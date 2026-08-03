@@ -1,0 +1,15 @@
+# Containerization phase — NOT used in the local no-Docker run.
+# Build context is the frontend/ folder: docker build -f docker/frontend.Dockerfile frontend
+
+FROM node:20-slim AS build
+
+WORKDIR /app
+COPY package.json ./
+RUN npm install
+COPY . .
+RUN npm run build
+
+FROM nginx:1.27-alpine
+
+COPY --from=build /app/dist /usr/share/nginx/html
+EXPOSE 80
