@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Deploying FastAPI services</title>
+</head>
+<body>
+  <nav>
+    <a href="/">Home</a> | <a href="/ops/">Ops wiki</a> | <a href="/ops/runbooks/">Runbooks</a> | <a href="/login">Sign in</a>
+  </nav>
+  <header>
+    <p>Internal ops wiki — last reviewed by the platform team</p>
+  </header>
+
+  <h1>Deploying FastAPI services</h1>
+
+  <p>Notes on running FastAPI apps in something resembling production:
+  process model, workers, and what belongs in front of the app server.</p>
+
+  <h2>Running with uvicorn</h2>
+
+  <p>Uvicorn is the ASGI server we use everywhere. For local work a single
+  reloading process is all you need:</p>
+
+  <pre><code class="language-bash">uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+</code></pre>
+
+  <p>Never ship <code>--reload</code> to production — it watches the
+  filesystem and roughly doubles memory usage for no benefit.</p>
+
+  <h2>Multiple worker processes</h2>
+
+  <p>A single Python process handles one CPU core. To use more cores, run
+  multiple worker processes with the <code>--workers</code> flag:</p>
+
+  <pre><code class="language-bash">uvicorn app.main:app --host 0.0.0.0 --port 8000 --workers 4
+</code></pre>
+
+  <p>Each worker is a separate process with its own memory and its own copy
+  of anything you loaded at startup — including in-process caches and ML
+  models, so four workers means four copies of the model in RAM. A common
+  starting point is one worker per core, then adjust from measurements. In
+  container platforms that scale by replicas (Kubernetes, most PaaS), prefer
+  one worker per container and let the orchestrator handle the fan-out —
+  two schedulers fighting over the same cores helps nobody.</p>
+
+  <h2>Reverse proxy in front</h2>
+
+  <p>Terminate TLS and buffer slow clients in a reverse proxy (nginx,
+  Caddy, or the platform's ingress), not in uvicorn. The proxy handles
+  header sanitisation and request size limits; pass
+  <code>--proxy-headers</code> to uvicorn so the app sees the real client IP
+  from <code>X-Forwarded-For</code>.</p>
+
+  <h2>Health checks</h2>
+
+  <p>Expose a cheap <code>/health</code> endpoint that returns 200 without
+  touching the database. Load balancers poll it every few seconds; making it
+  do real work turns your health check into a small self-inflicted load
+  test.</p>
+
+  <footer>
+    <p>© internal wiki · <a href="/ops/edit">edit this page</a> · <a href="/ops/history">history</a></p>
+  </footer>
+</body>
+</html>

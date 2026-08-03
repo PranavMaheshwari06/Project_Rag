@@ -1,0 +1,26 @@
+# python
+.venv/
+__pycache__/
+*.pyc
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+
+# secrets
+.env
+
+# data and indexes (samples stay committed)
+data/raw/*
+data/processed/*
+data/index/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+!data/index/.gitkeep
+
+# frontend
+node_modules/
+frontend/dist/
+
+# model caches if someone points HF_HOME here
+.cache/

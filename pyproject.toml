@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "engineerdoc-ai"
+version = "0.1.0"
+description = "Hybrid RAG service for technical documentation: dense + BM25 + RRF + cross-encoder rerank, grounded answers with citations."
+requires-python = ">=3.10"
+dependencies = [
+    "fastapi~=0.115",
+    "uvicorn[standard]~=0.34",
+    "pydantic~=2.9",
+    "pydantic-settings~=2.6",
+    "PyYAML~=6.0",
+    "python-dotenv~=1.0",
+    "sentence-transformers~=3.3",
+    "rank-bm25~=0.2.2",
+    "numpy>=1.26",
+    "qdrant-client~=1.12",
+    "beautifulsoup4~=4.12",
+    "openai~=1.55",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest~=8.3",
+    "httpx~=0.27",
+]
+
+[tool.setuptools.packages.find]
+include = ["api*", "core*", "schemas*", "ingestion*", "retrieval*", "generation*", "evaluation*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"

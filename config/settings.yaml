@@ -1,0 +1,40 @@
+# Single source of truth for every tunable knob.
+# core/config.py loads this file; a few env vars (OPENAI_API_KEY, QDRANT_URL,
+# VECTOR_BACKEND, LLM_MODEL, EMBED_MODEL, RERANK_MODEL) override it.
+
+paths:
+  sample_dir: data/samples
+  processed_path: data/processed/chunks.jsonl
+  index_dir: data/index
+
+chunking:
+  target_tokens: 512
+  max_tokens: 1024
+  overlap_ratio: 0.12        # ~12% of target carried into the next chunk
+  min_section_tokens: 40     # sections smaller than this merge with neighbours
+
+retrieval:
+  vector_backend: memory     # memory | qdrant
+  qdrant_url: http://localhost:6333
+  collection: engineerdoc_chunks
+  dense_top_k: 20
+  bm25_top_k: 20
+  rrf_k: 60
+  rerank_n: 10
+  final_top_k: 5
+
+models:
+  embed_model: BAAI/bge-small-en-v1.5
+  rerank_model: BAAI/bge-reranker-base
+  embed_batch_size: 16       # small batches so CPU stays usable
+  llm_model: gpt-4o-mini
+
+generation:
+  refusal_threshold: 0.3     # top rerank score below this -> explicit refusal
+  max_evidence_chunks: 4
+  max_sentences_per_chunk: 3
+
+evaluation:
+  gold_path: evaluation/datasets/gold_qa.jsonl
+  k_values: [5, 10]
+  benchmark_out: frontend/public/benchmark.json
