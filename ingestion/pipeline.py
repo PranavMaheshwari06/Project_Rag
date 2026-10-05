@@ -1,6 +1,5 @@
 """End-to-end ingestion: crawl -> parse -> clean -> chunk -> chunks.jsonl."""
 
-import json
 import logging
 
 from core.config import Settings

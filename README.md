@@ -58,19 +58,47 @@ _PENDING — run `make eval` to populate._
 
 ## Setup (local, no Docker)
 
-Needs Python 3.10+. First run downloads two models from Hugging Face
+Use Python 3.12 for development, matching the API Docker image (the package
+supports Python 3.10+). First run downloads two models from Hugging Face
 (bge-small ~130MB, bge-reranker-base ~1.1GB) — after that everything is
 offline.
 
 ```bash
-python -m venv .venv
-. .venv/bin/activate          # Windows: .venv\Scripts\activate
-make install                  # pip install -e .[dev]
+make install                  # creates .venv and installs .[dev] into it
 make ingest                   # sample corpus -> data/processed/chunks.jsonl
 make index                    # dense (NumPy) + BM25 indexes
 make eval                     # 4-way benchmark -> frontend/public/benchmark.json + table above
 make test                     # pytest
 make run                      # uvicorn on :8000
+```
+
+All Python Makefile targets use `.venv` directly, so activation is optional.
+For direct Python commands, run `source .venv/bin/activate` first. To choose
+another base interpreter, use `make install PYTHON=python3.12` on a fresh
+checkout. `make venv` creates the environment without installing dependencies.
+
+Without Make (including Windows PowerShell):
+
+```bash
+python3 -m venv .venv          # Windows: python -m venv .venv
+# Linux/macOS:
+.venv/bin/python -m pip install -e '.[dev]'
+.venv/bin/python -m pytest -q
+# Windows: use .venv/Scripts/python.exe instead of .venv/bin/python.
+```
+
+Dependencies are declared in `pyproject.toml`; the `dev` extra includes pytest,
+HTTP test support, and Ruff (`make fmt`). `.venv` is local and disposable,
+ignored by Git and excluded from Docker builds. Recreate it on each machine;
+do not upload or copy it to a hosting server. Python dependency versions are
+currently ranges, so installs are not yet locked to identical versions.
+
+Optional CPU-only install with uv (avoids downloading CUDA dependencies for
+this project's CPU models):
+
+```bash
+make venv
+uv pip install --python .venv/bin/python --torch-backend cpu -e '.[dev]'
 ```
 
 Frontend (needs Node 18+):
@@ -92,10 +120,15 @@ without it.
 
 `docker-compose.yml` wires Qdrant + API + frontend with healthchecks; the API
 switches to the Qdrant backend via `VECTOR_BACKEND=qdrant`. Not needed for the
-local run. For a public URL, Render/Railway can run the compose file on a
-single service: point the service at the repo, set `OPENAI_API_KEY` (optional),
-and expose ports 8000/5173. Ingest+index at container start or bake the
-indexes into the image.
+local run. Hosting uses a fresh environment built from `pyproject.toml`,
+not your local `.venv`. The API image installs runtime dependencies only;
+local development installs the additional `dev` tools.
+
+Public hosting still needs deployment work: provision the API, frontend,
+and Qdrant as appropriate for the chosen host, configure frontend API routing,
+and arrange model downloads and persistent indexes. Ingest and index before
+serving queries. The compose file is a starting point for container deployment;
+public hosting has not been verified.
 
 ## Design notes
 

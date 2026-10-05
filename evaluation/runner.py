@@ -8,7 +8,7 @@ import re
 import time
 from datetime import datetime, timezone
 
-from core.config import REPO_ROOT, Settings
+from core.config import Settings
 from evaluation.answer_eval import METHOD_LABEL, evaluate_answer
 from evaluation.latency_eval import summarize_latencies
 from evaluation.retrieval_eval import count_relevant_chunks, evaluate_ranking, load_gold
@@ -106,7 +106,7 @@ def _write_outputs(settings: Settings, result: BenchmarkResult) -> None:
     out_path.write_text(result.model_dump_json(indent=2), encoding="utf-8")
     log.info("wrote %s", out_path)
 
-    readme = REPO_ROOT / "README.md"
+    readme = settings.resolve(settings.evaluation.readme_path)
     if readme.exists():
         content = readme.read_text(encoding="utf-8")
         if README_START in content and README_END in content:
