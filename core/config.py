@@ -61,6 +61,7 @@ class EvalCfg(BaseModel):
     gold_path: str = "evaluation/datasets/gold_qa.jsonl"
     k_values: list[int] = [5, 10]
     benchmark_out: str = "frontend/public/benchmark.json"
+    readme_path: str = "README.md"
 
 
 class Settings(BaseModel):
