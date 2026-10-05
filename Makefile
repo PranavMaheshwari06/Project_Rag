@@ -1,10 +1,24 @@
 # Local-first targets: none of these need Docker. `up` is for the later
 # containerization phase.
 
-PY ?= python
+.DEFAULT_GOAL := install
+VENV := .venv
+ifeq ($(OS),Windows_NT)
+PY ?= $(VENV)/Scripts/python.exe
+PYTHON ?= python
+else
+PY ?= $(VENV)/bin/python
+PYTHON ?= python3
+endif
 
-install:
-	$(PY) -m pip install -e .[dev]
+venv:
+	$(PYTHON) -m venv $(VENV)
+
+$(PY):
+	$(MAKE) venv
+
+install: $(PY)
+	$(PY) -m pip install -e '.[dev]'
 
 ingest:
 	$(PY) scripts/seed_ingest.py
@@ -22,9 +36,9 @@ run:
 	$(PY) -m uvicorn api.main:app --port 8000
 
 fmt:
-	$(PY) -m ruff format . 2>/dev/null || echo "ruff not installed; skipping"
+	$(PY) -m ruff format .
 
 up:
 	docker compose up --build
 
-.PHONY: install ingest index eval test run fmt up
+.PHONY: venv install ingest index eval test run fmt up

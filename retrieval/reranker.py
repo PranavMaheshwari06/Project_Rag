@@ -4,6 +4,7 @@ comparing against a stable 0..1 range, whatever the library's default
 activation happens to be."""
 
 import numpy as np
+from torch.nn import Identity
 
 
 class Reranker:
@@ -26,11 +27,9 @@ class Reranker:
         logits = model.predict(
             [(query, t) for t in texts],
             batch_size=self.batch_size,
+            activation_fct=Identity(),  # raw logits; sigmoid applied once, below
             convert_to_numpy=True,
             show_progress_bar=False,
         )
         logits = np.asarray(logits, dtype=np.float64).reshape(-1)
-        # some CrossEncoder versions already apply sigmoid; values in [0,1] pass through unchanged
-        needs_sigmoid = logits.min() < 0 or logits.max() > 1
-        probs = 1.0 / (1.0 + np.exp(-logits)) if needs_sigmoid else logits
-        return [float(p) for p in probs]
+        return [float(p) for p in 1.0 / (1.0 + np.exp(-logits))]
