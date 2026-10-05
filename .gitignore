@@ -6,6 +6,7 @@ __pycache__/
 dist/
 build/
 .pytest_cache/
+.ruff_cache/
 
 # secrets
 .env
@@ -24,3 +25,10 @@ frontend/dist/
 
 # model caches if someone points HF_HOME here
 .cache/
+
+# local tooling
+.claude/
+.archify/
+CLAUDE.md
+REVIEW_AND_FINALIZATION_PLAN.md
+skills-lock.json

@@ -38,3 +38,4 @@ evaluation:
   gold_path: evaluation/datasets/gold_qa.jsonl
   k_values: [5, 10]
   benchmark_out: frontend/public/benchmark.json
+  readme_path: README.md
