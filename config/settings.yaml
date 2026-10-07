@@ -8,6 +8,8 @@ paths:
   raw_dir: data/raw                      # raw HTML/PDF cache (gitignored)
   processed_path: data/processed/chunks.jsonl
   index_dir: data/index
+  extracted_dir: data/extracted          # LLM drafts, one JSON per programme (committed)
+  verified_dir: data/verified            # human-verified records (committed)
 
 crawl:
   # identifies us to site owners; robots.txt rules are matched on "StudyAbroadRAG"
@@ -40,6 +42,10 @@ models:
   embed_batch_size: 16       # small batches so CPU stays usable
   llm_model: gemini-3.8-flash  # free tier; model names and limits change, re-check before relying on them
   llm_base_url: https://generativelanguage.googleapis.com/v1beta/openai/  # OpenAI-compatible endpoint
+
+extraction:
+  delay_seconds: 30.0        # gap between LLM calls; ~20k-token prompts hit the free tier per-minute limit at 5s
+  min_quote_words: 2         # one-word quotes match anywhere, so they prove nothing
 
 generation:
   refusal_threshold: 0.3     # top rerank score below this -> explicit refusal

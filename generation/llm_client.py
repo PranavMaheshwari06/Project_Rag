@@ -18,7 +18,7 @@ class LLMClient:
     def available(self) -> bool:
         return bool(self._api_key)
 
-    def complete(self, messages: list[dict]) -> str:
+    def complete(self, messages: list[dict], json_mode: bool = False) -> str:
         if not self.available:
             raise RuntimeError("no LLM API key configured; use the extractive fallback")
         if self._client is None:
@@ -26,6 +26,9 @@ class LLMClient:
 
             self._client = OpenAI(api_key=self._api_key, base_url=self.base_url)
         resp = self._client.chat.completions.create(
-            model=self.model, messages=messages, temperature=0
+            model=self.model,
+            messages=messages,
+            temperature=0,
+            **({"response_format": {"type": "json_object"}} if json_mode else {}),
         )
         return resp.choices[0].message.content or ""

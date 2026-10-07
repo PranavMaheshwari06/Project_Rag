@@ -1,0 +1,158 @@
+{
+  "extracted_at": "2026-10-07T22:16:58+00:00",
+  "model": "gemini-3.8-flash",
+  "rejected_quotes": [],
+  "record": {
+    "university": "Saarland University",
+    "programme": "M.Sc. Computer Science",
+    "source_doc_ids": [
+      "de/saarland/cs-msc/programme",
+      "de/saarland/masters-application-guide"
+    ],
+    "degree_requirement": {
+      "status": "stated",
+      "value": "Bachelor’s degree from a German university (at least 180 CP) or an equivalent qualification from a foreign university in computer science, informatics or a related field",
+      "quote": "Students seeking admission to the Master’s programme shall have a Bachelor’s degree from a German university (at least 180 CP) or an equivalent qualification from a foreign university in computer science, informatics or a related field:",
+      "doc_id": "de/saarland/masters-application-guide"
+    },
+    "min_total_ects": {
+      "status": "stated",
+      "value": 180,
+      "quote": "Students seeking admission to the Master’s programme shall have a Bachelor’s degree from a German university (at least 180 CP) or an equivalent qualification from a foreign university in computer science, informatics or a related field:",
+      "doc_id": "de/saarland/masters-application-guide"
+    },
+    "subject_credits": {
+      "status": "not_published",
+      "value": null,
+      "quote": null,
+      "doc_id": null
+    },
+    "min_grade_german_scale": {
+      "status": "not_published",
+      "value": null,
+      "quote": null,
+      "doc_id": null
+    },
+    "english": {
+      "status": "stated",
+      "value": [
+        {
+          "test": "IELTS",
+          "min_score": "7.0"
+        },
+        {
+          "test": "TOEFL iBT",
+          "min_score": "95"
+        },
+        {
+          "test": "TOEFL PBT",
+          "min_score": "600"
+        },
+        {
+          "test": "Cambridge English Certificate",
+          "min_score": "C1 Advanced (CAE) or C2 Proficiency (CPE)"
+        },
+        {
+          "test": "PTE Academic",
+          "min_score": "76"
+        }
+      ],
+      "quote": "The following certificates will be accepted: _ IELTS (academic test): min. 7.0 out of 9 _ TOEFL (internet based): min. 95 out of 120 (2026: 5 out of 6) _ TOEFL (paper based): min. 600 out of 677 (2026: 5 out of 6) _ Cambridge English Certificate: C1 Advanced (CAE) or C2 Proficiency (CPE) _ PTE Academic: min. 76",
+      "doc_id": "de/saarland/masters-application-guide"
+    },
+    "entrance_tests": {
+      "status": "stated",
+      "value": [
+        {
+          "test": "GRE General Test",
+          "min_scores": null,
+          "requirement": "one_of",
+          "applies_to_degree_countries": []
+        },
+        {
+          "test": "Indian GATE test",
+          "min_scores": null,
+          "requirement": "one_of",
+          "applies_to_degree_countries": []
+        }
+      ],
+      "quote": "Applicants for Computer Science, Cybersecurity, DSAI, Embedded Systems and Visual Computing who have no degree certificate earned within the European Higher Education Area (EHEA) region, Switzerland, or the UK are required to upload the test result from the GRE General Test or the Indian GATE test .",
+      "doc_id": "de/saarland/masters-application-guide"
+    },
+    "german": {
+      "status": "stated",
+      "value": {
+        "min_level": "none",
+        "needed_by": "admission"
+      },
+      "quote": "Knowledge of proficiency in German is not required.",
+      "doc_id": "de/saarland/masters-application-guide"
+    },
+    "work_experience": {
+      "status": "stated",
+      "value": "counts_in_selection",
+      "quote": "- Details about relevant work/study periods abroad and relevant work experience or internships",
+      "doc_id": "de/saarland/cs-msc/programme"
+    },
+    "aps_required": {
+      "status": "stated",
+      "value": true,
+      "quote": "Applicants who have obtained their university degree in China, India or Vietnam are required to submit the original ( digitally signed ) APS Certificate issued by the Academic Evaluation Center (Akademische Prüfstelle) in the corresponding country with the application.",
+      "doc_id": "de/saarland/masters-application-guide"
+    },
+    "application_route": {
+      "status": "stated",
+      "value": "direct",
+      "quote": "Applications for our postgraduate programmes have to be submitted online in the application system of the computer science department!",
+      "doc_id": "de/saarland/masters-application-guide"
+    },
+    "deadlines": {
+      "status": "stated",
+      "value": [
+        {
+          "intake": "winter",
+          "applicant_group": "all",
+          "date": "15 May"
+        },
+        {
+          "intake": "summer",
+          "applicant_group": "all",
+          "date": "15 November"
+        }
+      ],
+      "quote": "Applications should normally be received by 15 May for students seeking to begin studying in the winter semester and by 15 November for students looking to start their studies in summer.",
+      "doc_id": "de/saarland/cs-msc/programme"
+    },
+    "selection_process": {
+      "status": "stated",
+      "value": "The criteria listed above will be used to assess the aptitude of the applicant in terms of the academic profile and requirements of the respective Master’s degree programme. The decision whether the programme admission requirements have been met is made by the Examination Board.",
+      "quote": "The criteria listed above will be used to assess the aptitude of the applicant in terms of the academic profile and requirements of the respective Master’s degree programme. The decision whether the programme admission requirements have been met is made by the Examination Board.",
+      "doc_id": "de/saarland/masters-application-guide"
+    },
+    "required_documents": {
+      "status": "not_published",
+      "value": null,
+      "quote": null,
+      "doc_id": null
+    },
+    "tuition_eur_per_semester_non_eu": {
+      "status": "stated",
+      "value": 0.0,
+      "quote": "| Tuition fees | Not applicable |",
+      "doc_id": "de/saarland/cs-msc/programme"
+    },
+    "semester_fee_eur": {
+      "status": "not_published",
+      "value": null,
+      "quote": null,
+      "doc_id": null
+    },
+    "language_of_instruction": {
+      "status": "stated",
+      "value": "English",
+      "quote": "The teaching language of the master’s degree programme is English.",
+      "doc_id": "de/saarland/masters-application-guide"
+    },
+    "verified": false
+  }
+}

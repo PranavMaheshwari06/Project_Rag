@@ -1,0 +1,120 @@
+{
+  "extracted_at": "2026-10-07T22:14:52+00:00",
+  "model": "gemini-3.8-flash",
+  "rejected_quotes": [],
+  "record": {
+    "university": "RWTH Aachen",
+    "programme": "M.Sc. Computer Science",
+    "source_doc_ids": [
+      "de/rwth/cs-msc/programme",
+      "de/rwth/cs-msc/application",
+      "de/rwth/cs-msc/department"
+    ],
+    "degree_requirement": {
+      "status": "stated",
+      "value": "first university degree, with which the necessary background education can be proven, as determined in the exam regulations",
+      "quote": "A prerequisite for starting studies is a first university degree, with which the necessary background education can be proven, as determined in the exam regulations.",
+      "doc_id": "de/rwth/cs-msc/programme"
+    },
+    "min_total_ects": {
+      "status": "not_published",
+      "value": null,
+      "quote": null,
+      "doc_id": null
+    },
+    "subject_credits": {
+      "status": "not_published",
+      "value": null,
+      "quote": null,
+      "doc_id": null
+    },
+    "min_grade_german_scale": {
+      "status": "not_published",
+      "value": null,
+      "quote": null,
+      "doc_id": null
+    },
+    "english": {
+      "status": "not_published",
+      "value": null,
+      "quote": null,
+      "doc_id": null
+    },
+    "entrance_tests": {
+      "status": "stated",
+      "value": [
+        {
+          "test": "GRE",
+          "min_scores": "above 75th percentile in quantitative reasoning (GRE-QR) and above 15th percentile in verbal reasoning (GRE-VR). Additionally you need at least 3.5 points in analytical writing (GRE-AW)",
+          "requirement": "required",
+          "applies_to_degree_countries": []
+        }
+      ],
+      "quote": "Additionally, if your first degree is from outside the European Union, you are required to submit a GRE test certificate. You need to be above 75th percentile in quantitative reasoning (GRE-QR) and above 15th percentile in verbal reasoning (GRE-VR). Additionally you need at least 3.5 points in analytical writing (GRE-AW).",
+      "doc_id": "de/rwth/cs-msc/application"
+    },
+    "german": {
+      "status": "not_published",
+      "value": null,
+      "quote": null,
+      "doc_id": null
+    },
+    "work_experience": {
+      "status": "not_published",
+      "value": null,
+      "quote": null,
+      "doc_id": null
+    },
+    "aps_required": {
+      "status": "not_published",
+      "value": null,
+      "quote": null,
+      "doc_id": null
+    },
+    "application_route": {
+      "status": "stated",
+      "value": "direct",
+      "quote": "Applications for Master Computer Science always have to be submitted using the online application service.",
+      "doc_id": "de/rwth/cs-msc/application"
+    },
+    "deadlines": {
+      "status": "not_published",
+      "value": null,
+      "quote": null,
+      "doc_id": null
+    },
+    "selection_process": {
+      "status": "stated",
+      "value": "Open (No NC)",
+      "quote": "- Open (No NC)",
+      "doc_id": "de/rwth/cs-msc/programme"
+    },
+    "required_documents": {
+      "status": "stated",
+      "value": [
+        "The diploma of your first degree including a full transcript of records and course/module descriptions detailing the contents as well as the accuired knowledge and skills for each course or module"
+      ],
+      "quote": "- The diploma of your first degree including a full transcript of records and course/module descriptions detailing the contents as well as the accuired knowledge and skills for each course or module.",
+      "doc_id": "de/rwth/cs-msc/application"
+    },
+    "tuition_eur_per_semester_non_eu": {
+      "status": "not_published",
+      "value": null,
+      "quote": null,
+      "doc_id": null
+    },
+    "semester_fee_eur": {
+      "status": "not_published",
+      "value": null,
+      "quote": null,
+      "doc_id": null
+    },
+    "language_of_instruction": {
+      "status": "stated",
+      "value": "German and English",
+      "quote": "- Language: German and English",
+      "doc_id": "de/rwth/cs-msc/programme"
+    },
+    "verified": false
+  }
+}

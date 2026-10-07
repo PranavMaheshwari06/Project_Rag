@@ -29,6 +29,9 @@ ingest:
 index:
 	$(PY) scripts/build_indexes.py
 
+extract:
+	$(PY) scripts/extract.py $(ARGS)
+
 eval:
 	$(PY) scripts/run_eval.py
 
@@ -44,4 +47,4 @@ fmt:
 up:
 	docker compose up --build
 
-.PHONY: venv install crawl ingest index eval test run fmt up
+.PHONY: venv install crawl ingest index extract eval test run fmt up
