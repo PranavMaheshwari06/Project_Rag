@@ -20,6 +20,9 @@ $(PY):
 install: $(PY)
 	$(PY) -m pip install -e '.[dev]'
 
+crawl:
+	$(PY) scripts/crawl.py $(ARGS)
+
 ingest:
 	$(PY) scripts/seed_ingest.py
 
@@ -41,4 +44,4 @@ fmt:
 up:
 	docker compose up --build
 
-.PHONY: venv install ingest index eval test run fmt up
+.PHONY: venv install crawl ingest index eval test run fmt up

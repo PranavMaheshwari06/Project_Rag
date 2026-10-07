@@ -11,7 +11,7 @@ build/
 # secrets
 .env
 
-# data and indexes (samples stay committed)
+# raw crawl cache, data and indexes (sources/manifest.json is the committed record)
 data/raw/*
 data/processed/*
 data/index/*
@@ -30,5 +30,6 @@ frontend/dist/
 .claude/
 .archify/
 CLAUDE.md
+STATUS.md
 REVIEW_AND_FINALIZATION_PLAN.md
 skills-lock.json

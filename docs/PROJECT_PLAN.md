@@ -1,12 +1,12 @@
-# Project plan: study-abroad admissions and eligibility assistant
+# Project plan: Germany admissions and eligibility assistant
 
-Status: living document. Last updated 2026-10-05. Phase 1 (clean base) is done. Next: Phase 2.
+Status: living document. Last updated 2026-10-06. Phase 1 (clean base) is done. Phase 2 (sources and ingestion) is in progress.
 
-This repository started as EngineerDoc AI, a hybrid RAG service over technical documentation. It is being turned into a study-abroad assistant for students applying to Germany, the UK and the US. The hand-written retrieval core is kept; the corpus, extraction, eligibility logic, agent, UI and deployment are new. `DECISIONS.md` records the reasoning behind each major choice.
+This repository started as EngineerDoc AI, a hybrid RAG service over technical documentation. It is being turned into an admissions and eligibility assistant for international students applying to master's programmes in Germany. The hand-written retrieval core is kept; the corpus, extraction, eligibility logic, agent, UI and deployment are new. `DECISIONS.md` records the reasoning behind each major choice.
 
 ## 1. The product
 
-A student enters a profile. For a shortlist of programmes the system shows:
+A student enters a profile. For a shortlist of German programmes the system shows:
 
 - which published requirements they **meet, miss, or have not provided**, each with a citation;
 - what to fix;
@@ -14,26 +14,53 @@ A student enters a profile. For a shortlist of programmes the system shows:
 
 The student can also chat freely. Every claim links to an official page and shows its crawl date. When a source does not cover a question, the system says so.
 
+### Architecture (end state)
+
+```mermaid
+flowchart LR
+    subgraph Offline["Offline, run by the maintainer"]
+        REG[sources/registry.yaml] --> CR[crawler<br/>robots.txt, delay, cache]
+        CR --> RAW[data/raw + manifest.json]
+        RAW --> ING[parse, clean, chunk<br/>+ metadata]
+        ING --> IDX[dense + BM25 indexes]
+        ING --> EXT[LLM extraction]
+        EXT --> REV[human review]
+        REV --> REQ[verified requirements JSON]
+    end
+    subgraph Online["Online, per request"]
+        P[profile form or<br/>pasted CV] --> RE[rules engine<br/>deterministic]
+        REQ --> RE
+        Q[chat question] --> AG[agent<br/>tool-use loop]
+        AG --> RET[hybrid retrieval<br/>RRF + rerank + filters]
+        IDX --> RET
+        AG --> RE
+        RE --> EXP[LLM explanation<br/>with citations]
+        RET --> EXP
+        EXP --> UI[report + process panel + chat]
+    end
+```
+
+The LLM extracts and explains. The rules engine decides eligibility.
+
 ## 2. Key decisions
 
-### 2.1 Why Germany, the UK and the US
-This is a scope decision, stated once on the coverage page and in the README. The reason is engineering, not "these countries are best":
+### 2.1 Why Germany only
+This is a scope decision, stated once on the coverage page and in the README:
 
-- They are among the largest destinations for international students.
-- They are three structurally different admissions systems:
-  - **Germany** is rule-based: uni-assist, APS for some nationalities, a blocked account, grade conversion.
-  - **The UK** is grade-equivalency tables per country.
-  - **The US** is holistic, so only published minimums apply.
+- The maintainer studies in Germany, so the sources and edge cases can be checked first-hand.
+- The German system is rule-based (uni-assist, APS for some nationalities, a blocked account, grade conversion). It maps cleanly onto a deterministic rules engine, which is the core design choice of the project.
+- Germany is one of the largest destinations for international master's students and most public universities charge little or no tuition (exceptions such as TUM and Baden-Württemberg's fees for non-EU students are exactly the kind of detail the report must cite).
+- Depth beats breadth for a verified product: every programme record is checked by hand, so a few countries done badly would be worse than one done well.
 
-Handling three different systems shows the design generalises. A fourth country means adding sources and a schema mapping. A question about an uncovered country gets a coverage-aware refusal ("I currently cover DE/UK/US only") plus the official portal link. That behaviour is evaluated too.
+A question about another country gets a coverage-aware refusal ("I currently cover Germany only") plus the official portal link. That behaviour is evaluated too. Adding a country later would mean new sources and a schema mapping; it is out of scope.
 
 ### 2.2 Eligibility report, not an admission probability
-- **Not offered: a probability of admission.** There is no public admissions-outcome data, and UK/US selection is holistic and changes yearly. A number like "72% chance" would be invented.
+- **Not offered: a probability of admission.** There is no public admissions-outcome data, and selection committees change their criteria from year to year. A number like "72% chance" would be invented.
 - **Offered: an eligibility and gap report against published requirements.**
   1. **LLM structured extraction.** Each programme page becomes a `ProgramRequirements` record: minimum grade and scale, required degree or field, ECTS/credit prerequisites, IELTS/TOEFL/Duolingo minimums, GRE/GMAT, APS, work experience, deadlines, fees, documents. Each field cites its source span.
   2. **Human verification.** The extracted JSON is reviewed by hand. The verified records are both the product data and the gold evaluation set.
   3. **Deterministic rules engine.** It compares the profile with the requirements. Each requirement returns `meets`, `does_not_meet`, `unknown` (missing info) or `not_published`. The LLM never decides eligibility; it only extracts and explains.
-  4. **Deterministic tools** for grade conversion (for example the German modified Bavarian formula) and test-score equivalence where officially published.
+  4. **Deterministic tools** for grade conversion (the modified Bavarian formula) and test-score equivalence where officially published.
   5. **Competitiveness is qualitative and cited.** If a page says "typically admitted students have…", we quote it.
 - **Numbers in the report, with no invented weights:**
   - A count: "6 of 8 published requirements met · 1 not met · 1 missing info".
@@ -43,22 +70,22 @@ Handling three different systems shows the design generalises. A fourth country 
 - **Scope:** master's programmes in CS, Data Science and AI. Requirements are per programme, so a fixed field keeps the workload bounded. Adding fields later is data work, not code.
 
 ### 2.3 The whole journey, not only admission
-Visa rules are mostly per country but connect to the university at specific points. Each stage comes from official sources.
+Visa rules are national but connect to the university at specific points. Each stage comes from official sources.
 
-| Stage | Germany | UK | US | University-specific link |
-|---|---|---|---|---|
-| Before applying | APS (some nationalities), uni-assist, language tests | UCAS / direct application, ATAS for some STEM courses | Application, test policies | Programme requirements |
-| Admission → visa document | Admission letter | CAS issued by the university | I-20 issued by the university | The university issues the document the visa depends on |
-| Visa and funds | National D visa, blocked account, health insurance | Student visa, maintenance funds (London vs outside) | F-1, SEVIS fee, interview, funds = university's cost of attendance | Location and university change the money needed |
-| Arrival and during study | City registration, residence permit, work-hour limits | BRP/eVisa, work-hour limits | On-campus work rules, maintaining status | City of the university |
-| After graduation | Post-study job-seeker permit | Graduate Route | OPT / STEM OPT | Some depend on the programme |
+| Stage (`stage` in the registry) | Germany | University-specific link |
+|---|---|---|
+| Before applying (`before_applying`) | APS (some nationalities), uni-assist or direct application, language tests | Programme requirements and deadlines |
+| Admission → visa document (`visa_document`) | Admission letter, national D visa application | The university issues the letter the visa depends on |
+| Visa and funds (`visa_funds`) | Blocked account, health insurance | Fees and cost of living differ by university and city |
+| Arrival and during study (`arrival`) | City registration (Anmeldung), residence permit, work-hour limits | City of the university |
+| After graduation (`after_graduation`) | 18-month job-seeker residence permit, EU Blue Card route | Some depend on the degree |
 
-- The **funds check** is a deterministic rule: the profile budget is compared with the required financial proof for that country, city and university, with a margin and a citation.
+- The **funds check** is a deterministic rule: the profile budget is compared with the required financial proof, with a margin and a citation.
 - **Extensions and status changes** are answered as cited official procedure only, never as personal advice.
 - **City-level offices** (for example foreigners' offices) are covered only for the cities of covered universities.
 
 ### 2.4 Profiles: no accounts, privacy by design
-- The profile form covers nationality, degree, grade and scale, field, credits, language tests, GRE, work experience, budget, target countries and intake.
+- The profile form covers nationality, degree, grade and scale, field, credits, language tests, GRE, work experience, budget and intake.
 - A "paste your CV or profile" box fills the form via structured output. The user confirms or edits before anything is checked.
 - The profile lives only in the browser (localStorage) and is sent with each request. The server is stateless: no auth, no database of personal data, no profile fields in logs. Profiles can be exported and imported as JSON.
 
@@ -82,7 +109,7 @@ Three kinds of user text, never mixed:
 ## 3. LLM provider and deployment
 
 ### 3.1 LLM
-The project uses the **Gemini free tier** (Google AI Studio key, no billing) through Gemini's OpenAI-compatible endpoint. `generation/llm_client.py` is the only module that touches the SDK, so the provider stays swappable. A `base_url` setting is added in Phase 3.
+The project uses the **Gemini free tier** (Google AI Studio key, no billing) through Gemini's OpenAI-compatible endpoint. `generation/llm_client.py` is the only module that touches the SDK, so the provider stays swappable. A `base_url` setting and the `GEMINI_API_KEY` variable are wired in Phase 3; until then the code still reads `OPENAI_API_KEY` and, with no key, uses the extractive fallback.
 
 - The key goes in `.env` as `GEMINI_API_KEY`. It is never committed or pasted into chat.
 - Free-tier rate limits and model names change; re-check them at build and deploy time rather than hard-coding assumptions.
@@ -122,23 +149,23 @@ Engineering due diligence, not legal advice; have a lawyer review it before any 
 - **Feedback storage** is opt-in, contains no profile, can be deleted on request, and has a retention limit.
 - **EU AI Act:** AI systems that determine access or admission to education are high-risk. This tool is a self-service information aid and makes no decision for any institution; the UI and README say so. Transparency duties are met: clearly labelled as AI, answers cite sources, and every report carries a "not official advice; confirm with the university or embassy" note.
 - **Application security:** secrets only in host environment variables, secret scanning and dependency audit in CI, CORS locked to the frontend domain, input size limits, agent tools read-only (so injected text cannot trigger actions), PDF parsing size and page limits.
-- **Content and licensing:** respect robots.txt and site terms (gov.uk content is under the Open Government Licence). Text is stored for retrieval but only short excerpts are shown, always with a link to the source.
+- **Content and licensing:** respect robots.txt and site terms. Sites that block bots (for example a "verify your browser" wall) are dropped, not worked around. Text is stored for retrieval but only short excerpts are shown, always with a link to the source.
 
-## 5. Scope: vertical slice first
+## 5. Scope
 
-**Milestone A (MVP, deployed): Germany only**, country rules and journey stages, DAAD and uni-assist, through all phases.
+**One milestone: Germany, taken end to end and deployed.** Country rules and journey stages, DAAD, uni-assist and APS, through all phases.
 
-- **Universities (17):** one per federal state plus Passau and Braunschweig: KIT, TUM, Passau, TU Berlin, Potsdam/HPI, Bremen, TU Hamburg, TU Darmstadt, TU Braunschweig, Rostock, RWTH Aachen, RPTU Kaiserslautern-Landau, Saarland, TU Dresden, OVGU Magdeburg, Kiel, TU Ilmenau.
-- **Programmes (~25):** English-taught MSc in CS, Data Science or AI. Flag any university with none.
-- **Rollout:** build and verify the pipeline on 5 universities (TUM, RWTH, TU Berlin, Saarland, TU Dresden), then add the rest in batches. After that, adding a university is data work.
-- **Coverage tiers:**
-  1. Country-wide rules answer for any German university.
-  2. The full eligibility report covers only verified programmes.
-  3. An uncovered programme gets a coverage notice, the tier-1 rules, a DAAD database link and the paste-text unverified check.
+- **Pilot universities (5), Phase 2:** TUM, RWTH Aachen, TU Berlin, Saarland University, TU Dresden. The pipeline is built and checked on these first.
+- **Pilot programmes (8):** TUM M.Sc. Informatics and M.Sc. Data Engineering and Analytics; RWTH M.Sc. Computer Science and M.Sc. Data Science; TU Berlin M.Sc. Computer Science; Saarland M.Sc. Computer Science and M.Sc. Data Science and Artificial Intelligence; TU Dresden M.Sc. Computer Science. `sources/registry.yaml` is the authoritative list.
+- **Batch 2 (about 7 universities), end of Phase 3:** well-known universities that are popular with international students. Candidates: KIT, LMU Munich, TU Darmstadt, University of Stuttgart, University of Bonn, University of Tübingen, and Heidelberg or Mannheim. Each is checked against the live site for an English-taught MSc in CS, Data Science or AI before it goes in; any without one is dropped.
+  - **Why the end of Phase 3:** extraction and the review screen are proven on the pilots first, so adding a university is cheap. Batch 2 lands before the Phase 4 evaluation baseline, so the gold set, the Phase 5 ablations and the deployed demo all run on the corpus that ships. More universities also means more programme pages that read alike, which is where metadata filters and reranking have to prove their value.
+- **Long tail:** further universities are data-only work after deployment (registry entries, crawl, extract, verify). No code changes.
+- **Coverage tiers (what a user sees):**
+  1. **Country rules** (APS, uni-assist, visa, blocked account, health insurance, residence permit, job-seeker permit) answer for any German university.
+  2. **The full eligibility report** covers only verified programmes.
+  3. **An uncovered programme or university** (for example Passau or Regensburg) gets a "not covered yet" notice, the tier-1 rules, a DAAD programme-database link and the paste-text unverified check. Its requirements are never invented.
+  4. **Another country** gets "I currently cover Germany only" plus the official portal link.
 - **No fragile scrapers.** Fetch registry URLs, cache raw HTML/PDF, convert to text, run LLM extraction over the text. Tables use pdfplumber. No per-site CSS selectors.
-
-**Milestone B:** add the UK (tests whether the schema and rules generalise).
-**Milestone C:** add the US and bring each country to 10–12 universities.
 
 **Demo reliability:** the frontend pings `/health` on load and shows an honest wake-up status. 2–3 precomputed demo profiles ship as static JSON so a full report renders even when the backend is asleep or the quota is hit.
 
@@ -146,44 +173,52 @@ Engineering due diligence, not legal advice; have a lawyer review it before any 
 
 ## 6. Target structure
 
+Each folder is tagged with the phase that builds or changes it.
+
 ```
-sources/registry.yaml   every source URL + country, layer (rules|scholarship|university), uni, programme
-ingestion/              crawler (robots.txt, cache, crawl date, change detection), HTML+PDF parsing,
-                        chunker (keep, add table-aware), metadata on every chunk
-extraction/             LLM -> ProgramRequirements / Scholarship (pydantic), verified JSON committed
-eligibility/            profile schema, rules engine, grade conversion (pure Python, fully unit-tested)
-retrieval/              keep hybrid core; add metadata filters, query rewrite, parent-child
-agent/                  hand-rolled tool-use loop, step budget, refusal
-mcp_server/             MCP server exposing the same tools (search_sources, get_requirements,
-                        check_eligibility, convert_grade, find_scholarships)
-generation/             LLM client (OpenAI-compatible), structured answers, citations, guardrails
+sources/registry.yaml   every source URL + country, layer (rules|scholarship|university), stage, uni,
+                        programme (2); manifest.json records each crawl (2)
+ingestion/              registry loader, polite crawler (robots.txt, per-host delay, cache, crawl date,
+                        content hash), HTML+PDF parsing, cleaner, chunker, metadata on every chunk (2)
+extraction/             LLM -> ProgramRequirements / Scholarship (pydantic), review screen,
+                        verified JSON committed (3)
+eligibility/            profile schema, rules engine, grade conversion, funds check
+                        (pure Python, fully unit-tested) (6)
+retrieval/              hybrid core kept (dense + BM25 + RRF + rerank); add metadata filters,
+                        query rewrite, parent-child (5)
+agent/                  hand-rolled tool-use loop, step budget, refusal (7)
+generation/             LLM client (OpenAI-compatible, Gemini base_url) (3), structured answers,
+                        citations, guardrails (8)
 evaluation/             retrieval gold, extraction accuracy, eligibility verdict accuracy on synthetic
-                        profiles, refusal/coverage probes, judge-based faithfulness, cost/latency
-api/                    SSE streaming, rate limit + request cap, cache, tracing, usage per request
-frontend/               profile form + paste-to-fill, eligibility report, chat with sources, coverage
-                        page, evaluation dashboard
-ops/                    Dockerfile, docker-compose (local), GitHub Actions (lint, tests, build, eval gate),
-                        deploy to HF Spaces + Cloudflare Pages
+                        profiles, refusal/coverage probes (4), judge-based faithfulness, cost/latency (8)
+api/                    SSE streaming, rate limit + request cap, cache, tracing, usage per request (8)
+frontend/               profile form + paste-to-fill, eligibility report, process panel, chat with
+                        sources, coverage page, evaluation dashboard (9)
+ops/                    Dockerfile, docker-compose (local), GitHub Actions (lint, tests, build, eval
+                        gate) (8), deploy to HF Spaces + Cloudflare Pages, weekly re-crawl (10)
+mcp_server/             MCP server exposing the agent's tools (search_sources, get_requirements,
+                        check_eligibility, convert_grade, find_scholarships) (11, after deploy)
 ```
 
 ## 7. Phases
 
-Each phase ends runnable and measured. The first three columns are the work; the last two are the manual task and the concept to learn.
+Each phase ends runnable and measured. A phase starts only when the previous one meets its "Done when" line and is committed.
 
-| # | Phase | What gets built | Manual task | Concepts |
-|---|---|---|---|---|
-| 1 | Clean base | Done: reranker normalisation, test isolation, `vite-env.d.ts`, CI workflow, stale docs removed | — | — |
-| 2 | Sources and ingestion | Source registry checked against live sites; polite crawler (robots.txt, cache, crawl date); HTML/PDF parsing; chunks with metadata; journey-stage sources. 5 universities first, then the rest | Review the source list, confirm programmes, decide robots.txt / terms-of-use issues (~30 min) | Crawling ethics, parsing, chunking, provenance |
-| 3 | Extraction | Requirement schemas, LLM extraction, simple review screen showing each field next to its source text; `base_url` setting for the LLM client | **Verify every extracted record** (~3–5 h) | Structured outputs, schema design, field-level accuracy |
-| 4 | Eval baseline | ~150 draft gold questions, ~40 synthetic profiles, first benchmark numbers with the four existing retrieval modes | Review/fix drafts, write ~20 questions (~2–3 h) | Recall, MRR, nDCG; gold sets; judge bias |
-| 5 | Retrieval upgrades | Metadata filters, query rewriting, parent-child retrieval, ablation table; each kept only if the benchmark improves | Read results and decide what stays | Ablation method |
-| 6 | Eligibility engine | Profile schema, rules engine, grade conversion, funds check, hard/soft flags, margins, paste-to-fill | Write 5 realistic anonymised profiles and check verdicts | Deterministic logic vs LLM |
-| 7 | Agent and MCP | Tool-use loop; MCP server with the same tools; agent vs one-shot RAG compared on multi-hop questions | Connect the server to an MCP client and try to break it | Agent loops, tool design, MCP |
-| 8 | Production layer | SSE streaming, guardrails, caching, rate and request caps, tracing, user-source path, feedback queue, privacy notice, Docker, CI eval gate | Run the Docker setup and attempt prompt injections | LLMOps, security, containers |
-| 9 | UI | Wireframes first, then profile form, report, process panel, chat, coverage page, dashboard | Approve wireframes, give usability feedback | Streaming UIs, UX for AI |
-| 10 | Deploy and showcase | HF Space and Cloudflare Pages config, weekly re-crawl workflow, README with real numbers, architecture diagram, `LEARNING.md` | Create accounts, add secrets, press deploy | Deployment, CI/CD, operations |
+| # | Phase | What gets built | Manual task | Concepts | Done when |
+|---|---|---|---|---|---|
+| 1 | Clean base | Done: reranker normalisation, test isolation, `vite-env.d.ts`, CI workflow, stale docs removed | — | — | Merged (PR #1) |
+| 2 | Sources and ingestion | Source registry checked against live sites; polite crawler (robots.txt, cache, crawl date); HTML/PDF parsing; chunks with metadata; journey-stage sources, on the 5 pilot universities | Review the source list, confirm programmes, decide robots.txt / terms-of-use issues (~30 min); run `make crawl`, `make ingest`, `make index` | Crawling ethics, parsing, chunking, provenance | `make crawl/ingest/index` run clean; tests green; Phase 2 section in `LEARNING.md`; PR open |
+| 3 | Extraction + batch 2 | Requirement schemas, LLM extraction, simple review screen showing each field next to its source text; `base_url` setting for the LLM client. Then batch 2 (about 7 universities): registry, crawl, extract | **Verify every extracted record**: pilots (~3–5 h), then batch 2 (~6 h) | Structured outputs, schema design, field-level accuracy | Every programme has human-verified `ProgramRequirements` JSON committed |
+| 4 | Eval baseline | ~150 draft gold questions, ~40 synthetic profiles, refusal and coverage probes, first benchmark numbers with the four existing retrieval modes | Review/fix drafts, write ~20 questions (~2–3 h) | Recall, MRR, nDCG; gold sets; judge bias | `make eval` prints real numbers for all four modes |
+| 5 | Retrieval upgrades | Metadata filters, query rewriting, parent-child retrieval, ablation table; each kept only if the benchmark improves | Read results and decide what stays | Ablation method | Ablation table committed; only upgrades that beat the baseline remain |
+| 6 | Eligibility engine | Profile schema, rules engine, grade conversion, funds check, hard/soft flags, margins, paste-to-fill | Write 5 realistic anonymised profiles and check verdicts | Deterministic logic vs LLM | Verdicts correct on the 5 profiles; engine fully unit-tested |
+| 7 | Small agent | Tool-use loop over the existing functions (search, get_requirements, check_eligibility, convert_grade, find_scholarships) with a step budget; compared with one-shot RAG on multi-hop questions | Try multi-part questions and try to break it | Agent loops, tool design | Agent beats one-shot RAG on the multi-hop eval subset |
+| 8 | Production layer | SSE streaming, guardrails, caching, rate and request caps, tracing, user-source path, feedback queue, privacy notice, Docker, CI eval gate | Run the Docker setup and attempt prompt injections | LLMOps, security, containers | Docker run verified; injection attempts handled; CI gate green |
+| 9 | UI | Wireframes first, then profile form, report, process panel, chat, coverage page, dashboard | Approve wireframes, give usability feedback | Streaming UIs, UX for AI | Wireframes approved; form, report, process panel and chat working |
+| 10 | Deploy and showcase | HF Space and Cloudflare Pages config, weekly re-crawl workflow, README with real numbers, architecture diagram, `LEARNING.md` | Create accounts, add secrets, press deploy | Deployment, CI/CD, operations | Public URL serves a cited answer and an eligibility report |
+| 11 | MCP server (after deploy) | MCP server exposing the agent's tools | Connect the server to an MCP client and try to break it | MCP, tool contracts | Same tools usable from an MCP client |
 
-**One-time setup:** GitHub repo (done); Gemini API key in `.env` before Phase 3; Docker Desktop with WSL integration (done); MCP client installed before Phase 7; Hugging Face and Cloudflare accounts before Phase 10; product name chosen before Phase 9.
+**One-time setup:** GitHub repo (done); Gemini API key in `.env` before Phase 3; Docker Desktop with WSL integration (done); Hugging Face and Cloudflare accounts before Phase 10; product name chosen before Phase 9; MCP client installed before Phase 11.
 
 ### The loop for every phase
 1. **Kick off.** "Start Phase N" → a short brief: what gets built, what the maintainer must do, what "done" means.
@@ -191,10 +226,10 @@ Each phase ends runnable and measured. The first three columns are the work; the
 3. **Hands-on task** (the manual column above).
 4. **Run it yourself** with the commands provided.
 5. **Explain.** "Explain Phase N" → a walkthrough of how it works and why.
-6. **Checkpoint.** Write the phase's `DECISIONS.md` entry in your own words, then "Quiz me on Phase N": 3–5 interview-style questions with honest feedback.
+6. **Park the learning.** Append the phase's notes, 3–5 interview-style quiz questions and the owed `DECISIONS.md` entry to `LEARNING.md`. The maintainer writes the DECISIONS entries and takes the quizzes in one batch after Phase 10, before Phase 11; this does not gate the next phase.
 7. **Commit.** "Commit Phase N": one branch and one PR per phase.
 
-Other commands: "Continue Phase N, step X", "Pause, explain why X", "Status?", "I disagree with X because Y". New session: "Continue the study-abroad project, Phase N".
+Other commands: "Continue Phase N, step X", "Pause, explain why X", "Status?", "I disagree with X because Y". New session: "Continue the project, Phase N".
 
 ## 8. Carried over from the earlier review
 Items from the October review that still apply and are folded into the phases above:
@@ -215,7 +250,7 @@ Items from the October review that still apply and are folded into the phases ab
 | Data engineering | Crawling, PDF/HTML/tables, provenance, freshness |
 | Retrieval and RAG | Hybrid search, reranking, filters, rewriting, citations |
 | LLM engineering | Structured extraction, schema validation, model routing |
-| Agentic AI and MCP | Tool-use loop, MCP server |
+| Agentic AI | Tool-use loop (Phase 7); MCP server after deploy (Phase 11) |
 | Evaluation | Gold sets, judge, ablations, CI gate |
 | LLMOps | Tracing, usage, caching, caps |
 | Backend and DevOps | FastAPI, Docker, CI/CD, free deployment |
@@ -230,10 +265,12 @@ Items from the October review that still apply and are folded into the phases ab
 
 ## 11. Verification (end state)
 - `make test` and CI are green.
-- `make ingest index eval` produces non-PENDING numbers that the dashboard renders.
+- `make crawl ingest index eval` produces non-PENDING numbers that the dashboard renders.
 - Extraction accuracy and eligibility-verdict accuracy are reported against the verified gold data.
-- The MCP server works from an MCP client.
 - The deployed URL serves a streamed, cited answer and an eligibility report for a pasted profile.
+- After deploy (Phase 11): the MCP server works from an MCP client.
 
 ## 12. Open items
 - Product name: to be chosen before Phase 9.
+- Batch-2 university list: confirmed against live sites in Phase 3.
+- Long tail of further German universities: after deploy.

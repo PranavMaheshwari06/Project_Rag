@@ -75,3 +75,14 @@ def test_tiny_sections_merge():
     cfg = ChunkingCfg(target_tokens=512, max_tokens=1024, overlap_ratio=0.1, min_section_tokens=40)
     chunks = chunk_document(make_doc(text), cfg)
     assert len(chunks) == 1
+
+
+def test_chunks_respect_real_model_limit():
+    # fake tokenizer: every word costs 3 model tokens, like German text or tables
+    tokens_of = lambda text: 3 * len(text.split())  # noqa: E731
+    cfg = ChunkingCfg(target_tokens=100, max_tokens=120, overlap_ratio=0.1,
+                      min_section_tokens=5, model_token_limit=150)
+    doc = make_doc("# Title\n\n" + " ".join(f"w{i}" for i in range(110)))
+    chunks = chunk_document(doc, cfg, tokens_of)
+    assert len(chunks) > 1
+    assert all(tokens_of(c.text) <= cfg.model_token_limit for c in chunks)

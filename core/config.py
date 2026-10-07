@@ -21,9 +21,19 @@ except ImportError:
 
 
 class PathsCfg(BaseModel):
-    sample_dir: str = "data/samples"
+    registry_path: str = "sources/registry.yaml"
+    manifest_path: str = "sources/manifest.json"
+    raw_dir: str = "data/raw"
     processed_path: str = "data/processed/chunks.jsonl"
     index_dir: str = "data/index"
+
+
+class CrawlCfg(BaseModel):
+    user_agent: str = "StudyAbroadRAG/0.1 (+https://github.com/PranavMaheshwari06/Project_Rag)"
+    delay_seconds: float = 2.0
+    timeout_seconds: float = 30.0
+    max_bytes: int = 20_000_000
+    max_pdf_pages: int = 80
 
 
 class ChunkingCfg(BaseModel):
@@ -31,6 +41,7 @@ class ChunkingCfg(BaseModel):
     max_tokens: int = 1024
     overlap_ratio: float = 0.12
     min_section_tokens: int = 40
+    model_token_limit: int = 510  # embedder max_seq_length 512 minus [CLS]/[SEP]
 
 
 class RetrievalCfg(BaseModel):
@@ -66,6 +77,7 @@ class EvalCfg(BaseModel):
 
 class Settings(BaseModel):
     paths: PathsCfg = PathsCfg()
+    crawl: CrawlCfg = CrawlCfg()
     chunking: ChunkingCfg = ChunkingCfg()
     retrieval: RetrievalCfg = RetrievalCfg()
     models: ModelsCfg = ModelsCfg()
