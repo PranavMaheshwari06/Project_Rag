@@ -1,6 +1,8 @@
 # Gold QA set
 
-`gold_qa.jsonl` — one JSON object per line:
+The FastAPI seed set now lives in `tests/fixtures/gold_qa.jsonl` (test corpus
+only). The study-abroad gold set is written here in Phase 4, same format,
+one JSON object per line:
 
 - `qid`: stable id
 - `question`: the query as a user would type it

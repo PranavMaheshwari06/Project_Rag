@@ -1,0 +1,72 @@
+{
+  "fastapi_docs/background-tasks": {
+    "url": "https://docs.example.dev/fastapi/background-tasks/",
+    "final_url": "https://docs.example.dev/fastapi/background-tasks/",
+    "status": 200,
+    "content_type": "text/markdown",
+    "fetched_at": "2026-10-05T00:00:00+00:00",
+    "sha256": null,
+    "file": "fastapi_docs/background-tasks.md",
+    "error": null
+  },
+  "fastapi_docs/dependencies": {
+    "url": "https://docs.example.dev/fastapi/dependencies/",
+    "final_url": "https://docs.example.dev/fastapi/dependencies/",
+    "status": 200,
+    "content_type": "text/markdown",
+    "fetched_at": "2026-10-05T00:00:00+00:00",
+    "sha256": null,
+    "file": "fastapi_docs/dependencies.md",
+    "error": null
+  },
+  "fastapi_docs/middleware": {
+    "url": "https://docs.example.dev/fastapi/middleware/",
+    "final_url": "https://docs.example.dev/fastapi/middleware/",
+    "status": 200,
+    "content_type": "text/markdown",
+    "fetched_at": "2026-10-05T00:00:00+00:00",
+    "sha256": null,
+    "file": "fastapi_docs/middleware.md",
+    "error": null
+  },
+  "fastapi_docs/path-parameters": {
+    "url": "https://docs.example.dev/fastapi/path-parameters/",
+    "final_url": "https://docs.example.dev/fastapi/path-parameters/",
+    "status": 200,
+    "content_type": "text/markdown",
+    "fetched_at": "2026-10-05T00:00:00+00:00",
+    "sha256": null,
+    "file": "fastapi_docs/path-parameters.md",
+    "error": null
+  },
+  "fastapi_docs/query-parameters": {
+    "url": "https://docs.example.dev/fastapi/query-parameters/",
+    "final_url": "https://docs.example.dev/fastapi/query-parameters/",
+    "status": 200,
+    "content_type": "text/markdown",
+    "fetched_at": "2026-10-05T00:00:00+00:00",
+    "sha256": null,
+    "file": "fastapi_docs/query-parameters.md",
+    "error": null
+  },
+  "fastapi_docs/settings-management": {
+    "url": "https://docs.example.dev/fastapi/settings-management/",
+    "final_url": "https://docs.example.dev/fastapi/settings-management/",
+    "status": 200,
+    "content_type": "text/markdown",
+    "fetched_at": "2026-10-05T00:00:00+00:00",
+    "sha256": null,
+    "file": "fastapi_docs/settings-management.md",
+    "error": null
+  },
+  "ops_notes/deployment": {
+    "url": "https://wiki.example.dev/ops/deployment/",
+    "final_url": "https://wiki.example.dev/ops/deployment/",
+    "status": 200,
+    "content_type": "text/html",
+    "fetched_at": "2026-10-05T00:00:00+00:00",
+    "sha256": null,
+    "file": "ops_notes/deployment.html",
+    "error": null
+  }
+}

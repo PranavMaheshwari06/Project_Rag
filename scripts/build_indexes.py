@@ -14,7 +14,7 @@ from retrieval.pipeline import build_indexes
 def main():
     setup_logging()
     stats = build_indexes(get_settings())
-    print(f"indexed {stats['chunks']} chunks (dense dim={stats['dim']})")
+    print(f"indexed {stats['chunks']} chunks (dense dim={stats['dim']}, {stats['truncated']} truncated at the embedder's token limit)")
 
 
 if __name__ == "__main__":

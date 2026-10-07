@@ -5,6 +5,7 @@ are atomic: a chunk boundary never lands inside one, and overlap never takes
 part of one."""
 
 import re
+from collections.abc import Callable
 from dataclasses import dataclass
 
 from core.config import ChunkingCfg
@@ -115,7 +116,28 @@ def _split_oversized(items: list[tuple[Block, str, bool]], cfg: ChunkingCfg) -> 
     return out
 
 
-def chunk_document(parsed: ParsedDoc, cfg: ChunkingCfg) -> list[Chunk]:
+def _fit_model_limit(text: str, tokens_of: Callable[[str], int], limit: int) -> list[str]:
+    """The word proxy undercounts German text and tables (up to ~2.7 model tokens
+    per word), so a chunk can still overflow the embedder. Halve it at a word
+    boundary until the real count fits. Code chunks stay whole."""
+    words = text.split()
+    if tokens_of(text) <= limit or len(words) < 2 or text.lstrip().startswith(("```", "~~~")):
+        return [text]
+    mid = len(words) // 2
+    return [
+        part
+        for half in (words[:mid], words[mid:])
+        for part in _fit_model_limit(" ".join(half), tokens_of, limit)
+    ]
+
+
+def chunk_document(
+    parsed: ParsedDoc,
+    cfg: ChunkingCfg,
+    tokens_of: Callable[[str], int] | None = None,
+) -> list[Chunk]:
+    """`tokens_of` is the embedder's real token counter; without it only the
+    whitespace proxy applies."""
     items = _split_oversized(_parse_blocks(parsed.text, parsed.title), cfg)
     overlap_budget = int(cfg.target_tokens * cfg.overlap_ratio)
 
@@ -147,6 +169,13 @@ def chunk_document(parsed: ParsedDoc, cfg: ChunkingCfg) -> list[Chunk]:
         has_new = True
     flush()
 
+    if tokens_of:
+        pieces = [
+            (part, path)
+            for text, path in pieces
+            for part in _fit_model_limit(text, tokens_of, cfg.model_token_limit)
+        ]
+
     return [
         Chunk(
             chunk_id=f"{parsed.doc_id}::{idx:03d}",
@@ -157,6 +186,7 @@ def chunk_document(parsed: ParsedDoc, cfg: ChunkingCfg) -> list[Chunk]:
             url=parsed.url,
             text=text,
             token_count=count_tokens(text),
+            **parsed.meta,
         )
         for idx, (text, path) in enumerate(pieces)
     ]

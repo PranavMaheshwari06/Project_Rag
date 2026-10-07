@@ -32,5 +32,12 @@ class Embedder:
         )
         return vectors.astype(np.float32)
 
+    def count_truncated(self, texts: list[str]) -> int:
+        """Passages longer than the model's max_seq_length are silently cut;
+        their tail is invisible to dense retrieval."""
+        model = self._load()
+        lengths = [len(ids) for ids in model.tokenizer(texts, add_special_tokens=True)["input_ids"]]
+        return sum(n > model.max_seq_length for n in lengths)
+
     def encode_query(self, text: str) -> np.ndarray:
         return self.encode_passages([QUERY_PREFIX + text])[0]
