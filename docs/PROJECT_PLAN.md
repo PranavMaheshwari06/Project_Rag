@@ -109,7 +109,7 @@ Three kinds of user text, never mixed:
 ## 3. LLM provider and deployment
 
 ### 3.1 LLM
-The project uses the **Gemini free tier** (Google AI Studio key, no billing) through Gemini's OpenAI-compatible endpoint. `generation/llm_client.py` is the only module that touches the SDK, so the provider stays swappable. A `base_url` setting and the `GEMINI_API_KEY` variable are wired in Phase 3; until then the code still reads `OPENAI_API_KEY` and, with no key, uses the extractive fallback.
+The project uses the **Gemini free tier** (Google AI Studio key, no billing) through Gemini's OpenAI-compatible endpoint. `generation/llm_client.py` is the only module that touches the SDK, so the provider stays swappable. The endpoint (`models.llm_base_url`), model (`models.llm_model`) and the `GEMINI_API_KEY` variable were wired in Phase 3; with no key the app uses the extractive fallback.
 
 - The key goes in `.env` as `GEMINI_API_KEY`. It is never committed or pasted into chat.
 - Free-tier rate limits and model names change; re-check them at build and deploy time rather than hard-coding assumptions.

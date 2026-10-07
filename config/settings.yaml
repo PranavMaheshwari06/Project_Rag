@@ -1,5 +1,5 @@
 # Single source of truth for every tunable knob.
-# core/config.py loads this file; a few env vars (OPENAI_API_KEY, QDRANT_URL,
+# core/config.py loads this file; a few env vars (GEMINI_API_KEY, QDRANT_URL,
 # VECTOR_BACKEND, LLM_MODEL, EMBED_MODEL, RERANK_MODEL) override it.
 
 paths:
@@ -38,7 +38,8 @@ models:
   embed_model: BAAI/bge-small-en-v1.5
   rerank_model: BAAI/bge-reranker-base
   embed_batch_size: 16       # small batches so CPU stays usable
-  llm_model: gpt-4o-mini
+  llm_model: gemini-3.8-flash  # free tier; model names and limits change, re-check before relying on them
+  llm_base_url: https://generativelanguage.googleapis.com/v1beta/openai/  # OpenAI-compatible endpoint
 
 generation:
   refusal_threshold: 0.3     # top rerank score below this -> explicit refusal
