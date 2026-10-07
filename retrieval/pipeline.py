@@ -26,6 +26,9 @@ def build_indexes(settings: Settings) -> dict:
 
     embedder = Embedder(settings.models.embed_model, settings.models.embed_batch_size)
     vectors = embedder.encode_passages(texts)
+    truncated = embedder.count_truncated(texts)
+    if truncated:
+        log.warning("%d/%d chunks exceed the embedder's token limit and get truncated", truncated, len(texts))
 
     dense = get_vector_store(settings)
     dense.build(ids, vectors)
@@ -34,7 +37,7 @@ def build_indexes(settings: Settings) -> dict:
     bm25.build(ids, texts)
 
     log.info("indexed %d chunks (dense dim=%d, backend=%s)", len(ids), vectors.shape[1], settings.retrieval.vector_backend)
-    return {"chunks": len(ids), "dim": int(vectors.shape[1])}
+    return {"chunks": len(ids), "dim": int(vectors.shape[1]), "truncated": truncated}
 
 
 class RetrievalPipeline:

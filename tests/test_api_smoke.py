@@ -18,6 +18,9 @@ def test_search(client):
     top = body["results"][0]
     assert top["rerank_score"] is not None
     assert top["chunk"]["chunk_id"]
+    # registry provenance rides along on every chunk
+    assert top["chunk"]["country"] == "XX" and top["chunk"]["layer"] == "rules"
+    assert top["chunk"]["crawled_at"]
     assert "total" in body["latency_ms"]
     assert resp.headers["x-request-id"] == body["request_id"]
 

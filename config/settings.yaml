@@ -3,15 +3,26 @@
 # VECTOR_BACKEND, LLM_MODEL, EMBED_MODEL, RERANK_MODEL) override it.
 
 paths:
-  sample_dir: data/samples
+  registry_path: sources/registry.yaml   # every source URL + provenance
+  manifest_path: sources/manifest.json   # crawl results (committed)
+  raw_dir: data/raw                      # raw HTML/PDF cache (gitignored)
   processed_path: data/processed/chunks.jsonl
   index_dir: data/index
 
+crawl:
+  # identifies us to site owners; robots.txt rules are matched on "StudyAbroadRAG"
+  user_agent: "StudyAbroadRAG/0.1 (+https://github.com/PranavMaheshwari06/Project_Rag)"
+  delay_seconds: 2.0         # min gap between requests to one host (robots Crawl-delay wins if larger)
+  timeout_seconds: 30
+  max_bytes: 20000000        # abort downloads above ~20MB
+  max_pdf_pages: 80          # parse at most this many pages per PDF
+
 chunking:
-  target_tokens: 512
-  max_tokens: 1024
+  target_tokens: 256        # whitespace words; prose runs ~1.25 bge tokens/word, so 384 max + overlap fits 512
+  max_tokens: 384
   overlap_ratio: 0.12        # ~12% of target carried into the next chunk
   min_section_tokens: 40     # sections smaller than this merge with neighbours
+  model_token_limit: 510     # real tokenizer count; chunks above this are re-split (German/tables run 2x the word count)
 
 retrieval:
   vector_backend: memory     # memory | qdrant
@@ -35,7 +46,7 @@ generation:
   max_sentences_per_chunk: 3
 
 evaluation:
-  gold_path: evaluation/datasets/gold_qa.jsonl
+  gold_path: evaluation/datasets/gold_qa.jsonl   # new study-abroad gold set lands in Phase 4
   k_values: [5, 10]
   benchmark_out: frontend/public/benchmark.json
   readme_path: README.md

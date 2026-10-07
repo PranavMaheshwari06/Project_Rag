@@ -12,6 +12,13 @@ class Chunk(BaseModel):
     url: str
     text: str
     token_count: int
+    # provenance from the source registry; None for sources that don't set it
+    country: str | None = None
+    layer: str | None = None
+    stage: str | None = None
+    university: str | None = None
+    programme: str | None = None
+    crawled_at: str | None = None
 
 
 class RetrievedChunk(BaseModel):

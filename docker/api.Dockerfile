@@ -18,7 +18,7 @@ COPY generation ./generation
 COPY evaluation ./evaluation
 COPY scripts ./scripts
 COPY config ./config
-COPY data/samples ./data/samples
+COPY sources ./sources
 RUN pip install --no-cache-dir --no-deps .
 
 EXPOSE 8000

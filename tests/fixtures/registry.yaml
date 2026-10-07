@@ -1,0 +1,9 @@
+# Offline test corpus: the old FastAPI sample docs, kept so smoke and e2e
+# tests run without network against a corpus with known answers.
+- {id: fastapi_docs/background-tasks, url: "https://docs.example.dev/fastapi/background-tasks/", country: XX, layer: rules}
+- {id: fastapi_docs/dependencies, url: "https://docs.example.dev/fastapi/dependencies/", country: XX, layer: rules}
+- {id: fastapi_docs/middleware, url: "https://docs.example.dev/fastapi/middleware/", country: XX, layer: rules}
+- {id: fastapi_docs/path-parameters, url: "https://docs.example.dev/fastapi/path-parameters/", country: XX, layer: rules}
+- {id: fastapi_docs/query-parameters, url: "https://docs.example.dev/fastapi/query-parameters/", country: XX, layer: rules}
+- {id: fastapi_docs/settings-management, url: "https://docs.example.dev/fastapi/settings-management/", country: XX, layer: rules}
+- {id: ops_notes/deployment, url: "https://wiki.example.dev/ops/deployment/", country: XX, layer: university, university: Ops Wiki}
