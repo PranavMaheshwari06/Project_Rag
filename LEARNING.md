@@ -39,3 +39,32 @@ Per phase: what was built, why (interview answers), quiz questions, the DECISION
 ### Open findings
 - A forced re-fetch of `de/rules/daad-enrolling` reported `changed=True` for the same URL hours later: pages with dynamic content change their hash without the text changing. The Phase 10 weekly re-crawl uses this hash, so it may be noisy. Fix idea: hash the cleaned text, not the raw bytes.
 - The TU Berlin suitability PDF dates from 2020; check currency when extracting in Phase 3.
+
+---
+
+## Phase 3: Extraction + batch 2 (in progress)
+
+### Why (defend these)
+- **Provider behind one thin client + `base_url`.** Gemini speaks the OpenAI API, so switching provider is a config change, not a code change. The free tier was the budget constraint.
+- **Tests blank the API key.** Tests must be offline, deterministic and free; the real endpoint is checked once by hand.
+- **`Cited` fields: stated (value + verbatim quote + doc id) or not_published.** The quote lets a human verify in seconds and lets code reject hallucinated values (quote not in source = reject). `not_published` is a real answer the eligibility engine turns into "unknown", never a guess.
+- **English scores kept as text** (6.5, 88, C1): different tests use different scales; conversion belongs to the Phase 6 rules engine, not the schema.
+
+- **Conditional entrance tests** (GRE or GATE, only for degrees from named countries). The LLM extracts the condition; the Phase 6 engine applies it to the profile. Hard case of "the LLM never decides".
+- **One call per programme over full page text, not retrieved chunks.** Each programme is under ~10k words, so the model sees everything; retrieval could miss the one sentence with the deadline.
+- **Quote check on words only** (lowercase, punctuation and markdown dropped), so formatting differences don't reject true quotes, and quotes under 2 words are rejected because they would match anywhere.
+- **Failures don't stop the run.** Free-tier 503/429 errors are normal; a failed programme is skipped and re-running fills only the gaps.
+
+### Quiz questions (answer later)
+1. Why does every extracted field carry a verbatim quote, and what check does the quote enable?
+2. Why is "not published" a separate state rather than an empty value?
+3. Why does the LLM extract but never decide eligibility?
+4. Why give the extractor whole pages instead of top-k retrieved chunks?
+5. A quote check passes. Does that prove the value is right? What else can go wrong?
+
+### DECISIONS entries to write (maintainer, own words)
+- [ ] Gemini free tier via the OpenAI-compatible endpoint; model choice and why 2.5-flash was not usable.
+- [ ] The `Cited` field design.
+
+### Open findings
+- Free-tier rate limits and model availability change without notice (2.5-flash closed to new keys in Oct 2026).

@@ -26,6 +26,8 @@ class PathsCfg(BaseModel):
     raw_dir: str = "data/raw"
     processed_path: str = "data/processed/chunks.jsonl"
     index_dir: str = "data/index"
+    extracted_dir: str = "data/extracted"  # LLM drafts (committed)
+    verified_dir: str = "data/verified"  # human-verified records (committed)
 
 
 class CrawlCfg(BaseModel):
@@ -64,6 +66,11 @@ class ModelsCfg(BaseModel):
     llm_base_url: str = "https://generativelanguage.googleapis.com/v1beta/openai/"
 
 
+class ExtractionCfg(BaseModel):
+    delay_seconds: float = 30.0
+    min_quote_words: int = 2
+
+
 class GenerationCfg(BaseModel):
     refusal_threshold: float = 0.3
     max_evidence_chunks: int = 4
@@ -84,6 +91,7 @@ class Settings(BaseModel):
     retrieval: RetrievalCfg = RetrievalCfg()
     models: ModelsCfg = ModelsCfg()
     generation: GenerationCfg = GenerationCfg()
+    extraction: ExtractionCfg = ExtractionCfg()
     evaluation: EvalCfg = EvalCfg()
     llm_api_key: str | None = None
 

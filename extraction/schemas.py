@@ -44,6 +44,18 @@ class Deadline(BaseModel):
     date: str  # as published, e.g. "31 May"
 
 
+class EntranceTest(BaseModel):
+    test: str  # e.g. "GRE", "GATE", "TUM aptitude assessment"
+    min_scores: str | None = None  # as published: "QR above 75th percentile"
+    requirement: Literal["required", "one_of", "recommended"]  # one_of = any of the one_of tests
+    applies_to_degree_countries: list[str] = []  # empty = all applicants
+
+
+class GermanRequirement(BaseModel):
+    min_level: Literal["none", "A1", "A2", "B1", "B2", "C1", "C2"]
+    needed_by: Literal["admission", "enrolment", "during_studies"]
+
+
 class ProgramRequirements(BaseModel):
     university: str
     programme: str
@@ -54,7 +66,9 @@ class ProgramRequirements(BaseModel):
     subject_credits: Cited[list[SubjectCredits]] = Cited()
     min_grade_german_scale: Cited[float] = Cited()  # 1.0 best, 4.0 pass
     english: Cited[list[LanguageTest]] = Cited()
-    gre: Cited[Literal["required", "recommended", "not_required"]] = Cited()
+    entrance_tests: Cited[list[EntranceTest]] = Cited()
+    german: Cited[GermanRequirement] = Cited()
+    work_experience: Cited[Literal["required", "counts_in_selection", "recommended", "not_required"]] = Cited()
     aps_required: Cited[bool] = Cited()
     application_route: Cited[Literal["direct", "uni_assist", "both"]] = Cited()
     deadlines: Cited[list[Deadline]] = Cited()

@@ -1,0 +1,155 @@
+{
+  "extracted_at": "2026-10-07T22:41:00+00:00",
+  "model": "gemini-3.5-flash",
+  "rejected_quotes": [],
+  "record": {
+    "university": "TU Berlin",
+    "programme": "M.Sc. Computer Science",
+    "source_doc_ids": [
+      "de/tub/cs-msc/programme",
+      "de/tub/cs-msc/application",
+      "de/tub/cs-msc/suitability-form",
+      "de/tub/eecs-application-faq",
+      "de/tub/admission-requirements"
+    ],
+    "degree_requirement": {
+      "status": "stated",
+      "value": "first professionally qualifying degree in the field of “Informatik” or Computer Science or in a related study program",
+      "quote": "The specific admission requirement is a first professionally qualifying degree in the field of “Informatik” or Computer Science or in a related study program.",
+      "doc_id": "de/tub/cs-msc/application"
+    },
+    "min_total_ects": {
+      "status": "not_published",
+      "value": null,
+      "quote": null,
+      "doc_id": null
+    },
+    "subject_credits": {
+      "status": "stated",
+      "value": [
+        {
+          "area": "foundations of computer sciences",
+          "min_ects": 36
+        },
+        {
+          "area": "Theoretical Computer Science",
+          "min_ects": 12
+        },
+        {
+          "area": "Computer Engineering or Information Technology",
+          "min_ects": 12
+        },
+        {
+          "area": "Methodological and Practical Computer Science",
+          "min_ects": 12
+        },
+        {
+          "area": "Mathematics",
+          "min_ects": 18
+        },
+        {
+          "area": "computer sciences (excluding thesis)",
+          "min_ects": 30
+        }
+      ],
+      "quote": "► Study programs in the above subject area and related study programs must contain at least the following components:\n\n- 36 CP in foundations of computer sciences, including 12 CP in the field of Theoretical Computer Science , 12 CP in the field of Computer Engineering or Information Technology, 12 CP in the field of Methodological and Practical Computer Science\n\n- 18 CP in the field of Mathematics,\n\n- and additionally, at least 30 CP in the field of computer sciences, not including your thesis",
+      "doc_id": "de/tub/cs-msc/application"
+    },
+    "min_grade_german_scale": {
+      "status": "not_published",
+      "value": null,
+      "quote": null,
+      "doc_id": null
+    },
+    "english": {
+      "status": "stated",
+      "value": [
+        {
+          "test": "CEFR",
+          "min_score": "B2"
+        },
+        {
+          "test": "IELTS",
+          "min_score": "6.5"
+        }
+      ],
+      "quote": "A further requirement for admission to the Master's program in Computer Science (Informatik) is proof of English language proficiency at level B2 according to the Common European Framework of Reference for Languages (CEFR).",
+      "doc_id": "de/tub/cs-msc/application"
+    },
+    "entrance_tests": {
+      "status": "not_published",
+      "value": null,
+      "quote": null,
+      "doc_id": null
+    },
+    "german": {
+      "status": "stated",
+      "value": {
+        "min_level": "none",
+        "needed_by": "admission"
+      },
+      "quote": "The study program is taught in English.",
+      "doc_id": "de/tub/cs-msc/application"
+    },
+    "work_experience": {
+      "status": "stated",
+      "value": "not_required",
+      "quote": "Will my professional experience be taken into account when reviewing the admission requirements for the Master's program? No, professional experience is not credited for study programs with open admission or study programs with restricted admission (currently M. Sc. Information Systems Management).",
+      "doc_id": "de/tub/eecs-application-faq"
+    },
+    "aps_required": {
+      "status": "not_published",
+      "value": null,
+      "quote": null,
+      "doc_id": null
+    },
+    "application_route": {
+      "status": "stated",
+      "value": "both",
+      "quote": "Master’s applicants who earned or will earn their first university degree (generally a bachelor’s) at a German university and are applying with a ECTS certificate (European Credit Transfer System (ECTS), see infobox) must submit their application directly to the TU Berlin.",
+      "doc_id": "de/tub/cs-msc/application"
+    },
+    "deadlines": {
+      "status": "not_published",
+      "value": null,
+      "quote": null,
+      "doc_id": null
+    },
+    "selection_process": {
+      "status": "stated",
+      "value": "open admission",
+      "quote": "The Master's program is admission-free (open admission).",
+      "doc_id": "de/tub/cs-msc/application"
+    },
+    "required_documents": {
+      "status": "stated",
+      "value": [
+        "Suitability Assessment Form",
+        "proof of English language proficiency",
+        "first university degree or ECTS certificate",
+        "preliminary review documentation (VPD) from uni-assist (for foreign degrees)"
+      ],
+      "quote": "If you did not complete your bachelor’s degree in Computer Science/Informatik at TU Berlin, you will need to add the Suitability Assessment Form to your application documents.",
+      "doc_id": "de/tub/cs-msc/application"
+    },
+    "tuition_eur_per_semester_non_eu": {
+      "status": "not_published",
+      "value": null,
+      "quote": null,
+      "doc_id": null
+    },
+    "semester_fee_eur": {
+      "status": "not_published",
+      "value": null,
+      "quote": null,
+      "doc_id": null
+    },
+    "language_of_instruction": {
+      "status": "stated",
+      "value": "English",
+      "quote": "The study program is taught in English.",
+      "doc_id": "de/tub/cs-msc/application"
+    },
+    "verified": false
+  }
+}
