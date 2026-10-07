@@ -59,7 +59,9 @@ class ModelsCfg(BaseModel):
     embed_model: str = "BAAI/bge-small-en-v1.5"
     rerank_model: str = "BAAI/bge-reranker-base"
     embed_batch_size: int = 16
-    llm_model: str = "gpt-4o-mini"
+    llm_model: str = "gemini-3.8-flash"
+    # any OpenAI-compatible endpoint; Gemini by default
+    llm_base_url: str = "https://generativelanguage.googleapis.com/v1beta/openai/"
 
 
 class GenerationCfg(BaseModel):
@@ -83,7 +85,7 @@ class Settings(BaseModel):
     models: ModelsCfg = ModelsCfg()
     generation: GenerationCfg = GenerationCfg()
     evaluation: EvalCfg = EvalCfg()
-    openai_api_key: str | None = None
+    llm_api_key: str | None = None
 
     def resolve(self, rel: str) -> Path:
         """Turn a repo-relative path from the yaml into an absolute one."""
@@ -107,7 +109,7 @@ def load_settings(config_path: Path | None = None) -> Settings:
         value = os.environ.get(env_name)
         if value:
             setattr(getattr(settings, section), field, value)
-    settings.openai_api_key = os.environ.get("OPENAI_API_KEY") or None
+    settings.llm_api_key = os.environ.get("GEMINI_API_KEY") or None
     return settings
 
 
