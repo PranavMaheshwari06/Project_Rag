@@ -1,54 +1,76 @@
-# EngineerDoc AI
+# Germany Master's Eligibility Assistant
 
-I built this because most RAG demos fail in the same place — and it's not the
-LLM. Naive RAG stuffs the top-3 cosine neighbours into a prompt and hopes.
-When the answer quality is bad, it's almost always because *retrieval* handed
-the model the wrong evidence: pure vector search misses exact identifiers
-(`BackgroundTasks`, `--workers`), pure keyword search misses paraphrases, and
-nothing checks whether the best hit is actually good enough to answer from.
+> **Status: in development (Phase 2 of 11).** The data pipeline is built. The eligibility report, agent, UI and public demo come in later phases. See [the project plan](docs/PROJECT_PLAN.md).
 
-So this project treats retrieval quality as the product. It's a hybrid RAG
-service over technical documentation with a measured, reproducible answer to
-the question "does each retrieval stage actually earn its latency?" — plus a
-system that refuses to answer when the evidence is weak instead of
-hallucinating.
+Applying for a master's in Germany means checking a dozen official websites: the programme page, uni-assist, APS, the embassy, the blocked-account rules, the city's foreigners' office. Each one says something slightly different, and some of it is only in PDFs. This project reads those official pages for you and answers from them, with a citation and a crawl date on every claim.
 
-## What it does
+A student enters their profile and gets, for each programme:
 
-- **Hybrid retrieval:** dense embeddings (bge-small) + in-process BM25 with a
-  code-aware tokenizer, fused with Reciprocal Rank Fusion (k=60), reranked
-  with a cross-encoder (bge-reranker-base).
-- **Grounded generation:** answers come only from retrieved evidence, with
-  inline `[n]` citations mapped back to chunk id + URL. If the top rerank
-  score is below a configurable threshold, the system returns an explicit
-  refusal instead of guessing. Hallucinated citation markers are stripped.
-- **Full trace observability:** every request gets a request id, structured
-  JSON logs, per-stage latency, and per-chunk dense/bm25/RRF/rerank scores in
-  the API response.
-- **Reproducible evaluation:** a 4-way benchmark (vector-only / bm25-only /
-  hybrid / hybrid+rerank) over a hand-labeled gold set, reporting Recall@k,
-  MRR, nDCG@k, latency p50/p95 and answer groundedness.
-- **Two-tab frontend:** Search (cited answers, score traces, refusal state)
-  and an Evaluation Dashboard that renders the benchmark from static JSON —
-  no backend needed to inspect results.
-- Runs **fully offline**: committed sample corpus, local CPU models, NumPy
-  vector store, extractive answer fallback. No API key, no Docker, no
-  services required.
+- **which published requirements they meet, miss, or haven't provided yet**, with margins ("IELTS 6.5 vs 7.0 required, short by 0.5");
+- **what to fix**;
+- **the visa, financial-proof and arrival rules that apply**, plus matching scholarships.
 
-## Query path
+When the sources don't cover a question, it says so instead of guessing.
+
+**What it is not:** an admission predictor. There is no public data on who gets admitted, so any "72% chance" would be invented. It is also not official advice: always confirm with the university or embassy.
+
+## Coverage
+
+- **Country-wide rules** (APS, uni-assist, national visa, blocked account, health insurance, residence permit, job-seeker permit): answered for any German university, from DAAD, uni-assist, APS India, the Federal Foreign Office, BAMF and city service pages.
+- **Full eligibility reports** for English-taught MSc programmes in CS, Data Science and AI. Pilot universities: TUM, RWTH Aachen, TU Berlin, Saarland University and TU Dresden, 8 programmes in total. A second batch of about 7 well-known universities follows before the public demo.
+- **Anything else** (another university, another country) gets an honest "not covered yet", the general rules, and a link to the official source. Requirements are never invented.
+
+Germany only, on purpose: one country done properly beats three done badly. Every programme record is checked by hand.
+
+## How it works
 
 ```mermaid
 flowchart LR
-    Q[query] --> D[dense search\nbge-small + cosine]
-    Q --> B[BM25 search\ncode-aware tokens]
-    D --> F[RRF fusion\nk=60]
-    B --> F
-    F --> R[cross-encoder rerank\nbge-reranker-base]
-    R --> T{top score >=\nrefusal threshold?}
-    T -- no --> X[explicit refusal]
-    T -- yes --> G[grounded generation\nLLM or extractive]
-    G --> C[citation mapping\nn -> chunk_id + url]
+    subgraph Offline
+        REG[source registry] --> CR[polite crawler]
+        CR --> RAW[raw pages + manifest]
+        RAW --> ING[parse, clean, chunk]
+        ING --> IDX[dense + BM25 indexes]
+        ING --> EXT[LLM extraction]
+        EXT --> REV[human review]
+        REV --> REQ[verified requirements]
+    end
+    subgraph Per request
+        P[student profile] --> RE[rules engine]
+        REQ --> RE
+        Q[question] --> AG[agent]
+        AG --> RET[hybrid retrieval + rerank]
+        IDX --> RET
+        AG --> RE
+        RE --> EXP[cited explanation]
+        RET --> EXP
+    end
 ```
+
+**The key design choice: the LLM never decides eligibility.** It extracts requirements from official pages, and every extracted record is verified by a person. A deterministic rules engine compares the profile with those records. The LLM then only explains the result. So verdicts are reproducible, testable and explainable, and a prompt injection cannot change one.
+
+### Built so far
+
+- **Source registry**: every official URL, labelled by layer (country rules, scholarship, university), journey stage (before applying, visa document, visa and funds, arrival, after graduation), university and programme.
+- **Polite crawler**:
+  - respects robots.txt and refuses when it can't read it;
+  - waits between requests to the same site;
+  - follows and records redirects, and caps download size;
+  - records a crawl date and a content hash for every page, so later re-crawls can spot changes.
+  - Sites that block bots are dropped, not worked around.
+- **Parsing**: HTML via BeautifulSoup, PDFs via pdfplumber, with tables kept as markdown. A structure-aware chunker splits on headings and fits the embedding model's 512-token limit. Every chunk carries its source's labels and crawl date, so retrieval can later filter by university or stage.
+- **Hybrid retrieval**, all hand-written (no LangChain or LlamaIndex):
+  - dense embeddings (bge-small) and BM25;
+  - fused with Reciprocal Rank Fusion;
+  - reranked with a cross-encoder (bge-reranker-base).
+  - Every result carries its full score trace.
+- **Grounded answers with a refusal gate**: if the best reranked evidence scores below a threshold, the system declines. Answers cite `[n]` markers mapped back to the source URL. Citation markers that point at no source are stripped.
+- **Evaluation harness**: a 4-way benchmark (vector, BM25, hybrid, hybrid+rerank) on Recall@k, MRR, nDCG and p50/p95 latency.
+- **Observability**: request ids, structured JSON logs and per-stage latency.
+
+### Coming next
+
+LLM extraction with a review screen → evaluation on a hand-checked gold set → retrieval upgrades kept only if the numbers improve → eligibility rules engine → small tool-using agent → streaming, guardrails and rate limits → UI → free public deployment → MCP server. Details and the "done when" check for each phase are in [docs/PROJECT_PLAN.md](docs/PROJECT_PLAN.md).
 
 ## Benchmark
 
@@ -56,144 +78,43 @@ flowchart LR
 _PENDING — run `make eval` to populate._
 <!-- BENCHMARK:END -->
 
-## Setup (local, no Docker)
+Numbers appear once the gold question set is built (Phase 4).
 
-Use Python 3.12 for development, matching the API Docker image (the package
-supports Python 3.10+). First run downloads two models from Hugging Face
-(bge-small ~130MB, bge-reranker-base ~1.1GB) — after that everything is
-offline.
+## Run it locally
 
-```bash
-make install                  # creates .venv and installs .[dev] into it
-make ingest                   # sample corpus -> data/processed/chunks.jsonl
-make index                    # dense (NumPy) + BM25 indexes
-make eval                     # 4-way benchmark -> frontend/public/benchmark.json + table above
-make test                     # pytest
-make run                      # uvicorn on :8000
-```
-
-All Python Makefile targets use `.venv` directly, so activation is optional.
-For direct Python commands, run `source .venv/bin/activate` first. To choose
-another base interpreter, use `make install PYTHON=python3.12` on a fresh
-checkout. `make venv` creates the environment without installing dependencies.
-
-Without Make (including Windows PowerShell):
+Python 3.12 is recommended (3.10+ supported). The first run downloads two models from Hugging Face (bge-small ~130MB, bge-reranker-base ~1.1GB). After that, everything except `make crawl` runs offline.
 
 ```bash
-python3 -m venv .venv          # Windows: python -m venv .venv
-# Linux/macOS:
-.venv/bin/python -m pip install -e '.[dev]'
-.venv/bin/python -m pytest -q
-# Windows: use .venv/Scripts/python.exe instead of .venv/bin/python.
+make install    # creates .venv and installs .[dev]
+make crawl      # fetch every registry source into data/raw/ (the only network step; cached pages are skipped)
+make ingest     # parse, clean and chunk -> data/processed/chunks.jsonl
+make index      # dense (NumPy) + BM25 indexes
+make test       # pytest (offline, uses its own fixture corpus)
+make run        # API on :8000
 ```
 
-Dependencies are declared in `pyproject.toml`; the `dev` extra includes pytest,
-HTTP test support, and Ruff (`make fmt`). `.venv` is local and disposable,
-ignored by Git and excluded from Docker builds. Recreate it on each machine;
-do not upload or copy it to a hosting server. Python dependency versions are
-currently ranges, so installs are not yet locked to identical versions.
-
-Optional CPU-only install with uv (avoids downloading CUDA dependencies for
-this project's CPU models):
-
-```bash
-make venv
-uv pip install --python .venv/bin/python --torch-backend cpu -e '.[dev]'
-```
-
-Frontend (needs Node 18+):
+Frontend (Node 18+):
 
 ```bash
 cd frontend
 npm install
-npm run dev                   # :5173, talks to the API on :8000
+npm run dev     # :5173, talks to the API on :8000
 ```
 
-The Dashboard tab renders from `frontend/public/benchmark.json` and works
-with no backend running at all.
+No API key is needed. Without one, answers come from an extractive fallback, which stitches together quoted sentences from the cited evidence. The LLM path (Gemini, free tier) is wired in Phase 3; copy `.env.example` to `.env` to configure it. All tunables live in `config/settings.yaml`.
 
-Optional: copy `.env.example` to `.env` and set `OPENAI_API_KEY` to switch
-answer generation from extractive mode to an LLM. Everything else works
-without it.
+Without Make (including Windows): `python -m venv .venv`, then `.venv/bin/python -m pip install -e '.[dev]'` (Windows: `.venv/Scripts/python.exe`). Optional CPU-only install: `make venv && uv pip install --python .venv/bin/python --torch-backend cpu -e '.[dev]'`.
 
-### Docker phase (later)
+`docker-compose.yml` (Qdrant + API + frontend) is a starting point for the containerised setup in Phase 8; hosting is not verified yet.
 
-`docker-compose.yml` wires Qdrant + API + frontend with healthchecks; the API
-switches to the Qdrant backend via `VECTOR_BACKEND=qdrant`. Not needed for the
-local run. Hosting uses a fresh environment built from `pyproject.toml`,
-not your local `.venv`. The API image installs runtime dependencies only;
-local development installs the additional `dev` tools.
+## Honest limitations (current)
 
-Public hosting still needs deployment work: provision the API, frontend,
-and Qdrant as appropriate for the chosen host, configure frontend API routing,
-and arrange model downloads and persistent indexes. Ingest and index before
-serving queries. The compose file is a starting point for container deployment;
-public hosting has not been verified.
+- **Small corpus, single node.** In-memory BM25 and brute-force cosine search. Fine for thousands of chunks, not millions.
+- **No benchmark numbers yet.** The study-abroad gold set is built in Phase 4.
+- **Official pages change.** Every answer shows its crawl date. A weekly re-crawl with human review of changed pages comes with deployment.
+- **The extractive fallback is quotes, not prose.** It is grounded by construction but not fluent.
+- **Answer groundedness is a token-overlap heuristic**, labelled as such. It is not an LLM judge.
 
-## Design notes
+## Privacy
 
-- All knobs (top_k, rrf_k, refusal_threshold, chunk sizes, models) live in
-  `config/settings.yaml`, loaded once through pydantic. No magic numbers in
-  code.
-- The vector store is an interface with two implementations — NumPy
-  brute-force (default) and Qdrant. Swapping is a one-line config change.
-- The chunker is structure-aware: splits on headings, targets 512–1024
-  tokens with ~12% overlap, and never splits inside a fenced code block.
-- Answer groundedness is scored with a token-overlap heuristic and labeled as
-  such everywhere it appears. It is not an LLM judge; don't read it as one.
-
-## Honest limitations
-
-- **Single node, small corpus.** In-memory BM25, brute-force cosine, no
-  sharding. Fine for thousands of chunks, not millions.
-- **Gold set is a seed.** 8 hand-written pairs prove the harness; conclusions
-  need 30–60 (see `evaluation/datasets/README.md`).
-- **Clean corpus assumption.** The parser handles tidy HTML/markdown. No OCR,
-  no PDFs, no tables-in-images.
-- **Extractive fallback is stitched quotes.** Readable and grounded by
-  construction, but not fluent prose. The LLM path needs a key.
-- **The overlap groundedness metric is generous** to extractive answers —
-  they're built from evidence text, so it mostly validates the citation
-  wiring, not deep factuality.
-
-## v2 scale-up (when the corpus stops being cute)
-
-In rough order of when they'd start paying rent:
-
-1. **Index versioning + object storage** — rebuilds shouldn't drop traffic;
-   store chunks/embeddings as versioned artifacts, swap atomically.
-2. **Ingestion queue** — crawling and embedding move to workers (Celery/RQ)
-   the moment ingestion takes longer than a request timeout.
-3. **OpenSearch/Elasticsearch** replaces in-process BM25 once the index no
-   longer fits comfortably in RAM or needs incremental updates.
-4. **OCR + PDF parsing** when the corpus stops being clean HTML/markdown.
-5. **Access control** (per-source ACLs filtered at retrieval time) the day
-   two user groups shouldn't see the same documents.
-6. **GPU or hosted embedding/rerank inference** once query volume makes CPU
-   latency the bottleneck rather than a footnote.
-
----
-
-## Resume bullets
-
-- Built a hybrid-retrieval RAG service (dense + BM25 + RRF + cross-encoder
-  rerank) with grounded, citation-mapped answers and threshold-based refusal;
-  FastAPI + React, fully runnable offline on CPU.
-- Designed a reproducible 4-way retrieval benchmark (Recall@k, MRR, nDCG,
-  p50/p95 latency) over a hand-labeled gold set, rendered in a live
-  evaluation dashboard.
-- Instrumented the full pipeline with request-scoped structured logging and
-  per-chunk score traces (dense/BM25/RRF/rerank) for end-to-end retrieval
-  debuggability.
-
-## 30-second pitch
-
-"Most RAG failures are retrieval failures, so I built the retrieval story
-properly: dense and BM25 candidates fused with reciprocal rank fusion, then a
-cross-encoder reranks the top candidates, and the system refuses to answer
-when its best evidence is weak instead of hallucinating. Every answer carries
-citations that map back to real chunks, and — the part I care about most —
-there's a reproducible benchmark comparing vector-only, BM25-only, hybrid,
-and hybrid-plus-rerank on Recall, MRR and nDCG, so the architecture is
-justified by numbers, not vibes. It's config-driven, observably logged, and
-runs end-to-end offline on a laptop."
+Profiles will stay in the browser. The server is stateless and keeps no accounts and no personal data. Answers cite public official pages only.

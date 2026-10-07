@@ -9,6 +9,8 @@ import pytest
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
+FIXTURES = Path(__file__).resolve().parent / "fixtures"
+
 
 @pytest.fixture(scope="session")
 def built_corpus(tmp_path_factory):
@@ -19,6 +21,11 @@ def built_corpus(tmp_path_factory):
     settings = get_settings()
     # isolate generated artifacts from the real data/, benchmark.json and README
     tmp = tmp_path_factory.mktemp("rag")
+    # offline fixture corpus with known answers, read through the real loader
+    settings.paths.registry_path = str(FIXTURES / "registry.yaml")
+    settings.paths.manifest_path = str(FIXTURES / "manifest.json")
+    settings.paths.raw_dir = str(FIXTURES / "raw")
+    settings.evaluation.gold_path = str(FIXTURES / "gold_qa.jsonl")
     settings.paths.processed_path = str(tmp / "chunks.jsonl")
     settings.paths.index_dir = str(tmp / "index")
     settings.evaluation.benchmark_out = str(tmp / "benchmark.json")

@@ -1,0 +1,74 @@
+# Every source the corpus is built from. Official sites only.
+# Fields: id (stable, also the raw-cache filename), url, country (ISO code),
+#   layer: rules | scholarship | university
+#   stage (optional): before_applying | visa_document | visa_funds | arrival | after_graduation
+#   university, programme, title (optional). City pages carry the university
+#   whose city they cover, so they can be filtered together.
+# `make crawl` fetches these into data/raw/ and records results in manifest.json.
+
+# ---------------------------------------------------------------- DE country rules
+- {id: de/rules/daad-requirements-overview, url: "https://www.daad.de/en/studying-in-germany/requirements/overview/", country: DE, layer: rules, stage: before_applying}
+- {id: de/rules/daad-enrolling, url: "https://www.daad.de/en/studying-in-germany/requirements/enrolling/", country: DE, layer: rules, stage: arrival}
+- {id: de/rules/daad-health-insurance, url: "https://www.daad.de/en/study-and-research-in-germany/plan-your-studies/health-insurance/", country: DE, layer: rules, stage: visa_funds}
+- {id: de/rules/daad-finances, url: "https://www.daad.de/en/studying-in-germany/living-in-germany/finances/", country: DE, layer: rules, stage: visa_funds}
+- {id: de/rules/uni-assist-apply-in-6-steps, url: "https://www.uni-assist.de/en/apply-in-6-steps/", country: DE, layer: rules, stage: before_applying}
+- {id: de/rules/uni-assist-faq-plan-application, url: "https://www.uni-assist.de/en/faqs/plan-your-application/", country: DE, layer: rules, stage: before_applying}
+- {id: de/rules/aps-india-home, url: "https://aps-india.de/", country: DE, layer: rules, stage: before_applying, title: APS India - Academic Evaluation Centre}
+- {id: de/rules/aps-india-faqs, url: "https://aps-india.de/faqs/", country: DE, layer: rules, stage: before_applying, title: APS India FAQs}
+- {id: de/rules/aps-india-leaflet-graduates-2026, url: "https://aps-india.de/wp-content/uploads/2026/06/Leaflet_BA_Graduates_English_dMAT_June2026.pdf", country: DE, layer: rules, stage: before_applying, title: APS India leaflet for graduates (valid as of June 2026)}
+- {id: de/rules/embassy-india-studies-visa, url: "https://india.diplo.de/in-en/service/2756350-2756350", country: DE, layer: rules, stage: visa_document}
+- {id: de/rules/foreign-office-studying-faq, url: "https://www.auswaertiges-amt.de/en/visa-service/buergerservice/faq/606850-606850", country: DE, layer: rules, stage: visa_document}
+- {id: de/rules/bamf-studying-and-working, url: "https://www.bamf.de/SharedDocs/Anlagen/EN/Integration/bildung-und-beruf-in-deutschland.pdf?__blob=publicationFile&v=12", country: DE, layer: rules, stage: arrival, title: BAMF - Studying and Working in Germany}
+- {id: de/rules/bamf-skilled-workers-academic, url: "https://www.bamf.de/EN/Themen/MigrationAufenthalt/ZuwandererDrittstaaten/Arbeit/Hochschulabsolvent/hochschulabsolvent-node.html", country: DE, layer: rules, stage: after_graduation}
+- {id: de/rules/foreign-office-blocked-account, url: "https://www.auswaertiges-amt.de/en/sperrkonto-388600", country: DE, layer: rules, stage: visa_funds}
+
+# ---------------------------------------------------------------- DE scholarships
+- {id: de/scholarship/daad-scholarships-overview, url: "https://www.daad.de/en/studying-in-germany/scholarships/daad-scholarships/", country: DE, layer: scholarship}
+- {id: de/scholarship/daad-study-scholarships-master, url: "https://www2.daad.de/deutschland/stipendium/datenbank/en/21148-scholarship-database/?detail=50026200", country: DE, layer: scholarship}
+- {id: de/scholarship/daad-study-scholarships-stem, url: "https://www2.daad.de/deutschland/stipendium/datenbank/en/21148-scholarship-database/?detail=57742130", country: DE, layer: scholarship}
+- {id: de/scholarship/deutschlandstipendium, url: "https://www.deutschlandstipendium.de/de/english-1700.html", country: DE, layer: scholarship}
+
+# ---------------------------------------------------------------- TUM (Munich)
+- {id: de/tum/informatics-msc/programme, url: "https://www.tum.de/en/studies/degree-programs/detail/informatics-master-of-science-msc", country: DE, layer: university, university: TUM, programme: M.Sc. Informatics}
+- {id: de/tum/dea-msc/department, url: "https://www.cit.tum.de/en/cit/studies/degree-programs/master-data-engineering-and-analytics/", country: DE, layer: university, university: TUM, programme: M.Sc. Data Engineering and Analytics}
+- {id: de/tum/informatics-msc/department, url: "https://www.cit.tum.de/en/cit/studies/degree-programs/master-informatics/", country: DE, layer: university, university: TUM, programme: M.Sc. Informatics}
+- {id: de/tum/dea-msc/programme, url: "https://www.tum.de/en/studies/degree-programs/detail/data-engineering-and-analytics-master-of-science-msc", country: DE, layer: university, university: TUM, programme: M.Sc. Data Engineering and Analytics}
+- {id: de/munich/foreign-students, url: "https://stadt.muenchen.de/infos/new-foreign-students.html", country: DE, layer: rules, stage: arrival, university: TUM}
+- {id: de/munich/residence-permit-study, url: "https://stadt.muenchen.de/service/en-GB/info/servicestelle-fur-zuwanderung-und-einburgerung/10424886/", country: DE, layer: rules, stage: arrival, university: TUM}
+
+# ---------------------------------------------------------------- RWTH Aachen
+- {id: de/rwth/cs-msc/programme, url: "https://www.rwth-aachen.de/cms/root/studium/vor-dem-studium/studiengaenge/liste-aktuelle-studiengaenge/studiengangbeschreibung/~bcfg/informatik-m-sc/?lidx=1", country: DE, layer: university, university: RWTH Aachen, programme: M.Sc. Computer Science}
+- {id: de/rwth/cs-msc/application, url: "https://www.informatik.rwth-aachen.de/cms/informatik/studium/vor-dem-studium/bewerbungsinfos/master-informatik/~npsy/bewerbungsverfahren/?lidx=1", country: DE, layer: university, university: RWTH Aachen, programme: M.Sc. Computer Science}
+- {id: de/rwth/cs-msc/department, url: "https://www.informatik.rwth-aachen.de/cms/informatik/studium/vor-dem-studium/bewerbungsinfos/~npqg/master-informatik/?lidx=1", country: DE, layer: university, university: RWTH Aachen, programme: M.Sc. Computer Science}
+- {id: de/rwth/ds-msc/programme, url: "https://www.rwth-aachen.de/cms/root/studium/vor-dem-studium/studiengaenge/liste-aktuelle-studiengaenge/studiengangbeschreibung/~pzpc/data-science-m-sc/?lidx=1", country: DE, layer: university, university: RWTH Aachen, programme: M.Sc. Data Science}
+- {id: de/rwth/ds-msc/requirements, url: "https://sc.informatik.rwth-aachen.de/en/studium/master/master-data-science/", country: DE, layer: university, university: RWTH Aachen, programme: M.Sc. Data Science}
+- {id: de/rwth/ds-msc/application, url: "https://sc.informatik.rwth-aachen.de/en/studium/master/master-data-science/application-for-admission/", country: DE, layer: university, university: RWTH Aachen, programme: M.Sc. Data Science}
+- {id: de/aachen/first-steps, url: "https://www.rwth-aachen.de/cms/root/studium/im-studium/internationales/~bczcgd/first-steps-and-tutorials-for-internatio/?lidx=1", country: DE, layer: rules, stage: arrival, university: RWTH Aachen}
+- {id: de/aachen/residence-permit, url: "https://www.rwth-aachen.de/go/id/bpte/lidx/1", country: DE, layer: rules, stage: arrival, university: RWTH Aachen}
+
+# ---------------------------------------------------------------- TU Berlin
+- {id: de/tub/cs-msc/programme, url: "https://www.tu.berlin/en/studying/study-programs/all-programs-offered/study-course/computer-science-informatik-m-sc", country: DE, layer: university, university: TU Berlin, programme: M.Sc. Computer Science}
+- {id: de/tub/cs-msc/application, url: "https://www.tu.berlin/en/eecs/academics-teaching/study-offer/masters-programs/msc-computer-science-informatik/msc-cs-in-application-admission", country: DE, layer: university, university: TU Berlin, programme: M.Sc. Computer Science}
+- {id: de/tub/cs-msc/suitability-form, url: "https://www.static.tu.berlin/fileadmin/www/10000040/1_Studium_Lehre/1_Studienangebot/2_Masterstudiengaenge/2_M_CS/MScCS-SAF.2020-10.pdf", country: DE, layer: university, university: TU Berlin, programme: M.Sc. Computer Science, title: TU Berlin M.Sc. Computer Science suitability assessment form}
+- {id: de/tub/eecs-application-faq, url: "https://www.tu.berlin/en/eecs/academics-teaching/study-offer/application-admission-faq", country: DE, layer: university, university: TU Berlin, stage: before_applying}
+- {id: de/tub/admission-requirements, url: "https://www.tu.berlin/en/studierendensekretariat/requirements-for-admission-to-a-degree-program", country: DE, layer: university, university: TU Berlin, stage: before_applying}
+- {id: de/berlin/residence-permit-study, url: "https://service.berlin.de/dienstleistung/305244/en/", country: DE, layer: rules, stage: arrival, university: TU Berlin}
+- {id: de/berlin/immigration-study, url: "https://www.berlin.de/einwanderung/en/residence/study/", country: DE, layer: rules, stage: arrival, university: TU Berlin}
+- {id: de/berlin/visa-studying, url: "https://www.berlin.de/einwanderung/en/entry/visa-procedure/longer-stays/artikel.1047861.en.php", country: DE, layer: rules, stage: visa_document, university: TU Berlin}
+- {id: de/berlin/job-search-after-graduation, url: "https://service.berlin.de/dienstleistung/324661/en/", country: DE, layer: rules, stage: after_graduation, university: TU Berlin}
+- {id: de/berlin/anmeldung, url: "https://willkommenszentrum.berlin.de/en/housing/anmeldung-residence-registration", country: DE, layer: rules, stage: arrival, university: TU Berlin}
+
+# ---------------------------------------------------------------- Saarland University (Saarbrücken)
+- {id: de/saarland/cs-msc/programme, url: "https://www.uni-saarland.de/en/study/programmes/master/informatics.html", country: DE, layer: university, university: Saarland University, programme: M.Sc. Computer Science}
+- {id: de/saarland/dsai-msc/programme, url: "https://www.uni-saarland.de/en/study/programmes/master/data-science.html", country: DE, layer: university, university: Saarland University, programme: M.Sc. Data Science and Artificial Intelligence}
+- {id: de/saarland/dsai-msc/department, url: "https://saarland-informatics-campus.de/en/studium-studies/data-science-and-artificial-intelligence-master/", country: DE, layer: university, university: Saarland University, programme: M.Sc. Data Science and Artificial Intelligence}
+- {id: de/saarland/dsai-msc/study-regulations, url: "https://www.uni-saarland.de/fileadmin/upload/verwaltung/uebersetzungen/english/master/data-science_so.pdf", country: DE, layer: university, university: Saarland University, programme: M.Sc. Data Science and Artificial Intelligence, title: Saarland DSAI study regulations (English translation)}
+- {id: de/saarland/masters-application-guide, url: "https://saarland-informatics-campus.de/en/studium-studies/master-english/application-guide/", country: DE, layer: university, university: Saarland University, stage: before_applying}
+- {id: de/saarbruecken/residence-permit, url: "https://www.uni-saarland.de/en/global/welcome-center/first-steps/residence-permit.html", country: DE, layer: rules, stage: arrival, university: Saarland University}
+- {id: de/saarbruecken/registration, url: "https://www.uni-saarland.de/en/global/welcome-center/first-steps/residents-registration.html", country: DE, layer: rules, stage: arrival, university: Saarland University}
+
+# ---------------------------------------------------------------- TU Dresden
+- {id: de/tud/cs-msc/department, url: "https://tu-dresden.de/ing/informatik/studium/studienangebot/master-studiengaenge/m-sc-computer-science?set_language=en", country: DE, layer: university, university: TU Dresden, programme: M.Sc. Computer Science}
+- {id: de/tud/cs-msc/programme, url: "https://tu-dresden.de/studium/vor-dem-studium/studienangebot/sins/sins_studiengang?autoid=73&set_language=en", country: DE, layer: university, university: TU Dresden, programme: M.Sc. Computer Science}
+- {id: de/tud/cs-msc/aptitude-assessment, url: "https://tu-dresden.de/studium/vor-dem-studium/studienangebot/sins/sins_eignungsfeststellung_detail?autoid=73&set_language=en", country: DE, layer: university, university: TU Dresden, programme: M.Sc. Computer Science}
+- {id: de/tud/international-faq, url: "https://tu-dresden.de/studium/vor-dem-studium/internationales/faq?set_language=en", country: DE, layer: university, university: TU Dresden, stage: before_applying}
