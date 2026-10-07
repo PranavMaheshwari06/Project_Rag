@@ -68,3 +68,4 @@ Per phase: what was built, why (interview answers), quiz questions, the DECISION
 
 ### Open findings
 - Free-tier rate limits and model availability change without notice (2.5-flash closed to new keys in Oct 2026).
+- Gemini free tier is 20 requests/day per model. Model fallback (3.8 -> 3.6 -> 3.5 flash) and response caching become requirements for the deployed chat (Phase 8).
