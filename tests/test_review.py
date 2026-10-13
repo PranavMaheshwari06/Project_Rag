@@ -17,6 +17,7 @@ def client(tmp_path, monkeypatch):
     paths = get_settings().paths
     monkeypatch.setattr(paths, "extracted_dir", str(tmp_path / "extracted"))
     monkeypatch.setattr(paths, "verified_dir", str(tmp_path / "verified"))
+    monkeypatch.setattr(paths, "checked_dir", str(tmp_path / "checked"))
     monkeypatch.setattr(review, "sources", lambda: {SRC.slug: SRC})
     rec = {"university": "Test Uni", "programme": "M.Sc. Testing", "source_doc_ids": ["de/test/prog"],
            "min_total_ects": {"status": "stated", "value": 180, "doc_id": "de/test/prog",
@@ -47,3 +48,19 @@ def test_save_writes_verified_and_rejects_invented_quote(client):
     rec["min_total_ects"]["quote"] = "At least 120 ECTS must be proven in mathematics"
     r = c.put(url, json=rec)
     assert r.status_code == 422 and "not found" in r.json()["detail"]
+
+
+def test_cross_check_suggestion_must_pass_quote_check(client):
+    c, _, tmp = client
+    (tmp / "checked").mkdir()
+    (tmp / "checked" / f"{SRC.slug}.json").write_text(json.dumps({"fields": {
+        "min_total_ects": {"verdict": "correct"},
+        "degree_requirement": {"verdict": "missed", "value": "Bachelor's degree", "doc_id": "de/test/prog",
+                               "quote": "A bachelor's degree with at least 180 ECTS is required."},
+        "semester_fee_eur": {"verdict": "missed", "value": 300, "doc_id": "de/test/prog",
+                             "quote": "The semester fee is 300 euros."},  # not on the page
+    }}))
+    checks = c.get(f"/api/programmes/{SRC.slug}").json()["checks"]
+    assert "invalid" not in checks["degree_requirement"]
+    assert "not found" in checks["semester_fee_eur"]["invalid"]
+    assert checks["min_total_ects"]["verdict"] == "correct"
