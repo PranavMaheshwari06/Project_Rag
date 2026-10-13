@@ -15,6 +15,7 @@ build/
 data/raw/*
 data/processed/*
 data/index/*
+data/pages/
 !data/raw/.gitkeep
 !data/processed/.gitkeep
 !data/index/.gitkeep

@@ -15,6 +15,9 @@
   @media (max-width: 900px) { main { grid-template-columns: 1fr; } }
   .field { border:1px solid var(--line); border-radius:6px; padding:8px 10px; margin-bottom:10px; background:var(--card); }
   .field.done { border-color:var(--ok); }
+  .field.green { border-left:5px solid var(--ok); }
+  .field.amber { border-left:5px solid var(--warn); }
+  .check { font-size:12px; margin-top:6px; }
   .field h3 { margin:0 0 6px; font-size:13px; display:flex; justify-content:space-between; gap:8px; }
   textarea, select, input[type=text] { width:100%; font:12px/1.4 ui-monospace, monospace; background:var(--bg); color:var(--fg); border:1px solid var(--line); border-radius:4px; padding:4px 6px; }
   textarea { min-height:3.2em; resize:vertical; }
@@ -130,6 +133,30 @@ function render(d) {
     const lab = (t, el) => { const l = document.createElement('label'); l.textContent = t; div.append(l, el); };
     lab('status', status); lab('value (JSON)', value); lab('quote (copied from the page)', quote); lab('page', doc); div.append(show);
     for (const m of d.flags[name] || []) { const w = document.createElement('div'); w.className = 'warn'; w.textContent = '! ' + m; div.append(w); }
+    const c = d.checks[name];
+    if (c) {
+      // green: the cross-checker agrees and no number in the value is missing from the quote
+      const agrees = ['correct', 'not_published_ok'].includes(c.verdict);
+      const numberFlag = (d.flags[name] || []).some(m => m.startsWith('value has numbers'));
+      div.classList.add(agrees && !numberFlag ? 'green' : 'amber');
+      const line = document.createElement('div'); line.className = 'check';
+      line.textContent = `Cross-check: ${c.verdict}` + (c.reason ? ` - ${c.reason}` : '');
+      div.append(line);
+      if (c.invalid) {
+        const bad = document.createElement('div'); bad.className = 'rej';
+        bad.textContent = 'Invalid suggestion (ignored): ' + c.invalid;
+        div.append(bad);
+      } else if (['partial', 'wrong', 'missed'].includes(c.verdict)) {
+        const sug = document.createElement('div'); sug.className = 'check';
+        sug.textContent = c.value === null ? 'Suggests: not_published' : `Suggests: ${JSON.stringify(c.value)} | quote: "${c.quote}" (${c.doc_id})`;
+        const use = document.createElement('button'); use.textContent = 'use suggestion';
+        use.onclick = () => {
+          if (c.value === null) { status.value = 'not_published'; value.value = ''; quote.value = ''; }
+          else { status.value = 'stated'; value.value = JSON.stringify(c.value, null, 1); quote.value = c.quote; doc.value = c.doc_id; showDoc(c.doc_id, quotePattern(c.quote)); }
+        };
+        div.append(sug, use);
+      }
+    }
     div._get = () => status.value === 'stated'
       ? {status: 'stated', value: JSON.parse(value.value), quote: quote.value.trim(), doc_id: doc.value}
       : {status: 'not_published', value: null, quote: null, doc_id: null};

@@ -10,6 +10,7 @@ paths:
   index_dir: data/index
   extracted_dir: data/extracted          # LLM drafts, one JSON per programme (committed)
   verified_dir: data/verified            # human-verified records (committed)
+  checked_dir: data/checked              # second-model cross-check of each draft (committed)
 
 crawl:
   # identifies us to site owners; robots.txt rules are matched on "StudyAbroadRAG"

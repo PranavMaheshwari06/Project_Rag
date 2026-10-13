@@ -50,7 +50,7 @@ def sources() -> dict[str, ProgrammeSource]:
 
 def _file(kind: str, slug: str) -> Path:
     s = get_settings()
-    return s.resolve(s.paths.verified_dir if kind == "verified" else s.paths.extracted_dir) / f"{slug}.json"
+    return s.resolve(getattr(s.paths, f"{kind}_dir")) / f"{slug}.json"
 
 
 def _src(slug: str) -> ProgrammeSource:
@@ -82,6 +82,33 @@ def flags(rec: ProgramRequirements, docs: dict[str, str]) -> dict[str, list[str]
                     msgs.append(f"page mentions '{m.group(0)}' in {doc_id}: ...{around}...")
         if msgs:
             out[name] = msgs
+    return out
+
+
+def checks(slug: str, docs: dict[str, str]) -> dict[str, dict]:
+    """The cross-checker's verdict per field. A suggested value goes through
+    the same schema and quote-in-page check as a draft; one that fails is
+    marked invalid and the screen offers no button for it."""
+    path = _file("checked", slug)
+    if not path.exists():
+        return {}
+    out = {}
+    for name, c in json.loads(path.read_text(encoding="utf-8"))["fields"].items():
+        if name not in FIELDS:
+            continue
+        c = dict(c)
+        if c.get("value") is not None:
+            try:
+                cited = ProgramRequirements.model_fields[name].annotation.model_validate(
+                    {"status": "stated", "value": c["value"], "quote": c.get("quote"), "doc_id": c.get("doc_id")})
+                rec = ProgramRequirements(university="", programme="", source_doc_ids=[], **{name: cited})
+                bad = check_quotes(rec, docs, get_settings().extraction.min_quote_words)
+                c["value"] = cited.model_dump(mode="json")["value"]  # normalised, e.g. test-name aliases
+                if bad:
+                    c["invalid"] = bad[0]
+            except ValidationError as exc:
+                c["invalid"] = f"value does not fit the schema: {str(exc)[:300]}"
+        out[name] = c
     return out
 
 
@@ -119,6 +146,7 @@ def get_programme(slug: str):
         "fields": FIELDS,
         "docs": src.docs,
         "flags": flags(rec, src.docs),
+        "checks": checks(slug, src.docs),
         "rejected_quotes": data.get("rejected_quotes", []),
     }
 
