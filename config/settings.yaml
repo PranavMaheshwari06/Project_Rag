@@ -41,6 +41,7 @@ models:
   rerank_model: BAAI/bge-reranker-base
   embed_batch_size: 16       # small batches so CPU stays usable
   llm_model: gemini-3.8-flash  # free tier; model names and limits change, re-check before relying on them
+  llm_fallback_models: [gemini-3.6-flash, gemini-3.5-flash]  # each model has its own free-tier daily quota
   llm_base_url: https://generativelanguage.googleapis.com/v1beta/openai/  # OpenAI-compatible endpoint
 
 extraction:

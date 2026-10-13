@@ -30,3 +30,25 @@ def test_complete_uses_configured_endpoint(monkeypatch):
     assert call["init"] == {"api_key": "test-key", "base_url": settings.models.llm_base_url}
     assert call["model"] == settings.models.llm_model
     assert call["temperature"] == 0
+
+
+def test_quota_error_switches_to_fallback_model(monkeypatch):
+    import openai
+
+    class Quota(openai.RateLimitError):
+        def __init__(self):
+            pass
+
+    class QuotaThenOk(FakeOpenAI):
+        def create(self, **kwargs):
+            if kwargs["model"] == "primary":
+                raise Quota()
+            return super().create(**kwargs)
+
+    monkeypatch.setattr(openai, "OpenAI", QuotaThenOk)
+    settings = Settings(llm_api_key="k")
+    settings.models.llm_model = "primary"
+    settings.models.llm_fallback_models = ["backup"]
+    llm = LLMClient(settings)
+    assert llm.complete([{"role": "user", "content": "hi"}]) == "ok"
+    assert llm.model == "backup"
