@@ -58,6 +58,7 @@ class Deadline(BaseModel):
     intake: Literal["winter", "summer"]
     applicant_group: Literal["all", "eu", "non_eu"]
     date: str  # as published, e.g. "31 May"
+    kind: Literal["final", "early"] = "final"  # some programmes run an optional early round
 
 
 class EntranceTest(BaseModel):
@@ -65,6 +66,8 @@ class EntranceTest(BaseModel):
     min_scores: str | None = None  # as published: "QR above 75th percentile"
     requirement: Literal["required", "one_of", "recommended"]  # one_of = any of the one_of tests
     applies_to_degree_countries: list[str] = []  # empty = all applicants
+    # applicants with a degree from here are exempt; region names as published, e.g. "EHEA"
+    exempt_degree_countries: list[str] = []
 
     _canonical = field_validator("test")(canonical_test)
 
@@ -83,11 +86,12 @@ class ProgramRequirements(BaseModel):
     min_total_ects: Cited[int] = Cited()
     subject_credits: Cited[list[SubjectCredits]] = Cited()
     min_grade_german_scale: Cited[float] = Cited()  # 1.0 best, 4.0 pass
+    min_grade_original_scale: Cited[str] = Cited()  # as published, e.g. "CGPA 75% or 3.00/4, top 10% of class"
     english: Cited[list[LanguageTest]] = Cited()
     entrance_tests: Cited[list[EntranceTest]] = Cited()
     german: Cited[GermanRequirement] = Cited()
     work_experience: Cited[Literal["required", "counts_in_selection", "recommended", "not_required"]] = Cited()
-    aps_required: Cited[bool] = Cited()
+    aps_degree_countries: Cited[list[str]] = Cited()  # degree countries that need an APS certificate; [] = none
     application_route: Cited[Literal["direct", "uni_assist", "both"]] = Cited()
     deadlines: Cited[list[Deadline]] = Cited()
     selection_process: Cited[str] = Cited()  # aptitude assessment, interview, essay...

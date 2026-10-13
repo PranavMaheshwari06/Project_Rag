@@ -33,8 +33,11 @@ Rules:
 - Use only the documents. Never use outside knowledge, never guess, never round or convert numbers.
 - Some pages cover several programmes: only take what applies to "{programme}" at {university}.
 - min_grade_german_scale: only if a minimum grade on the German scale (1.0 best, 4.0 pass) is stated.
+- min_grade_original_scale: a minimum grade stated on another scale (percentage, GPA out of 4, class rank), as written.
 - english: one entry per accepted test with its minimum score as written.
-- entrance_tests: GRE, GATE, GMAT, the university's own aptitude test, etc. Use "one_of" for tests that are alternatives to each other. applies_to_degree_countries lists the countries named (empty if it applies to all applicants).
+- entrance_tests: GRE, GATE, GMAT, the university's own aptitude test, etc. Use "one_of" for tests that are alternatives to each other. applies_to_degree_countries lists the countries named (empty if it applies to all applicants). exempt_degree_countries lists countries or regions whose degree holders are exempt (e.g. "EHEA", "Switzerland", "UK"), as written.
+- aps_degree_countries: the countries whose degree holders must submit an APS certificate, as named; [] if the pages say no APS is needed.
+- deadlines: kind "early" for an optional earlier round, "final" otherwise.
 - german: "none" if the pages say no German is needed.
 - work_experience: "counts_in_selection" if internships or work experience earn points or are considered but are not required.
 - tuition_eur_per_semester_non_eu: 0 if the pages say there are no tuition fees.
