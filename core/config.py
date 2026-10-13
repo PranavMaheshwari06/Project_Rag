@@ -62,6 +62,7 @@ class ModelsCfg(BaseModel):
     rerank_model: str = "BAAI/bge-reranker-base"
     embed_batch_size: int = 16
     llm_model: str = "gemini-3.8-flash"
+    llm_fallback_models: list[str] = []  # tried in order when a model's quota is exhausted
     # any OpenAI-compatible endpoint; Gemini by default
     llm_base_url: str = "https://generativelanguage.googleapis.com/v1beta/openai/"
 

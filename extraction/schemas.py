@@ -7,9 +7,23 @@ engine reports it as unknown instead of guessing."""
 
 from typing import Generic, Literal, TypeVar
 
-from pydantic import BaseModel, model_validator
+from pydantic import BaseModel, field_validator, model_validator
 
 T = TypeVar("T")
+
+
+# spellings the LLM produced for the same test; keys are lowercase
+TEST_ALIASES = {
+    "gre general test": "GRE", "gre (general)": "GRE",
+    "gate test": "GATE", "indian gate test": "GATE",
+    "toefl ibt": "TOEFL iBT", "toefl (internet based)": "TOEFL iBT",
+    "toefl (paper based)": "TOEFL PBT",
+    "ielts (academic test)": "IELTS",
+}
+
+
+def canonical_test(name: str) -> str:
+    return TEST_ALIASES.get(name.strip().lower(), name.strip())
 
 
 class Cited(BaseModel, Generic[T]):
@@ -37,6 +51,8 @@ class LanguageTest(BaseModel):
     test: str  # e.g. "IELTS", "TOEFL iBT", "CEFR"
     min_score: str  # kept as text: 6.5, 88 and C1 are all valid minimums
 
+    _canonical = field_validator("test")(canonical_test)
+
 
 class Deadline(BaseModel):
     intake: Literal["winter", "summer"]
@@ -49,6 +65,8 @@ class EntranceTest(BaseModel):
     min_scores: str | None = None  # as published: "QR above 75th percentile"
     requirement: Literal["required", "one_of", "recommended"]  # one_of = any of the one_of tests
     applies_to_degree_countries: list[str] = []  # empty = all applicants
+
+    _canonical = field_validator("test")(canonical_test)
 
 
 class GermanRequirement(BaseModel):

@@ -10,6 +10,7 @@ from core.config import Settings
 class LLMClient:
     def __init__(self, settings: Settings):
         self.model = settings.models.llm_model
+        self._fallbacks = list(settings.models.llm_fallback_models)
         self.base_url = settings.models.llm_base_url
         self._api_key = settings.llm_api_key
         self._client = None
@@ -25,10 +26,19 @@ class LLMClient:
             from openai import OpenAI
 
             self._client = OpenAI(api_key=self._api_key, base_url=self.base_url)
-        resp = self._client.chat.completions.create(
-            model=self.model,
-            messages=messages,
-            temperature=0,
-            **({"response_format": {"type": "json_object"}} if json_mode else {}),
-        )
-        return resp.choices[0].message.content or ""
+        from openai import RateLimitError
+
+        while True:
+            try:
+                resp = self._client.chat.completions.create(
+                    model=self.model,
+                    messages=messages,
+                    temperature=0,
+                    **({"response_format": {"type": "json_object"}} if json_mode else {}),
+                )
+                return resp.choices[0].message.content or ""
+            except RateLimitError:
+                # ponytail: any 429 (per-minute or daily) switches model for good; no retry-after handling
+                if not self._fallbacks:
+                    raise
+                self.model = self._fallbacks.pop(0)
