@@ -94,3 +94,9 @@ Per phase: what was built, why (interview answers), quiz questions, the DECISION
 - A cross-check file has no link to the draft it checked, so it goes stale after `make extract --refresh`; re-run the check after every re-extraction.
 - The RWTH per-programme language PDF sits behind an id-based URL that can change when RWTH replaces the file; the crawl will show a 404.
 - The first cross-checks (Saarland ×2, TU Berlin, TU Dresden, on the 2026-10-08 drafts) flagged 2 missed fields, 1 wrong field and 10 partial ones. Partials clustered in English scores (dropped TOEFL 2026-format and CEFR minimums), document lists, and GRE/GATE country conditions; the last led to the applies-to / exempt country fields.
+- Schema gaps found by the 2026-10-16 cross-checks, for Phase 6 to handle (optional fields added later keep verified records valid):
+  - alternative admission routes: KIT CS admits on subject credits **or** a GATE pass **or** a selection interview;
+  - exemptions by citizenship or schooling, not degree country: RWTH Data Science waives the GRE for EU/EEA citizens and German school leavers;
+  - deadline groups beyond eu / non_eu: RWTH gives non-EU applicants already enrolled at RWTH or holding a German degree 15 July / 15 January;
+  - test validity: KIT accepts GRE scores up to 5 years old and GATE up to 3;
+  - conditions on a single route: KIT asks for proof of the top 10% only from interview-route applicants.
