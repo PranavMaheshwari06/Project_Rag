@@ -1,5 +1,5 @@
 {
-  "extracted_at": "2026-10-07T22:17:32+00:00",
+  "extracted_at": "2026-10-16T08:47:56+00:00",
   "model": "gemini-3.8-flash",
   "rejected_quotes": [],
   "record": {
@@ -35,20 +35,26 @@
       "quote": null,
       "doc_id": null
     },
+    "min_grade_original_scale": {
+      "status": "stated",
+      "value": "cumulative undergraduate grade point average (CGPA) of 75% or 3.00 GPA on a 4 point scale and ranking in the top 10% of the graduating class",
+      "quote": "Minimal application prerequisite is a cumulative undergraduate grade point average (CGPA) of 75% or 3.00 GPA on a 4 point scale and ranking in the top 10% of the graduating class.",
+      "doc_id": "de/saarland/masters-application-guide"
+    },
     "english": {
       "status": "stated",
       "value": [
         {
-          "test": "IELTS (academic test)",
+          "test": "IELTS",
           "min_score": "7.0 out of 9"
         },
         {
-          "test": "TOEFL (internet based)",
-          "min_score": "95 out of 120"
+          "test": "TOEFL iBT",
+          "min_score": "95 out of 120 (2026: 5 out of 6)"
         },
         {
-          "test": "TOEFL (paper based)",
-          "min_score": "600 out of 677"
+          "test": "TOEFL PBT",
+          "min_score": "600 out of 677 (2026: 5 out of 6)"
         },
         {
           "test": "Cambridge English Certificate",
@@ -66,16 +72,26 @@
       "status": "stated",
       "value": [
         {
-          "test": "GRE General Test",
+          "test": "GRE",
           "min_scores": null,
           "requirement": "one_of",
-          "applies_to_degree_countries": []
+          "applies_to_degree_countries": [],
+          "exempt_degree_countries": [
+            "European Higher Education Area (EHEA) region",
+            "Switzerland",
+            "the UK"
+          ]
         },
         {
-          "test": "GATE test",
+          "test": "GATE",
           "min_scores": null,
           "requirement": "one_of",
-          "applies_to_degree_countries": []
+          "applies_to_degree_countries": [],
+          "exempt_degree_countries": [
+            "European Higher Education Area (EHEA) region",
+            "Switzerland",
+            "the UK"
+          ]
         }
       ],
       "quote": "Applicants for Computer Science, Cybersecurity, DSAI, Embedded Systems and Visual Computing who have no degree certificate earned within the European Higher Education Area (EHEA) region, Switzerland, or the UK are required to upload the test result from the GRE General Test or the Indian GATE test .",
@@ -96,17 +112,21 @@
       "quote": null,
       "doc_id": null
     },
-    "aps_required": {
+    "aps_degree_countries": {
       "status": "stated",
-      "value": true,
+      "value": [
+        "China",
+        "India",
+        "Vietnam"
+      ],
       "quote": "Applicants who have obtained their university degree in China, India or Vietnam are required to submit the original ( digitally signed ) APS Certificate issued by the Academic Evaluation Center (Akademische Prüfstelle) in the corresponding country with the application.",
       "doc_id": "de/saarland/masters-application-guide"
     },
     "application_route": {
       "status": "stated",
       "value": "direct",
-      "quote": "Applications should be submitted via the online application portal managed by the Department of Computer Science.",
-      "doc_id": "de/saarland/dsai-msc/programme"
+      "quote": "Applications for our postgraduate programmes have to be submitted online in the application system of the computer science department!",
+      "doc_id": "de/saarland/masters-application-guide"
     },
     "deadlines": {
       "status": "stated",
@@ -114,20 +134,34 @@
         {
           "intake": "winter",
           "applicant_group": "all",
-          "date": "May 15"
+          "date": "May 15",
+          "kind": "final"
+        },
+        {
+          "intake": "winter",
+          "applicant_group": "all",
+          "date": "November 15",
+          "kind": "early"
         },
         {
           "intake": "summer",
           "applicant_group": "all",
-          "date": "November 15"
+          "date": "November 15",
+          "kind": "final"
+        },
+        {
+          "intake": "summer",
+          "applicant_group": "all",
+          "date": "May 15",
+          "kind": "early"
         }
       ],
-      "quote": "Applications should normally be received by 15 May for students seeking to begin studying in the winter semester and by 15 November for students looking to start their studies in summer.",
+      "quote": "Applications should normally be received by 15 May for students seeking to begin studying in the winter semester and by 15 November for students looking to start their studies in summer. Applicants who apply by May 15th for the following summer semester are expected to receive a letter of admission by mid-July if the respective Master's commission makes a positive decision. Applicants who apply by November 15th for the following winter semester are expected to receive a letter of admission by mid-February if the respective Master's commission makes a positive decision.",
       "doc_id": "de/saarland/dsai-msc/programme"
     },
     "selection_process": {
       "status": "stated",
-      "value": "The criteria listed above will be used to assess the aptitude of the applicant in terms of the academic profile and requirements of the respective Master’s degree programme. The decision whether the programme admission requirements have been met is made by the Examination Board.",
+      "value": "The criteria listed are used to assess the applicant's aptitude with regard to the academic profile and requirements of the Master's degree programme, and the decision on admission is made by the Examination Board.",
       "quote": "The criteria listed above will be used to assess the aptitude of the applicant in terms of the academic profile and requirements of the respective Master’s degree programme. The decision whether the programme admission requirements have been met is made by the Examination Board.",
       "doc_id": "de/saarland/masters-application-guide"
     },
@@ -135,22 +169,17 @@
       "status": "stated",
       "value": [
         "a copy of your university entrance qualification",
-        "copies of your 3 most recent degrees* (with certified translation, if the original language is not English, German or French)",
-        "a certified list of all attended courses with the respective grades, including an explanation of the grading system",
-        "Curriculum Vitae (CV) including information on your areas of interest in research, as well as any projects or publications",
-        "two complete review forms by recommenders appointed by the applicant",
-        "English certificate",
-        "APS Certificate (for applicants with degrees from China, India or Vietnam)",
-        "GRE General Test or Indian GATE test result (for applicants with degrees from outside EHEA, Switzerland, or the UK)"
+        "copies of your 3 most recent degrees",
+        "a certified list of all attended courses with the respective grades, including an explanation of the grading system"
       ],
-      "quote": "During the application process, you need to submit the following documents with your application in order to be considered for admission. Please note that we only accept files in the PDF file format.",
+      "quote": "_ a copy of your university entrance qualification _ copies of your 3 most recent degrees* (with certified translation, if the original language is not English, German or French) _ a certified list of all attended courses with the respective grades, including an explanation of the grading system",
       "doc_id": "de/saarland/masters-application-guide"
     },
     "tuition_eur_per_semester_non_eu": {
       "status": "stated",
       "value": 0.0,
-      "quote": "No study fees",
-      "doc_id": "de/saarland/dsai-msc/department"
+      "quote": "| Tuition fees | Not applicable |",
+      "doc_id": "de/saarland/dsai-msc/programme"
     },
     "semester_fee_eur": {
       "status": "not_published",
@@ -161,7 +190,7 @@
     "language_of_instruction": {
       "status": "stated",
       "value": "English",
-      "quote": "Language of instruction | English",
+      "quote": "| Language of instruction | English |",
       "doc_id": "de/saarland/dsai-msc/programme"
     },
     "verified": false

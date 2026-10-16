@@ -1,0 +1,135 @@
+{
+  "slug": "saarland-university-m-sc-data-science-and-artificial-intelligence",
+  "checked_at": "2026-10-16T09:37:08Z",
+  "fields": {
+    "degree_requirement": {
+      "verdict": "correct",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "min_total_ects": {
+      "verdict": "correct",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "subject_credits": {
+      "verdict": "not_published_ok",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "min_grade_german_scale": {
+      "verdict": "not_published_ok",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "min_grade_original_scale": {
+      "verdict": "correct",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "english": {
+      "verdict": "correct",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "entrance_tests": {
+      "verdict": "correct",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "german": {
+      "verdict": "correct",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "work_experience": {
+      "verdict": "not_published_ok",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "aps_degree_countries": {
+      "verdict": "correct",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "application_route": {
+      "verdict": "correct",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "deadlines": {
+      "verdict": "correct",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "selection_process": {
+      "verdict": "correct",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "required_documents": {
+      "verdict": "partial",
+      "value": [
+        "a copy of your university entrance qualification",
+        "copies of your 3 most recent degrees (with certified translation, if the original language is not English, German or French; a recent transcript if the current degree is ongoing)",
+        "a certified list of all attended courses with the respective grades, including an explanation of the grading system",
+        "Curriculum Vitae (CV) including information on your areas of interest in research, as well as any projects or publications",
+        "two complete review forms by recommenders appointed by the applicant in the application system",
+        "personal statement written by the applicant",
+        "English certificate (IELTS, TOEFL, Cambridge or PTE; MOI not accepted)",
+        "APS certificate (degrees from China, India or Vietnam)",
+        "GRE General Test or GATE test result (degrees from outside the EHEA, Switzerland and the UK)"
+      ],
+      "quote": "_ a copy of your university entrance qualification _ copies of your 3 most recent degrees* (with certified translation, if the original language is not English, German or French) _ a certified list of all attended courses with the respective grades, including an explanation of the grading system",
+      "doc_id": "de/saarland/masters-application-guide",
+      "reason": "Draft lists only the transcript items; the guide also requires a CV, two recommender review forms, the English certificate, APS (China/India/Vietnam) and GRE/GATE (non-EHEA/CH/UK), and the programme page requires a personal statement."
+    },
+    "tuition_eur_per_semester_non_eu": {
+      "verdict": "correct",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "semester_fee_eur": {
+      "verdict": "not_published_ok",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "language_of_instruction": {
+      "verdict": "correct",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    }
+  }
+}

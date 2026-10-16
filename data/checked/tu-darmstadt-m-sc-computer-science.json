@@ -1,0 +1,167 @@
+{
+  "slug": "tu-darmstadt-m-sc-computer-science",
+  "checked_at": "2026-10-16T09:37:25Z",
+  "fields": {
+    "degree_requirement": {
+      "verdict": "partial",
+      "value": "A degree B.Sc. Informatik of TU Darmstadt (reference programme), or an equivalent degree",
+      "quote": "1. A degree B.Sc. Informatik of TU Darmstadt (reference programme), or an equivalent degree.",
+      "doc_id": "de/tu-darmstadt/cs-msc/programme",
+      "reason": "Draft only says 'Bachelor's degree with 180 ECTS'; the programme page requires the B.Sc. Informatik of TU Darmstadt or an equivalent degree (the 180 ECTS belongs in min_total_ects)."
+    },
+    "min_total_ects": {
+      "verdict": "correct",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "subject_credits": {
+      "verdict": "correct",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "min_grade_german_scale": {
+      "verdict": "not_published_ok",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": "Guide says grades/GPA are not used in admission decisions; no minimum grade exists."
+    },
+    "min_grade_original_scale": {
+      "verdict": "not_published_ok",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": "Same: 'Grades / GPA: Are not used in admission decisions; only course content is assessed'."
+    },
+    "english": {
+      "verdict": "partial",
+      "value": [
+        {
+          "test": "IELTS",
+          "min_score": "overall ≥ 7.0"
+        },
+        {
+          "test": "TOEFL iBT",
+          "min_score": "≥ 95"
+        },
+        {
+          "test": "Medium of instruction confirmation",
+          "min_score": "official confirmation that English was the language of instruction for the entire Bachelor’s programme"
+        }
+      ],
+      "quote": "- IELTS overall ≥ 7.0 or TOEFL iBT ≥ 95\n\n- Or an official confirmation that English was the language of instruction for your entire Bachelor’s programme",
+      "doc_id": "de/tu-darmstadt/informatics-master-admission-guide",
+      "reason": "Scores are right but the draft drops the accepted alternative of an official English-medium-of-instruction confirmation for the whole Bachelor's (programme page states the level as English C1)."
+    },
+    "entrance_tests": {
+      "verdict": "partial",
+      "value": [
+        {
+          "test": "TU Darmstadt Entrance Exam",
+          "min_scores": null,
+          "requirement": "one_of",
+          "applies_to_degree_countries": [],
+          "exempt_degree_countries": []
+        },
+        {
+          "test": "GRE",
+          "min_scores": "Verbal Reasoning ≥ 155 Quantitative Reasoning ≥ 165 Analytical Writing ≥ 3.5",
+          "requirement": "one_of",
+          "applies_to_degree_countries": [],
+          "exempt_degree_countries": []
+        },
+        {
+          "test": "GATE",
+          "min_scores": "Overall ≥ 750",
+          "requirement": "one_of",
+          "applies_to_degree_countries": [],
+          "exempt_degree_countries": []
+        }
+      ],
+      "quote": "| GRE | Verbal Reasoning ≥ 155 Quantitative Reasoning ≥ 165 Analytical Writing ≥ 3.5 | Via ETS Institution Code 2249 Department Code 0402 (Computer Science) GRE Home accepted only if submitted through ETS |\n| GATE | Overall ≥ 750 | Send via e-mail to application@informatik… |",
+      "doc_id": "de/tu-darmstadt/informatics-master-admission-guide",
+      "reason": "Draft has no minimum scores; guide gives GRE V≥155/Q≥165/AW≥3.5 and GATE ≥750 (each section binding, no combining, due Aug 20/Feb 20). Note the exam is only required when documents cannot verify competencies, which one_of cannot express."
+    },
+    "german": {
+      "verdict": "not_published_ok",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": "No German requirement stated; the page only says the programme can be completed entirely in English (implied, not stated as 'none')."
+    },
+    "work_experience": {
+      "verdict": "correct",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "aps_degree_countries": {
+      "verdict": "not_published_ok",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "application_route": {
+      "verdict": "correct",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "deadlines": {
+      "verdict": "correct",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "selection_process": {
+      "verdict": "correct",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": "Value is right; the guide adds that grades are not used and every applicant meeting the requirements is admitted (no capacity limit)."
+    },
+    "required_documents": {
+      "verdict": "missed",
+      "value": [
+        "Signed application form (paper, by post or courier)",
+        "All documents listed under 'Application documents to be submitted' in the Online Application Portal, as certified hard copies",
+        "Certified translation for any document not in English or German",
+        "Equivalency Table (provided in the application portal)",
+        "If the Bachelor's is still in progress: prospective-graduation certificate (original plus certified translation)",
+        "If the Bachelor's is still in progress: transcript of records for each semester (original plus certified translation)"
+      ],
+      "quote": "Your application is valid only if the signed application form and all required documents have been received in paper form by post or courier before the deadline. There is no option to upload documents online, and submitting the online application alone is not sufficient.",
+      "doc_id": "de/tu-darmstadt/informatics-master-admission-guide",
+      "reason": "Guide names several documents (other items come from the Step 2, Equivalency Table and degree-in-progress bullets on the same page); the full checklist is only a link, so the list is not exhaustive. The guide also contradicts itself on uploading vs. post for in-progress documents."
+    },
+    "tuition_eur_per_semester_non_eu": {
+      "verdict": "not_published_ok",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": "No tuition mentioned anywhere; only the semester fee and living costs are listed."
+    },
+    "semester_fee_eur": {
+      "verdict": "correct",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": "Value is approximate ('≈') and dated summer semester 2025."
+    },
+    "language_of_instruction": {
+      "verdict": "partial",
+      "value": "English (both English- and German-taught courses and modules are offered; the programme can be completed entirely in English)",
+      "quote": "| Language | English C1 . Both English- and German-taught courses and modules are available in this study programme. The programme can be completed entirely in English by choosing only English-taught courses and modules. Academic literature may also include some German sources. |",
+      "doc_id": "de/tu-darmstadt/cs-msc/programme",
+      "reason": "Draft omits that German-taught modules also exist and some literature may be German; the quote should be the whole table row."
+    }
+  }
+}
