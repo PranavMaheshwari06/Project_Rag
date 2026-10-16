@@ -1,0 +1,169 @@
+{
+  "slug": "rwth-aachen-m-sc-computer-science",
+  "checked_at": "2026-10-16T09:37:28+00:00",
+  "fields": {
+    "degree_requirement": {
+      "verdict": "partial",
+      "value": "First university degree proving the background required by Section 3.2 of the exam regulations: skills and competencies in applied computer science (programming, data structures and algorithms, databases and information systems, software engineering), technical computer science (technical computer science, operating systems and systems software, data communication and security, system programming), theoretical computer science (formal systems, automata and processes, calculability and complexity, mathematical logic) and mathematics (discrete mathematics, analysis for computer scientists, linear algebra, applied stochastics); the examination board decides.",
+      "quote": "The educational background required for the Computer Science M.Sc. program according to Section 3.2 includes the skills and competencies in:\n\n- Applied computer science: programming, data structures and algorithms, databases and information systems, software engineering\n\n- Technical computer science: technical computer science, operating systems and systems software, data communication and security, system programming\n\n- Theoretical computer science: formal systems, automata and processes, and calculability and complexity, mathematical logic\n\n- Mathematics: Discrete mathematics, analysis for computer scientists, linear algebra, applied stochastics",
+      "doc_id": "de/rwth/cs-msc/department",
+      "reason": "Draft is generic; the department page lists the concrete subject competencies required, which is the substance of the requirement."
+    },
+    "min_total_ects": {
+      "verdict": "not_published_ok",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "subject_credits": {
+      "verdict": "not_published_ok",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "min_grade_german_scale": {
+      "verdict": "not_published_ok",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "min_grade_original_scale": {
+      "verdict": "not_published_ok",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "english": {
+      "verdict": "partial",
+      "value": [
+        {
+          "test": "TOEFL iBT",
+          "min_score": "90 points or a total score of 4,5"
+        },
+        {
+          "test": "IELTS",
+          "min_score": "6.0"
+        },
+        {
+          "test": "Cambridge Test -B2 First",
+          "min_score": "grade of at least B"
+        },
+        {
+          "test": "Cambridge Test – C1 Advanced",
+          "min_score": "passed"
+        },
+        {
+          "test": "Cambridge Test – c2 Proficiency",
+          "min_score": "passed"
+        },
+        {
+          "test": "Pearson Test of English (PTE) Academic",
+          "min_score": "60 points"
+        },
+        {
+          "test": "UNIcert",
+          "min_score": "II or higher"
+        },
+        {
+          "test": "School-education certificate (CEFR)",
+          "min_score": "B2"
+        },
+        {
+          "test": "Placement test of the RWTH Language Center",
+          "min_score": "level B2.2.1 or higher"
+        }
+      ],
+      "quote": "a) Test of English as Foreign Language (TOEFL) Internet-based Test (IBT) with a result of at least 90 points or a\ntotal score of 4,5\nb) IELTS test with a score of at least 6.0\nc) Cambridge Test -B2 First with a grade of at least B\nd) Cambridge Test – C1 Advanced\ne) Cambridge Test – c2 Proficiency\nf) Pearson Test of English (PTE) Academic with a result of at least 60 points\ng) UNIcert II or higher\nh) a certificate that was acquired as part of the school education required by law in the respective country and\nthat shows English language skills at level B2 of the \"Common European Framework of Reference of Language\n(GeR)\"1\ni) Placement test of the RWTH Language Center with the level B2.2.1 or higher",
+      "doc_id": "de/rwth/language-requirements-pdf",
+      "reason": "CS M.Sc. maps to 'German & English - § 3 Abs. 7 & Abs. 9 ÜPO' (B2 list, right list chosen) but draft drops item h (school certificate at CEFR B2); also note footnote 2 (placement test only for enrolled RWTH students), footnote 3 (English-language Bachelor's thesis accepted on Examination Board review) and degree exemption for UK/Ireland/Australia/NZ/Canada/US."
+    },
+    "entrance_tests": {
+      "verdict": "correct",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "german": {
+      "verdict": "correct",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": "Value is right, but the C1 level comes from the language PDF's § 3 Abs. 7 ÜPO list (DSH 2, TestDaF 4 in all sections, Goethe C1, telc C1 Hochschule), not from the cited quote, which only supports the enrolment timing."
+    },
+    "work_experience": {
+      "verdict": "not_published_ok",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "aps_degree_countries": {
+      "verdict": "not_published_ok",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "application_route": {
+      "verdict": "correct",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "deadlines": {
+      "verdict": "correct",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": "Dates match the open-admission master rows; the quote covers only the winter row (summer row is a separate row), and non-EU applicants already enrolled at RWTH or holding a relevant German degree get July 15 / January 15 instead."
+    },
+    "selection_process": {
+      "verdict": "correct",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "required_documents": {
+      "verdict": "partial",
+      "value": [
+        "Diploma of first degree",
+        "Transcript of records",
+        "Course/module descriptions",
+        "GRE test certificate (if first degree is from outside the European Union)",
+        "Resume (list format)",
+        "Certified translation into German or English of documents not issued in those languages"
+      ],
+      "quote": "You need to sumbit at least all the documents listed above for a German degree. Additionally, if your first degree is from outside the European Union, you are required to submit a GRE test certificate. You need to be above 75th percentile in quantitative reasoning (GRE-QR) and above 15th percentile in verbal reasoning (GRE-VR). Additionally you need at least 3.5 points in analytical writing (GRE-AW).",
+      "doc_id": "de/rwth/cs-msc/application",
+      "reason": "Draft omits the GRE certificate required for non-EU degrees; the international master page (de/rwth/master-application-international) also requires a resume (list format) and certified translations."
+    },
+    "tuition_eur_per_semester_non_eu": {
+      "verdict": "not_published_ok",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "semester_fee_eur": {
+      "verdict": "not_published_ok",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "language_of_instruction": {
+      "verdict": "correct",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    }
+  }
+}

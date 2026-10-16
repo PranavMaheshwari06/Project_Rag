@@ -1,5 +1,5 @@
 {
-  "extracted_at": "2026-10-07T22:14:52+00:00",
+  "extracted_at": "2026-10-16T08:43:53+00:00",
   "model": "gemini-3.8-flash",
   "rejected_quotes": [],
   "record": {
@@ -8,11 +8,15 @@
     "source_doc_ids": [
       "de/rwth/cs-msc/programme",
       "de/rwth/cs-msc/application",
-      "de/rwth/cs-msc/department"
+      "de/rwth/cs-msc/department",
+      "de/rwth/application-deadlines",
+      "de/rwth/master-application-international",
+      "de/rwth/language-requirements",
+      "de/rwth/language-requirements-pdf"
     ],
     "degree_requirement": {
       "status": "stated",
-      "value": "first university degree, with which the necessary background education can be proven, as determined in the exam regulations",
+      "value": "First university degree, with which the necessary background education can be proven, as determined in the exam regulations",
       "quote": "A prerequisite for starting studies is a first university degree, with which the necessary background education can be proven, as determined in the exam regulations.",
       "doc_id": "de/rwth/cs-msc/programme"
     },
@@ -34,30 +38,75 @@
       "quote": null,
       "doc_id": null
     },
-    "english": {
+    "min_grade_original_scale": {
       "status": "not_published",
       "value": null,
       "quote": null,
       "doc_id": null
+    },
+    "english": {
+      "status": "stated",
+      "value": [
+        {
+          "test": "TOEFL iBT",
+          "min_score": "90 points or a total score of 4,5"
+        },
+        {
+          "test": "IELTS",
+          "min_score": "6.0"
+        },
+        {
+          "test": "Cambridge Test -B2 First",
+          "min_score": "grade of at least B"
+        },
+        {
+          "test": "Cambridge Test – C1 Advanced",
+          "min_score": "passed"
+        },
+        {
+          "test": "Cambridge Test – c2 Proficiency",
+          "min_score": "passed"
+        },
+        {
+          "test": "Pearson Test of English (PTE) Academic",
+          "min_score": "60 points"
+        },
+        {
+          "test": "UNIcert",
+          "min_score": "II or higher"
+        },
+        {
+          "test": "Placement test of the RWTH Language Center",
+          "min_score": "level B2.2.1 or higher"
+        }
+      ],
+      "quote": "a) Test of English as Foreign Language (TOEFL) Internet-based Test (IBT) with a result of at least 90 points or a\ntotal score of 4,5\nb) IELTS test with a score of at least 6.0\nc) Cambridge Test -B2 First with a grade of at least B\nd) Cambridge Test – C1 Advanced\ne) Cambridge Test – c2 Proficiency\nf) Pearson Test of English (PTE) Academic with a result of at least 60 points\ng) UNIcert II or higher\nh) a certificate that was acquired as part of the school education required by law in the respective country and\nthat shows English language skills at level B2 of the \"Common European Framework of Reference of Language\n(GeR)\"1\ni) Placement test of the RWTH Language Center with the level B2.2.1 or higher2",
+      "doc_id": "de/rwth/language-requirements-pdf"
     },
     "entrance_tests": {
       "status": "stated",
       "value": [
         {
           "test": "GRE",
-          "min_scores": "above 75th percentile in quantitative reasoning (GRE-QR) and above 15th percentile in verbal reasoning (GRE-VR). Additionally you need at least 3.5 points in analytical writing (GRE-AW)",
+          "min_scores": "GRE-QR > 75th percentile, GRE-VR > 15th percentile, GRE-AW >= 3.5",
           "requirement": "required",
-          "applies_to_degree_countries": []
+          "applies_to_degree_countries": [],
+          "exempt_degree_countries": [
+            "European Union"
+          ]
         }
       ],
       "quote": "Additionally, if your first degree is from outside the European Union, you are required to submit a GRE test certificate. You need to be above 75th percentile in quantitative reasoning (GRE-QR) and above 15th percentile in verbal reasoning (GRE-VR). Additionally you need at least 3.5 points in analytical writing (GRE-AW).",
       "doc_id": "de/rwth/cs-msc/application"
     },
     "german": {
-      "status": "not_published",
-      "value": null,
-      "quote": null,
-      "doc_id": null
+      "status": "stated",
+      "value": {
+        "min_level": "C1",
+        "needed_by": "enrolment"
+      },
+      "quote": "After a successful application, you still have submit proof of German and English language proficiency . Without proof of proficiency in both languages you cannot enroll, even if you are admitted.",
+      "doc_id": "de/rwth/cs-msc/application"
     },
     "work_experience": {
       "status": "not_published",
@@ -65,7 +114,7 @@
       "quote": null,
       "doc_id": null
     },
-    "aps_required": {
+    "aps_degree_countries": {
       "status": "not_published",
       "value": null,
       "quote": null,
@@ -78,21 +127,48 @@
       "doc_id": "de/rwth/cs-msc/application"
     },
     "deadlines": {
-      "status": "not_published",
-      "value": null,
-      "quote": null,
-      "doc_id": null
+      "status": "stated",
+      "value": [
+        {
+          "intake": "winter",
+          "applicant_group": "eu",
+          "date": "July 15",
+          "kind": "final"
+        },
+        {
+          "intake": "winter",
+          "applicant_group": "non_eu",
+          "date": "March 1",
+          "kind": "final"
+        },
+        {
+          "intake": "summer",
+          "applicant_group": "eu",
+          "date": "January 15",
+          "kind": "final"
+        },
+        {
+          "intake": "summer",
+          "applicant_group": "non_eu",
+          "date": "September 1",
+          "kind": "final"
+        }
+      ],
+      "quote": "| Master (without NC—first or higher semesters) | Germany and EU: May 1 until July 15 Other Countries : December 1 until March 1 |",
+      "doc_id": "de/rwth/application-deadlines"
     },
     "selection_process": {
       "status": "stated",
-      "value": "Open (No NC)",
-      "quote": "- Open (No NC)",
-      "doc_id": "de/rwth/cs-msc/programme"
+      "value": "Based on the application documents, the examination board determines whether the applicant fulfills the educational admission requirements; admission to the program is open (No NC).",
+      "quote": "Based on the application documents, the examination board will decide on whether the applicant meets the above educational admission requirements.",
+      "doc_id": "de/rwth/cs-msc/department"
     },
     "required_documents": {
       "status": "stated",
       "value": [
-        "The diploma of your first degree including a full transcript of records and course/module descriptions detailing the contents as well as the accuired knowledge and skills for each course or module"
+        "Diploma of first degree",
+        "Transcript of records",
+        "Course/module descriptions"
       ],
       "quote": "- The diploma of your first degree including a full transcript of records and course/module descriptions detailing the contents as well as the accuired knowledge and skills for each course or module.",
       "doc_id": "de/rwth/cs-msc/application"

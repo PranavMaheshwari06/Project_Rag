@@ -83,6 +83,90 @@
     "status": 200,
     "url": "https://www.berlin.de/einwanderung/en/entry/visa-procedure/longer-stays/artikel.1047861.en.php"
   },
+  "de/darmstadt/residence-permit": {
+    "changed": false,
+    "checked_at": "2026-10-16T08:35:45+00:00",
+    "content_type": "text/html",
+    "error": null,
+    "fetched_at": "2026-10-16T08:35:45+00:00",
+    "file": "de/darmstadt/residence-permit.html",
+    "final_url": "https://www.tu-darmstadt.de/studieren/studierende_tu/internationale_studierende_1/aufenthalt_international/artikel_details_de_en_204992.en.jsp",
+    "sha256": "75dcd3a8b845ea19ccccd217742ff0b1cff2230524fa3563073bd687a8eefef9",
+    "status": 200,
+    "url": "https://www.tu-darmstadt.de/studieren/studierende_tu/internationale_studierende_1/aufenthalt_international/artikel_details_de_en_204992.en.jsp"
+  },
+  "de/karlsruhe/residence-permit": {
+    "changed": false,
+    "checked_at": "2026-10-16T08:35:40+00:00",
+    "content_type": "text/html",
+    "error": null,
+    "fetched_at": "2026-10-16T08:35:40+00:00",
+    "file": "de/karlsruhe/residence-permit.html",
+    "final_url": "https://www.intl.kit.edu/istudies/12699.php",
+    "sha256": "8ec6ae7f45fe8486ff677aac39ddf68849b67569403624a63c86f04044b34da9",
+    "status": 200,
+    "url": "https://www.intl.kit.edu/istudies/12699.php"
+  },
+  "de/kit/cds-msc/programme": {
+    "changed": false,
+    "checked_at": "2026-10-16T08:35:40+00:00",
+    "content_type": "text/html",
+    "error": null,
+    "fetched_at": "2026-10-16T08:35:40+00:00",
+    "file": "de/kit/cds-msc/programme.html",
+    "final_url": "https://www.sle.kit.edu/english/vorstudium/master-computational-data-science.php",
+    "sha256": "775b81d5fb17f1f88b6e2d73d0fc01bf45a19429ba46b8fc788557f268065b78",
+    "status": 200,
+    "url": "https://www.sle.kit.edu/english/vorstudium/master-computational-data-science.php"
+  },
+  "de/kit/cs-msc/admission": {
+    "changed": false,
+    "checked_at": "2026-10-16T08:35:38+00:00",
+    "content_type": "text/html",
+    "error": null,
+    "fetched_at": "2026-10-16T08:35:38+00:00",
+    "file": "de/kit/cs-msc/admission.html",
+    "final_url": "https://www.informatik.kit.edu/english/14346.php",
+    "sha256": "d67d9bad2c2c0954244422564c8133d29ef68b9caeb73f102c58189d57a20bdd",
+    "status": 200,
+    "url": "https://www.informatik.kit.edu/english/14346.php"
+  },
+  "de/kit/cs-msc/department": {
+    "changed": false,
+    "checked_at": "2026-10-16T08:35:38+00:00",
+    "content_type": "text/html",
+    "error": null,
+    "fetched_at": "2026-10-16T08:35:38+00:00",
+    "file": "de/kit/cs-msc/department.html",
+    "final_url": "https://www.informatik.kit.edu/english/mastercomputerscience.php",
+    "sha256": "7643529b1a5e827f5b7bcbae322c1ebc804258829659f298b0ec9ea0564eb4f5",
+    "status": 200,
+    "url": "https://www.informatik.kit.edu/english/mastercomputerscience.php"
+  },
+  "de/kit/cs-msc/programme": {
+    "changed": false,
+    "checked_at": "2026-10-16T08:35:38+00:00",
+    "content_type": "text/html",
+    "error": null,
+    "fetched_at": "2026-10-16T08:35:38+00:00",
+    "file": "de/kit/cs-msc/programme.html",
+    "final_url": "https://www.sle.kit.edu/english/vorstudium/master-computer-science.php",
+    "sha256": "610ba763c81d40974c977c8a2fcd0a7d4a6cd53afe2318584cd69ffdd8af9b35",
+    "status": 200,
+    "url": "https://www.sle.kit.edu/english/vorstudium/master-computer-science.php"
+  },
+  "de/kit/tuition-fees": {
+    "changed": false,
+    "checked_at": "2026-10-16T08:35:40+00:00",
+    "content_type": "text/html",
+    "error": null,
+    "fetched_at": "2026-10-16T08:35:40+00:00",
+    "file": "de/kit/tuition-fees.html",
+    "final_url": "https://www.intl.kit.edu/istudies/12606.php",
+    "sha256": "2446fd81cfb24eea96751ec61c7356e6fde448a9f2ae0c9b6e275e1a3197b0a8",
+    "status": 200,
+    "url": "https://www.intl.kit.edu/istudies/12606.php"
+  },
   "de/munich/foreign-students": {
     "changed": false,
     "checked_at": "2026-10-05T12:20:15+00:00",
@@ -275,6 +359,18 @@
     "status": 200,
     "url": "https://www.uni-assist.de/en/faqs/plan-your-application/"
   },
+  "de/rwth/application-deadlines": {
+    "changed": false,
+    "checked_at": "2026-10-16T08:35:30+00:00",
+    "content_type": "text/html",
+    "error": null,
+    "fetched_at": "2026-10-16T08:35:30+00:00",
+    "file": "de/rwth/application-deadlines.html",
+    "final_url": "https://www.rwth-aachen.de/cms/root/studium/vor-dem-studium/~bsottx/bewerbungs-und-einschreibefrist/?lidx=1",
+    "sha256": "f23cebc456c7748483fba1eb2a516d8ff364dc7248cabb3486d21b14eebd6351",
+    "status": 200,
+    "url": "https://www.rwth-aachen.de/cms/root/studium/vor-dem-studium/~bsottx/bewerbungs-und-einschreibefrist/?lidx=1"
+  },
   "de/rwth/cs-msc/application": {
     "changed": false,
     "checked_at": "2026-10-05T12:20:24+00:00",
@@ -346,6 +442,42 @@
     "sha256": "238d119fe331bafc896be796e6f5cfd3f346f9f24c180a6556ddd74fd4bcc881",
     "status": 200,
     "url": "https://sc.informatik.rwth-aachen.de/en/studium/master/master-data-science/"
+  },
+  "de/rwth/language-requirements": {
+    "changed": false,
+    "checked_at": "2026-10-16T08:35:33+00:00",
+    "content_type": "text/html",
+    "error": null,
+    "fetched_at": "2026-10-16T08:35:33+00:00",
+    "file": "de/rwth/language-requirements.html",
+    "final_url": "https://www.rwth-aachen.de/cms/root/studium/vor-dem-studium/zugangsvoraussetzungen/~zwyn/sprachkenntnisse/?lidx=1",
+    "sha256": "f98d29c55bc9bae4b4768272ff8e88f91cdaa81d6de51f61225037894f28dac3",
+    "status": 200,
+    "url": "https://www.rwth-aachen.de/cms/root/studium/vor-dem-studium/zugangsvoraussetzungen/~zwyn/sprachkenntnisse/?lidx=1"
+  },
+  "de/rwth/language-requirements-pdf": {
+    "changed": false,
+    "checked_at": "2026-10-16T08:35:35+00:00",
+    "content_type": "application/pdf",
+    "error": null,
+    "fetched_at": "2026-10-16T08:35:35+00:00",
+    "file": "de/rwth/language-requirements-pdf.pdf",
+    "final_url": "https://www.rwth-aachen.de/global/show_document.asp?id=aaaaaaaaabpixuo",
+    "sha256": "112bff017b12dfc5f4bf0d80386646aaa40574becdeab860596e3224f9d171c8",
+    "status": 200,
+    "url": "https://www.rwth-aachen.de/global/show_document.asp?id=aaaaaaaaabpixuo"
+  },
+  "de/rwth/master-application-international": {
+    "changed": false,
+    "checked_at": "2026-10-16T08:35:31+00:00",
+    "content_type": "text/html",
+    "error": null,
+    "fetched_at": "2026-10-16T08:35:31+00:00",
+    "file": "de/rwth/master-application-international.html",
+    "final_url": "https://www.rwth-aachen.de/cms/root/studium/vor-dem-studium/bewerbung-um-einen-studienplatz/master-bewerbung/~dqml/bewerbung-master-internationale/?lidx=1",
+    "sha256": "bb4acff8ecad23d070658006f118c4e2d723a48ff514a8593d690a816ef7d165",
+    "status": 200,
+    "url": "https://www.rwth-aachen.de/cms/root/studium/vor-dem-studium/bewerbung-um-einen-studienplatz/master-bewerbung/~dqml/bewerbung-master-internationale/?lidx=1"
   },
   "de/saarbruecken/registration": {
     "changed": false,
@@ -478,6 +610,54 @@
     "sha256": "85072dd03b401c14178d215d1b9d03e0b82c680888b0e456b1a5893f463cea48",
     "status": 200,
     "url": "https://www.deutschlandstipendium.de/de/english-1700.html"
+  },
+  "de/stuttgart/residence-permit": {
+    "changed": false,
+    "checked_at": "2026-10-16T08:35:48+00:00",
+    "content_type": "text/html",
+    "error": null,
+    "fetched_at": "2026-10-16T08:35:48+00:00",
+    "file": "de/stuttgart/residence-permit.html",
+    "final_url": "https://www.uni-stuttgart.de/en/study/international/visa/",
+    "sha256": "637793e3cbdfb74e94a7d2a557b94789a0cba34ce6f0c7371fb79d5e478dbb7c",
+    "status": 200,
+    "url": "https://www.uni-stuttgart.de/en/study/international/visa/"
+  },
+  "de/tu-darmstadt/aiml-msc/programme": {
+    "changed": false,
+    "checked_at": "2026-10-16T08:35:43+00:00",
+    "content_type": "text/html",
+    "error": null,
+    "fetched_at": "2026-10-16T08:35:43+00:00",
+    "file": "de/tu-darmstadt/aiml-msc/programme.html",
+    "final_url": "https://www.tu-darmstadt.de/studieren/studieninteressierte/studienangebot_studiengaenge/studiengang_334592.en.jsp",
+    "sha256": "6c1aa04604a946fae2870f4bd122338e9ee74cdc10b8124d612a2620bd3bfe29",
+    "status": 200,
+    "url": "https://www.tu-darmstadt.de/studieren/studieninteressierte/studienangebot_studiengaenge/studiengang_334592.en.jsp"
+  },
+  "de/tu-darmstadt/cs-msc/programme": {
+    "changed": false,
+    "checked_at": "2026-10-16T08:35:42+00:00",
+    "content_type": "text/html",
+    "error": null,
+    "fetched_at": "2026-10-16T08:35:42+00:00",
+    "file": "de/tu-darmstadt/cs-msc/programme.html",
+    "final_url": "https://www.tu-darmstadt.de/studieren/studieninteressierte/studienangebot_studiengaenge/studiengang_334656.en.jsp",
+    "sha256": "dba78264d70a998583aa5075346f6aa1542a1a8872277714a610812237409439",
+    "status": 200,
+    "url": "https://www.tu-darmstadt.de/studieren/studieninteressierte/studienangebot_studiengaenge/studiengang_334656.en.jsp"
+  },
+  "de/tu-darmstadt/informatics-master-admission-guide": {
+    "changed": false,
+    "checked_at": "2026-10-16T08:35:45+00:00",
+    "content_type": "text/html",
+    "error": null,
+    "fetched_at": "2026-10-16T08:35:45+00:00",
+    "file": "de/tu-darmstadt/informatics-master-admission-guide.html",
+    "final_url": "https://www.informatik.tu-darmstadt.de/studium_fb20/vor_dem_studium/bewerbung_1/bewerbung_2.en.jsp",
+    "sha256": "e40caa50c27f10945d0273325952c3d4c08c68be2ed32d06fc56b7173f7c3095",
+    "status": 200,
+    "url": "https://www.informatik.tu-darmstadt.de/studium_fb20/vor_dem_studium/bewerbung_1/bewerbung_2.en.jsp"
   },
   "de/tub/admission-requirements": {
     "changed": false,
@@ -634,5 +814,53 @@
     "sha256": "dbde1d9aa686460d8a1ff887ae449c45b257f9106c63d61b58e0772c50c74497",
     "status": 200,
     "url": "https://www.tum.de/en/studies/degree-programs/detail/informatics-master-of-science-msc"
+  },
+  "de/tum/language-certificates": {
+    "changed": false,
+    "checked_at": "2026-10-16T08:35:30+00:00",
+    "content_type": "text/html",
+    "error": null,
+    "fetched_at": "2026-10-16T08:35:30+00:00",
+    "file": "de/tum/language-certificates.html",
+    "final_url": "https://www.tum.de/en/studies/application/application-info-portal/admission-requirements/language-certificates",
+    "sha256": "854072bdb44999e8a30004e65098efeaf7fbcc26fb2bbd4f942126e87a60fdf8",
+    "status": 200,
+    "url": "https://www.tum.de/en/studies/application/application-info-portal/admission-requirements/language-certificates"
+  },
+  "de/ustutt/cs-msc/department": {
+    "changed": false,
+    "checked_at": "2026-10-16T08:35:47+00:00",
+    "content_type": "text/html",
+    "error": null,
+    "fetched_at": "2026-10-16T08:35:47+00:00",
+    "file": "de/ustutt/cs-msc/department.html",
+    "final_url": "https://www.f05.uni-stuttgart.de/en/cs/prospective-students/msc-computerscience/",
+    "sha256": "e59dc31283a675be95e0d72ed3e80636864d65d4210e63a717c918f92278d97d",
+    "status": 200,
+    "url": "https://www.f05.uni-stuttgart.de/en/cs/prospective-students/msc-computerscience/"
+  },
+  "de/ustutt/cs-msc/programme": {
+    "changed": false,
+    "checked_at": "2026-10-16T08:35:47+00:00",
+    "content_type": "text/html",
+    "error": null,
+    "fetched_at": "2026-10-16T08:35:47+00:00",
+    "file": "de/ustutt/cs-msc/programme.html",
+    "final_url": "https://www.uni-stuttgart.de/en/study/study-programs/Computer-Science-M.Sc.-00001/",
+    "sha256": "4a387ef48caff87c2677e88115ec12a8900a41a59c297f2c48d3e8fec87246a2",
+    "status": 200,
+    "url": "https://www.uni-stuttgart.de/en/study/study-programs/Computer-Science-M.Sc.-00001/"
+  },
+  "de/ustutt/tuition-fees": {
+    "changed": false,
+    "checked_at": "2026-10-16T08:35:47+00:00",
+    "content_type": "text/html",
+    "error": null,
+    "fetched_at": "2026-10-16T08:35:47+00:00",
+    "file": "de/ustutt/tuition-fees.html",
+    "final_url": "https://www.student.uni-stuttgart.de/en/organizing-studies/formalities/tuition-and-fees/",
+    "sha256": "bb2ac424779115db4cb40c5a72e02e7b841535f94fe3ca101c05387b23d3f28c",
+    "status": 200,
+    "url": "https://www.student.uni-stuttgart.de/en/organizing-studies/formalities/tuition-and-fees/"
   }
 }

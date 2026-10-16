@@ -1,0 +1,145 @@
+{
+  "slug": "kit-m-sc-computer-science",
+  "checked_at": "2026-10-16T09:37:07+00:00",
+  "fields": {
+    "degree_requirement": {
+      "verdict": "correct",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "min_total_ects": {
+      "verdict": "correct",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "subject_credits": {
+      "verdict": "partial",
+      "value": [
+        {
+          "area": "Theoretical Computer Science",
+          "min_ects": 15
+        },
+        {
+          "area": "Practical Computer Science",
+          "min_ects": 30
+        },
+        {
+          "area": "Computer Engineering",
+          "min_ects": 8
+        },
+        {
+          "area": "Mathematics",
+          "min_ects": 25
+        }
+      ],
+      "quote": "- you can prove minimum knowledge and minimum achievements from your bachelor's degree or other university studies: Theoretical Computer Science: 15 credit points Practical Computer Science: 30 credit points Computer Engineering: 8 credit points Mathematics: 25 credit points The modules are assigned to the above-mentioned subject areas by the selection committee.",
+      "doc_id": "de/kit/cs-msc/programme",
+      "reason": "Numbers are right, but they are only one of three alternative routes: a successful GATE or a selection interview (needs 15/20/6/20 CP in three of the four areas) also qualifies, so missing these credits is not an automatic fail."
+    },
+    "min_grade_german_scale": {
+      "verdict": "not_published_ok",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "min_grade_original_scale": {
+      "verdict": "unsure",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": "No general minimum grade, but the admission page requires proof of being in the best 10% of the year for applicants invited via the interview route only (de/kit/cs-msc/admission); the schema cannot express that condition."
+    },
+    "english": {
+      "verdict": "correct",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "entrance_tests": {
+      "verdict": "correct",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "german": {
+      "verdict": "not_published_ok",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "work_experience": {
+      "verdict": "not_published_ok",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "aps_degree_countries": {
+      "verdict": "not_published_ok",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "application_route": {
+      "verdict": "not_published_ok",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "deadlines": {
+      "verdict": "correct",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "selection_process": {
+      "verdict": "partial",
+      "value": "Ranking list for 100 places per year, max 190 points: up to 70 for the overall grade of the final examination, plus up to 20 (Theoretical CS), 50 (Practical CS), 10 (Computer Engineering) and 40 (Mathematics) for credits. To enter selection an applicant needs one of: a successful GATE (CS&IT or DS&AI), the minimum credits 15/30/8/25 CP, or a passed selection interview (in English, scored 0-60, below 30 is a fail; open to applicants meeting 15/20/6/20 CP in three of the four areas, and per the admission page proof of being in the top 10% of their year).",
+      "quote": "You can participate in the selection process if you fulfill one of the following three conditions:\n\n- you have a successful GATE test (see above)\n\n- you can prove minimum knowledge and minimum achievements from your bachelor's degree or other university studies: Theoretical Computer Science: 15 credit points Practical Computer Science: 30 credit points Computer Engineering: 8 credit points Mathematics: 25 credit points The modules are assigned to the above-mentioned subject areas by the selection committee.\n\n- you will successfully complete an aptitude interview . A prerequisite for participation is that your proven knowledge and achievements do not fall below the following requirements in three of the four areas mentioned: Theoretical Computer Science: 15 credit points Practical Computer Science: 20 credit points Computer Engineering: 6 credit points Mathematics: 20 credit points The selection interview can be conducted online (Zoom) in exceptional cases and within the available slots.",
+      "doc_id": "de/kit/cs-msc/programme",
+      "reason": "Draft covers the 190-point ranking (its quote is valid) but omits the three entry routes, including the selection interview for applicants short of the credit minimums."
+    },
+    "required_documents": {
+      "verdict": "missed",
+      "value": [
+        "valid GRE (or GATE) score-card (international applicants)",
+        "application documents in machine-readable form"
+      ],
+      "quote": "International applicants must submit machine‑readable documents along with a valid GRE (or GATE) score-card.",
+      "doc_id": "de/kit/cs-msc/department",
+      "reason": "The department page names the GRE/GATE score-card and machine-readable documents for international applicants; English B2 proof (programme page) is also required."
+    },
+    "tuition_eur_per_semester_non_eu": {
+      "verdict": "correct",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "semester_fee_eur": {
+      "verdict": "not_published_ok",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "language_of_instruction": {
+      "verdict": "correct",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    }
+  }
+}
