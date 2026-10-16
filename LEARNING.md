@@ -44,6 +44,14 @@ Per phase: what was built, why (interview answers), quiz questions, the DECISION
 
 ## Phase 3: Extraction + batch 2 (in progress)
 
+### What was built
+- `generation/llm_client.py` on Gemini's OpenAI-compatible endpoint (`models.llm_base_url`), with a fallback list (`models.llm_fallback_models`): a 429 moves to the next model.
+- `extraction/schemas.py`: `ProgramRequirements`, 17 `Cited` fields, including entrance tests with applies-to and exempt degree-country lists, foreign grade minimums and APS degree countries. Test-name aliases (GRE / GATE / TOEFL spellings).
+- `extraction/extract.py` + `make extract`: one call per programme over its own pages plus its university's general pages; JSON mode, pydantic validation, one repair retry, quote check. Drafts in `data/extracted/`.
+- `scripts/dump_pages.py` + second-model cross-check: a model from a different family reads the draft and the exact page text and writes a verdict per field to `data/checked/`.
+- `extraction/review.py` + `make review`: field next to quote and page, automatic warnings, cross-check verdicts, a tick per field, Save to `data/verified/`.
+- Registry: 53 -> 72 sources. Gap pages for RWTH (deadlines, international application, language rules + PDF) and TUM (language certificates); batch 2 = KIT, TU Darmstadt, Stuttgart. 8 -> 13 programmes.
+
 ### Why (defend these)
 - **Provider behind one thin client + `base_url`.** Gemini speaks the OpenAI API, so switching provider is a config change, not a code change. The free tier was the budget constraint.
 - **Tests blank the API key.** Tests must be offline, deterministic and free; the real endpoint is checked once by hand.
@@ -54,6 +62,14 @@ Per phase: what was built, why (interview answers), quiz questions, the DECISION
 - **One call per programme over full page text, not retrieved chunks.** Each programme is under ~10k words, so the model sees everything; retrieval could miss the one sentence with the deadline.
 - **Quote check on words only** (lowercase, punctuation and markdown dropped), so formatting differences don't reject true quotes, and quotes under 2 words are rejected because they would match anywhere.
 - **Failures don't stop the run.** Free-tier 503/429 errors are normal; a failed programme is skipped and re-running fills only the gaps.
+- **Second-model cross-check from a different model family.** Two models from the same family tend to make the same mistakes; a different family's errors overlap less. The checker can be wrong too, so its suggestions go through the same schema and quote check, and the human tick stays the final gate.
+- **Green / amber fields.** The reviewer's time goes where the risk is: amber fields (checker disagrees or a warning fired) are read in full, green ones get a 10-second quote-vs-value check. Every field is still ticked.
+- **Warnings are cheap deterministic checks.** A number in the value that is not in the quote catches invented digits; a "not published" field whose keywords appear on the page catches missed fields.
+- **Review screen is a separate app from `api/`.** Nothing admin-only can leak into the public service.
+- **Drafts, cross-checks and verified records are all committed.** Together they are the audit trail: what the LLM said, what the checker said, what a human signed off. They are also the inputs for the Phase 4 extraction-accuracy numbers.
+- **Batch 2 cut from ~7 to 3 universities.** The goal is to deploy soon; every programme costs ~30 min of human verification and free-tier quota. Adding universities later is data-only work.
+- **Phase 6 before Phase 5.** The eligibility engine is the product and needs only the verified records; retrieval upgrades need the Phase 4 baseline to be judged and can wait.
+- **Uni-wide pages go to every programme of that university** (fees, language rules). Cheaper than duplicating registry entries; the prompt tells the model to take only what applies to the named programme. A ~100k-character TUM tuition page was left out because it would ride along on every TUM call and hit the per-minute token limit.
 
 ### Quiz questions (answer later)
 1. Why does every extracted field carry a verbatim quote, and what check does the quote enable?
@@ -61,11 +77,20 @@ Per phase: what was built, why (interview answers), quiz questions, the DECISION
 3. Why does the LLM extract but never decide eligibility?
 4. Why give the extractor whole pages instead of top-k retrieved chunks?
 5. A quote check passes. Does that prove the value is right? What else can go wrong?
+6. Why use a second model from a different family as a checker, and why does its output still go through the quote check?
+7. What does a reviewer do differently on a green field and an amber field, and why is every field still ticked?
+8. Why commit drafts, cross-checks and verified records instead of only the verified ones?
+9. Why was batch 2 cut to three universities, and what does adding a fourth cost?
 
 ### DECISIONS entries to write (maintainer, own words)
 - [ ] Gemini free tier via the OpenAI-compatible endpoint; model choice and why 2.5-flash was not usable.
 - [ ] The `Cited` field design.
+- [ ] Second-model cross-check + human tick as the verification design (and committing `data/checked/` as the audit trail).
+- [ ] 2026-10-13: batch 2 = KIT, TU Darmstadt, Stuttgart; Phase 6 before Phase 5; Phase 9 is a functional UI and polish moves to Phase 12 after deploy.
 
 ### Open findings
 - Free-tier rate limits and model availability change without notice (2.5-flash closed to new keys in Oct 2026).
 - Gemini free tier is 20 requests/day per model. Model fallback (3.8 -> 3.6 -> 3.5 flash) and response caching become requirements for the deployed chat (Phase 8).
+- A cross-check file has no link to the draft it checked, so it goes stale after `make extract --refresh`; re-run the check after every re-extraction.
+- The RWTH per-programme language PDF sits behind an id-based URL that can change when RWTH replaces the file; the crawl will show a 404.
+- The first cross-checks (Saarland ×2, TU Berlin, TU Dresden, on the 2026-10-08 drafts) flagged 2 missed fields, 1 wrong field and 10 partial ones. Partials clustered in English scores (dropped TOEFL 2026-format and CEFR minimums), document lists, and GRE/GATE country conditions; the last led to the applies-to / exempt country fields.
