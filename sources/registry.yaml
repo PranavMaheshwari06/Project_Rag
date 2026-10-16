@@ -33,6 +33,7 @@
 - {id: de/tum/dea-msc/department, url: "https://www.cit.tum.de/en/cit/studies/degree-programs/master-data-engineering-and-analytics/", country: DE, layer: university, university: TUM, programme: M.Sc. Data Engineering and Analytics}
 - {id: de/tum/informatics-msc/department, url: "https://www.cit.tum.de/en/cit/studies/degree-programs/master-informatics/", country: DE, layer: university, university: TUM, programme: M.Sc. Informatics}
 - {id: de/tum/dea-msc/programme, url: "https://www.tum.de/en/studies/degree-programs/detail/data-engineering-and-analytics-master-of-science-msc", country: DE, layer: university, university: TUM, programme: M.Sc. Data Engineering and Analytics}
+- {id: de/tum/language-certificates, url: "https://www.tum.de/en/studies/application/application-info-portal/admission-requirements/language-certificates", country: DE, layer: university, university: TUM, stage: before_applying}
 - {id: de/munich/foreign-students, url: "https://stadt.muenchen.de/infos/new-foreign-students.html", country: DE, layer: rules, stage: arrival, university: TUM}
 - {id: de/munich/residence-permit-study, url: "https://stadt.muenchen.de/service/en-GB/info/servicestelle-fur-zuwanderung-und-einburgerung/10424886/", country: DE, layer: rules, stage: arrival, university: TUM}
 
@@ -43,6 +44,11 @@
 - {id: de/rwth/ds-msc/programme, url: "https://www.rwth-aachen.de/cms/root/studium/vor-dem-studium/studiengaenge/liste-aktuelle-studiengaenge/studiengangbeschreibung/~pzpc/data-science-m-sc/?lidx=1", country: DE, layer: university, university: RWTH Aachen, programme: M.Sc. Data Science}
 - {id: de/rwth/ds-msc/requirements, url: "https://sc.informatik.rwth-aachen.de/en/studium/master/master-data-science/", country: DE, layer: university, university: RWTH Aachen, programme: M.Sc. Data Science}
 - {id: de/rwth/ds-msc/application, url: "https://sc.informatik.rwth-aachen.de/en/studium/master/master-data-science/application-for-admission/", country: DE, layer: university, university: RWTH Aachen, programme: M.Sc. Data Science}
+- {id: de/rwth/application-deadlines, url: "https://www.rwth-aachen.de/cms/root/studium/vor-dem-studium/~bsottx/bewerbungs-und-einschreibefrist/?lidx=1", country: DE, layer: university, university: RWTH Aachen, stage: before_applying}
+- {id: de/rwth/master-application-international, url: "https://www.rwth-aachen.de/cms/root/studium/vor-dem-studium/bewerbung-um-einen-studienplatz/master-bewerbung/~dqml/bewerbung-master-internationale/?lidx=1", country: DE, layer: university, university: RWTH Aachen, stage: before_applying}
+- {id: de/rwth/language-requirements, url: "https://www.rwth-aachen.de/cms/root/studium/vor-dem-studium/zugangsvoraussetzungen/~zwyn/sprachkenntnisse/?lidx=1", country: DE, layer: university, university: RWTH Aachen, stage: before_applying}
+# id-based PDF URL: may change when RWTH replaces the file (crawl will report a 404)
+- {id: de/rwth/language-requirements-pdf, url: "https://www.rwth-aachen.de/global/show_document.asp?id=aaaaaaaaabpixuo", country: DE, layer: university, university: RWTH Aachen, stage: before_applying, title: RWTH language requirements per degree programme}
 - {id: de/aachen/first-steps, url: "https://www.rwth-aachen.de/cms/root/studium/im-studium/internationales/~bczcgd/first-steps-and-tutorials-for-internatio/?lidx=1", country: DE, layer: rules, stage: arrival, university: RWTH Aachen}
 - {id: de/aachen/residence-permit, url: "https://www.rwth-aachen.de/go/id/bpte/lidx/1", country: DE, layer: rules, stage: arrival, university: RWTH Aachen}
 
@@ -72,3 +78,27 @@
 - {id: de/tud/cs-msc/programme, url: "https://tu-dresden.de/studium/vor-dem-studium/studienangebot/sins/sins_studiengang?autoid=73&set_language=en", country: DE, layer: university, university: TU Dresden, programme: M.Sc. Computer Science}
 - {id: de/tud/cs-msc/aptitude-assessment, url: "https://tu-dresden.de/studium/vor-dem-studium/studienangebot/sins/sins_eignungsfeststellung_detail?autoid=73&set_language=en", country: DE, layer: university, university: TU Dresden, programme: M.Sc. Computer Science}
 - {id: de/tud/international-faq, url: "https://tu-dresden.de/studium/vor-dem-studium/internationales/faq?set_language=en", country: DE, layer: university, university: TU Dresden, stage: before_applying}
+
+# ================================================================ Batch 2 (end of Phase 3)
+
+# ---------------------------------------------------------------- KIT (Karlsruhe)
+- {id: de/kit/cs-msc/programme, url: "https://www.sle.kit.edu/english/vorstudium/master-computer-science.php", country: DE, layer: university, university: KIT, programme: M.Sc. Computer Science}
+- {id: de/kit/cs-msc/department, url: "https://www.informatik.kit.edu/english/mastercomputerscience.php", country: DE, layer: university, university: KIT, programme: M.Sc. Computer Science}
+- {id: de/kit/cs-msc/admission, url: "https://www.informatik.kit.edu/english/14346.php", country: DE, layer: university, university: KIT, programme: M.Sc. Computer Science}
+- {id: de/kit/cds-msc/programme, url: "https://www.sle.kit.edu/english/vorstudium/master-computational-data-science.php", country: DE, layer: university, university: KIT, programme: M.Sc. Computational and Data Science}
+- {id: de/kit/tuition-fees, url: "https://www.intl.kit.edu/istudies/12606.php", country: DE, layer: university, university: KIT, stage: visa_funds}
+- {id: de/karlsruhe/residence-permit, url: "https://www.intl.kit.edu/istudies/12699.php", country: DE, layer: rules, stage: arrival, university: KIT}
+
+# ---------------------------------------------------------------- TU Darmstadt
+# Eligibility_check.pdf left out: link found but its content was never checked.
+- {id: de/tu-darmstadt/cs-msc/programme, url: "https://www.tu-darmstadt.de/studieren/studieninteressierte/studienangebot_studiengaenge/studiengang_334656.en.jsp", country: DE, layer: university, university: TU Darmstadt, programme: M.Sc. Computer Science}
+- {id: de/tu-darmstadt/aiml-msc/programme, url: "https://www.tu-darmstadt.de/studieren/studieninteressierte/studienangebot_studiengaenge/studiengang_334592.en.jsp", country: DE, layer: university, university: TU Darmstadt, programme: M.Sc. Artificial Intelligence and Machine Learning}
+- {id: de/tu-darmstadt/informatics-master-admission-guide, url: "https://www.informatik.tu-darmstadt.de/studium_fb20/vor_dem_studium/bewerbung_1/bewerbung_2.en.jsp", country: DE, layer: university, university: TU Darmstadt, stage: before_applying}
+- {id: de/darmstadt/residence-permit, url: "https://www.tu-darmstadt.de/studieren/studierende_tu/internationale_studierende_1/aufenthalt_international/artikel_details_de_en_204992.en.jsp", country: DE, layer: rules, stage: arrival, university: TU Darmstadt}
+
+# ---------------------------------------------------------------- University of Stuttgart
+# The AI / Data Science master's is German-taught, so only Computer Science is listed.
+- {id: de/ustutt/cs-msc/programme, url: "https://www.uni-stuttgart.de/en/study/study-programs/Computer-Science-M.Sc.-00001/", country: DE, layer: university, university: University of Stuttgart, programme: M.Sc. Computer Science}
+- {id: de/ustutt/cs-msc/department, url: "https://www.f05.uni-stuttgart.de/en/cs/prospective-students/msc-computerscience/", country: DE, layer: university, university: University of Stuttgart, programme: M.Sc. Computer Science}
+- {id: de/ustutt/tuition-fees, url: "https://www.student.uni-stuttgart.de/en/organizing-studies/formalities/tuition-and-fees/", country: DE, layer: university, university: University of Stuttgart, stage: visa_funds}
+- {id: de/stuttgart/residence-permit, url: "https://www.uni-stuttgart.de/en/study/international/visa/", country: DE, layer: rules, stage: arrival, university: University of Stuttgart}
