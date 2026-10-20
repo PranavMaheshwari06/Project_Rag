@@ -22,8 +22,9 @@ def client(tmp_path, monkeypatch):
     rec = {"university": "Test Uni", "programme": "M.Sc. Testing", "source_doc_ids": ["de/test/prog"],
            "min_total_ects": {"status": "stated", "value": 180, "doc_id": "de/test/prog",
                               "quote": "A bachelor's degree with at least 180 ECTS is required."},
-           # list value: regression for flags() choking on nested models
-           "english": {"status": "stated", "value": [{"test": "IELTS", "min_score": "6.5"}],
+           # list value: regression for flags() choking on nested models;
+           # the en dash must not be read as the number 2013 (–)
+           "english": {"status": "stated", "value": [{"test": "IELTS", "min_score": "6.5 – overall"}],
                        "doc_id": "de/test/prog", "quote": "IELTS 6.5 is accepted."}}
     (tmp_path / "extracted").mkdir()
     (tmp_path / "extracted" / f"{SRC.slug}.json").write_text(json.dumps({"model": "m", "record": rec}))
