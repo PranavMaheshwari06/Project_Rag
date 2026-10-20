@@ -1,0 +1,212 @@
+{
+  "verified_at": "2026-10-20T20:41:58+00:00",
+  "draft_model": "gemini-3.8-flash",
+  "record": {
+    "university": "KIT",
+    "programme": "M.Sc. Computer Science",
+    "source_doc_ids": [
+      "de/kit/cs-msc/programme",
+      "de/kit/cs-msc/department",
+      "de/kit/cs-msc/admission",
+      "de/kit/tuition-fees"
+    ],
+    "degree_requirement": {
+      "status": "stated",
+      "value": "Bachelor's degree (or at least an equivalent degree) in Computer Science (or a program with essentially the same content) from a university, university of applied sciences, university of cooperative education or a foreign university.",
+      "quote": "- bachelor's degree a bachelor's degree (or at least an equivalent degree) in Computer Science (or a program with essentially the same content) from a university, university of applied sciences, university of cooperative education or a foreign university. The degree program must have been completed within a standard period of study of at least three years and with a minimum number of 180 ECTS credits.",
+      "doc_id": "de/kit/cs-msc/programme"
+    },
+    "min_total_ects": {
+      "status": "stated",
+      "value": 180,
+      "quote": "- bachelor's degree a bachelor's degree (or at least an equivalent degree) in Computer Science (or a program with essentially the same content) from a university, university of applied sciences, university of cooperative education or a foreign university. The degree program must have been completed within a standard period of study of at least three years and with a minimum number of 180 ECTS credits.",
+      "doc_id": "de/kit/cs-msc/programme"
+    },
+    "subject_credits": {
+      "status": "stated",
+      "value": [
+        {
+          "area": "Theoretical Computer Science",
+          "min_ects": 15
+        },
+        {
+          "area": "Practical Computer Science",
+          "min_ects": 30
+        },
+        {
+          "area": "Computer Engineering",
+          "min_ects": 8
+        },
+        {
+          "area": "Mathematics",
+          "min_ects": 25
+        }
+      ],
+      "quote": "- you can prove minimum knowledge and minimum achievements from your bachelor's degree or other university studies: Theoretical Computer Science: 15 credit points Practical Computer Science: 30 credit points Computer Engineering: 8 credit points Mathematics: 25 credit points The modules are assigned to the above-mentioned subject areas by the selection committee.",
+      "doc_id": "de/kit/cs-msc/programme"
+    },
+    "min_grade_german_scale": {
+      "status": "not_published",
+      "value": null,
+      "quote": null,
+      "doc_id": null
+    },
+    "min_grade_original_scale": {
+      "status": "stated",
+      "value": "Proof of being in the best 10% of the academic year; required only on the interview route (applicants who do not meet the direct credit minimums)",
+      "quote": "All applicants who do not meet the admission requirements according to §5 (1) point 2. a) of the selection statues of the KIT Master's Program in Computer Science , but who have proven knowledge and performance in three of the four areas mentioned in §5 (2) point 2. b) and you are able to provide the proof from your University of beeing one of the best 10% students in the academic year , will be invited by e-mail at least 2 days before the selection interviews.",
+      "doc_id": "de/kit/cs-msc/admission"
+    },
+    "english": {
+      "status": "stated",
+      "value": [
+        {
+          "test": "University entrance qualification certifying English at CEFR B2 or higher, or at least five years of English up to graduation with a final grade of at least German grade 4 (or 5 grade points)",
+          "min_score": "B2"
+        },
+        {
+          "test": "University degree with English as the sole language of instruction and examination (stated in the Diploma Supplement, Transcript of Records or degree certificate)",
+          "min_score": "accepted as proof"
+        },
+        {
+          "test": "TOEFL iBT",
+          "min_score": "90 points"
+        },
+        {
+          "test": "IELTS",
+          "min_score": "overall score of at least 6.5, no section below 5.5"
+        },
+        {
+          "test": "TOEIC",
+          "min_score": "at least 400 points in Listening, 385 in Reading, 160 in Speaking, 150 in Writing"
+        },
+        {
+          "test": "Cambridge Certificate C1 Advanced (CAE)",
+          "min_score": "pass"
+        },
+        {
+          "test": "Cambridge Certificate C2 Proficiency (CPE)",
+          "min_score": "pass"
+        },
+        {
+          "test": "Cambridge Certificate B2 First (FCE)",
+          "min_score": "pass"
+        },
+        {
+          "test": "UNIcert",
+          "min_score": "at least level II"
+        },
+        {
+          "test": "Pearson PTE Academic",
+          "min_score": "at least 58.5 points overall and at least 56.8 in Listening, 60.6 in Reading, 53.5 in Speaking, 74.1 in Writing"
+        }
+      ],
+      "quote": "The following is sufficient proof of your English language skills\n\n- your university entrance qualification , if it certifies English language proficiency at CEFR level B2 or higher or it shows that you have studied English for at least five years up to graduation and your final grade or average grade of the last two years of English lessons corresponds to at least the German grade 4 (sufficient) or at least 5 grade points or\n\n- a university degree with English as the sole language of instruction and examination in the completed degree program - this must be clearly stated in the Diploma Supplement, Transcript of Records or in the degree certificate.\n\nOtherwise, only the following English tests listed in the KIT admission and enrollment regulations are accepted as proof of English proficiency:\n\n- TOEFL iBT (internet-based) with at least 90 points\n\n- IELTS with an overall score of at least 6.5, no section below 5.5\n\n- TOEIC with at least 400 points in Listening, 385 in Reading, 160 in Speaking, 150 in Writing\n\n- Cambridge Certificate C1 Advanced (CAE)\n\n- Cambridge Certificate C2 Proficiency (CPE)\n\n- Cambridge Certificate B2 First (FCE)\n\n- UNIcert, at least level II\n\n- Pearson PTE Academic with at least 58.5 points overall and at least 56.8 in Listening, 60.6 in Reading, 53.5 in Speaking, 74.1 in Writing",
+      "doc_id": "de/kit/cs-msc/programme"
+    },
+    "entrance_tests": {
+      "status": "stated",
+      "value": [
+        {
+          "test": "GRE",
+          "min_scores": "Verbal Reasoning: at least 151 points, Quantitative Reasoning: at least 164 points, Analytical Writing: at least 4 points",
+          "requirement": "one_of",
+          "applies_to_degree_countries": [],
+          "exempt_degree_countries": [
+            "European Higher Education Area (EHEA)",
+            "signatory state to the Convention on the Recognition of Qualifications concerning Higher Education in the European Union of April 1, 1997 (Lisbon Convention)"
+          ]
+        },
+        {
+          "test": "Graduate Aptitude Test in Engineering (GATE) in the field of Computer Science and Information Technology or Data Science and Artificial Intelligence",
+          "min_scores": null,
+          "requirement": "one_of",
+          "applies_to_degree_countries": [],
+          "exempt_degree_countries": [
+            "European Higher Education Area (EHEA)",
+            "signatory state to the Convention on the Recognition of Qualifications concerning Higher Education in the European Union of April 1, 1997 (Lisbon Convention)"
+          ]
+        }
+      ],
+      "quote": "- GRE test with the following scores in the individual areas: Verbal Reasoning: at least 151 points Quantitative Reasoning: at least 164 points Analytical Writing: at least 4 points Proof of the GRE is not necessary if: the university degree was obtained at a university in the European Higher Education Area (EHEA ) the degree was obtained at a higher education institution of a signatory state to the Convention on the Recognition of Qualifications concerning Higher Education in the European Union of April 1, 1997 (Lisbon Convention ) a successful Graduate Aptitude Test in Engineering (GATE) in the field of Computer Science and Information Technology or Data Science and Artificial Intelligence .",
+      "doc_id": "de/kit/cs-msc/programme"
+    },
+    "german": {
+      "status": "not_published",
+      "value": null,
+      "quote": null,
+      "doc_id": null
+    },
+    "work_experience": {
+      "status": "not_published",
+      "value": null,
+      "quote": null,
+      "doc_id": null
+    },
+    "aps_degree_countries": {
+      "status": "not_published",
+      "value": null,
+      "quote": null,
+      "doc_id": null
+    },
+    "application_route": {
+      "status": "not_published",
+      "value": null,
+      "quote": null,
+      "doc_id": null
+    },
+    "deadlines": {
+      "status": "stated",
+      "value": [
+        {
+          "intake": "winter",
+          "applicant_group": "all",
+          "date": "June 15",
+          "kind": "final"
+        },
+        {
+          "intake": "summer",
+          "applicant_group": "all",
+          "date": "January 15",
+          "kind": "final"
+        }
+      ],
+      "quote": "- Application deadline : June 15 for winter term, January 15 for summer term",
+      "doc_id": "de/kit/cs-msc/admission"
+    },
+    "selection_process": {
+      "status": "stated",
+      "value": "Entry to the selection needs one of three: a successful GATE (Computer Science and Information Technology, or Data Science and Artificial Intelligence); minimum credits of 15 CP Theoretical CS, 30 CP Practical CS, 8 CP Computer Engineering and 25 CP Mathematics; or a passed aptitude interview, open to applicants with at least 15 / 20 / 6 / 20 CP in three of those four areas. Interviews are online (Zoom) only in exceptional cases.",
+      "quote": "You can participate in the selection process if you fulfill one of the following three conditions:\n\n- you have a successful GATE test (see above)\n\n- you can prove minimum knowledge and minimum achievements from your bachelor's degree or other university studies: Theoretical Computer Science: 15 credit points Practical Computer Science: 30 credit points Computer Engineering: 8 credit points Mathematics: 25 credit points The modules are assigned to the above-mentioned subject areas by the selection committee.\n\n- you will successfully complete an aptitude interview . A prerequisite for participation is that your proven knowledge and achievements do not fall below the following requirements in three of the four areas mentioned: Theoretical Computer Science: 15 credit points Practical Computer Science: 20 credit points Computer Engineering: 6 credit points Mathematics: 20 credit points The selection interview can be conducted online (Zoom) in exceptional cases and within the available slots.",
+      "doc_id": "de/kit/cs-msc/programme"
+    },
+    "required_documents": {
+      "status": "stated",
+      "value": [
+        "Valid GRE or GATE score card (international applicants)",
+        "Application documents in machine-readable form"
+      ],
+      "quote": "International applicants must submit machine‑readable documents along with a valid GRE (or GATE) score-card.",
+      "doc_id": "de/kit/cs-msc/department"
+    },
+    "tuition_eur_per_semester_non_eu": {
+      "status": "stated",
+      "value": 1500.0,
+      "quote": "According to Article 3, LHGebG (Baden-Württemberg Act on State University Fees), international students (from third countries/non-EU countries) attending bachelor’s, teacher’s, and consecutive master’s programs as well as free movers will have to pay tuition fees in the amount of EUR 1,500 per semester as from the 2017/2018 winter semester.",
+      "doc_id": "de/kit/tuition-fees"
+    },
+    "semester_fee_eur": {
+      "status": "not_published",
+      "value": null,
+      "quote": null,
+      "doc_id": null
+    },
+    "language_of_instruction": {
+      "status": "stated",
+      "value": "English",
+      "quote": "Language of instruction: English",
+      "doc_id": "de/kit/cs-msc/programme"
+    },
+    "verified": true
+  }
+}
