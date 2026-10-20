@@ -73,7 +73,7 @@ def flags(rec: ProgramRequirements, docs: dict[str, str]) -> dict[str, list[str]
         f = getattr(rec, name)
         msgs = []
         if f.status == "stated":
-            missing = _numbers(json.dumps(dump[name]["value"])) - _numbers(f.quote)
+            missing = _numbers(json.dumps(dump[name]["value"], ensure_ascii=False)) - _numbers(f.quote)
             if missing:
                 msgs.append(f"value has numbers that are not in the quote: {', '.join(f'{n:g}' for n in sorted(missing))}")
         else:
