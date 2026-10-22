@@ -1,5 +1,5 @@
 {
-  "extracted_at": "2026-10-07T22:30:42+00:00",
+  "extracted_at": "2026-10-20T21:34:22+00:00",
   "model": "gemini-3.8-flash",
   "rejected_quotes": [],
   "record": {
@@ -7,7 +7,8 @@
     "programme": "M.Sc. Data Engineering and Analytics",
     "source_doc_ids": [
       "de/tum/dea-msc/department",
-      "de/tum/dea-msc/programme"
+      "de/tum/dea-msc/programme",
+      "de/tum/language-certificates"
     ],
     "degree_requirement": {
       "status": "stated",
@@ -33,6 +34,12 @@
       "quote": null,
       "doc_id": null
     },
+    "min_grade_original_scale": {
+      "status": "not_published",
+      "value": null,
+      "quote": null,
+      "doc_id": null
+    },
     "english": {
       "status": "not_published",
       "value": null,
@@ -44,7 +51,7 @@
       "value": [
         {
           "test": "GRE",
-          "min_scores": "Quantitative reasoning: 164, Analytical writing: 4.0",
+          "min_scores": null,
           "requirement": "one_of",
           "applies_to_degree_countries": [
             "Bangladesh",
@@ -52,11 +59,12 @@
             "India",
             "Iran",
             "Pakistan"
-          ]
+          ],
+          "exempt_degree_countries": []
         },
         {
           "test": "GATE",
-          "min_scores": "minimal qualifying score of the respective year",
+          "min_scores": null,
           "requirement": "one_of",
           "applies_to_degree_countries": [
             "Bangladesh",
@@ -64,10 +72,11 @@
             "India",
             "Iran",
             "Pakistan"
-          ]
+          ],
+          "exempt_degree_countries": []
         }
       ],
-      "quote": "GRE or Gate score for applicants with a B.Sc. degree from Bangladesh, China, India, Iran, Pakistan (original scorecard or have the score transmitted directly via ETS)",
+      "quote": "- GRE or Gate score for applicants with a B.Sc. degree from Bangladesh, China, India, Iran, Pakistan (original scorecard or have the score transmitted directly via ETS)",
       "doc_id": "de/tum/dea-msc/department"
     },
     "german": {
@@ -79,12 +88,16 @@
     "work_experience": {
       "status": "stated",
       "value": "counts_in_selection",
-      "quote": "This may include demonstration of qualifications which exceed the knowledge and qualifications obtained at undergraduate degree level, e.g. program-related vocational training, internships, stays abroad, research papers etc.",
+      "quote": "- Certificates from professional training or additional qualifications related to the program (e.g. participation in research competitions, internships, etc.) (not mandatory)",
       "doc_id": "de/tum/dea-msc/department"
     },
-    "aps_required": {
+    "aps_degree_countries": {
       "status": "stated",
-      "value": true,
+      "value": [
+        "China",
+        "India",
+        "Vietnam"
+      ],
       "quote": "Applicants with an undergraduate degree from China, India and Vietnam have to submit a certificate from the German Evaluation Center (APS).",
       "doc_id": "de/tum/dea-msc/department"
     },
@@ -100,12 +113,14 @@
         {
           "intake": "winter",
           "applicant_group": "all",
-          "date": "05-31"
+          "date": "05-31",
+          "kind": "final"
         },
         {
           "intake": "summer",
           "applicant_group": "all",
-          "date": "11-30"
+          "date": "11-30",
+          "kind": "final"
         }
       ],
       "quote": "Application period for winter semester: 01.02. – 31.05. Application period for summer semester: 01.10. – 30.11.",
@@ -113,28 +128,26 @@
     },
     "selection_process": {
       "status": "stated",
-      "value": "Two-stage aptitude assessment procedure evaluating bachelor's degree grades, curricular analysis, statement of reasons, and scientific essay; applicants may receive direct admission, rejection, or an invitation to a written test on campus.",
+      "value": "Two-stage aptitude assessment process assessing qualification regarding the qualitative requirements of the Master's program.",
       "quote": "The aptitude assessment for the M.Sc. Data Engineering and Analytics is a two-stage process in which we assess your qualification with regard to the special qualitative requirements of this Master's program.",
       "doc_id": "de/tum/dea-msc/department"
     },
     "required_documents": {
       "status": "stated",
       "value": [
-        "Statement of reasons (Letter of Motivation)",
-        "CV/résumé",
-        "Scientific essay",
-        "Analysis of the Curriculum",
-        "Bachelor's degree certificate or official transcript of records",
-        "Curriculum (module descriptions/syllabus)",
-        "Proof of English language proficiency",
-        "GRE or GATE score (for degrees from Bangladesh, China, India, Iran, Pakistan)",
-        "Preliminary documentation from uni-assist (VPD) (for degrees from outside Germany)",
-        "APS certificate (for degrees from China, Vietnam, India)",
-        "Passport photo",
-        "Passport copy"
+        "Degree Certificate and Diploma or Subject and Grade Transcript of Studies to Date",
+        "Transcript of Records",
+        "Proof of English Language Proficiency",
+        "Statement of purpose (Letter of Motivation)",
+        "Essay",
+        "Curriculum (e.g. module description)",
+        "Curricular Analysis",
+        "Complete and Current Résumé",
+        "Passport",
+        "Preliminary Documentation (VPD) if the qualification for graduate studies (e.g. a Bachelor’s) was obtained outside Germany)"
       ],
-      "quote": "The following documents have to be submitted for the application (the required documents may vary depending on the applicant):",
-      "doc_id": "de/tum/dea-msc/department"
+      "quote": "- Degree Certificate and Diploma or Subject and Grade Transcript of Studies to Date\n\n- Transcript of Records\n\n- Proof of English Language Proficiency\n\n- Statement of purpose (Letter of Motivation)\n\n- Essay\n\n- Curriculum (e.g. module description)\n\n- Curricular Analysis\n\n- Complete and Current Résumé\n\n- Passport\n\n- Preliminary Documentation (VPD) if the qualification for graduate studies (e.g. a Bachelor’s) was obtained outside Germany)",
+      "doc_id": "de/tum/dea-msc/programme"
     },
     "tuition_eur_per_semester_non_eu": {
       "status": "stated",
@@ -151,8 +164,8 @@
     "language_of_instruction": {
       "status": "stated",
       "value": "English",
-      "quote": "The language of instruction for this program is usually English.",
-      "doc_id": "de/tum/dea-msc/programme"
+      "quote": "Language of Instruction : English",
+      "doc_id": "de/tum/dea-msc/department"
     },
     "verified": false
   }

@@ -1,0 +1,162 @@
+{
+  "slug": "tu-dresden-m-sc-computer-science",
+  "checked_at": "2026-10-22T22:06:46+00:00",
+  "fields": {
+    "degree_requirement": {
+      "verdict": "correct",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "min_total_ects": {
+      "verdict": "not_published_ok",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "subject_credits": {
+      "verdict": "not_published_ok",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "min_grade_german_scale": {
+      "verdict": "not_published_ok",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "min_grade_original_scale": {
+      "verdict": "not_published_ok",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "english": {
+      "verdict": "correct",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "entrance_tests": {
+      "verdict": "not_published_ok",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "german": {
+      "verdict": "correct",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "work_experience": {
+      "verdict": "not_published_ok",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "aps_degree_countries": {
+      "verdict": "correct",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "application_route": {
+      "verdict": "partial",
+      "value": "both",
+      "quote": "Please note: If you are required to apply via the uni-assist portal, you will receive all information regarding the application and the aptitude assessment process from uni-assist.",
+      "doc_id": "de/tud/cs-msc/aptitude-assessment",
+      "reason": "Pages say international applicants generally apply via uni-assist but with exceptions (direct selma/TU Dresden portal for individual programmes or special conditions); the programme page also lists an own 'Apply now' portal, so uni_assist alone loses the condition."
+    },
+    "deadlines": {
+      "verdict": "partial",
+      "value": [
+        {
+          "intake": "winter",
+          "applicant_group": "non_eu",
+          "date": "31st May",
+          "kind": "final"
+        },
+        {
+          "intake": "summer",
+          "applicant_group": "non_eu",
+          "date": "30th November",
+          "kind": "final"
+        },
+        {
+          "intake": "winter",
+          "applicant_group": "eu",
+          "date": "15th July",
+          "kind": "final"
+        },
+        {
+          "intake": "summer",
+          "applicant_group": "eu",
+          "date": "15th January",
+          "kind": "final"
+        },
+        {
+          "intake": "winter",
+          "applicant_group": "all",
+          "date": "15th September",
+          "kind": "final"
+        },
+        {
+          "intake": "summer",
+          "applicant_group": "all",
+          "date": "15th March",
+          "kind": "final"
+        }
+      ],
+      "quote": "- Application period for the degree program (winter semester): 1st June – 15th September",
+      "doc_id": "de/tud/cs-msc/programme",
+      "reason": "Draft keeps only the uni-assist application windows. The programme page also gives a separate application period for the degree programme (1 Jun-15 Sep winter, 1 Dec-15 Mar summer) and a separate aptitude-assessment registration period (1 Jun-15 Jul, 1 Dec-15 Jan) that may fall before the application deadline; these are lost."
+    },
+    "selection_process": {
+      "verdict": "correct",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "required_documents": {
+      "verdict": "correct",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "tuition_eur_per_semester_non_eu": {
+      "verdict": "not_published_ok",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "semester_fee_eur": {
+      "verdict": "correct",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "language_of_instruction": {
+      "verdict": "correct",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    }
+  }
+}

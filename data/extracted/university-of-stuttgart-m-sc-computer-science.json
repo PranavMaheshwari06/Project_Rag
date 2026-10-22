@@ -1,0 +1,142 @@
+{
+  "extracted_at": "2026-10-20T21:13:24+00:00",
+  "model": "gemini-3.8-flash",
+  "rejected_quotes": [],
+  "record": {
+    "university": "University of Stuttgart",
+    "programme": "M.Sc. Computer Science",
+    "source_doc_ids": [
+      "de/ustutt/cs-msc/programme",
+      "de/ustutt/cs-msc/department",
+      "de/ustutt/tuition-fees"
+    ],
+    "degree_requirement": {
+      "status": "stated",
+      "value": "bachelor's degree (or equivalent) with a duration of at least 6 semesters in Computer Science, Software Engineering or in a subject closely related",
+      "quote": "General requirement is a bachelor's degree (or equivalent) with a duration of at least 6 semesters in Computer Science, Software Engineering or in a subject closely related.",
+      "doc_id": "de/ustutt/cs-msc/programme"
+    },
+    "min_total_ects": {
+      "status": "not_published",
+      "value": null,
+      "quote": null,
+      "doc_id": null
+    },
+    "subject_credits": {
+      "status": "not_published",
+      "value": null,
+      "quote": null,
+      "doc_id": null
+    },
+    "min_grade_german_scale": {
+      "status": "not_published",
+      "value": null,
+      "quote": null,
+      "doc_id": null
+    },
+    "min_grade_original_scale": {
+      "status": "not_published",
+      "value": null,
+      "quote": null,
+      "doc_id": null
+    },
+    "english": {
+      "status": "stated",
+      "value": [
+        {
+          "test": "TOEFL iBT",
+          "min_score": "95"
+        },
+        {
+          "test": "IELTS",
+          "min_score": "Band 7"
+        }
+      ],
+      "quote": "adequate knowledge of the English language for the special study: advanced knowledge of English at level C1 (recognized certificates e.g. TOEFL iBT score 95 or IELTS Band 7) For German students, the proof of 5 years of English classes at secondary school with final level C1 (Abitur)",
+      "doc_id": "de/ustutt/cs-msc/department"
+    },
+    "entrance_tests": {
+      "status": "not_published",
+      "value": null,
+      "quote": null,
+      "doc_id": null
+    },
+    "german": {
+      "status": "stated",
+      "value": {
+        "min_level": "none",
+        "needed_by": "admission"
+      },
+      "quote": "Please note that you don't need a proof for German language proficiency (since the program is taught in English).",
+      "doc_id": "de/ustutt/cs-msc/programme"
+    },
+    "work_experience": {
+      "status": "not_published",
+      "value": null,
+      "quote": null,
+      "doc_id": null
+    },
+    "aps_degree_countries": {
+      "status": "not_published",
+      "value": null,
+      "quote": null,
+      "doc_id": null
+    },
+    "application_route": {
+      "status": "stated",
+      "value": "direct",
+      "quote": "The application has to be done vis the online portal C@mpus .",
+      "doc_id": "de/ustutt/cs-msc/department"
+    },
+    "deadlines": {
+      "status": "stated",
+      "value": [
+        {
+          "intake": "winter",
+          "applicant_group": "all",
+          "date": "January 15",
+          "kind": "final"
+        },
+        {
+          "intake": "summer",
+          "applicant_group": "all",
+          "date": "July 15",
+          "kind": "final"
+        }
+      ],
+      "quote": "Application period for the winter semester: November 15 – January 15 The winter semester starts in October. summer semester: May 15 – July 15 The summer semester starts in April.",
+      "doc_id": "de/ustutt/cs-msc/programme"
+    },
+    "selection_process": {
+      "status": "stated",
+      "value": "On the basis of the documents presented, the Board of Admission (Zulassungsausschuss) decides whether the conditions of entry are fulfilled or not. In case of the latter, an interview or an entrance examination may be necessary. In some cases, students who are missing certain qualifications may be granted admission on the condition that they acquire these qualifications in the course of their studies, for example by attending additional modules.",
+      "quote": "On the basis of the documents presented, the Board of Admission (Zulassungsausschuss) decides whether the conditions of entry are fulfilled or not. In case of the latter, an interview or an entrance examination may be necessary. In some cases, students who are missing certain qualifications may be granted admission on the condition that they acquire these qualifications in the course of their studies, for example by attending additional modules.",
+      "doc_id": "de/ustutt/cs-msc/department"
+    },
+    "required_documents": {
+      "status": "not_published",
+      "value": null,
+      "quote": null,
+      "doc_id": null
+    },
+    "tuition_eur_per_semester_non_eu": {
+      "status": "stated",
+      "value": 1500.0,
+      "quote": "The Land Baden-Württemberg has introduced tuition fees for a second degree (650 EUR / semester) and for international students who are not citizens of an EU/EEA country (1500 EUR / semester).",
+      "doc_id": "de/ustutt/tuition-fees"
+    },
+    "semester_fee_eur": {
+      "status": "stated",
+      "value": 184.0,
+      "quote": "Currently it amounts to EUR 184.00 for students and EUR 177.50 for doctoral students .",
+      "doc_id": "de/ustutt/tuition-fees"
+    },
+    "language_of_instruction": {
+      "status": "stated",
+      "value": "English",
+      "quote": "The classes of M.Sc. Computer Science are held in English.",
+      "doc_id": "de/ustutt/cs-msc/department"
+    },
+    "verified": false
+  }
+}

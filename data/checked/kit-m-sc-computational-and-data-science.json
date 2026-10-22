@@ -1,0 +1,142 @@
+{
+  "slug": "kit-m-sc-computational-and-data-science",
+  "checked_at": "2026-10-22T22:06:26+00:00",
+  "fields": {
+    "degree_requirement": {
+      "verdict": "correct",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "min_total_ects": {
+      "verdict": "correct",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "subject_credits": {
+      "verdict": "partial",
+      "value": [
+        {
+          "area": "Grundlagen der Mathematik (Lineare Algebra und Analysis oder Höhere Mathematik)",
+          "min_ects": 20
+        },
+        {
+          "area": "Mindestens 40 LP in einem der Gebiete: Angewandte Mathematik oder Mathematik für Computational and Data Science / Informatik / Natur-, Ingenieur- oder Wirtschaftswissenschaften (SEE-Profile)",
+          "min_ects": 40
+        },
+        {
+          "area": "Mindestens 12 LP in jedem der beiden verbleibenden Gebiete",
+          "min_ects": 12
+        },
+        {
+          "area": "Bachelorarbeit (oder vergleichbare selbstständige wissenschaftliche Arbeit)",
+          "min_ects": 6
+        }
+      ],
+      "quote": "Mindestens 40 LP aus einem und mindestens 12 LP aus den beiden verbleibenden Gebieten",
+      "doc_id": "de/kit/cds-msc/programme",
+      "reason": "Draft keeps only the 20 LP mathematics line; the same sentence also requires 40 LP in one of three areas and 12 LP in each of the other two, plus a 6 LP bachelor thesis. Up to 12 LP missing can be admitted with conditions (Auflagen) at the committee's discretion, so a shortfall is not an automatic fail."
+    },
+    "min_grade_german_scale": {
+      "verdict": "not_published_ok",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "min_grade_original_scale": {
+      "verdict": "not_published_ok",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "english": {
+      "verdict": "correct",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "entrance_tests": {
+      "verdict": "not_published_ok",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "german": {
+      "verdict": "unsure",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": "Pages state no general German requirement, but the Computational Chemistry SEE profile is offered only in German and 'sehr gute Deutschkenntnisse sind zwingend erforderlich'. This is a profile-specific condition the schema cannot express, so not_published is arguably right for the programme as a whole."
+    },
+    "work_experience": {
+      "verdict": "not_published_ok",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "aps_degree_countries": {
+      "verdict": "not_published_ok",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "application_route": {
+      "verdict": "not_published_ok",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "deadlines": {
+      "verdict": "not_published_ok",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "selection_process": {
+      "verdict": "not_published_ok",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "required_documents": {
+      "verdict": "not_published_ok",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "tuition_eur_per_semester_non_eu": {
+      "verdict": "correct",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "semester_fee_eur": {
+      "verdict": "not_published_ok",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "language_of_instruction": {
+      "verdict": "correct",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    }
+  }
+}

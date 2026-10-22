@@ -1,6 +1,6 @@
 {
-  "extracted_at": "2026-10-07T22:42:01+00:00",
-  "model": "gemini-3.5-flash",
+  "extracted_at": "2026-10-20T21:23:28+00:00",
+  "model": "gemini-3.8-flash",
   "rejected_quotes": [],
   "record": {
     "university": "TU Dresden",
@@ -13,7 +13,7 @@
     ],
     "degree_requirement": {
       "status": "stated",
-      "value": "first professionally qualifying university degree recognized in Germany or a degree from a state or state-recognized vocational academy in computer science",
+      "value": "A first professionally qualifying university degree recognized in Germany or a degree from a state or state-recognized vocational academy in computer science.",
       "quote": "The prerequisite for admission to the course is a first professionally qualifying university degree recognized in Germany or a degree from a state or state-recognized vocational academy in computer science.",
       "doc_id": "de/tud/cs-msc/programme"
     },
@@ -35,11 +35,17 @@
       "quote": null,
       "doc_id": null
     },
+    "min_grade_original_scale": {
+      "status": "not_published",
+      "value": null,
+      "quote": null,
+      "doc_id": null
+    },
     "english": {
       "status": "stated",
       "value": [
         {
-          "test": "TOEFL iBt",
+          "test": "TOEFL iBT",
           "min_score": "95"
         },
         {
@@ -60,7 +66,7 @@
       "status": "stated",
       "value": {
         "min_level": "none",
-        "needed_by": "admission"
+        "needed_by": "enrolment"
       },
       "quote": "No proof of German language skills is required for English-language Master's degree programs.",
       "doc_id": "de/tud/international-faq"
@@ -71,17 +77,21 @@
       "quote": null,
       "doc_id": null
     },
-    "aps_required": {
+    "aps_degree_countries": {
       "status": "stated",
-      "value": true,
+      "value": [
+        "China",
+        "Vietnam",
+        "India"
+      ],
       "quote": "Applicants with Chinese, Vietnamese or Indian educational certificates must submit a certificate from the Academic Evaluation Center (APS) with their application.",
       "doc_id": "de/tud/international-faq"
     },
     "application_route": {
       "status": "stated",
-      "value": "both",
-      "quote": "International degree seeking students generally have to apply for a degree course via uni-assist . However, there are exceptions depending on the respective requirements and the desired degree program!",
-      "doc_id": "de/tud/international-faq"
+      "value": "uni_assist",
+      "quote": "The application takes place online via uni-assist e.V. As part of the application process with uni-assist, you will receive further information about the aptitude assessment procedure.",
+      "doc_id": "de/tud/cs-msc/aptitude-assessment"
     },
     "deadlines": {
       "status": "stated",
@@ -89,30 +99,34 @@
         {
           "intake": "winter",
           "applicant_group": "non_eu",
-          "date": "31st May"
-        },
-        {
-          "intake": "winter",
-          "applicant_group": "eu",
-          "date": "15th July"
+          "date": "31st May",
+          "kind": "final"
         },
         {
           "intake": "summer",
           "applicant_group": "non_eu",
-          "date": "30th November"
+          "date": "30th November",
+          "kind": "final"
+        },
+        {
+          "intake": "winter",
+          "applicant_group": "eu",
+          "date": "15th July",
+          "kind": "final"
         },
         {
           "intake": "summer",
           "applicant_group": "eu",
-          "date": "15th January"
+          "date": "15th January",
+          "kind": "final"
         }
       ],
-      "quote": "Application period: EU applicants: 1st April – 15th July , 1st October – 15th January Non-EU applicants: 1st April – 31st May , 1st October – 30th November",
+      "quote": "- Application period: EU applicants: 1st April – 15th July , 1st October – 15th January Non-EU applicants: 1st April – 31st May , 1st October – 30th November",
       "doc_id": "de/tud/cs-msc/aptitude-assessment"
     },
     "selection_process": {
       "status": "stated",
-      "value": "aptitude assessment procedure",
+      "value": "Proof of special aptitude is provided through aptitude assessment procedures in accordance with the Master Computer Science aptitude assessment regulations.",
       "quote": "Proof of special aptitude is provided through aptitude assessment procedures in accordance with the Master Computer Science aptitude assessment regulations.",
       "doc_id": "de/tud/cs-msc/programme"
     },
@@ -120,22 +134,21 @@
       "status": "stated",
       "value": [
         "Application for the suitability assessment on the website of the faculty",
-        "Copy of the original and officially certified translation (German or English) of the degree certificate of the required first university degree including official transcript of records",
-        "Confirmation from the first university that at least 80% of the work required for the current university degree program has been completed, as well as information on the current average grade for degree program with entry restrictions",
+        "Copy of the original and officially certified translation (German or English) of the degree certificate of the required first university degree including official transcript of records (or confirmation that at least 80% of credits have been completed)",
         "Additional certificates and other suitable documents to determine whether the subject-specific and language requirements are met",
         "Curriculum vitae with previous academic achievements",
         "Module descriptions (or comparable tables of contents) of the modules relevant for the Master's degree program in Computer Science",
-        "a letter of motivation outlining both your reasons for wanting to study the degree program and your particular qualifications for it",
-        "Proof of the required English language skills at level C 1 of the Common European Framework of Reference for Languages (CEFR) based on the result of an internationally offered test"
+        "Letter of motivation outlining both your reasons for wanting to study the degree program and your particular qualifications for it",
+        "Proof of the required English language skills at level C 1"
       ],
-      "quote": "• Application for the suitability assessment on the website of the faculty • Copy of the original and officially certified translation (German or English) of the degree certificate of the required first university degree including official transcript of records. If the first university degree is not yet available: Confirmation from the first university that at least 80% of the work required for the current university degree program has been completed, as well as information on the current average grade for degree program with entry restrictions (form on the Admission Office website • Additional certificates and other suitable documents to determine whether the subject-specific and language requirements are met • Curriculum vitae with previous academic achievements • Module descriptions (or comparable tables of contents) of the modules relevant for the Master's degree program in Computer Science • a letter of motivation outlining both your reasons for wanting to study the degree program and your particular qualifications for it • Proof of the required English language skills at level C 1 of the Common European Framework of Reference for Languages (CEFR) based on the result of an internationally offered test.",
+      "quote": "• Application for the suitability assessment on the website of the faculty • Copy of the original and officially certified translation (German or English) of the degree certificate of the required first university degree including official transcript of records. If the first university degree is not yet available: Confirmation from the first university that at least 80% of the work required for the current university degree program has been completed, as well as information on the current average grade for degree program with entry restrictions (form on the Admission Office website • Additional certificates and other suitable documents to determine whether the subject-specific and language requirements are met • Curriculum vitae with previous academic achievements • Module descriptions (or comparable tables of contents) of the modules relevant for the Master's degree program in Computer Science • a letter of motivation outlining both your reasons for wanting to study the degree program and your particular qualifications for it • Proof of the required English language skills at level C 1 of the Common European Framework of Reference for Languages (CEFR) based on the result of an internationally offered test. Proof is deemed to have been provided if the “Test of English as a Foreign Language” TOEFL iBt (120-95) (New: 5.0 points) or the IELTS test was passed with at least level 7.0.",
       "doc_id": "de/tud/cs-msc/aptitude-assessment"
     },
     "tuition_eur_per_semester_non_eu": {
-      "status": "stated",
-      "value": 0.0,
-      "quote": "Tuition fees per semester: semester fee and, if applicable, second degree and long-term tuition fees",
-      "doc_id": "de/tud/cs-msc/programme"
+      "status": "not_published",
+      "value": null,
+      "quote": null,
+      "doc_id": null
     },
     "semester_fee_eur": {
       "status": "stated",
@@ -146,7 +159,7 @@
     "language_of_instruction": {
       "status": "stated",
       "value": "English",
-      "quote": "Language of instruction: English",
+      "quote": "- Language of instruction: English",
       "doc_id": "de/tud/cs-msc/programme"
     },
     "verified": false
