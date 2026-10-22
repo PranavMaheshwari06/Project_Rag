@@ -1,0 +1,202 @@
+{
+  "extracted_at": "2026-10-20T21:19:08+00:00",
+  "model": "gemini-3.8-flash",
+  "rejected_quotes": [],
+  "record": {
+    "university": "Saarland University",
+    "programme": "M.Sc. Computer Science",
+    "source_doc_ids": [
+      "de/saarland/cs-msc/programme",
+      "de/saarland/masters-application-guide"
+    ],
+    "degree_requirement": {
+      "status": "stated",
+      "value": "Bachelor's degree from a German university (at least 180 CP) or an equivalent qualification from a foreign university in computer science, informatics or a related field",
+      "quote": "Students seeking admission to the Master’s programme shall have a Bachelor’s degree from a German university (at least 180 CP) or an equivalent qualification from a foreign university in computer science, informatics or a related field:",
+      "doc_id": "de/saarland/masters-application-guide"
+    },
+    "min_total_ects": {
+      "status": "stated",
+      "value": 180,
+      "quote": "Students seeking admission to the Master’s programme shall have a Bachelor’s degree from a German university (at least 180 CP) or an equivalent qualification from a foreign university in computer science, informatics or a related field:",
+      "doc_id": "de/saarland/masters-application-guide"
+    },
+    "subject_credits": {
+      "status": "not_published",
+      "value": null,
+      "quote": null,
+      "doc_id": null
+    },
+    "min_grade_german_scale": {
+      "status": "not_published",
+      "value": null,
+      "quote": null,
+      "doc_id": null
+    },
+    "min_grade_original_scale": {
+      "status": "stated",
+      "value": "cumulative undergraduate grade point average (CGPA) of 75% or 3.00 GPA on a 4 point scale and ranking in the top 10% of the graduating class",
+      "quote": "Minimal prerequisite is a cumulative undergraduate grade point average (CGPA) of 75% or 3.00 GPA on a 4 point scale and ranking in the top 10% of the graduating class.",
+      "doc_id": "de/saarland/masters-application-guide"
+    },
+    "english": {
+      "status": "stated",
+      "value": [
+        {
+          "test": "IELTS",
+          "min_score": "7.0 out of 9"
+        },
+        {
+          "test": "TOEFL iBT",
+          "min_score": "95 out of 120 (2026: 5 out of 6)"
+        },
+        {
+          "test": "TOEFL PBT",
+          "min_score": "600 out of 677 (2026: 5 out of 6)"
+        },
+        {
+          "test": "Cambridge English Certificate",
+          "min_score": "C1 Advanced (CAE) or C2 Proficiency (CPE)"
+        },
+        {
+          "test": "PTE Academic",
+          "min_score": "76"
+        }
+      ],
+      "quote": "The following certificates will be accepted: _ IELTS (academic test): min. 7.0 out of 9 _ TOEFL (internet based): min. 95 out of 120 (2026: 5 out of 6) _ TOEFL (paper based): min. 600 out of 677 (2026: 5 out of 6) _ Cambridge English Certificate: C1 Advanced (CAE) or C2 Proficiency (CPE) _ PTE Academic: min. 76",
+      "doc_id": "de/saarland/masters-application-guide"
+    },
+    "entrance_tests": {
+      "status": "stated",
+      "value": [
+        {
+          "test": "GRE",
+          "min_scores": null,
+          "requirement": "one_of",
+          "applies_to_degree_countries": [],
+          "exempt_degree_countries": [
+            "European Higher Education Area (EHEA) region",
+            "Switzerland",
+            "UK"
+          ]
+        },
+        {
+          "test": "GATE",
+          "min_scores": null,
+          "requirement": "one_of",
+          "applies_to_degree_countries": [],
+          "exempt_degree_countries": [
+            "European Higher Education Area (EHEA) region",
+            "Switzerland",
+            "UK"
+          ]
+        }
+      ],
+      "quote": "Applicants for Computer Science, Cybersecurity, DSAI, Embedded Systems and Visual Computing who have no degree certificate earned within the European Higher Education Area (EHEA) region, Switzerland, or the UK are required to upload the test result from the GRE General Test or the Indian GATE test .",
+      "doc_id": "de/saarland/masters-application-guide"
+    },
+    "german": {
+      "status": "stated",
+      "value": {
+        "min_level": "none",
+        "needed_by": "admission"
+      },
+      "quote": "Knowledge of proficiency in German is not required.",
+      "doc_id": "de/saarland/masters-application-guide"
+    },
+    "work_experience": {
+      "status": "stated",
+      "value": "counts_in_selection",
+      "quote": "Details about relevant work/study periods abroad and relevant work experience or internships",
+      "doc_id": "de/saarland/cs-msc/programme"
+    },
+    "aps_degree_countries": {
+      "status": "stated",
+      "value": [
+        "China",
+        "India",
+        "Vietnam"
+      ],
+      "quote": "Applicants who have obtained their university degree in China, India or Vietnam are required to submit the original ( digitally signed ) APS Certificate issued by the Academic Evaluation Center (Akademische Prüfstelle) in the corresponding country with the application.",
+      "doc_id": "de/saarland/masters-application-guide"
+    },
+    "application_route": {
+      "status": "stated",
+      "value": "direct",
+      "quote": "Applications should be submitted via the online application portal managed by the Department of Computer Science where you'll find further information about application and admission procedures.",
+      "doc_id": "de/saarland/cs-msc/programme"
+    },
+    "deadlines": {
+      "status": "stated",
+      "value": [
+        {
+          "intake": "winter",
+          "applicant_group": "all",
+          "date": "November 15",
+          "kind": "early"
+        },
+        {
+          "intake": "winter",
+          "applicant_group": "all",
+          "date": "May 15",
+          "kind": "final"
+        },
+        {
+          "intake": "summer",
+          "applicant_group": "all",
+          "date": "May 15",
+          "kind": "early"
+        },
+        {
+          "intake": "summer",
+          "applicant_group": "all",
+          "date": "November 15",
+          "kind": "final"
+        }
+      ],
+      "quote": "The application deadline for the winter semester (lectures start in mid-October) is May 15th. A decision can be expected the latest by mid-July. Applicants who apply by November 15th for the following winter semester are expected to receive a letter of admission by mid-February, if the respective Master’s commission makes a positive decision.",
+      "doc_id": "de/saarland/masters-application-guide"
+    },
+    "selection_process": {
+      "status": "stated",
+      "value": "The criteria listed in the application guide are evaluated by the Examination Board to assess the applicant's aptitude based on academic track record, curricular background in mathematics and theoretical/practical informatics, references, and grades.",
+      "quote": "The criteria listed above will be used to assess the aptitude of the applicant in terms of the academic profile and requirements of the respective Master’s degree programme. The decision whether the programme admission requirements have been met is made by the Examination Board.",
+      "doc_id": "de/saarland/masters-application-guide"
+    },
+    "required_documents": {
+      "status": "stated",
+      "value": [
+        "copy of university entrance qualification",
+        "copies of 3 most recent degrees (with certified translation, if the original language is not English, German or French)",
+        "certified list of all attended courses with the respective grades, including an explanation of the grading system",
+        "Curriculum Vitae (CV)",
+        "two review forms / letters of recommendation by academic recommenders",
+        "proof of English language proficiency",
+        "letter of motivation or personal statement",
+        "APS certificate (if degree from China, India or Vietnam)",
+        "GRE General Test or Indian GATE test (if degree outside EHEA, Switzerland, or UK)"
+      ],
+      "quote": "During the application process, you need to submit the following documents with your application in order to be considered for admission. Please note that we only accept files in the PDF file format.",
+      "doc_id": "de/saarland/masters-application-guide"
+    },
+    "tuition_eur_per_semester_non_eu": {
+      "status": "stated",
+      "value": 0.0,
+      "quote": "| Tuition fees | Not applicable |",
+      "doc_id": "de/saarland/cs-msc/programme"
+    },
+    "semester_fee_eur": {
+      "status": "not_published",
+      "value": null,
+      "quote": null,
+      "doc_id": null
+    },
+    "language_of_instruction": {
+      "status": "stated",
+      "value": "English",
+      "quote": "The teaching language of the master’s degree programme is English.",
+      "doc_id": "de/saarland/masters-application-guide"
+    },
+    "verified": false
+  }
+}

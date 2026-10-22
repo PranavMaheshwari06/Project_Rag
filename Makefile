@@ -29,6 +29,12 @@ ingest:
 index:
 	$(PY) scripts/build_indexes.py
 
+extract:
+	$(PY) scripts/extract.py $(ARGS)
+
+review:
+	$(PY) -m uvicorn extraction.review:app --port 8001
+
 eval:
 	$(PY) scripts/run_eval.py
 
@@ -44,4 +50,4 @@ fmt:
 up:
 	docker compose up --build
 
-.PHONY: venv install crawl ingest index eval test run fmt up
+.PHONY: venv install crawl ingest index extract review eval test run fmt up

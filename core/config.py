@@ -26,6 +26,9 @@ class PathsCfg(BaseModel):
     raw_dir: str = "data/raw"
     processed_path: str = "data/processed/chunks.jsonl"
     index_dir: str = "data/index"
+    extracted_dir: str = "data/extracted"  # LLM drafts (committed)
+    verified_dir: str = "data/verified"  # human-verified records (committed)
+    checked_dir: str = "data/checked"  # second-model cross-check of each draft (committed)
 
 
 class CrawlCfg(BaseModel):
@@ -59,7 +62,15 @@ class ModelsCfg(BaseModel):
     embed_model: str = "BAAI/bge-small-en-v1.5"
     rerank_model: str = "BAAI/bge-reranker-base"
     embed_batch_size: int = 16
-    llm_model: str = "gpt-4o-mini"
+    llm_model: str = "gemini-3.8-flash"
+    llm_fallback_models: list[str] = []  # tried in order when a model's quota is exhausted
+    # any OpenAI-compatible endpoint; Gemini by default
+    llm_base_url: str = "https://generativelanguage.googleapis.com/v1beta/openai/"
+
+
+class ExtractionCfg(BaseModel):
+    delay_seconds: float = 30.0
+    min_quote_words: int = 2
 
 
 class GenerationCfg(BaseModel):
@@ -82,8 +93,9 @@ class Settings(BaseModel):
     retrieval: RetrievalCfg = RetrievalCfg()
     models: ModelsCfg = ModelsCfg()
     generation: GenerationCfg = GenerationCfg()
+    extraction: ExtractionCfg = ExtractionCfg()
     evaluation: EvalCfg = EvalCfg()
-    openai_api_key: str | None = None
+    llm_api_key: str | None = None
 
     def resolve(self, rel: str) -> Path:
         """Turn a repo-relative path from the yaml into an absolute one."""
@@ -107,7 +119,7 @@ def load_settings(config_path: Path | None = None) -> Settings:
         value = os.environ.get(env_name)
         if value:
             setattr(getattr(settings, section), field, value)
-    settings.openai_api_key = os.environ.get("OPENAI_API_KEY") or None
+    settings.llm_api_key = os.environ.get("GEMINI_API_KEY") or None
     return settings
 
 

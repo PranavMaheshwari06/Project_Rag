@@ -1,0 +1,172 @@
+{
+  "extracted_at": "2026-10-20T21:34:22+00:00",
+  "model": "gemini-3.8-flash",
+  "rejected_quotes": [],
+  "record": {
+    "university": "TUM",
+    "programme": "M.Sc. Data Engineering and Analytics",
+    "source_doc_ids": [
+      "de/tum/dea-msc/department",
+      "de/tum/dea-msc/programme",
+      "de/tum/language-certificates"
+    ],
+    "degree_requirement": {
+      "status": "stated",
+      "value": "Bachelor's degree in Informatics / Computer Science equivalent to the B.Sc. Informatics taught at TUM",
+      "quote": "Students with a Bachelor’s degree in Informatics / Computer Science which is equivalent to the B.Sc. Informatics taught at TUM are eligible to apply.",
+      "doc_id": "de/tum/dea-msc/department"
+    },
+    "min_total_ects": {
+      "status": "not_published",
+      "value": null,
+      "quote": null,
+      "doc_id": null
+    },
+    "subject_credits": {
+      "status": "not_published",
+      "value": null,
+      "quote": null,
+      "doc_id": null
+    },
+    "min_grade_german_scale": {
+      "status": "not_published",
+      "value": null,
+      "quote": null,
+      "doc_id": null
+    },
+    "min_grade_original_scale": {
+      "status": "not_published",
+      "value": null,
+      "quote": null,
+      "doc_id": null
+    },
+    "english": {
+      "status": "not_published",
+      "value": null,
+      "quote": null,
+      "doc_id": null
+    },
+    "entrance_tests": {
+      "status": "stated",
+      "value": [
+        {
+          "test": "GRE",
+          "min_scores": null,
+          "requirement": "one_of",
+          "applies_to_degree_countries": [
+            "Bangladesh",
+            "China",
+            "India",
+            "Iran",
+            "Pakistan"
+          ],
+          "exempt_degree_countries": []
+        },
+        {
+          "test": "GATE",
+          "min_scores": null,
+          "requirement": "one_of",
+          "applies_to_degree_countries": [
+            "Bangladesh",
+            "China",
+            "India",
+            "Iran",
+            "Pakistan"
+          ],
+          "exempt_degree_countries": []
+        }
+      ],
+      "quote": "- GRE or Gate score for applicants with a B.Sc. degree from Bangladesh, China, India, Iran, Pakistan (original scorecard or have the score transmitted directly via ETS)",
+      "doc_id": "de/tum/dea-msc/department"
+    },
+    "german": {
+      "status": "not_published",
+      "value": null,
+      "quote": null,
+      "doc_id": null
+    },
+    "work_experience": {
+      "status": "stated",
+      "value": "counts_in_selection",
+      "quote": "- Certificates from professional training or additional qualifications related to the program (e.g. participation in research competitions, internships, etc.) (not mandatory)",
+      "doc_id": "de/tum/dea-msc/department"
+    },
+    "aps_degree_countries": {
+      "status": "stated",
+      "value": [
+        "China",
+        "India",
+        "Vietnam"
+      ],
+      "quote": "Applicants with an undergraduate degree from China, India and Vietnam have to submit a certificate from the German Evaluation Center (APS).",
+      "doc_id": "de/tum/dea-msc/department"
+    },
+    "application_route": {
+      "status": "stated",
+      "value": "both",
+      "quote": "Applicants who did not obtain their qualification for postgraduate studies (usually a bachelor's degree) in Germany must apply for a preliminary documentation (VPD) from uni-assist, additionally to the TUM application.",
+      "doc_id": "de/tum/dea-msc/department"
+    },
+    "deadlines": {
+      "status": "stated",
+      "value": [
+        {
+          "intake": "winter",
+          "applicant_group": "all",
+          "date": "05-31",
+          "kind": "final"
+        },
+        {
+          "intake": "summer",
+          "applicant_group": "all",
+          "date": "11-30",
+          "kind": "final"
+        }
+      ],
+      "quote": "Application period for winter semester: 01.02. – 31.05. Application period for summer semester: 01.10. – 30.11.",
+      "doc_id": "de/tum/dea-msc/programme"
+    },
+    "selection_process": {
+      "status": "stated",
+      "value": "Two-stage aptitude assessment process assessing qualification regarding the qualitative requirements of the Master's program.",
+      "quote": "The aptitude assessment for the M.Sc. Data Engineering and Analytics is a two-stage process in which we assess your qualification with regard to the special qualitative requirements of this Master's program.",
+      "doc_id": "de/tum/dea-msc/department"
+    },
+    "required_documents": {
+      "status": "stated",
+      "value": [
+        "Degree Certificate and Diploma or Subject and Grade Transcript of Studies to Date",
+        "Transcript of Records",
+        "Proof of English Language Proficiency",
+        "Statement of purpose (Letter of Motivation)",
+        "Essay",
+        "Curriculum (e.g. module description)",
+        "Curricular Analysis",
+        "Complete and Current Résumé",
+        "Passport",
+        "Preliminary Documentation (VPD) if the qualification for graduate studies (e.g. a Bachelor’s) was obtained outside Germany)"
+      ],
+      "quote": "- Degree Certificate and Diploma or Subject and Grade Transcript of Studies to Date\n\n- Transcript of Records\n\n- Proof of English Language Proficiency\n\n- Statement of purpose (Letter of Motivation)\n\n- Essay\n\n- Curriculum (e.g. module description)\n\n- Curricular Analysis\n\n- Complete and Current Résumé\n\n- Passport\n\n- Preliminary Documentation (VPD) if the qualification for graduate studies (e.g. a Bachelor’s) was obtained outside Germany)",
+      "doc_id": "de/tum/dea-msc/programme"
+    },
+    "tuition_eur_per_semester_non_eu": {
+      "status": "stated",
+      "value": 6000.0,
+      "quote": "The tuition fees for international students from third countries for this degree program are 6,000 euros per semester .",
+      "doc_id": "de/tum/dea-msc/programme"
+    },
+    "semester_fee_eur": {
+      "status": "stated",
+      "value": 97.0,
+      "quote": "- Student Fees:\n\n\t\t\t\t\t\t\t97.00 €",
+      "doc_id": "de/tum/dea-msc/programme"
+    },
+    "language_of_instruction": {
+      "status": "stated",
+      "value": "English",
+      "quote": "Language of Instruction : English",
+      "doc_id": "de/tum/dea-msc/department"
+    },
+    "verified": false
+  }
+}

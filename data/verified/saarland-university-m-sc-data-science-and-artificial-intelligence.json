@@ -1,0 +1,203 @@
+{
+  "verified_at": "2026-10-20T20:47:01+00:00",
+  "draft_model": "gemini-3.8-flash",
+  "record": {
+    "university": "Saarland University",
+    "programme": "M.Sc. Data Science and Artificial Intelligence",
+    "source_doc_ids": [
+      "de/saarland/dsai-msc/programme",
+      "de/saarland/dsai-msc/department",
+      "de/saarland/dsai-msc/study-regulations",
+      "de/saarland/masters-application-guide"
+    ],
+    "degree_requirement": {
+      "status": "stated",
+      "value": "Bachelor's degree from a German university (at least 180 CP) or an equivalent qualification from a foreign university in computer science, informatics or a related field",
+      "quote": "Bachelor's degree from a German university (at least 180 CP) or an equivalent qualification from a foreign university in computer science, informatics or a related field",
+      "doc_id": "de/saarland/dsai-msc/programme"
+    },
+    "min_total_ects": {
+      "status": "stated",
+      "value": 180,
+      "quote": "Bachelor's degree from a German university (at least 180 CP) or an equivalent qualification from a foreign university in computer science, informatics or a related field",
+      "doc_id": "de/saarland/dsai-msc/programme"
+    },
+    "subject_credits": {
+      "status": "not_published",
+      "value": null,
+      "quote": null,
+      "doc_id": null
+    },
+    "min_grade_german_scale": {
+      "status": "not_published",
+      "value": null,
+      "quote": null,
+      "doc_id": null
+    },
+    "min_grade_original_scale": {
+      "status": "stated",
+      "value": "cumulative undergraduate grade point average (CGPA) of 75% or 3.00 GPA on a 4 point scale and ranking in the top 10% of the graduating class",
+      "quote": "Minimal application prerequisite is a cumulative undergraduate grade point average (CGPA) of 75% or 3.00 GPA on a 4 point scale and ranking in the top 10% of the graduating class.",
+      "doc_id": "de/saarland/masters-application-guide"
+    },
+    "english": {
+      "status": "stated",
+      "value": [
+        {
+          "test": "IELTS",
+          "min_score": "7.0 out of 9"
+        },
+        {
+          "test": "TOEFL iBT",
+          "min_score": "95 out of 120 (2026: 5 out of 6)"
+        },
+        {
+          "test": "TOEFL PBT",
+          "min_score": "600 out of 677 (2026: 5 out of 6)"
+        },
+        {
+          "test": "Cambridge English Certificate",
+          "min_score": "C1 Advanced (CAE) or C2 Proficiency (CPE)"
+        },
+        {
+          "test": "PTE Academic",
+          "min_score": "76"
+        }
+      ],
+      "quote": "The following certificates will be accepted: _ IELTS (academic test): min. 7.0 out of 9 _ TOEFL (internet based): min. 95 out of 120 (2026: 5 out of 6) _ TOEFL (paper based): min. 600 out of 677 (2026: 5 out of 6) _ Cambridge English Certificate: C1 Advanced (CAE) or C2 Proficiency (CPE) _ PTE Academic: min. 76",
+      "doc_id": "de/saarland/masters-application-guide"
+    },
+    "entrance_tests": {
+      "status": "stated",
+      "value": [
+        {
+          "test": "GRE",
+          "min_scores": null,
+          "requirement": "one_of",
+          "applies_to_degree_countries": [],
+          "exempt_degree_countries": [
+            "European Higher Education Area (EHEA) region",
+            "Switzerland",
+            "the UK"
+          ]
+        },
+        {
+          "test": "GATE",
+          "min_scores": null,
+          "requirement": "one_of",
+          "applies_to_degree_countries": [],
+          "exempt_degree_countries": [
+            "European Higher Education Area (EHEA) region",
+            "Switzerland",
+            "the UK"
+          ]
+        }
+      ],
+      "quote": "Applicants for Computer Science, Cybersecurity, DSAI, Embedded Systems and Visual Computing who have no degree certificate earned within the European Higher Education Area (EHEA) region, Switzerland, or the UK are required to upload the test result from the GRE General Test or the Indian GATE test .",
+      "doc_id": "de/saarland/masters-application-guide"
+    },
+    "german": {
+      "status": "stated",
+      "value": {
+        "min_level": "none",
+        "needed_by": "admission"
+      },
+      "quote": "Knowledge of proficiency in German is not required.",
+      "doc_id": "de/saarland/masters-application-guide"
+    },
+    "work_experience": {
+      "status": "not_published",
+      "value": null,
+      "quote": null,
+      "doc_id": null
+    },
+    "aps_degree_countries": {
+      "status": "stated",
+      "value": [
+        "China",
+        "India",
+        "Vietnam"
+      ],
+      "quote": "Applicants who have obtained their university degree in China, India or Vietnam are required to submit the original ( digitally signed ) APS Certificate issued by the Academic Evaluation Center (Akademische Prüfstelle) in the corresponding country with the application.",
+      "doc_id": "de/saarland/masters-application-guide"
+    },
+    "application_route": {
+      "status": "stated",
+      "value": "direct",
+      "quote": "Applications for our postgraduate programmes have to be submitted online in the application system of the computer science department!",
+      "doc_id": "de/saarland/masters-application-guide"
+    },
+    "deadlines": {
+      "status": "stated",
+      "value": [
+        {
+          "intake": "winter",
+          "applicant_group": "all",
+          "date": "May 15",
+          "kind": "final"
+        },
+        {
+          "intake": "winter",
+          "applicant_group": "all",
+          "date": "November 15",
+          "kind": "early"
+        },
+        {
+          "intake": "summer",
+          "applicant_group": "all",
+          "date": "November 15",
+          "kind": "final"
+        },
+        {
+          "intake": "summer",
+          "applicant_group": "all",
+          "date": "May 15",
+          "kind": "early"
+        }
+      ],
+      "quote": "Applications should normally be received by 15 May for students seeking to begin studying in the winter semester and by 15 November for students looking to start their studies in summer. Applicants who apply by May 15th for the following summer semester are expected to receive a letter of admission by mid-July if the respective Master's commission makes a positive decision. Applicants who apply by November 15th for the following winter semester are expected to receive a letter of admission by mid-February if the respective Master's commission makes a positive decision.",
+      "doc_id": "de/saarland/dsai-msc/programme"
+    },
+    "selection_process": {
+      "status": "stated",
+      "value": "The criteria listed are used to assess the applicant's aptitude with regard to the academic profile and requirements of the Master's degree programme, and the decision on admission is made by the Examination Board.",
+      "quote": "The criteria listed above will be used to assess the aptitude of the applicant in terms of the academic profile and requirements of the respective Master’s degree programme. The decision whether the programme admission requirements have been met is made by the Examination Board.",
+      "doc_id": "de/saarland/masters-application-guide"
+    },
+    "required_documents": {
+      "status": "stated",
+      "value": [
+        "Copy of the university entrance qualification",
+        "Copies of the 3 most recent degrees (certified translation if not in English, German or French; a recent transcript if the current degree is ongoing)",
+        "Certified list of all attended courses with grades, including an explanation of the grading system",
+        "Curriculum Vitae (CV) with research interests, projects or publications",
+        "Two complete review forms by recommenders appointed in the application system (at least one should know the applicant academically)",
+        "APS certificate, original and digitally signed (degrees from China, India or Vietnam)",
+        "GRE General Test or GATE result (no degree from the EHEA, Switzerland or the UK); no minimum score, home editions accepted",
+        "Personal statement written by the applicant (listed under the requirements on the programme page)",
+        "English certificate at C1 (IELTS, TOEFL, Cambridge or PTE; MOI not accepted)"
+      ],
+      "quote": "Transcripts (Academic Records):\n\n_ a copy of your university entrance qualification _ copies of your 3 most recent degrees* (with certified translation, if the original language is not English, German or French) _ a certified list of all attended courses with the respective grades, including an explanation of the grading system\n\n*If your current degree is ongoing, please include a recent transcript showing your current progress.\n\nMinimal prerequisite is a cumulative undergraduate grade point average of 75% and ranking in the top 10% of the graduating class.\n\nCurriculum Vitae (CV)\n\nincluding information on your areas of interest in research, as well as any projects or publications\n\nLetters of Recommendation\n\nA complete application includes two complete review forms by recommenders appointed by the applicant. These recommenders can optionally upload an additional recommendation letter.\n\nIt is your responsibility to ensure that your referees have the information they need to provide a reference and submit it by the deadline.\n\nIt is extremely important to enter valid email addresses of your referees! An email will be sent to your recommenders with information on how to proceed. Please check them before submitting your application.\n\nWe do not accept letters of recommendation sent by mail or any other means.\n\nPlease note that your application is considered fully submitted only after both recommenders have filled out the review forms.\n\nAPS certificate\n\nApplicants who have obtained their university degree in China, India or Vietnam are required to submit the original ( digitally signed ) APS Certificate issued by the Academic Evaluation Center (Akademische Prüfstelle) in the corresponding country with the application.\n\nGRE General Test / GATE test\n\nApplicants for Computer Science, Cybersecurity, DSAI, Embedded Systems and Visual Computing who have no degree certificate earned within the European Higher Education Area (EHEA) region, Switzerland, or the UK are required to upload the test result from the GRE General Test or the Indian GATE test . There is no minimum score requirement and we accept home editions of the GRE/GATE tests . There are no exceptions from this requirement for degrees from branch campuses located in non-EHEA countries. The GRE test result of one of the subject tests or a prep test does not satisfy this requirement.",
+      "doc_id": "de/saarland/masters-application-guide"
+    },
+    "tuition_eur_per_semester_non_eu": {
+      "status": "stated",
+      "value": 0.0,
+      "quote": "| Tuition fees | Not applicable |",
+      "doc_id": "de/saarland/dsai-msc/programme"
+    },
+    "semester_fee_eur": {
+      "status": "not_published",
+      "value": null,
+      "quote": null,
+      "doc_id": null
+    },
+    "language_of_instruction": {
+      "status": "stated",
+      "value": "English",
+      "quote": "| Language of instruction | English |",
+      "doc_id": "de/saarland/dsai-msc/programme"
+    },
+    "verified": true
+  }
+}

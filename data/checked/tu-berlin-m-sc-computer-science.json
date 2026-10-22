@@ -1,0 +1,138 @@
+{
+  "slug": "tu-berlin-m-sc-computer-science",
+  "checked_at": "2026-10-16T09:41:36Z",
+  "fields": {
+    "degree_requirement": {
+      "verdict": "correct",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "min_total_ects": {
+      "verdict": "not_published_ok",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "subject_credits": {
+      "verdict": "correct",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "min_grade_german_scale": {
+      "verdict": "not_published_ok",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "min_grade_original_scale": {
+      "verdict": "not_published_ok",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "english": {
+      "verdict": "partial",
+      "value": [
+        {
+          "test": "CEFR",
+          "min_score": "B2"
+        },
+        {
+          "test": "IELTS",
+          "min_score": "6.5"
+        }
+      ],
+      "quote": "Please note that a higher B2 English level is required. For the IELTS test, an overall band score of 6.5 is required, even if an overall band score of 5.5 confirms a B2 on the certificate.",
+      "doc_id": "de/tub/eecs-application-faq",
+      "reason": "Pages require CEFR B2 English (programme pages and FAQ), not only IELTS 6.5; the CEFR B2 entry is missing."
+    },
+    "entrance_tests": {
+      "verdict": "not_published_ok",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "german": {
+      "verdict": "not_published_ok",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "work_experience": {
+      "verdict": "correct",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "aps_degree_countries": {
+      "verdict": "not_published_ok",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "application_route": {
+      "verdict": "partial",
+      "value": "both",
+      "quote": "Master’s applicants who earned or will earn their first university degree (generally a bachelor’s) at a German university and are applying with a ECTS certificate (European Credit Transfer System (ECTS), see infobox) must submit their application directly to the TU Berlin.\n\n### First Degree Semester: Graduates who studied at a foreign university (primary university degree)\n\nApplicants who completed their primary university degree (such as Bachelor’s/undergraduate degree) from a foreign university (EU or non-EU) or who are currently studying at a foreign university and want to apply with an ECTS certificate (see infobox) will need a preliminary review documentation (VPD) for their application to TU Berlin from the summer semester of 2026 onwards. This must be requested from uni-assist specifically for TU Berlin.",
+      "doc_id": "de/tub/cs-msc/application",
+      "reason": "Value 'both' is right but the draft quote only covers direct application for German-degree holders; foreign-degree holders need a uni-assist VPD."
+    },
+    "deadlines": {
+      "verdict": "not_published_ok",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "selection_process": {
+      "verdict": "correct",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "required_documents": {
+      "verdict": "partial",
+      "value": [
+        "A recognized English language certificate",
+        "Suitability Assessment Form (if the bachelor's in Computer Science/Informatik was not completed at TU Berlin)",
+        "Preliminary review documentation (VPD) from uni-assist (degree from a foreign university, from summer semester 2026)"
+      ],
+      "quote": "Applicants who completed their primary university degree (such as Bachelor’s/undergraduate degree) from a foreign university (EU or non-EU) or who are currently studying at a foreign university and want to apply with an ECTS certificate (see infobox) will need a preliminary review documentation (VPD) for their application to TU Berlin from the summer semester of 2026 onwards. This must be requested from uni-assist specifically for TU Berlin.",
+      "doc_id": "de/tub/cs-msc/application",
+      "reason": "Missing the uni-assist VPD required for foreign-degree applicants (quoted); the other two items stay supported by the draft's EECS FAQ quote."
+    },
+    "tuition_eur_per_semester_non_eu": {
+      "verdict": "not_published_ok",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "semester_fee_eur": {
+      "verdict": "not_published_ok",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "language_of_instruction": {
+      "verdict": "correct",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    }
+  }
+}

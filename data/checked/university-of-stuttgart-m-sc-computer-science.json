@@ -1,0 +1,137 @@
+{
+  "slug": "university-of-stuttgart-m-sc-computer-science",
+  "checked_at": "2026-10-22T22:06:19+00:00",
+  "fields": {
+    "degree_requirement": {
+      "verdict": "correct",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "min_total_ects": {
+      "verdict": "not_published_ok",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "subject_credits": {
+      "verdict": "not_published_ok",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "min_grade_german_scale": {
+      "verdict": "not_published_ok",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "min_grade_original_scale": {
+      "verdict": "not_published_ok",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "english": {
+      "verdict": "partial",
+      "value": [
+        {
+          "test": "TOEFL iBT",
+          "min_score": "95"
+        },
+        {
+          "test": "IELTS",
+          "min_score": "Band 7"
+        }
+      ],
+      "quote": "advanced knowledge of English at level C1 (recognized certificates e.g. TOEFL iBT score 95 or IELTS Band 7)",
+      "doc_id": "de/ustutt/cs-msc/department",
+      "reason": "The requirement is CEFR level C1; TOEFL iBT 95 and IELTS Band 7 are only examples ('e.g.') of recognized certificates, and German students instead prove 5 years of school English with final level C1 (Abitur). Those conditions are lost in the draft."
+    },
+    "entrance_tests": {
+      "verdict": "not_published_ok",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "german": {
+      "verdict": "correct",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "work_experience": {
+      "verdict": "not_published_ok",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "aps_degree_countries": {
+      "verdict": "not_published_ok",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "application_route": {
+      "verdict": "correct",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "deadlines": {
+      "verdict": "correct",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "selection_process": {
+      "verdict": "correct",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "required_documents": {
+      "verdict": "missed",
+      "value": [
+        "supplementary form (PDF generated from the online form, uploaded to C@mpus)",
+        "IELTS or TOEFL certificate (uploaded like any other document)"
+      ],
+      "quote": "At the end of the completion process, you will receive a PDF, which you upload to the C@mpus portal in the \"Supplementary form\" section, please.",
+      "doc_id": "de/ustutt/cs-msc/department",
+      "reason": "The department page names a supplementary form PDF and an uploaded English certificate; no full document list is given, but 'all documents have to be uploaded' and missing documents mean rejection."
+    },
+    "tuition_eur_per_semester_non_eu": {
+      "verdict": "correct",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "semester_fee_eur": {
+      "verdict": "correct",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "language_of_instruction": {
+      "verdict": "correct",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    }
+  }
+}

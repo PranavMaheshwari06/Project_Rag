@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Requirements review</title>
+<style>
+  :root { --bg:#fff; --fg:#1b1b1f; --mute:#666; --line:#d8d8de; --warn:#b45309; --ok:#15803d; --bad:#b91c1c; --hi:#fde68a; --card:#f6f6f8; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#16161a; --fg:#e8e8ee; --mute:#9a9aa6; --line:#33333b; --warn:#fbbf24; --ok:#4ade80; --bad:#f87171; --hi:#5b4a00; --card:#1f1f25; } }
+  * { box-sizing: border-box; }
+  body { margin:0; font:14px/1.45 system-ui, sans-serif; background:var(--bg); color:var(--fg); }
+  header { padding:10px 16px; border-bottom:1px solid var(--line); display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
+  header h1 { font-size:16px; margin:0; }
+  main { display:grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap:16px; padding:16px; }
+  @media (max-width: 900px) { main { grid-template-columns: 1fr; } }
+  .field { border:1px solid var(--line); border-radius:6px; padding:8px 10px; margin-bottom:10px; background:var(--card); }
+  .field.done { border-color:var(--ok); }
+  .field.green { border-left:5px solid var(--ok); }
+  .field.amber { border-left:5px solid var(--warn); }
+  .check { font-size:12px; margin-top:6px; }
+  .field h3 { margin:0 0 6px; font-size:13px; display:flex; justify-content:space-between; gap:8px; }
+  textarea, select, input[type=text] { width:100%; font:12px/1.4 ui-monospace, monospace; background:var(--bg); color:var(--fg); border:1px solid var(--line); border-radius:4px; padding:4px 6px; }
+  textarea { min-height:3.2em; resize:vertical; }
+  label { font-size:11px; color:var(--mute); display:block; margin-top:6px; }
+  .warn { color:var(--warn); font-size:12px; margin-top:6px; }
+  .rej { color:var(--bad); font-size:12px; }
+  button { font:inherit; padding:4px 10px; border:1px solid var(--line); border-radius:4px; background:var(--card); color:var(--fg); cursor:pointer; }
+  button:disabled { opacity:.5; cursor:not-allowed; }
+  #doc { white-space:pre-wrap; font:12px/1.5 ui-monospace, monospace; border:1px solid var(--line); border-radius:6px; padding:10px; max-height:75vh; overflow:auto; background:var(--card); }
+  .sticky { position:sticky; top:0; align-self:start; }
+  mark { background:var(--hi); color:inherit; }
+  #msg { white-space:pre-wrap; font-size:12px; }
+  .ok { color:var(--ok); } .bad { color:var(--bad); }
+  ul { padding-left:18px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Requirements review</h1>
+  <select id="pick" style="width:auto;max-width:60vw"></select>
+  <span id="count"></span>
+  <button id="save" disabled>Save as verified</button>
+  <span id="msg"></span>
+</header>
+<main>
+  <section id="fields"></section>
+  <section class="sticky">
+    <select id="docpick"></select>
+    <input type="text" id="search" placeholder="search the page (case-insensitive)" style="margin:6px 0">
+    <div id="doc"></div>
+  </section>
+</main>
+<script>
+let cur = null, docs = {}, boxes = [];
+const $ = id => document.getElementById(id);
+const words = s => s.toLowerCase().match(/[a-z0-9]+/g) || [];
+
+async function api(path, opt) {
+  const r = await fetch(path, opt);
+  const body = await r.json().catch(() => ({}));
+  if (!r.ok) throw new Error(typeof body.detail === 'string' ? body.detail : JSON.stringify(body.detail || r.status));
+  return body;
+}
+
+async function loadList(keep) {
+  const list = await api('/api/programmes');
+  const pick = $('pick');
+  pick.innerHTML = '';
+  for (const p of list) {
+    const o = document.createElement('option');
+    o.value = p.slug; o.textContent = `[${p.status}] ${p.university} - ${p.programme}`;
+    pick.append(o);
+  }
+  $('count').textContent = `${list.filter(p => p.status === 'verified').length}/${list.length} verified`;
+  if (keep) pick.value = keep;
+  return pick.value;
+}
+
+function highlight(text, pattern) {
+  const box = $('doc'); box.textContent = '';
+  const m = pattern && text.match(pattern);
+  if (!m) { box.textContent = text; return false; }
+  const mark = document.createElement('mark'); mark.textContent = m[0];
+  box.append(text.slice(0, m.index), mark, text.slice(m.index + m[0].length));
+  mark.scrollIntoView({block: 'center'});
+  return true;
+}
+
+function showDoc(id, pattern) {
+  $('docpick').value = id;
+  highlight(docs[id] || '', pattern);
+}
+
+function quotePattern(q) {
+  const w = words(q);
+  return w.length ? new RegExp(w.map(x => x.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('[^a-z0-9]+'), 'i') : null;
+}
+
+function updateSave() {
+  const all = boxes.length && boxes.every(b => b.checked);
+  $('save').disabled = !all;
+  $('save').title = all ? '' : 'tick every field first';
+}
+
+function render(d) {
+  cur = d; docs = d.docs; boxes = [];
+  const docpick = $('docpick'); docpick.innerHTML = '';
+  for (const id of Object.keys(docs)) { const o = document.createElement('option'); o.value = id; o.textContent = id; docpick.append(o); }
+  showDoc(Object.keys(docs)[0], null);
+  const root = $('fields'); root.innerHTML = '';
+  if (d.rejected_quotes.length) {
+    const r = document.createElement('div'); r.className = 'rej';
+    r.textContent = 'Dropped by the extractor (quote not found): ' + d.rejected_quotes.join(' | ');
+    root.append(r);
+  }
+  for (const name of d.fields) {
+    const f = d.record[name], div = document.createElement('div'); div.className = 'field';
+    const h = document.createElement('h3'), title = document.createElement('span'); title.textContent = name;
+    const tick = document.createElement('label'); tick.style.margin = 0;
+    const cb = document.createElement('input'); cb.type = 'checkbox'; cb.addEventListener('change', () => { div.classList.toggle('done', cb.checked); updateSave(); });
+    tick.append(cb, ' reviewed'); h.append(title, tick); div.append(h); boxes.push(cb);
+
+    const status = document.createElement('select');
+    for (const s of ['stated', 'not_published']) { const o = document.createElement('option'); o.value = s; o.textContent = s; status.append(o); }
+    status.value = f.status;
+    const value = document.createElement('textarea'); value.value = f.value === null ? '' : JSON.stringify(f.value, null, 1);
+    const quote = document.createElement('textarea'); quote.value = f.quote || '';
+    const doc = document.createElement('select');
+    for (const id of Object.keys(docs)) { const o = document.createElement('option'); o.value = id; o.textContent = id; doc.append(o); }
+    doc.value = f.doc_id || Object.keys(docs)[0];
+    const show = document.createElement('button'); show.textContent = 'find quote in page';
+    show.onclick = () => { showDoc(doc.value, quotePattern(quote.value)); };
+    const lab = (t, el) => { const l = document.createElement('label'); l.textContent = t; div.append(l, el); };
+    lab('status', status); lab('value (JSON)', value); lab('quote (copied from the page)', quote); lab('page', doc); div.append(show);
+    for (const m of d.flags[name] || []) { const w = document.createElement('div'); w.className = 'warn'; w.textContent = '! ' + m; div.append(w); }
+    const c = d.checks[name];
+    if (c) {
+      // green: the cross-checker agrees and no number in the value is missing from the quote
+      const agrees = ['correct', 'not_published_ok'].includes(c.verdict);
+      const numberFlag = (d.flags[name] || []).some(m => m.startsWith('value has numbers'));
+      div.classList.add(agrees && !numberFlag ? 'green' : 'amber');
+      const line = document.createElement('div'); line.className = 'check';
+      line.textContent = `Cross-check: ${c.verdict}` + (c.reason ? ` - ${c.reason}` : '');
+      div.append(line);
+      if (c.invalid) {
+        const bad = document.createElement('div'); bad.className = 'rej';
+        bad.textContent = 'Invalid suggestion (ignored): ' + c.invalid;
+        div.append(bad);
+      } else if (['partial', 'wrong', 'missed'].includes(c.verdict)) {
+        const sug = document.createElement('div'); sug.className = 'check';
+        sug.textContent = c.value === null ? 'Suggests: not_published' : `Suggests: ${JSON.stringify(c.value)} | quote: "${c.quote}" (${c.doc_id})`;
+        const use = document.createElement('button'); use.textContent = 'use suggestion';
+        use.onclick = () => {
+          if (c.value === null) { status.value = 'not_published'; value.value = ''; quote.value = ''; }
+          else { status.value = 'stated'; value.value = JSON.stringify(c.value, null, 1); quote.value = c.quote; doc.value = c.doc_id; showDoc(c.doc_id, quotePattern(c.quote)); }
+        };
+        div.append(sug, use);
+      }
+    }
+    div._get = () => status.value === 'stated'
+      ? {status: 'stated', value: JSON.parse(value.value), quote: quote.value.trim(), doc_id: doc.value}
+      : {status: 'not_published', value: null, quote: null, doc_id: null};
+    div.dataset.name = name; root.append(div);
+  }
+  updateSave();
+}
+
+async function open(slug) {
+  $('msg').textContent = '';
+  try { render(await api('/api/programmes/' + slug)); }
+  catch (e) { $('fields').textContent = e.message; $('save').disabled = true; }
+}
+
+$('pick').onchange = e => open(e.target.value);
+$('docpick').onchange = e => showDoc(e.target.value, $('search').value ? new RegExp($('search').value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i') : null);
+$('search').oninput = e => { const q = e.target.value; highlight(docs[$('docpick').value] || '', q ? new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i') : null); };
+$('save').onclick = async () => {
+  const rec = {university: cur.record.university, programme: cur.record.programme, source_doc_ids: cur.record.source_doc_ids, verified: true};
+  try {
+    for (const div of document.querySelectorAll('.field')) rec[div.dataset.name] = div._get();
+    const r = await api('/api/programmes/' + cur.slug, {method: 'PUT', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(rec)});
+    $('msg').className = 'ok'; $('msg').textContent = 'saved ' + r.saved;
+    await loadList(cur.slug);
+  } catch (e) { $('msg').className = 'bad'; $('msg').textContent = e.message; }
+};
+
+loadList().then(s => s && open(s));
+</script>
+</body>
+</html>

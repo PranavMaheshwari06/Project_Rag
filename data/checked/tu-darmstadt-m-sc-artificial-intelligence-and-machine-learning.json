@@ -1,0 +1,149 @@
+{
+  "slug": "tu-darmstadt-m-sc-artificial-intelligence-and-machine-learning",
+  "checked_at": "2026-10-22T22:06:22+00:00",
+  "fields": {
+    "degree_requirement": {
+      "verdict": "correct",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "min_total_ects": {
+      "verdict": "correct",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "subject_credits": {
+      "verdict": "correct",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "work_experience": {
+      "verdict": "correct",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "application_route": {
+      "verdict": "correct",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "deadlines": {
+      "verdict": "correct",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "selection_process": {
+      "verdict": "correct",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "semester_fee_eur": {
+      "verdict": "correct",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "language_of_instruction": {
+      "verdict": "correct",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "min_grade_german_scale": {
+      "verdict": "not_published_ok",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "min_grade_original_scale": {
+      "verdict": "not_published_ok",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "german": {
+      "verdict": "not_published_ok",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "aps_degree_countries": {
+      "verdict": "not_published_ok",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "required_documents": {
+      "verdict": "not_published_ok",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "tuition_eur_per_semester_non_eu": {
+      "verdict": "not_published_ok",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "english": {
+      "verdict": "partial",
+      "value": [
+        {
+          "test": "IELTS",
+          "min_score": "overall ≥ 7.0"
+        },
+        {
+          "test": "TOEFL iBT",
+          "min_score": "≥ 95"
+        }
+      ],
+      "quote": "- Or an official confirmation that English was the language of instruction for your entire Bachelor’s programme",
+      "doc_id": "de/tu-darmstadt/informatics-master-admission-guide",
+      "reason": "IELTS 7.0 / TOEFL 95 are right, but they are not the only route: an official confirmation that English was the language of instruction for the whole Bachelor's also qualifies. Condition lost."
+    },
+    "entrance_tests": {
+      "verdict": "partial",
+      "value": [
+        {
+          "test": "GRE",
+          "min_scores": "Verbal Reasoning ≥ 155 Quantitative Reasoning ≥ 165 Analytical Writing ≥ 3.5",
+          "requirement": "one_of",
+          "applies_to_degree_countries": [],
+          "exempt_degree_countries": []
+        },
+        {
+          "test": "GATE",
+          "min_scores": "Overall ≥ 750",
+          "requirement": "one_of",
+          "applies_to_degree_countries": [],
+          "exempt_degree_countries": []
+        }
+      ],
+      "quote": "Only when required entrance competencies cannot be confirmed from the submitted documents",
+      "doc_id": "de/tu-darmstadt/informatics-master-admission-guide",
+      "reason": "Scores are right, but GRE/GATE are only an exemption (deadline Aug 20 / Feb 20) from an on-campus Entrance Exam that is itself required only when the entrance competencies cannot be verified from the documents; listing the Entrance Exam as one_of alongside GRE/GATE loses that condition."
+    }
+  }
+}

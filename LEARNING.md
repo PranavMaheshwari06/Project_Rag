@@ -39,3 +39,68 @@ Per phase: what was built, why (interview answers), quiz questions, the DECISION
 ### Open findings
 - A forced re-fetch of `de/rules/daad-enrolling` reported `changed=True` for the same URL hours later: pages with dynamic content change their hash without the text changing. The Phase 10 weekly re-crawl uses this hash, so it may be noisy. Fix idea: hash the cleaned text, not the raw bytes.
 - The TU Berlin suitability PDF dates from 2020; check currency when extracting in Phase 3.
+
+---
+
+## Phase 3: Extraction + batch 2
+
+### What was built
+- `generation/llm_client.py` on Gemini's OpenAI-compatible endpoint (`models.llm_base_url`), with a fallback list (`models.llm_fallback_models`): a 429 moves to the next model.
+- `extraction/schemas.py`: `ProgramRequirements`, 17 `Cited` fields, including entrance tests with applies-to and exempt degree-country lists, foreign grade minimums and APS degree countries. Test-name aliases (GRE / GATE / TOEFL spellings).
+- `extraction/extract.py` + `make extract`: one call per programme over its own pages plus its university's general pages; JSON mode, pydantic validation, one repair retry, quote check. Drafts in `data/extracted/`.
+- `scripts/dump_pages.py` + second-model cross-check: a model from a different family reads the draft and the exact page text and writes a verdict per field to `data/checked/`.
+- `extraction/review.py` + `make review`: field next to quote and page, automatic warnings, cross-check verdicts, a tick per field, Save to `data/verified/`.
+- Registry: 53 -> 72 sources. Gap pages for RWTH (deadlines, international application, language rules + PDF) and TUM (language certificates); batch 2 = KIT, TU Darmstadt, Stuttgart. 8 -> 13 programmes.
+
+### Why (defend these)
+- **Provider behind one thin client + `base_url`.** Gemini speaks the OpenAI API, so switching provider is a config change, not a code change. The free tier was the budget constraint.
+- **Tests blank the API key.** Tests must be offline, deterministic and free; the real endpoint is checked once by hand.
+- **`Cited` fields: stated (value + verbatim quote + doc id) or not_published.** The quote lets a human verify in seconds and lets code reject hallucinated values (quote not in source = reject). `not_published` is a real answer the eligibility engine turns into "unknown", never a guess.
+- **English scores kept as text** (6.5, 88, C1): different tests use different scales; conversion belongs to the Phase 6 rules engine, not the schema.
+
+- **Conditional entrance tests** (GRE or GATE, only for degrees from named countries). The LLM extracts the condition; the Phase 6 engine applies it to the profile. Hard case of "the LLM never decides".
+- **One call per programme over full page text, not retrieved chunks.** Each programme is under ~10k words, so the model sees everything; retrieval could miss the one sentence with the deadline.
+- **Quote check on words only** (lowercase, punctuation and markdown dropped), so formatting differences don't reject true quotes, and quotes under 2 words are rejected because they would match anywhere.
+- **Failures don't stop the run.** Free-tier 503/429 errors are normal; a failed programme is skipped and re-running fills only the gaps.
+- **Second-model cross-check from a different model family.** Two models from the same family tend to make the same mistakes; a different family's errors overlap less. The checker can be wrong too, so its suggestions go through the same schema and quote check, For the first six programmes a human tick was the final gate; batch 2 differs, see the note on how it was verified below.
+- **Green / amber fields.** The reviewer's time goes where the risk is: amber fields (checker disagrees or a warning fired) are read in full, green ones get a 10-second quote-vs-value check. Every field is still ticked.
+- **Warnings are cheap deterministic checks.** A number in the value that is not in the quote catches invented digits; a "not published" field whose keywords appear on the page catches missed fields.
+- **Review screen is a separate app from `api/`.** Nothing admin-only can leak into the public service.
+- **Drafts, cross-checks and verified records are all committed.** Together they are the audit trail: what the LLM said, what the checker said, what a human signed off. They are also the inputs for the Phase 4 extraction-accuracy numbers.
+- **Batch 2 cut from ~7 to 3 universities.** The goal is to deploy soon; every programme costs ~30 min of human verification and free-tier quota. Adding universities later is data-only work.
+- **Batch 2 verified by a second pass over the sources, not by hand.** The first six programmes were ticked field by field in the review screen. For the other seven, to ship sooner, each record was re-read field by field against its cited pages (no outside knowledge) and the corrected records were saved through the same Save path as the screen, so the schema and quote-in-page checks still applied. The first record was checked by hand against the pages before the rest ran, and four calls from the pass were reverted after reading the pages. Rules that came out of it: an example ("e.g. TOEFL 95") is not a minimum; a list is stated only if the page gives the list, so one incidental item stays not_published instead of showing a partial list; an inference (work experience "counts in selection") is not stated unless the page says it; a date is not tagged with an applicant group the page did not name. The cost: for these seven, verified and the cross-check are not independent, so the Phase 4 draft-vs-verified and checker-precision numbers are computed on the six hand-verified programmes and say so.
+- **Phase 6 before Phase 5.** The eligibility engine is the product and needs only the verified records; retrieval upgrades need the Phase 4 baseline to be judged and can wait.
+- **Uni-wide pages go to every programme of that university** (fees, language rules). Cheaper than duplicating registry entries; the prompt tells the model to take only what applies to the named programme. A ~100k-character TUM tuition page was left out because it would ride along on every TUM call and hit the per-minute token limit.
+
+### Quiz questions (answer later)
+1. Why does every extracted field carry a verbatim quote, and what check does the quote enable?
+2. Why is "not published" a separate state rather than an empty value?
+3. Why does the LLM extract but never decide eligibility?
+4. Why give the extractor whole pages instead of top-k retrieved chunks?
+5. A quote check passes. Does that prove the value is right? What else can go wrong?
+6. Why use a second model from a different family as a checker, and why does its output still go through the quote check?
+7. What does a reviewer do differently on a green field and an amber field, and why is every field still ticked?
+8. Why commit drafts, cross-checks and verified records instead of only the verified ones?
+9. Why was batch 2 cut to three universities, and what does adding a fourth cost?
+10. Batch 2 was verified by a second source pass instead of a hand tick. What does that change about what "verified" means, and which Phase 4 numbers stay trustworthy?
+
+### DECISIONS entries to write (maintainer, own words)
+- [ ] Gemini free tier via the OpenAI-compatible endpoint; model choice and why 2.5-flash was not usable.
+- [ ] The `Cited` field design.
+- [ ] Second-model cross-check + human tick as the verification design (and committing `data/checked/` as the audit trail).
+- [ ] 2026-10-13: batch 2 = KIT, TU Darmstadt, Stuttgart; Phase 6 before Phase 5; Phase 9 is a functional UI and polish moves to Phase 12 after deploy.
+- [ ] 2026-10-23: the seven batch-2 programmes were verified by a second pass over their cited pages instead of a hand tick, to ship sooner; the first six were hand-verified. Phase 4 accuracy numbers use the six.
+### Open findings
+- Free-tier rate limits and model availability change without notice (2.5-flash closed to new keys in Oct 2026).
+- Gemini free tier is 20 requests/day per model. Model fallback (3.8 -> 3.6 -> 3.5 flash) and response caching become requirements for the deployed chat (Phase 8).
+- A cross-check file has no link to the draft it checked, so it goes stale after `make extract --refresh`; re-run the check after every re-extraction.
+- The RWTH per-programme language PDF sits behind an id-based URL that can change when RWTH replaces the file; the crawl will show a 404.
+- The first cross-checks (Saarland ×2, TU Berlin, TU Dresden, on the 2026-10-08 drafts) flagged 2 missed fields, 1 wrong field and 10 partial ones. Partials clustered in English scores (dropped TOEFL 2026-format and CEFR minimums), document lists, and GRE/GATE country conditions; the last led to the applies-to / exempt country fields.
+- Schema gaps found by the 2026-10-16 cross-checks, for Phase 6 to handle (optional fields added later keep verified records valid):
+  - alternative admission routes: KIT CS admits on subject credits **or** a GATE pass **or** a selection interview;
+  - exemptions by citizenship or schooling, not degree country: RWTH Data Science waives the GRE for EU/EEA citizens and German school leavers;
+  - deadline groups beyond eu / non_eu: RWTH gives non-EU applicants already enrolled at RWTH or holding a German degree 15 July / 15 January;
+  - test validity: KIT accepts GRE scores up to 5 years old and GATE up to 3;
+  - conditions on a single route: KIT asks for proof of the top 10% only from interview-route applicants.
+- Batch 2 verification (2026-10-23, 13/13 verified). Changes against the drafts: English tests the page gives only as examples became the stated level (Stuttgart C1); Cambridge "pass" dropped where the page names no score (KIT); work experience set to not_published where it was inferred (TUM x2, Saarland); fuller lists where the page gives one (KIT subject credits, TUM DEA documents); TUM DEA and TU Darmstadt entrance tests now carry their conditions.
+- More schema gaps for Phase 6: deadlines have no route (uni-assist vs the direct portal at TU Dresden) and no "recommended, visa applicants only" kind (TUM); aptitude-assessment registration windows (TU Dresden, TUM second stage) have no field; English proof cannot say any-of vs all-of, or hold an English-taught-degree route (Darmstadt) or native-speaker exemptions (Saarland); subject credits cannot say "40 in one area, 12 in each other" (KIT); admission with conditions for up to 12 missing credits (KIT); document lists vary by applicant country (TUM); Darmstadt's semester fee on the page is labelled summer 2025.

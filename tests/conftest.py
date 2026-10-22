@@ -2,12 +2,16 @@
 and indexing once, so smoke/e2e tests exercise the same path a user does.
 First run downloads the embedding + reranker models."""
 
+import os
 import sys
 from pathlib import Path
 
 import pytest
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+
+# tests never call the real LLM: an empty value wins over .env (load_dotenv does not override)
+os.environ["GEMINI_API_KEY"] = ""
 
 FIXTURES = Path(__file__).resolve().parent / "fixtures"
 
