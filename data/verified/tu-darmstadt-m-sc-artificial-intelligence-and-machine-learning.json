@@ -1,0 +1,168 @@
+{
+  "verified_at": "2026-10-22T23:41:39+00:00",
+  "draft_model": "gemini-3.8-flash",
+  "record": {
+    "university": "TU Darmstadt",
+    "programme": "M.Sc. Artificial Intelligence and Machine Learning",
+    "source_doc_ids": [
+      "de/tu-darmstadt/aiml-msc/programme",
+      "de/tu-darmstadt/informatics-master-admission-guide"
+    ],
+    "degree_requirement": {
+      "status": "stated",
+      "value": "Bachelor’s degree comprising at least 180 ECTS (or an equivalent workload)",
+      "quote": "- Bachelor’s degree comprising at least 180 ECTS (or an equivalent workload)",
+      "doc_id": "de/tu-darmstadt/informatics-master-admission-guide"
+    },
+    "min_total_ects": {
+      "status": "stated",
+      "value": 180,
+      "quote": "- Bachelor’s degree comprising at least 180 ECTS (or an equivalent workload)",
+      "doc_id": "de/tu-darmstadt/informatics-master-admission-guide"
+    },
+    "subject_credits": {
+      "status": "stated",
+      "value": [
+        {
+          "area": "core courses of our B.Sc. Informatik",
+          "min_ects": 60
+        }
+      ],
+      "quote": "- Minimum 60 ECTS must match the core courses of our B.Sc. Informatik in content, academic level, and depth",
+      "doc_id": "de/tu-darmstadt/informatics-master-admission-guide"
+    },
+    "min_grade_german_scale": {
+      "status": "not_published",
+      "value": null,
+      "quote": null,
+      "doc_id": null
+    },
+    "min_grade_original_scale": {
+      "status": "not_published",
+      "value": null,
+      "quote": null,
+      "doc_id": null
+    },
+    "english": {
+      "status": "stated",
+      "value": [
+        {
+          "test": "IELTS",
+          "min_score": "overall ≥ 7.0"
+        },
+        {
+          "test": "TOEFL iBT",
+          "min_score": "≥ 95"
+        },
+        {
+          "test": "Official confirmation (alternative route)",
+          "min_score": "English was the language of instruction for the entire Bachelor’s programme"
+        }
+      ],
+      "quote": "- IELTS overall ≥ 7.0 or TOEFL iBT ≥ 95\n\n- Or an official confirmation that English was the language of instruction for your entire Bachelor’s programme",
+      "doc_id": "de/tu-darmstadt/informatics-master-admission-guide"
+    },
+    "entrance_tests": {
+      "status": "stated",
+      "value": [
+        {
+          "test": "Entrance Exam",
+          "min_scores": "Only when required entrance competencies cannot be confirmed from the submitted documents; GRE or GATE scores below exempt",
+          "requirement": "one_of",
+          "applies_to_degree_countries": [],
+          "exempt_degree_countries": []
+        },
+        {
+          "test": "GRE",
+          "min_scores": "Verbal Reasoning ≥ 155 Quantitative Reasoning ≥ 165 Analytical Writing ≥ 3.5",
+          "requirement": "one_of",
+          "applies_to_degree_countries": [],
+          "exempt_degree_countries": []
+        },
+        {
+          "test": "GATE",
+          "min_scores": "Overall ≥ 750",
+          "requirement": "one_of",
+          "applies_to_degree_countries": [],
+          "exempt_degree_countries": []
+        }
+      ],
+      "quote": "| Required for: | Only applicants to our English-taught Master’s programs Only when required entrance competencies cannot be confirmed from the submitted documents |\n| Format: | On-site at TU Darmstadt using pre-configured university computers (personal devices not permitted) Access to the digital exam is only possible via the university network |\n| When: | Typically first week of September (for winter semester) Typically first week of March (for summer semester) |\n| Duration: | 90 minutes |\n| Language: | English |\n| Scope: | Same exam for all English-taught Master’s programs Sample questions on Entrance Exam website |\n| Exemption from the Entrance Exam: Provide one of the following no later than August 20 th (for winter semester) or February 20 th (for summer semester). We strongly recommend submitting your scores as early as possible. |\n| Test | Required scores | How to submit |\n| GRE | Verbal Reasoning ≥ 155 Quantitative Reasoning ≥ 165 Analytical Writing ≥ 3.5 | Via ETS Institution Code 2249 Department Code 0402 (Computer Science) GRE Home accepted only if submitted through ETS |\n| GATE | Overall ≥ 750 | Send via e-mail to application@informatik… |",
+      "doc_id": "de/tu-darmstadt/informatics-master-admission-guide"
+    },
+    "german": {
+      "status": "not_published",
+      "value": null,
+      "quote": null,
+      "doc_id": null
+    },
+    "work_experience": {
+      "status": "stated",
+      "value": "not_required",
+      "quote": "- Professional experience: Admission decisions are based exclusively on academic coursework",
+      "doc_id": "de/tu-darmstadt/informatics-master-admission-guide"
+    },
+    "aps_degree_countries": {
+      "status": "not_published",
+      "value": null,
+      "quote": null,
+      "doc_id": null
+    },
+    "application_route": {
+      "status": "stated",
+      "value": "direct",
+      "quote": "Apply via the Online Application Portal .",
+      "doc_id": "de/tu-darmstadt/informatics-master-admission-guide"
+    },
+    "deadlines": {
+      "status": "stated",
+      "value": [
+        {
+          "intake": "winter",
+          "applicant_group": "all",
+          "date": "July 15",
+          "kind": "final"
+        },
+        {
+          "intake": "summer",
+          "applicant_group": "all",
+          "date": "January 15",
+          "kind": "final"
+        }
+      ],
+      "quote": "| Cut-off deadline for online application and arrival of hard-copy documents | July 15 | January 15 |",
+      "doc_id": "de/tu-darmstadt/informatics-master-admission-guide"
+    },
+    "selection_process": {
+      "status": "stated",
+      "value": "Provided that the admission requirements (content-related evaluation and formal prerequisites) are met, there are no numerical admission restrictions.",
+      "quote": "Provided that the admission requirements (content-related evaluation and formal prerequisites) are met, there are no numerical admission restrictions.",
+      "doc_id": "de/tu-darmstadt/aiml-msc/programme"
+    },
+    "required_documents": {
+      "status": "not_published",
+      "value": null,
+      "quote": null,
+      "doc_id": null
+    },
+    "tuition_eur_per_semester_non_eu": {
+      "status": "not_published",
+      "value": null,
+      "quote": null,
+      "doc_id": null
+    },
+    "semester_fee_eur": {
+      "status": "stated",
+      "value": 348.18,
+      "quote": "- Semester Fee ≈ € 348,18 (summer semester 2025) — includes Deutschland Semester Ticket , Call a Bike , students' union services",
+      "doc_id": "de/tu-darmstadt/informatics-master-admission-guide"
+    },
+    "language_of_instruction": {
+      "status": "stated",
+      "value": "The programme can be completed entirely in English by choosing only English-taught courses and modules.",
+      "quote": "The programme can be completed entirely in English by choosing only English-taught courses and modules.",
+      "doc_id": "de/tu-darmstadt/aiml-msc/programme"
+    },
+    "verified": true
+  }
+}
