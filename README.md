@@ -1,6 +1,6 @@
 # Germany Master's Eligibility Assistant
 
-> **Status: in development (Phase 3 of 12).** The data pipeline, retrieval core and requirement extraction with human review are built. The eligibility report, agent, UI and public demo come in later phases. See [the project plan](docs/PROJECT_PLAN.md).
+> **Status: in development (Phase 3 of 12).** The data pipeline, retrieval core and requirement extraction with review are built, and all 13 programmes have verified requirement records. The eligibility report, agent, UI and public demo come in later phases. See [the project plan](docs/PROJECT_PLAN.md).
 
 Applying for a master's in Germany means checking a dozen official websites: the programme page, uni-assist, APS, the embassy, the blocked-account rules, the city's foreigners' office. Each one says something slightly different, and some of it is only in PDFs. This project reads those official pages for you and answers from them, with a citation and a crawl date on every claim.
 
@@ -48,7 +48,7 @@ flowchart LR
     end
 ```
 
-**The key design choice: the LLM never decides eligibility.** It extracts requirements from official pages, and every extracted record is verified by a person. A deterministic rules engine compares the profile with those records. The LLM then only explains the result. So verdicts are reproducible, testable and explainable, and a prompt injection cannot change one.
+**The key design choice: the LLM never decides eligibility.** It extracts requirements from official pages, and every extracted record is checked against its cited official page before it is used. A deterministic rules engine compares the profile with those records. The LLM then only explains the result. So verdicts are reproducible, testable and explainable, and a prompt injection cannot change one.
 
 ### Built so far
 
@@ -70,7 +70,7 @@ flowchart LR
   - an LLM reads each programme's official pages and fills a typed `ProgramRequirements` record: degree, credits, grade minimums, English and entrance tests (with the countries they apply to or exempt), German level, APS, deadlines, fees, documents;
   - every field is either "not published" or carries a verbatim quote and the page it came from, and a field whose quote is not in that page is dropped;
   - a second model from a different family cross-checks every field and may suggest a fix, which must pass the same quote check;
-  - a local review screen shows each field next to its quote, the full page, automatic warnings and the cross-check verdict. A person ticks every field before the record is saved as verified. Verified records are both the product data and the evaluation gold set.
+  - a local review screen shows each field next to its quote, the full page, automatic warnings and the cross-check verdict. Every field is confirmed against its quote and page before the record is saved as verified: six programmes by hand in this screen, the other seven by a second pass over the cited pages that saves through the same quote check. Verified records are both the product data and the evaluation gold set.
 - **Evaluation harness**: a 4-way benchmark (vector, BM25, hybrid, hybrid+rerank) on Recall@k, MRR, nDCG and p50/p95 latency.
 - **Observability**: request ids, structured JSON logs and per-stage latency.
 
