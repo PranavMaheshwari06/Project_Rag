@@ -18,6 +18,16 @@ class GoldItem:
     relevant_doc_ids: list[str]
     relevant_sections: list[str] = field(default_factory=list)
     answer_hint: str = ""
+    kind: str = "requirement"  # one of KINDS
+    university: str | None = None
+    programme: str | None = None
+    author: str = "model"  # who wrote the question: model | human
+    reviewed_by: str = "model"  # who last checked the label: model | human
+    expect_refusal: bool = False
+
+
+KINDS = {"requirement", "country_rules", "confusable", "multi_hop", "refusal", "coverage"}
+OPTIONAL = ("relevant_sections", "answer_hint", "kind", "university", "programme", "author", "reviewed_by", "expect_refusal")
 
 
 def load_gold(path: Path) -> list[GoldItem]:
@@ -31,8 +41,7 @@ def load_gold(path: Path) -> list[GoldItem]:
                 qid=raw["qid"],
                 question=raw["question"],
                 relevant_doc_ids=raw["relevant_doc_ids"],
-                relevant_sections=raw.get("relevant_sections", []),
-                answer_hint=raw.get("answer_hint", ""),
+                **{k: raw[k] for k in OPTIONAL if k in raw},
             ))
     return items
 
