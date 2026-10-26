@@ -1,0 +1,202 @@
+{
+  "verified_at": "2026-10-20T20:44:30+00:00",
+  "draft_model": "gemini-3.8-flash",
+  "record": {
+    "university": "RWTH Aachen",
+    "programme": "M.Sc. Computer Science",
+    "source_doc_ids": [
+      "de/rwth/cs-msc/programme",
+      "de/rwth/cs-msc/application",
+      "de/rwth/cs-msc/department",
+      "de/rwth/application-deadlines",
+      "de/rwth/master-application-international",
+      "de/rwth/language-requirements",
+      "de/rwth/language-requirements-pdf"
+    ],
+    "degree_requirement": {
+      "status": "stated",
+      "value": "First university degree proving the background required by Section 3.2 of the exam regulations: skills and competencies in applied computer science (programming, data structures and algorithms, databases and information systems, software engineering), technical computer science (technical computer science, operating systems and systems software, data communication and security, system programming), theoretical computer science (formal systems, automata and processes, calculability and complexity, mathematical logic) and mathematics (discrete mathematics, analysis for computer scientists, linear algebra, applied stochastics); the examination board decides.",
+      "quote": "The educational background required for the Computer Science M.Sc. program according to Section 3.2 includes the skills and competencies in:\n\n- Applied computer science: programming, data structures and algorithms, databases and information systems, software engineering\n\n- Technical computer science: technical computer science, operating systems and systems software, data communication and security, system programming\n\n- Theoretical computer science: formal systems, automata and processes, and calculability and complexity, mathematical logic\n\n- Mathematics: Discrete mathematics, analysis for computer scientists, linear algebra, applied stochastics",
+      "doc_id": "de/rwth/cs-msc/department"
+    },
+    "min_total_ects": {
+      "status": "not_published",
+      "value": null,
+      "quote": null,
+      "doc_id": null
+    },
+    "subject_credits": {
+      "status": "not_published",
+      "value": null,
+      "quote": null,
+      "doc_id": null
+    },
+    "min_grade_german_scale": {
+      "status": "not_published",
+      "value": null,
+      "quote": null,
+      "doc_id": null
+    },
+    "min_grade_original_scale": {
+      "status": "not_published",
+      "value": null,
+      "quote": null,
+      "doc_id": null
+    },
+    "english": {
+      "status": "stated",
+      "value": [
+        {
+          "test": "TOEFL iBT",
+          "min_score": "90 points or a total score of 4,5"
+        },
+        {
+          "test": "IELTS",
+          "min_score": "6.0"
+        },
+        {
+          "test": "Cambridge Test -B2 First",
+          "min_score": "grade of at least B"
+        },
+        {
+          "test": "Cambridge Test – C1 Advanced",
+          "min_score": "passed"
+        },
+        {
+          "test": "Cambridge Test – c2 Proficiency",
+          "min_score": "passed"
+        },
+        {
+          "test": "Pearson Test of English (PTE) Academic",
+          "min_score": "60 points"
+        },
+        {
+          "test": "UNIcert",
+          "min_score": "II or higher"
+        },
+        {
+          "test": "School-education certificate (CEFR)",
+          "min_score": "B2"
+        },
+        {
+          "test": "Placement test of the RWTH Language Center",
+          "min_score": "level B2.2.1 or higher"
+        }
+      ],
+      "quote": "a) Test of English as Foreign Language (TOEFL) Internet-based Test (IBT) with a result of at least 90 points or a\ntotal score of 4,5\nb) IELTS test with a score of at least 6.0\nc) Cambridge Test -B2 First with a grade of at least B\nd) Cambridge Test – C1 Advanced\ne) Cambridge Test – c2 Proficiency\nf) Pearson Test of English (PTE) Academic with a result of at least 60 points\ng) UNIcert II or higher\nh) a certificate that was acquired as part of the school education required by law in the respective country and\nthat shows English language skills at level B2 of the \"Common European Framework of Reference of Language\n(GeR)\"1\ni) Placement test of the RWTH Language Center with the level B2.2.1 or higher",
+      "doc_id": "de/rwth/language-requirements-pdf"
+    },
+    "entrance_tests": {
+      "status": "stated",
+      "value": [
+        {
+          "test": "GRE",
+          "min_scores": "GRE-QR > 75th percentile, GRE-VR > 15th percentile, GRE-AW >= 3.5",
+          "requirement": "required",
+          "applies_to_degree_countries": [],
+          "exempt_degree_countries": [
+            "European Union"
+          ]
+        }
+      ],
+      "quote": "Additionally, if your first degree is from outside the European Union, you are required to submit a GRE test certificate. You need to be above 75th percentile in quantitative reasoning (GRE-QR) and above 15th percentile in verbal reasoning (GRE-VR). Additionally you need at least 3.5 points in analytical writing (GRE-AW).",
+      "doc_id": "de/rwth/cs-msc/application"
+    },
+    "german": {
+      "status": "stated",
+      "value": {
+        "min_level": "C1",
+        "needed_by": "enrolment"
+      },
+      "quote": "After a successful application, you still have submit proof of German and English language proficiency . Without proof of proficiency in both languages you cannot enroll, even if you are admitted.",
+      "doc_id": "de/rwth/cs-msc/application"
+    },
+    "work_experience": {
+      "status": "not_published",
+      "value": null,
+      "quote": null,
+      "doc_id": null
+    },
+    "aps_degree_countries": {
+      "status": "not_published",
+      "value": null,
+      "quote": null,
+      "doc_id": null
+    },
+    "application_route": {
+      "status": "stated",
+      "value": "direct",
+      "quote": "Applications for Master Computer Science always have to be submitted using the online application service.",
+      "doc_id": "de/rwth/cs-msc/application"
+    },
+    "deadlines": {
+      "status": "stated",
+      "value": [
+        {
+          "intake": "winter",
+          "applicant_group": "eu",
+          "date": "July 15",
+          "kind": "final"
+        },
+        {
+          "intake": "winter",
+          "applicant_group": "non_eu",
+          "date": "March 1",
+          "kind": "final"
+        },
+        {
+          "intake": "summer",
+          "applicant_group": "eu",
+          "date": "January 15",
+          "kind": "final"
+        },
+        {
+          "intake": "summer",
+          "applicant_group": "non_eu",
+          "date": "September 1",
+          "kind": "final"
+        }
+      ],
+      "quote": "| Master (without NC—first or higher semesters) | Germany and EU: May 1 until July 15 Other Countries : December 1 until March 1 |",
+      "doc_id": "de/rwth/application-deadlines"
+    },
+    "selection_process": {
+      "status": "stated",
+      "value": "Based on the application documents, the examination board determines whether the applicant fulfills the educational admission requirements; admission to the program is open (No NC).",
+      "quote": "Based on the application documents, the examination board will decide on whether the applicant meets the above educational admission requirements.",
+      "doc_id": "de/rwth/cs-msc/department"
+    },
+    "required_documents": {
+      "status": "stated",
+      "value": [
+        "Transcript of records covering all semesters studied, or diploma supplement (grades needed for all but the last two semesters)",
+        "Module catalog or course descriptions of all completed courses",
+        "For a higher-semester start: final academic transcript (e.g. bachelor's) and a transcript of master's-level studies",
+        "Resume (list format)",
+        "Additional documents required by the examination board, e.g. GRE (results must be verifiable online; ETS institution code 8504)",
+        "Certified translation into German or English of documents issued in other languages, uploaded together with the original"
+      ],
+      "quote": "Please upload the following documents as PDFs at the end of your application:\n\n- Copy of your transcript of records or your diploma supplement. Please submit a transcript of records with all the semesters you have studied. When you apply you have to be able to provide grades for all the semesters you have studied except your last two semesters of study.\n\n- A module catalog or course descriptions of all the courses you completed in your studies. If these are available on your university’s webpage, you can also upload a PDF that shows the link to this page. If you do not, or cannot upload a module catalog, the respective Examination Board will still review your application for your eligibility for your chosen course(s) of study. Your application may however have to be rejected due to your missing module catalog.\n\n- If you are applying to start in an higher course semester (“advanced standing”): a copy of your final academic transcript (e.g., bachelor’s degree transcript) and a transcript from your master’s level studies.\n\n- Resume (list format)\n\n- You may need to upload additional documents if they are required by the examination board of your master’s program (e.g., proof of the Graduate Record Examination (GRE) , Test AS). Please note that you must enable your test results to be verified online so that the submitted test can be deemed to be complete. For the GRE, you must instruct ETS to accept RWTH Aachen University as the recipient. The institution code that you will need is 8504. If you are asked for a department code, please select the code for “all departments.”\n\nPlease check the webpages for your chosen course(s) of study carefully to find out if you need to submit any additional documents in your application.\n\n### Translation of Your Documents\n\nIf your documents were not issued in German or English, you must have a certified translator translate them into either German or English. The copies do not need to be notarized. Please note that in such cases, the copy of the translation or the copy of the original alone is insufficient – make sure to upload both!",
+      "doc_id": "de/rwth/master-application-international"
+    },
+    "tuition_eur_per_semester_non_eu": {
+      "status": "not_published",
+      "value": null,
+      "quote": null,
+      "doc_id": null
+    },
+    "semester_fee_eur": {
+      "status": "not_published",
+      "value": null,
+      "quote": null,
+      "doc_id": null
+    },
+    "language_of_instruction": {
+      "status": "stated",
+      "value": "German and English",
+      "quote": "- Language: German and English",
+      "doc_id": "de/rwth/cs-msc/programme"
+    },
+    "verified": true
+  }
+}

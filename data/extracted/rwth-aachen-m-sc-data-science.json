@@ -1,0 +1,195 @@
+{
+  "extracted_at": "2026-10-16T08:45:40+00:00",
+  "model": "gemini-3.8-flash",
+  "rejected_quotes": [],
+  "record": {
+    "university": "RWTH Aachen",
+    "programme": "M.Sc. Data Science",
+    "source_doc_ids": [
+      "de/rwth/ds-msc/programme",
+      "de/rwth/ds-msc/requirements",
+      "de/rwth/ds-msc/application",
+      "de/rwth/application-deadlines",
+      "de/rwth/master-application-international",
+      "de/rwth/language-requirements",
+      "de/rwth/language-requirements-pdf"
+    ],
+    "degree_requirement": {
+      "status": "stated",
+      "value": "First degree in Computer Science, Mathematics, Physics or a closely related area awarded by an internationally recognised university-level institution.",
+      "quote": "An applicant must have a first degree in Computer Science, Mathematics, Physics or a closely related area awarded by an internationally recognised university-level institution .",
+      "doc_id": "de/rwth/ds-msc/application"
+    },
+    "min_total_ects": {
+      "status": "not_published",
+      "value": null,
+      "quote": null,
+      "doc_id": null
+    },
+    "subject_credits": {
+      "status": "not_published",
+      "value": null,
+      "quote": null,
+      "doc_id": null
+    },
+    "min_grade_german_scale": {
+      "status": "not_published",
+      "value": null,
+      "quote": null,
+      "doc_id": null
+    },
+    "min_grade_original_scale": {
+      "status": "not_published",
+      "value": null,
+      "quote": null,
+      "doc_id": null
+    },
+    "english": {
+      "status": "stated",
+      "value": [
+        {
+          "test": "TOEFL iBT",
+          "min_score": "90 points or a total score of 4,5"
+        },
+        {
+          "test": "IELTS",
+          "min_score": "6.0"
+        },
+        {
+          "test": "Cambridge Test - B2 First",
+          "min_score": "grade of at least B"
+        },
+        {
+          "test": "Cambridge Test – C1 Advanced",
+          "min_score": "passed"
+        },
+        {
+          "test": "Cambridge Test – C2 Proficiency",
+          "min_score": "passed"
+        },
+        {
+          "test": "PTE Academic",
+          "min_score": "60 points"
+        },
+        {
+          "test": "UNIcert",
+          "min_score": "II or higher"
+        }
+      ],
+      "quote": "a) Test of English as Foreign Language (TOEFL) Internet-based Test (IBT) with a result of at least 90 points or a\ntotal score of 4,5\nb) IELTS test with a score of at least 6.0\nc) Cambridge Test -B2 First with a grade of at least B\nd) Cambridge Test – C1 Advanced\ne) Cambridge Test – c2 Proficiency\nf) Pearson Test of English (PTE) Academic with a result of at least 60 points\ng) UNIcert II or higher\nh) a certificate that was acquired as part of the school education required by law in the respective country and\nthat shows English language skills at level B2 of the \"Common European Framework of Reference of Language\n(GeR)\"1\ni) Placement test of the RWTH Language Center with the level B2.2.1 or higher2",
+      "doc_id": "de/rwth/language-requirements-pdf"
+    },
+    "entrance_tests": {
+      "status": "stated",
+      "value": [
+        {
+          "test": "GRE",
+          "min_scores": "quantitative reasoning score: above 75th percentile (among 25% best), verbal reasoning score: above 15th percentile (among 85% best), analytical writing: minimum score 3.5",
+          "requirement": "required",
+          "applies_to_degree_countries": [],
+          "exempt_degree_countries": [
+            "European Union",
+            "European Economic Area",
+            "Germany"
+          ]
+        }
+      ],
+      "quote": "You need a Graduate Record Examination (GRE) General Test result that meets all of the following requirements (see exception below) : quantitative reasoning score: above 75th percentile (among 25% best) verbal reasoning score: above 15th percentile (among 85% best) analytical writing: minimum score 3.5 The GRE general test result must be provided with the application for admission before the application for admission deadline. It cannot be handed in after the application for admission deadline. Exception : The GRE is not required for applicants with citizenship of the European Union or European Economic Area or who completed their secondary education in Germany (to be more precise, they have to be what is called “ Bildungsinländerinnen oder Bildungsinländer ” in German, meaning you have an Abitur or equivalent).",
+      "doc_id": "de/rwth/ds-msc/application"
+    },
+    "german": {
+      "status": "stated",
+      "value": {
+        "min_level": "none",
+        "needed_by": "admission"
+      },
+      "quote": "- is completely offered in English (thus, no German language proficiency is required);",
+      "doc_id": "de/rwth/ds-msc/requirements"
+    },
+    "work_experience": {
+      "status": "not_published",
+      "value": null,
+      "quote": null,
+      "doc_id": null
+    },
+    "aps_degree_countries": {
+      "status": "not_published",
+      "value": null,
+      "quote": null,
+      "doc_id": null
+    },
+    "application_route": {
+      "status": "stated",
+      "value": "direct",
+      "quote": "Submit your application for admission via RWTH Aachen University’s online application portal .",
+      "doc_id": "de/rwth/ds-msc/application"
+    },
+    "deadlines": {
+      "status": "stated",
+      "value": [
+        {
+          "intake": "winter",
+          "applicant_group": "non_eu",
+          "date": "March 1",
+          "kind": "final"
+        },
+        {
+          "intake": "summer",
+          "applicant_group": "non_eu",
+          "date": "September 1",
+          "kind": "final"
+        },
+        {
+          "intake": "winter",
+          "applicant_group": "eu",
+          "date": "July 15",
+          "kind": "final"
+        },
+        {
+          "intake": "summer",
+          "applicant_group": "eu",
+          "date": "January 15",
+          "kind": "final"
+        }
+      ],
+      "quote": "#### Non-EU & Non-EEA applicants\n\nWinter Term: December to March 1 st\n\nSummer Term: June to September 1 st\n\nThese are the application periods for the following winter/summer term .\n\nFor the latest information always refer to the master application information for internationals page on RWTH Aachen University’s website. The DS master program is a program with an open admission (not a restricted admission (NC)). In case the information on this page and the linked page differs, consider the information on the linked page as correct.\n\n#### EU & EEA applicants\n\nWinter Term: June to July 15 th\n\nSummer Term: December to January 15 th",
+      "doc_id": "de/rwth/ds-msc/application"
+    },
+    "selection_process": {
+      "status": "stated",
+      "value": "Open admission (no NC); entry is based on meeting formal entrance requirements.",
+      "quote": "The DS master program is a program with an open admission (not a restricted admission (NC)).",
+      "doc_id": "de/rwth/ds-msc/application"
+    },
+    "required_documents": {
+      "status": "stated",
+      "value": [
+        "Transcript of records or diploma supplement",
+        "Module catalog or course descriptions",
+        "Resume (list format)",
+        "Proof of the Graduate Record Examination (GRE)"
+      ],
+      "quote": "Please upload the following documents as PDFs at the end of your application:\n\n- Copy of your transcript of records or your diploma supplement. Please submit a transcript of records with all the semesters you have studied. When you apply you have to be able to provide grades for all the semesters you have studied except your last two semesters of study.\n\n- A module catalog or course descriptions of all the courses you completed in your studies. If these are available on your university’s webpage, you can also upload a PDF that shows the link to this page. If you do not, or cannot upload a module catalog, the respective Examination Board will still review your application for your eligibility for your chosen course(s) of study. Your application may however have to be rejected due to your missing module catalog.\n\n- If you are applying to start in an higher course semester (“advanced standing”): a copy of your final academic transcript (e.g., bachelor’s degree transcript) and a transcript from your master’s level studies.\n\n- Resume (list format)\n\n- You may need to upload additional documents if they are required by the examination board of your master’s program (e.g., proof of the Graduate Record Examination (GRE) , Test AS).",
+      "doc_id": "de/rwth/master-application-international"
+    },
+    "tuition_eur_per_semester_non_eu": {
+      "status": "not_published",
+      "value": null,
+      "quote": null,
+      "doc_id": null
+    },
+    "semester_fee_eur": {
+      "status": "not_published",
+      "value": null,
+      "quote": null,
+      "doc_id": null
+    },
+    "language_of_instruction": {
+      "status": "stated",
+      "value": "English",
+      "quote": "- Language: English",
+      "doc_id": "de/rwth/ds-msc/programme"
+    },
+    "verified": false
+  }
+}

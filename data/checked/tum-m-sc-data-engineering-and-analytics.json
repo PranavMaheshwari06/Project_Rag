@@ -1,0 +1,190 @@
+{
+  "slug": "tum-m-sc-data-engineering-and-analytics",
+  "checked_at": "2026-10-22T22:06:33+00:00",
+  "fields": {
+    "degree_requirement": {
+      "verdict": "correct",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "min_total_ects": {
+      "verdict": "not_published_ok",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "subject_credits": {
+      "verdict": "not_published_ok",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "min_grade_german_scale": {
+      "verdict": "not_published_ok",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "min_grade_original_scale": {
+      "verdict": "not_published_ok",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "english": {
+      "verdict": "not_published_ok",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "entrance_tests": {
+      "verdict": "partial",
+      "value": [
+        {
+          "test": "GRE",
+          "min_scores": "Quantitative reasoning: 164; Analytical writing: 4.0 (verbal reasoning not taken into account)",
+          "requirement": "one_of",
+          "applies_to_degree_countries": [
+            "Bangladesh",
+            "China",
+            "India",
+            "Iran",
+            "Pakistan"
+          ],
+          "exempt_degree_countries": []
+        },
+        {
+          "test": "GATE",
+          "min_scores": "minimal qualifying score of the respective year (Computer Science test)",
+          "requirement": "one_of",
+          "applies_to_degree_countries": [
+            "Bangladesh",
+            "China",
+            "India",
+            "Iran",
+            "Pakistan"
+          ],
+          "exempt_degree_countries": []
+        }
+      ],
+      "quote": "The required scores are: Verbal reasoning: (will not be taken into account anymore) Quantitative reasoning: 164 Analytical writing: 4.0",
+      "doc_id": "de/tum/dea-msc/department",
+      "reason": "Countries and one_of structure are right, but the published minimum scores were dropped: GRE Quantitative 164 and Analytical writing 4.0 (Verbal ignored); GATE needs the minimal qualifying score of the respective year."
+    },
+    "german": {
+      "verdict": "not_published_ok",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "work_experience": {
+      "verdict": "unsure",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": "The quote only says related certificates, internships etc. are 'not mandatory'; the pages never say work experience earns selection points. counts_in_selection is an inference; not_required or recommended are equally defensible from the text."
+    },
+    "aps_degree_countries": {
+      "verdict": "correct",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "application_route": {
+      "verdict": "correct",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "deadlines": {
+      "verdict": "partial",
+      "value": [
+        {
+          "intake": "winter",
+          "applicant_group": "all",
+          "date": "03-31",
+          "kind": "early"
+        },
+        {
+          "intake": "winter",
+          "applicant_group": "all",
+          "date": "05-31",
+          "kind": "final"
+        },
+        {
+          "intake": "summer",
+          "applicant_group": "all",
+          "date": "10-31",
+          "kind": "early"
+        },
+        {
+          "intake": "summer",
+          "applicant_group": "all",
+          "date": "11-30",
+          "kind": "final"
+        }
+      ],
+      "quote": "February 1 – March 31: recommended application deadline for applicants who need a visa February 1 – May 31: compulsory application deadline\n\nFor the summer semester: October 1 – October 31: recommended application for applicants who need a visa October 1 - November 30: compulsory application deadline",
+      "doc_id": "de/tum/dea-msc/department",
+      "reason": "Final dates are right, but the page also gives recommended earlier application deadlines for applicants who need a visa (31 March winter, 31 October summer)."
+    },
+    "selection_process": {
+      "verdict": "correct",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "required_documents": {
+      "verdict": "partial",
+      "value": [
+        "A statement of reasons explaining why you have chosen this master’s program and TUM specifically (max. 2 pages)",
+        "Your CV/résumé",
+        "A scientific essay of approx. 1,000 words on a specified topic (see below)",
+        "Form \" Analysis of the Curriculum \" (see below)",
+        "Bachelor's degree certificate, including a list of courses and grades OR an official transcript of records. Documents not issued in German or English must be translated and notarized by a sworn translator .",
+        "Curriculum (module descriptions, course catalog or syllabus) of the underlying university degree; this document is very important for the check of the academic qualification!",
+        "Proof of your English language proficiency",
+        "GRE or Gate score for applicants with a B.Sc. degree from Bangladesh, China, India, Iran, Pakistan (original scorecard or have the score transmitted directly via ETS)",
+        "Preliminary documentation from uni-assist for all applicants with a Bachelor's degree from outside Germany",
+        "APS certificate for applicants with a Bachelor's from China, Vietnam or India",
+        "Certificates from professional training or additional qualifications related to the program (e.g. participation in research competitions, internships, etc.) (not mandatory)",
+        "A passport photo"
+      ],
+      "quote": "- A statement of reasons explaining why you have chosen this master’s program and TUM specifically (max. 2 pages)\n\n- Your CV/résumé\n\n- A scientific essay of approx. 1,000 words on a specified topic (see below)\n\n- Form \" Analysis of the Curriculum \" (see below)\n\n- Bachelor's degree certificate, including a list of courses and grades OR an official transcript of records. Documents not issued in German or English must be translated and notarized by a sworn translator .\n\n- Curriculum (module descriptions, course catalog or syllabus) of the underlying university degree; this document is very important for the check of the academic qualification!\n\n- Proof of your English language proficiency\n\n- GRE or Gate score for applicants with a B.Sc. degree from Bangladesh, China, India, Iran, Pakistan (original scorecard or have the score transmitted directly via ETS)\n\n- Preliminary documentation from uni-assist for all applicants with a Bachelor's degree from outside Germany\n\n- APS certificate for applicants with a Bachelor's from China, Vietnam or India\n\n- Certificates from professional training or additional qualifications related to the program (e.g. participation in research competitions, internships, etc.) (not mandatory)\n\n- A passport photo",
+      "doc_id": "de/tum/dea-msc/department",
+      "reason": "The draft copied the generic list; the programme page's list also requires GRE or GATE (for degrees from Bangladesh, China, India, Iran, Pakistan), the APS certificate (China, Vietnam, India) and a passport photo, and states the list varies by applicant."
+    },
+    "tuition_eur_per_semester_non_eu": {
+      "verdict": "correct",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "semester_fee_eur": {
+      "verdict": "correct",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    },
+    "language_of_instruction": {
+      "verdict": "correct",
+      "value": null,
+      "quote": null,
+      "doc_id": null,
+      "reason": null
+    }
+  }
+}

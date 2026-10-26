@@ -1,0 +1,174 @@
+{
+  "verified_at": "2026-10-22T23:41:39+00:00",
+  "draft_model": "gemini-3.8-flash",
+  "record": {
+    "university": "TUM",
+    "programme": "M.Sc. Informatics",
+    "source_doc_ids": [
+      "de/tum/informatics-msc/programme",
+      "de/tum/informatics-msc/department",
+      "de/tum/language-certificates"
+    ],
+    "degree_requirement": {
+      "status": "stated",
+      "value": "Bachelor’s degree in Informatics / Computer Science which is equivalent to the B.Sc. Informatics taught at TUM",
+      "quote": "Students with a Bachelor’s degree in Informatics / Computer Science which is equivalent to the B.Sc. Informatics taught at TUM are eligible to apply.",
+      "doc_id": "de/tum/informatics-msc/department"
+    },
+    "min_total_ects": {
+      "status": "not_published",
+      "value": null,
+      "quote": null,
+      "doc_id": null
+    },
+    "subject_credits": {
+      "status": "not_published",
+      "value": null,
+      "quote": null,
+      "doc_id": null
+    },
+    "min_grade_german_scale": {
+      "status": "not_published",
+      "value": null,
+      "quote": null,
+      "doc_id": null
+    },
+    "min_grade_original_scale": {
+      "status": "not_published",
+      "value": null,
+      "quote": null,
+      "doc_id": null
+    },
+    "english": {
+      "status": "not_published",
+      "value": null,
+      "quote": null,
+      "doc_id": null
+    },
+    "entrance_tests": {
+      "status": "stated",
+      "value": [
+        {
+          "test": "GRE",
+          "min_scores": "Quantitative reasoning: 164 Analytical writing: 4.0",
+          "requirement": "one_of",
+          "applies_to_degree_countries": [
+            "Bangladesh",
+            "China",
+            "India",
+            "Iran",
+            "Pakistan"
+          ],
+          "exempt_degree_countries": []
+        },
+        {
+          "test": "GATE",
+          "min_scores": "minimal qualifying score of the respective year",
+          "requirement": "one_of",
+          "applies_to_degree_countries": [
+            "Bangladesh",
+            "China",
+            "India",
+            "Iran",
+            "Pakistan"
+          ],
+          "exempt_degree_countries": []
+        }
+      ],
+      "quote": "Applicants with a Degree from Bangladesh, China, India, Iran or Pakistan have to submit a GRE (General) Test. We have defined required minimum scores, lower scores will not be accepted!\n\nThe required scores are: Verbal reasoning: (will not be taken into account anymore) Quantitative reasoning: 164 Analytical writing: 4.0 The Institution Code: 7806, Department: 5199 (\"all other departments\").\n\nAlternatively, students can submit a scorecard of the Indian GATE test (Computer Science; for M.Sc. CSE the Mechanical Engineering Test will also be accepted). The minimal qualifying score of the respective year is necessary.",
+      "doc_id": "de/tum/informatics-msc/department"
+    },
+    "german": {
+      "status": "not_published",
+      "value": null,
+      "quote": null,
+      "doc_id": null
+    },
+    "work_experience": {
+      "status": "not_published",
+      "value": null,
+      "quote": null,
+      "doc_id": null
+    },
+    "aps_degree_countries": {
+      "status": "stated",
+      "value": [
+        "China",
+        "India",
+        "Vietnam"
+      ],
+      "quote": "Applicants with an undergraduate degree from China, India and Vietnam have to submit a certificate from the German Evaluation Center (APS).",
+      "doc_id": "de/tum/informatics-msc/department"
+    },
+    "application_route": {
+      "status": "stated",
+      "value": "both",
+      "quote": "Applicants who did not obtain their qualification for postgraduate studies (usually a bachelor's degree) in Germany must apply for a preliminary documentation (VPD) from uni-assist, additionally to the TUM application.",
+      "doc_id": "de/tum/informatics-msc/department"
+    },
+    "deadlines": {
+      "status": "stated",
+      "value": [
+        {
+          "intake": "winter",
+          "applicant_group": "all",
+          "date": "31.05.",
+          "kind": "final"
+        },
+        {
+          "intake": "summer",
+          "applicant_group": "all",
+          "date": "30.11.",
+          "kind": "final"
+        }
+      ],
+      "quote": "Application period for the winter semester: 01.02. – 31.05. Application period for the summer semester: 01.10. – 30.11.",
+      "doc_id": "de/tum/informatics-msc/programme"
+    },
+    "selection_process": {
+      "status": "stated",
+      "value": "In the initial stages, grades from the Bachelor's program and written documents are evaluated using a point system; depending on the points, applicants are immediately admitted, rejected, or invited to an admissions interview.",
+      "quote": "In the initial stages, the grades you obtained during your Bachelor’s program, as well as your written documents, will be evaluated using a point system. Depending on the amount of points accumulated, applicants are either immediately admitted, rejected, or invited to an admissions interview.",
+      "doc_id": "de/tum/informatics-msc/programme"
+    },
+    "required_documents": {
+      "status": "stated",
+      "value": [
+        "A statement of reasons explaining why you have chosen this master’s program and TUM specifically (max. 2 pages)",
+        "Your CV/résumé",
+        "A scientific essay of approx. 1,000 words on a specified topic",
+        "Form \"Analysis of the Curriculum\"",
+        "Bachelor's degree certificate, including a list of courses and grades, OR an official transcript of records (documents not issued in German or English must be translated and notarized by a sworn translator)",
+        "Curriculum (module descriptions, course catalog or syllabus) of the underlying university degree",
+        "Proof of your English language proficiency",
+        "GRE or Gate score for applicants with a B.Sc. degree from Bangladesh, China, India, Iran, Pakistan",
+        "Preliminary documentation from uni-assist for all applicants with a Bachelor's degree from outside Germany",
+        "APS certificate for applicants with a Bachelor's from China, Vietnam or India",
+        "Certificates from professional training or additional qualifications related to the program (not mandatory)",
+        "A passport photo",
+        "A copy of your passport"
+      ],
+      "quote": "- A statement of reasons explaining why you have chosen this master’s program and TUM specifically (max. 2 pages)\n\n\n\n- Your CV/résumé\n\n\n\n- A scientific essay of approx. 1,000 words on a specified topic (see below)\n\n\n\n- Form \" Analysis of the Curriculum \" (see below)\n\n\n\n- Bachelor's degree certificate, including a list of courses and grades OR an official transcript of records. Documents not issued in German or English must be translated and notarized by a sworn translator .\n\n\n\n- Curriculum (module descriptions, course catalog or syllabus) of the underlying university degree; this document is very important for the check of the academic qualification!\n\n\n\n- Proof of your English language proficiency\n\n\n\n- GRE or Gate score for applicants with a B.Sc. degree from Bangladesh, China, India, Iran, Pakistan (original scorecard or have the score transmitted directly via ETS)\n\n\n\n- Preliminary documentation from uni-assist for all applicants with a Bachelor's degree from outside Germany\n\n\n\n- APS certificate for applicants with a Bachelor's from China, Vietnam or India\n\n\n\n- Certificates from professional training or additional qualifications related to the program (e.g. participation in research competitions, internships, etc.) (not mandatory)\n\n\n\n- A passport photo\n\n\n\n- A copy of your passport",
+      "doc_id": "de/tum/informatics-msc/department"
+    },
+    "tuition_eur_per_semester_non_eu": {
+      "status": "stated",
+      "value": 6000.0,
+      "quote": "The tuition fees for international students from third countries for this degree program are 6,000 euros per semester .",
+      "doc_id": "de/tum/informatics-msc/programme"
+    },
+    "semester_fee_eur": {
+      "status": "stated",
+      "value": 97.0,
+      "quote": "- Student Fees:\n\n\t\t\t\t\t\t\t97.00 €",
+      "doc_id": "de/tum/informatics-msc/programme"
+    },
+    "language_of_instruction": {
+      "status": "stated",
+      "value": "English",
+      "quote": "The language of instruction for this program is usually English.",
+      "doc_id": "de/tum/informatics-msc/programme"
+    },
+    "verified": true
+  }
+}

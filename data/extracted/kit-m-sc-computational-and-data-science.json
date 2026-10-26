@@ -1,0 +1,154 @@
+{
+  "extracted_at": "2026-10-20T21:08:20+00:00",
+  "model": "gemini-3.8-flash",
+  "rejected_quotes": [],
+  "record": {
+    "university": "KIT",
+    "programme": "M.Sc. Computational and Data Science",
+    "source_doc_ids": [
+      "de/kit/cds-msc/programme",
+      "de/kit/tuition-fees"
+    ],
+    "degree_requirement": {
+      "status": "stated",
+      "value": "Bachelor's degree (or equivalent) in Computational and Data Science, Mathematics, Computer Science (or equivalent content) or in Business and Economics, Chemistry, Earth System Sciences, Mechanical Engineering, Physics, Electrical Engineering and Information Technology, Chemical Engineering, Process Engineering, or Robotics with a standard study period of at least three years and at least 180 ECTS points.",
+      "quote": "- Bachelorabschluss ein bestandener Bachelorabschluss (oder mindestens gleichwertiger Abschluss) im Studiengang Computational and Data Science, Mathematik, Informatik (oder einem Studiengang mit im Wesentlichen gleichem Inhalt) oder einem Bachelorstudiengang in den Bereichen Wirtschaftswissenschaften, Chemie, Erdsystemwissenschaften, Maschinenbau, Physik, Elektro- und Informationstechnik, Chemieingenieurwesen, Verfahrenstechnik oder Robotik  an einer Universität, Fachhochschule oder Berufsakademie bzw. Dualen Hochschule oder an einer ausländischen Hochschule. Das Studium muss im Rahmen einer mindestens dreijährigen Regelstudienzeit und mit einer Mindestanzahl von 180 ECTS-Punkten absolviert worden sein.",
+      "doc_id": "de/kit/cds-msc/programme"
+    },
+    "min_total_ects": {
+      "status": "stated",
+      "value": 180,
+      "quote": "Das Studium muss im Rahmen einer mindestens dreijährigen Regelstudienzeit und mit einer Mindestanzahl von 180 ECTS-Punkten absolviert worden sein.",
+      "doc_id": "de/kit/cds-msc/programme"
+    },
+    "subject_credits": {
+      "status": "stated",
+      "value": [
+        {
+          "area": "Grundlagen der Mathematik (Lineare Algebra und Analysis oder Höhere Mathematik)",
+          "min_ects": 20
+        }
+      ],
+      "quote": "- Mindestkenntnisse und Mindestleistungen in den Bereichen Grundlagen der Mathematik (Lineare Algebra und Analysis oder Höhere Mathematik) 20 LP Mindestens 40 LP aus einem und mindestens 12 LP aus den beiden verbleibenden Gebieten: Angewandte Mathematik oder Mathematik für Computational and Data Science Informatik Natur- oder Ingenieur- oder Wirtschaftswissenschaften (konkret: Business and Economics, Computational Chemistry, Computational Earth System Sciences, Computational Mechanics and Thermodynamics, Computational Physics, Electrical Engineering and Information Technology, Process Engineering, Robotics and Autonomous Systems).",
+      "doc_id": "de/kit/cds-msc/programme"
+    },
+    "min_grade_german_scale": {
+      "status": "not_published",
+      "value": null,
+      "quote": null,
+      "doc_id": null
+    },
+    "min_grade_original_scale": {
+      "status": "not_published",
+      "value": null,
+      "quote": null,
+      "doc_id": null
+    },
+    "english": {
+      "status": "stated",
+      "value": [
+        {
+          "test": "TOEFL iBT",
+          "min_score": "90 points"
+        },
+        {
+          "test": "IELTS",
+          "min_score": "overall score of at least 6.5, no section below 5.5"
+        },
+        {
+          "test": "TOEIC",
+          "min_score": "at least 400 points in Listening, 385 in Reading, 160 in Speaking, 150 in Writing"
+        },
+        {
+          "test": "Cambridge Certificate C1 Advanced (CAE)",
+          "min_score": "pass"
+        },
+        {
+          "test": "Cambridge Certificate C2 Proficiency (CPE)",
+          "min_score": "pass"
+        },
+        {
+          "test": "Cambridge Certificate B2 First (FCE)",
+          "min_score": "pass"
+        },
+        {
+          "test": "UNIcert",
+          "min_score": "at least level II"
+        },
+        {
+          "test": "Pearson PTE Academic",
+          "min_score": "at least 58.5 points overall and at least 56.8 in Listening, 60.6 in Reading, 53.5 in Speaking, 74.1 in Writing"
+        }
+      ],
+      "quote": "Otherwise, only the following English tests listed in the KIT admission and enrollment regulations are accepted as proof of English proficiency:\n\n- TOEFL iBT (internet-based) with at least 90 points\n\n- IELTS with an overall score of at least 6.5, no section below 5.5\n\n- TOEIC with at least 400 points in Listening, 385 in Reading, 160 in Speaking, 150 in Writing\n\n- Cambridge Certificate C1 Advanced (CAE)\n\n- Cambridge Certificate C2 Proficiency (CPE)\n\n- Cambridge Certificate B2 First (FCE)\n\n- UNIcert, at least level II\n\n- Pearson PTE Academic with at least 58.5 points overall and at least 56.8 in Listening, 60.6 in Reading, 53.5 in Speaking, 74.1 in Writing",
+      "doc_id": "de/kit/cds-msc/programme"
+    },
+    "entrance_tests": {
+      "status": "not_published",
+      "value": null,
+      "quote": null,
+      "doc_id": null
+    },
+    "german": {
+      "status": "not_published",
+      "value": null,
+      "quote": null,
+      "doc_id": null
+    },
+    "work_experience": {
+      "status": "not_published",
+      "value": null,
+      "quote": null,
+      "doc_id": null
+    },
+    "aps_degree_countries": {
+      "status": "not_published",
+      "value": null,
+      "quote": null,
+      "doc_id": null
+    },
+    "application_route": {
+      "status": "not_published",
+      "value": null,
+      "quote": null,
+      "doc_id": null
+    },
+    "deadlines": {
+      "status": "not_published",
+      "value": null,
+      "quote": null,
+      "doc_id": null
+    },
+    "selection_process": {
+      "status": "not_published",
+      "value": null,
+      "quote": null,
+      "doc_id": null
+    },
+    "required_documents": {
+      "status": "not_published",
+      "value": null,
+      "quote": null,
+      "doc_id": null
+    },
+    "tuition_eur_per_semester_non_eu": {
+      "status": "stated",
+      "value": 1500.0,
+      "quote": "According to Article 3, LHGebG (Baden-Württemberg Act on State University Fees), international students (from third countries/non-EU countries) attending bachelor’s, teacher’s, and consecutive master’s programs as well as free movers will have to pay tuition fees in the amount of EUR 1,500 per semester as from the 2017/2018 winter semester.",
+      "doc_id": "de/kit/tuition-fees"
+    },
+    "semester_fee_eur": {
+      "status": "not_published",
+      "value": null,
+      "quote": null,
+      "doc_id": null
+    },
+    "language_of_instruction": {
+      "status": "stated",
+      "value": "English",
+      "quote": "Language of instruction: English",
+      "doc_id": "de/kit/cds-msc/programme"
+    },
+    "verified": false
+  }
+}
