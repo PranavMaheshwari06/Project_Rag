@@ -1,6 +1,8 @@
 # Learning log
 
-One section per phase, appended as each phase is built. Quizzes and `DECISIONS.md` entries are done in one batch after Phase 10 (before Phase 11), so nothing here blocks building. The `DECISIONS.md` entries are written by the maintainer, in their own words.
+One section per phase, appended as each phase is built. Quizzes are done in one batch after Phase 10 (before Phase 11), so nothing here blocks building.
+
+`DECISIONS.md` entries are drafted from the decisions taken in working sessions (the STATUS log, this file and the plan), dated on the day each was decided, then read and edited by the maintainer into their own words. A ticked box below means the draft is in `DECISIONS.md`.
 
 Per phase: what was built, why (interview answers), quiz questions, the DECISIONS entry owed, open findings.
 
@@ -32,9 +34,9 @@ Per phase: what was built, why (interview answers), quiz questions, the DECISION
 6. The word-count proxy for tokens failed on German tables. How was it found, and how was it fixed without dropping the proxy?
 
 ### DECISIONS entries to write (maintainer, own words)
-- [ ] Phase 2: crawl vs ingest, robots.txt fail-closed, dropping Make it in Germany.
-- [ ] 2026-10-06 scope change: Germany only (UK/US dropped), batch 2 at end of Phase 3, agent before deploy, MCP after deploy.
-- [ ] Chunk limit: real tokenizer as a second pass (supersedes part of the 2026-07-25 whitespace-proxy entry).
+- [x] Phase 2: crawl vs ingest, robots.txt fail-closed, dropping Make it in Germany.
+- [x] 2026-10-06 scope change: Germany only (UK/US dropped), batch 2 at end of Phase 3, agent before deploy, MCP after deploy.
+- [x] Chunk limit: real tokenizer as a second pass (supersedes part of the 2026-07-25 whitespace-proxy entry).
 
 ### Open findings
 - A forced re-fetch of `de/rules/daad-enrolling` reported `changed=True` for the same URL hours later: pages with dynamic content change their hash without the text changing. The Phase 10 weekly re-crawl uses this hash, so it may be noisy. Fix idea: hash the cleaned text, not the raw bytes.
@@ -85,11 +87,12 @@ Per phase: what was built, why (interview answers), quiz questions, the DECISION
 10. Batch 2 was verified by a second source pass instead of a hand tick. What does that change about what "verified" means, and which Phase 4 numbers stay trustworthy?
 
 ### DECISIONS entries to write (maintainer, own words)
-- [ ] Gemini free tier via the OpenAI-compatible endpoint; model choice and why 2.5-flash was not usable.
-- [ ] The `Cited` field design.
-- [ ] Second-model cross-check + human tick as the verification design (and committing `data/checked/` as the audit trail).
-- [ ] 2026-10-13: batch 2 = KIT, TU Darmstadt, Stuttgart; Phase 6 before Phase 5; Phase 9 is a functional UI and polish moves to Phase 12 after deploy.
-- [ ] 2026-10-23: the seven batch-2 programmes were verified by a second pass over their cited pages instead of a hand tick, to ship sooner; the first six were hand-verified. Phase 4 accuracy numbers use the six.
+- [x] Gemini free tier via the OpenAI-compatible endpoint; model choice and why 2.5-flash was not usable.
+- [x] The `Cited` field design.
+- [x] Second-model cross-check + human tick as the verification design (and committing `data/checked/` as the audit trail).
+- [x] 2026-10-13: batch 2 = KIT, TU Darmstadt, Stuttgart; Phase 6 before Phase 5; Phase 9 is a functional UI and polish moves to Phase 12 after deploy.
+- [x] 2026-10-23: the seven batch-2 programmes were verified by a second pass over their cited pages instead of a hand tick, to ship sooner; the first six were hand-verified. Phase 4 accuracy numbers use the six.
+
 ### Open findings
 - Free-tier rate limits and model availability change without notice (2.5-flash closed to new keys in Oct 2026).
 - Gemini free tier is 20 requests/day per model. Model fallback (3.8 -> 3.6 -> 3.5 flash) and response caching become requirements for the deployed chat (Phase 8).
@@ -104,3 +107,114 @@ Per phase: what was built, why (interview answers), quiz questions, the DECISION
   - conditions on a single route: KIT asks for proof of the top 10% only from interview-route applicants.
 - Batch 2 verification (2026-10-23, 13/13 verified). Changes against the drafts: English tests the page gives only as examples became the stated level (Stuttgart C1); Cambridge "pass" dropped where the page names no score (KIT); work experience set to not_published where it was inferred (TUM x2, Saarland); fuller lists where the page gives one (KIT subject credits, TUM DEA documents); TUM DEA and TU Darmstadt entrance tests now carry their conditions.
 - More schema gaps for Phase 6: deadlines have no route (uni-assist vs the direct portal at TU Dresden) and no "recommended, visa applicants only" kind (TUM); aptitude-assessment registration windows (TU Dresden, TUM second stage) have no field; English proof cannot say any-of vs all-of, or hold an English-taught-degree route (Darmstadt) or native-speaker exemptions (Saarland); subject credits cannot say "40 in one area, 12 in each other" (KIT); admission with conditions for up to 12 missing credits (KIT); document lists vary by applicant country (TUM); Darmstadt's semester fee on the page is labelled summer 2025.
+
+---
+
+## Phase 4: Eval baseline (in progress)
+
+Steps 0–2 are done (tiers, extraction accuracy, gold set). Step 3 (`make eval` with real numbers for the four retrieval modes, split by kind) and step 4 (refusal calibration on the refusal and coverage probes) are left, so the Phase 4 "Done when" line is not met yet. Two human steps are pending: the sampled audit of the second-pass records and the review of the gold set.
+
+### What was built
+- **Verification tiers.** Every `data/verified/<slug>.json` has a `tier`: `human` (6 programmes, every field ticked in `make review`) or `second_pass` (7: KIT CDS, Saarland CS, TU Darmstadt AIML, TU Dresden CS, TUM DEA, TUM Informatics, Stuttgart CS). A re-save in `extraction/review.py` keeps the existing tier; promoting `second_pass` to `human` is a deliberate hand edit.
+- **Extraction accuracy** (`evaluation/extraction_eval.py`): compares each LLM draft (`data/extracted/`) with its verified record (`data/verified/`) field by field, next to the cross-check verdict (`data/checked/`). `render()` prints the table below.
+- **Sampled audit of the second-pass records** (`scripts/audit_sample.py [n] [seed] [--sheet]`): a seeded random sample of `stated` fields from `second_pass` records. `--sheet` writes `data/audit/audit_sheet.md`: for each field the value, quote, doc id, a page excerpt of ±300 characters around the quote, a model pre-check line and an agree/disagree box for the auditor. Run as `scripts/audit_sample.py 35 4 --sheet`: 35 of 69 stated fields, seed 4.
+- **Gold set** (`evaluation/datasets/gold_qa.jsonl`, 104 items): requirement 45, country_rules 24, confusable 11, multi_hop 10, refusal 9, coverage 5. Drafted as student-voice questions from the verified pages, then checked by a separate model review pass; the per-item record is `evaluation/datasets/gold_review.md`.
+- **Gold fields and validator.** `GoldItem` in `evaluation/retrieval_eval.py` gained optional `kind`, `university`, `programme`, `author`, `reviewed_by` and `expect_refusal`, all defaulted so the old test fixture still loads. `scripts/validate_gold.py` checks every label; `make eval` runs it first.
+- 55 tests pass.
+
+### Why (defend these)
+- **Tiers instead of hand-ticking all 13.** The seven second-pass records would cost about 30 minutes each to tick by hand. Labelling each record with how it was verified keeps every claim true without blocking the build. The README and every metric say which tier they use.
+- **A re-save keeps the tier.** Otherwise opening a second-pass record in the review screen and pressing Save would silently relabel it as human-verified. Promotion is a hand edit so it is always a decision.
+- **A sample, not a census.** A random sample of 35 of the 69 stated second-pass fields gives an error-rate estimate with a confidence interval for about half the effort of checking all 69.
+- **Seeded.** The same command (`35 4`) always draws the same 35 fields, so anyone can reproduce the sample. The seed is recorded in the sheet and in the audit file, so the sample cannot be quietly redrawn until it looks good.
+- **Only `stated` fields are sampled.** The audit measures the precision of stated claims ("when the record says X, is X on the page?"). It does not estimate missed fields; those are what the cross-check's `missed` verdict and the review warnings target.
+- **The model pre-check is a second opinion, not the audit.** It points the auditor at likely problems. The auditor can see it, so it is not independent of the human verdict; the audit file records `prechecked_by: model` and `auditor: human` for that reason.
+- **Strict accuracy definition.** A field is "unchanged" only if status, value, quote and doc_id are all identical between draft and verified record. The product promises a citation, so a right value with a wrong quote or page is still a correction. The number is conservative: a cosmetic quote trim counts as an edit.
+- **Headline on the human tier only.** Second-pass records were verified with the cross-check's help, so they say nothing independent about the draft or the checker.
+- **Six kinds of gold item, each testing one thing.** `requirement`: a programme fact from one page. `country_rules`: national rules (visa, APS, blocked account). `confusable`: two sibling programmes whose pages read alike; tests that retrieval finds the right programme, which is where metadata filters (Phase 5) must earn their place. `multi_hop`: needs two docs. `refusal`: the corpus does not answer it. `coverage`: an uncovered university or another country. Splitting metrics by kind shows where a retrieval mode wins or loses instead of one blended average.
+- **Refusal and coverage items have no doc ids** (`relevant_doc_ids: []`, `expect_refusal: true`). Retrieval metrics skip them because there is nothing to recall; they feed refusal calibration in step 4.
+- **A validator before any number.** A broken label gives a confident wrong metric. The validator catches mechanical errors (unknown doc, a section filter that matches nothing, a number in the hint that is not on the page) before `make eval` runs.
+- **Synthetic profiles moved to Phase 6.** They test the eligibility engine, which does not exist yet.
+
+### The numbers
+
+Extraction accuracy (`render()` output):
+
+| records | programmes | fields | draft unchanged | edited | dropped | added | checker precision | checker recall |
+|---|---|---|---|---|---|---|---|---|
+| human tier (headline) | 6 | 102 | 0.794 | 18 | 0 | 3 | 0.947 | 0.857 |
+| all (second_pass not independent) | 13 | 221 | 0.828 | 32 | 3 | 3 | 0.833 | 0.658 |
+
+How to read it:
+- **Draft unchanged**: share of fields where the LLM draft survived verification exactly (status, value, quote and doc_id identical). On the human tier, 0.794 of 102 fields; the 0.794 is unchanged from before the tier split.
+- **Edited / dropped / added**: stated in both but changed; stated in the draft but `not_published` after verification; `not_published` in the draft but stated after verification.
+- **Checker precision**: of the fields the cross-check flagged (wrong, partial or missed), the share that really changed. **Checker recall**: of the fields that changed, the share it flagged.
+- **Caveat**: the review screen shows the cross-check verdict next to each field, so the checker numbers mean "predicts what a person who could see its verdict changed". The "all" row includes second-pass records, which were verified with the cross-check's help, so it is not independent; it is shown for completeness, not as the headline.
+
+Audit pre-check on the 35 sampled fields: 33 agree, 2 disagree, 0 unsure. The two disagreements are row 12 (Saarland CS `required_documents` omits the GRE/GATE result and the English certificate that the same section requires) and row 16 (TU Darmstadt AIML `entrance_tests` is recorded as `one_of`, i.e. mandatory, but the page makes the entrance exam conditional, "Only when required entrance competencies cannot be confirmed from the submitted documents", and GRE/GATE an exemption from it; the schema has no "conditional" value). Human audit: pending.
+
+Gold set review pass: 107 drafted, 81 unchanged, 23 fixed, 3 dropped, 104 kept. Every item is `author: model`, `reviewed_by: model`; human pass pending.
+
+### How the human steps are done
+
+**(a) Auditing a field (audit sheet row).**
+1. Open `data/audit/audit_sheet.md` and, for anything the excerpt does not settle, `make review` on that programme to see the full page.
+2. Find the quote on the page. If it is not there word for word (allowing punctuation), stop: that is a disagreement.
+3. Check the value against the quote digit by digit: scores, credits, dates, fees. Check country lists name by name (a missing or extra country changes who must take a test).
+4. Check scope: does the sentence apply to this programme, this applicant group (EU vs non-EU, degree country) and this intake?
+5. Check hard vs recommended: "must", "required" vs "recommended", "should", "e.g.". An example is not a minimum.
+6. Read the sentences around the quote for qualifications that change the meaning: "only if", "alternatively", "exempt", "unless". Row 16 is this case.
+7. Read the pre-check line last, so it does not anchor you.
+8. Tick agree, or tick disagree and write one line saying what the page says instead. Record the totals in `data/audit/second_pass_audit.json` as `{audited, of, seed, auditor: human, prechecked_by: model, disagreements}`. Fix confirmed disagreements in the verified record through the review Save path (which re-runs the schema and quote check); the tier stays `second_pass`.
+
+**(b) Judging a gold item** (skim `evaluation/datasets/gold_review.md`, then the item):
+- Is the listed doc really where the answer is, and is it the only doc that answers it? If a second page states the same fact, the doc-level label will undercount recall: reword the question or drop it.
+- Is the `answer_hint` supported by that doc, numbers included?
+- Does the question copy the page's wording? A real student does not write "Zugangsvoraussetzungen"; copied phrases make BM25 look better than it is.
+- Is the `kind` right (one doc vs two for `multi_hop`; a real sibling programme for `confusable`)?
+- Accept, edit or drop. Set `reviewed_by: human` on accepted or edited items. Optionally write a few items yourself with `author: human`. Run `.venv/bin/python scripts/validate_gold.py` after editing.
+
+**(c) Why 35 of 69 is an estimate, and what k errors means.** Auditing 35 of 69 fields measures the error rate on a sample, so the result is an estimate with uncertainty, not a count. With k errors in n = 35, the observed rate is p = k/n, and the Wilson 95% interval (z = 1.96) gives the range of true error rates consistent with that sample:
+
+- centre = (p + z²/2n) / (1 + z²/n)
+- half-width = z · sqrt(p(1−p)/n + z²/4n²) / (1 + z²/n)
+
+| errors k in 35 | Wilson 95% interval for the error rate |
+|---|---|
+| 0 | [0.000, 0.099] |
+| 1 | [0.005, 0.145] |
+| 2 | [0.016, 0.186] |
+| 3 | [0.030, 0.224] |
+
+Worked example for k = 0: p = 0, z²/n = 3.8416/35 = 0.1098, centre = (0 + 0.0549)/1.1098 = 0.0495, half-width = 1.96 · sqrt(3.8416/4900)/1.1098 = 0.0495, so [0, 0.099]. Zero errors in 35 still allows up to about a 10% error rate. Wilson is used instead of the textbook p ± z·sqrt(p(1−p)/n) because that formula gives a zero-width interval when k = 0, which would claim certainty from a small sample.
+
+**(d) Why model drafting plus human review is defensible.** "Model-assisted, human-reviewed" is a normal way to build an eval set: writing 100 varied questions by hand is slow, while judging whether a drafted question and its label are right is fast and is where a person adds the most. The risks are known and handled: drafted questions can echo page wording (checked in step b), and a model reviewing a model's items shares its blind spots (which is why the human pass exists). `author` and `reviewed_by` are recorded per item so the split is visible to any reader, and metrics can be reported on the human-reviewed subset alone.
+
+### Quiz questions (answer later)
+1. A field's value is correct but its quote comes from the wrong page. Does it count as "draft unchanged"? Why is that the right call for this product?
+2. Why is the extraction-accuracy headline computed on 6 programmes and not 13?
+3. The cross-check has precision 0.947 and recall 0.857 on the human tier. What does each mean, and why are they not independent measurements?
+4. The audit finds zero errors in 35 sampled fields. What can you claim about the error rate, and why not "0%"?
+5. Why is the audit sample seeded, and why are only `stated` fields sampled? What does that leave unmeasured?
+6. Why do refusal and coverage items carry no doc ids, and what are they used for instead?
+7. What makes a `confusable` item hard on this corpus, and which later phase is meant to fix it?
+8. The gold set is model-drafted. How do you defend it to a reviewer who says "the model graded its own homework"?
+
+### DECISIONS entries to write (maintainer, own words)
+- [x] 2026-10-26: verification tiers (`human` / `second_pass`) and a seeded sampled audit instead of hand-ticking all 13.
+- [x] 2026-10-26: synthetic profiles moved from Phase 4 to Phase 6.
+- [x] 2026-10-26: gold set model-assisted and human-reviewed, with `author` / `reviewed_by` per item.
+- [x] 2026-10-26: extraction accuracy defined on value + quote + doc_id.
+
+### Open findings
+- Doc-level labels undercount recall when the same fact is stated on two pages (for example RWTH non-EU deadlines on both `de/rwth/application-deadlines` and `de/rwth/master-application-international`). The drafters and the review pass avoided or reworded such items; 3 were dropped. A known limit of doc-level labels.
+- Near-identical sibling pages (TUM Informatics vs DEA department pages; TU Darmstadt CS vs AIML programme pages) make confusable items hard to write with a single right answer; only 11 confusables survived.
+- Official sources conflict:
+  - English level for the visa: India embassy page C1, APS leaflet B2;
+  - job-search permit for graduates abroad: BAMF six months, BAMF graduates page up to one year;
+  - student residence permit length: BAMF and Aachen one to two years, Munich three years;
+  - dMAT timing: APS India home page vs the APS leaflet;
+  - student work-day limit: TU Darmstadt guide 140 full / 280 half days, Foreign Office FAQ 120 / 240.
+  The answer layer (Phase 8) must surface a conflict with both citations instead of picking one.
+- The RWTH language-requirements PDF lost its headings in parsing (all 29 chunks share one `section_path`) and lists two score levels whose scope is unclear.
+- Schema gap: no "conditional" requirement value (TU Darmstadt AIML entrance exam, audit row 16). For Phase 6.

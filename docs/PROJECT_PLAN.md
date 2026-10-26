@@ -1,6 +1,6 @@
 # Project plan: Germany admissions and eligibility assistant
 
-Status: living document. Last updated 2026-10-23. Phases 1–2 are merged. Phase 3 (extraction, review, batch 2): all 13 programmes are extracted, cross-checked and verified; the Phase 3 notes and the pull request are left.
+Status: living document. Last updated 2026-10-26. Phases 1–3 are merged (PR #3 for Phase 3). Phase 4 (evaluation baseline) is in progress: verification tiers, extraction accuracy and the gold set are done; retrieval benchmark numbers and refusal calibration are left, and the human audit and gold-set review are pending.
 
 **Build order:** 1 → 2 → 3 → 4 → **6 → 5** → 7 → 8 → 9 → 10 → 11 → 12. Phase 6 (eligibility engine) runs before Phase 5 (retrieval upgrades) because the engine is the product and needs only the verified records (decided 2026-10-13).
 
@@ -29,7 +29,7 @@ flowchart LR
         ING --> IDX[dense + BM25 indexes]
         ING --> EXT[LLM extraction<br/>quote check]
         EXT --> CHK[second-model<br/>cross-check]
-        CHK --> REV[human review]
+        CHK --> REV[review<br/>human or second pass]
         REV --> REQ[verified requirements JSON]
     end
     subgraph Online["Online, per request"]
@@ -55,7 +55,7 @@ This is a scope decision, stated once on the coverage page and in the README:
 - The maintainer studies in Germany, so the sources and edge cases can be checked first-hand.
 - The German system is rule-based (uni-assist, APS for some nationalities, a blocked account, grade conversion). It maps cleanly onto a deterministic rules engine, which is the core design choice of the project.
 - Germany is one of the largest destinations for international master's students and most public universities charge little or no tuition (exceptions such as TUM and Baden-Württemberg's fees for non-EU students are exactly the kind of detail the report must cite).
-- Depth beats breadth for a verified product: every programme record is checked by hand, so a few countries done badly would be worse than one done well.
+- Depth beats breadth for a verified product: every programme record is verified against its official pages (by hand, or by a second pass with a sampled audit), so a few countries done badly would be worse than one done well.
 
 A question about another country gets a coverage-aware refusal ("I currently cover Germany only") plus the official portal link. That behaviour is evaluated too. Adding a country later would mean new sources and a schema mapping; it is out of scope.
 
@@ -64,7 +64,7 @@ A question about another country gets a coverage-aware refusal ("I currently cov
 - **Offered: an eligibility and gap report against published requirements.**
   1. **LLM structured extraction.** Each programme page becomes a `ProgramRequirements` record: minimum grade and scale, required degree or field, ECTS/credit prerequisites, IELTS/TOEFL/Duolingo minimums, GRE/GMAT, APS, work experience, deadlines, fees, documents. Each field cites its source span.
   2. **Automatic checks.** A field survives only if its verbatim quote is found in the page it cites. A second model from a different family then cross-checks every field (correct / wrong / partial / missed / not published / unsure) and may propose a fix; a proposed fix must pass the same schema and quote check, or it is shown as invalid.
-  3. **Human verification.** A review screen shows each field next to its quote, the full page, the automatic warnings and the cross-check verdict. Every field is ticked by hand before Save. The verified records are both the product data and the gold evaluation set.
+  3. **Verification, in two tiers recorded on each record (`tier`).** `human`: a review screen shows each field next to its quote, the full page, the automatic warnings and the cross-check verdict, and every field is ticked by hand before Save (6 programmes). `second_pass`: every field is re-read against its cited pages in a second pass and saved through the same Save path, which re-runs the schema and quote check, without a hand tick (7 programmes); a seeded sample of its stated fields is audited by hand (sheet prepared; human pass pending). A re-save keeps the tier; promotion to `human` is a deliberate hand edit. The verified records are both the product data and the gold evaluation set.
   4. **Deterministic rules engine.** It compares the profile with the requirements. Each requirement returns `meets`, `does_not_meet`, `unknown` (missing info) or `not_published`. The LLM never decides eligibility; it only extracts and explains.
   5. **Deterministic tools** for grade conversion (the modified Bavarian formula) and test-score equivalence where officially published.
   6. **Competitiveness is qualitative and cited.** If a page says "typically admitted students have…", we quote it.
@@ -198,8 +198,9 @@ retrieval/              hybrid core kept (dense + BM25 + RRF + rerank); add meta
 agent/                  hand-rolled tool-use loop, step budget, refusal (7)
 generation/             LLM client (OpenAI-compatible, Gemini base_url) (3), structured answers,
                         citations, guardrails (8)
-evaluation/             retrieval gold, extraction accuracy, eligibility verdict accuracy on synthetic
-                        profiles, refusal/coverage probes (4), judge-based faithfulness, cost/latency (8)
+evaluation/             retrieval gold set + validator, extraction accuracy, refusal/coverage probes (4),
+                        eligibility verdict accuracy on synthetic profiles (6), judge-based
+                        faithfulness, cost/latency (8)
 api/                    SSE streaming, rate limit + request cap, cache, tracing, usage per request (8)
 frontend/               profile form + paste-to-fill, eligibility report, process panel, chat with
                         sources, coverage page, evaluation dashboard (9)
@@ -209,7 +210,9 @@ mcp_server/             MCP server exposing the agent's tools (search_sources, g
                         check_eligibility, convert_grade, find_scholarships) (11, after deploy)
 data/extracted/         LLM drafts, one per programme (3)
 data/checked/           second-model cross-check per draft: the audit trail (3)
-data/verified/          human-verified records: product data and gold data (3)
+data/verified/          verified records with a tier (human | second_pass): product data and gold
+                        data (3, tier added in 4)
+data/audit/             sampled audit sheet and result for the second_pass tier (4)
 ```
 
 ## 7. Phases
@@ -220,9 +223,9 @@ Each phase ends runnable and measured. A phase starts only when the previous one
 |---|---|---|---|---|---|
 | 1 | Clean base | Done: reranker normalisation, test isolation, `vite-env.d.ts`, CI workflow, stale docs removed | — | — | Merged (PR #1) |
 | 2 | Sources and ingestion | Source registry checked against live sites; polite crawler (robots.txt, cache, crawl date); HTML/PDF parsing; chunks with metadata; journey-stage sources, on the 5 pilot universities | Review the source list, confirm programmes, decide robots.txt / terms-of-use issues (~30 min); run `make crawl`, `make ingest`, `make index` | Crawling ethics, parsing, chunking, provenance | `make crawl/ingest/index` run clean; tests green; Phase 2 section in `LEARNING.md`. Merged (PR #2) |
-| 3 | Extraction + batch 2 | Done: Gemini `base_url` + model fallback, `ProgramRequirements` with cited fields, `make extract` with quote check, second-model cross-check (`data/checked/`), review screen (`make review`). Registry gap pages and batch 2 (KIT, TU Darmstadt, Stuttgart) crawled, extracted, cross-checked and verified | Run crawl/ingest/index/extract; verify records in `make review` (6 programmes by hand; batch 2 by a second pass over the cited pages, first record hand-checked) | Structured outputs, schema design, field-level accuracy, verification design | `ls data/verified \| wc -l` = 13 (all registry programmes) and committed; Phase 3 in `LEARNING.md`; PR open |
-| 4 | Eval baseline | ~100 draft gold questions written from verified pages, ~40 synthetic profiles, refusal and coverage probes, first benchmark numbers with the four retrieval modes, extraction accuracy (LLM draft vs verified, cross-check precision) | Review/fix drafts, write ~20 questions (~2–3 h) | Recall, MRR, nDCG; gold sets; judge bias | `make eval` prints real numbers for all four modes and extraction accuracy |
-| 6 | Eligibility engine | Profile schema, rules engine, grade conversion, funds check, hard/soft flags, margins, entrance-test country conditions, paste-to-fill | Write 5 realistic anonymised profiles and check verdicts | Deterministic logic vs LLM | Verdicts correct on the 5 profiles; engine fully unit-tested |
+| 3 | Extraction + batch 2 | Done: Gemini `base_url` + model fallback, `ProgramRequirements` with cited fields, `make extract` with quote check, second-model cross-check (`data/checked/`), review screen (`make review`). Registry gap pages and batch 2 (KIT, TU Darmstadt, Stuttgart) crawled, extracted, cross-checked and verified | Run crawl/ingest/index/extract; verify records in `make review` (6 programmes by hand; the other 7 by a second pass over the cited pages, first record checked against its pages) | Structured outputs, schema design, field-level accuracy, verification design | `ls data/verified \| wc -l` = 13 (all registry programmes) and committed; Phase 3 in `LEARNING.md`. Merged (PR #3) |
+| 4 | Eval baseline | Verification tiers (`human` / `second_pass`) and a seeded sampled audit of the `second_pass` tier; extraction accuracy (LLM draft vs verified, cross-check precision and recall); a model-drafted gold set (104 items) with refusal and coverage probes, `author` / `reviewed_by` recorded per item, and a label validator; first benchmark numbers with the four retrieval modes split by kind; refusal calibration on the probes. Synthetic profiles moved to Phase 6 | Tick the audit sheet, review the gold set (accept, edit or drop; optionally write a few items) (~1 h) | Recall, MRR, nDCG; gold sets; sampling and confidence intervals; judge bias | `make eval` prints real numbers for all four modes and extraction accuracy |
+| 6 | Eligibility engine | Profile schema, rules engine, grade conversion, funds check, hard/soft flags, margins, entrance-test country conditions, paste-to-fill; ~40 synthetic profiles with expected verdicts (moved from Phase 4) | Write 5 realistic anonymised profiles and check verdicts | Deterministic logic vs LLM | Verdicts correct on the 5 profiles; engine fully unit-tested |
 | 5 | Retrieval upgrades | Metadata filters first; query rewriting and parent-child only if time allows; ablation table; each kept only if the benchmark improves | Read results and decide what stays | Ablation method | Ablation table committed; only upgrades that beat the baseline remain |
 | 7 | Small agent | Tool-use loop over the existing functions (search, get_requirements, check_eligibility, convert_grade; find_scholarships optional) with a step budget; compared with one-shot RAG on multi-hop questions | Try multi-part questions and try to break it | Agent loops, tool design | Agent beats one-shot RAG on the multi-hop eval subset |
 | 8 | Production layer | SSE streaming, guardrails, response caching, rate and request caps, tracing as structured logs (no vendor), model fallback, user-source path, feedback queue, privacy notice, Docker, CI eval gate | Run the Docker setup and attempt prompt injections | LLMOps, security, containers | Docker run verified; injection attempts handled; CI gate green |
@@ -239,7 +242,7 @@ Each phase ends runnable and measured. A phase starts only when the previous one
 3. **Hands-on task** (the manual column above).
 4. **Run it yourself** with the commands provided.
 5. **Explain.** "Explain Phase N" → a walkthrough of how it works and why.
-6. **Park the learning.** Append the phase's notes, 3–5 interview-style quiz questions and the owed `DECISIONS.md` entry to `LEARNING.md`. The maintainer writes the DECISIONS entries and takes the quizzes in one batch after Phase 10, before Phase 11; this does not gate the next phase.
+6. **Park the learning.** Append the phase's notes, 3–5 interview-style quiz questions and the owed `DECISIONS.md` entry to `LEARNING.md`. DECISIONS entries are drafted from the decisions taken in the session and then edited by the maintainer into their own words; the quizzes are taken in one batch after Phase 10, before Phase 11. Neither gates the next phase.
 7. **Commit.** "Commit Phase N": one branch and one PR per phase.
 
 Other commands: "Continue Phase N, step X", "Pause, explain why X", "Status?", "I disagree with X because Y". New session: "Continue the project, Phase N".
@@ -251,7 +254,7 @@ Items from the October review that still apply and are folded into the phases ab
 - Cleaner: do not strip comments or collapse blank lines inside fenced code (Phase 2).
 - Chunking: respect model token limits (bge-small: 512 tokens); keep parent context for display (Phases 2 and 5).
 - Answer contract: reject or repair empty, uncited or invalid-citation LLM output; add refusal reasons (Phases 3 and 8).
-- Evaluation: validate gold labels, add refusal probes, warm models before timing, report sample counts (Phase 4).
+- Evaluation: validate gold labels and add refusal probes (done in Phase 4: `scripts/validate_gold.py`, 9 refusal and 5 coverage items); warm models before timing, report sample counts (Phase 4).
 - Serving: readiness vs liveness on `/health`; rate limits and request deadlines; `/ingest` and `/evaluate` become admin or job-only (Phase 8).
 - Tests: no test may write real data, README or benchmark files, or call a paid provider (Phase 1 started this).
 - Deployment: same-origin or configurable API base and CORS; benchmark published as a build artifact, not an API write (Phase 10).
