@@ -73,6 +73,10 @@ def summarize(rows: list[dict], tier: str | None = "human") -> dict:
     }
 
 
+def _num(v) -> str:
+    return "n/a" if v is None else str(v)
+
+
 def render(settings: Settings) -> str:
     rows = compare(settings)
     lines = ["| records | programmes | fields | draft unchanged | edited | dropped | added | checker precision | checker recall |",
@@ -80,7 +84,6 @@ def render(settings: Settings) -> str:
     for tier, label in (("human", "human tier (headline)"), (None, "all (second_pass not independent)")):
         s = summarize(rows, tier)
         o = s["outcomes"]
-        num = lambda v: "n/a" if v is None else v
-        lines.append(f"| {label} | {s['programmes']} | {s['fields']} | {num(s['draft_accuracy'])} | {o.get('edited', 0)} | "
-                     f"{o.get('dropped', 0)} | {o.get('added', 0)} | {num(s['checker_precision'])} | {num(s['checker_recall'])} |")
+        lines.append(f"| {label} | {s['programmes']} | {s['fields']} | {_num(s['draft_accuracy'])} | {o.get('edited', 0)} | "
+                     f"{o.get('dropped', 0)} | {o.get('added', 0)} | {_num(s['checker_precision'])} | {_num(s['checker_recall'])} |")
     return "\n".join(lines)
