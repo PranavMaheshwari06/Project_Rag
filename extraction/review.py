@@ -166,8 +166,11 @@ def save_programme(slug: str, body: dict = Body(...)):
     draft = _file("extracted", slug)
     out = _file("verified", slug)
     out.parent.mkdir(parents=True, exist_ok=True)
+    # a re-save keeps the existing tier; promoting second_pass -> human is a deliberate hand edit
+    tier = json.loads(out.read_text(encoding="utf-8")).get("tier", "human") if out.exists() else "human"
     out.write_text(json.dumps({
         "verified_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+        "tier": tier,
         "draft_model": json.loads(draft.read_text(encoding="utf-8")).get("model") if draft.exists() else None,
         "record": rec.model_dump(mode="json"),
     }, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
