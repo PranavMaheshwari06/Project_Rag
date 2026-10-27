@@ -767,6 +767,18 @@
     "status": 200,
     "url": "https://tu-dresden.de/studium/vor-dem-studium/internationales/faq?set_language=en"
   },
+  "de/tud/semester-contribution": {
+    "changed": false,
+    "checked_at": "2026-10-27T20:28:10+00:00",
+    "content_type": "text/html",
+    "error": null,
+    "fetched_at": "2026-10-27T20:28:10+00:00",
+    "file": "de/tud/semester-contribution.html",
+    "final_url": "https://tu-dresden.de/studium/im-studium/studienorganisation/rueckmeldung",
+    "sha256": "5e66f337136339a2dbe577ca4f25dc74b7e1c53959d2fbad1ad6d00b83c51566",
+    "status": 200,
+    "url": "https://tu-dresden.de/studium/im-studium/studienorganisation/rueckmeldung"
+  },
   "de/tum/dea-msc/department": {
     "changed": false,
     "checked_at": "2026-10-05T12:22:49+00:00",
@@ -838,6 +850,18 @@
     "sha256": "e59dc31283a675be95e0d72ed3e80636864d65d4210e63a717c918f92278d97d",
     "status": 200,
     "url": "https://www.f05.uni-stuttgart.de/en/cs/prospective-students/msc-computerscience/"
+  },
+  "de/ustutt/cs-msc/english-proofs": {
+    "changed": false,
+    "checked_at": "2026-10-27T20:29:49+00:00",
+    "content_type": "application/pdf",
+    "error": null,
+    "fetched_at": "2026-10-27T20:29:49+00:00",
+    "file": "de/ustutt/cs-msc/english-proofs.pdf",
+    "final_url": "https://www.uni-stuttgart.de/studium/studienangebot_assets/computer-science/pdf/English_language_skills_MSc_CS_barrierefrei_01-2026.pdf",
+    "sha256": "d5ff8bff58a0f54817b46fb76a40d2398f62fde44afd945d8da655d0fedc15d1",
+    "status": 200,
+    "url": "https://www.uni-stuttgart.de/studium/studienangebot_assets/computer-science/pdf/English_language_skills_MSc_CS_barrierefrei_01-2026.pdf"
   },
   "de/ustutt/cs-msc/programme": {
     "changed": false,

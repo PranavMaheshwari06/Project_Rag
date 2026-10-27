@@ -32,8 +32,12 @@ def built_corpus(tmp_path_factory):
     settings.evaluation.gold_path = str(FIXTURES / "gold_qa.jsonl")
     settings.paths.processed_path = str(tmp / "chunks.jsonl")
     settings.paths.index_dir = str(tmp / "index")
+    for kind in ("extracted", "checked", "verified"):
+        setattr(settings.paths, f"{kind}_dir", str(tmp / kind))
     settings.evaluation.benchmark_out = str(tmp / "benchmark.json")
     settings.evaluation.readme_path = str(tmp / "README.md")
+    settings.evaluation.calibration_out = str(tmp / "refusal_calibration.json")
+    settings.evaluation.audit_path = str(tmp / "audit.json")
     stats = run_ingestion(settings)
     build_indexes(settings)
     return stats

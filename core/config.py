@@ -84,6 +84,9 @@ class EvalCfg(BaseModel):
     k_values: list[int] = [5, 10]
     benchmark_out: str = "frontend/public/benchmark.json"
     readme_path: str = "README.md"
+    calibration_out: str = "evaluation/results/refusal_calibration.json"
+    audit_path: str = "data/audit/second_pass_audit.json"
+    max_false_refusal_rate: float = 0.05
 
 
 class Settings(BaseModel):

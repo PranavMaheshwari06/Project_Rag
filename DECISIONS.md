@@ -65,6 +65,8 @@ that gap will narrow on messier corpora.
 corpus. The threshold is recalibrated on this corpus in Phase 4 (step 4) with
 the 14 refusal and coverage probes in the gold set; not done yet.*
 
+*Completed 2026-10-27: see the Phase 4 closure entry for the selected threshold and measured misses.*
+
 ## 2026-07-30 — doc-level gold labels, not chunk ids
 
 First draft labeled relevant chunk_ids. Then I changed the chunker config and
@@ -239,6 +241,8 @@ interval, and zero errors in 35 still allows an error rate up to about 10%
 (Wilson 95%). Only stated fields are sampled, so missed fields are not
 estimated.
 
+*Completed 2026-10-27: the sampled audit and all six confirmed corrections are recorded; historical scores remain unchanged. See the closure entry.*
+
 ## 2026-10-26 — synthetic profiles move from Phase 4 to Phase 6
 
 The ~40 synthetic profiles test eligibility verdicts, and the engine that
@@ -264,6 +268,8 @@ risks are that model-written questions echo page wording (which flatters BM25)
 and that a model reviewing a model shares its blind spots; the review
 checklist looks for the first, and the human pass is there for the second.
 
+*Accepted 2026-10-27: all 104 retained items now record human acceptance, including four explicitly approved updates. Authorship remains model-assisted; see the closure entry.*
+
 ## 2026-10-26 — extraction accuracy counts value, quote and doc_id
 
 A field counts as "draft unchanged" only if status, value, quote and doc_id
@@ -275,3 +281,13 @@ cross-check's help, so they say nothing independent. The cost: a cosmetic
 quote trim counts as an edit, so the number is conservative, and the checker's
 precision and recall mean "predicts what a person who could see its verdict
 changed", not an independent score.
+
+## 2026-10-27 — Phase 4 closure: preserve audit history and calibrate offline
+
+The completed 35-field review is now recorded, with both rubrics: 29 strict passes and 32 snapshot passes from the original population of 69 stated fields. Six findings were corrected through Save without promoting the second-pass tiers or replacing the historical scores. The complete report and original field values remain the audit trail. Extra citations support cross-page fields; optional exam conditions and degree origin remove the two immediate representation errors. Accordion headings are retained as scope, while ordinary tab controls stay out of the text.
+
+The maintainer accepted all 104 retained model-authored gold items and four targeted audit-related updates. Human acceptance is recorded per item; the model review and its uncertainty notes remain visible. The two added official sources bring the corpus to 74 sources and 600 chunks.
+
+The selected score threshold is `0.13340958034137707`. It refuses 4/14 refusal/coverage probes while falsely refusing 3/90 answerable questions. The constraint is at most 5% false refusals; ties prefer fewer false refusals, then a lower threshold. These are calibration-set results, not held-out estimates. Actual answer refusals are reported separately in the calibration artifact.
+
+The benchmark disables live LLM calls even when a key exists, so the baseline spends no free-tier quota. It reports extractive token-overlap answer metrics, four retrieval modes overall and by kind, the human-tier extraction headline, and the original audit scores. The threshold sweep reuses scores; timings use real searches after model warmup. Input hashes and per-item diagnostics are committed for comparison. Personal rewrites of these entries remain a maintainer task and do not gate Phase 6.

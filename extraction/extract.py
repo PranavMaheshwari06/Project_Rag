@@ -25,9 +25,10 @@ FIELDS = [name for name in ProgramRequirements.model_fields if name not in META_
 SYSTEM_PROMPT = """You extract master's admission requirements for ONE programme from official university pages.
 
 Return a JSON object with exactly these keys: {fields}.
-Each key maps to an object {{"status", "value", "quote", "doc_id"}}:
+Each key maps to an object {{"status", "value", "quote", "doc_id", "supporting_citations"}}:
 - "stated": the pages state it. "value" follows the JSON schema below. "quote" is copied character for character from one document: the whole sentence, bullet or table row that supports the value, never just the number or a single cell. "doc_id" is the id of that document.
 - "not_published": the pages do not state it. "value", "quote" and "doc_id" are null.
+- supporting_citations is an optional list of {{"quote", "doc_id"}} for additional supporting spans or pages; every span must be copied verbatim. Use [] for not_published.
 
 Rules:
 - Use only the documents. Never use outside knowledge, never guess, never round or convert numbers.
@@ -36,8 +37,10 @@ Rules:
 - min_grade_original_scale: a minimum grade stated on another scale (percentage, GPA out of 4, class rank), as written.
 - english: one entry per accepted test with its minimum score as written.
 - entrance_tests: GRE, GATE, GMAT, the university's own aptitude test, etc. Use "one_of" for tests that are alternatives to each other. applies_to_degree_countries lists the countries named (empty if it applies to all applicants). exempt_degree_countries lists countries or regions whose degree holders are exempt (e.g. "EHEA", "Switzerland", "UK"), as written.
+- entrance_tests.condition holds a conditional exam trigger or exemption rule. Do not put conditions in min_scores or turn exemption evidence into a universally mandatory test.
 - aps_degree_countries: the countries whose degree holders must submit an APS certificate, as named; [] if the pages say no APS is needed.
 - deadlines: kind "early" for an optional earlier round, "final" otherwise.
+- deadlines.degree_origin is germany or outside_germany only when the source explicitly scopes the deadline by qualifying degree origin, otherwise null.
 - german: "none" if the pages say no German is needed.
 - work_experience: "counts_in_selection" if internships or work experience earn points or are considered but are not required.
 - tuition_eur_per_semester_non_eu: 0 if the pages say there are no tuition fees.
@@ -99,17 +102,20 @@ def check_quotes(rec: ProgramRequirements, docs: dict[str, str], min_words: int)
         field = getattr(rec, name)
         if field.status != "stated":
             continue
-        quote = _words(field.quote)
-        if field.doc_id not in docs:
-            reason = f"cites unknown doc {field.doc_id}"
-        elif len(quote.split()) < min_words:
-            reason = "quote too short to verify"
-        elif quote not in _words(docs[field.doc_id]):
-            reason = f"quote not found in {field.doc_id}"
-        else:
-            continue
-        rejected.append(f"{name}: {reason}: {field.quote!r}")
-        setattr(rec, name, type(field)())
+        citations = [(field.quote, field.doc_id)] + [(c.quote, c.doc_id) for c in field.supporting_citations]
+        for raw_quote, doc_id in citations:
+            quote = _words(raw_quote)
+            if doc_id not in docs:
+                reason = f"cites unknown doc {doc_id}"
+            elif len(quote.split()) < min_words:
+                reason = "quote too short to verify"
+            elif quote not in _words(docs[doc_id]):
+                reason = f"quote not found in {doc_id}"
+            else:
+                continue
+            rejected.append(f"{name}: {reason}: {raw_quote!r}")
+            setattr(rec, name, type(field)())
+            break
     return rejected
 
 

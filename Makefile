@@ -37,7 +37,7 @@ review:
 
 eval:
 	$(PY) scripts/validate_gold.py
-	$(PY) scripts/run_eval.py
+	$(PY) scripts/run_eval.py --apply-threshold
 
 test:
 	$(PY) -m pytest -q

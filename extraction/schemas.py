@@ -7,7 +7,7 @@ engine reports it as unknown instead of guessing."""
 
 from typing import Generic, Literal, TypeVar
 
-from pydantic import BaseModel, field_validator, model_validator
+from pydantic import BaseModel, Field, field_validator, model_validator
 
 T = TypeVar("T")
 
@@ -26,18 +26,24 @@ def canonical_test(name: str) -> str:
     return TEST_ALIASES.get(name.strip().lower(), name.strip())
 
 
+class SupportingCitation(BaseModel):
+    quote: str = Field(min_length=1)
+    doc_id: str = Field(min_length=1)
+
+
 class Cited(BaseModel, Generic[T]):
     status: Literal["stated", "not_published"] = "not_published"
     value: T | None = None
     quote: str | None = None  # verbatim span from the source text
     doc_id: str | None = None  # registry id of the page the quote is from
+    supporting_citations: list[SupportingCitation] = Field(default_factory=list)
 
     @model_validator(mode="after")
     def _consistent(self):
         filled = [self.value is not None, bool(self.quote), bool(self.doc_id)]
         if self.status == "stated" and not all(filled):
             raise ValueError("a stated field needs value, quote and doc_id")
-        if self.status == "not_published" and any(filled):
+        if self.status == "not_published" and (any(filled) or self.supporting_citations):
             raise ValueError("a not_published field must be empty")
         return self
 
@@ -59,6 +65,7 @@ class Deadline(BaseModel):
     applicant_group: Literal["all", "eu", "non_eu"]
     date: str  # as published, e.g. "31 May"
     kind: Literal["final", "early"] = "final"  # some programmes run an optional early round
+    degree_origin: Literal["germany", "outside_germany"] | None = None
 
 
 class EntranceTest(BaseModel):
@@ -68,6 +75,7 @@ class EntranceTest(BaseModel):
     applies_to_degree_countries: list[str] = []  # empty = all applicants
     # applicants with a degree from here are exempt; region names as published, e.g. "EHEA"
     exempt_degree_countries: list[str] = []
+    condition: str | None = None  # exam trigger or conditions for using an exemption
 
     _canonical = field_validator("test")(canonical_test)
 

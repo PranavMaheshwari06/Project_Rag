@@ -43,6 +43,16 @@ def test_quote_only_edit_counts_as_edited():
     assert ev._outcome(st(1), st(1) | {"doc_id": "other"}) == "edited"
 
 
+def test_optional_defaults_are_not_edits_but_conditions_and_citations_are():
+    original = st([{"test": "GRE", "requirement": "one_of"}])
+    defaults = st([{"test": "GRE", "requirement": "one_of", "condition": None}])
+    defaults["supporting_citations"] = []
+    assert ev._outcome(original, defaults) == "unchanged"
+    changed = st([{"test": "GRE", "requirement": "one_of", "condition": "exemption only"}])
+    assert ev._outcome(original, changed) == "edited"
+    assert ev._outcome(original, original | {"supporting_citations": [{"quote": "other", "doc_id": "x"}]}) == "edited"
+
+
 def test_bad_or_missing_tier_raises(dirs):
     draft = {f: NP for f in FIELDS}
     (dirs / "extracted/a.json").write_text(json.dumps({"record": draft}))

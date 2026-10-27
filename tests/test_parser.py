@@ -32,3 +32,15 @@ def test_main_preferred_and_tables_kept():
 def test_body_fallback_without_main():
     doc = _parse("<html><body><h2>Visa</h2><p>Blocked account required.</p></body></html>")
     assert "## Visa" in doc.text and "Blocked account required." in doc.text
+
+
+def test_accordion_scope_headings_precede_their_content():
+    doc = _parse('''<main><h2>Deadlines</h2>
+      <div><a class="accordion-title">German degree</a><dl><dt>Deadline</dt><dd>15 July</dd></dl></div>
+      <div><a class="accordion-title">Foreign degree</a><p>31 May</p></div>
+      <details><summary>Exemptions</summary><p>Only with proof</p></details>
+      <div role="button" aria-expanded="false" aria-controls="profile">Profile tab</div><p>Profile contents</p></main>''')
+    assert doc.text.index("#### German degree") < doc.text.index("15 July")
+    assert doc.text.index("#### Foreign degree") < doc.text.index("31 May")
+    assert doc.text.count("#### Exemptions") == 1
+    assert "#### Profile tab" not in doc.text

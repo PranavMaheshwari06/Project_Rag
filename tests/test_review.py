@@ -61,13 +61,27 @@ def test_cross_check_suggestion_must_pass_quote_check(client):
     c, _, tmp = client
     (tmp / "checked").mkdir()
     (tmp / "checked" / f"{SRC.slug}.json").write_text(json.dumps({"fields": {
-        "min_total_ects": {"verdict": "correct"},
         "degree_requirement": {"verdict": "missed", "value": "Bachelor's degree", "doc_id": "de/test/prog",
                                "quote": "A bachelor's degree with at least 180 ECTS is required."},
         "semester_fee_eur": {"verdict": "missed", "value": 300, "doc_id": "de/test/prog",
                              "quote": "The semester fee is 300 euros."},  # not on the page
+        "min_total_ects": {"verdict": "partial", "value": 180, "doc_id": "de/test/prog",
+                           "quote": "at least 180 ECTS is required", "supporting_citations": [
+                               {"doc_id": "de/unknown", "quote": "invented support"}]},
     }}))
     checks = c.get(f"/api/programmes/{SRC.slug}").json()["checks"]
     assert "invalid" not in checks["degree_requirement"]
     assert "not found" in checks["semester_fee_eur"]["invalid"]
-    assert checks["min_total_ects"]["verdict"] == "correct"
+    assert "unknown doc" in checks["min_total_ects"]["invalid"]
+
+
+def test_save_preserves_supporting_citations_and_rejects_unknown_source(client):
+    c, rec, tmp = client
+    field = rec["min_total_ects"]
+    field["supporting_citations"] = [{"doc_id": "de/test/prog", "quote": "IELTS 6.5 is accepted."}]
+    url = f"/api/programmes/{SRC.slug}"
+    assert c.put(url, json=rec).status_code == 200
+    saved = json.loads((tmp / "verified" / f"{SRC.slug}.json").read_text())
+    assert saved["record"]["min_total_ects"]["supporting_citations"] == field["supporting_citations"]
+    field["supporting_citations"][0]["doc_id"] = "de/unknown"
+    assert c.put(url, json=rec).status_code == 422

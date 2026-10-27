@@ -61,7 +61,7 @@ export default function DashboardTab() {
   return (
     <div className="dashboard-tab">
       <p className="bench-meta">
-        {bench.gold_size} gold questions · {bench.chunk_count} chunks · generated {bench.generated_at}
+        {bench.gold_size} answerable questions · {bench.total_gold_size ?? bench.gold_size} total items · {bench.chunk_count} chunks · generated {bench.generated_at}
       </p>
 
       <table className="bench-table">
@@ -91,6 +91,35 @@ export default function DashboardTab() {
         </tbody>
       </table>
 
+      {Object.entries(bench.retrieval_by_kind ?? {}).map(([kind, configs]) => (
+        <div className="chart-box" key={kind}>
+          <h3>{kind} ({configs[0]?.query_count ?? 0} questions)</h3>
+          <table className="bench-table">
+            <thead><tr><th>config</th><th>Recall@5</th><th>Recall@10</th><th>MRR</th><th>nDCG@10</th></tr></thead>
+            <tbody>{configs.map(c => (
+              <tr key={c.name}><td>{c.name}</td><td>{(c.recall['@5'] ?? 0).toFixed(3)}</td>
+                <td>{(c.recall['@10'] ?? 0).toFixed(3)}</td><td>{c.mrr.toFixed(3)}</td>
+                <td>{(c.ndcg['@10'] ?? 0).toFixed(3)}</td></tr>
+            ))}</tbody>
+          </table>
+        </div>
+      ))}
+
+      {bench.refusal_calibration?.selected && (
+        <div className="chart-box">
+          <h3>Refusal calibration</h3>
+          <p>Threshold {bench.refusal_calibration.selected_threshold.toPrecision(5)} · {bench.refusal_calibration.selected.true_refusals}/{bench.refusal_calibration.selected.refusal_count} probes refused · {bench.refusal_calibration.selected.false_refusals}/{bench.refusal_calibration.selected.answerable_count} answerable questions falsely refused.</p>
+          <p>{bench.refusal_calibration.method}</p>
+        </div>
+      )}
+
+      {bench.extraction?.human && (
+        <div className="chart-box">
+          <h3>Extraction: human tier</h3>
+          <p>{bench.extraction.human.programmes} programmes · {bench.extraction.human.fields} fields · {((bench.extraction.human.draft_accuracy ?? 0) * 100).toFixed(1)}% draft unchanged.</p>
+        </div>
+      )}
+
       <div className="charts-grid">
         <MetricChart title="Recall@10" data={toChart((c) => c.recall['@10'] ?? 0)} />
         <MetricChart title="MRR" data={toChart((c) => c.mrr)} />
@@ -117,7 +146,7 @@ export default function DashboardTab() {
 
       {bench.answers && (
         <div className="answer-metrics">
-          <h3>Answer quality (hybrid + rerank)</h3>
+          <h3>Answer quality (hybrid + rerank{bench.answers.generation_mode ? `, ${bench.answers.generation_mode}` : ''})</h3>
           <div className="metric-cards">
             <div className="metric-card">
               <span className="metric-value">{(bench.answers.groundedness * 100).toFixed(1)}%</span>

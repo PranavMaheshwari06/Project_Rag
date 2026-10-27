@@ -78,6 +78,7 @@
 - {id: de/tud/cs-msc/programme, url: "https://tu-dresden.de/studium/vor-dem-studium/studienangebot/sins/sins_studiengang?autoid=73&set_language=en", country: DE, layer: university, university: TU Dresden, programme: M.Sc. Computer Science}
 - {id: de/tud/cs-msc/aptitude-assessment, url: "https://tu-dresden.de/studium/vor-dem-studium/studienangebot/sins/sins_eignungsfeststellung_detail?autoid=73&set_language=en", country: DE, layer: university, university: TU Dresden, programme: M.Sc. Computer Science}
 - {id: de/tud/international-faq, url: "https://tu-dresden.de/studium/vor-dem-studium/internationales/faq?set_language=en", country: DE, layer: university, university: TU Dresden, stage: before_applying}
+- {id: de/tud/semester-contribution, url: "https://tu-dresden.de/studium/im-studium/studienorganisation/rueckmeldung", country: DE, layer: university, university: TU Dresden, stage: arrival, title: TU Dresden current semester contribution}
 
 # ================================================================ Batch 2 (end of Phase 3)
 
@@ -100,5 +101,6 @@
 # The AI / Data Science master's is German-taught, so only Computer Science is listed.
 - {id: de/ustutt/cs-msc/programme, url: "https://www.uni-stuttgart.de/en/study/study-programs/Computer-Science-M.Sc.-00001/", country: DE, layer: university, university: University of Stuttgart, programme: M.Sc. Computer Science}
 - {id: de/ustutt/cs-msc/department, url: "https://www.f05.uni-stuttgart.de/en/cs/prospective-students/msc-computerscience/", country: DE, layer: university, university: University of Stuttgart, programme: M.Sc. Computer Science}
+- {id: de/ustutt/cs-msc/english-proofs, url: "https://www.uni-stuttgart.de/studium/studienangebot_assets/computer-science/pdf/English_language_skills_MSc_CS_barrierefrei_01-2026.pdf", country: DE, layer: university, university: University of Stuttgart, programme: M.Sc. Computer Science, title: Stuttgart CS accepted English proofs January 2026}
 - {id: de/ustutt/tuition-fees, url: "https://www.student.uni-stuttgart.de/en/organizing-studies/formalities/tuition-and-fees/", country: DE, layer: university, university: University of Stuttgart, stage: visa_funds}
 - {id: de/stuttgart/residence-permit, url: "https://www.uni-stuttgart.de/en/study/international/visa/", country: DE, layer: rules, stage: arrival, university: University of Stuttgart}

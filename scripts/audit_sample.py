@@ -68,6 +68,8 @@ if __name__ == "__main__":
     picks = sorted(random.Random(seed).sample(pool, min(n, len(pool))), key=lambda t: (t[0], t[1]))
     if "--sheet" in sys.argv:
         out = get_settings().resolve("data/audit/audit_sheet.md")
+        if out.exists() and "[x]" in out.read_text(encoding="utf-8").lower():
+            raise SystemExit("The completed audit sheet is frozen. Preserve it and create a separately named audit for a new run.")
         out.parent.mkdir(parents=True, exist_ok=True)
         out.write_text(sheet(picks, len(pool), seed), encoding="utf-8")
         sys.exit(print(f"wrote {out}"))

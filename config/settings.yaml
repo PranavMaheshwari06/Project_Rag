@@ -50,12 +50,15 @@ extraction:
   min_quote_words: 2         # one-word quotes match anywhere, so they prove nothing
 
 generation:
-  refusal_threshold: 0.3     # top rerank score below this -> explicit refusal
+  refusal_threshold: 0.13340958034137707  # Phase 4 calibration; see evaluation/results/
   max_evidence_chunks: 4
   max_sentences_per_chunk: 3
 
 evaluation:
-  gold_path: evaluation/datasets/gold_qa.jsonl   # new study-abroad gold set lands in Phase 4
+  gold_path: evaluation/datasets/gold_qa.jsonl   # 104 model-authored, human-accepted items
   k_values: [5, 10]
   benchmark_out: frontend/public/benchmark.json
   readme_path: README.md
+  calibration_out: evaluation/results/refusal_calibration.json
+  audit_path: data/audit/second_pass_audit.json
+  max_false_refusal_rate: 0.05

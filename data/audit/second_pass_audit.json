@@ -1,0 +1,981 @@
+{
+  "audited": 35,
+  "of": 69,
+  "seed": 4,
+  "audited_at": "2026-10-26",
+  "accepted_at": "2026-10-27",
+  "prechecked_by": "model",
+  "auditor": "human",
+  "review_provenance": "User-supplied second-pass report, checked against repository inputs; user accepted the six corrections in chat. This was not a blinded audit.",
+  "report_path": "data/audit/Audit_sheet_completed.md",
+  "report_sha256": "02fe07ff1412744792d022708f60a542fb3cdc55689981d20df9c9ce02e9c8ab",
+  "original_sheet_sha256": "57bf1e268b7c62455ac102412cd51a5413a73eb50f7f0943b7d37529156a5b28",
+  "scores": {
+    "strict": {
+      "passed": 29,
+      "total": 35,
+      "accuracy": 0.8285714285714286,
+      "wilson_95": [
+        0.6731771770095504,
+        0.9189735994629841
+      ]
+    },
+    "snapshot": {
+      "passed": 32,
+      "total": 35,
+      "accuracy": 0.9142857142857143,
+      "wilson_95": [
+        0.7762072603410349,
+        0.9704176317330301
+      ]
+    }
+  },
+  "limitations": [
+    "Only the 35 sampled stated fields were audited; the other 34 are unscored.",
+    "Strict review includes full sources and additional official documents absent from the original excerpts.",
+    "Historical scores describe pre-correction records, not post-fix accuracy."
+  ],
+  "disagreements": [
+    {
+      "row": 12,
+      "slug": "saarland-university-m-sc-computer-science",
+      "field": "required_documents",
+      "note": "Completed the document list using the guide and programme page, with additional validated citations."
+    },
+    {
+      "row": 16,
+      "slug": "tu-darmstadt-m-sc-artificial-intelligence-and-machine-learning",
+      "field": "entrance_tests",
+      "note": "Moved the conditional exam trigger and GRE/GATE exemption deadlines into condition fields."
+    },
+    {
+      "row": 20,
+      "slug": "tu-dresden-m-sc-computer-science",
+      "field": "deadlines",
+      "note": "Scoped application dates to foreign qualifying degrees; preserved source accordion headings."
+    },
+    {
+      "row": 22,
+      "slug": "tu-dresden-m-sc-computer-science",
+      "field": "semester_fee_eur",
+      "note": "Replaced the approximate FAQ amount with the winter 2026/27 on-campus contribution and citation."
+    },
+    {
+      "row": 28,
+      "slug": "tum-m-sc-informatics",
+      "field": "entrance_tests",
+      "note": "Specified the GATE Computer Science paper and annual qualifying score."
+    },
+    {
+      "row": 32,
+      "slug": "university-of-stuttgart-m-sc-computer-science",
+      "field": "english",
+      "note": "Used the official accepted-proof list, retaining C1, validity, MOI and citizenship/education context in the quote."
+    }
+  ],
+  "rows": [
+    {
+      "row": 1,
+      "slug": "kit-m-sc-computational-and-data-science",
+      "field": "english",
+      "original": {
+        "status": "stated",
+        "value": [
+          {
+            "test": "TOEFL iBT",
+            "min_score": "90 points"
+          },
+          {
+            "test": "IELTS",
+            "min_score": "overall score of at least 6.5, no section below 5.5"
+          },
+          {
+            "test": "TOEIC",
+            "min_score": "at least 400 points in Listening, 385 in Reading, 160 in Speaking, 150 in Writing"
+          },
+          {
+            "test": "Cambridge Certificate C1 Advanced (CAE)",
+            "min_score": "accepted certificate, no minimum score stated"
+          },
+          {
+            "test": "Cambridge Certificate C2 Proficiency (CPE)",
+            "min_score": "accepted certificate, no minimum score stated"
+          },
+          {
+            "test": "Cambridge Certificate B2 First (FCE)",
+            "min_score": "accepted certificate, no minimum score stated"
+          },
+          {
+            "test": "UNIcert",
+            "min_score": "at least level II"
+          },
+          {
+            "test": "Pearson PTE Academic",
+            "min_score": "at least 58.5 points overall and at least 56.8 in Listening, 60.6 in Reading, 53.5 in Speaking, 74.1 in Writing"
+          }
+        ],
+        "quote": "Otherwise, only the following English tests listed in the KIT admission and enrollment regulations are accepted as proof of English proficiency:\n\n- TOEFL iBT (internet-based) with at least 90 points\n\n- IELTS with an overall score of at least 6.5, no section below 5.5\n\n- TOEIC with at least 400 points in Listening, 385 in Reading, 160 in Speaking, 150 in Writing\n\n- Cambridge Certificate C1 Advanced (CAE)\n\n- Cambridge Certificate C2 Proficiency (CPE)\n\n- Cambridge Certificate B2 First (FCE)\n\n- UNIcert, at least level II\n\n- Pearson PTE Academic with at least 58.5 points overall and at least 56.8 in Listening, 60.6 in Reading, 53.5 in Speaking, 74.1 in Writing",
+        "doc_id": "de/kit/cds-msc/programme"
+      },
+      "snapshot_pass": true,
+      "strict_pass": true,
+      "correction_status": "not_required"
+    },
+    {
+      "row": 2,
+      "slug": "kit-m-sc-computational-and-data-science",
+      "field": "language_of_instruction",
+      "original": {
+        "status": "stated",
+        "value": "English",
+        "quote": "Language of instruction: English",
+        "doc_id": "de/kit/cds-msc/programme"
+      },
+      "snapshot_pass": true,
+      "strict_pass": true,
+      "correction_status": "not_required"
+    },
+    {
+      "row": 3,
+      "slug": "kit-m-sc-computational-and-data-science",
+      "field": "min_total_ects",
+      "original": {
+        "status": "stated",
+        "value": 180,
+        "quote": "Das Studium muss im Rahmen einer mindestens dreijährigen Regelstudienzeit und mit einer Mindestanzahl von 180 ECTS-Punkten absolviert worden sein.",
+        "doc_id": "de/kit/cds-msc/programme"
+      },
+      "snapshot_pass": true,
+      "strict_pass": true,
+      "correction_status": "not_required"
+    },
+    {
+      "row": 4,
+      "slug": "kit-m-sc-computational-and-data-science",
+      "field": "tuition_eur_per_semester_non_eu",
+      "original": {
+        "status": "stated",
+        "value": 1500.0,
+        "quote": "According to Article 3, LHGebG (Baden-Württemberg Act on State University Fees), international students (from third countries/non-EU countries) attending bachelor’s, teacher’s, and consecutive master’s programs as well as free movers will have to pay tuition fees in the amount of EUR 1,500 per semester as from the 2017/2018 winter semester.",
+        "doc_id": "de/kit/tuition-fees"
+      },
+      "snapshot_pass": true,
+      "strict_pass": true,
+      "correction_status": "not_required"
+    },
+    {
+      "row": 5,
+      "slug": "saarland-university-m-sc-computer-science",
+      "field": "application_route",
+      "original": {
+        "status": "stated",
+        "value": "direct",
+        "quote": "Applications should be submitted via the online application portal managed by the Department of Computer Science where you'll find further information about application and admission procedures.",
+        "doc_id": "de/saarland/cs-msc/programme"
+      },
+      "snapshot_pass": true,
+      "strict_pass": true,
+      "correction_status": "not_required"
+    },
+    {
+      "row": 6,
+      "slug": "saarland-university-m-sc-computer-science",
+      "field": "aps_degree_countries",
+      "original": {
+        "status": "stated",
+        "value": [
+          "China",
+          "India",
+          "Vietnam"
+        ],
+        "quote": "Applicants who have obtained their university degree in China, India or Vietnam are required to submit the original ( digitally signed ) APS Certificate issued by the Academic Evaluation Center (Akademische Prüfstelle) in the corresponding country with the application.",
+        "doc_id": "de/saarland/masters-application-guide"
+      },
+      "snapshot_pass": true,
+      "strict_pass": true,
+      "correction_status": "not_required"
+    },
+    {
+      "row": 7,
+      "slug": "saarland-university-m-sc-computer-science",
+      "field": "deadlines",
+      "original": {
+        "status": "stated",
+        "value": [
+          {
+            "intake": "winter",
+            "applicant_group": "all",
+            "date": "November 15",
+            "kind": "early"
+          },
+          {
+            "intake": "winter",
+            "applicant_group": "all",
+            "date": "May 15",
+            "kind": "final"
+          },
+          {
+            "intake": "summer",
+            "applicant_group": "all",
+            "date": "May 15",
+            "kind": "early"
+          },
+          {
+            "intake": "summer",
+            "applicant_group": "all",
+            "date": "November 15",
+            "kind": "final"
+          }
+        ],
+        "quote": "| Application deadline for the winter semester | Early deadline: Nov 15 (positive decision: notification at the lastest in February of the following year) Late deadline: May 15 |\n| Application deadline for the summer semester | Early deadline: May 15 (positive decision: notification at the lastest in July) Late deadline: Nov 15 |",
+        "doc_id": "de/saarland/cs-msc/programme"
+      },
+      "snapshot_pass": true,
+      "strict_pass": true,
+      "correction_status": "not_required"
+    },
+    {
+      "row": 8,
+      "slug": "saarland-university-m-sc-computer-science",
+      "field": "degree_requirement",
+      "original": {
+        "status": "stated",
+        "value": "Bachelor's degree from a German university (at least 180 CP) or an equivalent qualification from a foreign university in computer science, informatics or a related field",
+        "quote": "Students seeking admission to the Master’s programme shall have a Bachelor’s degree from a German university (at least 180 CP) or an equivalent qualification from a foreign university in computer science, informatics or a related field:",
+        "doc_id": "de/saarland/masters-application-guide"
+      },
+      "snapshot_pass": true,
+      "strict_pass": true,
+      "correction_status": "not_required"
+    },
+    {
+      "row": 9,
+      "slug": "saarland-university-m-sc-computer-science",
+      "field": "entrance_tests",
+      "original": {
+        "status": "stated",
+        "value": [
+          {
+            "test": "GRE",
+            "min_scores": null,
+            "requirement": "one_of",
+            "applies_to_degree_countries": [],
+            "exempt_degree_countries": [
+              "European Higher Education Area (EHEA) region",
+              "Switzerland",
+              "UK"
+            ]
+          },
+          {
+            "test": "GATE",
+            "min_scores": null,
+            "requirement": "one_of",
+            "applies_to_degree_countries": [],
+            "exempt_degree_countries": [
+              "European Higher Education Area (EHEA) region",
+              "Switzerland",
+              "UK"
+            ]
+          }
+        ],
+        "quote": "Applicants for Computer Science, Cybersecurity, DSAI, Embedded Systems and Visual Computing who have no degree certificate earned within the European Higher Education Area (EHEA) region, Switzerland, or the UK are required to upload the test result from the GRE General Test or the Indian GATE test .",
+        "doc_id": "de/saarland/masters-application-guide"
+      },
+      "snapshot_pass": true,
+      "strict_pass": true,
+      "correction_status": "not_required"
+    },
+    {
+      "row": 10,
+      "slug": "saarland-university-m-sc-computer-science",
+      "field": "german",
+      "original": {
+        "status": "stated",
+        "value": {
+          "min_level": "none",
+          "needed_by": "admission"
+        },
+        "quote": "Knowledge of proficiency in German is not required.",
+        "doc_id": "de/saarland/masters-application-guide"
+      },
+      "snapshot_pass": true,
+      "strict_pass": true,
+      "correction_status": "not_required"
+    },
+    {
+      "row": 11,
+      "slug": "saarland-university-m-sc-computer-science",
+      "field": "language_of_instruction",
+      "original": {
+        "status": "stated",
+        "value": "English",
+        "quote": "The teaching language of the master’s degree programme is English.",
+        "doc_id": "de/saarland/masters-application-guide"
+      },
+      "snapshot_pass": true,
+      "strict_pass": true,
+      "correction_status": "not_required"
+    },
+    {
+      "row": 12,
+      "slug": "saarland-university-m-sc-computer-science",
+      "field": "required_documents",
+      "original": {
+        "status": "stated",
+        "value": [
+          "copy of university entrance qualification",
+          "copies of 3 most recent degrees (with certified translation, if the original language is not English, German or French)",
+          "certified list of all attended courses with the respective grades, including an explanation of the grading system",
+          "Curriculum Vitae (CV)",
+          "two complete review forms by recommenders appointed by the applicant",
+          "APS certificate (if degree obtained in China, India or Vietnam)"
+        ],
+        "quote": "Transcripts (Academic Records):\n\n_ a copy of your university entrance qualification _ copies of your 3 most recent degrees* (with certified translation, if the original language is not English, German or French) _ a certified list of all attended courses with the respective grades, including an explanation of the grading system\n\n*If your current degree is ongoing, please include a recent transcript showing your current progress.\n\nMinimal prerequisite is a cumulative undergraduate grade point average of 75% and ranking in the top 10% of the graduating class.\n\nCurriculum Vitae (CV)\n\nincluding information on your areas of interest in research, as well as any projects or publications\n\nLetters of Recommendation\n\nA complete application includes two complete review forms by recommenders appointed by the applicant. These recommenders can optionally upload an additional recommendation letter.\n\nIt is your responsibility to ensure that your referees have the information they need to provide a reference and submit it by the deadline.\n\nIt is extremely important to enter valid email addresses of your referees! An email will be sent to your recommenders with information on how to proceed. Please check them before submitting your application.\n\nWe do not accept letters of recommendation sent by mail or any other means.\n\nPlease note that your application is considered fully submitted only after both recommenders have filled out the review forms.\n\nAPS certificate\n\nApplicants who have obtained their university degree in China, India or Vietnam are required to submit the original ( digitally signed ) APS Certificate issued by the Academic Evaluation Center (Akademische Prüfstelle) in the corresponding country with the application.",
+        "doc_id": "de/saarland/masters-application-guide"
+      },
+      "snapshot_pass": false,
+      "strict_pass": false,
+      "correction_status": "corrected",
+      "correction_note": "Completed the document list using the guide and programme page, with additional validated citations.",
+      "corrected": {
+        "status": "stated",
+        "value": [
+          "copy of university entrance qualification",
+          "copies of 3 most recent degrees (with certified translation, if the original language is not English, German or French); if the current degree is ongoing, submit a recent progress transcript",
+          "certified list of all attended courses with the respective grades, including an explanation of the grading system",
+          "Curriculum Vitae (CV)",
+          "two complete review forms by recommenders appointed by the applicant",
+          "APS certificate (if degree obtained in China, India or Vietnam)",
+          "English-proficiency certificate, or the guide-permitted native-speaker/study or German-school evidence; MOI is not accepted",
+          "GRE General or Indian GATE result for applicants without a degree from the EHEA, Switzerland or the UK; non-EHEA branch campuses are not exempt",
+          "Letter of motivation or personal statement documenting interest in this M.Sc. programme",
+          "Details of relevant work/study periods abroad and relevant work experience or internships"
+        ],
+        "quote": "Transcripts (Academic Records):\n\n_ a copy of your university entrance qualification _ copies of your 3 most recent degrees* (with certified translation, if the original language is not English, German or French) _ a certified list of all attended courses with the respective grades, including an explanation of the grading system\n\n*If your current degree is ongoing, please include a recent transcript showing your current progress.\n\nMinimal prerequisite is a cumulative undergraduate grade point average of 75% and ranking in the top 10% of the graduating class.\n\nCurriculum Vitae (CV)\n\nincluding information on your areas of interest in research, as well as any projects or publications\n\nLetters of Recommendation\n\nA complete application includes two complete review forms by recommenders appointed by the applicant. These recommenders can optionally upload an additional recommendation letter.\n\nIt is your responsibility to ensure that your referees have the information they need to provide a reference and submit it by the deadline.\n\nIt is extremely important to enter valid email addresses of your referees! An email will be sent to your recommenders with information on how to proceed. Please check them before submitting your application.\n\nWe do not accept letters of recommendation sent by mail or any other means.\n\nPlease note that your application is considered fully submitted only after both recommenders have filled out the review forms.\n\nAPS certificate\n\nApplicants who have obtained their university degree in China, India or Vietnam are required to submit the original ( digitally signed ) APS Certificate issued by the Academic Evaluation Center (Akademische Prüfstelle) in the corresponding country with the application.",
+        "doc_id": "de/saarland/masters-application-guide",
+        "supporting_citations": [
+          {
+            "quote": "All applicants from all countries must provide a proof of advanced proficiency in English (level C1 of the Common European Framework).\n\nThe following certificates will be accepted: _ IELTS (academic test): min. 7.0 out of 9 _ TOEFL (internet based): min. 95 out of 120 (2026: 5 out of 6) _ TOEFL (paper based): min. 600 out of 677 (2026: 5 out of 6) _ Cambridge English Certificate: C1 Advanced (CAE) or C2 Proficiency (CPE) _ PTE Academic: min. 76\n\nPlease note : Home editions of all of the above-mentioned English tests are accepted as well as expired tests.\n\nThe English certificate is a mandatory part of the application. A confirmation of your university or a MOI (Medium of Instruction) is not a sufficient equivalent.\n\nOnly native speakers from Australia, Ireland, Canada, New Zealand, the UK, and the USA, or applicants who have completed in-person studies while physically residing in one of these countries at a university located there , are excluded from this rule. In these cases, please enter native speaker from [country] or studied in [country] into the form and upload a high school and/or bachelor’s degree certificate from that country as proof.\n\nFor German applicants, school certificates demonstrating that English has been studied for at least 5 years up to the general qualification for university entrance (Abitur) with good or very good grades is sufficient. As level C1 is not usually achieved by the end of school, certificates with good or very good grades are examined individually.\n\nKnowledge of proficiency in German is not required.",
+            "doc_id": "de/saarland/masters-application-guide"
+          },
+          {
+            "quote": "GRE General Test / GATE test\n\nApplicants for Computer Science, Cybersecurity, DSAI, Embedded Systems and Visual Computing who have no degree certificate earned within the European Higher Education Area (EHEA) region, Switzerland, or the UK are required to upload the test result from the GRE General Test or the Indian GATE test . There is no minimum score requirement and we accept home editions of the GRE/GATE tests . There are no exceptions from this requirement for degrees from branch campuses located in non-EHEA countries. The GRE test result of one of the subject tests or a prep test does not satisfy this requirement.",
+            "doc_id": "de/saarland/masters-application-guide"
+          },
+          {
+            "quote": "- Proof of sufficient merit in their academic achievements in school and higher education\n\n- A letter of motivation or personal statement documenting the student's particular interest in the M.Sc. programme\n\n- Two relevant academic references\n\n- Details about relevant work/study periods abroad and relevant work experience or internships",
+            "doc_id": "de/saarland/cs-msc/programme"
+          }
+        ]
+      }
+    },
+    {
+      "row": 13,
+      "slug": "saarland-university-m-sc-computer-science",
+      "field": "tuition_eur_per_semester_non_eu",
+      "original": {
+        "status": "stated",
+        "value": 0.0,
+        "quote": "| Tuition fees | Not applicable |",
+        "doc_id": "de/saarland/cs-msc/programme"
+      },
+      "snapshot_pass": true,
+      "strict_pass": true,
+      "correction_status": "not_required"
+    },
+    {
+      "row": 14,
+      "slug": "tu-darmstadt-m-sc-artificial-intelligence-and-machine-learning",
+      "field": "application_route",
+      "original": {
+        "status": "stated",
+        "value": "direct",
+        "quote": "Apply via the Online Application Portal .",
+        "doc_id": "de/tu-darmstadt/informatics-master-admission-guide"
+      },
+      "snapshot_pass": true,
+      "strict_pass": true,
+      "correction_status": "not_required"
+    },
+    {
+      "row": 15,
+      "slug": "tu-darmstadt-m-sc-artificial-intelligence-and-machine-learning",
+      "field": "degree_requirement",
+      "original": {
+        "status": "stated",
+        "value": "Bachelor’s degree comprising at least 180 ECTS (or an equivalent workload)",
+        "quote": "- Bachelor’s degree comprising at least 180 ECTS (or an equivalent workload)",
+        "doc_id": "de/tu-darmstadt/informatics-master-admission-guide"
+      },
+      "snapshot_pass": true,
+      "strict_pass": true,
+      "correction_status": "not_required"
+    },
+    {
+      "row": 16,
+      "slug": "tu-darmstadt-m-sc-artificial-intelligence-and-machine-learning",
+      "field": "entrance_tests",
+      "original": {
+        "status": "stated",
+        "value": [
+          {
+            "test": "Entrance Exam",
+            "min_scores": "Only when required entrance competencies cannot be confirmed from the submitted documents; GRE or GATE scores below exempt",
+            "requirement": "one_of",
+            "applies_to_degree_countries": [],
+            "exempt_degree_countries": []
+          },
+          {
+            "test": "GRE",
+            "min_scores": "Verbal Reasoning ≥ 155 Quantitative Reasoning ≥ 165 Analytical Writing ≥ 3.5",
+            "requirement": "one_of",
+            "applies_to_degree_countries": [],
+            "exempt_degree_countries": []
+          },
+          {
+            "test": "GATE",
+            "min_scores": "Overall ≥ 750",
+            "requirement": "one_of",
+            "applies_to_degree_countries": [],
+            "exempt_degree_countries": []
+          }
+        ],
+        "quote": "| Required for: | Only applicants to our English-taught Master’s programs Only when required entrance competencies cannot be confirmed from the submitted documents |\n| Format: | On-site at TU Darmstadt using pre-configured university computers (personal devices not permitted) Access to the digital exam is only possible via the university network |\n| When: | Typically first week of September (for winter semester) Typically first week of March (for summer semester) |\n| Duration: | 90 minutes |\n| Language: | English |\n| Scope: | Same exam for all English-taught Master’s programs Sample questions on Entrance Exam website |\n| Exemption from the Entrance Exam: Provide one of the following no later than August 20 th (for winter semester) or February 20 th (for summer semester). We strongly recommend submitting your scores as early as possible. |\n| Test | Required scores | How to submit |\n| GRE | Verbal Reasoning ≥ 155 Quantitative Reasoning ≥ 165 Analytical Writing ≥ 3.5 | Via ETS Institution Code 2249 Department Code 0402 (Computer Science) GRE Home accepted only if submitted through ETS |\n| GATE | Overall ≥ 750 | Send via e-mail to application@informatik… |",
+        "doc_id": "de/tu-darmstadt/informatics-master-admission-guide"
+      },
+      "snapshot_pass": false,
+      "strict_pass": false,
+      "correction_status": "corrected",
+      "correction_note": "Moved the conditional exam trigger and GRE/GATE exemption deadlines into condition fields.",
+      "corrected": {
+        "status": "stated",
+        "value": [
+          {
+            "test": "Entrance Exam",
+            "min_scores": null,
+            "requirement": "required",
+            "applies_to_degree_countries": [],
+            "exempt_degree_countries": [],
+            "condition": "Only when required entrance competencies cannot be confirmed from the submitted documents and no qualifying GRE or GATE exemption is provided."
+          },
+          {
+            "test": "GRE",
+            "min_scores": "Verbal Reasoning ≥ 155 Quantitative Reasoning ≥ 165 Analytical Writing ≥ 3.5",
+            "requirement": "one_of",
+            "applies_to_degree_countries": [],
+            "exempt_degree_countries": [],
+            "condition": "Optional exemption evidence for the conditional entrance exam, not universally mandatory: submit no later than August 20 (winter) or February 20 (summer)."
+          },
+          {
+            "test": "GATE",
+            "min_scores": "Overall ≥ 750",
+            "requirement": "one_of",
+            "applies_to_degree_countries": [],
+            "exempt_degree_countries": [],
+            "condition": "Optional exemption evidence for the conditional entrance exam, not universally mandatory: submit no later than August 20 (winter) or February 20 (summer)."
+          }
+        ],
+        "quote": "| Required for: | Only applicants to our English-taught Master’s programs Only when required entrance competencies cannot be confirmed from the submitted documents |\n| Format: | On-site at TU Darmstadt using pre-configured university computers (personal devices not permitted) Access to the digital exam is only possible via the university network |\n| When: | Typically first week of September (for winter semester) Typically first week of March (for summer semester) |\n| Duration: | 90 minutes |\n| Language: | English |\n| Scope: | Same exam for all English-taught Master’s programs Sample questions on Entrance Exam website |\n| Exemption from the Entrance Exam: Provide one of the following no later than August 20 th (for winter semester) or February 20 th (for summer semester). We strongly recommend submitting your scores as early as possible. |\n| Test | Required scores | How to submit |\n| GRE | Verbal Reasoning ≥ 155 Quantitative Reasoning ≥ 165 Analytical Writing ≥ 3.5 | Via ETS Institution Code 2249 Department Code 0402 (Computer Science) GRE Home accepted only if submitted through ETS |\n| GATE | Overall ≥ 750 | Send via e-mail to application@informatik… |",
+        "doc_id": "de/tu-darmstadt/informatics-master-admission-guide",
+        "supporting_citations": []
+      }
+    },
+    {
+      "row": 17,
+      "slug": "tu-darmstadt-m-sc-artificial-intelligence-and-machine-learning",
+      "field": "subject_credits",
+      "original": {
+        "status": "stated",
+        "value": [
+          {
+            "area": "core courses of our B.Sc. Informatik",
+            "min_ects": 60
+          }
+        ],
+        "quote": "- Minimum 60 ECTS must match the core courses of our B.Sc. Informatik in content, academic level, and depth",
+        "doc_id": "de/tu-darmstadt/informatics-master-admission-guide"
+      },
+      "snapshot_pass": true,
+      "strict_pass": true,
+      "correction_status": "not_required"
+    },
+    {
+      "row": 18,
+      "slug": "tu-dresden-m-sc-computer-science",
+      "field": "application_route",
+      "original": {
+        "status": "stated",
+        "value": "both",
+        "quote": "Please note: If you are required to apply via the uni-assist portal, you will receive all information regarding the application and the aptitude assessment process from uni-assist.",
+        "doc_id": "de/tud/cs-msc/aptitude-assessment"
+      },
+      "snapshot_pass": true,
+      "strict_pass": true,
+      "correction_status": "not_required"
+    },
+    {
+      "row": 19,
+      "slug": "tu-dresden-m-sc-computer-science",
+      "field": "aps_degree_countries",
+      "original": {
+        "status": "stated",
+        "value": [
+          "China",
+          "Vietnam",
+          "India"
+        ],
+        "quote": "Applicants with Chinese, Vietnamese or Indian educational certificates must submit a certificate from the Academic Evaluation Center (APS) with their application.",
+        "doc_id": "de/tud/international-faq"
+      },
+      "snapshot_pass": true,
+      "strict_pass": true,
+      "correction_status": "not_required"
+    },
+    {
+      "row": 20,
+      "slug": "tu-dresden-m-sc-computer-science",
+      "field": "deadlines",
+      "original": {
+        "status": "stated",
+        "value": [
+          {
+            "intake": "winter",
+            "applicant_group": "non_eu",
+            "date": "31st May",
+            "kind": "final"
+          },
+          {
+            "intake": "summer",
+            "applicant_group": "non_eu",
+            "date": "30th November",
+            "kind": "final"
+          },
+          {
+            "intake": "winter",
+            "applicant_group": "eu",
+            "date": "15th July",
+            "kind": "final"
+          },
+          {
+            "intake": "summer",
+            "applicant_group": "eu",
+            "date": "15th January",
+            "kind": "final"
+          }
+        ],
+        "quote": "- Application period: EU applicants: 1st April – 15th July , 1st October – 15th January Non-EU applicants: 1st April – 31st May , 1st October – 30th November",
+        "doc_id": "de/tud/cs-msc/aptitude-assessment"
+      },
+      "snapshot_pass": true,
+      "strict_pass": false,
+      "correction_status": "corrected",
+      "correction_note": "Scoped application dates to foreign qualifying degrees; preserved source accordion headings.",
+      "corrected": {
+        "status": "stated",
+        "value": [
+          {
+            "intake": "winter",
+            "applicant_group": "non_eu",
+            "date": "31st May",
+            "kind": "final",
+            "degree_origin": "outside_germany"
+          },
+          {
+            "intake": "summer",
+            "applicant_group": "non_eu",
+            "date": "30th November",
+            "kind": "final",
+            "degree_origin": "outside_germany"
+          },
+          {
+            "intake": "winter",
+            "applicant_group": "eu",
+            "date": "15th July",
+            "kind": "final",
+            "degree_origin": "outside_germany"
+          },
+          {
+            "intake": "summer",
+            "applicant_group": "eu",
+            "date": "15th January",
+            "kind": "final",
+            "degree_origin": "outside_germany"
+          }
+        ],
+        "quote": "#### Applicants with a foreign university degree\n\n- Application period: EU applicants: 1st April – 15th July , 1st October – 15th January Non-EU applicants: 1st April – 31st May , 1st October – 30th November\n\n- Application address: The application takes place online via uni-assist e.V. As part of the application process with uni-assist, you will receive further information about the aptitude assessment procedure.\n\n### Further links and information\n\n- Additional information: Notes and Rules of Procedure for the Aptitude Test [Eignungsfeststellungsordnung] on the webpages of the faculty\n\n- Link to the degree program: Computer Science\n\n## About this page",
+        "doc_id": "de/tud/cs-msc/aptitude-assessment",
+        "supporting_citations": []
+      }
+    },
+    {
+      "row": 21,
+      "slug": "tu-dresden-m-sc-computer-science",
+      "field": "degree_requirement",
+      "original": {
+        "status": "stated",
+        "value": "A first professionally qualifying university degree recognized in Germany or a degree from a state or state-recognized vocational academy in computer science.",
+        "quote": "The prerequisite for admission to the course is a first professionally qualifying university degree recognized in Germany or a degree from a state or state-recognized vocational academy in computer science.",
+        "doc_id": "de/tud/cs-msc/programme"
+      },
+      "snapshot_pass": true,
+      "strict_pass": true,
+      "correction_status": "not_required"
+    },
+    {
+      "row": 22,
+      "slug": "tu-dresden-m-sc-computer-science",
+      "field": "semester_fee_eur",
+      "original": {
+        "status": "stated",
+        "value": 360.0,
+        "quote": "The semester contribution costs approx. 360 € for direct study students.",
+        "doc_id": "de/tud/international-faq"
+      },
+      "snapshot_pass": true,
+      "strict_pass": false,
+      "correction_status": "corrected",
+      "correction_note": "Replaced the approximate FAQ amount with the winter 2026/27 on-campus contribution and citation.",
+      "corrected": {
+        "status": "stated",
+        "value": 361.0,
+        "quote": "## Aktueller Semesterbeitrag\n\n> zum Wintersemester 2026/27 ACHTUNG! Der Semesterbeitrag hat sich aufgrund der Erhöhung des Deutschlandtickets und des Betrags für den Studierendenrat geändert.\n\n### 1. für Studierende im Präsenzstudium (Direktstudium ohne IHI)\n\ndas heißt alle Direkt-, Promotions- oder Graduiertenstudierende sowie alle Studentinnen und Studenten im weiterbildenden Direktstudium, auch in berufsbegleitender Form, 361,00 EUR Aufschlüsselung: 112,73 EUR Studentenwerksbeitrag + 248,27 EUR Studentenschaftsbeitrag. Der Studentenschaftsbeitrag beinhaltet 14,09 EUR für StuRa/Fachschaft sowie 234,18 EUR für das Semesterticket und die Fahrradverleihsysteme-Nutzung. Sofern Sie sich für dieses Semester vom Studium beurlauben wollen, können Sie bis zum Ende der Rückmeldefrist auf Ihrem Beurlaubungsantrag (in selma unter Antragsübersicht) angeben, ob Sie den gesamten Semesterbeitrag oder nur den Teilbetrag in Höhe von 126,82 EUR (ohne Semesterticket) zahlen wollen.",
+        "doc_id": "de/tud/semester-contribution",
+        "supporting_citations": []
+      }
+    },
+    {
+      "row": 23,
+      "slug": "tum-m-sc-data-engineering-and-analytics",
+      "field": "entrance_tests",
+      "original": {
+        "status": "stated",
+        "value": [
+          {
+            "test": "GRE",
+            "min_scores": "Quantitative reasoning: 164; Analytical writing: 4.0 (verbal reasoning not taken into account)",
+            "requirement": "one_of",
+            "applies_to_degree_countries": [
+              "Bangladesh",
+              "China",
+              "India",
+              "Iran",
+              "Pakistan"
+            ],
+            "exempt_degree_countries": []
+          },
+          {
+            "test": "GATE",
+            "min_scores": "minimal qualifying score of the respective year (Computer Science test)",
+            "requirement": "one_of",
+            "applies_to_degree_countries": [
+              "Bangladesh",
+              "China",
+              "India",
+              "Iran",
+              "Pakistan"
+            ],
+            "exempt_degree_countries": []
+          }
+        ],
+        "quote": "Applicants with a Degree from Bangladesh, China, India, Iran or Pakistan have to submit a GRE (General) Test. We have defined required minimum scores, lower scores will not be accepted!\n\n\n\nThe required scores are: Verbal reasoning: (will not be taken into account anymore) Quantitative reasoning: 164 Analytical writing: 4.0 The Institution Code: 7806, Department: 5199 (\"all other departments\").\n\n\n\nAlternatively, students can submit a scorecard of the Indian GATE test (Computer Science; for M.Sc. CSE the Mechanical Engineering Test will also be accepted). The minimal qualifying score of the respective year is necessary.",
+        "doc_id": "de/tum/dea-msc/department"
+      },
+      "snapshot_pass": true,
+      "strict_pass": true,
+      "correction_status": "not_required"
+    },
+    {
+      "row": 24,
+      "slug": "tum-m-sc-data-engineering-and-analytics",
+      "field": "language_of_instruction",
+      "original": {
+        "status": "stated",
+        "value": "English",
+        "quote": "Language of Instruction : English",
+        "doc_id": "de/tum/dea-msc/department"
+      },
+      "snapshot_pass": true,
+      "strict_pass": true,
+      "correction_status": "not_required"
+    },
+    {
+      "row": 25,
+      "slug": "tum-m-sc-data-engineering-and-analytics",
+      "field": "required_documents",
+      "original": {
+        "status": "stated",
+        "value": [
+          "A statement of reasons explaining why you have chosen this master’s program and TUM specifically (max. 2 pages)",
+          "Your CV/résumé",
+          "A scientific essay of approx. 1,000 words on a specified topic",
+          "Form \"Analysis of the Curriculum\"",
+          "Bachelor's degree certificate, including a list of courses and grades, OR an official transcript of records (documents not issued in German or English must be translated and notarized by a sworn translator)",
+          "Curriculum (module descriptions, course catalog or syllabus) of the underlying university degree",
+          "Proof of your English language proficiency",
+          "GRE or Gate score for applicants with a B.Sc. degree from Bangladesh, China, India, Iran, Pakistan",
+          "Preliminary documentation from uni-assist for all applicants with a Bachelor's degree from outside Germany",
+          "APS certificate for applicants with a Bachelor's from China, Vietnam or India",
+          "Certificates from professional training or additional qualifications related to the program (not mandatory)",
+          "A passport photo",
+          "A copy of your passport"
+        ],
+        "quote": "- A statement of reasons explaining why you have chosen this master’s program and TUM specifically (max. 2 pages)\n\n\n\n- Your CV/résumé\n\n\n\n- A scientific essay of approx. 1,000 words on a specified topic (see below)\n\n\n\n- Form \" Analysis of the Curriculum \" (see below)\n\n\n\n- Bachelor's degree certificate, including a list of courses and grades OR an official transcript of records. Documents not issued in German or English must be translated and notarized by a sworn translator .\n\n\n\n- Curriculum (module descriptions, course catalog or syllabus) of the underlying university degree; this document is very important for the check of the academic qualification!\n\n\n\n- Proof of your English language proficiency\n\n\n\n- GRE or Gate score for applicants with a B.Sc. degree from Bangladesh, China, India, Iran, Pakistan (original scorecard or have the score transmitted directly via ETS)\n\n\n\n- Preliminary documentation from uni-assist for all applicants with a Bachelor's degree from outside Germany\n\n\n\n- APS certificate for applicants with a Bachelor's from China, Vietnam or India\n\n\n\n- Certificates from professional training or additional qualifications related to the program (e.g. participation in research competitions, internships, etc.) (not mandatory)\n\n\n\n- A passport photo\n\n\n\n- A copy of your passport",
+        "doc_id": "de/tum/dea-msc/department"
+      },
+      "snapshot_pass": true,
+      "strict_pass": true,
+      "correction_status": "not_required"
+    },
+    {
+      "row": 26,
+      "slug": "tum-m-sc-data-engineering-and-analytics",
+      "field": "semester_fee_eur",
+      "original": {
+        "status": "stated",
+        "value": 97.0,
+        "quote": "- Student Fees:\n\n\t\t\t\t\t\t\t97.00 €",
+        "doc_id": "de/tum/dea-msc/programme"
+      },
+      "snapshot_pass": true,
+      "strict_pass": true,
+      "correction_status": "not_required"
+    },
+    {
+      "row": 27,
+      "slug": "tum-m-sc-informatics",
+      "field": "degree_requirement",
+      "original": {
+        "status": "stated",
+        "value": "Bachelor’s degree in Informatics / Computer Science which is equivalent to the B.Sc. Informatics taught at TUM",
+        "quote": "Students with a Bachelor’s degree in Informatics / Computer Science which is equivalent to the B.Sc. Informatics taught at TUM are eligible to apply.",
+        "doc_id": "de/tum/informatics-msc/department"
+      },
+      "snapshot_pass": true,
+      "strict_pass": true,
+      "correction_status": "not_required"
+    },
+    {
+      "row": 28,
+      "slug": "tum-m-sc-informatics",
+      "field": "entrance_tests",
+      "original": {
+        "status": "stated",
+        "value": [
+          {
+            "test": "GRE",
+            "min_scores": "Quantitative reasoning: 164 Analytical writing: 4.0",
+            "requirement": "one_of",
+            "applies_to_degree_countries": [
+              "Bangladesh",
+              "China",
+              "India",
+              "Iran",
+              "Pakistan"
+            ],
+            "exempt_degree_countries": []
+          },
+          {
+            "test": "GATE",
+            "min_scores": "minimal qualifying score of the respective year",
+            "requirement": "one_of",
+            "applies_to_degree_countries": [
+              "Bangladesh",
+              "China",
+              "India",
+              "Iran",
+              "Pakistan"
+            ],
+            "exempt_degree_countries": []
+          }
+        ],
+        "quote": "Applicants with a Degree from Bangladesh, China, India, Iran or Pakistan have to submit a GRE (General) Test. We have defined required minimum scores, lower scores will not be accepted!\n\nThe required scores are: Verbal reasoning: (will not be taken into account anymore) Quantitative reasoning: 164 Analytical writing: 4.0 The Institution Code: 7806, Department: 5199 (\"all other departments\").\n\nAlternatively, students can submit a scorecard of the Indian GATE test (Computer Science; for M.Sc. CSE the Mechanical Engineering Test will also be accepted). The minimal qualifying score of the respective year is necessary.",
+        "doc_id": "de/tum/informatics-msc/department"
+      },
+      "snapshot_pass": false,
+      "strict_pass": false,
+      "correction_status": "corrected",
+      "correction_note": "Specified the GATE Computer Science paper and annual qualifying score.",
+      "corrected": {
+        "status": "stated",
+        "value": [
+          {
+            "test": "GRE",
+            "min_scores": "Quantitative reasoning: 164 Analytical writing: 4.0",
+            "requirement": "one_of",
+            "applies_to_degree_countries": [
+              "Bangladesh",
+              "China",
+              "India",
+              "Iran",
+              "Pakistan"
+            ],
+            "exempt_degree_countries": [],
+            "condition": null
+          },
+          {
+            "test": "GATE",
+            "min_scores": "minimal qualifying score of the respective year (Computer Science test)",
+            "requirement": "one_of",
+            "applies_to_degree_countries": [
+              "Bangladesh",
+              "China",
+              "India",
+              "Iran",
+              "Pakistan"
+            ],
+            "exempt_degree_countries": [],
+            "condition": null
+          }
+        ],
+        "quote": "Applicants with a Degree from Bangladesh, China, India, Iran or Pakistan have to submit a GRE (General) Test. We have defined required minimum scores, lower scores will not be accepted!\n\nThe required scores are: Verbal reasoning: (will not be taken into account anymore) Quantitative reasoning: 164 Analytical writing: 4.0 The Institution Code: 7806, Department: 5199 (\"all other departments\").\n\nAlternatively, students can submit a scorecard of the Indian GATE test (Computer Science; for M.Sc. CSE the Mechanical Engineering Test will also be accepted). The minimal qualifying score of the respective year is necessary.",
+        "doc_id": "de/tum/informatics-msc/department",
+        "supporting_citations": []
+      }
+    },
+    {
+      "row": 29,
+      "slug": "tum-m-sc-informatics",
+      "field": "tuition_eur_per_semester_non_eu",
+      "original": {
+        "status": "stated",
+        "value": 6000.0,
+        "quote": "The tuition fees for international students from third countries for this degree program are 6,000 euros per semester .",
+        "doc_id": "de/tum/informatics-msc/programme"
+      },
+      "snapshot_pass": true,
+      "strict_pass": true,
+      "correction_status": "not_required"
+    },
+    {
+      "row": 30,
+      "slug": "university-of-stuttgart-m-sc-computer-science",
+      "field": "application_route",
+      "original": {
+        "status": "stated",
+        "value": "direct",
+        "quote": "The application has to be done vis the online portal C@mpus .",
+        "doc_id": "de/ustutt/cs-msc/department"
+      },
+      "snapshot_pass": true,
+      "strict_pass": true,
+      "correction_status": "not_required"
+    },
+    {
+      "row": 31,
+      "slug": "university-of-stuttgart-m-sc-computer-science",
+      "field": "degree_requirement",
+      "original": {
+        "status": "stated",
+        "value": "bachelor's degree (or equivalent) with a duration of at least 6 semesters in Computer Science, Software Engineering or in a subject closely related",
+        "quote": "General requirement is a bachelor's degree (or equivalent) with a duration of at least 6 semesters in Computer Science, Software Engineering or in a subject closely related.",
+        "doc_id": "de/ustutt/cs-msc/programme"
+      },
+      "snapshot_pass": true,
+      "strict_pass": true,
+      "correction_status": "not_required"
+    },
+    {
+      "row": 32,
+      "slug": "university-of-stuttgart-m-sc-computer-science",
+      "field": "english",
+      "original": {
+        "status": "stated",
+        "value": [
+          {
+            "test": "CEFR",
+            "min_score": "C1"
+          }
+        ],
+        "quote": "For an admission, you need to prove sufficient knowledge of the English language on CEFR level C1 (Common European Framework of Reference for Languages).",
+        "doc_id": "de/ustutt/cs-msc/programme"
+      },
+      "snapshot_pass": true,
+      "strict_pass": false,
+      "correction_status": "corrected",
+      "correction_note": "Used the official accepted-proof list, retaining C1, validity, MOI and citizenship/education context in the quote.",
+      "corrected": {
+        "status": "stated",
+        "value": [
+          {
+            "test": "TOEFL iBT",
+            "min_score": "95 points / from 2026: 5 or better"
+          },
+          {
+            "test": "IELTS",
+            "min_score": "band 7.0 or better (academic)"
+          },
+          {
+            "test": "Cambridge ESOL CAE/CPE",
+            "min_score": "accepted exams; no numerical minimum stated"
+          },
+          {
+            "test": "Oxford Test of English Advanced",
+            "min_score": "C1"
+          },
+          {
+            "test": "PTE Academic",
+            "min_score": "76 or better"
+          },
+          {
+            "test": "telc University B2/C1",
+            "min_score": "result very good"
+          },
+          {
+            "test": "telc general examination",
+            "min_score": "C1 / C2"
+          }
+        ],
+        "quote": "Proof of English Proficiency\nAll applicants of the M.Sc. Computer Science program are required to upload valid* proof of\na working knowledge of the English language of at least level C1 before the application\ndeadline.\nAccepted proofs are:\n• TOEFL IBT 95 points / from 2026: 5 or better\n• IELTS band 7.0 or better (academic)\n• Cambridge ESOL CAE/CPE University of Cambridge ESOL exams\n• Oxford Test of English Advanced (C1)\n• PTE Academic Score 76 or better\n• telc: telc University B2/C1 (result „very good“); telc C1 / C2 (general examination)\n*Please note that most certificates, e.g. TOEFL-certificate, IELTS-certificate etc., are only\nvalid for two years. The uploaded certificate has to be valid at least until the application\ndeadline (15th of January/July).\n“Medium of Instruction (MOI)”, e.g. certificate confirming your bachelor’s program was\nconducted in English, is not accepted.\nIf you are a national with citizenship and education in one of the countries listed below, you\ndo not need to upload one of the English proficiency proofs listed above. In this case, it is\nmandatory to upload a proof of citizenship instead (readable copy of a passport or similar).\nIn case of questions, please contact the Student Advisor, Dr. Stefanie Anstein.\nList of majority native English speaking countries currently used by the Admission\nCommittee:\n• Antigua and Barbuda\n• Australia\n• The Bahamas\n• Barbados\n• Belize\n• Canada (except Quebec)\n• Dominica\n• Grenada\n• Guyana\n• Ireland\n• Jamaica\n• Malta\n• New Zealand\n• St Kitts and Nevis\n• St Lucia\n• St Vincent and the Grenadines\n• Trinidad and Tobago\n• United Kingdom\n• United States of America\nAs of January, 2026",
+        "doc_id": "de/ustutt/cs-msc/english-proofs",
+        "supporting_citations": []
+      }
+    },
+    {
+      "row": 33,
+      "slug": "university-of-stuttgart-m-sc-computer-science",
+      "field": "german",
+      "original": {
+        "status": "stated",
+        "value": {
+          "min_level": "none",
+          "needed_by": "admission"
+        },
+        "quote": "Please note that you don't need a proof for German language proficiency (since the program is taught in English).",
+        "doc_id": "de/ustutt/cs-msc/programme"
+      },
+      "snapshot_pass": true,
+      "strict_pass": true,
+      "correction_status": "not_required"
+    },
+    {
+      "row": 34,
+      "slug": "university-of-stuttgart-m-sc-computer-science",
+      "field": "selection_process",
+      "original": {
+        "status": "stated",
+        "value": "On the basis of the documents presented, the Board of Admission (Zulassungsausschuss) decides whether the conditions of entry are fulfilled or not. In case of the latter, an interview or an entrance examination may be necessary. In some cases, students who are missing certain qualifications may be granted admission on the condition that they acquire these qualifications in the course of their studies, for example by attending additional modules.",
+        "quote": "On the basis of the documents presented, the Board of Admission (Zulassungsausschuss) decides whether the conditions of entry are fulfilled or not. In case of the latter, an interview or an entrance examination may be necessary. In some cases, students who are missing certain qualifications may be granted admission on the condition that they acquire these qualifications in the course of their studies, for example by attending additional modules.",
+        "doc_id": "de/ustutt/cs-msc/department"
+      },
+      "snapshot_pass": true,
+      "strict_pass": true,
+      "correction_status": "not_required"
+    },
+    {
+      "row": 35,
+      "slug": "university-of-stuttgart-m-sc-computer-science",
+      "field": "tuition_eur_per_semester_non_eu",
+      "original": {
+        "status": "stated",
+        "value": 1500.0,
+        "quote": "The Land Baden-Württemberg has introduced tuition fees for a second degree (650 EUR / semester) and for international students who are not citizens of an EU/EEA country (1500 EUR / semester).",
+        "doc_id": "de/ustutt/tuition-fees"
+      },
+      "snapshot_pass": true,
+      "strict_pass": true,
+      "correction_status": "not_required"
+    }
+  ],
+  "corrections_verified_at": "2026-10-27",
+  "original_sheet_git_commit": "d2c3a4dc2c019ecf524d3f8f8bb100e1e745cddb"
+}
