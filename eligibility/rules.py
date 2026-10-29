@@ -20,7 +20,9 @@ from core.config import Settings
 
 SCHEMA_VERSION = "rules-v1"
 
-Verdict = Literal["meets", "does_not_meet", "unknown", "not_published"]
+# not_applicable: a condition (e.g. degree country) switched the rule off; it is
+# shown in the trace but never counted
+Verdict = Literal["meets", "does_not_meet", "unknown", "not_published", "not_applicable"]
 Severity = Literal["hard", "soft", "info"]
 Category = Literal["admission", "readiness", "finance"]
 
@@ -48,6 +50,25 @@ class Maximum(Strict):
     strict: bool = False
 
 
+class In(Strict):
+    """Fact is one of `values` (strings compared case-insensitively). A list fact
+    such as `documents` meets if any element matches. `negate` flips the result."""
+
+    type: Literal["in"] = "in"
+    fact: str
+    values: list[str | bool] = Field(min_length=1)
+    negate: bool = False
+
+
+class When(Strict):
+    """`then` applies only if `when` meets. If `when` fails the rule is
+    not_applicable; if `when` is unknown the rule stays unknown, never exempt."""
+
+    type: Literal["when"] = "when"
+    when: "Check"
+    then: "Check"
+
+
 class UniversityReview(Strict):
     """A step only the university can resolve; never `meets` on its own."""
 
@@ -66,8 +87,9 @@ class Group(Strict):
         return self
 
 
-Check = Annotated[Minimum | Maximum | UniversityReview | Group, Field(discriminator="type")]
+Check = Annotated[Minimum | Maximum | In | When | UniversityReview | Group, Field(discriminator="type")]
 Group.model_rebuild()
+When.model_rebuild()
 
 
 class Rule(Strict):
@@ -98,6 +120,21 @@ def record_hash(record: dict) -> str:
     """Same canonical form as scripts/validate_phase6_inventory.py."""
     blob = json.dumps(record, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
     return hashlib.sha256(blob.encode("utf-8")).hexdigest()
+
+
+def uncited_quotes(rules: RuleSet, record: dict) -> list[str]:
+    """Rule citations whose quote is not inside a quote of the verified record
+    from the same doc (word-normalised, as the extraction quote check)."""
+    from extraction.extract import _words
+
+    cited: dict[str, list[str]] = {}
+    for field in record.values():
+        if isinstance(field, dict) and field.get("quote"):
+            cited.setdefault(field["doc_id"], []).append(_words(field["quote"]))
+            for s in field.get("supporting_citations", []):
+                cited.setdefault(s["doc_id"], []).append(_words(s["quote"]))
+    return [f"{r.id}: {c.quote[:60]!r}" for r in rules.rules for c in r.citations
+            if not any(_words(c.quote) in q for q in cited.get(c.doc_id, []))]
 
 
 def load_ruleset(settings: Settings, slug: str) -> tuple[RuleSet, bool]:

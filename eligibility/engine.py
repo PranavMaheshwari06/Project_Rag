@@ -8,7 +8,17 @@ from decimal import Decimal
 
 from eligibility.profile import Profile
 from eligibility.report import Criterion, Headline, Report
-from eligibility.rules import Check, Group, Maximum, Minimum, Rule, RuleSet, Verdict
+from eligibility.rules import (
+    Check,
+    Group,
+    In,
+    Maximum,
+    Minimum,
+    Rule,
+    RuleSet,
+    Verdict,
+    When,
+)
 from pydantic import BaseModel
 
 
@@ -53,11 +63,37 @@ def _bound(check: Minimum | Maximum, profile: Profile) -> Result:
     )
 
 
+def _norm(v: object) -> object:
+    return v.casefold() if isinstance(v, str) else v
+
+
+def _in(check: In, profile: Profile) -> Result:
+    required = f"{'not ' if check.negate else ''}one of {', '.join(map(str, check.values))}"
+    observed = resolve(profile, check.fact)
+    if observed is None:
+        return Result(verdict="unknown", required=required, reason="missing_fact")
+    allowed = {_norm(v) for v in check.values}
+    items = observed if isinstance(observed, list) else [observed]
+    hit = any(_norm(x) in allowed for x in items) != check.negate
+    return Result(verdict="meets" if hit else "does_not_meet", entered=str(observed), required=required)
+
+
 def evaluate(check: Check, profile: Profile) -> Result:
     if isinstance(check, (Minimum, Maximum)):
         return _bound(check, profile)
+    if isinstance(check, In):
+        return _in(check, profile)
+    if isinstance(check, When):
+        cond = evaluate(check.when, profile)
+        if cond.verdict == "meets":
+            return evaluate(check.then, profile)
+        if cond.verdict == "does_not_meet":
+            return Result(verdict="not_applicable", entered=cond.entered)
+        return Result(verdict="unknown", reason=cond.reason or "condition_unresolved")
     if isinstance(check, Group):
-        results = [evaluate(c, profile) for c in check.children]
+        results = [r for r in (evaluate(c, profile) for c in check.children) if r.verdict != "not_applicable"]
+        if not results:
+            return Result(verdict="not_applicable")
         verdicts = {r.verdict for r in results}
         # all_of: one known failure fails it. any_of: one pass passes it.
         decisive, other = (
@@ -83,7 +119,7 @@ def check_funds(funds_eur: Decimal | None, required_eur: Decimal) -> Result:
 
 def _action(rule: Rule, r: Result) -> str | None:
     if r.verdict == "does_not_meet":
-        return f"Not met: {rule.label}."
+        return f"{'Still needed' if rule.category == 'readiness' else 'Not met'}: {rule.label}."
     if r.reason == "missing_fact":
         return f"Provide the missing fact for: {rule.label}."
     if r.reason == "university_review":
@@ -114,7 +150,7 @@ def check_eligibility(profile: Profile, rules: RuleSet, stale: bool = False) -> 
                 citations=rule.citations,
             )
         )
-        if rule.category == "admission" and rule.severity == "hard":
+        if rule.category == "admission" and rule.severity == "hard" and r.verdict != "not_applicable":
             admission.append((rule, r))
     headline: Headline
     if any(r.verdict == "does_not_meet" for _, r in admission):

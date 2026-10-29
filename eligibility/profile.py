@@ -33,15 +33,28 @@ class LanguageEvidence(Strict):
     taken_on: date | None = None
 
 
-class EntranceTestResult(Strict):
-    test: str  # "GRE" or "GATE"
-    percentile: Decimal | None = None  # GRE: a percentile, never a raw score
+class Gre(Strict):
+    """GRE General. Scaled scores and percentiles are different facts: a rule
+    asking for a percentile never reads a scaled score, and vice versa."""
+
+    quant: Decimal | None = None
+    verbal: Decimal | None = None
+    writing: Decimal | None = None
+    quant_percentile: Decimal | None = None
+    verbal_percentile: Decimal | None = None
+    writing_percentile: Decimal | None = None
+    taken_on: date | None = None
+
+
+class Gate(Strict):
+    paper: str | None = None  # GATE paper code, e.g. "CS", "DA"
     year: int | None = None
-    qualified: bool | None = None  # GATE: reported qualifying result
+    qualified: bool | None = None  # as reported on the scorecard; no cutoff is invented
 
 
 class Profile(Strict):
     schema_version: str = SCHEMA_VERSION
+    # countries as English short names, as the university pages publish them ("India")
     citizenships: list[str] | None = None
     degree_country: str | None = None
     school_country: str | None = None
@@ -52,6 +65,7 @@ class Profile(Strict):
     subject_credits: dict[str, Decimal] | None = None  # student-confirmed allocation per area
     grade: Grade | None = None
     language: list[LanguageEvidence] | None = None
-    entrance_tests: list[EntranceTestResult] | None = None
-    documents: list[str] | None = None  # documents the student already has
+    gre: Gre | None = None
+    gate: Gate | None = None
+    documents: list[str] | None = None  # document keys the student already has, e.g. "aps_certificate"
     funds_eur: Decimal | None = Field(default=None, ge=0)
