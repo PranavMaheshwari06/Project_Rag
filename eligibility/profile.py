@@ -63,10 +63,13 @@ class Profile(Strict):
     degree_completed: bool | None = None
     total_credits: Decimal | None = None
     credit_unit: str | None = None  # "ECTS" or another unit; other units are not converted
-    subject_credits: dict[str, Decimal] | None = None  # student-confirmed allocation per area
+    # student-confirmed credits per area, keyed in snake_case as the rules name them
+    # (theoretical_cs, practical_cs, computer_engineering, mathematics, ...)
+    subject_credits: dict[str, Decimal] | None = None
     grade: Grade | None = None
     language: list[LanguageEvidence] | None = None  # [] = student has no test
     english_instruction_share: Decimal | None = Field(default=None, ge=0, le=100)  # % of prior programme taught in English
+    interview_passed: bool | None = None  # the target's aptitude interview, once taken (invited != passed)
     gre: Gre | None = None
     gate: Gate | None = None
     documents: list[str] | None = None  # document keys the student already has, e.g. "aps_certificate"

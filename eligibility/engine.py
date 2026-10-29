@@ -100,7 +100,7 @@ def evaluate(check: Check, profile: Profile) -> Result:
             return evaluate(check.then, profile)
         if cond.verdict == "does_not_meet":
             return Result(verdict="not_applicable", entered=cond.entered)
-        return Result(verdict="unknown", reason=cond.reason or "condition_unresolved")
+        return Result(verdict="unknown", reason=cond.reason or "condition_unresolved", required=cond.required)
     if isinstance(check, Group):
         results = [r for r in (evaluate(c, profile) for c in check.children) if r.verdict != "not_applicable"]
         if not results:

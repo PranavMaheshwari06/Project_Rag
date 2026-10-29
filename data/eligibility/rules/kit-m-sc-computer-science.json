@@ -1,0 +1,497 @@
+{
+  "schema_version": "rules-v1",
+  "slug": "kit-m-sc-computer-science",
+  "record_sha256": "ea85986cefb22fe0ac7c50ecaea561f4fa171997f7e02f3f0fcd8b741917fbb2",
+  "rules": [
+    {
+      "id": "degree",
+      "label": "Bachelor's in Computer Science or essentially the same content, at least 3 years",
+      "severity": "hard",
+      "check": {
+        "type": "university_review",
+        "note": "KIT decides whether the degree is Computer Science or essentially the same content (R01)."
+      },
+      "citations": [
+        {
+          "doc_id": "de/kit/cs-msc/programme",
+          "quote": "The degree program must have been completed within a standard period of study of at least three years and with a minimum number of 180 ECTS credits."
+        }
+      ],
+      "reviewed_by": "pending"
+    },
+    {
+      "id": "degree_ects",
+      "label": "At least 180 ECTS credits in the first degree",
+      "check": {
+        "type": "all_of",
+        "children": [
+          {
+            "type": "in",
+            "fact": "credit_unit",
+            "values": [
+              "ECTS"
+            ]
+          },
+          {
+            "type": "min",
+            "fact": "total_credits",
+            "value": "180"
+          }
+        ]
+      },
+      "citations": [
+        {
+          "doc_id": "de/kit/cs-msc/programme",
+          "quote": "The degree program must have been completed within a standard period of study of at least three years and with a minimum number of 180 ECTS credits."
+        }
+      ],
+      "reviewed_by": "pending"
+    },
+    {
+      "id": "selection_entry",
+      "label": "Entry to the selection: successful GATE (CS or DA), the full credit minimums, or the interview route",
+      "check": {
+        "type": "any_of",
+        "children": [
+          {
+            "type": "all_of",
+            "children": [
+              {
+                "type": "in",
+                "fact": "gate.paper",
+                "values": [
+                  "CS",
+                  "DA"
+                ]
+              },
+              {
+                "type": "in",
+                "fact": "gate.qualified",
+                "values": [
+                  true
+                ]
+              }
+            ]
+          },
+          {
+            "type": "all_of",
+            "children": [
+              {
+                "type": "min",
+                "fact": "subject_credits.theoretical_cs",
+                "value": "15"
+              },
+              {
+                "type": "min",
+                "fact": "subject_credits.practical_cs",
+                "value": "30"
+              },
+              {
+                "type": "min",
+                "fact": "subject_credits.computer_engineering",
+                "value": "8"
+              },
+              {
+                "type": "min",
+                "fact": "subject_credits.mathematics",
+                "value": "25"
+              }
+            ]
+          },
+          {
+            "type": "all_of",
+            "children": [
+              {
+                "type": "any_of",
+                "children": [
+                  {
+                    "type": "all_of",
+                    "children": [
+                      {
+                        "type": "min",
+                        "fact": "subject_credits.practical_cs",
+                        "value": "20"
+                      },
+                      {
+                        "type": "min",
+                        "fact": "subject_credits.computer_engineering",
+                        "value": "6"
+                      },
+                      {
+                        "type": "min",
+                        "fact": "subject_credits.mathematics",
+                        "value": "20"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "all_of",
+                    "children": [
+                      {
+                        "type": "min",
+                        "fact": "subject_credits.theoretical_cs",
+                        "value": "15"
+                      },
+                      {
+                        "type": "min",
+                        "fact": "subject_credits.computer_engineering",
+                        "value": "6"
+                      },
+                      {
+                        "type": "min",
+                        "fact": "subject_credits.mathematics",
+                        "value": "20"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "all_of",
+                    "children": [
+                      {
+                        "type": "min",
+                        "fact": "subject_credits.theoretical_cs",
+                        "value": "15"
+                      },
+                      {
+                        "type": "min",
+                        "fact": "subject_credits.practical_cs",
+                        "value": "20"
+                      },
+                      {
+                        "type": "min",
+                        "fact": "subject_credits.mathematics",
+                        "value": "20"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "all_of",
+                    "children": [
+                      {
+                        "type": "min",
+                        "fact": "subject_credits.theoretical_cs",
+                        "value": "15"
+                      },
+                      {
+                        "type": "min",
+                        "fact": "subject_credits.practical_cs",
+                        "value": "20"
+                      },
+                      {
+                        "type": "min",
+                        "fact": "subject_credits.computer_engineering",
+                        "value": "6"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "max",
+                "fact": "grade.class_rank_percentile",
+                "value": "10"
+              },
+              {
+                "type": "in",
+                "fact": "interview_passed",
+                "values": [
+                  true
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "citations": [
+        {
+          "doc_id": "de/kit/cs-msc/programme",
+          "quote": "You can participate in the selection process if you fulfill one of the following three conditions:"
+        },
+        {
+          "doc_id": "de/kit/cs-msc/programme",
+          "quote": "you have a successful GATE test (see above)"
+        },
+        {
+          "doc_id": "de/kit/cs-msc/programme",
+          "quote": "Theoretical Computer Science: 15 credit points Practical Computer Science: 30 credit points Computer Engineering: 8 credit points Mathematics: 25 credit points"
+        },
+        {
+          "doc_id": "de/kit/cs-msc/programme",
+          "quote": "A prerequisite for participation is that your proven knowledge and achievements do not fall below the following requirements in three of the four areas mentioned: Theoretical Computer Science: 15 credit points Practical Computer Science: 20 credit points Computer Engineering: 6 credit points Mathematics: 20 credit points"
+        },
+        {
+          "doc_id": "de/kit/cs-msc/admission",
+          "quote": "proof from your University of beeing one of the best 10% students in the academic year"
+        }
+      ],
+      "reviewed_by": "pending"
+    },
+    {
+      "id": "module_assignment",
+      "label": "The selection committee assigns your modules to the subject areas",
+      "severity": "info",
+      "check": {
+        "type": "university_review",
+        "note": "Credits per area are your own allocation; the committee makes the official assignment."
+      },
+      "citations": [
+        {
+          "doc_id": "de/kit/cs-msc/programme",
+          "quote": "The modules are assigned to the above-mentioned subject areas by the selection committee."
+        }
+      ],
+      "reviewed_by": "pending"
+    },
+    {
+      "id": "gre_or_gate",
+      "label": "GRE (verbal 151, quantitative 164, writing 4) or successful GATE, unless the degree is from an EHEA or Lisbon Convention country",
+      "check": {
+        "type": "when",
+        "when": {
+          "type": "university_review",
+          "note": "Whether the degree country is in the EHEA or a Lisbon Convention state is not defined yet (R06); membership is never assumed."
+        },
+        "then": {
+          "type": "any_of",
+          "children": [
+            {
+              "type": "all_of",
+              "children": [
+                {
+                  "type": "min",
+                  "fact": "gre.verbal",
+                  "value": "151"
+                },
+                {
+                  "type": "min",
+                  "fact": "gre.quant",
+                  "value": "164"
+                },
+                {
+                  "type": "min",
+                  "fact": "gre.writing",
+                  "value": "4"
+                }
+              ]
+            },
+            {
+              "type": "all_of",
+              "children": [
+                {
+                  "type": "in",
+                  "fact": "gate.paper",
+                  "values": [
+                    "CS",
+                    "DA"
+                  ]
+                },
+                {
+                  "type": "in",
+                  "fact": "gate.qualified",
+                  "values": [
+                    true
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "citations": [
+        {
+          "doc_id": "de/kit/cs-msc/programme",
+          "quote": "GRE test with the following scores in the individual areas: Verbal Reasoning: at least 151 points Quantitative Reasoning: at least 164 points Analytical Writing: at least 4 points"
+        },
+        {
+          "doc_id": "de/kit/cs-msc/programme",
+          "quote": "Proof of the GRE is not necessary if: the university degree was obtained at a university in the European Higher Education Area (EHEA )"
+        },
+        {
+          "doc_id": "de/kit/cs-msc/programme",
+          "quote": "a successful Graduate Aptitude Test in Engineering (GATE) in the field of Computer Science and Information Technology or Data Science and Artificial Intelligence"
+        }
+      ],
+      "reviewed_by": "pending"
+    },
+    {
+      "id": "test_validity",
+      "label": "GRE not older than 5 years, GATE not older than 3 years",
+      "check": {
+        "type": "university_review",
+        "note": "The age of the GRE/GATE result is not checked yet: the reference date and boundary need a reviewed date rule (R04)."
+      },
+      "citations": [
+        {
+          "doc_id": "de/kit/cs-msc/admission",
+          "quote": "GRE certificates must not be older than 5 years (GATE 3 years)."
+        }
+      ],
+      "reviewed_by": "pending"
+    },
+    {
+      "id": "english",
+      "label": "English proof: a listed test, an English-taught degree, or a qualifying school certificate",
+      "check": {
+        "type": "any_of",
+        "children": [
+          {
+            "type": "min",
+            "fact": "english_instruction_share",
+            "value": "100"
+          },
+          {
+            "type": "min",
+            "fact": "language.TOEFL iBT.overall",
+            "value": "90"
+          },
+          {
+            "type": "all_of",
+            "children": [
+              {
+                "type": "min",
+                "fact": "language.IELTS.overall",
+                "value": "6.5"
+              },
+              {
+                "type": "min",
+                "fact": "language.IELTS.components.Listening",
+                "value": "5.5"
+              },
+              {
+                "type": "min",
+                "fact": "language.IELTS.components.Reading",
+                "value": "5.5"
+              },
+              {
+                "type": "min",
+                "fact": "language.IELTS.components.Speaking",
+                "value": "5.5"
+              },
+              {
+                "type": "min",
+                "fact": "language.IELTS.components.Writing",
+                "value": "5.5"
+              }
+            ]
+          },
+          {
+            "type": "all_of",
+            "children": [
+              {
+                "type": "min",
+                "fact": "language.TOEIC.components.Listening",
+                "value": "400"
+              },
+              {
+                "type": "min",
+                "fact": "language.TOEIC.components.Reading",
+                "value": "385"
+              },
+              {
+                "type": "min",
+                "fact": "language.TOEIC.components.Speaking",
+                "value": "160"
+              },
+              {
+                "type": "min",
+                "fact": "language.TOEIC.components.Writing",
+                "value": "150"
+              }
+            ]
+          },
+          {
+            "type": "all_of",
+            "children": [
+              {
+                "type": "min",
+                "fact": "language.PTE Academic.overall",
+                "value": "58.5"
+              },
+              {
+                "type": "min",
+                "fact": "language.PTE Academic.components.Listening",
+                "value": "56.8"
+              },
+              {
+                "type": "min",
+                "fact": "language.PTE Academic.components.Reading",
+                "value": "60.6"
+              },
+              {
+                "type": "min",
+                "fact": "language.PTE Academic.components.Speaking",
+                "value": "53.5"
+              },
+              {
+                "type": "min",
+                "fact": "language.PTE Academic.components.Writing",
+                "value": "74.1"
+              }
+            ]
+          },
+          {
+            "type": "in",
+            "fact": "language.CAE.grade",
+            "values": [
+              "A",
+              "B",
+              "C",
+              "pass"
+            ]
+          },
+          {
+            "type": "in",
+            "fact": "language.CPE.grade",
+            "values": [
+              "A",
+              "B",
+              "C",
+              "pass"
+            ]
+          },
+          {
+            "type": "in",
+            "fact": "language.FCE.grade",
+            "values": [
+              "A",
+              "B",
+              "C",
+              "pass"
+            ]
+          },
+          {
+            "type": "university_review",
+            "note": "Other KIT-accepted proof (UNIcert level II, an English-certifying university entrance qualification) is not modelled; KIT decides."
+          }
+        ]
+      },
+      "citations": [
+        {
+          "doc_id": "de/kit/cs-msc/programme",
+          "quote": "a university degree with English as the sole language of instruction and examination in the completed degree program"
+        },
+        {
+          "doc_id": "de/kit/cs-msc/programme",
+          "quote": "TOEFL iBT (internet-based) with at least 90 points"
+        },
+        {
+          "doc_id": "de/kit/cs-msc/programme",
+          "quote": "IELTS with an overall score of at least 6.5, no section below 5.5"
+        },
+        {
+          "doc_id": "de/kit/cs-msc/programme",
+          "quote": "TOEIC with at least 400 points in Listening, 385 in Reading, 160 in Speaking, 150 in Writing"
+        },
+        {
+          "doc_id": "de/kit/cs-msc/programme",
+          "quote": "Pearson PTE Academic with at least 58.5 points overall and at least 56.8 in Listening, 60.6 in Reading, 53.5 in Speaking, 74.1 in Writing"
+        },
+        {
+          "doc_id": "de/kit/cs-msc/programme",
+          "quote": "Cambridge Certificate C1 Advanced (CAE)"
+        }
+      ],
+      "reviewed_by": "pending"
+    }
+  ]
+}

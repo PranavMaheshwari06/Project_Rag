@@ -107,8 +107,90 @@ def test_tum_english_alternatives():
     assert eng().verdict == "unknown"
 
 
-def test_tum_english_rule_waits_for_maintainer_review():
+def test_tum_review_status():
     rules, _ = load_ruleset(get_settings(), TUM)
     status = {r.id: r.reviewed_by for r in rules.rules}
-    assert status["english"] == "pending"  # new interpretation, not yet accepted
-    assert status["gre_or_gate"] == status["degree"] == status["aptitude_assessment"] == "human"
+    hard = ("degree", "gre_or_gate", "english", "aptitude_assessment")
+    assert all(status[i] == "human" for i in hard)
+    assert status["aps"] == status["vpd"] == "pending"  # readiness rules (R16) not yet decided
+
+
+# --- KIT Computer Science -------------------------------------------------------
+KIT = "kit-m-sc-computer-science"
+
+
+def kit(**facts):
+    return {c.rule_id: c for c in check_eligibility(Profile(**facts), *load_ruleset(get_settings(), KIT)).criteria}
+
+
+FULL = {"theoretical_cs": "15", "practical_cs": "30", "computer_engineering": "8", "mathematics": "25"}
+
+
+def test_kit_selection_routes_are_alternatives():
+    entry = lambda **f: kit(**f)["selection_entry"]  # noqa: E731
+    assert entry(subject_credits=FULL).verdict == "meets"                    # credit route, exact minimums
+    assert entry(subject_credits={**FULL, "mathematics": "24"}).verdict == "unknown"  # GATE not supplied: still open
+    assert entry(gate={"paper": "DA", "qualified": True}).verdict == "meets"  # GATE alone is enough
+    assert entry(gate={"paper": "ME", "qualified": True}).verdict == "unknown"  # wrong paper, other routes open
+    # credits short and GATE failed, but the interview route has no rank/interview facts yet
+    short = {**FULL, "mathematics": "24"}
+    assert entry(subject_credits=short, gate={"paper": "CS", "qualified": False}).verdict == "unknown"
+
+
+def test_kit_interview_route():
+    entry = lambda **f: kit(**f)["selection_entry"]  # noqa: E731
+    relaxed = {"theoretical_cs": "15", "practical_cs": "20", "computer_engineering": "6", "mathematics": "20"}
+    top10 = {"obtained": "9", "best": "10", "passing": "5", "class_rank_percentile": "10"}
+    no_gate = {"paper": "CS", "qualified": False}
+    base = {"gate": no_gate, "grade": top10}
+    # prerequisites met, interview not taken yet: invited, not passed
+    assert entry(subject_credits=relaxed, **base).verdict == "unknown"
+    assert entry(subject_credits=relaxed, interview_passed=True, **base).verdict == "meets"
+    assert entry(subject_credits=relaxed, interview_passed=False, **base).verdict == "does_not_meet"
+    # three of four areas is enough: computer engineering below the relaxed minimum
+    three = {**relaxed, "computer_engineering": "5"}
+    assert entry(subject_credits=three, interview_passed=True, **base).verdict == "meets"
+    # only two areas reach the relaxed minimums
+    two = {**three, "mathematics": "19"}
+    assert entry(subject_credits=two, interview_passed=True, **base).verdict == "does_not_meet"
+    # top 10% is strict about the rank: 11% fails the route
+    rank11 = {**top10, "class_rank_percentile": "11"}
+    assert entry(subject_credits=relaxed, interview_passed=True, gate=no_gate, grade=rank11).verdict == "does_not_meet"
+
+
+def test_kit_credits_need_ects():
+    assert kit(total_credits="180", credit_unit="ECTS")["degree_ects"].verdict == "meets"
+    assert kit(total_credits="179", credit_unit="ECTS")["degree_ects"].verdict == "does_not_meet"
+    assert kit(total_credits="180", credit_unit="US credits")["degree_ects"].verdict == "does_not_meet"
+    assert kit(total_credits="180")["degree_ects"].verdict == "unknown"  # unit not stated
+
+
+def test_kit_gre_and_validity_stay_open_until_country_groups_and_dates_exist():
+    gre = kit(degree_country="India", gre={"verbal": "160", "quant": "170", "writing": "5"})
+    assert (gre["gre_or_gate"].verdict, gre["gre_or_gate"].reason) == ("unknown", "university_review")
+    assert "EHEA" in gre["gre_or_gate"].action  # the action says why, not "None"
+    assert kit()["test_validity"].verdict == "unknown"
+
+
+def test_kit_english_routes():
+    eng = lambda **f: kit(**f)["english"]  # noqa: E731
+    def ielts(writing):
+        return {"test": "IELTS", "overall": "6.5",
+                "components": {"Listening": "6", "Reading": "6", "Speaking": "6", "Writing": writing}}
+
+    assert eng(language=[{"test": "TOEFL iBT", "overall": "90"}]).verdict == "meets"
+    assert eng(language=[ielts("5.5")]).verdict == "meets"
+    # a section below 5.5 fails IELTS, but other KIT-accepted proof may exist: unknown, never a fail
+    assert eng(language=[ielts("5.0")]).verdict == "unknown"
+    assert eng(language=[{"test": "CAE", "grade": "pass"}]).verdict == "meets"
+    assert eng(english_instruction_share="100").verdict == "meets"
+    assert eng(english_instruction_share="90").verdict == "unknown"  # "sole language" means all of it
+
+
+def test_kit_headline_never_positive_while_the_university_decides():
+    p = Profile(subject_credits=FULL, total_credits="180", credit_unit="ECTS",
+                language=[{"test": "TOEFL iBT", "overall": "95"}])
+    rep = check_eligibility(p, *load_ruleset(get_settings(), KIT))
+    assert rep.headline == "needs_information_or_review"
+    info = [c for c in rep.criteria if c.rule_id == "module_assignment"][0]
+    assert info.severity == "info"  # shown, but never part of the headline
