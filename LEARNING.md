@@ -266,3 +266,21 @@ The next steps add typed profiles/rules and deterministic primitives. Consequent
 - Decide R01–R17 (accept, correct or defer) programme by programme as each catalogue is built in Step 3; Steps 1–2 do not wait for them. Source gaps are not resolved by acceptance alone.
 - Author five synthetic/anonymised profiles and independent labels using H01–H05 before Step 5 engine comparisons.
 - Rewrite the dated Step 0 decision draft in personal words when convenient; quizzes and rewrites retain the deferred schedule.
+
+### Phase 6 Steps 1-3 (2026-10-29): engine primitives and the first rule file
+
+**Maintainer-checked engine behaviour (C1-C10, accepted 2026-10-29).** Hand-checked against `tests/test_eligibility_engine.py`:
+- C1-C3: the Bavarian formula, `1 + 3*(best - obtained)/(best - passing)`, gives 2.5 for 3.0 on 4.0/2.0 and for 75 on 100/50, 2.2 for 8 on 10/5, and leaves a German-scale 2.0 at 2.0. The result is an estimate, never an official equivalence.
+- C4: a grade outside the scale's passing range is rejected, not converted.
+- C5-C7: a minimum of 120 is met at 120 with margin 0 and failed at 119.5 with margin -0.5; a strict bound fails at zero margin; for an upper limit the margin is positive when under it, so positive always means favourable.
+- C8: a fact not supplied is `unknown`; a fact entered as 0 is a real failure.
+- C9: `any_of` with one fail and one unknown stays unknown; `all_of` with one fail and one unknown fails.
+- C10: soft rules and finance/readiness rules never move the academic headline, and an unreviewed rule can never produce a positive headline.
+
+**TUM Informatics decisions.** T1 (R01): degree equivalence is TUM's call, `unknown`, no matching on degree title. T3 (R14): GRE needs QR >= 164 and AW >= 4.0, or a qualifying GATE CS scorecard, only for degrees from Bangladesh, China, India, Iran or Pakistan; the Mechanical Engineering GATE paper is for M.Sc. CSE only. T4 (R14): the aptitude assessment is a university decision, so TUM never shows a positive headline. Those three rules are `reviewed_by: human`. T2 (English) was not accepted blind: see below.
+
+**Finding: R14 was wrong that the English thresholds are missing, and the cause is the parser.** The cached TUM language page holds them (TOEFL iBT 88, IELTS Academic 6.5, PTE Academic 65, Cambridge CAE/CPE grades A-C, or at least 50% of the prior programme taught in English). `ingestion/parser.py` prefers `<main>`, and on that page `html.parser` closes `<main>` before the English accordion, so the cleaned text and every chunk contain only the German section. Consequences: the extractor correctly saw nothing and recorded `english: not_published`, and retrieval cannot answer TUM English questions either. Not fixed here: changing the parser changes the corpus and the Phase 4 retrieval baseline, so it needs its own versioned decision and a re-run of the unchanged retrieval configurations. Other pages with the same pattern are unchecked.
+
+What the rule does meanwhile: the English rule cites the raw cached page. `make eligibility ARGS="--validate"` checks each quote against a verified-record quote, or else against the cached raw HTML text, and only where `data/raw` exists (CI prints "not checked"). The English rule is `reviewed_by: pending` because this interpretation is new. It never reports a failure, only `meets` or `unknown`, because TUM may accept alternative proof under the programme regulations and the new TOEFL 1-6 scale, which are not modelled. The record's `english: not_published` stays unchanged; a Save-path correction is owed.
+
+Possible quiz question: why is a quote that is on the page but missing from the parsed corpus weaker evidence than a verified-record quote, and what does the check do about it?

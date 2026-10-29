@@ -30,6 +30,7 @@ class LanguageEvidence(Strict):
     test: str  # canonical name, e.g. "IELTS", "TOEFL iBT"; CEFR is a framework, not a test
     overall: Decimal | None = None
     components: dict[str, Decimal] | None = None
+    grade: str | None = None  # letter grade, e.g. Cambridge CAE/CPE "A"
     taken_on: date | None = None
 
 
@@ -64,7 +65,8 @@ class Profile(Strict):
     credit_unit: str | None = None  # "ECTS" or another unit; other units are not converted
     subject_credits: dict[str, Decimal] | None = None  # student-confirmed allocation per area
     grade: Grade | None = None
-    language: list[LanguageEvidence] | None = None
+    language: list[LanguageEvidence] | None = None  # [] = student has no test
+    english_instruction_share: Decimal | None = Field(default=None, ge=0, le=100)  # % of prior programme taught in English
     gre: Gre | None = None
     gate: Gate | None = None
     documents: list[str] | None = None  # document keys the student already has, e.g. "aps_certificate"

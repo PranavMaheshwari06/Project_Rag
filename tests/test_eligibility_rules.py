@@ -82,6 +82,33 @@ def test_tum_rules_cite_the_verified_record():
     s = get_settings()
     rules, stale = load_ruleset(s, TUM)
     record = json.loads((Path(s.paths.verified_dir) / f"{TUM}.json").read_text())["record"]
-    assert not stale and uncited_quotes(rules, record) == []
+    assert not stale
+    # only the English rule cites evidence the record omits (english is not_published there)
+    assert {r for r, _, _ in uncited_quotes(rules, record)} == {"english"}
     rules.rules[0].citations[0].quote = "a quote that is on no page"
-    assert len(uncited_quotes(rules, record)) == 1
+    assert {r for r, _, _ in uncited_quotes(rules, record)} == {"degree", "english"}
+
+
+def lang(*entries):
+    return {"language": list(entries)}
+
+
+def test_tum_english_alternatives():
+    eng = lambda **f: tum_report(**f)["english"]  # noqa: E731
+    assert eng(**lang({"test": "IELTS", "overall": "6.5"})).verdict == "meets"
+    assert eng(**lang({"test": "toefl ibt", "overall": "88"})).verdict == "meets"  # name match ignores case
+    assert eng(**lang({"test": "PTE Academic", "overall": "64"}), english_instruction_share="50").verdict == "meets"
+    assert eng(**lang({"test": "CAE", "grade": "B"})).verdict == "meets"
+    assert eng(english_instruction_share="50").verdict == "meets"  # exactly half counts
+    # failing every listed route is still unknown: TUM may accept other proof, so we never say fails
+    r = eng(**lang({"test": "IELTS", "overall": "6.0"}), english_instruction_share="40")
+    assert (r.verdict, r.reason) == ("unknown", "university_review")
+    # nothing supplied: unknown, and asking for the missing fact
+    assert eng().verdict == "unknown"
+
+
+def test_tum_english_rule_waits_for_maintainer_review():
+    rules, _ = load_ruleset(get_settings(), TUM)
+    status = {r.id: r.reviewed_by for r in rules.rules}
+    assert status["english"] == "pending"  # new interpretation, not yet accepted
+    assert status["gre_or_gate"] == status["degree"] == status["aptitude_assessment"] == "human"

@@ -122,9 +122,9 @@ def record_hash(record: dict) -> str:
     return hashlib.sha256(blob.encode("utf-8")).hexdigest()
 
 
-def uncited_quotes(rules: RuleSet, record: dict) -> list[str]:
-    """Rule citations whose quote is not inside a quote of the verified record
-    from the same doc (word-normalised, as the extraction quote check)."""
+def uncited_quotes(rules: RuleSet, record: dict) -> list[tuple[str, str, str]]:
+    """(rule id, doc id, quote) for citations not inside a quote of the verified
+    record from the same doc (word-normalised, as the extraction quote check)."""
     from extraction.extract import _words
 
     cited: dict[str, list[str]] = {}
@@ -133,7 +133,7 @@ def uncited_quotes(rules: RuleSet, record: dict) -> list[str]:
             cited.setdefault(field["doc_id"], []).append(_words(field["quote"]))
             for s in field.get("supporting_citations", []):
                 cited.setdefault(s["doc_id"], []).append(_words(s["quote"]))
-    return [f"{r.id}: {c.quote[:60]!r}" for r in rules.rules for c in r.citations
+    return [(r.id, c.doc_id, c.quote) for r in rules.rules for c in r.citations
             if not any(_words(c.quote) in q for q in cited.get(c.doc_id, []))]
 
 

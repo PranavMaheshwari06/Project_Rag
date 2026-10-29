@@ -30,13 +30,20 @@ class Result(BaseModel):
     reason: str | None = None  # why the verdict is unknown
 
 
+ABSENT = object()  # the student listed their tests and this one is not among them
+
+
 def resolve(profile: Profile, path: str) -> object:
-    """Dotted lookup; a missing link (None, absent dict key) gives None."""
+    """Dotted lookup; a missing link (None, absent dict key) gives None. In a list
+    of language results a path part selects the entry by test name, e.g.
+    `language.IELTS.overall`; a test missing from a supplied list is ABSENT."""
     cur: object = profile
     for part in path.split("."):
-        if cur is None:
-            return None
-        if isinstance(cur, dict):
+        if cur is None or cur is ABSENT:
+            return cur
+        if isinstance(cur, list):
+            cur = next((e for e in cur if e.test.casefold() == part.casefold()), ABSENT)
+        elif isinstance(cur, dict):
             cur = cur.get(part)
         elif hasattr(cur, part):
             cur = getattr(cur, part)
@@ -51,6 +58,8 @@ def _bound(check: Minimum | Maximum, profile: Profile) -> Result:
     observed = resolve(profile, check.fact)
     if observed is None:
         return Result(verdict="unknown", required=required, reason="missing_fact")
+    if observed is ABSENT:
+        return Result(verdict="does_not_meet", entered="not reported", required=required)
     if not isinstance(observed, Decimal):
         raise ValueError(f"fact {check.fact} is not numeric")
     margin = observed - check.value if smallest else check.value - observed
@@ -72,6 +81,8 @@ def _in(check: In, profile: Profile) -> Result:
     observed = resolve(profile, check.fact)
     if observed is None:
         return Result(verdict="unknown", required=required, reason="missing_fact")
+    if observed is ABSENT:
+        return Result(verdict="does_not_meet", entered="not reported", required=required)
     allowed = {_norm(v) for v in check.values}
     items = observed if isinstance(observed, list) else [observed]
     hit = any(_norm(x) in allowed for x in items) != check.negate

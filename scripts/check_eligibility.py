@@ -17,14 +17,37 @@ from eligibility.profile import Profile  # noqa: E402
 from eligibility.rules import load_ruleset, uncited_quotes  # noqa: E402
 
 
+def raw_page_words(settings, doc_id: str) -> str | None:
+    """Plain text of the cached page, for quotes the parsed corpus lost (see LEARNING)."""
+    from bs4 import BeautifulSoup
+    from extraction.extract import _words
+
+    manifest = json.loads(Path(settings.paths.manifest_path).read_text(encoding="utf-8"))
+    rec = manifest.get(doc_id)
+    path = Path(settings.paths.raw_dir) / rec["file"] if rec and rec.get("file") else None
+    if not path or not path.is_file():
+        return None
+    return _words(BeautifulSoup(path.read_text(encoding="utf-8"), "html.parser").get_text(" "))
+
+
 def validate(settings) -> list[str]:
+    """Quotes must be inside a verified-record quote (checked everywhere) or, for
+    evidence the record omits, inside the cached raw page (checked only where
+    data/raw exists, so CI cannot claim page verification)."""
+    from extraction.extract import _words
+
     errors = []
     for path in sorted(Path(settings.paths.rules_dir).glob("*.json")):
         rules, stale = load_ruleset(settings, path.stem)
         if stale:
             errors.append(f"{path.stem}: stale, the verified record changed")
         record = json.loads((Path(settings.paths.verified_dir) / path.name).read_text(encoding="utf-8"))["record"]
-        errors += [f"{path.stem}: quote not in record: {e}" for e in uncited_quotes(rules, record)]
+        for rule_id, doc_id, quote in uncited_quotes(rules, record):
+            page = raw_page_words(settings, doc_id)
+            if page is None:
+                print(f"{path.stem}: {rule_id}: quote not in record, cached page unavailable, not checked")
+            elif _words(quote) not in page:
+                errors.append(f"{path.stem}: {rule_id}: quote not in record or cached page: {quote[:60]!r}")
     return errors
 
 
