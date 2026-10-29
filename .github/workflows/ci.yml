@@ -15,7 +15,7 @@ jobs:
           tests/test_parser.py tests/test_extraction.py tests/test_extraction_schemas.py
           tests/test_extraction_eval.py tests/test_review.py tests/test_validate_gold.py
           tests/test_refusal_eval.py tests/test_eval_runner.py
-          tests/test_phase6_inventory.py
+          tests/test_phase6_inventory.py tests/test_eligibility_types.py
       - run: python scripts/validate_phase6_inventory.py
   frontend:
     runs-on: ubuntu-latest

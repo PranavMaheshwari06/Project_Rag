@@ -29,6 +29,7 @@ class PathsCfg(BaseModel):
     extracted_dir: str = "data/extracted"  # LLM drafts (committed)
     verified_dir: str = "data/verified"  # human-verified records (committed)
     checked_dir: str = "data/checked"  # second-model cross-check of each draft (committed)
+    rules_dir: str = "data/eligibility/rules"  # reviewed rule catalogue (committed)
 
 
 class CrawlCfg(BaseModel):
