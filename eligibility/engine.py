@@ -4,8 +4,11 @@ no clock. A fact that was not supplied is `unknown`, never a failure.
 Margin: positive is favourable (observed - minimum, or maximum - observed). A
 strict bound keeps its strictness at a zero margin."""
 
+from datetime import date
 from decimal import Decimal
 
+from core.config import get_settings
+from eligibility.groups import CountryGroups, load_groups
 from eligibility.profile import Profile
 from eligibility.report import Criterion, Headline, Report
 from eligibility.rules import (
@@ -76,33 +79,49 @@ def _norm(v: object) -> object:
     return v.casefold() if isinstance(v, str) else v
 
 
-def _in(check: In, profile: Profile) -> Result:
+def default_groups() -> CountryGroups:
+    return load_groups(get_settings().paths.country_groups_path)
+
+
+def _in(check: In, profile: Profile, groups: CountryGroups | None) -> Result:
     required = f"{'not ' if check.negate else ''}one of {', '.join(map(str, check.values))}"
     observed = resolve(profile, check.fact)
     if observed is None:
         return Result(verdict="unknown", required=required, reason="missing_fact")
     if observed is ABSENT:
         return Result(verdict="does_not_meet", entered="not reported", required=required)
-    allowed = {_norm(v) for v in check.values}
     items = observed if isinstance(observed, list) else [observed]
-    hit = any(_norm(x) in allowed for x in items) != check.negate
-    return Result(verdict="meets" if hit else "does_not_meet", entered=str(observed), required=required)
+    literals = {_norm(v) for v in check.values if not (isinstance(v, str) and v.startswith("@"))}
+    refs = [v[1:] for v in check.values if isinstance(v, str) and v.startswith("@")]
+    states = []  # a literal or any group match wins; an uncertain member only blocks a "no"
+    for x in items:
+        if _norm(x) in literals:
+            states.append("member")
+        for ref in refs:
+            states.append((groups or default_groups()).membership(ref, str(x)))
+    if "member" in states:
+        hit = True
+    elif "uncertain" in states:
+        return Result(verdict="unknown", entered=str(observed), required=required, reason="group_membership_uncertain")
+    else:
+        hit = False
+    return Result(verdict="meets" if hit != check.negate else "does_not_meet", entered=str(observed), required=required)
 
 
-def evaluate(check: Check, profile: Profile) -> Result:
+def evaluate(check: Check, profile: Profile, groups: CountryGroups | None = None) -> Result:
     if isinstance(check, (Minimum, Maximum)):
         return _bound(check, profile)
     if isinstance(check, In):
-        return _in(check, profile)
+        return _in(check, profile, groups)
     if isinstance(check, When):
-        cond = evaluate(check.when, profile)
+        cond = evaluate(check.when, profile, groups)
         if cond.verdict == "meets":
-            return evaluate(check.then, profile)
+            return evaluate(check.then, profile, groups)
         if cond.verdict == "does_not_meet":
             return Result(verdict="not_applicable", entered=cond.entered)
         return Result(verdict="unknown", reason=cond.reason or "condition_unresolved", required=cond.required)
     if isinstance(check, Group):
-        results = [r for r in (evaluate(c, profile) for c in check.children) if r.verdict != "not_applicable"]
+        results = [r for r in (evaluate(c, profile, groups) for c in check.children) if r.verdict != "not_applicable"]
         if not results:
             return Result(verdict="not_applicable")
         verdicts = {r.verdict for r in results}
@@ -135,18 +154,37 @@ def _action(rule: Rule, r: Result) -> str | None:
         return f"Provide the missing fact for: {rule.label}."
     if r.reason == "university_review":
         return f"The university decides: {r.required}"
+    if r.reason == "group_membership_uncertain":
+        return f"The university decides whether your degree country counts: {rule.label}."
     return None
 
 
-def check_eligibility(profile: Profile, rules: RuleSet, stale: bool = False) -> Report:
-    """One criterion per top-level rule; alternatives live inside their group."""
+def _group_refs(check: Check) -> set[str]:
+    if isinstance(check, In):
+        return {v[1:] for v in check.values if isinstance(v, str) and v.startswith("@")}
+    if isinstance(check, When):
+        return _group_refs(check.when) | _group_refs(check.then)
+    if isinstance(check, Group):
+        return set().union(*(_group_refs(c) for c in check.children))
+    return set()
+
+
+def check_eligibility(
+    profile: Profile,
+    rules: RuleSet,
+    stale: bool = False,
+    as_of: date | None = None,
+    groups: CountryGroups | None = None,
+) -> Report:
+    """One criterion per top-level rule; alternatives live inside their group.
+    `as_of` is only used to flag country lists past their re-check date."""
     if stale:  # the record changed since the rules were reviewed: no verdicts
         return Report(
             slug=rules.slug, headline="needs_information_or_review", rules_stale=True
         )
     criteria, admission = [], []
     for rule in rules.rules:
-        r = evaluate(rule.check, profile)
+        r = evaluate(rule.check, profile, groups)
         criteria.append(
             Criterion(
                 rule_id=rule.id,
@@ -172,4 +210,11 @@ def check_eligibility(profile: Profile, rules: RuleSet, stale: bool = False) -> 
         headline = "meets_checked_published_requirements"
     else:  # unresolved fact, university judgment, or a rule nobody has reviewed yet
         headline = "needs_information_or_review"
-    return Report(slug=rules.slug, headline=headline, criteria=criteria)
+    notices = []
+    used = set().union(*(_group_refs(r.check) for r in rules.rules))
+    if as_of and used:
+        for name in sorted(used):
+            g = (groups or default_groups()).groups[name]
+            if as_of > g.recheck_after:
+                notices.append(f"The {g.label} country list was last checked on {g.fetched_on}; re-check it ({g.source_url}).")
+    return Report(slug=rules.slug, headline=headline, criteria=criteria, notices=notices)

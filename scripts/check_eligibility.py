@@ -6,13 +6,14 @@ Usage: check_eligibility.py --profile p.json --programme <slug>
 
 import argparse
 import json
+from datetime import date
 import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from core.config import get_settings  # noqa: E402
-from eligibility.engine import check_eligibility  # noqa: E402
+from eligibility.engine import check_eligibility, default_groups  # noqa: E402
 from eligibility.profile import Profile  # noqa: E402
 from eligibility.rules import load_ruleset, uncited_quotes  # noqa: E402
 
@@ -48,6 +49,9 @@ def validate(settings) -> list[str]:
                 print(f"{path.stem}: {rule_id}: quote not in record, cached page unavailable, not checked")
             elif _words(quote) not in page:
                 errors.append(f"{path.stem}: {rule_id}: quote not in record or cached page: {quote[:60]!r}")
+    for name, g in default_groups().groups.items():
+        if date.today() > g.recheck_after:
+            errors.append(f"country list {name} is past its re-check date {g.recheck_after}")
     return errors
 
 
@@ -65,11 +69,13 @@ def main() -> int:
     if not (args.profile and args.programme):
         ap.error("--profile and --programme are required unless --validate")
     profile = Profile.model_validate_json(Path(args.profile).read_text(encoding="utf-8"))
-    report = check_eligibility(profile, *load_ruleset(settings, args.programme))
+    report = check_eligibility(profile, *load_ruleset(settings, args.programme), as_of=date.today())
     print(f"{report.slug}: {report.headline}{' (rules stale)' if report.rules_stale else ''}")
     for c in report.criteria:
         margin = f" margin {c.margin}" if c.margin is not None else ""
         print(f"  [{c.verdict}] {c.label}{margin}" + (f"\n      -> {c.action}" if c.action else ""))
+    for n in report.notices:
+        print(f"  notice: {n}")
     return 0
 
 

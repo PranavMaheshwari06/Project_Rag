@@ -34,3 +34,4 @@ class Report(BaseModel):
     headline: Headline
     criteria: list[Criterion] = []
     rules_stale: bool = False
+    notices: list[str] = []  # e.g. a country list past its re-check date

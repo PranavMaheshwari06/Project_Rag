@@ -244,12 +244,17 @@
     },
     {
       "id": "gre_or_gate",
-      "label": "GRE (verbal 151, quantitative 164, writing 4) or successful GATE, unless the degree is from an EHEA or Lisbon Convention country",
+      "label": "GRE (verbal 151, quantitative 164, writing 4) or successful GATE, unless the degree is from an EHEA country or a Lisbon Convention state",
       "check": {
         "type": "when",
         "when": {
-          "type": "university_review",
-          "note": "Whether the degree country is in the EHEA or a Lisbon Convention state is not defined yet (R06); membership is never assumed."
+          "type": "in",
+          "fact": "degree_country",
+          "values": [
+            "@EHEA",
+            "@LISBON"
+          ],
+          "negate": true
         },
         "then": {
           "type": "any_of",
@@ -311,7 +316,7 @@
           "quote": "a successful Graduate Aptitude Test in Engineering (GATE) in the field of Computer Science and Information Technology or Data Science and Artificial Intelligence"
         }
       ],
-      "reviewed_by": "pending"
+      "reviewed_by": "human"
     },
     {
       "id": "test_validity",

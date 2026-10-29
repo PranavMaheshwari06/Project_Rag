@@ -165,11 +165,21 @@ def test_kit_credits_need_ects():
     assert kit(total_credits="180")["degree_ects"].verdict == "unknown"  # unit not stated
 
 
-def test_kit_gre_and_validity_stay_open_until_country_groups_and_dates_exist():
-    gre = kit(degree_country="India", gre={"verbal": "160", "quant": "170", "writing": "5"})
-    assert (gre["gre_or_gate"].verdict, gre["gre_or_gate"].reason) == ("unknown", "university_review")
-    assert "EHEA" in gre["gre_or_gate"].action  # the action says why, not "None"
-    assert kit()["test_validity"].verdict == "unknown"
+def test_kit_gre_depends_on_the_degree_country():
+    gre = lambda country, **f: kit(degree_country=country, **f)["gre_or_gate"]  # noqa: E731
+    scores = {"verbal": "151", "quant": "164", "writing": "4"}
+    assert gre("India", gre=scores).verdict == "meets"                           # not exempt: scores needed, met
+    low = {**scores, "quant": "163"}
+    assert gre("India", gre=low).verdict == "unknown"                            # GATE route still open
+    assert gre("India", gre=low, gate={"paper": "CS", "qualified": False}).verdict == "does_not_meet"
+    assert gre("India", gate={"paper": "CS", "qualified": True}).verdict == "meets"  # GATE replaces the GRE
+    assert gre("Germany").verdict == "not_applicable"                            # EHEA
+    assert gre("Canada").verdict == "not_applicable"                             # Lisbon only
+    assert gre("Russia").verdict == "not_applicable"                             # EHEA-suspended, but Lisbon ratified
+    assert gre("United States").verdict == "unknown"                             # signed, not ratified
+    assert gre("India").verdict == "unknown"                                     # needed, no result given yet
+    assert kit()["gre_or_gate"].verdict == "unknown"                             # no degree country at all
+    assert kit()["test_validity"].verdict == "unknown"                           # age limits not modelled yet
 
 
 def test_kit_english_routes():
