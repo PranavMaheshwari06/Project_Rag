@@ -230,3 +230,39 @@ Optional schema defaults are normalized when comparing extraction records; a cha
 The review-screen tests stalled in the restricted sandbox and passed outside it. Full test artifacts, including evaluation output, are isolated from real corpus files. CI now covers the new pure-logic and review tests; model-backed API tests remain part of the local full suite.
 
 Additional quiz questions: Why must a threshold sweep reuse scores but latency measurements use real searches? Why does tuning on these probes not establish held-out refusal performance? What does a second valid source change about doc-level Recall@k?
+
+## Phase 6: cited eligibility reports (Step 0 draft, 2026-10-27)
+
+### What is runnable
+
+- `phase-6-eligibility-engine` branches from the completed Phase 4 commit `b85ae75`. PR #4 remains a separate, unmerged prerequisite; nothing was merged during kickoff.
+- [The coverage matrix](docs/PHASE_6_RULE_COVERAGE.md) accounts for all 13 programmes and 221 original fields: 24 proposed automatic comparisons, 78 information/readiness fields, 29 manual-review fields and 90 `not_published` fields. These classify possible implementation, not measured engine coverage or eligibility accuracy. No eligibility engine exists yet.
+- `data/eligibility/coverage_inventory.json` preserves raw-byte hashes for 51 Phase 4 inputs, canonical hashes of all 13 original records and raw/cleaned hashes for 42 official cached sources. Existing verified records, tiers, audit scores, gold labels and benchmark artifacts remain unchanged.
+- [The rule-review packet](docs/PHASE_6_RULE_REVIEW.md) contains 17 pending interpretations and 44 supplemental cached-source excerpts. It exposes the missing KIT CDS thesis prerequisite, conditional Darmstadt exams, RWTH country-basis differences and unresolved language/overlap evidence. It does not claim maintainer acceptance or current live-page verification.
+- [The five-profile worksheet](docs/PHASE_6_FIVE_PROFILE_WORKSHEET.md) is deliberately blank. The maintainer writes the facts and expected labels independently before engine comparisons. Filling a form with model labels would not establish independent evaluation.
+
+Run `make validate-phase6-inventory`; locally, add `ARGS="--check-cache"` to parse the official cache and validate original/supplemental quotes and snapshot hashes. The default CI check validates identities, record/baseline bindings and generated-document consistency without pretending raw pages are present. Seven focused tests cover missing inventory fields, stale bindings, changed tiers, source/quote drift, review provenance and baseline preservation. No provider, model download or eligibility verdict is involved.
+
+The extended offline CI selection passes all 55 tests; repository lint and diff whitespace checks pass. As in Phase 4, the review-screen tests stalled in the restricted sandbox and passed outside it. The full model-backed suite and frontend build were not rerun for this inventory-only increment.
+
+### Why these boundaries matter
+
+A quote match checks that words occur in a source, not that a rule interpretation is correct. The derived rule catalogue therefore needs its own semantic review, separate from extraction verification. KIT CS's selection alternatives and its GRE/GATE condition must become separate logical groups. RWTH CS uses degree origin for GRE while DS uses citizenship or German schooling. Treating either distinction as a flat list could reject a qualifying student or exempt one without evidence.
+
+The original `not_published` value also cannot establish that no prerequisite exists. TUM's English fields are empty even though the cached programme pages require language proof; Dresden's required aptitude assessment is under selection rather than entrance tests. Step 0 preserves the historical values and adds a visible gap instead of silently changing the Phase 4 evaluation inputs. Genuine extraction corrections will use the reviewed Save path.
+
+The next steps add typed profiles/rules and deterministic primitives. Consequential semantics remain pending the maintainer's review; unresolved source gaps remain unknown even after accepting that conservative treatment. Academic admission, application readiness and financial checks will have separate summaries. The LLM extracts information; deterministic code compares it.
+
+### Quiz questions (deferred batch)
+
+1. Why can a verified extraction record still be unsafe to use as an executable rule?
+2. What false verdict can result from merging KIT's selection routes with GRE/GATE alternatives?
+3. How does missing source publication differ from missing student evidence or unresolved university equivalence?
+4. What do file, canonical-record and cleaned-source hashes each detect, and what can none of them prove?
+5. Why must five maintainer-authored expected labels be frozen before comparing with engine output?
+
+### Pending maintainer work
+
+- Decide R01–R17 (accept, correct or defer) programme by programme as each catalogue is built in Step 3; Steps 1–2 do not wait for them. Source gaps are not resolved by acceptance alone.
+- Author five synthetic/anonymised profiles and independent labels using H01–H05 before Step 5 engine comparisons.
+- Rewrite the dated Step 0 decision draft in personal words when convenient; quizzes and rewrites retain the deferred schedule.

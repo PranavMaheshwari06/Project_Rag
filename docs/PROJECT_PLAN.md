@@ -4,6 +4,8 @@ Status: living document. Last updated 2026-10-27. Phases 1–3 are merged (PR #3
 
 **Build order:** 1 → 2 → 3 → 4 → **6 → 5** → 7 → 8 → 9 → 10 → 11 → 12. Phase 6 (eligibility engine) runs before Phase 5 (retrieval upgrades) because the engine is the product and needs only the verified records (decided 2026-10-13).
 
+Planning documents and their roles are collected in [PLANNING_INDEX.md](PLANNING_INDEX.md). The next phase is specified in [PHASE_6_IMPLEMENTATION_PLAN.md](PHASE_6_IMPLEMENTATION_PLAN.md), including the schema gaps carried from Phase 3, APIs/CLI, five maintainer-authored cases, synthetic evaluation and the existing phase learning/review loop. It is a plan, not a claim that Phase 6 is implemented.
+
 **Goal of the build:** a deployed, working system that proves real GenAI / RAG / LLM-systems skills on a CV, shipped as soon as possible without lowering data quality. A reviewer should find a live URL, a README with real evaluation numbers and an architecture diagram, a CI eval gate, an agent and an MCP server. Visual polish comes after deploy (Phase 12).
 
 This repository started as EngineerDoc AI, a hybrid RAG service over technical documentation. It is being turned into an admissions and eligibility assistant for international students applying to master's programmes in Germany. The hand-written retrieval core is kept; the corpus, extraction, eligibility logic, agent, UI and deployment are new. `DECISIONS.md` records the reasoning behind each major choice.

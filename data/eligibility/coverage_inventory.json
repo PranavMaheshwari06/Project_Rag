@@ -1,0 +1,3309 @@
+{
+  "schema_version": "phase6-inventory-v1",
+  "created_on": "2026-10-27",
+  "baseline_commit": "b85ae75",
+  "status": "draft_for_maintainer_review",
+  "author": "model_assisted",
+  "reviewed_by": "pending",
+  "scope": "Step 0 coverage inventory only; no executable eligibility rules or measured eligibility coverage.",
+  "hash_method": "sha256; files are raw bytes; record hashes use original record JSON with sorted keys, compact separators and UTF-8 ensure_ascii=False; text hashes use cleaned source UTF-8.",
+  "baseline_inputs": {
+    "config/settings.yaml": "fc4759c12f5452628b227c9ef8f96ba7ffda82217b39323b8ada24b0eaf15d76",
+    "data/audit/Audit_sheet_completed.md": "02fe07ff1412744792d022708f60a542fb3cdc55689981d20df9c9ce02e9c8ab",
+    "data/audit/audit_sheet.md": "cd3a3c2c811603ea3490c895b02da7742e5499babe47ac08ee666fa7c2bb1df6",
+    "data/audit/second_pass_audit.json": "1380635bf248f8087012260c785823a3a720dfebdc30ffa6195174f6d818c096",
+    "data/checked/kit-m-sc-computational-and-data-science.json": "b5bf8372c3e1988d3b3d383cdce04f3c7455270036d38234abb3c2f7adc17161",
+    "data/checked/kit-m-sc-computer-science.json": "fe21342cf7d081c1bd0bbb1afe13af1cdac4398f40072cd42e5e96dfb3d49779",
+    "data/checked/rwth-aachen-m-sc-computer-science.json": "231d145575b85bdf431ef91302890d2aa25fb5c4c60efa81fc39ebc69942a2af",
+    "data/checked/rwth-aachen-m-sc-data-science.json": "cf9f5590eb64363d511e8ef46a779303d259e0f2ba925f0aa876c5a8e4d94822",
+    "data/checked/saarland-university-m-sc-computer-science.json": "af7ffc6e77dfaf4ceb74113a7b4d9d0162fa3446b752dbb6d65f254355d6433f",
+    "data/checked/saarland-university-m-sc-data-science-and-artificial-intelligence.json": "9870218ebeae9913e6fbc09fc20aebe2bbb3574f81e70df5415f3d190a40e61b",
+    "data/checked/tu-berlin-m-sc-computer-science.json": "e9cfd1d9f29df98974dd77c25c0bfb403c0e49c81057aaf63e9009afc3a06a6b",
+    "data/checked/tu-darmstadt-m-sc-artificial-intelligence-and-machine-learning.json": "f6f28d6ef132f35fd1ce2557ef1e1ff70786bcaf8868d06bdf09b6b4bf4c58dc",
+    "data/checked/tu-darmstadt-m-sc-computer-science.json": "e8fcf31a0261041d200f30cee0be9022b4a353715cc215032498efbc05c88df9",
+    "data/checked/tu-dresden-m-sc-computer-science.json": "9458ac061053fcab7bf6c8db1e4e73a6dc0a00acc96c964b576692bc08a189bd",
+    "data/checked/tum-m-sc-data-engineering-and-analytics.json": "31f3d011af0ce3216b5eeddf444ef6f596381f8719d9b4ba1af78fa797792a67",
+    "data/checked/tum-m-sc-informatics.json": "8e4616b1f17bca4fca4ef6408bf27ff933bc9a9d6d8fb51c2262fedec5745c51",
+    "data/checked/university-of-stuttgart-m-sc-computer-science.json": "8bc6b173db304804671208487fe3969639e3e9e191a7f38d37f94e8db5eea5a6",
+    "data/extracted/kit-m-sc-computational-and-data-science.json": "d3cb3bda5c36a5391e2f1f002b4d387deccf4ce91290270afc7ab0d49e152074",
+    "data/extracted/kit-m-sc-computer-science.json": "a09624e1bdeb5ce5d6a9e13902ac6064da846d34164539e8da395a4f7749e051",
+    "data/extracted/rwth-aachen-m-sc-computer-science.json": "baf3ca54447c4ce4aeb80bb7b5a7f3d395ebf736d47ee00c7f86d04c69fb529e",
+    "data/extracted/rwth-aachen-m-sc-data-science.json": "69cc7ee41a4cd6330011a225a10ce632af27bbff97f3b6098c65733aefe005db",
+    "data/extracted/saarland-university-m-sc-computer-science.json": "91dd68dc43d4bf6d1036ee5b91a83e8eff8caa6fa7e3353e386db006d12688ad",
+    "data/extracted/saarland-university-m-sc-data-science-and-artificial-intelligence.json": "b2769e2f167873509bac99d04e43eaa3d653d4eb2875fd35f21e3e0a1309c46a",
+    "data/extracted/tu-berlin-m-sc-computer-science.json": "da84df2424b4c51229f27e3fee07aa2146a5574d4cd0af3ad5e92ba71d3d245f",
+    "data/extracted/tu-darmstadt-m-sc-artificial-intelligence-and-machine-learning.json": "c2044f7a44642eb2411d7fe448f3478145b1d19b47fd70c98434bf4bd668d343",
+    "data/extracted/tu-darmstadt-m-sc-computer-science.json": "cbf9f4f3eaea4a31379b2124171a9a4db25b9936ca75c87c728dd407353617a0",
+    "data/extracted/tu-dresden-m-sc-computer-science.json": "767b8ef0c1dc4ddf0a91578dd8f3bbe39ba4b6d5319ea33a717741c25337786c",
+    "data/extracted/tum-m-sc-data-engineering-and-analytics.json": "0e7478b20acda48e79ff07fa76b48f8f337dabd4bd08d9336dedab06c4128b06",
+    "data/extracted/tum-m-sc-informatics.json": "4d5330baa5007f8f1c78ef3d6cfa5b39206709c5e07e1ad22d4ee760022c5c20",
+    "data/extracted/university-of-stuttgart-m-sc-computer-science.json": "e46a11e4c5e678b2a52c5f680dac71c79732b104da8acea90e367b18929e9416",
+    "data/verified/kit-m-sc-computational-and-data-science.json": "9c93542ac6dc35bfb6d86094fa6bef169af05030b2b76bfc7c29bebf91945a1d",
+    "data/verified/kit-m-sc-computer-science.json": "f673b8caad2996fc33c346243ce6342ce1230e2051b2e170f1d2458c5e06dded",
+    "data/verified/rwth-aachen-m-sc-computer-science.json": "ab4cb429f8b1a9778cc89f0fb7d92efaf6684ca43664f9b74b8b5bd1690ce429",
+    "data/verified/rwth-aachen-m-sc-data-science.json": "59a78534c0786e98c6705455c79c9cfa99f9a8e7011d970d0d5b2bdad4dad611",
+    "data/verified/saarland-university-m-sc-computer-science.json": "2c271fb78ff2dd91bbaac3473b3b488854dcf32576a758cae2ae9db3e79e3f0c",
+    "data/verified/saarland-university-m-sc-data-science-and-artificial-intelligence.json": "3b4dc22e313897594063058b3afd22a45c4026bd53af2e3c66da6f1c899aa908",
+    "data/verified/tu-berlin-m-sc-computer-science.json": "8c5750776280234f4eb99f7d57618bcdb5b8aba38ee303c849cc6ede11991390",
+    "data/verified/tu-darmstadt-m-sc-artificial-intelligence-and-machine-learning.json": "08877d3908a679c2c71404dfe6e9c710086bd109df9e4fa11fd51fe361bc3bfc",
+    "data/verified/tu-darmstadt-m-sc-computer-science.json": "b179705a590cb1d9f18cc3f8b6e2fd841cbc7c7ee14eb396116751c573dce989",
+    "data/verified/tu-dresden-m-sc-computer-science.json": "a41f69955a14a95d033398403720eaed77e1065763c84ba0f79caf4933a0cfa7",
+    "data/verified/tum-m-sc-data-engineering-and-analytics.json": "f4703f178a3a32d41b819bacc14f74bd373a0781bb2557986c09188b85467580",
+    "data/verified/tum-m-sc-informatics.json": "2baba2204a0d14bd924f849133d4a2036261119859443c9b3b6edf5924d42b9c",
+    "data/verified/university-of-stuttgart-m-sc-computer-science.json": "e9c0e7d2c49f1e64eebb43affa7d5338d1beaa8751af1fd4fbd5b16fb45f82bb",
+    "evaluation/datasets/README.md": "0e4aa490291f714f534571d76b720e277d38aa7a36f054fb8a04eabb3718be64",
+    "evaluation/datasets/gold_qa.jsonl": "64e9d0cf2d7ebf057dd293d128c9085cb87eb4c468abad30f3bd6a75ab4dc7a6",
+    "evaluation/datasets/gold_review.md": "83652ed37d7fb51252dcf3767f29822439e356381d92c4dc86e738c6cc877b76",
+    "evaluation/results/refusal_calibration.json": "6827004a421518c8a8921728e819be9b60581c747d6b08d4443404a6325df393",
+    "extraction/schemas.py": "8e7930917a10c83895e727b15f8d49448b5a54d1e8a2b83c9fab2d524ae1af65",
+    "frontend/public/benchmark.json": "47d8492ad882ed32d2423adb30f1362bc2dd51eab802f9b6a4f0c004bf046f09",
+    "sources/manifest.json": "c3e9250c5b6ca30e1cab7fa12d09da020e8d0e7ef70c1f4d091ec4c15b41521d",
+    "sources/registry.yaml": "e64624469fe08a9acbd213595a1a8bc87c8a42786220330879cbfd93c3fe318b"
+  },
+  "sources": {
+    "de/kit/cds-msc/programme": {
+      "url": "https://www.sle.kit.edu/english/vorstudium/master-computational-data-science.php",
+      "final_url": "https://www.sle.kit.edu/english/vorstudium/master-computational-data-science.php",
+      "snapshot_sha256": "775b81d5fb17f1f88b6e2d73d0fc01bf45a19429ba46b8fc788557f268065b78",
+      "text_sha256": "2ed0e23498ec221974b65282c32a5c9d911a70d8131ecbaa07040e431619b966",
+      "fetched_at": "2026-10-16T08:35:40+00:00",
+      "cache_file": "de/kit/cds-msc/programme.html"
+    },
+    "de/kit/cs-msc/admission": {
+      "url": "https://www.informatik.kit.edu/english/14346.php",
+      "final_url": "https://www.informatik.kit.edu/english/14346.php",
+      "snapshot_sha256": "d67d9bad2c2c0954244422564c8133d29ef68b9caeb73f102c58189d57a20bdd",
+      "text_sha256": "2832c95013084e1e187ad8dcfbdd2a7d50c42033ffa87eee29c62552e04cd442",
+      "fetched_at": "2026-10-16T08:35:38+00:00",
+      "cache_file": "de/kit/cs-msc/admission.html"
+    },
+    "de/kit/cs-msc/department": {
+      "url": "https://www.informatik.kit.edu/english/mastercomputerscience.php",
+      "final_url": "https://www.informatik.kit.edu/english/mastercomputerscience.php",
+      "snapshot_sha256": "7643529b1a5e827f5b7bcbae322c1ebc804258829659f298b0ec9ea0564eb4f5",
+      "text_sha256": "50f9b4bc63e77c61dac6289e71ef9380949a92cbc95c516beda87a94c47a343d",
+      "fetched_at": "2026-10-16T08:35:38+00:00",
+      "cache_file": "de/kit/cs-msc/department.html"
+    },
+    "de/kit/cs-msc/programme": {
+      "url": "https://www.sle.kit.edu/english/vorstudium/master-computer-science.php",
+      "final_url": "https://www.sle.kit.edu/english/vorstudium/master-computer-science.php",
+      "snapshot_sha256": "610ba763c81d40974c977c8a2fcd0a7d4a6cd53afe2318584cd69ffdd8af9b35",
+      "text_sha256": "15f37407839aabe61f8f3d50679375d1eb8e5f261226e1c52babf37503931fc1",
+      "fetched_at": "2026-10-16T08:35:38+00:00",
+      "cache_file": "de/kit/cs-msc/programme.html"
+    },
+    "de/kit/tuition-fees": {
+      "url": "https://www.intl.kit.edu/istudies/12606.php",
+      "final_url": "https://www.intl.kit.edu/istudies/12606.php",
+      "snapshot_sha256": "2446fd81cfb24eea96751ec61c7356e6fde448a9f2ae0c9b6e275e1a3197b0a8",
+      "text_sha256": "a5a5ca1e5211e1986506ba9093284711f39e6ade2e5455664ce5fdc41af935bf",
+      "fetched_at": "2026-10-16T08:35:40+00:00",
+      "cache_file": "de/kit/tuition-fees.html"
+    },
+    "de/rwth/application-deadlines": {
+      "url": "https://www.rwth-aachen.de/cms/root/studium/vor-dem-studium/~bsottx/bewerbungs-und-einschreibefrist/?lidx=1",
+      "final_url": "https://www.rwth-aachen.de/cms/root/studium/vor-dem-studium/~bsottx/bewerbungs-und-einschreibefrist/?lidx=1",
+      "snapshot_sha256": "f23cebc456c7748483fba1eb2a516d8ff364dc7248cabb3486d21b14eebd6351",
+      "text_sha256": "546afe15d273d71e1cd5eceec6479d21d267261a18638e4e30f3e6c9c2f67bfb",
+      "fetched_at": "2026-10-16T08:35:30+00:00",
+      "cache_file": "de/rwth/application-deadlines.html"
+    },
+    "de/rwth/cs-msc/application": {
+      "url": "https://www.informatik.rwth-aachen.de/cms/informatik/studium/vor-dem-studium/bewerbungsinfos/master-informatik/~npsy/bewerbungsverfahren/?lidx=1",
+      "final_url": "https://www.informatik.rwth-aachen.de/cms/informatik/studium/vor-dem-studium/bewerbungsinfos/master-informatik/~npsy/bewerbungsverfahren/?lidx=1",
+      "snapshot_sha256": "e90e1a419afeec75c0924f0aa9b39bd6c358e58a959198187bce2d69990f18c9",
+      "text_sha256": "70968f00615fa7a9a7557cbc2ba7043cc528940eb35f7b961f40b3e87d283368",
+      "fetched_at": "2026-10-05T12:20:24+00:00",
+      "cache_file": "de/rwth/cs-msc/application.html"
+    },
+    "de/rwth/cs-msc/department": {
+      "url": "https://www.informatik.rwth-aachen.de/cms/informatik/studium/vor-dem-studium/bewerbungsinfos/~npqg/master-informatik/?lidx=1",
+      "final_url": "https://www.informatik.rwth-aachen.de/cms/informatik/studium/vor-dem-studium/bewerbungsinfos/~npqg/master-informatik/?lidx=1",
+      "snapshot_sha256": "5b11a0b98c2d712a1ca457f82f61b760bebe36e14c516100705b6356cde63bc8",
+      "text_sha256": "ae2b4110f6415eba84121bc6be75d09b2d079e4930ed9d18f82792f15f171f9a",
+      "fetched_at": "2026-10-05T12:20:26+00:00",
+      "cache_file": "de/rwth/cs-msc/department.html"
+    },
+    "de/rwth/cs-msc/programme": {
+      "url": "https://www.rwth-aachen.de/cms/root/studium/vor-dem-studium/studiengaenge/liste-aktuelle-studiengaenge/studiengangbeschreibung/~bcfg/informatik-m-sc/?lidx=1",
+      "final_url": "https://www.rwth-aachen.de/cms/root/studium/vor-dem-studium/studiengaenge/liste-aktuelle-studiengaenge/studiengangbeschreibung/~bcfg/informatik-m-sc/?lidx=1",
+      "snapshot_sha256": "8d9f67698140c132025f98fc13b2e7fec078b2d000e43bfcbac2df8d34ff3041",
+      "text_sha256": "52c66cc2c55bb9596f69c0d852c3d47c9ab18e14df852cd2ad44074a0b762d00",
+      "fetched_at": "2026-10-05T12:20:23+00:00",
+      "cache_file": "de/rwth/cs-msc/programme.html"
+    },
+    "de/rwth/ds-msc/application": {
+      "url": "https://sc.informatik.rwth-aachen.de/en/studium/master/master-data-science/application-for-admission/",
+      "final_url": "https://sc.informatik.rwth-aachen.de/en/studium/master/master-data-science/application-for-admission/",
+      "snapshot_sha256": "4e662e29daf7b232b908a0f2c1d412f8e3d02dfbb8700d6d793bcfde3e382c96",
+      "text_sha256": "c31aa1cef05a7394283a00bc8da5d33a1ae589273e3d8b1004f73c1616150d57",
+      "fetched_at": "2026-10-05T12:20:29+00:00",
+      "cache_file": "de/rwth/ds-msc/application.html"
+    },
+    "de/rwth/ds-msc/programme": {
+      "url": "https://www.rwth-aachen.de/cms/root/studium/vor-dem-studium/studiengaenge/liste-aktuelle-studiengaenge/studiengangbeschreibung/~pzpc/data-science-m-sc/?lidx=1",
+      "final_url": "https://www.rwth-aachen.de/cms/root/studium/vor-dem-studium/studiengaenge/liste-aktuelle-studiengaenge/studiengangbeschreibung/~pzpc/data-science-m-sc/?lidx=1",
+      "snapshot_sha256": "92648f86b7791a7c5db7ed1d6c56c37aa879dea33cb08f50f7fd9bb341bed2e4",
+      "text_sha256": "b341dcf95ef56008880d7f0eb3ffad6f93048821715be9e583260d244ba079b6",
+      "fetched_at": "2026-10-05T12:20:28+00:00",
+      "cache_file": "de/rwth/ds-msc/programme.html"
+    },
+    "de/rwth/ds-msc/requirements": {
+      "url": "https://sc.informatik.rwth-aachen.de/en/studium/master/master-data-science/",
+      "final_url": "https://sc.informatik.rwth-aachen.de/en/studium/master/master-data-science/",
+      "snapshot_sha256": "238d119fe331bafc896be796e6f5cfd3f346f9f24c180a6556ddd74fd4bcc881",
+      "text_sha256": "042a1d69c406392d248b721abfa4867a1bf1dc9f46eb1bb1d580c0fafb46e140",
+      "fetched_at": "2026-10-05T12:22:50+00:00",
+      "cache_file": "de/rwth/ds-msc/requirements.html"
+    },
+    "de/rwth/language-requirements": {
+      "url": "https://www.rwth-aachen.de/cms/root/studium/vor-dem-studium/zugangsvoraussetzungen/~zwyn/sprachkenntnisse/?lidx=1",
+      "final_url": "https://www.rwth-aachen.de/cms/root/studium/vor-dem-studium/zugangsvoraussetzungen/~zwyn/sprachkenntnisse/?lidx=1",
+      "snapshot_sha256": "f98d29c55bc9bae4b4768272ff8e88f91cdaa81d6de51f61225037894f28dac3",
+      "text_sha256": "9a0db6fc63a523113d0cf6cf7bf5589f22baa442132c76dc5640e7bdd4e032ba",
+      "fetched_at": "2026-10-16T08:35:33+00:00",
+      "cache_file": "de/rwth/language-requirements.html"
+    },
+    "de/rwth/language-requirements-pdf": {
+      "url": "https://www.rwth-aachen.de/global/show_document.asp?id=aaaaaaaaabpixuo",
+      "final_url": "https://www.rwth-aachen.de/global/show_document.asp?id=aaaaaaaaabpixuo",
+      "snapshot_sha256": "112bff017b12dfc5f4bf0d80386646aaa40574becdeab860596e3224f9d171c8",
+      "text_sha256": "5a5eb57f0660ab7a41a03da9b2a18220a3310c1c97b465a39fa337c0b18f2306",
+      "fetched_at": "2026-10-16T08:35:35+00:00",
+      "cache_file": "de/rwth/language-requirements-pdf.pdf"
+    },
+    "de/rwth/master-application-international": {
+      "url": "https://www.rwth-aachen.de/cms/root/studium/vor-dem-studium/bewerbung-um-einen-studienplatz/master-bewerbung/~dqml/bewerbung-master-internationale/?lidx=1",
+      "final_url": "https://www.rwth-aachen.de/cms/root/studium/vor-dem-studium/bewerbung-um-einen-studienplatz/master-bewerbung/~dqml/bewerbung-master-internationale/?lidx=1",
+      "snapshot_sha256": "bb4acff8ecad23d070658006f118c4e2d723a48ff514a8593d690a816ef7d165",
+      "text_sha256": "38e6cfc698113230b0b1f5aad66bffacfe245edf2901b698a471d2ec3e441fb4",
+      "fetched_at": "2026-10-16T08:35:31+00:00",
+      "cache_file": "de/rwth/master-application-international.html"
+    },
+    "de/saarland/cs-msc/programme": {
+      "url": "https://www.uni-saarland.de/en/study/programmes/master/informatics.html",
+      "final_url": "https://www.uni-saarland.de/en/study/programmes/master/informatics.html",
+      "snapshot_sha256": "739c57b1c79a6b76f69bd8cef77f636c477693c3718e95e87bad5b5be5a09cad",
+      "text_sha256": "b215e8987b5cb9c7f989ec66b8cc4dc313578d9009df30891b4dcb1aeb592a45",
+      "fetched_at": "2026-10-05T12:20:41+00:00",
+      "cache_file": "de/saarland/cs-msc/programme.html"
+    },
+    "de/saarland/dsai-msc/department": {
+      "url": "https://saarland-informatics-campus.de/en/studium-studies/data-science-and-artificial-intelligence-master/",
+      "final_url": "https://saarland-informatics-campus.de/en/studium-studies/data-science-and-artificial-intelligence-master/",
+      "snapshot_sha256": "2b9cdcb8c621fd4187d57ac707fb6d8df5d05d5a702f9538f20d5cebc834b29c",
+      "text_sha256": "00dd5b7cebdd7d10e785b1a35d38de73a3987e0696a50bffaf96f02153aecb37",
+      "fetched_at": "2026-10-05T12:20:44+00:00",
+      "cache_file": "de/saarland/dsai-msc/department.html"
+    },
+    "de/saarland/dsai-msc/programme": {
+      "url": "https://www.uni-saarland.de/en/study/programmes/master/data-science.html",
+      "final_url": "https://www.uni-saarland.de/en/study/programmes/master/data-science.html",
+      "snapshot_sha256": "aa99b6ad84370b4b15c2bca0e48c6b8b70cf8d980a42ca377e0245ada8e20fcf",
+      "text_sha256": "2cfca5433af74b8dee9d05fbfa1e92105dedab8319a3aa1bc0925ed09159e127",
+      "fetched_at": "2026-10-05T12:20:41+00:00",
+      "cache_file": "de/saarland/dsai-msc/programme.html"
+    },
+    "de/saarland/dsai-msc/study-regulations": {
+      "url": "https://www.uni-saarland.de/fileadmin/upload/verwaltung/uebersetzungen/english/master/data-science_so.pdf",
+      "final_url": "https://www.uni-saarland.de/fileadmin/upload/verwaltung/uebersetzungen/english/master/data-science_so.pdf",
+      "snapshot_sha256": "0bc2b7528e23c30fd707cb39c2acb6b18ac64e7531ecee497ec97ff527817cb3",
+      "text_sha256": "f1cdc3ba911d0ace14a391eda1cae71f0db92a6b183a05096953a978484551e7",
+      "fetched_at": "2026-10-05T12:20:44+00:00",
+      "cache_file": "de/saarland/dsai-msc/study-regulations.pdf"
+    },
+    "de/saarland/masters-application-guide": {
+      "url": "https://saarland-informatics-campus.de/en/studium-studies/master-english/application-guide/",
+      "final_url": "https://saarland-informatics-campus.de/en/studium-studies/master-english/application-guide/",
+      "snapshot_sha256": "48eddbf546d99cc6b8c3f6d50cafe37a002406c75507e83a917d3027c8038af7",
+      "text_sha256": "9c7deffdb33377e3a7fccf50b4a6e899afccd72d4899138567ead1e03ca7dff8",
+      "fetched_at": "2026-10-05T12:20:46+00:00",
+      "cache_file": "de/saarland/masters-application-guide.html"
+    },
+    "de/tu-darmstadt/aiml-msc/programme": {
+      "url": "https://www.tu-darmstadt.de/studieren/studieninteressierte/studienangebot_studiengaenge/studiengang_334592.en.jsp",
+      "final_url": "https://www.tu-darmstadt.de/studieren/studieninteressierte/studienangebot_studiengaenge/studiengang_334592.en.jsp",
+      "snapshot_sha256": "6c1aa04604a946fae2870f4bd122338e9ee74cdc10b8124d612a2620bd3bfe29",
+      "text_sha256": "bac923e79b4fe784adcf253e5bdb5d26ab8a512e05fb2be63800bb46754ff0e7",
+      "fetched_at": "2026-10-16T08:35:43+00:00",
+      "cache_file": "de/tu-darmstadt/aiml-msc/programme.html"
+    },
+    "de/tu-darmstadt/cs-msc/programme": {
+      "url": "https://www.tu-darmstadt.de/studieren/studieninteressierte/studienangebot_studiengaenge/studiengang_334656.en.jsp",
+      "final_url": "https://www.tu-darmstadt.de/studieren/studieninteressierte/studienangebot_studiengaenge/studiengang_334656.en.jsp",
+      "snapshot_sha256": "dba78264d70a998583aa5075346f6aa1542a1a8872277714a610812237409439",
+      "text_sha256": "51a890f5cb8c442a99debd1e05e3803691d9625a546d1daf3128771ceb459d4f",
+      "fetched_at": "2026-10-16T08:35:42+00:00",
+      "cache_file": "de/tu-darmstadt/cs-msc/programme.html"
+    },
+    "de/tu-darmstadt/informatics-master-admission-guide": {
+      "url": "https://www.informatik.tu-darmstadt.de/studium_fb20/vor_dem_studium/bewerbung_1/bewerbung_2.en.jsp",
+      "final_url": "https://www.informatik.tu-darmstadt.de/studium_fb20/vor_dem_studium/bewerbung_1/bewerbung_2.en.jsp",
+      "snapshot_sha256": "e40caa50c27f10945d0273325952c3d4c08c68be2ed32d06fc56b7173f7c3095",
+      "text_sha256": "2dbaa4e0ebbb66e2dcaddf89374c1ca057c849494eb6a9b58a4dd30884fcf31d",
+      "fetched_at": "2026-10-16T08:35:45+00:00",
+      "cache_file": "de/tu-darmstadt/informatics-master-admission-guide.html"
+    },
+    "de/tub/admission-requirements": {
+      "url": "https://www.tu.berlin/en/studierendensekretariat/requirements-for-admission-to-a-degree-program",
+      "final_url": "https://www.tu.berlin/en/studierendensekretariat/requirements-for-admission-to-a-degree-program",
+      "snapshot_sha256": "48ee3b4e9a46af5e56eb26436a494ab8b3b69eec39072ad9b3450bb0737788d7",
+      "text_sha256": "698e597c5f0a59d91c7841995418b3b0f6a0603ff1b0407b8c9e70aee2a1f3fd",
+      "fetched_at": "2026-10-05T12:20:38+00:00",
+      "cache_file": "de/tub/admission-requirements.html"
+    },
+    "de/tub/cs-msc/application": {
+      "url": "https://www.tu.berlin/en/eecs/academics-teaching/study-offer/masters-programs/msc-computer-science-informatik/msc-cs-in-application-admission",
+      "final_url": "https://www.tu.berlin/en/eecs/academics-teaching/organizing-your-studies/during-your-studies/msc-computer-science-informatik/msc-cs-in-application-admission",
+      "snapshot_sha256": "c037dd9ca5ec4c2119f3f2bc32407c116178a691b6e8b2a634b93a9c3d5d5438",
+      "text_sha256": "f4b0febfe12cfb1d4e5561622c08dbc0e24ca36e14d50989ed681266b1859f07",
+      "fetched_at": "2026-10-05T12:20:33+00:00",
+      "cache_file": "de/tub/cs-msc/application.html"
+    },
+    "de/tub/cs-msc/programme": {
+      "url": "https://www.tu.berlin/en/studying/study-programs/all-programs-offered/study-course/computer-science-informatik-m-sc",
+      "final_url": "https://www.tu.berlin/en/studying/study-programs/all-programs-offered/study-course/computer-science-informatik-m-sc",
+      "snapshot_sha256": "ded43dae90cd7ef15f7dfc3e8f519d4646e75f2e1d5b702884734225f553a677",
+      "text_sha256": "2d27e1a6f9ded7ce6e1330ea50247ea71d58d30981746c295812b155185d3e87",
+      "fetched_at": "2026-10-05T12:20:32+00:00",
+      "cache_file": "de/tub/cs-msc/programme.html"
+    },
+    "de/tub/cs-msc/suitability-form": {
+      "url": "https://www.static.tu.berlin/fileadmin/www/10000040/1_Studium_Lehre/1_Studienangebot/2_Masterstudiengaenge/2_M_CS/MScCS-SAF.2020-10.pdf",
+      "final_url": "https://www.static.tu.berlin/fileadmin/www/10000040/1_Studium_Lehre/1_Studienangebot/2_Masterstudiengaenge/2_M_CS/MScCS-SAF.2020-10.pdf",
+      "snapshot_sha256": "3ebfa1e5bbb9418b5626d7bd63acd3f4a0e59d9684e8051e62ffabe4ee31142b",
+      "text_sha256": "d30740e4af78490eaf21cbcf15520065630b73c58c5bae67fc06525fbb7a52a2",
+      "fetched_at": "2026-10-05T12:20:35+00:00",
+      "cache_file": "de/tub/cs-msc/suitability-form.pdf"
+    },
+    "de/tub/eecs-application-faq": {
+      "url": "https://www.tu.berlin/en/eecs/academics-teaching/study-offer/application-admission-faq",
+      "final_url": "https://www.tu.berlin/en/eecs/academics-teaching/study-offer/masters-programs/faq-application-admission-master",
+      "snapshot_sha256": "b9e6c7647ba85a417f7b6aaaab5729fbc8e4a5b4bf3c0b279a413a550a643242",
+      "text_sha256": "e404073df85f1b3741bac09c3997e805f326e539cb1305a16a24d10b1a0b36be",
+      "fetched_at": "2026-10-05T12:20:36+00:00",
+      "cache_file": "de/tub/eecs-application-faq.html"
+    },
+    "de/tud/cs-msc/aptitude-assessment": {
+      "url": "https://tu-dresden.de/studium/vor-dem-studium/studienangebot/sins/sins_eignungsfeststellung_detail?autoid=73&set_language=en",
+      "final_url": "https://tu-dresden.de/studium/vor-dem-studium/studienangebot/sins/sins_eignungsfeststellung_detail?autoid=73&set_language=en",
+      "snapshot_sha256": "c04f9c9fb0530fb278e543307973842ca9016262e9317351c66b6a2ec6ccfabd",
+      "text_sha256": "dbe9b6cb4858d3903a5163684bde11863075d4c5021c75c67b95f5b88553d21a",
+      "fetched_at": "2026-10-05T12:20:53+00:00",
+      "cache_file": "de/tud/cs-msc/aptitude-assessment.html"
+    },
+    "de/tud/cs-msc/department": {
+      "url": "https://tu-dresden.de/ing/informatik/studium/studienangebot/master-studiengaenge/m-sc-computer-science?set_language=en",
+      "final_url": "https://tu-dresden.de/ing/informatik/studium/studienangebot/master-studiengaenge/m-sc-computer-science?set_language=en",
+      "snapshot_sha256": "dad663252a140773337b5bef69f79216263743e1d15d683ee062aced6d0646c0",
+      "text_sha256": "45614995af64d519be42384d97e5dd7a8ce841d3d40e1b02f0431921799cf046",
+      "fetched_at": "2026-10-05T12:20:50+00:00",
+      "cache_file": "de/tud/cs-msc/department.html"
+    },
+    "de/tud/cs-msc/programme": {
+      "url": "https://tu-dresden.de/studium/vor-dem-studium/studienangebot/sins/sins_studiengang?autoid=73&set_language=en",
+      "final_url": "https://tu-dresden.de/studium/vor-dem-studium/studienangebot/sins/sins_studiengang?autoid=73&set_language=en",
+      "snapshot_sha256": "a93cf7fef895630279b8720bfc7a9b6090f13a8b302037c03527cfa23cf3b8a2",
+      "text_sha256": "c094614ce133f39f17d791ad168b2bc359d087d73c8c816346f124f1f7d611e7",
+      "fetched_at": "2026-10-05T12:20:51+00:00",
+      "cache_file": "de/tud/cs-msc/programme.html"
+    },
+    "de/tud/international-faq": {
+      "url": "https://tu-dresden.de/studium/vor-dem-studium/internationales/faq?set_language=en",
+      "final_url": "https://tu-dresden.de/studium/vor-dem-studium/internationales/faq?set_language=en",
+      "snapshot_sha256": "1ce4e5136c8ac73578f797704b0d004b0c2f0ea65666118cda447a0dd9acc0b1",
+      "text_sha256": "5bd75a3fee8911f22d7d889b653617b711e47841b5dcc4690d55bb287e509a41",
+      "fetched_at": "2026-10-05T12:20:58+00:00",
+      "cache_file": "de/tud/international-faq.html"
+    },
+    "de/tud/semester-contribution": {
+      "url": "https://tu-dresden.de/studium/im-studium/studienorganisation/rueckmeldung",
+      "final_url": "https://tu-dresden.de/studium/im-studium/studienorganisation/rueckmeldung",
+      "snapshot_sha256": "5e66f337136339a2dbe577ca4f25dc74b7e1c53959d2fbad1ad6d00b83c51566",
+      "text_sha256": "a8b2f984908f86ce0ae4a1e7fa1be800a6f625dd7095967332da80c4847fab82",
+      "fetched_at": "2026-10-27T20:28:10+00:00",
+      "cache_file": "de/tud/semester-contribution.html"
+    },
+    "de/tum/dea-msc/department": {
+      "url": "https://www.cit.tum.de/en/cit/studies/degree-programs/master-data-engineering-and-analytics/",
+      "final_url": "https://www.cit.tum.de/en/cit/studies/degree-programs/master-data-engineering-and-analytics/",
+      "snapshot_sha256": "e735bedd11c1cd09e2706802e1bbc832d8db8db9c4269e4cf4670d8137ff780f",
+      "text_sha256": "244bff64ec519f37c91a3095c376a498e6865a616e3a3e373448db1dcee16d7e",
+      "fetched_at": "2026-10-05T12:22:49+00:00",
+      "cache_file": "de/tum/dea-msc/department.html"
+    },
+    "de/tum/dea-msc/programme": {
+      "url": "https://www.tum.de/en/studies/degree-programs/detail/data-engineering-and-analytics-master-of-science-msc",
+      "final_url": "https://www.tum.de/en/studies/degree-programs/detail/data-engineering-and-analytics-master-of-science-msc",
+      "snapshot_sha256": "7ce1ee6d2871b0bdc945012407b2778b59c6b18db1505a9c089c7b9f130a2d78",
+      "text_sha256": "90bc60de7a09849bd754ad5b0e517f915eb9abace6e2634a48fcfff5ad34258a",
+      "fetched_at": "2026-10-05T12:20:05+00:00",
+      "cache_file": "de/tum/dea-msc/programme.html"
+    },
+    "de/tum/informatics-msc/department": {
+      "url": "https://www.cit.tum.de/en/cit/studies/degree-programs/master-informatics/",
+      "final_url": "https://www.cit.tum.de/en/cit/studies/degree-programs/master-informatics/",
+      "snapshot_sha256": "e9f4876c2e9cfca9112f3d1fc6d58a4b42c9d7c06e9c6b13f86b2f950d9f63d6",
+      "text_sha256": "ab39f962e4cc06f8497513ad60167a2d0294fb66c52c2f6a6ff71a512916909a",
+      "fetched_at": "2026-10-05T12:20:05+00:00",
+      "cache_file": "de/tum/informatics-msc/department.html"
+    },
+    "de/tum/informatics-msc/programme": {
+      "url": "https://www.tum.de/en/studies/degree-programs/detail/informatics-master-of-science-msc",
+      "final_url": "https://www.tum.de/en/studies/degree-programs/detail/informatics-master-of-science-msc",
+      "snapshot_sha256": "dbde1d9aa686460d8a1ff887ae449c45b257f9106c63d61b58e0772c50c74497",
+      "text_sha256": "8ef7fc94c43933a31410720ba7941d48ce6e42d17d332c6b76afa803cf82e043",
+      "fetched_at": "2026-10-05T12:20:05+00:00",
+      "cache_file": "de/tum/informatics-msc/programme.html"
+    },
+    "de/tum/language-certificates": {
+      "url": "https://www.tum.de/en/studies/application/application-info-portal/admission-requirements/language-certificates",
+      "final_url": "https://www.tum.de/en/studies/application/application-info-portal/admission-requirements/language-certificates",
+      "snapshot_sha256": "854072bdb44999e8a30004e65098efeaf7fbcc26fb2bbd4f942126e87a60fdf8",
+      "text_sha256": "8a874d27ddfa0964d525497efbc993e1fe1b76cf92fcd97bc73d1448381dab1b",
+      "fetched_at": "2026-10-16T08:35:30+00:00",
+      "cache_file": "de/tum/language-certificates.html"
+    },
+    "de/ustutt/cs-msc/department": {
+      "url": "https://www.f05.uni-stuttgart.de/en/cs/prospective-students/msc-computerscience/",
+      "final_url": "https://www.f05.uni-stuttgart.de/en/cs/prospective-students/msc-computerscience/",
+      "snapshot_sha256": "e59dc31283a675be95e0d72ed3e80636864d65d4210e63a717c918f92278d97d",
+      "text_sha256": "687a27d481f1f36af1a8a384fd3e27e893ce69b4a3646a63a813294c9393f594",
+      "fetched_at": "2026-10-16T08:35:47+00:00",
+      "cache_file": "de/ustutt/cs-msc/department.html"
+    },
+    "de/ustutt/cs-msc/english-proofs": {
+      "url": "https://www.uni-stuttgart.de/studium/studienangebot_assets/computer-science/pdf/English_language_skills_MSc_CS_barrierefrei_01-2026.pdf",
+      "final_url": "https://www.uni-stuttgart.de/studium/studienangebot_assets/computer-science/pdf/English_language_skills_MSc_CS_barrierefrei_01-2026.pdf",
+      "snapshot_sha256": "d5ff8bff58a0f54817b46fb76a40d2398f62fde44afd945d8da655d0fedc15d1",
+      "text_sha256": "ef327322f8ea87332483b1598a996917371492f6b8284d0c7b8a9409667db6df",
+      "fetched_at": "2026-10-27T20:29:49+00:00",
+      "cache_file": "de/ustutt/cs-msc/english-proofs.pdf"
+    },
+    "de/ustutt/cs-msc/programme": {
+      "url": "https://www.uni-stuttgart.de/en/study/study-programs/Computer-Science-M.Sc.-00001/",
+      "final_url": "https://www.uni-stuttgart.de/en/study/study-programs/Computer-Science-M.Sc.-00001/",
+      "snapshot_sha256": "4a387ef48caff87c2677e88115ec12a8900a41a59c297f2c48d3e8fec87246a2",
+      "text_sha256": "981895b7d1c6a5cc952852e6aa8b421f93cd6f6530a04cb2b5bfedbf95675fc1",
+      "fetched_at": "2026-10-16T08:35:47+00:00",
+      "cache_file": "de/ustutt/cs-msc/programme.html"
+    },
+    "de/ustutt/tuition-fees": {
+      "url": "https://www.student.uni-stuttgart.de/en/organizing-studies/formalities/tuition-and-fees/",
+      "final_url": "https://www.student.uni-stuttgart.de/en/organizing-studies/formalities/tuition-and-fees/",
+      "snapshot_sha256": "bb2ac424779115db4cb40c5a72e02e7b841535f94fe3ca101c05387b23d3f28c",
+      "text_sha256": "1ab6fe5557c1c2fbdbe69bedf392bc69b1e26f76e44b74bd27d8c497626e9856",
+      "fetched_at": "2026-10-16T08:35:47+00:00",
+      "cache_file": "de/ustutt/tuition-fees.html"
+    }
+  },
+  "additional_evidence": {
+    "E01": {
+      "doc_id": "de/kit/cs-msc/programme",
+      "quote": "You can participate in the selection process if you fulfill one of the following three conditions:"
+    },
+    "E02": {
+      "doc_id": "de/kit/cs-msc/programme",
+      "quote": "Proof of the GRE is not necessary if: the university degree was obtained at a university in the European Higher Education Area (EHEA )"
+    },
+    "E03": {
+      "doc_id": "de/kit/cs-msc/admission",
+      "quote": "GRE certificates must not be older than 5 years (GATE 3 years)."
+    },
+    "E04": {
+      "doc_id": "de/kit/cs-msc/admission",
+      "quote": "proof from your University of beeing one of the best 10% students in the academic year"
+    },
+    "E05": {
+      "doc_id": "de/kit/cds-msc/programme",
+      "quote": "eine Bachelorarbeit (oder eine vergleichbare selbstständige wissenschaftliche Arbeit) im Umfang von mindestens 6 LP"
+    },
+    "E06": {
+      "doc_id": "de/kit/cds-msc/programme",
+      "quote": "Mindestens 40 LP aus einem und mindestens 12 LP aus den beiden verbleibenden Gebieten:"
+    },
+    "E07": {
+      "doc_id": "de/kit/cds-msc/programme",
+      "quote": "Fehlen Mindestleistungen im Umfang von bis zu 12 LP, kann die Zugangskommission eine Zulassung unter Vorbehalt aussprechen."
+    },
+    "E08": {
+      "doc_id": "de/kit/cds-msc/programme",
+      "quote": "Es besteht kein Anspruch auf eine Zulassung unter Auflagen. Die Entscheidung liegt im Ermessen der Zugangskommission."
+    },
+    "E09": {
+      "doc_id": "de/rwth/cs-msc/application",
+      "quote": "if your first degree is from outside the European Union, you are required to submit a GRE test certificate."
+    },
+    "E10": {
+      "doc_id": "de/rwth/ds-msc/application",
+      "quote": "The GRE is not required for applicants with citizenship of the European Union or European Economic Area or who completed their secondary education in Germany"
+    },
+    "E11": {
+      "doc_id": "de/rwth/master-application-international",
+      "quote": "If you are currently enrolled as a student at RWTH (for example as an exchange student or in a German course and you have a student ID number), your application deadline is July 15 for the winter semester and January 15 for the summer semester."
+    },
+    "E12": {
+      "doc_id": "de/rwth/master-application-international",
+      "quote": "These application deadlines also apply to applicants who hold a German university degree relevant to the qualification for the Master's program they are applying for."
+    },
+    "E13": {
+      "doc_id": "de/rwth/language-requirements-pdf",
+      "quote": "Computer Science M.Sc.3 |  |  | German & English - § 3 Abs. 7 & Abs. 9 ÜPO"
+    },
+    "E14": {
+      "doc_id": "de/rwth/language-requirements-pdf",
+      "quote": "Data Science M.Sc.3 |  |  | English - § 3 Abs. 9 ÜPO"
+    },
+    "E15": {
+      "doc_id": "de/tu-darmstadt/informatics-master-admission-guide",
+      "quote": "If the required entrance competencies cannot be verified from your application documents alone, you will be invited to the Entrance Exam ."
+    },
+    "E16": {
+      "doc_id": "de/tu-darmstadt/informatics-master-admission-guide",
+      "quote": "The required minimum scores are binding – there are no exceptions. Missing points in one category cannot be compensated by higher scores in another. Results from different tests cannot be combined."
+    },
+    "E17": {
+      "doc_id": "de/tu-darmstadt/informatics-master-admission-guide",
+      "quote": "A postal stamp dated on or before the deadline is not sufficient."
+    },
+    "E18": {
+      "doc_id": "de/tu-darmstadt/informatics-master-admission-guide",
+      "quote": "Semester Fee ≈ € 348,18 (summer semester 2025)"
+    },
+    "E19": {
+      "doc_id": "de/saarland/masters-application-guide",
+      "quote": "Minimal application prerequisite is a cumulative undergraduate grade point average (CGPA) of 75% or 3.00 GPA on a 4 point scale and ranking in the top 10% of the graduating class."
+    },
+    "E20": {
+      "doc_id": "de/saarland/masters-application-guide",
+      "quote": "There is no minimum score requirement and we accept home editions of the GRE/GATE tests ."
+    },
+    "E21": {
+      "doc_id": "de/saarland/masters-application-guide",
+      "quote": "There are no exceptions from this requirement for degrees from branch campuses located in non-EHEA countries."
+    },
+    "E22": {
+      "doc_id": "de/saarland/masters-application-guide",
+      "quote": "Home editions of all of the above-mentioned English tests are accepted as well as expired tests."
+    },
+    "E23": {
+      "doc_id": "de/saarland/masters-application-guide",
+      "quote": "A confirmation of your university or a MOI (Medium of Instruction) is not a sufficient equivalent."
+    },
+    "E24": {
+      "doc_id": "de/saarland/masters-application-guide",
+      "quote": "Only native speakers from Australia, Ireland, Canada, New Zealand, the UK, and the USA, or applicants who have completed in-person studies while physically residing in one of these countries at a university located there , are excluded from this rule."
+    },
+    "E25": {
+      "doc_id": "de/saarland/masters-application-guide",
+      "quote": "Applicants who apply by November 15th for the following winter semester"
+    },
+    "E26": {
+      "doc_id": "de/saarland/masters-application-guide",
+      "quote": "Applicants who apply by May 15th for the following summer semester"
+    },
+    "E27": {
+      "doc_id": "de/tub/cs-msc/application",
+      "quote": "and additionally, at least 30 CP in the field of computer sciences, not including your thesis"
+    },
+    "E28": {
+      "doc_id": "de/tub/eecs-application-faq",
+      "quote": "For the IELTS test, an overall band score of 6.5 is required, even if an overall band score of 5.5 confirms a B2 on the certificate."
+    },
+    "E29": {
+      "doc_id": "de/tub/cs-msc/application",
+      "quote": "will need a preliminary review documentation (VPD) for their application to TU Berlin from the summer semester of 2026 onwards."
+    },
+    "E30": {
+      "doc_id": "de/tud/cs-msc/aptitude-assessment",
+      "quote": "TOEFL iBt (120-95) (New: 5.0 points)"
+    },
+    "E31": {
+      "doc_id": "de/tud/cs-msc/aptitude-assessment",
+      "quote": "Registration period for aptitude assessment procedures: 1st June – 15th July , 1st December – 15th January"
+    },
+    "E32": {
+      "doc_id": "de/tum/informatics-msc/department",
+      "quote": "February 1 – March 31: recommended application deadline for applicants who need a visa February 1 – May 31: compulsory application deadline"
+    },
+    "E33": {
+      "doc_id": "de/tum/informatics-msc/department",
+      "quote": "October 1 – October 31: recommended application for applicants who need a visa October 1 - November 30: compulsory application deadline"
+    },
+    "E34": {
+      "doc_id": "de/tum/informatics-msc/department",
+      "quote": "Test date for application for the winter semester 2026/27: Thu, 20 Aug, 2026."
+    },
+    "E35": {
+      "doc_id": "de/tum/dea-msc/programme",
+      "quote": "Evidence of your language proficiency has to be submitted before the end of the application deadline."
+    },
+    "E36": {
+      "doc_id": "de/tum/informatics-msc/programme",
+      "quote": "Evidence of your language proficiency has to be submitted before the end of the application deadline."
+    },
+    "E37": {
+      "doc_id": "de/ustutt/cs-msc/english-proofs",
+      "quote": "The uploaded certificate has to be valid at least until the application\ndeadline (15th of January/July)."
+    },
+    "E38": {
+      "doc_id": "de/ustutt/cs-msc/english-proofs",
+      "quote": "If you are a national with citizenship and education in one of the countries listed below, you\ndo not need to upload one of the English proficiency proofs listed above."
+    },
+    "E39": {
+      "doc_id": "de/ustutt/cs-msc/english-proofs",
+      "quote": "Canada (except Quebec)"
+    },
+    "E40": {
+      "doc_id": "de/kit/cds-msc/programme",
+      "quote": "a university degree with English as the sole language of instruction and examination in the completed degree program"
+    },
+    "E41": {
+      "doc_id": "de/kit/cds-msc/programme",
+      "quote": "The above-mentioned tests are accepted as proof of language proficiency for an unlimited period of time"
+    },
+    "E42": {
+      "doc_id": "de/kit/cs-msc/programme",
+      "quote": "you must provide proof of the required language skills regardless of your citizenship and by the end of the enrollment period at the latest"
+    },
+    "E43": {
+      "doc_id": "de/kit/cds-msc/programme",
+      "quote": "you must provide proof of the required language skills regardless of your citizenship and by the end of the enrollment period at the latest"
+    },
+    "E44": {
+      "doc_id": "de/tud/semester-contribution",
+      "quote": "zum Wintersemester 2026/27 ACHTUNG!"
+    }
+  },
+  "reviews": {
+    "R01": {
+      "title": "Degree and subject equivalence",
+      "proposed_interpretation": "Compare supplied totals only in the published unit; compare student-confirmed course allocations as entered facts. Resolve equivalence only from the exact published reference qualification or an explicitly reported university assessment. A matching degree title does not certify equivalence. Routine committee-selection wording alone adds no extra hard blocker.",
+      "unresolved": "No automatic non-ECTS conversion or semantic course assignment. Degree duration, completion, module content and required university assessments must remain explicit.",
+      "evidence_ids": [],
+      "record_fields": [
+        "kit-m-sc-computational-and-data-science.degree_requirement",
+        "kit-m-sc-computer-science.degree_requirement",
+        "rwth-aachen-m-sc-computer-science.degree_requirement",
+        "rwth-aachen-m-sc-data-science.degree_requirement",
+        "saarland-university-m-sc-computer-science.degree_requirement",
+        "saarland-university-m-sc-data-science-and-artificial-intelligence.degree_requirement",
+        "tu-berlin-m-sc-computer-science.degree_requirement",
+        "tu-darmstadt-m-sc-artificial-intelligence-and-machine-learning.degree_requirement",
+        "tu-darmstadt-m-sc-computer-science.degree_requirement",
+        "tu-dresden-m-sc-computer-science.degree_requirement",
+        "tum-m-sc-data-engineering-and-analytics.degree_requirement",
+        "tum-m-sc-informatics.degree_requirement",
+        "university-of-stuttgart-m-sc-computer-science.degree_requirement",
+        "kit-m-sc-computational-and-data-science.subject_credits",
+        "kit-m-sc-computer-science.subject_credits",
+        "tu-berlin-m-sc-computer-science.subject_credits",
+        "tu-darmstadt-m-sc-artificial-intelligence-and-machine-learning.subject_credits",
+        "tu-darmstadt-m-sc-computer-science.subject_credits"
+      ],
+      "reviewed_by": "pending",
+      "status": "pending"
+    },
+    "R02": {
+      "title": "KIT CS: selection alternatives and separate GRE condition",
+      "proposed_interpretation": "Use degree prerequisites AND the applicable GRE/GATE condition AND any_of(full 15/30/8/25 credits, qualifying GATE CS/DA, passed interview). Interview eligibility needs at least three of the relaxed 15/20/6/20 areas and top-10% evidence from the admission page. Invitation alone does not pass the interview. Rank is not universal.",
+      "unresolved": "Programme text says regulations are subject to approval; department shorthand says international applicants. Review the dated regulation and reconcile scope before treating the draft as an approved machine rule. Do not merge the admission-route and GRE-alternative groups.",
+      "evidence_ids": [
+        "E01",
+        "E02",
+        "E04"
+      ],
+      "record_fields": [
+        "kit-m-sc-computer-science.selection_process",
+        "kit-m-sc-computer-science.subject_credits",
+        "kit-m-sc-computer-science.entrance_tests",
+        "kit-m-sc-computer-science.min_grade_original_scale",
+        "kit-m-sc-computer-science.required_documents"
+      ],
+      "reviewed_by": "pending",
+      "status": "pending"
+    },
+    "R03": {
+      "title": "KIT CDS: grouped credits, thesis and conditional admission",
+      "proposed_interpretation": "Require basic maths 20 LP plus 40 LP in one of three domains and 12 LP in each other domain, and a thesis/comparable independent scientific work of at least 6 LP. Up to 12 missing LP can lead to discretionary conditional admission, with completion within the first three semesters; it is not an unconditional pass.",
+      "unresolved": "The cached page does not establish an overlap/double-counting policy for basic maths versus domain credits or thesis credits. Do not invent disjointness or allow double counting without evidence. Missing thesis is a material extraction omission; retain a correction candidate until Save review. Conditional approval remains university review.",
+      "evidence_ids": [
+        "E05",
+        "E06",
+        "E07",
+        "E08"
+      ],
+      "record_fields": [
+        "kit-m-sc-computational-and-data-science.degree_requirement",
+        "kit-m-sc-computational-and-data-science.subject_credits",
+        "kit-m-sc-computational-and-data-science.selection_process"
+      ],
+      "reviewed_by": "pending",
+      "status": "pending"
+    },
+    "R04": {
+      "title": "KIT test validity and accepted English proof",
+      "proposed_interpretation": "GRE no older than five years; GATE no older than three, using a reviewed reference date. English proof is an any_of group with overall AND components inside each test, education-based routes, and proof due by enrolment. KIT explicitly accepts its listed English tests without time limit.",
+      "unresolved": "Check the reference date and inclusive age boundary for GRE/GATE; do not copy a generic two-year English validity rule. Cambridge names alone do not publish a numeric pass score. KIT CDS omits the education routes from its record; attach supplemental evidence pending correction review.",
+      "evidence_ids": [
+        "E03",
+        "E40",
+        "E41",
+        "E42",
+        "E43"
+      ],
+      "record_fields": [
+        "kit-m-sc-computer-science.entrance_tests",
+        "kit-m-sc-computer-science.english",
+        "kit-m-sc-computational-and-data-science.english"
+      ],
+      "reviewed_by": "pending",
+      "status": "pending"
+    },
+    "R05": {
+      "title": "RWTH: country basis and strict GRE bounds",
+      "proposed_interpretation": "CS uses qualifying-degree country outside the EU. DS exempts EU/EEA citizens or German secondary-school qualifiers. Otherwise QR >75th percentile AND VR >15th percentile AND AW >=3.5. Preserve percentile identity, strict boundaries and DS submission with the application.",
+      "unresolved": "Unknown citizenship/degree/school facts or unresolved country-group membership cannot imply exemption. CS degree-country exemptions cannot be reused for DS.",
+      "evidence_ids": [
+        "E09",
+        "E10"
+      ],
+      "record_fields": [
+        "rwth-aachen-m-sc-computer-science.entrance_tests",
+        "rwth-aachen-m-sc-data-science.entrance_tests"
+      ],
+      "reviewed_by": "pending",
+      "status": "pending"
+    },
+    "R06": {
+      "title": "Country-group definitions need independent official evidence",
+      "proposed_interpretation": "Version EU, EEA, EHEA and relevant Lisbon-signatory groups separately, with effective date and official membership evidence. Programme citations establish which group applies, not the membership list.",
+      "unresolved": "Official membership lists are not in the current registry. Collect and review them in Step 3; do not populate from model memory. Preserve Saarland non-EHEA branch-campus handling.",
+      "evidence_ids": [
+        "E02",
+        "E09",
+        "E10",
+        "E21"
+      ],
+      "record_fields": [
+        "kit-m-sc-computer-science.entrance_tests",
+        "rwth-aachen-m-sc-computer-science.entrance_tests",
+        "rwth-aachen-m-sc-data-science.entrance_tests",
+        "saarland-university-m-sc-computer-science.entrance_tests",
+        "saarland-university-m-sc-data-science-and-artificial-intelligence.entrance_tests"
+      ],
+      "reviewed_by": "pending",
+      "status": "pending"
+    },
+    "R07": {
+      "title": "RWTH English scope and milestone",
+      "proposed_interpretation": "PDF programme rows point CS and DS to section 3(9), while the parsed PDF contains two English-score lists. CS also needs accepted German proof at enrolment; DS explicitly requires no German. English proof is due at enrolment according to application guidance.",
+      "unresolved": "Confirm the visual PDF section-to-score mapping and accepted certificate/exemption scope before enabling a positive language verdict. Retain both lists as evidence; do not choose 90/6.0 merely because the current record does.",
+      "evidence_ids": [
+        "E13",
+        "E14"
+      ],
+      "record_fields": [
+        "rwth-aachen-m-sc-computer-science.english",
+        "rwth-aachen-m-sc-data-science.english",
+        "rwth-aachen-m-sc-computer-science.german",
+        "rwth-aachen-m-sc-data-science.german"
+      ],
+      "reviewed_by": "pending",
+      "status": "pending"
+    },
+    "R08": {
+      "title": "Darmstadt: competencies and conditional exam, both programmes",
+      "proposed_interpretation": "Academic equivalence (180 total and 60 matching core ECTS) remains separate from formal exam outcomes. Trigger the entrance exam only when document review cannot confirm competencies. Qualifying GRE (155/165/3.5, same sitting, no compensation) OR GATE overall >=750 can exempt the exam, with August 20/February 20 submission deadlines.",
+      "unresolved": "GRE is not universally mandatory and does not independently certify degree equivalence. Missing assessment is unknown. The CS flat one_of record needs explicit source-faithful interpretation; do not silently edit it. AIML documents are not_published in its record although the shared guide supplies prerequisites.",
+      "evidence_ids": [
+        "E15",
+        "E16",
+        "E17"
+      ],
+      "record_fields": [
+        "tu-darmstadt-m-sc-computer-science.entrance_tests",
+        "tu-darmstadt-m-sc-artificial-intelligence-and-machine-learning.entrance_tests",
+        "tu-darmstadt-m-sc-computer-science.subject_credits",
+        "tu-darmstadt-m-sc-artificial-intelligence-and-machine-learning.subject_credits",
+        "tu-darmstadt-m-sc-computer-science.required_documents",
+        "tu-darmstadt-m-sc-artificial-intelligence-and-machine-learning.required_documents"
+      ],
+      "reviewed_by": "pending",
+      "status": "pending"
+    },
+    "R09": {
+      "title": "Saarland: grade alternatives AND class rank",
+      "proposed_interpretation": "Interpret the published threshold as (75% OR 3.00/4 on the applicable original scale) AND top-10% class rank. Compare original scales only; do not convert 75% to a German cutoff or require both grade scales.",
+      "unresolved": "Keep subject-competency/foreign-degree equivalence review separately from the numeric comparison. Contradictory grade evidence needs review.",
+      "evidence_ids": [
+        "E19"
+      ],
+      "record_fields": [
+        "saarland-university-m-sc-computer-science.min_grade_original_scale",
+        "saarland-university-m-sc-data-science-and-artificial-intelligence.min_grade_original_scale"
+      ],
+      "reviewed_by": "pending",
+      "status": "pending"
+    },
+    "R10": {
+      "title": "Saarland: test submission and English exceptions",
+      "proposed_interpretation": "Outside the degree-region exemptions require GRE General OR Indian GATE result, with no invented numeric minimum. English tests can be home editions or expired; MOI alone is disallowed. Native-speaker/in-person-education exceptions require the stated countries and documentary evidence. German-school evidence is individually examined.",
+      "unresolved": "Do not infer exemption from citizenship alone, a remote degree, or the parent institution of a non-EHEA branch campus. The record associates 2026 TOEFL wording with PBT as well as iBT: keep formats distinct and review that ambiguous scope.",
+      "evidence_ids": [
+        "E20",
+        "E21",
+        "E22",
+        "E23",
+        "E24"
+      ],
+      "record_fields": [
+        "saarland-university-m-sc-computer-science.entrance_tests",
+        "saarland-university-m-sc-data-science-and-artificial-intelligence.entrance_tests",
+        "saarland-university-m-sc-computer-science.english",
+        "saarland-university-m-sc-data-science-and-artificial-intelligence.english"
+      ],
+      "reviewed_by": "pending",
+      "status": "pending"
+    },
+    "R11": {
+      "title": "Deadlines: years, routes, classes and exceptions",
+      "proposed_interpretation": "Use intake starting year Y and an explicit offset for every date. Offset -1: RWTH summer September; Saarland winter early November and summer early May/final November; Dresden foreign-degree non-EU summer November; TUM final summer November and Informatics recommended summer October; Stuttgart final summer July. Offset 0: the other listed winter deadlines and summer January deadlines, plus Darmstadt summer February test-exemption submission. KIT CS summer January is 0. Keep closing days inclusive.",
+      "unresolved": "RWTH current-enrolment/relevant-German-degree exceptions change deadlines, and DS explicitly names EEA. Separate Dresden aptitude-registration from uni-assist application; TUM Informatics recommended visa dates from final dates; Darmstadt hard-copy arrival and August20/February20 test-exemption submission from application. TUM assessment dates can be semester-specific, not recurring. TU Berlin/KIT CDS have no numeric application deadline in their verified records; do not borrow siblings.",
+      "evidence_ids": [
+        "E11",
+        "E12",
+        "E25",
+        "E26",
+        "E31",
+        "E32",
+        "E33",
+        "E17"
+      ],
+      "record_fields": [
+        "kit-m-sc-computational-and-data-science.deadlines",
+        "kit-m-sc-computer-science.deadlines",
+        "rwth-aachen-m-sc-computer-science.deadlines",
+        "rwth-aachen-m-sc-data-science.deadlines",
+        "saarland-university-m-sc-computer-science.deadlines",
+        "saarland-university-m-sc-data-science-and-artificial-intelligence.deadlines",
+        "tu-berlin-m-sc-computer-science.deadlines",
+        "tu-darmstadt-m-sc-artificial-intelligence-and-machine-learning.deadlines",
+        "tu-darmstadt-m-sc-computer-science.deadlines",
+        "tu-dresden-m-sc-computer-science.deadlines",
+        "tum-m-sc-data-engineering-and-analytics.deadlines",
+        "tum-m-sc-informatics.deadlines",
+        "university-of-stuttgart-m-sc-computer-science.deadlines"
+      ],
+      "reviewed_by": "pending",
+      "status": "pending"
+    },
+    "R12": {
+      "title": "TU Berlin: credit exclusions and proof/route scope",
+      "proposed_interpretation": "36 foundations CP contains the three 12-CP areas, plus 18 maths and 30 additional CS excluding thesis; do not count the 36 and its children twice. Theoretical-CS exclusions apply. Faculty IV IELTS >=6.5 and its listed degree-country proof route apply; generic B2 or MOI elsewhere does not suffice. Foreign-degree VPD applies from summer 2026, alongside the university application.",
+      "unresolved": "Other Faculty IV accepted certificates and the numeric application deadline are linked but not captured fully in the current cache. Keep those branches unresolved. All academic allocation equivalence remains the board decision.",
+      "evidence_ids": [
+        "E27",
+        "E28",
+        "E29"
+      ],
+      "record_fields": [
+        "tu-berlin-m-sc-computer-science.subject_credits",
+        "tu-berlin-m-sc-computer-science.english",
+        "tu-berlin-m-sc-computer-science.application_route",
+        "tu-berlin-m-sc-computer-science.required_documents",
+        "tu-berlin-m-sc-computer-science.deadlines"
+      ],
+      "reviewed_by": "pending",
+      "status": "pending"
+    },
+    "R13": {
+      "title": "Dresden: test format and separate aptitude procedure",
+      "proposed_interpretation": "Accepted TOEFL old-format 95 or new-format 5.0, or IELTS 7.0, must be represented as actual evidence identities, not a generic C1 claim. German-degree applicants have a separate aptitude-registration portal/window; foreign-degree applications use uni-assist with applicant-class dates. University aptitude remains a required assessment.",
+      "unresolved": "The new TOEFL score is omitted in the record; record a correction candidate. Do not treat not_published entrance_tests as absence of the aptitude prerequisite, which is stated under selection_process. Resolve class terminology without silently assuming EU means EEA.",
+      "evidence_ids": [
+        "E30",
+        "E31"
+      ],
+      "record_fields": [
+        "tu-dresden-m-sc-computer-science.english",
+        "tu-dresden-m-sc-computer-science.selection_process",
+        "tu-dresden-m-sc-computer-science.entrance_tests",
+        "tu-dresden-m-sc-computer-science.application_route",
+        "tu-dresden-m-sc-computer-science.deadlines"
+      ],
+      "reviewed_by": "pending",
+      "status": "pending"
+    },
+    "R14": {
+      "title": "TUM: English omission, optional documents and assessment",
+      "proposed_interpretation": "English evidence is required by the application deadline for both programmes even though english is not_published in the records. GRE 164 QR AND 4.0 AW OR qualifying annual CS GATE applies by degree country (Bangladesh, China, India, Iran, Pakistan); VPD and APS have separate degree-country predicates. Optional training certificates stay optional. The university aptitude assessment is distinct from GRE/GATE.",
+      "unresolved": "The cached language-certificates page contains German proof, not the complete English thresholds. Obtain the official English-proof evidence before automating that branch. Programme overview describes an interview while department text describes a second-stage test: keep unresolved review and period-specific dates, including the 2026-only test. No fabricated aptitude point formula.",
+      "evidence_ids": [
+        "E34",
+        "E35",
+        "E36"
+      ],
+      "record_fields": [
+        "tum-m-sc-data-engineering-and-analytics.english",
+        "tum-m-sc-data-engineering-and-analytics.entrance_tests",
+        "tum-m-sc-data-engineering-and-analytics.required_documents",
+        "tum-m-sc-data-engineering-and-analytics.application_route",
+        "tum-m-sc-data-engineering-and-analytics.selection_process",
+        "tum-m-sc-informatics.english",
+        "tum-m-sc-informatics.entrance_tests",
+        "tum-m-sc-informatics.required_documents",
+        "tum-m-sc-informatics.application_route",
+        "tum-m-sc-informatics.selection_process"
+      ],
+      "reviewed_by": "pending",
+      "status": "pending"
+    },
+    "R15": {
+      "title": "Stuttgart: language validity and conditional assessment",
+      "proposed_interpretation": "IELTS Academic >=7; TOEFL 95 old scale or >=5 new scale; other specifically named certificates. Certificate validity must extend to the deadline; do not universally assign two years where the source says most certificates. MOI is not accepted. Native-country exception requires citizenship AND education, with Canada excluding Quebec. Missing qualifications can require an interview/exam or discretionary conditions.",
+      "unresolved": "The level/duration of education for the exception is not fully specified. Keep ambiguous education evidence and conditional admission as review; do not infer automatic eligibility or rejection from an invitation.",
+      "evidence_ids": [
+        "E37",
+        "E38",
+        "E39"
+      ],
+      "record_fields": [
+        "university-of-stuttgart-m-sc-computer-science.english",
+        "university-of-stuttgart-m-sc-computer-science.selection_process"
+      ],
+      "reviewed_by": "pending",
+      "status": "pending"
+    },
+    "R16": {
+      "title": "Documents, APS and readiness remain separate",
+      "proposed_interpretation": "Use degree-country APS rules where published, conditional VPD/GRE/language documents, ongoing-degree evidence and required milestones. Not_published APS does not mean exempt. Missing documents, pending submission and late application go to readiness, not an academic-failure headline. Lists are not asserted exhaustive.",
+      "unresolved": "Unlisted APS/programme-country combinations need sourced evidence; do not import nationality-based conditions. Shared-source document omissions (KIT CDS, Darmstadt AIML) are visible correction candidates, not silent normalisation.",
+      "evidence_ids": [
+        "E17",
+        "E29"
+      ],
+      "record_fields": [
+        "kit-m-sc-computational-and-data-science.aps_degree_countries",
+        "kit-m-sc-computational-and-data-science.required_documents",
+        "kit-m-sc-computational-and-data-science.application_route",
+        "kit-m-sc-computer-science.aps_degree_countries",
+        "kit-m-sc-computer-science.required_documents",
+        "kit-m-sc-computer-science.application_route",
+        "rwth-aachen-m-sc-computer-science.aps_degree_countries",
+        "rwth-aachen-m-sc-computer-science.required_documents",
+        "rwth-aachen-m-sc-computer-science.application_route",
+        "rwth-aachen-m-sc-data-science.aps_degree_countries",
+        "rwth-aachen-m-sc-data-science.required_documents",
+        "rwth-aachen-m-sc-data-science.application_route",
+        "saarland-university-m-sc-computer-science.aps_degree_countries",
+        "saarland-university-m-sc-computer-science.required_documents",
+        "saarland-university-m-sc-computer-science.application_route",
+        "saarland-university-m-sc-data-science-and-artificial-intelligence.aps_degree_countries",
+        "saarland-university-m-sc-data-science-and-artificial-intelligence.required_documents",
+        "saarland-university-m-sc-data-science-and-artificial-intelligence.application_route",
+        "tu-berlin-m-sc-computer-science.aps_degree_countries",
+        "tu-berlin-m-sc-computer-science.required_documents",
+        "tu-berlin-m-sc-computer-science.application_route",
+        "tu-darmstadt-m-sc-artificial-intelligence-and-machine-learning.aps_degree_countries",
+        "tu-darmstadt-m-sc-artificial-intelligence-and-machine-learning.required_documents",
+        "tu-darmstadt-m-sc-artificial-intelligence-and-machine-learning.application_route",
+        "tu-darmstadt-m-sc-computer-science.aps_degree_countries",
+        "tu-darmstadt-m-sc-computer-science.required_documents",
+        "tu-darmstadt-m-sc-computer-science.application_route",
+        "tu-dresden-m-sc-computer-science.aps_degree_countries",
+        "tu-dresden-m-sc-computer-science.required_documents",
+        "tu-dresden-m-sc-computer-science.application_route",
+        "tum-m-sc-data-engineering-and-analytics.aps_degree_countries",
+        "tum-m-sc-data-engineering-and-analytics.required_documents",
+        "tum-m-sc-data-engineering-and-analytics.application_route",
+        "tum-m-sc-informatics.aps_degree_countries",
+        "tum-m-sc-informatics.required_documents",
+        "tum-m-sc-informatics.application_route",
+        "university-of-stuttgart-m-sc-computer-science.aps_degree_countries",
+        "university-of-stuttgart-m-sc-computer-science.required_documents",
+        "university-of-stuttgart-m-sc-computer-science.application_route"
+      ],
+      "reviewed_by": "pending",
+      "status": "pending"
+    },
+    "R17": {
+      "title": "Fees, financial proof and source periods",
+      "proposed_interpretation": "Display fees as cited information with scope/period and possible exemptions. Darmstadt EUR348.18 is labelled summer 2025; Dresden EUR361 is winter 2026/27. Do not certify future fees, waivers or visa funding from citizenship or a bank balance alone. Financial proof is a separate purpose/period/route comparison.",
+      "unresolved": "Review separate national funds evidence and official grade-conversion evidence in Step 2/3. No universal visa amount or grade cutoff is introduced by this inventory. Expired fee periods remain visible.",
+      "evidence_ids": [
+        "E18",
+        "E44"
+      ],
+      "record_fields": [
+        "kit-m-sc-computational-and-data-science.tuition_eur_per_semester_non_eu",
+        "kit-m-sc-computational-and-data-science.semester_fee_eur",
+        "kit-m-sc-computer-science.tuition_eur_per_semester_non_eu",
+        "kit-m-sc-computer-science.semester_fee_eur",
+        "rwth-aachen-m-sc-computer-science.tuition_eur_per_semester_non_eu",
+        "rwth-aachen-m-sc-computer-science.semester_fee_eur",
+        "rwth-aachen-m-sc-data-science.tuition_eur_per_semester_non_eu",
+        "rwth-aachen-m-sc-data-science.semester_fee_eur",
+        "saarland-university-m-sc-computer-science.tuition_eur_per_semester_non_eu",
+        "saarland-university-m-sc-computer-science.semester_fee_eur",
+        "saarland-university-m-sc-data-science-and-artificial-intelligence.tuition_eur_per_semester_non_eu",
+        "saarland-university-m-sc-data-science-and-artificial-intelligence.semester_fee_eur",
+        "tu-berlin-m-sc-computer-science.tuition_eur_per_semester_non_eu",
+        "tu-berlin-m-sc-computer-science.semester_fee_eur",
+        "tu-darmstadt-m-sc-artificial-intelligence-and-machine-learning.tuition_eur_per_semester_non_eu",
+        "tu-darmstadt-m-sc-artificial-intelligence-and-machine-learning.semester_fee_eur",
+        "tu-darmstadt-m-sc-computer-science.tuition_eur_per_semester_non_eu",
+        "tu-darmstadt-m-sc-computer-science.semester_fee_eur",
+        "tu-dresden-m-sc-computer-science.tuition_eur_per_semester_non_eu",
+        "tu-dresden-m-sc-computer-science.semester_fee_eur",
+        "tum-m-sc-data-engineering-and-analytics.tuition_eur_per_semester_non_eu",
+        "tum-m-sc-data-engineering-and-analytics.semester_fee_eur",
+        "tum-m-sc-informatics.tuition_eur_per_semester_non_eu",
+        "tum-m-sc-informatics.semester_fee_eur",
+        "university-of-stuttgart-m-sc-computer-science.tuition_eur_per_semester_non_eu",
+        "university-of-stuttgart-m-sc-computer-science.semester_fee_eur"
+      ],
+      "reviewed_by": "pending",
+      "status": "pending"
+    }
+  },
+  "programmes": {
+    "kit-m-sc-computational-and-data-science": {
+      "university": "KIT",
+      "programme": "M.Sc. Computational and Data Science",
+      "verification_tier": "second_pass",
+      "record_sha256": "3d726ca23a10879cfea8b8e0803ecaf52103a97d1e7239acd1f97dc4218faab2",
+      "fields": {
+        "degree_requirement": {
+          "classification": "manual_review",
+          "note": "Degree, duration and subject equivalence require the published reference qualification or university assessment; compare entered facts separately.",
+          "review_ids": [
+            "R01"
+          ],
+          "source_doc_ids": [
+            "de/kit/cds-msc/programme"
+          ],
+          "evidence_ids": []
+        },
+        "min_total_ects": {
+          "classification": "automatic",
+          "note": "Compare the published total against confirmed ECTS only; an equivalent-workload claim or other credit unit needs review.",
+          "review_ids": [
+            "R01"
+          ],
+          "source_doc_ids": [
+            "de/kit/cds-msc/programme"
+          ],
+          "evidence_ids": []
+        },
+        "subject_credits": {
+          "classification": "manual_review",
+          "note": "20 basic-maths LP AND (40 in one domain AND 12 in each remaining domain); 6-LP thesis additionally omitted. Overlap policy unresolved; <=12 missing LP requires committee approval.",
+          "review_ids": [
+            "R01",
+            "R03"
+          ],
+          "source_doc_ids": [
+            "de/kit/cds-msc/programme"
+          ],
+          "evidence_ids": [
+            "E05",
+            "E06",
+            "E07",
+            "E08"
+          ]
+        },
+        "min_grade_german_scale": {
+          "classification": "not_published",
+          "note": "Not published in the verified field; this does not establish absence or exemption.",
+          "review_ids": [],
+          "source_doc_ids": [],
+          "evidence_ids": []
+        },
+        "min_grade_original_scale": {
+          "classification": "not_published",
+          "note": "Not published in the verified field; this does not establish absence or exemption.",
+          "review_ids": [],
+          "source_doc_ids": [],
+          "evidence_ids": []
+        },
+        "english": {
+          "classification": "automatic",
+          "note": "Record has test routes; cache additionally states school/sole-English-degree evidence. IELTS6.5/components5.5; other per-test components; proof by enrolment and unlimited test validity.",
+          "review_ids": [
+            "R04"
+          ],
+          "source_doc_ids": [
+            "de/kit/cds-msc/programme"
+          ],
+          "evidence_ids": [
+            "E40",
+            "E41",
+            "E43"
+          ]
+        },
+        "entrance_tests": {
+          "classification": "not_published",
+          "note": "Not published in the verified field; this does not establish absence or exemption.",
+          "review_ids": [],
+          "source_doc_ids": [],
+          "evidence_ids": []
+        },
+        "german": {
+          "classification": "not_published",
+          "note": "Not published in the verified field; this does not establish absence or exemption.",
+          "review_ids": [],
+          "source_doc_ids": [],
+          "evidence_ids": []
+        },
+        "work_experience": {
+          "classification": "not_published",
+          "note": "Not published in the verified field; this does not establish absence or exemption.",
+          "review_ids": [],
+          "source_doc_ids": [],
+          "evidence_ids": []
+        },
+        "aps_degree_countries": {
+          "classification": "not_published",
+          "note": "Not published in the verified field; this does not establish absence or exemption.",
+          "review_ids": [
+            "R16"
+          ],
+          "source_doc_ids": [],
+          "evidence_ids": []
+        },
+        "application_route": {
+          "classification": "not_published",
+          "note": "Not published in the verified field; this does not establish absence or exemption.",
+          "review_ids": [
+            "R16"
+          ],
+          "source_doc_ids": [],
+          "evidence_ids": []
+        },
+        "deadlines": {
+          "classification": "not_published",
+          "note": "Not published in the verified field; this does not establish absence or exemption.",
+          "review_ids": [
+            "R11"
+          ],
+          "source_doc_ids": [],
+          "evidence_ids": []
+        },
+        "selection_process": {
+          "classification": "not_published",
+          "note": "Record is not_published; cached programme describes discretionary conditional admission. Pending interpretation, not an exemption.",
+          "review_ids": [
+            "R03"
+          ],
+          "source_doc_ids": [],
+          "evidence_ids": [
+            "E07",
+            "E08"
+          ]
+        },
+        "required_documents": {
+          "classification": "not_published",
+          "note": "Not published in the verified field; this does not establish absence or exemption.",
+          "review_ids": [
+            "R16"
+          ],
+          "source_doc_ids": [],
+          "evidence_ids": []
+        },
+        "tuition_eur_per_semester_non_eu": {
+          "classification": "informational_readiness",
+          "note": "Cited EUR/semester amount; fee liability, exceptions and waivers require evidence; separate from visa proof.",
+          "review_ids": [
+            "R17"
+          ],
+          "source_doc_ids": [
+            "de/kit/tuition-fees"
+          ],
+          "evidence_ids": []
+        },
+        "semester_fee_eur": {
+          "classification": "not_published",
+          "note": "Not published in the verified field; this does not establish absence or exemption.",
+          "review_ids": [
+            "R17"
+          ],
+          "source_doc_ids": [],
+          "evidence_ids": []
+        },
+        "language_of_instruction": {
+          "classification": "informational_readiness",
+          "note": "Teaching language is information; it does not itself prove the applicant holds accepted language evidence.",
+          "review_ids": [],
+          "source_doc_ids": [
+            "de/kit/cds-msc/programme"
+          ],
+          "evidence_ids": []
+        }
+      }
+    },
+    "kit-m-sc-computer-science": {
+      "university": "KIT",
+      "programme": "M.Sc. Computer Science",
+      "verification_tier": "human",
+      "record_sha256": "ea85986cefb22fe0ac7c50ecaea561f4fa171997f7e02f3f0fcd8b741917fbb2",
+      "fields": {
+        "degree_requirement": {
+          "classification": "manual_review",
+          "note": "Degree, duration and subject equivalence require the published reference qualification or university assessment; compare entered facts separately.",
+          "review_ids": [
+            "R01"
+          ],
+          "source_doc_ids": [
+            "de/kit/cs-msc/programme"
+          ],
+          "evidence_ids": []
+        },
+        "min_total_ects": {
+          "classification": "automatic",
+          "note": "Compare the published total against confirmed ECTS only; an equivalent-workload claim or other credit unit needs review.",
+          "review_ids": [
+            "R01"
+          ],
+          "source_doc_ids": [
+            "de/kit/cs-msc/programme"
+          ],
+          "evidence_ids": []
+        },
+        "subject_credits": {
+          "classification": "manual_review",
+          "note": "Direct route: theory 15, practical 30, engineering 8, maths 25 CP. Alternative GATE/interview routes mean a failed direct-credit comparison alone cannot reject.",
+          "review_ids": [
+            "R01",
+            "R02"
+          ],
+          "source_doc_ids": [
+            "de/kit/cs-msc/programme"
+          ],
+          "evidence_ids": []
+        },
+        "min_grade_german_scale": {
+          "classification": "not_published",
+          "note": "Not published in the verified field; this does not establish absence or exemption.",
+          "review_ids": [],
+          "source_doc_ids": [],
+          "evidence_ids": []
+        },
+        "min_grade_original_scale": {
+          "classification": "manual_review",
+          "note": "Top-10% evidence belongs to the interview route, not every applicant.",
+          "review_ids": [
+            "R02"
+          ],
+          "source_doc_ids": [
+            "de/kit/cs-msc/admission"
+          ],
+          "evidence_ids": [
+            "E04"
+          ]
+        },
+        "english": {
+          "classification": "automatic",
+          "note": "B2 evidence alternatives include supported school/English-degree routes. IELTS6.5 AND every section>=5.5; other tests have their own components. Due at enrolment; listed English tests have unlimited validity.",
+          "review_ids": [
+            "R04"
+          ],
+          "source_doc_ids": [
+            "de/kit/cs-msc/programme"
+          ],
+          "evidence_ids": [
+            "E42"
+          ]
+        },
+        "entrance_tests": {
+          "classification": "manual_review",
+          "note": "GRE VR151/QR164/AW4 OR qualifying CS/DA GATE, with EHEA/Lisbon degree exemptions; separate from selection-route alternatives.",
+          "review_ids": [
+            "R02",
+            "R04",
+            "R06"
+          ],
+          "source_doc_ids": [
+            "de/kit/cs-msc/programme"
+          ],
+          "evidence_ids": [
+            "E02",
+            "E03"
+          ]
+        },
+        "german": {
+          "classification": "not_published",
+          "note": "Not published in the verified field; this does not establish absence or exemption.",
+          "review_ids": [],
+          "source_doc_ids": [],
+          "evidence_ids": []
+        },
+        "work_experience": {
+          "classification": "not_published",
+          "note": "Not published in the verified field; this does not establish absence or exemption.",
+          "review_ids": [],
+          "source_doc_ids": [],
+          "evidence_ids": []
+        },
+        "aps_degree_countries": {
+          "classification": "not_published",
+          "note": "Not published in the verified field; this does not establish absence or exemption.",
+          "review_ids": [
+            "R16"
+          ],
+          "source_doc_ids": [],
+          "evidence_ids": []
+        },
+        "application_route": {
+          "classification": "not_published",
+          "note": "Not published in the verified field; this does not establish absence or exemption.",
+          "review_ids": [
+            "R16"
+          ],
+          "source_doc_ids": [],
+          "evidence_ids": []
+        },
+        "deadlines": {
+          "classification": "informational_readiness",
+          "note": "Calendar comparison is deterministic after route/class/milestone/year-offset review; keep separate from academic eligibility.",
+          "review_ids": [
+            "R11"
+          ],
+          "source_doc_ids": [
+            "de/kit/cs-msc/admission"
+          ],
+          "evidence_ids": []
+        },
+        "selection_process": {
+          "classification": "manual_review",
+          "note": "GATE OR direct credits OR passed interview; relaxed 15/20/6/20 in at least three areas plus rank before interview. Ranking is not an admission probability.",
+          "review_ids": [
+            "R02"
+          ],
+          "source_doc_ids": [
+            "de/kit/cs-msc/programme"
+          ],
+          "evidence_ids": [
+            "E01",
+            "E04"
+          ]
+        },
+        "required_documents": {
+          "classification": "informational_readiness",
+          "note": "Track supplied/pending/absent documents using sourced conditions; preserve optional items.",
+          "review_ids": [
+            "R16"
+          ],
+          "source_doc_ids": [
+            "de/kit/cs-msc/department"
+          ],
+          "evidence_ids": []
+        },
+        "tuition_eur_per_semester_non_eu": {
+          "classification": "informational_readiness",
+          "note": "Cited EUR/semester amount; fee liability, exceptions and waivers require evidence; separate from visa proof.",
+          "review_ids": [
+            "R17"
+          ],
+          "source_doc_ids": [
+            "de/kit/tuition-fees"
+          ],
+          "evidence_ids": []
+        },
+        "semester_fee_eur": {
+          "classification": "not_published",
+          "note": "Not published in the verified field; this does not establish absence or exemption.",
+          "review_ids": [
+            "R17"
+          ],
+          "source_doc_ids": [],
+          "evidence_ids": []
+        },
+        "language_of_instruction": {
+          "classification": "informational_readiness",
+          "note": "Teaching language is information; it does not itself prove the applicant holds accepted language evidence.",
+          "review_ids": [],
+          "source_doc_ids": [
+            "de/kit/cs-msc/programme"
+          ],
+          "evidence_ids": []
+        }
+      }
+    },
+    "rwth-aachen-m-sc-computer-science": {
+      "university": "RWTH Aachen",
+      "programme": "M.Sc. Computer Science",
+      "verification_tier": "human",
+      "record_sha256": "c4cf2e21fa8f8f52204fb3e33844ac6b06f92041822bff236fb0016b81d8f627",
+      "fields": {
+        "degree_requirement": {
+          "classification": "manual_review",
+          "note": "Degree, duration and subject equivalence require the published reference qualification or university assessment; compare entered facts separately.",
+          "review_ids": [
+            "R01"
+          ],
+          "source_doc_ids": [
+            "de/rwth/cs-msc/department"
+          ],
+          "evidence_ids": []
+        },
+        "min_total_ects": {
+          "classification": "not_published",
+          "note": "Not published in the verified field; this does not establish absence or exemption.",
+          "review_ids": [],
+          "source_doc_ids": [],
+          "evidence_ids": []
+        },
+        "subject_credits": {
+          "classification": "not_published",
+          "note": "Not published in the verified field; this does not establish absence or exemption.",
+          "review_ids": [],
+          "source_doc_ids": [],
+          "evidence_ids": []
+        },
+        "min_grade_german_scale": {
+          "classification": "not_published",
+          "note": "Not published in the verified field; this does not establish absence or exemption.",
+          "review_ids": [],
+          "source_doc_ids": [],
+          "evidence_ids": []
+        },
+        "min_grade_original_scale": {
+          "classification": "not_published",
+          "note": "Not published in the verified field; this does not establish absence or exemption.",
+          "review_ids": [],
+          "source_doc_ids": [],
+          "evidence_ids": []
+        },
+        "english": {
+          "classification": "manual_review",
+          "note": "Record lists TOEFL90/4.5 or IELTS6.0 etc.; PDF has two English lists and programme section references. Resolve visual section scope and enrolment milestone before positive verdict.",
+          "review_ids": [
+            "R07"
+          ],
+          "source_doc_ids": [
+            "de/rwth/language-requirements-pdf"
+          ],
+          "evidence_ids": [
+            "E13",
+            "E14"
+          ]
+        },
+        "entrance_tests": {
+          "classification": "automatic",
+          "note": "Degree outside EU triggers GRE; otherwise QR>75th, VR>15th percentiles AND AW>=3.5.",
+          "review_ids": [
+            "R05",
+            "R06"
+          ],
+          "source_doc_ids": [
+            "de/rwth/cs-msc/application"
+          ],
+          "evidence_ids": [
+            "E09"
+          ]
+        },
+        "german": {
+          "classification": "automatic",
+          "note": "Accepted German proof at C1 due by enrolment; a self-reported level alone is not an accepted certificate.",
+          "review_ids": [
+            "R07"
+          ],
+          "source_doc_ids": [
+            "de/rwth/cs-msc/application"
+          ],
+          "evidence_ids": []
+        },
+        "work_experience": {
+          "classification": "not_published",
+          "note": "Not published in the verified field; this does not establish absence or exemption.",
+          "review_ids": [],
+          "source_doc_ids": [],
+          "evidence_ids": []
+        },
+        "aps_degree_countries": {
+          "classification": "not_published",
+          "note": "Not published in the verified field; this does not establish absence or exemption.",
+          "review_ids": [
+            "R16"
+          ],
+          "source_doc_ids": [],
+          "evidence_ids": []
+        },
+        "application_route": {
+          "classification": "informational_readiness",
+          "note": "Show published route and conditional portal/VPD steps, with a separate readiness summary.",
+          "review_ids": [
+            "R16"
+          ],
+          "source_doc_ids": [
+            "de/rwth/cs-msc/application"
+          ],
+          "evidence_ids": []
+        },
+        "deadlines": {
+          "classification": "informational_readiness",
+          "note": "Winter March1/non-EU vs July15/EU; summer September1(Y-1) vs January15(Y). RWTH enrolment or relevant German degree changes non-EU deadline; DS names EEA too.",
+          "review_ids": [
+            "R11"
+          ],
+          "source_doc_ids": [
+            "de/rwth/application-deadlines"
+          ],
+          "evidence_ids": [
+            "E11",
+            "E12"
+          ]
+        },
+        "selection_process": {
+          "classification": "informational_readiness",
+          "note": "Describe the published selection process; routine board selection alone is not an additional unresolved hard prerequisite.",
+          "review_ids": [
+            "R01"
+          ],
+          "source_doc_ids": [
+            "de/rwth/cs-msc/department"
+          ],
+          "evidence_ids": []
+        },
+        "required_documents": {
+          "classification": "informational_readiness",
+          "note": "Track supplied/pending/absent documents using sourced conditions; preserve optional items.",
+          "review_ids": [
+            "R16"
+          ],
+          "source_doc_ids": [
+            "de/rwth/master-application-international"
+          ],
+          "evidence_ids": []
+        },
+        "tuition_eur_per_semester_non_eu": {
+          "classification": "not_published",
+          "note": "Not published in the verified field; this does not establish absence or exemption.",
+          "review_ids": [
+            "R17"
+          ],
+          "source_doc_ids": [],
+          "evidence_ids": []
+        },
+        "semester_fee_eur": {
+          "classification": "not_published",
+          "note": "Not published in the verified field; this does not establish absence or exemption.",
+          "review_ids": [
+            "R17"
+          ],
+          "source_doc_ids": [],
+          "evidence_ids": []
+        },
+        "language_of_instruction": {
+          "classification": "informational_readiness",
+          "note": "Teaching language is information; it does not itself prove the applicant holds accepted language evidence.",
+          "review_ids": [],
+          "source_doc_ids": [
+            "de/rwth/cs-msc/programme"
+          ],
+          "evidence_ids": []
+        }
+      }
+    },
+    "rwth-aachen-m-sc-data-science": {
+      "university": "RWTH Aachen",
+      "programme": "M.Sc. Data Science",
+      "verification_tier": "human",
+      "record_sha256": "09f2c8e081e0830a38692bb8f3020e6c063c6b5a4ab257103bae03232ad1830f",
+      "fields": {
+        "degree_requirement": {
+          "classification": "manual_review",
+          "note": "Recognised degree AND one of CS/maths/physics module profiles; exact published RWTH reference degrees can resolve the profile route, foreign equivalence stays review.",
+          "review_ids": [
+            "R01"
+          ],
+          "source_doc_ids": [
+            "de/rwth/ds-msc/application"
+          ],
+          "evidence_ids": []
+        },
+        "min_total_ects": {
+          "classification": "not_published",
+          "note": "Not published in the verified field; this does not establish absence or exemption.",
+          "review_ids": [],
+          "source_doc_ids": [],
+          "evidence_ids": []
+        },
+        "subject_credits": {
+          "classification": "not_published",
+          "note": "Not published in the verified field; this does not establish absence or exemption.",
+          "review_ids": [],
+          "source_doc_ids": [],
+          "evidence_ids": []
+        },
+        "min_grade_german_scale": {
+          "classification": "not_published",
+          "note": "Not published in the verified field; this does not establish absence or exemption.",
+          "review_ids": [],
+          "source_doc_ids": [],
+          "evidence_ids": []
+        },
+        "min_grade_original_scale": {
+          "classification": "not_published",
+          "note": "Not published in the verified field; this does not establish absence or exemption.",
+          "review_ids": [],
+          "source_doc_ids": [],
+          "evidence_ids": []
+        },
+        "english": {
+          "classification": "manual_review",
+          "note": "Record lists TOEFL90/4.5 or IELTS6.0 etc.; PDF has two English lists and programme section references. Resolve visual section scope and enrolment milestone before positive verdict.",
+          "review_ids": [
+            "R07"
+          ],
+          "source_doc_ids": [
+            "de/rwth/language-requirements-pdf"
+          ],
+          "evidence_ids": [
+            "E13",
+            "E14"
+          ]
+        },
+        "entrance_tests": {
+          "classification": "automatic",
+          "note": "Citizenship EU/EEA OR qualifying German secondary schooling exempts GRE; otherwise QR>75th, VR>15th percentiles AND AW>=3.5.",
+          "review_ids": [
+            "R05",
+            "R06"
+          ],
+          "source_doc_ids": [
+            "de/rwth/ds-msc/application"
+          ],
+          "evidence_ids": [
+            "E10"
+          ]
+        },
+        "german": {
+          "classification": "informational_readiness",
+          "note": "Source explicitly says no German proof is needed at the stated milestone; display exemption without counting a passed requirement.",
+          "review_ids": [],
+          "source_doc_ids": [
+            "de/rwth/ds-msc/requirements"
+          ],
+          "evidence_ids": []
+        },
+        "work_experience": {
+          "classification": "not_published",
+          "note": "Not published in the verified field; this does not establish absence or exemption.",
+          "review_ids": [],
+          "source_doc_ids": [],
+          "evidence_ids": []
+        },
+        "aps_degree_countries": {
+          "classification": "not_published",
+          "note": "Not published in the verified field; this does not establish absence or exemption.",
+          "review_ids": [
+            "R16"
+          ],
+          "source_doc_ids": [],
+          "evidence_ids": []
+        },
+        "application_route": {
+          "classification": "informational_readiness",
+          "note": "Show published route and conditional portal/VPD steps, with a separate readiness summary.",
+          "review_ids": [
+            "R16"
+          ],
+          "source_doc_ids": [
+            "de/rwth/ds-msc/application"
+          ],
+          "evidence_ids": []
+        },
+        "deadlines": {
+          "classification": "informational_readiness",
+          "note": "Winter March1/non-EU vs July15/EU; summer September1(Y-1) vs January15(Y). RWTH enrolment or relevant German degree changes non-EU deadline; DS names EEA too.",
+          "review_ids": [
+            "R11"
+          ],
+          "source_doc_ids": [
+            "de/rwth/ds-msc/application"
+          ],
+          "evidence_ids": [
+            "E11",
+            "E12"
+          ]
+        },
+        "selection_process": {
+          "classification": "informational_readiness",
+          "note": "Describe the published selection process; routine board selection alone is not an additional unresolved hard prerequisite.",
+          "review_ids": [
+            "R01"
+          ],
+          "source_doc_ids": [
+            "de/rwth/ds-msc/application"
+          ],
+          "evidence_ids": []
+        },
+        "required_documents": {
+          "classification": "informational_readiness",
+          "note": "Track supplied/pending/absent documents using sourced conditions; preserve optional items.",
+          "review_ids": [
+            "R16"
+          ],
+          "source_doc_ids": [
+            "de/rwth/master-application-international"
+          ],
+          "evidence_ids": []
+        },
+        "tuition_eur_per_semester_non_eu": {
+          "classification": "not_published",
+          "note": "Not published in the verified field; this does not establish absence or exemption.",
+          "review_ids": [
+            "R17"
+          ],
+          "source_doc_ids": [],
+          "evidence_ids": []
+        },
+        "semester_fee_eur": {
+          "classification": "not_published",
+          "note": "Not published in the verified field; this does not establish absence or exemption.",
+          "review_ids": [
+            "R17"
+          ],
+          "source_doc_ids": [],
+          "evidence_ids": []
+        },
+        "language_of_instruction": {
+          "classification": "informational_readiness",
+          "note": "Teaching language is information; it does not itself prove the applicant holds accepted language evidence.",
+          "review_ids": [],
+          "source_doc_ids": [
+            "de/rwth/ds-msc/programme"
+          ],
+          "evidence_ids": []
+        }
+      }
+    },
+    "saarland-university-m-sc-computer-science": {
+      "university": "Saarland University",
+      "programme": "M.Sc. Computer Science",
+      "verification_tier": "second_pass",
+      "record_sha256": "7dddd9fb5d34a431b215b29b75e62621ce5f75b2fa1e678f0c86407e9bea5d56",
+      "fields": {
+        "degree_requirement": {
+          "classification": "manual_review",
+          "note": "Degree, duration and subject equivalence require the published reference qualification or university assessment; compare entered facts separately.",
+          "review_ids": [
+            "R01"
+          ],
+          "source_doc_ids": [
+            "de/saarland/masters-application-guide"
+          ],
+          "evidence_ids": []
+        },
+        "min_total_ects": {
+          "classification": "automatic",
+          "note": "Compare the published total against confirmed ECTS only; an equivalent-workload claim or other credit unit needs review.",
+          "review_ids": [
+            "R01"
+          ],
+          "source_doc_ids": [
+            "de/saarland/masters-application-guide"
+          ],
+          "evidence_ids": []
+        },
+        "subject_credits": {
+          "classification": "not_published",
+          "note": "Not published in the verified field; this does not establish absence or exemption.",
+          "review_ids": [],
+          "source_doc_ids": [],
+          "evidence_ids": []
+        },
+        "min_grade_german_scale": {
+          "classification": "not_published",
+          "note": "Not published in the verified field; this does not establish absence or exemption.",
+          "review_ids": [],
+          "source_doc_ids": [],
+          "evidence_ids": []
+        },
+        "min_grade_original_scale": {
+          "classification": "automatic",
+          "note": "(>=75% OR >=3.00/4 on the applicable original scale) AND top10% rank; no invented German-grade threshold.",
+          "review_ids": [
+            "R09"
+          ],
+          "source_doc_ids": [
+            "de/saarland/masters-application-guide"
+          ],
+          "evidence_ids": [
+            "E19"
+          ]
+        },
+        "english": {
+          "classification": "automatic",
+          "note": "IELTS7; TOEFL95/120 or new5/6, PBT600/677 subject to format-scope review; named Cambridge/PTE76. Home/expired tests allowed; MOI disallowed; narrow native/in-person-study exceptions.",
+          "review_ids": [
+            "R10"
+          ],
+          "source_doc_ids": [
+            "de/saarland/masters-application-guide"
+          ],
+          "evidence_ids": [
+            "E22",
+            "E23",
+            "E24"
+          ]
+        },
+        "entrance_tests": {
+          "classification": "automatic",
+          "note": "GRE General OR Indian GATE result without numeric cutoff; exempt by degree earned in EHEA/Switzerland/UK, not non-EHEA branch campuses.",
+          "review_ids": [
+            "R06",
+            "R10"
+          ],
+          "source_doc_ids": [
+            "de/saarland/masters-application-guide"
+          ],
+          "evidence_ids": [
+            "E20",
+            "E21"
+          ]
+        },
+        "german": {
+          "classification": "informational_readiness",
+          "note": "Source explicitly says no German proof is needed at the stated milestone; display exemption without counting a passed requirement.",
+          "review_ids": [],
+          "source_doc_ids": [
+            "de/saarland/masters-application-guide"
+          ],
+          "evidence_ids": []
+        },
+        "work_experience": {
+          "classification": "not_published",
+          "note": "Not published in the verified field; this does not establish absence or exemption.",
+          "review_ids": [],
+          "source_doc_ids": [],
+          "evidence_ids": []
+        },
+        "aps_degree_countries": {
+          "classification": "informational_readiness",
+          "note": "Document readiness uses qualifying-degree country, not citizenship; missing proof is a readiness gap.",
+          "review_ids": [
+            "R16"
+          ],
+          "source_doc_ids": [
+            "de/saarland/masters-application-guide"
+          ],
+          "evidence_ids": []
+        },
+        "application_route": {
+          "classification": "informational_readiness",
+          "note": "Show published route and conditional portal/VPD steps, with a separate readiness summary.",
+          "review_ids": [
+            "R16"
+          ],
+          "source_doc_ids": [
+            "de/saarland/cs-msc/programme"
+          ],
+          "evidence_ids": []
+        },
+        "deadlines": {
+          "classification": "informational_readiness",
+          "note": "Winter final May15(Y), early November15(Y-1); summer final November15(Y-1), early May15(Y-1). Early rounds are optional.",
+          "review_ids": [
+            "R11"
+          ],
+          "source_doc_ids": [
+            "de/saarland/cs-msc/programme"
+          ],
+          "evidence_ids": [
+            "E25",
+            "E26"
+          ]
+        },
+        "selection_process": {
+          "classification": "informational_readiness",
+          "note": "Describe the published selection process; routine board selection alone is not an additional unresolved hard prerequisite.",
+          "review_ids": [
+            "R01"
+          ],
+          "source_doc_ids": [
+            "de/saarland/masters-application-guide"
+          ],
+          "evidence_ids": []
+        },
+        "required_documents": {
+          "classification": "informational_readiness",
+          "note": "Track supplied/pending/absent documents using sourced conditions; preserve optional items.",
+          "review_ids": [
+            "R16"
+          ],
+          "source_doc_ids": [
+            "de/saarland/masters-application-guide",
+            "de/saarland/cs-msc/programme"
+          ],
+          "evidence_ids": []
+        },
+        "tuition_eur_per_semester_non_eu": {
+          "classification": "informational_readiness",
+          "note": "Cited EUR/semester amount; fee liability, exceptions and waivers require evidence; separate from visa proof.",
+          "review_ids": [
+            "R17"
+          ],
+          "source_doc_ids": [
+            "de/saarland/cs-msc/programme"
+          ],
+          "evidence_ids": []
+        },
+        "semester_fee_eur": {
+          "classification": "not_published",
+          "note": "Not published in the verified field; this does not establish absence or exemption.",
+          "review_ids": [
+            "R17"
+          ],
+          "source_doc_ids": [],
+          "evidence_ids": []
+        },
+        "language_of_instruction": {
+          "classification": "informational_readiness",
+          "note": "Teaching language is information; it does not itself prove the applicant holds accepted language evidence.",
+          "review_ids": [],
+          "source_doc_ids": [
+            "de/saarland/masters-application-guide"
+          ],
+          "evidence_ids": []
+        }
+      }
+    },
+    "saarland-university-m-sc-data-science-and-artificial-intelligence": {
+      "university": "Saarland University",
+      "programme": "M.Sc. Data Science and Artificial Intelligence",
+      "verification_tier": "human",
+      "record_sha256": "d2322b7af0d71ef930eafb2d0b20276153730814691446dbefd25f87d0ff0c8f",
+      "fields": {
+        "degree_requirement": {
+          "classification": "manual_review",
+          "note": "Degree, duration and subject equivalence require the published reference qualification or university assessment; compare entered facts separately.",
+          "review_ids": [
+            "R01"
+          ],
+          "source_doc_ids": [
+            "de/saarland/dsai-msc/programme"
+          ],
+          "evidence_ids": []
+        },
+        "min_total_ects": {
+          "classification": "automatic",
+          "note": "Compare the published total against confirmed ECTS only; an equivalent-workload claim or other credit unit needs review.",
+          "review_ids": [
+            "R01"
+          ],
+          "source_doc_ids": [
+            "de/saarland/dsai-msc/programme"
+          ],
+          "evidence_ids": []
+        },
+        "subject_credits": {
+          "classification": "not_published",
+          "note": "Not published in the verified field; this does not establish absence or exemption.",
+          "review_ids": [],
+          "source_doc_ids": [],
+          "evidence_ids": []
+        },
+        "min_grade_german_scale": {
+          "classification": "not_published",
+          "note": "Not published in the verified field; this does not establish absence or exemption.",
+          "review_ids": [],
+          "source_doc_ids": [],
+          "evidence_ids": []
+        },
+        "min_grade_original_scale": {
+          "classification": "automatic",
+          "note": "(>=75% OR >=3.00/4 on the applicable original scale) AND top10% rank; no invented German-grade threshold.",
+          "review_ids": [
+            "R09"
+          ],
+          "source_doc_ids": [
+            "de/saarland/masters-application-guide"
+          ],
+          "evidence_ids": [
+            "E19"
+          ]
+        },
+        "english": {
+          "classification": "automatic",
+          "note": "IELTS7; TOEFL95/120 or new5/6, PBT600/677 subject to format-scope review; named Cambridge/PTE76. Home/expired tests allowed; MOI disallowed; narrow native/in-person-study exceptions.",
+          "review_ids": [
+            "R10"
+          ],
+          "source_doc_ids": [
+            "de/saarland/masters-application-guide"
+          ],
+          "evidence_ids": [
+            "E22",
+            "E23",
+            "E24"
+          ]
+        },
+        "entrance_tests": {
+          "classification": "automatic",
+          "note": "GRE General OR Indian GATE result without numeric cutoff; exempt by degree earned in EHEA/Switzerland/UK, not non-EHEA branch campuses.",
+          "review_ids": [
+            "R06",
+            "R10"
+          ],
+          "source_doc_ids": [
+            "de/saarland/masters-application-guide"
+          ],
+          "evidence_ids": [
+            "E20",
+            "E21"
+          ]
+        },
+        "german": {
+          "classification": "informational_readiness",
+          "note": "Source explicitly says no German proof is needed at the stated milestone; display exemption without counting a passed requirement.",
+          "review_ids": [],
+          "source_doc_ids": [
+            "de/saarland/masters-application-guide"
+          ],
+          "evidence_ids": []
+        },
+        "work_experience": {
+          "classification": "not_published",
+          "note": "Not published in the verified field; this does not establish absence or exemption.",
+          "review_ids": [],
+          "source_doc_ids": [],
+          "evidence_ids": []
+        },
+        "aps_degree_countries": {
+          "classification": "informational_readiness",
+          "note": "Document readiness uses qualifying-degree country, not citizenship; missing proof is a readiness gap.",
+          "review_ids": [
+            "R16"
+          ],
+          "source_doc_ids": [
+            "de/saarland/masters-application-guide"
+          ],
+          "evidence_ids": []
+        },
+        "application_route": {
+          "classification": "informational_readiness",
+          "note": "Show published route and conditional portal/VPD steps, with a separate readiness summary.",
+          "review_ids": [
+            "R16"
+          ],
+          "source_doc_ids": [
+            "de/saarland/masters-application-guide"
+          ],
+          "evidence_ids": []
+        },
+        "deadlines": {
+          "classification": "informational_readiness",
+          "note": "Winter final May15(Y), early November15(Y-1); summer final November15(Y-1), early May15(Y-1). Early rounds are optional.",
+          "review_ids": [
+            "R11"
+          ],
+          "source_doc_ids": [
+            "de/saarland/dsai-msc/programme"
+          ],
+          "evidence_ids": [
+            "E25",
+            "E26"
+          ]
+        },
+        "selection_process": {
+          "classification": "informational_readiness",
+          "note": "Describe the published selection process; routine board selection alone is not an additional unresolved hard prerequisite.",
+          "review_ids": [
+            "R01"
+          ],
+          "source_doc_ids": [
+            "de/saarland/masters-application-guide"
+          ],
+          "evidence_ids": []
+        },
+        "required_documents": {
+          "classification": "informational_readiness",
+          "note": "Track supplied/pending/absent documents using sourced conditions; preserve optional items.",
+          "review_ids": [
+            "R16"
+          ],
+          "source_doc_ids": [
+            "de/saarland/masters-application-guide"
+          ],
+          "evidence_ids": []
+        },
+        "tuition_eur_per_semester_non_eu": {
+          "classification": "informational_readiness",
+          "note": "Cited EUR/semester amount; fee liability, exceptions and waivers require evidence; separate from visa proof.",
+          "review_ids": [
+            "R17"
+          ],
+          "source_doc_ids": [
+            "de/saarland/dsai-msc/programme"
+          ],
+          "evidence_ids": []
+        },
+        "semester_fee_eur": {
+          "classification": "not_published",
+          "note": "Not published in the verified field; this does not establish absence or exemption.",
+          "review_ids": [
+            "R17"
+          ],
+          "source_doc_ids": [],
+          "evidence_ids": []
+        },
+        "language_of_instruction": {
+          "classification": "informational_readiness",
+          "note": "Teaching language is information; it does not itself prove the applicant holds accepted language evidence.",
+          "review_ids": [],
+          "source_doc_ids": [
+            "de/saarland/dsai-msc/programme"
+          ],
+          "evidence_ids": []
+        }
+      }
+    },
+    "tu-berlin-m-sc-computer-science": {
+      "university": "TU Berlin",
+      "programme": "M.Sc. Computer Science",
+      "verification_tier": "human",
+      "record_sha256": "abf4441514dbbeb90cccbf878d66db024bcea1672e7d50cbb17ed826f452feb5",
+      "fields": {
+        "degree_requirement": {
+          "classification": "manual_review",
+          "note": "Degree, duration and subject equivalence require the published reference qualification or university assessment; compare entered facts separately.",
+          "review_ids": [
+            "R01"
+          ],
+          "source_doc_ids": [
+            "de/tub/cs-msc/application"
+          ],
+          "evidence_ids": []
+        },
+        "min_total_ects": {
+          "classification": "not_published",
+          "note": "Not published in the verified field; this does not establish absence or exemption.",
+          "review_ids": [],
+          "source_doc_ids": [],
+          "evidence_ids": []
+        },
+        "subject_credits": {
+          "classification": "manual_review",
+          "note": "36 foundations CP includes theory12+engineering12+practical12; plus maths18 and additionalCS30 excluding thesis. Respect theory exclusions and board allocation.",
+          "review_ids": [
+            "R01",
+            "R12"
+          ],
+          "source_doc_ids": [
+            "de/tub/cs-msc/application"
+          ],
+          "evidence_ids": [
+            "E27"
+          ]
+        },
+        "min_grade_german_scale": {
+          "classification": "not_published",
+          "note": "Not published in the verified field; this does not establish absence or exemption.",
+          "review_ids": [],
+          "source_doc_ids": [],
+          "evidence_ids": []
+        },
+        "min_grade_original_scale": {
+          "classification": "not_published",
+          "note": "Not published in the verified field; this does not establish absence or exemption.",
+          "review_ids": [],
+          "source_doc_ids": [],
+          "evidence_ids": []
+        },
+        "english": {
+          "classification": "automatic",
+          "note": "Faculty IV higher B2: IELTS>=6.5; only listed native-country degree proof. Other accepted-certificate branches are not fully cached. No generic MOI substitution.",
+          "review_ids": [
+            "R12"
+          ],
+          "source_doc_ids": [
+            "de/tub/eecs-application-faq"
+          ],
+          "evidence_ids": [
+            "E28"
+          ]
+        },
+        "entrance_tests": {
+          "classification": "not_published",
+          "note": "Not published in the verified field; this does not establish absence or exemption.",
+          "review_ids": [],
+          "source_doc_ids": [],
+          "evidence_ids": []
+        },
+        "german": {
+          "classification": "not_published",
+          "note": "Not published in the verified field; this does not establish absence or exemption.",
+          "review_ids": [],
+          "source_doc_ids": [],
+          "evidence_ids": []
+        },
+        "work_experience": {
+          "classification": "informational_readiness",
+          "note": "Published not-required statement; experience cannot substitute for academic prerequisites.",
+          "review_ids": [
+            "R01"
+          ],
+          "source_doc_ids": [
+            "de/tub/cs-msc/programme"
+          ],
+          "evidence_ids": []
+        },
+        "aps_degree_countries": {
+          "classification": "not_published",
+          "note": "Not published in the verified field; this does not establish absence or exemption.",
+          "review_ids": [
+            "R16"
+          ],
+          "source_doc_ids": [],
+          "evidence_ids": []
+        },
+        "application_route": {
+          "classification": "informational_readiness",
+          "note": "German-degree direct route; foreign-degree VPD via uni-assist from summer2026 plus university application, not two interchangeable portals.",
+          "review_ids": [
+            "R12",
+            "R16"
+          ],
+          "source_doc_ids": [
+            "de/tub/cs-msc/application"
+          ],
+          "evidence_ids": [
+            "E29"
+          ]
+        },
+        "deadlines": {
+          "classification": "not_published",
+          "note": "Not published in the verified field; this does not establish absence or exemption.",
+          "review_ids": [
+            "R11",
+            "R12"
+          ],
+          "source_doc_ids": [],
+          "evidence_ids": []
+        },
+        "selection_process": {
+          "classification": "informational_readiness",
+          "note": "Describe the published selection process; routine board selection alone is not an additional unresolved hard prerequisite.",
+          "review_ids": [
+            "R01"
+          ],
+          "source_doc_ids": [
+            "de/tub/cs-msc/application"
+          ],
+          "evidence_ids": []
+        },
+        "required_documents": {
+          "classification": "informational_readiness",
+          "note": "Track supplied/pending/absent documents using sourced conditions; preserve optional items.",
+          "review_ids": [
+            "R16"
+          ],
+          "source_doc_ids": [
+            "de/tub/eecs-application-faq"
+          ],
+          "evidence_ids": []
+        },
+        "tuition_eur_per_semester_non_eu": {
+          "classification": "not_published",
+          "note": "Not published in the verified field; this does not establish absence or exemption.",
+          "review_ids": [
+            "R17"
+          ],
+          "source_doc_ids": [],
+          "evidence_ids": []
+        },
+        "semester_fee_eur": {
+          "classification": "not_published",
+          "note": "Not published in the verified field; this does not establish absence or exemption.",
+          "review_ids": [
+            "R17"
+          ],
+          "source_doc_ids": [],
+          "evidence_ids": []
+        },
+        "language_of_instruction": {
+          "classification": "informational_readiness",
+          "note": "Teaching language is information; it does not itself prove the applicant holds accepted language evidence.",
+          "review_ids": [],
+          "source_doc_ids": [
+            "de/tub/cs-msc/programme"
+          ],
+          "evidence_ids": []
+        }
+      }
+    },
+    "tu-darmstadt-m-sc-artificial-intelligence-and-machine-learning": {
+      "university": "TU Darmstadt",
+      "programme": "M.Sc. Artificial Intelligence and Machine Learning",
+      "verification_tier": "second_pass",
+      "record_sha256": "22bfc9865e47f439e949a6dbd78e9fd3eda2a31eac6d0a382f8bdb75bbaead42",
+      "fields": {
+        "degree_requirement": {
+          "classification": "manual_review",
+          "note": "Degree, duration and subject equivalence require the published reference qualification or university assessment; compare entered facts separately.",
+          "review_ids": [
+            "R01"
+          ],
+          "source_doc_ids": [
+            "de/tu-darmstadt/informatics-master-admission-guide"
+          ],
+          "evidence_ids": []
+        },
+        "min_total_ects": {
+          "classification": "automatic",
+          "note": "Compare the published total against confirmed ECTS only; an equivalent-workload claim or other credit unit needs review.",
+          "review_ids": [
+            "R01"
+          ],
+          "source_doc_ids": [
+            "de/tu-darmstadt/informatics-master-admission-guide"
+          ],
+          "evidence_ids": []
+        },
+        "subject_credits": {
+          "classification": "manual_review",
+          "note": ">=60 ECTS must match reference Informatik core in content, academic level and depth; an entered 60 is not certified equivalence.",
+          "review_ids": [
+            "R01",
+            "R08"
+          ],
+          "source_doc_ids": [
+            "de/tu-darmstadt/informatics-master-admission-guide"
+          ],
+          "evidence_ids": []
+        },
+        "min_grade_german_scale": {
+          "classification": "not_published",
+          "note": "Not published in the verified field; this does not establish absence or exemption.",
+          "review_ids": [],
+          "source_doc_ids": [],
+          "evidence_ids": []
+        },
+        "min_grade_original_scale": {
+          "classification": "not_published",
+          "note": "Not published in the verified field; this does not establish absence or exemption.",
+          "review_ids": [],
+          "source_doc_ids": [],
+          "evidence_ids": []
+        },
+        "english": {
+          "classification": "automatic",
+          "note": "IELTS>=7 OR TOEFLiBT>=95 OR official entire-Bachelor English instruction confirmation; no cross-format TOEFL conversion.",
+          "review_ids": [
+            "R08"
+          ],
+          "source_doc_ids": [
+            "de/tu-darmstadt/informatics-master-admission-guide"
+          ],
+          "evidence_ids": []
+        },
+        "entrance_tests": {
+          "classification": "manual_review",
+          "note": "Conditional competency exam; optional GRE155/165/3.5 or GATE750 exemption by Aug20/Feb20. Preserve academic equivalence, same sitting and submission evidence separately.",
+          "review_ids": [
+            "R08"
+          ],
+          "source_doc_ids": [
+            "de/tu-darmstadt/informatics-master-admission-guide"
+          ],
+          "evidence_ids": [
+            "E15",
+            "E16"
+          ]
+        },
+        "german": {
+          "classification": "not_published",
+          "note": "Not published in the verified field; this does not establish absence or exemption.",
+          "review_ids": [],
+          "source_doc_ids": [],
+          "evidence_ids": []
+        },
+        "work_experience": {
+          "classification": "informational_readiness",
+          "note": "Published not-required statement; experience cannot substitute for academic prerequisites.",
+          "review_ids": [
+            "R01"
+          ],
+          "source_doc_ids": [
+            "de/tu-darmstadt/informatics-master-admission-guide"
+          ],
+          "evidence_ids": []
+        },
+        "aps_degree_countries": {
+          "classification": "not_published",
+          "note": "Not published in the verified field; this does not establish absence or exemption.",
+          "review_ids": [
+            "R16"
+          ],
+          "source_doc_ids": [],
+          "evidence_ids": []
+        },
+        "application_route": {
+          "classification": "informational_readiness",
+          "note": "Show published route and conditional portal/VPD steps, with a separate readiness summary.",
+          "review_ids": [
+            "R16"
+          ],
+          "source_doc_ids": [
+            "de/tu-darmstadt/informatics-master-admission-guide"
+          ],
+          "evidence_ids": []
+        },
+        "deadlines": {
+          "classification": "informational_readiness",
+          "note": "Winter July15(Y), summer January15(Y): both online cutoff and hard-copy arrival. GRE/GATE exemption deadlines Aug20/Feb20 are separate.",
+          "review_ids": [
+            "R08",
+            "R11"
+          ],
+          "source_doc_ids": [
+            "de/tu-darmstadt/informatics-master-admission-guide"
+          ],
+          "evidence_ids": [
+            "E17"
+          ]
+        },
+        "selection_process": {
+          "classification": "informational_readiness",
+          "note": "Describe the published selection process; routine board selection alone is not an additional unresolved hard prerequisite.",
+          "review_ids": [
+            "R01"
+          ],
+          "source_doc_ids": [
+            "de/tu-darmstadt/aiml-msc/programme"
+          ],
+          "evidence_ids": []
+        },
+        "required_documents": {
+          "classification": "not_published",
+          "note": "Record is not_published; shared official guide requires hard-copy application/documents. Pending correction review.",
+          "review_ids": [
+            "R08",
+            "R16"
+          ],
+          "source_doc_ids": [],
+          "evidence_ids": [
+            "E17"
+          ]
+        },
+        "tuition_eur_per_semester_non_eu": {
+          "classification": "not_published",
+          "note": "Not published in the verified field; this does not establish absence or exemption.",
+          "review_ids": [
+            "R17"
+          ],
+          "source_doc_ids": [],
+          "evidence_ids": []
+        },
+        "semester_fee_eur": {
+          "classification": "informational_readiness",
+          "note": "EUR348.18 is explicitly summer2025; historical information cannot certify a 2026/2027 payable contribution.",
+          "review_ids": [
+            "R17"
+          ],
+          "source_doc_ids": [
+            "de/tu-darmstadt/informatics-master-admission-guide"
+          ],
+          "evidence_ids": [
+            "E18"
+          ]
+        },
+        "language_of_instruction": {
+          "classification": "informational_readiness",
+          "note": "Teaching language is information; it does not itself prove the applicant holds accepted language evidence.",
+          "review_ids": [],
+          "source_doc_ids": [
+            "de/tu-darmstadt/aiml-msc/programme"
+          ],
+          "evidence_ids": []
+        }
+      }
+    },
+    "tu-darmstadt-m-sc-computer-science": {
+      "university": "TU Darmstadt",
+      "programme": "M.Sc. Computer Science",
+      "verification_tier": "human",
+      "record_sha256": "b87f9260300eb3c064033b3fdd76663bcaf6c373bc1a928bb9b53bb9e8759c17",
+      "fields": {
+        "degree_requirement": {
+          "classification": "manual_review",
+          "note": "Degree, duration and subject equivalence require the published reference qualification or university assessment; compare entered facts separately.",
+          "review_ids": [
+            "R01"
+          ],
+          "source_doc_ids": [
+            "de/tu-darmstadt/cs-msc/programme"
+          ],
+          "evidence_ids": []
+        },
+        "min_total_ects": {
+          "classification": "automatic",
+          "note": "Compare the published total against confirmed ECTS only; an equivalent-workload claim or other credit unit needs review.",
+          "review_ids": [
+            "R01"
+          ],
+          "source_doc_ids": [
+            "de/tu-darmstadt/informatics-master-admission-guide"
+          ],
+          "evidence_ids": []
+        },
+        "subject_credits": {
+          "classification": "manual_review",
+          "note": ">=60 ECTS must match reference Informatik core in content, academic level and depth; an entered 60 is not certified equivalence.",
+          "review_ids": [
+            "R01",
+            "R08"
+          ],
+          "source_doc_ids": [
+            "de/tu-darmstadt/informatics-master-admission-guide"
+          ],
+          "evidence_ids": []
+        },
+        "min_grade_german_scale": {
+          "classification": "not_published",
+          "note": "Not published in the verified field; this does not establish absence or exemption.",
+          "review_ids": [],
+          "source_doc_ids": [],
+          "evidence_ids": []
+        },
+        "min_grade_original_scale": {
+          "classification": "not_published",
+          "note": "Not published in the verified field; this does not establish absence or exemption.",
+          "review_ids": [],
+          "source_doc_ids": [],
+          "evidence_ids": []
+        },
+        "english": {
+          "classification": "automatic",
+          "note": "IELTS>=7 OR TOEFLiBT>=95 OR official entire-Bachelor English instruction confirmation; no cross-format TOEFL conversion.",
+          "review_ids": [
+            "R08"
+          ],
+          "source_doc_ids": [
+            "de/tu-darmstadt/informatics-master-admission-guide"
+          ],
+          "evidence_ids": []
+        },
+        "entrance_tests": {
+          "classification": "manual_review",
+          "note": "Conditional competency exam; optional GRE155/165/3.5 or GATE750 exemption by Aug20/Feb20. Preserve academic equivalence, same sitting and submission evidence separately.",
+          "review_ids": [
+            "R08"
+          ],
+          "source_doc_ids": [
+            "de/tu-darmstadt/informatics-master-admission-guide"
+          ],
+          "evidence_ids": [
+            "E15",
+            "E16"
+          ]
+        },
+        "german": {
+          "classification": "not_published",
+          "note": "Not published in the verified field; this does not establish absence or exemption.",
+          "review_ids": [],
+          "source_doc_ids": [],
+          "evidence_ids": []
+        },
+        "work_experience": {
+          "classification": "informational_readiness",
+          "note": "Published not-required statement; experience cannot substitute for academic prerequisites.",
+          "review_ids": [
+            "R01"
+          ],
+          "source_doc_ids": [
+            "de/tu-darmstadt/informatics-master-admission-guide"
+          ],
+          "evidence_ids": []
+        },
+        "aps_degree_countries": {
+          "classification": "not_published",
+          "note": "Not published in the verified field; this does not establish absence or exemption.",
+          "review_ids": [
+            "R16"
+          ],
+          "source_doc_ids": [],
+          "evidence_ids": []
+        },
+        "application_route": {
+          "classification": "informational_readiness",
+          "note": "Show published route and conditional portal/VPD steps, with a separate readiness summary.",
+          "review_ids": [
+            "R16"
+          ],
+          "source_doc_ids": [
+            "de/tu-darmstadt/informatics-master-admission-guide"
+          ],
+          "evidence_ids": []
+        },
+        "deadlines": {
+          "classification": "informational_readiness",
+          "note": "Winter July15(Y), summer January15(Y): both online cutoff and hard-copy arrival. GRE/GATE exemption deadlines Aug20/Feb20 are separate.",
+          "review_ids": [
+            "R08",
+            "R11"
+          ],
+          "source_doc_ids": [
+            "de/tu-darmstadt/informatics-master-admission-guide"
+          ],
+          "evidence_ids": [
+            "E17"
+          ]
+        },
+        "selection_process": {
+          "classification": "informational_readiness",
+          "note": "Describe the published selection process; routine board selection alone is not an additional unresolved hard prerequisite.",
+          "review_ids": [
+            "R01"
+          ],
+          "source_doc_ids": [
+            "de/tu-darmstadt/cs-msc/programme"
+          ],
+          "evidence_ids": []
+        },
+        "required_documents": {
+          "classification": "informational_readiness",
+          "note": "Track supplied/pending/absent documents using sourced conditions; preserve optional items.",
+          "review_ids": [
+            "R16"
+          ],
+          "source_doc_ids": [
+            "de/tu-darmstadt/informatics-master-admission-guide"
+          ],
+          "evidence_ids": []
+        },
+        "tuition_eur_per_semester_non_eu": {
+          "classification": "not_published",
+          "note": "Not published in the verified field; this does not establish absence or exemption.",
+          "review_ids": [
+            "R17"
+          ],
+          "source_doc_ids": [],
+          "evidence_ids": []
+        },
+        "semester_fee_eur": {
+          "classification": "informational_readiness",
+          "note": "EUR348.18 is explicitly summer2025; historical information cannot certify a 2026/2027 payable contribution.",
+          "review_ids": [
+            "R17"
+          ],
+          "source_doc_ids": [
+            "de/tu-darmstadt/informatics-master-admission-guide"
+          ],
+          "evidence_ids": [
+            "E18"
+          ]
+        },
+        "language_of_instruction": {
+          "classification": "informational_readiness",
+          "note": "Teaching language is information; it does not itself prove the applicant holds accepted language evidence.",
+          "review_ids": [],
+          "source_doc_ids": [
+            "de/tu-darmstadt/cs-msc/programme"
+          ],
+          "evidence_ids": []
+        }
+      }
+    },
+    "tu-dresden-m-sc-computer-science": {
+      "university": "TU Dresden",
+      "programme": "M.Sc. Computer Science",
+      "verification_tier": "second_pass",
+      "record_sha256": "3c7460d2e1249d4929184c6d70ca649ebd091e58807fc7e653ca918376a11487",
+      "fields": {
+        "degree_requirement": {
+          "classification": "manual_review",
+          "note": "Degree, duration and subject equivalence require the published reference qualification or university assessment; compare entered facts separately.",
+          "review_ids": [
+            "R01"
+          ],
+          "source_doc_ids": [
+            "de/tud/cs-msc/programme"
+          ],
+          "evidence_ids": []
+        },
+        "min_total_ects": {
+          "classification": "not_published",
+          "note": "Not published in the verified field; this does not establish absence or exemption.",
+          "review_ids": [],
+          "source_doc_ids": [],
+          "evidence_ids": []
+        },
+        "subject_credits": {
+          "classification": "not_published",
+          "note": "Not published in the verified field; this does not establish absence or exemption.",
+          "review_ids": [],
+          "source_doc_ids": [],
+          "evidence_ids": []
+        },
+        "min_grade_german_scale": {
+          "classification": "not_published",
+          "note": "Not published in the verified field; this does not establish absence or exemption.",
+          "review_ids": [],
+          "source_doc_ids": [],
+          "evidence_ids": []
+        },
+        "min_grade_original_scale": {
+          "classification": "not_published",
+          "note": "Not published in the verified field; this does not establish absence or exemption.",
+          "review_ids": [],
+          "source_doc_ids": [],
+          "evidence_ids": []
+        },
+        "english": {
+          "classification": "automatic",
+          "note": "IELTS>=7 OR TOEFL95 old scale /5.0 new scale; explicit new-scale evidence is missing from the existing record. C1 claim alone does not identify proof.",
+          "review_ids": [
+            "R13"
+          ],
+          "source_doc_ids": [
+            "de/tud/cs-msc/aptitude-assessment"
+          ],
+          "evidence_ids": [
+            "E30"
+          ]
+        },
+        "entrance_tests": {
+          "classification": "not_published",
+          "note": "Record is not_published; selection_process explicitly requires university aptitude assessment.",
+          "review_ids": [
+            "R13"
+          ],
+          "source_doc_ids": [],
+          "evidence_ids": []
+        },
+        "german": {
+          "classification": "informational_readiness",
+          "note": "Source explicitly says no German proof is needed at the stated milestone; display exemption without counting a passed requirement.",
+          "review_ids": [],
+          "source_doc_ids": [
+            "de/tud/international-faq"
+          ],
+          "evidence_ids": []
+        },
+        "work_experience": {
+          "classification": "not_published",
+          "note": "Not published in the verified field; this does not establish absence or exemption.",
+          "review_ids": [],
+          "source_doc_ids": [],
+          "evidence_ids": []
+        },
+        "aps_degree_countries": {
+          "classification": "informational_readiness",
+          "note": "Document readiness uses qualifying-degree country, not citizenship; missing proof is a readiness gap.",
+          "review_ids": [
+            "R16"
+          ],
+          "source_doc_ids": [
+            "de/tud/international-faq"
+          ],
+          "evidence_ids": []
+        },
+        "application_route": {
+          "classification": "informational_readiness",
+          "note": "German-degree aptitude-registration portal vs foreign-degree uni-assist application; keep distinct from enrolment.",
+          "review_ids": [
+            "R13"
+          ],
+          "source_doc_ids": [
+            "de/tud/cs-msc/aptitude-assessment"
+          ],
+          "evidence_ids": [
+            "E31"
+          ]
+        },
+        "deadlines": {
+          "classification": "informational_readiness",
+          "note": "Foreign-degree non-EU: May31(Y)/Nov30(Y-1); foreign-degree EU: July15(Y)/Jan15(Y). German-degree aptitude registration June1-July15 /Dec1(Y-1)-Jan15.",
+          "review_ids": [
+            "R11",
+            "R13"
+          ],
+          "source_doc_ids": [
+            "de/tud/cs-msc/aptitude-assessment"
+          ],
+          "evidence_ids": [
+            "E31"
+          ]
+        },
+        "selection_process": {
+          "classification": "manual_review",
+          "note": "Required university aptitude outcome; not_published entrance_tests is not an exemption from this assessment.",
+          "review_ids": [
+            "R01",
+            "R13"
+          ],
+          "source_doc_ids": [
+            "de/tud/cs-msc/programme"
+          ],
+          "evidence_ids": []
+        },
+        "required_documents": {
+          "classification": "informational_readiness",
+          "note": "Track supplied/pending/absent documents using sourced conditions; preserve optional items.",
+          "review_ids": [
+            "R16"
+          ],
+          "source_doc_ids": [
+            "de/tud/cs-msc/aptitude-assessment"
+          ],
+          "evidence_ids": []
+        },
+        "tuition_eur_per_semester_non_eu": {
+          "classification": "not_published",
+          "note": "Not published in the verified field; this does not establish absence or exemption.",
+          "review_ids": [
+            "R17"
+          ],
+          "source_doc_ids": [],
+          "evidence_ids": []
+        },
+        "semester_fee_eur": {
+          "classification": "informational_readiness",
+          "note": "EUR361 applies to winter2026/27 and the stated attendance category; not a timeless contribution.",
+          "review_ids": [
+            "R17"
+          ],
+          "source_doc_ids": [
+            "de/tud/semester-contribution"
+          ],
+          "evidence_ids": [
+            "E44"
+          ]
+        },
+        "language_of_instruction": {
+          "classification": "informational_readiness",
+          "note": "Teaching language is information; it does not itself prove the applicant holds accepted language evidence.",
+          "review_ids": [],
+          "source_doc_ids": [
+            "de/tud/cs-msc/programme"
+          ],
+          "evidence_ids": []
+        }
+      }
+    },
+    "tum-m-sc-data-engineering-and-analytics": {
+      "university": "TUM",
+      "programme": "M.Sc. Data Engineering and Analytics",
+      "verification_tier": "second_pass",
+      "record_sha256": "f180521a23fe26d9181c96a015adfb8efe1ff46c6010a19522051795c4e19230",
+      "fields": {
+        "degree_requirement": {
+          "classification": "manual_review",
+          "note": "Degree, duration and subject equivalence require the published reference qualification or university assessment; compare entered facts separately.",
+          "review_ids": [
+            "R01"
+          ],
+          "source_doc_ids": [
+            "de/tum/dea-msc/department"
+          ],
+          "evidence_ids": []
+        },
+        "min_total_ects": {
+          "classification": "not_published",
+          "note": "Not published in the verified field; this does not establish absence or exemption.",
+          "review_ids": [],
+          "source_doc_ids": [],
+          "evidence_ids": []
+        },
+        "subject_credits": {
+          "classification": "not_published",
+          "note": "Not published in the verified field; this does not establish absence or exemption.",
+          "review_ids": [],
+          "source_doc_ids": [],
+          "evidence_ids": []
+        },
+        "min_grade_german_scale": {
+          "classification": "not_published",
+          "note": "Not published in the verified field; this does not establish absence or exemption.",
+          "review_ids": [],
+          "source_doc_ids": [],
+          "evidence_ids": []
+        },
+        "min_grade_original_scale": {
+          "classification": "not_published",
+          "note": "Not published in the verified field; this does not establish absence or exemption.",
+          "review_ids": [],
+          "source_doc_ids": [],
+          "evidence_ids": []
+        },
+        "english": {
+          "classification": "not_published",
+          "note": "Record is not_published; cached programme explicitly requires English proof. Accepted thresholds are not covered by the cached language page; mandatory source gap.",
+          "review_ids": [
+            "R14"
+          ],
+          "source_doc_ids": [],
+          "evidence_ids": [
+            "E35"
+          ]
+        },
+        "entrance_tests": {
+          "classification": "automatic",
+          "note": "Degree in Bangladesh/China/India/Iran/Pakistan: GRE QR>=164 AND AW>=4 OR annual qualifying CS GATE; use explicit scorecard qualification, not an invented cutoff.",
+          "review_ids": [
+            "R14"
+          ],
+          "source_doc_ids": [
+            "de/tum/dea-msc/department"
+          ],
+          "evidence_ids": []
+        },
+        "german": {
+          "classification": "not_published",
+          "note": "Not published in the verified field; this does not establish absence or exemption.",
+          "review_ids": [],
+          "source_doc_ids": [],
+          "evidence_ids": []
+        },
+        "work_experience": {
+          "classification": "not_published",
+          "note": "Not published in the verified field; this does not establish absence or exemption.",
+          "review_ids": [],
+          "source_doc_ids": [],
+          "evidence_ids": []
+        },
+        "aps_degree_countries": {
+          "classification": "informational_readiness",
+          "note": "Document readiness uses qualifying-degree country, not citizenship; missing proof is a readiness gap.",
+          "review_ids": [
+            "R16"
+          ],
+          "source_doc_ids": [
+            "de/tum/dea-msc/department"
+          ],
+          "evidence_ids": []
+        },
+        "application_route": {
+          "classification": "informational_readiness",
+          "note": "University application plus VPD for qualifying degree outside Germany; VPD alone is not an application.",
+          "review_ids": [
+            "R14",
+            "R16"
+          ],
+          "source_doc_ids": [
+            "de/tum/dea-msc/department"
+          ],
+          "evidence_ids": []
+        },
+        "deadlines": {
+          "classification": "informational_readiness",
+          "note": "Final winterMay31(Y)/summerNov30(Y-1); keep visa recommendation and period-specific assessment dates separate.",
+          "review_ids": [
+            "R11",
+            "R14"
+          ],
+          "source_doc_ids": [
+            "de/tum/dea-msc/programme"
+          ],
+          "evidence_ids": []
+        },
+        "selection_process": {
+          "classification": "manual_review",
+          "note": "University two-stage aptitude assessment/equivalence remains unresolved; programme interview narrative and department test detail need reconciliation.",
+          "review_ids": [
+            "R01",
+            "R14"
+          ],
+          "source_doc_ids": [
+            "de/tum/dea-msc/department"
+          ],
+          "evidence_ids": []
+        },
+        "required_documents": {
+          "classification": "informational_readiness",
+          "note": "Preserve degree-country VPD/GRE/APS/language conditions and optional training certificates; essay/motivation authorship is the student’s responsibility.",
+          "review_ids": [
+            "R14",
+            "R16"
+          ],
+          "source_doc_ids": [
+            "de/tum/dea-msc/department"
+          ],
+          "evidence_ids": []
+        },
+        "tuition_eur_per_semester_non_eu": {
+          "classification": "informational_readiness",
+          "note": "Cited EUR/semester amount; fee liability, exceptions and waivers require evidence; separate from visa proof.",
+          "review_ids": [
+            "R17"
+          ],
+          "source_doc_ids": [
+            "de/tum/dea-msc/programme"
+          ],
+          "evidence_ids": []
+        },
+        "semester_fee_eur": {
+          "classification": "informational_readiness",
+          "note": "Cited EUR/semester contribution valid only for its source period; separate from tuition/living costs.",
+          "review_ids": [
+            "R17"
+          ],
+          "source_doc_ids": [
+            "de/tum/dea-msc/programme"
+          ],
+          "evidence_ids": []
+        },
+        "language_of_instruction": {
+          "classification": "informational_readiness",
+          "note": "Teaching language is information; it does not itself prove the applicant holds accepted language evidence.",
+          "review_ids": [],
+          "source_doc_ids": [
+            "de/tum/dea-msc/department"
+          ],
+          "evidence_ids": []
+        }
+      }
+    },
+    "tum-m-sc-informatics": {
+      "university": "TUM",
+      "programme": "M.Sc. Informatics",
+      "verification_tier": "second_pass",
+      "record_sha256": "b67527c84ef26cfa5b7023fbc2c48784e0bf14b9d1bd94fd1b5d3f55aff1b2a4",
+      "fields": {
+        "degree_requirement": {
+          "classification": "manual_review",
+          "note": "Degree, duration and subject equivalence require the published reference qualification or university assessment; compare entered facts separately.",
+          "review_ids": [
+            "R01"
+          ],
+          "source_doc_ids": [
+            "de/tum/informatics-msc/department"
+          ],
+          "evidence_ids": []
+        },
+        "min_total_ects": {
+          "classification": "not_published",
+          "note": "Not published in the verified field; this does not establish absence or exemption.",
+          "review_ids": [],
+          "source_doc_ids": [],
+          "evidence_ids": []
+        },
+        "subject_credits": {
+          "classification": "not_published",
+          "note": "Not published in the verified field; this does not establish absence or exemption.",
+          "review_ids": [],
+          "source_doc_ids": [],
+          "evidence_ids": []
+        },
+        "min_grade_german_scale": {
+          "classification": "not_published",
+          "note": "Not published in the verified field; this does not establish absence or exemption.",
+          "review_ids": [],
+          "source_doc_ids": [],
+          "evidence_ids": []
+        },
+        "min_grade_original_scale": {
+          "classification": "not_published",
+          "note": "Not published in the verified field; this does not establish absence or exemption.",
+          "review_ids": [],
+          "source_doc_ids": [],
+          "evidence_ids": []
+        },
+        "english": {
+          "classification": "not_published",
+          "note": "Record is not_published; cached programme explicitly requires English proof. Accepted thresholds are not covered by the cached language page; mandatory source gap.",
+          "review_ids": [
+            "R14"
+          ],
+          "source_doc_ids": [],
+          "evidence_ids": [
+            "E36"
+          ]
+        },
+        "entrance_tests": {
+          "classification": "automatic",
+          "note": "Degree in Bangladesh/China/India/Iran/Pakistan: GRE QR>=164 AND AW>=4 OR annual qualifying CS GATE; use explicit scorecard qualification, not an invented cutoff.",
+          "review_ids": [
+            "R14"
+          ],
+          "source_doc_ids": [
+            "de/tum/informatics-msc/department"
+          ],
+          "evidence_ids": []
+        },
+        "german": {
+          "classification": "not_published",
+          "note": "Not published in the verified field; this does not establish absence or exemption.",
+          "review_ids": [],
+          "source_doc_ids": [],
+          "evidence_ids": []
+        },
+        "work_experience": {
+          "classification": "not_published",
+          "note": "Not published in the verified field; this does not establish absence or exemption.",
+          "review_ids": [],
+          "source_doc_ids": [],
+          "evidence_ids": []
+        },
+        "aps_degree_countries": {
+          "classification": "informational_readiness",
+          "note": "Document readiness uses qualifying-degree country, not citizenship; missing proof is a readiness gap.",
+          "review_ids": [
+            "R16"
+          ],
+          "source_doc_ids": [
+            "de/tum/informatics-msc/department"
+          ],
+          "evidence_ids": []
+        },
+        "application_route": {
+          "classification": "informational_readiness",
+          "note": "University application plus VPD for qualifying degree outside Germany; VPD alone is not an application.",
+          "review_ids": [
+            "R14",
+            "R16"
+          ],
+          "source_doc_ids": [
+            "de/tum/informatics-msc/department"
+          ],
+          "evidence_ids": []
+        },
+        "deadlines": {
+          "classification": "informational_readiness",
+          "note": "Final winterMay31(Y)/summerNov30(Y-1); keep visa recommendation and period-specific assessment dates separate.",
+          "review_ids": [
+            "R11",
+            "R14"
+          ],
+          "source_doc_ids": [
+            "de/tum/informatics-msc/programme"
+          ],
+          "evidence_ids": [
+            "E32",
+            "E33"
+          ]
+        },
+        "selection_process": {
+          "classification": "manual_review",
+          "note": "University two-stage aptitude assessment/equivalence remains unresolved; programme interview narrative and department test detail need reconciliation.",
+          "review_ids": [
+            "R01",
+            "R14"
+          ],
+          "source_doc_ids": [
+            "de/tum/informatics-msc/programme"
+          ],
+          "evidence_ids": [
+            "E34"
+          ]
+        },
+        "required_documents": {
+          "classification": "informational_readiness",
+          "note": "Preserve degree-country VPD/GRE/APS/language conditions and optional training certificates; essay/motivation authorship is the student’s responsibility.",
+          "review_ids": [
+            "R14",
+            "R16"
+          ],
+          "source_doc_ids": [
+            "de/tum/informatics-msc/department"
+          ],
+          "evidence_ids": []
+        },
+        "tuition_eur_per_semester_non_eu": {
+          "classification": "informational_readiness",
+          "note": "Cited EUR/semester amount; fee liability, exceptions and waivers require evidence; separate from visa proof.",
+          "review_ids": [
+            "R17"
+          ],
+          "source_doc_ids": [
+            "de/tum/informatics-msc/programme"
+          ],
+          "evidence_ids": []
+        },
+        "semester_fee_eur": {
+          "classification": "informational_readiness",
+          "note": "Cited EUR/semester contribution valid only for its source period; separate from tuition/living costs.",
+          "review_ids": [
+            "R17"
+          ],
+          "source_doc_ids": [
+            "de/tum/informatics-msc/programme"
+          ],
+          "evidence_ids": []
+        },
+        "language_of_instruction": {
+          "classification": "informational_readiness",
+          "note": "Teaching language is information; it does not itself prove the applicant holds accepted language evidence.",
+          "review_ids": [],
+          "source_doc_ids": [
+            "de/tum/informatics-msc/programme"
+          ],
+          "evidence_ids": []
+        }
+      }
+    },
+    "university-of-stuttgart-m-sc-computer-science": {
+      "university": "University of Stuttgart",
+      "programme": "M.Sc. Computer Science",
+      "verification_tier": "second_pass",
+      "record_sha256": "430b7664c0bc143e8a08fde7f0a1b9ae16e192bdbe8d1aa608a5201f5ef2695c",
+      "fields": {
+        "degree_requirement": {
+          "classification": "manual_review",
+          "note": "Degree, duration and subject equivalence require the published reference qualification or university assessment; compare entered facts separately.",
+          "review_ids": [
+            "R01"
+          ],
+          "source_doc_ids": [
+            "de/ustutt/cs-msc/programme"
+          ],
+          "evidence_ids": []
+        },
+        "min_total_ects": {
+          "classification": "not_published",
+          "note": "Not published in the verified field; this does not establish absence or exemption.",
+          "review_ids": [],
+          "source_doc_ids": [],
+          "evidence_ids": []
+        },
+        "subject_credits": {
+          "classification": "not_published",
+          "note": "Not published in the verified field; this does not establish absence or exemption.",
+          "review_ids": [],
+          "source_doc_ids": [],
+          "evidence_ids": []
+        },
+        "min_grade_german_scale": {
+          "classification": "not_published",
+          "note": "Not published in the verified field; this does not establish absence or exemption.",
+          "review_ids": [],
+          "source_doc_ids": [],
+          "evidence_ids": []
+        },
+        "min_grade_original_scale": {
+          "classification": "not_published",
+          "note": "Not published in the verified field; this does not establish absence or exemption.",
+          "review_ids": [],
+          "source_doc_ids": [],
+          "evidence_ids": []
+        },
+        "english": {
+          "classification": "automatic",
+          "note": "IELTS Academic7; TOEFL95 old/>=5 new; named Cambridge/Oxford/PTE76/telc results. Valid through deadline; MOI excluded; citizenship AND education exception with Quebec exclusion.",
+          "review_ids": [
+            "R15"
+          ],
+          "source_doc_ids": [
+            "de/ustutt/cs-msc/english-proofs"
+          ],
+          "evidence_ids": [
+            "E37",
+            "E38",
+            "E39"
+          ]
+        },
+        "entrance_tests": {
+          "classification": "not_published",
+          "note": "Not published in the verified field; this does not establish absence or exemption.",
+          "review_ids": [],
+          "source_doc_ids": [],
+          "evidence_ids": []
+        },
+        "german": {
+          "classification": "informational_readiness",
+          "note": "Source explicitly says no German proof is needed at the stated milestone; display exemption without counting a passed requirement.",
+          "review_ids": [],
+          "source_doc_ids": [
+            "de/ustutt/cs-msc/programme"
+          ],
+          "evidence_ids": []
+        },
+        "work_experience": {
+          "classification": "not_published",
+          "note": "Not published in the verified field; this does not establish absence or exemption.",
+          "review_ids": [],
+          "source_doc_ids": [],
+          "evidence_ids": []
+        },
+        "aps_degree_countries": {
+          "classification": "not_published",
+          "note": "Not published in the verified field; this does not establish absence or exemption.",
+          "review_ids": [
+            "R16"
+          ],
+          "source_doc_ids": [],
+          "evidence_ids": []
+        },
+        "application_route": {
+          "classification": "informational_readiness",
+          "note": "Show published route and conditional portal/VPD steps, with a separate readiness summary.",
+          "review_ids": [
+            "R16"
+          ],
+          "source_doc_ids": [
+            "de/ustutt/cs-msc/department"
+          ],
+          "evidence_ids": []
+        },
+        "deadlines": {
+          "classification": "informational_readiness",
+          "note": "WinterJanuary15(Y); summerJuly15(Y-1). These early final dates are not the usual July/January convention.",
+          "review_ids": [
+            "R11"
+          ],
+          "source_doc_ids": [
+            "de/ustutt/cs-msc/programme"
+          ],
+          "evidence_ids": []
+        },
+        "selection_process": {
+          "classification": "manual_review",
+          "note": "Unresolved qualification gaps may trigger interview/exam or committee-approved conditions; do not infer an outcome.",
+          "review_ids": [
+            "R01",
+            "R15"
+          ],
+          "source_doc_ids": [
+            "de/ustutt/cs-msc/department"
+          ],
+          "evidence_ids": []
+        },
+        "required_documents": {
+          "classification": "not_published",
+          "note": "Not published in the verified field; this does not establish absence or exemption.",
+          "review_ids": [
+            "R16"
+          ],
+          "source_doc_ids": [],
+          "evidence_ids": []
+        },
+        "tuition_eur_per_semester_non_eu": {
+          "classification": "informational_readiness",
+          "note": "Cited EUR/semester amount; fee liability, exceptions and waivers require evidence; separate from visa proof.",
+          "review_ids": [
+            "R17"
+          ],
+          "source_doc_ids": [
+            "de/ustutt/tuition-fees"
+          ],
+          "evidence_ids": []
+        },
+        "semester_fee_eur": {
+          "classification": "informational_readiness",
+          "note": "Cited EUR/semester contribution valid only for its source period; separate from tuition/living costs.",
+          "review_ids": [
+            "R17"
+          ],
+          "source_doc_ids": [
+            "de/ustutt/tuition-fees"
+          ],
+          "evidence_ids": []
+        },
+        "language_of_instruction": {
+          "classification": "informational_readiness",
+          "note": "Teaching language is information; it does not itself prove the applicant holds accepted language evidence.",
+          "review_ids": [],
+          "source_doc_ids": [
+            "de/ustutt/cs-msc/department"
+          ],
+          "evidence_ids": []
+        }
+      }
+    }
+  }
+}

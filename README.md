@@ -78,6 +78,8 @@ flowchart LR
 
 Eligibility rules engine (Phase 6; Phase 4 baseline complete) → retrieval upgrades kept only if the numbers improve → small tool-using agent → streaming, guardrails and rate limits → UI → free public deployment → MCP server → UI polish. Details and the "done when" check for each phase are in [docs/PROJECT_PLAN.md](docs/PROJECT_PLAN.md).
 
+The [planning index](docs/PLANNING_INDEX.md) collects the current specification, decisions and evidence. The [Phase 6 implementation plan](docs/PHASE_6_IMPLEMENTATION_PLAN.md) defines the next runnable increments and the maintainer's review and learning tasks.
+
 ## Verification
 
 Requirement records are the product data, so how each one was verified is recorded in the record itself (`tier` in `data/verified/<slug>.json`):

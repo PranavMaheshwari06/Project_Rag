@@ -39,6 +39,9 @@ eval:
 	$(PY) scripts/validate_gold.py
 	$(PY) scripts/run_eval.py --apply-threshold
 
+validate-phase6-inventory:
+	$(PY) scripts/validate_phase6_inventory.py $(ARGS)
+
 test:
 	$(PY) -m pytest -q
 
@@ -51,4 +54,4 @@ fmt:
 up:
 	docker compose up --build
 
-.PHONY: venv install crawl ingest index extract review eval test run fmt up
+.PHONY: venv install crawl ingest index extract review eval validate-phase6-inventory test run fmt up

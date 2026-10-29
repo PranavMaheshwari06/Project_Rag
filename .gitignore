@@ -30,6 +30,7 @@ frontend/dist/
 # local tooling
 .claude/
 .archify/
+graphify-out/
 CLAUDE.md
 STATUS.md
 REVIEW_AND_FINALIZATION_PLAN.md

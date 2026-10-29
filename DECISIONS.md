@@ -291,3 +291,13 @@ The maintainer accepted all 104 retained model-authored gold items and four targ
 The selected score threshold is `0.13340958034137707`. It refuses 4/14 refusal/coverage probes while falsely refusing 3/90 answerable questions. The constraint is at most 5% false refusals; ties prefer fewer false refusals, then a lower threshold. These are calibration-set results, not held-out estimates. Actual answer refusals are reported separately in the calibration artifact.
 
 The benchmark disables live LLM calls even when a key exists, so the baseline spends no free-tier quota. It reports extractive token-overlap answer metrics, four retrieval modes overall and by kind, the human-tier extraction headline, and the original audit scores. The threshold sweep reuses scores; timings use real searches after model warmup. Input hashes and per-item diagnostics are committed for comparison. Personal rewrites of these entries remain a maintainer task and do not gate Phase 6.
+
+## 2026-10-27 — Phase 6 Step 0: separate source verification from rule interpretation
+
+Draft for the maintainer to rewrite; semantic rule acceptance is pending.
+
+Phase 6 starts on `phase-6-eligibility-engine` from `b85ae75`, stacked on the still-unmerged Phase 4 work. Its first deliverable is a 13-programme, 17-field inventory rather than eligibility verdicts. Every field has a proposed automation boundary, original source references and any relevant pending interpretation. Forty-four supplemental cached excerpts expose exceptional branches and missed prerequisites without modifying the Phase 4 records or promoting verification tiers. Hashes bind the inventory to its records, cached sources and 51 preserved baseline inputs.
+
+Why: extracting the right words and deciding how conditions combine are different tasks. KIT alternatives, RWTH exemption bases and conditional Darmstadt exams can change a decision even when each quoted value is correct. The cost is a separate semantic review and explicit unknowns for unresolved evidence, including KIT CDS overlap policy and incomplete language-proof coverage. A successful quote/hash check proves consistency with a snapshot, not current university policy or correctness of the interpretation.
+
+The five maintainer-authored profiles and expected labels remain blank until authored independently; the model must not supply them and claim human provenance. The LLM extracts information, while deterministic code will compare confirmed facts under reviewed rules. No engine accuracy or completed Phase 6 claim follows from this inventory.
