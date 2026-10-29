@@ -230,3 +230,30 @@ def test_one_criterion_per_top_level_rule():
         Profile(total_credits="120"), ruleset((group("any_of", FAIL, PASS), {}))
     )
     assert len(rep.criteria) == 1
+
+
+# --- numeric matches, grade share, German level --------------------------------
+def test_in_matches_numbers_by_value():
+    four_point = {"type": "in", "fact": "grade.best", "values": ["4", "100"]}
+    g = {"obtained": "3.2", "passing": "2"}
+    assert ev(four_point, grade={**g, "best": "4.0"}).verdict == "meets"
+    assert ev(four_point, grade={**g, "best": "10"}).verdict == "does_not_meet"
+    assert ev({"type": "in", "fact": "gate.year", "values": ["2026"]}, gate={"year": 2026}).verdict == "meets"
+    # strings that are not numbers keep the case-insensitive match
+    assert ev({"type": "in", "fact": "gate.paper", "values": ["CS"]}, gate={"paper": "cs"}).verdict == "meets"
+
+
+def test_percent_of_best():
+    g = {"obtained": "3.0", "best": "4", "passing": "2"}
+    assert ev(mn("grade.percent_of_best", "75"), grade=g).margin == D("0")
+    assert ev(mn("grade.percent_of_best", "75"), grade={**g, "obtained": "2.99"}).verdict == "does_not_meet"
+    assert ev(mn("grade.percent_of_best", "75")).verdict == "unknown"  # no grade given
+
+
+def test_german_level_is_cefr():
+    c1 = {"type": "in", "fact": "german_level", "values": ["C1", "C2"]}
+    assert ev(c1, german_level="C2").verdict == "meets"
+    assert ev(c1, german_level="B2").verdict == "does_not_meet"
+    assert ev(c1).verdict == "unknown"
+    with pytest.raises(ValueError):
+        Profile(german_level="fluent")

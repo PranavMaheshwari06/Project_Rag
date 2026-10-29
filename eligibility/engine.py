@@ -5,7 +5,7 @@ Margin: positive is favourable (observed - minimum, or maximum - observed). A
 strict bound keeps its strictness at a zero margin."""
 
 from datetime import date
-from decimal import Decimal
+from decimal import Decimal, InvalidOperation
 
 from core.config import get_settings
 from eligibility.groups import CountryGroups, load_groups
@@ -76,7 +76,17 @@ def _bound(check: Minimum | Maximum, profile: Profile) -> Result:
 
 
 def _norm(v: object) -> object:
-    return v.casefold() if isinstance(v, str) else v
+    """Numbers compare by value ("4" equals 4.0), other strings case-insensitively."""
+    if isinstance(v, bool):
+        return v
+    if isinstance(v, (int, Decimal)):
+        return Decimal(v)
+    if isinstance(v, str):
+        try:
+            return Decimal(v)
+        except InvalidOperation:
+            return v.casefold()
+    return v
 
 
 def default_groups() -> CountryGroups:

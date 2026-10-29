@@ -7,6 +7,7 @@ fields: rules key on one of them and must never substitute another."""
 
 from datetime import date
 from decimal import Decimal
+from typing import Literal
 
 from pydantic import BaseModel, ConfigDict, Field
 
@@ -24,6 +25,11 @@ class Grade(Strict):
     best: Decimal
     passing: Decimal
     class_rank_percentile: Decimal | None = None  # 10 = top 10% of the class
+
+    @property
+    def percent_of_best(self) -> Decimal:
+        """obtained / best * 100. Only meaningful next to a check on `best`."""
+        return self.obtained / self.best * 100
 
 
 class LanguageEvidence(Strict):
@@ -72,5 +78,6 @@ class Profile(Strict):
     interview_passed: bool | None = None  # the target's aptitude interview, once taken (invited != passed)
     gre: Gre | None = None
     gate: Gate | None = None
+    german_level: Literal["A1", "A2", "B1", "B2", "C1", "C2"] | None = None  # CEFR, as certified
     documents: list[str] | None = None  # document keys the student already has, e.g. "aps_certificate"
     funds_eur: Decimal | None = Field(default=None, ge=0)
