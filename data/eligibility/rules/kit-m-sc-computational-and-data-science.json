@@ -1,0 +1,376 @@
+{
+  "schema_version": "rules-v1",
+  "slug": "kit-m-sc-computational-and-data-science",
+  "record_sha256": "3d726ca23a10879cfea8b8e0803ecaf52103a97d1e7239acd1f97dc4218faab2",
+  "rules": [
+    {
+      "id": "degree",
+      "label": "Bachelor's (or equivalent) in Computational and Data Science, Mathematics, Computer Science or a listed science, engineering or economics subject",
+      "check": {
+        "type": "university_review",
+        "note": "KIT decides whether your degree is one of the listed subjects or equivalent, and that it ran for a standard period of at least three years (R01)."
+      },
+      "citations": [
+        {
+          "doc_id": "de/kit/cds-msc/programme",
+          "quote": "Bachelorabschluss ein bestandener Bachelorabschluss (oder mindestens gleichwertiger Abschluss) im Studiengang Computational and Data Science, Mathematik, Informatik (oder einem Studiengang mit im Wesentlichen gleichem Inhalt)"
+        }
+      ],
+      "reviewed_by": "pending"
+    },
+    {
+      "id": "degree_ects",
+      "label": "At least 180 ECTS credits in the first degree",
+      "check": {
+        "type": "all_of",
+        "children": [
+          {
+            "type": "in",
+            "fact": "credit_unit",
+            "values": [
+              "ECTS"
+            ]
+          },
+          {
+            "type": "min",
+            "fact": "total_credits",
+            "value": "180"
+          }
+        ]
+      },
+      "citations": [
+        {
+          "doc_id": "de/kit/cds-msc/programme",
+          "quote": "Das Studium muss im Rahmen einer mindestens dreijährigen Regelstudienzeit und mit einer Mindestanzahl von 180 ECTS-Punkten absolviert worden sein."
+        }
+      ],
+      "reviewed_by": "pending"
+    },
+    {
+      "id": "credit_minimums",
+      "label": "Credits: basic maths 20, thesis 6, and 40 in one of three subject areas plus 12 in each of the other two (up to 12 missing credits can be admitted on conditions)",
+      "check": {
+        "type": "any_of",
+        "children": [
+          {
+            "type": "all_of",
+            "children": [
+              {
+                "type": "min",
+                "fact": "subject_credits.basic_mathematics",
+                "value": "20"
+              },
+              {
+                "type": "min",
+                "fact": "subject_credits.bachelor_thesis",
+                "value": "6"
+              },
+              {
+                "type": "any_of",
+                "children": [
+                  {
+                    "type": "all_of",
+                    "children": [
+                      {
+                        "type": "min",
+                        "fact": "subject_credits.applied_mathematics",
+                        "value": "40"
+                      },
+                      {
+                        "type": "min",
+                        "fact": "subject_credits.computer_science",
+                        "value": "12"
+                      },
+                      {
+                        "type": "min",
+                        "fact": "subject_credits.science_engineering_economics",
+                        "value": "12"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "all_of",
+                    "children": [
+                      {
+                        "type": "min",
+                        "fact": "subject_credits.computer_science",
+                        "value": "40"
+                      },
+                      {
+                        "type": "min",
+                        "fact": "subject_credits.applied_mathematics",
+                        "value": "12"
+                      },
+                      {
+                        "type": "min",
+                        "fact": "subject_credits.science_engineering_economics",
+                        "value": "12"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "all_of",
+                    "children": [
+                      {
+                        "type": "min",
+                        "fact": "subject_credits.science_engineering_economics",
+                        "value": "40"
+                      },
+                      {
+                        "type": "min",
+                        "fact": "subject_credits.applied_mathematics",
+                        "value": "12"
+                      },
+                      {
+                        "type": "min",
+                        "fact": "subject_credits.computer_science",
+                        "value": "12"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "all_of",
+            "children": [
+              {
+                "type": "min",
+                "fact": "subject_credits.basic_mathematics",
+                "value": "8"
+              },
+              {
+                "type": "any_of",
+                "children": [
+                  {
+                    "type": "min",
+                    "fact": "subject_credits.applied_mathematics",
+                    "value": "28"
+                  },
+                  {
+                    "type": "min",
+                    "fact": "subject_credits.computer_science",
+                    "value": "28"
+                  },
+                  {
+                    "type": "min",
+                    "fact": "subject_credits.science_engineering_economics",
+                    "value": "28"
+                  }
+                ]
+              },
+              {
+                "type": "university_review",
+                "note": "Up to 12 missing credits in total can lead to admission on conditions, to be made up in the first three semesters. KIT's admission committee decides case by case; there is no entitlement."
+              }
+            ]
+          }
+        ]
+      },
+      "citations": [
+        {
+          "doc_id": "de/kit/cds-msc/programme",
+          "quote": "Mindestkenntnisse und Mindestleistungen in den Bereichen Grundlagen der Mathematik (Lineare Algebra und Analysis oder Höhere Mathematik) 20 LP Mindestens 40 LP aus einem und mindestens 12 LP aus den beiden verbleibenden Gebieten: Angewandte Mathematik oder Mathematik für Computational and Data Science Informatik Natur- oder Ingenieur- oder Wirtschaftswissenschaften"
+        },
+        {
+          "doc_id": "de/kit/cds-msc/programme",
+          "quote": "eine Bachelorarbeit (oder eine vergleichbare selbstständige wissenschaftliche Arbeit) im Umfang von mindestens 6 LP"
+        },
+        {
+          "doc_id": "de/kit/cds-msc/programme",
+          "quote": "Fehlen Mindestleistungen im Umfang von bis zu 12 LP, kann die Zugangskommission eine Zulassung unter Vorbehalt aussprechen."
+        },
+        {
+          "doc_id": "de/kit/cds-msc/programme",
+          "quote": "Es besteht kein Anspruch auf eine Zulassung unter Auflagen. Die Entscheidung liegt im Ermessen der Zugangskommission."
+        }
+      ],
+      "reviewed_by": "pending"
+    },
+    {
+      "id": "credit_counting",
+      "label": "How your courses are counted towards the credit areas",
+      "check": {
+        "type": "university_review",
+        "note": "The page does not say whether one course may count towards both basic maths and a subject area, or towards the thesis, nor which area a module belongs to. Credits per area are your own allocation; KIT decides the official count."
+      },
+      "citations": [
+        {
+          "doc_id": "de/kit/cds-msc/programme",
+          "quote": "Mindestens 40 LP aus einem und mindestens 12 LP aus den beiden verbleibenden Gebieten:"
+        }
+      ],
+      "reviewed_by": "pending"
+    },
+    {
+      "id": "english",
+      "label": "English proof: a listed test, an English-taught degree, or a qualifying school certificate",
+      "check": {
+        "type": "any_of",
+        "children": [
+          {
+            "type": "min",
+            "fact": "english_instruction_share",
+            "value": "100"
+          },
+          {
+            "type": "min",
+            "fact": "language.TOEFL iBT.overall",
+            "value": "90"
+          },
+          {
+            "type": "all_of",
+            "children": [
+              {
+                "type": "min",
+                "fact": "language.IELTS.overall",
+                "value": "6.5"
+              },
+              {
+                "type": "min",
+                "fact": "language.IELTS.components.Listening",
+                "value": "5.5"
+              },
+              {
+                "type": "min",
+                "fact": "language.IELTS.components.Reading",
+                "value": "5.5"
+              },
+              {
+                "type": "min",
+                "fact": "language.IELTS.components.Speaking",
+                "value": "5.5"
+              },
+              {
+                "type": "min",
+                "fact": "language.IELTS.components.Writing",
+                "value": "5.5"
+              }
+            ]
+          },
+          {
+            "type": "all_of",
+            "children": [
+              {
+                "type": "min",
+                "fact": "language.TOEIC.components.Listening",
+                "value": "400"
+              },
+              {
+                "type": "min",
+                "fact": "language.TOEIC.components.Reading",
+                "value": "385"
+              },
+              {
+                "type": "min",
+                "fact": "language.TOEIC.components.Speaking",
+                "value": "160"
+              },
+              {
+                "type": "min",
+                "fact": "language.TOEIC.components.Writing",
+                "value": "150"
+              }
+            ]
+          },
+          {
+            "type": "all_of",
+            "children": [
+              {
+                "type": "min",
+                "fact": "language.PTE Academic.overall",
+                "value": "58.5"
+              },
+              {
+                "type": "min",
+                "fact": "language.PTE Academic.components.Listening",
+                "value": "56.8"
+              },
+              {
+                "type": "min",
+                "fact": "language.PTE Academic.components.Reading",
+                "value": "60.6"
+              },
+              {
+                "type": "min",
+                "fact": "language.PTE Academic.components.Speaking",
+                "value": "53.5"
+              },
+              {
+                "type": "min",
+                "fact": "language.PTE Academic.components.Writing",
+                "value": "74.1"
+              }
+            ]
+          },
+          {
+            "type": "in",
+            "fact": "language.CAE.grade",
+            "values": [
+              "A",
+              "B",
+              "C",
+              "pass"
+            ]
+          },
+          {
+            "type": "in",
+            "fact": "language.CPE.grade",
+            "values": [
+              "A",
+              "B",
+              "C",
+              "pass"
+            ]
+          },
+          {
+            "type": "in",
+            "fact": "language.FCE.grade",
+            "values": [
+              "A",
+              "B",
+              "C",
+              "pass"
+            ]
+          },
+          {
+            "type": "university_review",
+            "note": "Other KIT-accepted proof is not modelled and KIT decides: a university entrance qualification that certifies English at CEFR B2 (or five years of English with at least German grade 4), and UNIcert level II. You may also be admitted on provisional proof if the B2 certificate follows by the end of enrolment."
+          }
+        ]
+      },
+      "citations": [
+        {
+          "doc_id": "de/kit/cds-msc/programme",
+          "quote": "a university degree with English as the sole language of instruction and examination in the completed degree program"
+        },
+        {
+          "doc_id": "de/kit/cds-msc/programme",
+          "quote": "TOEFL iBT (internet-based) with at least 90 points"
+        },
+        {
+          "doc_id": "de/kit/cds-msc/programme",
+          "quote": "IELTS with an overall score of at least 6.5, no section below 5.5"
+        },
+        {
+          "doc_id": "de/kit/cds-msc/programme",
+          "quote": "TOEIC with at least 400 points in Listening, 385 in Reading, 160 in Speaking, 150 in Writing"
+        },
+        {
+          "doc_id": "de/kit/cds-msc/programme",
+          "quote": "Pearson PTE Academic with at least 58.5 points overall and at least 56.8 in Listening, 60.6 in Reading, 53.5 in Speaking, 74.1 in Writing"
+        },
+        {
+          "doc_id": "de/kit/cds-msc/programme",
+          "quote": "Cambridge Certificate C1 Advanced (CAE)"
+        },
+        {
+          "doc_id": "de/kit/cds-msc/programme",
+          "quote": "if it certifies English language proficiency at CEFR level B2 or higher"
+        }
+      ],
+      "reviewed_by": "pending"
+    }
+  ]
+}
