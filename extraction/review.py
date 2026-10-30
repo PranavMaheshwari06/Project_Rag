@@ -73,7 +73,8 @@ def flags(rec: ProgramRequirements, docs: dict[str, str]) -> dict[str, list[str]
         f = getattr(rec, name)
         msgs = []
         if f.status == "stated":
-            missing = _numbers(json.dumps(dump[name]["value"], ensure_ascii=False)) - _numbers(f.quote)
+            evidence = " ".join([f.quote] + [c.quote for c in f.supporting_citations])
+            missing = _numbers(json.dumps(dump[name]["value"], ensure_ascii=False)) - _numbers(evidence)
             if missing:
                 msgs.append(f"value has numbers that are not in the quote: {', '.join(f'{n:g}' for n in sorted(missing))}")
         else:
@@ -101,7 +102,8 @@ def checks(slug: str, docs: dict[str, str]) -> dict[str, dict]:
         if c.get("value") is not None:
             try:
                 cited = ProgramRequirements.model_fields[name].annotation.model_validate(
-                    {"status": "stated", "value": c["value"], "quote": c.get("quote"), "doc_id": c.get("doc_id")})
+                    {"status": "stated", "value": c["value"], "quote": c.get("quote"), "doc_id": c.get("doc_id"),
+                     "supporting_citations": c.get("supporting_citations", [])})
                 rec = ProgramRequirements(university="", programme="", source_doc_ids=[], **{name: cited})
                 bad = check_quotes(rec, docs, get_settings().extraction.min_quote_words)
                 c["value"] = cited.model_dump(mode="json")["value"]  # normalised, e.g. test-name aliases

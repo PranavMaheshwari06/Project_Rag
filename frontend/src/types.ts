@@ -46,6 +46,7 @@ export interface ConfigMetrics {
   ndcg: Record<string, number>
   latency_p50_ms: number
   latency_p95_ms: number
+  query_count?: number
 }
 
 export interface AnswerMetrics {
@@ -53,6 +54,8 @@ export interface AnswerMetrics {
   unsupported_claim_rate: number
   refusal_rate: number
   method: string
+  generation_mode?: string
+  refusal_confusion?: Record<string, number | null>
 }
 
 export interface BenchmarkResult {
@@ -63,4 +66,26 @@ export interface BenchmarkResult {
   settings_snapshot: Record<string, string | number>
   configs: ConfigMetrics[]
   answers: AnswerMetrics | null
+  total_gold_size?: number
+  gold_counts?: Record<string, number>
+  reviewer_counts?: Record<string, number>
+  retrieval_by_kind?: Record<string, ConfigMetrics[]>
+  extraction?: Record<string, {
+    programmes: number
+    fields: number
+    draft_accuracy: number | null
+    checker_precision: number | null
+    checker_recall: number | null
+  }>
+  refusal_calibration?: {
+    status: string
+    selected_threshold: number
+    method: string
+    selected: {
+      true_refusals: number
+      refusal_count: number
+      false_refusals: number
+      answerable_count: number
+    }
+  }
 }

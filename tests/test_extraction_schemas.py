@@ -29,3 +29,23 @@ def test_test_name_spellings_are_normalised():
     assert EntranceTest(test="Indian GATE test", requirement="one_of").test == "GATE"
     assert LanguageTest(test="TOEFL iBt", min_score="88").test == "TOEFL iBT"
     assert LanguageTest(test="PTE Academic", min_score="60").test == "PTE Academic"
+
+
+def test_conditional_exam_and_degree_origin_round_trip():
+    from extraction.schemas import Deadline, EntranceTest
+
+    exam = EntranceTest(test="Entrance Exam", requirement="required", condition="Only if documents are insufficient")
+    deadline = Deadline(intake="winter", applicant_group="non_eu", date="31 May", degree_origin="outside_germany")
+    assert EntranceTest.model_validate_json(exam.model_dump_json()).condition == exam.condition
+    assert deadline.degree_origin == "outside_germany"
+    assert Deadline(intake="winter", applicant_group="all", date="15 July").degree_origin is None
+    with pytest.raises(ValidationError):
+        Deadline(intake="winter", applicant_group="all", date="15 July", degree_origin="EU")
+
+
+def test_supporting_citations_require_stated_field_and_complete_citation():
+    with pytest.raises(ValidationError):
+        Cited[str](supporting_citations=[{"quote": "a source", "doc_id": "x"}])
+    with pytest.raises(ValidationError):
+        Cited[str](status="stated", value="x", quote="a source", doc_id="x",
+                   supporting_citations=[{"quote": "", "doc_id": "y"}])

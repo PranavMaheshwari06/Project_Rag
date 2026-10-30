@@ -28,7 +28,17 @@ def _outcome(draft: dict, final: dict) -> str:
         return "dropped"
     if draft["status"] == "not_published":
         return "added"
-    same = all(draft[k] == final[k] for k in ("value", "quote", "doc_id"))  # a corrected citation is still a correction
+    def normalize(value):
+        # Optional schema additions must not turn old, unchanged records into edits.
+        if isinstance(value, dict):
+            return {k: normalize(v) for k, v in value.items()
+                    if not (k in {"condition", "degree_origin"} and v is None)
+                    and not (k == "supporting_citations" and not v)}
+        if isinstance(value, list):
+            return [normalize(v) for v in value]
+        return value
+
+    same = normalize(draft) == normalize(final)  # supporting citations count too
     return "unchanged" if same else "edited"
 
 

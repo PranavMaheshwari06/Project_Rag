@@ -125,6 +125,7 @@ function render(d) {
     status.value = f.status;
     const value = document.createElement('textarea'); value.value = f.value === null ? '' : JSON.stringify(f.value, null, 1);
     const quote = document.createElement('textarea'); quote.value = f.quote || '';
+    const supporting = document.createElement('textarea'); supporting.value = JSON.stringify(f.supporting_citations || [], null, 1);
     const doc = document.createElement('select');
     for (const id of Object.keys(docs)) { const o = document.createElement('option'); o.value = id; o.textContent = id; doc.append(o); }
     doc.value = f.doc_id || Object.keys(docs)[0];
@@ -132,6 +133,7 @@ function render(d) {
     show.onclick = () => { showDoc(doc.value, quotePattern(quote.value)); };
     const lab = (t, el) => { const l = document.createElement('label'); l.textContent = t; div.append(l, el); };
     lab('status', status); lab('value (JSON)', value); lab('quote (copied from the page)', quote); lab('page', doc); div.append(show);
+    lab('additional citations (JSON: quote and doc_id)', supporting);
     for (const m of d.flags[name] || []) { const w = document.createElement('div'); w.className = 'warn'; w.textContent = '! ' + m; div.append(w); }
     const c = d.checks[name];
     if (c) {
@@ -151,6 +153,7 @@ function render(d) {
         sug.textContent = c.value === null ? 'Suggests: not_published' : `Suggests: ${JSON.stringify(c.value)} | quote: "${c.quote}" (${c.doc_id})`;
         const use = document.createElement('button'); use.textContent = 'use suggestion';
         use.onclick = () => {
+          supporting.value = JSON.stringify(c.value === null ? [] : (c.supporting_citations || []), null, 1);
           if (c.value === null) { status.value = 'not_published'; value.value = ''; quote.value = ''; }
           else { status.value = 'stated'; value.value = JSON.stringify(c.value, null, 1); quote.value = c.quote; doc.value = c.doc_id; showDoc(c.doc_id, quotePattern(c.quote)); }
         };
@@ -158,7 +161,7 @@ function render(d) {
       }
     }
     div._get = () => status.value === 'stated'
-      ? {status: 'stated', value: JSON.parse(value.value), quote: quote.value.trim(), doc_id: doc.value}
+      ? {status: 'stated', value: JSON.parse(value.value), quote: quote.value.trim(), doc_id: doc.value, supporting_citations: JSON.parse(supporting.value)}
       : {status: 'not_published', value: null, quote: null, doc_id: null};
     div.dataset.name = name; root.append(div);
   }

@@ -1,5 +1,17 @@
 # Gold set review (model pass)
 
+Human acceptance recorded 2026-10-27: the maintainer accepted all 104 retained
+items and the following targeted updates. Authorship remains `model`; the
+current dataset records `reviewed_by: human`. The historical model pass below
+is preserved, including its uncertainty notes; acceptance does not make the
+review independent or remove the known label ambiguity.
+
+- b09 / c19: specify a qualifying university degree obtained outside Germany.
+- b10: ask for winter 2026/27 regular on-campus fees; label the current
+  contribution source (EUR 361), replacing the approximate FAQ estimate.
+- c05: include both the department page and January 2026 accepted-proof PDF;
+  retain earlier TOEFL 95 / IELTS 7.0 and add the PDF's 2026 TOEFL threshold.
+
 Reviewed: `evaluation/datasets/gold_qa.jsonl` against the page text in `data/processed/chunks.jsonl`. Local files only. Every item was checked for the right label, a supported hint, no page echo, the right kind and valid labels. Refusal topics were searched across all 72 docs.
 
 ## Summary

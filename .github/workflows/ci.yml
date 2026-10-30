@@ -10,7 +10,11 @@ jobs:
       - run: pip install -e '.[dev]'
       - run: ruff check .
       # pure-logic tests only; model-backed tests download ~1.2GB
-      - run: pytest -q tests/test_rrf.py tests/test_chunker.py tests/test_citation_mapper.py
+      - run: >-
+          pytest -q tests/test_rrf.py tests/test_chunker.py tests/test_citation_mapper.py
+          tests/test_parser.py tests/test_extraction.py tests/test_extraction_schemas.py
+          tests/test_extraction_eval.py tests/test_review.py tests/test_validate_gold.py
+          tests/test_refusal_eval.py tests/test_eval_runner.py
   frontend:
     runs-on: ubuntu-latest
     defaults: { run: { working-directory: frontend } }

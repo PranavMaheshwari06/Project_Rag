@@ -1,5 +1,5 @@
 {
-  "verified_at": "2026-10-22T23:41:39+00:00",
+  "verified_at": "2026-10-27T20:31:31+00:00",
   "tier": "second_pass",
   "draft_model": "gemini-3.8-flash",
   "record": {
@@ -13,31 +13,36 @@
       "status": "stated",
       "value": "Bachelor's degree from a German university (at least 180 CP) or an equivalent qualification from a foreign university in computer science, informatics or a related field",
       "quote": "Students seeking admission to the Master’s programme shall have a Bachelor’s degree from a German university (at least 180 CP) or an equivalent qualification from a foreign university in computer science, informatics or a related field:",
-      "doc_id": "de/saarland/masters-application-guide"
+      "doc_id": "de/saarland/masters-application-guide",
+      "supporting_citations": []
     },
     "min_total_ects": {
       "status": "stated",
       "value": 180,
       "quote": "Students seeking admission to the Master’s programme shall have a Bachelor’s degree from a German university (at least 180 CP) or an equivalent qualification from a foreign university in computer science, informatics or a related field:",
-      "doc_id": "de/saarland/masters-application-guide"
+      "doc_id": "de/saarland/masters-application-guide",
+      "supporting_citations": []
     },
     "subject_credits": {
       "status": "not_published",
       "value": null,
       "quote": null,
-      "doc_id": null
+      "doc_id": null,
+      "supporting_citations": []
     },
     "min_grade_german_scale": {
       "status": "not_published",
       "value": null,
       "quote": null,
-      "doc_id": null
+      "doc_id": null,
+      "supporting_citations": []
     },
     "min_grade_original_scale": {
       "status": "stated",
       "value": "cumulative undergraduate grade point average (CGPA) of 75% or 3.00 GPA on a 4 point scale and ranking in the top 10% of the graduating class",
       "quote": "Minimal prerequisite is a cumulative undergraduate grade point average (CGPA) of 75% or 3.00 GPA on a 4 point scale and ranking in the top 10% of the graduating class.",
-      "doc_id": "de/saarland/masters-application-guide"
+      "doc_id": "de/saarland/masters-application-guide",
+      "supporting_citations": []
     },
     "english": {
       "status": "stated",
@@ -64,7 +69,8 @@
         }
       ],
       "quote": "The following certificates will be accepted: _ IELTS (academic test): min. 7.0 out of 9 _ TOEFL (internet based): min. 95 out of 120 (2026: 5 out of 6) _ TOEFL (paper based): min. 600 out of 677 (2026: 5 out of 6) _ Cambridge English Certificate: C1 Advanced (CAE) or C2 Proficiency (CPE) _ PTE Academic: min. 76",
-      "doc_id": "de/saarland/masters-application-guide"
+      "doc_id": "de/saarland/masters-application-guide",
+      "supporting_citations": []
     },
     "entrance_tests": {
       "status": "stated",
@@ -78,7 +84,8 @@
             "European Higher Education Area (EHEA) region",
             "Switzerland",
             "UK"
-          ]
+          ],
+          "condition": null
         },
         {
           "test": "GATE",
@@ -89,11 +96,13 @@
             "European Higher Education Area (EHEA) region",
             "Switzerland",
             "UK"
-          ]
+          ],
+          "condition": null
         }
       ],
       "quote": "Applicants for Computer Science, Cybersecurity, DSAI, Embedded Systems and Visual Computing who have no degree certificate earned within the European Higher Education Area (EHEA) region, Switzerland, or the UK are required to upload the test result from the GRE General Test or the Indian GATE test .",
-      "doc_id": "de/saarland/masters-application-guide"
+      "doc_id": "de/saarland/masters-application-guide",
+      "supporting_citations": []
     },
     "german": {
       "status": "stated",
@@ -102,13 +111,15 @@
         "needed_by": "admission"
       },
       "quote": "Knowledge of proficiency in German is not required.",
-      "doc_id": "de/saarland/masters-application-guide"
+      "doc_id": "de/saarland/masters-application-guide",
+      "supporting_citations": []
     },
     "work_experience": {
       "status": "not_published",
       "value": null,
       "quote": null,
-      "doc_id": null
+      "doc_id": null,
+      "supporting_citations": []
     },
     "aps_degree_countries": {
       "status": "stated",
@@ -118,13 +129,15 @@
         "Vietnam"
       ],
       "quote": "Applicants who have obtained their university degree in China, India or Vietnam are required to submit the original ( digitally signed ) APS Certificate issued by the Academic Evaluation Center (Akademische Prüfstelle) in the corresponding country with the application.",
-      "doc_id": "de/saarland/masters-application-guide"
+      "doc_id": "de/saarland/masters-application-guide",
+      "supporting_citations": []
     },
     "application_route": {
       "status": "stated",
       "value": "direct",
       "quote": "Applications should be submitted via the online application portal managed by the Department of Computer Science where you'll find further information about application and admission procedures.",
-      "doc_id": "de/saarland/cs-msc/programme"
+      "doc_id": "de/saarland/cs-msc/programme",
+      "supporting_citations": []
     },
     "deadlines": {
       "status": "stated",
@@ -133,66 +146,93 @@
           "intake": "winter",
           "applicant_group": "all",
           "date": "November 15",
-          "kind": "early"
+          "kind": "early",
+          "degree_origin": null
         },
         {
           "intake": "winter",
           "applicant_group": "all",
           "date": "May 15",
-          "kind": "final"
+          "kind": "final",
+          "degree_origin": null
         },
         {
           "intake": "summer",
           "applicant_group": "all",
           "date": "May 15",
-          "kind": "early"
+          "kind": "early",
+          "degree_origin": null
         },
         {
           "intake": "summer",
           "applicant_group": "all",
           "date": "November 15",
-          "kind": "final"
+          "kind": "final",
+          "degree_origin": null
         }
       ],
       "quote": "| Application deadline for the winter semester | Early deadline: Nov 15 (positive decision: notification at the lastest in February of the following year) Late deadline: May 15 |\n| Application deadline for the summer semester | Early deadline: May 15 (positive decision: notification at the lastest in July) Late deadline: Nov 15 |",
-      "doc_id": "de/saarland/cs-msc/programme"
+      "doc_id": "de/saarland/cs-msc/programme",
+      "supporting_citations": []
     },
     "selection_process": {
       "status": "stated",
       "value": "The listed admission criteria are used to assess the applicant's aptitude in terms of academic profile and the requirements of the programme; the Examination Board decides whether the admission requirements have been met.",
       "quote": "The criteria listed above will be used to assess the aptitude of the applicant in terms of the academic profile and requirements of the respective Master’s degree programme. The decision whether the programme admission requirements have been met is made by the Examination Board.",
-      "doc_id": "de/saarland/masters-application-guide"
+      "doc_id": "de/saarland/masters-application-guide",
+      "supporting_citations": []
     },
     "required_documents": {
       "status": "stated",
       "value": [
         "copy of university entrance qualification",
-        "copies of 3 most recent degrees (with certified translation, if the original language is not English, German or French)",
+        "copies of 3 most recent degrees (with certified translation, if the original language is not English, German or French); if the current degree is ongoing, submit a recent progress transcript",
         "certified list of all attended courses with the respective grades, including an explanation of the grading system",
         "Curriculum Vitae (CV)",
         "two complete review forms by recommenders appointed by the applicant",
-        "APS certificate (if degree obtained in China, India or Vietnam)"
+        "APS certificate (if degree obtained in China, India or Vietnam)",
+        "English-proficiency certificate, or the guide-permitted native-speaker/study or German-school evidence; MOI is not accepted",
+        "GRE General or Indian GATE result for applicants without a degree from the EHEA, Switzerland or the UK; non-EHEA branch campuses are not exempt",
+        "Letter of motivation or personal statement documenting interest in this M.Sc. programme",
+        "Details of relevant work/study periods abroad and relevant work experience or internships"
       ],
       "quote": "Transcripts (Academic Records):\n\n_ a copy of your university entrance qualification _ copies of your 3 most recent degrees* (with certified translation, if the original language is not English, German or French) _ a certified list of all attended courses with the respective grades, including an explanation of the grading system\n\n*If your current degree is ongoing, please include a recent transcript showing your current progress.\n\nMinimal prerequisite is a cumulative undergraduate grade point average of 75% and ranking in the top 10% of the graduating class.\n\nCurriculum Vitae (CV)\n\nincluding information on your areas of interest in research, as well as any projects or publications\n\nLetters of Recommendation\n\nA complete application includes two complete review forms by recommenders appointed by the applicant. These recommenders can optionally upload an additional recommendation letter.\n\nIt is your responsibility to ensure that your referees have the information they need to provide a reference and submit it by the deadline.\n\nIt is extremely important to enter valid email addresses of your referees! An email will be sent to your recommenders with information on how to proceed. Please check them before submitting your application.\n\nWe do not accept letters of recommendation sent by mail or any other means.\n\nPlease note that your application is considered fully submitted only after both recommenders have filled out the review forms.\n\nAPS certificate\n\nApplicants who have obtained their university degree in China, India or Vietnam are required to submit the original ( digitally signed ) APS Certificate issued by the Academic Evaluation Center (Akademische Prüfstelle) in the corresponding country with the application.",
-      "doc_id": "de/saarland/masters-application-guide"
+      "doc_id": "de/saarland/masters-application-guide",
+      "supporting_citations": [
+        {
+          "quote": "All applicants from all countries must provide a proof of advanced proficiency in English (level C1 of the Common European Framework).\n\nThe following certificates will be accepted: _ IELTS (academic test): min. 7.0 out of 9 _ TOEFL (internet based): min. 95 out of 120 (2026: 5 out of 6) _ TOEFL (paper based): min. 600 out of 677 (2026: 5 out of 6) _ Cambridge English Certificate: C1 Advanced (CAE) or C2 Proficiency (CPE) _ PTE Academic: min. 76\n\nPlease note : Home editions of all of the above-mentioned English tests are accepted as well as expired tests.\n\nThe English certificate is a mandatory part of the application. A confirmation of your university or a MOI (Medium of Instruction) is not a sufficient equivalent.\n\nOnly native speakers from Australia, Ireland, Canada, New Zealand, the UK, and the USA, or applicants who have completed in-person studies while physically residing in one of these countries at a university located there , are excluded from this rule. In these cases, please enter native speaker from [country] or studied in [country] into the form and upload a high school and/or bachelor’s degree certificate from that country as proof.\n\nFor German applicants, school certificates demonstrating that English has been studied for at least 5 years up to the general qualification for university entrance (Abitur) with good or very good grades is sufficient. As level C1 is not usually achieved by the end of school, certificates with good or very good grades are examined individually.\n\nKnowledge of proficiency in German is not required.",
+          "doc_id": "de/saarland/masters-application-guide"
+        },
+        {
+          "quote": "GRE General Test / GATE test\n\nApplicants for Computer Science, Cybersecurity, DSAI, Embedded Systems and Visual Computing who have no degree certificate earned within the European Higher Education Area (EHEA) region, Switzerland, or the UK are required to upload the test result from the GRE General Test or the Indian GATE test . There is no minimum score requirement and we accept home editions of the GRE/GATE tests . There are no exceptions from this requirement for degrees from branch campuses located in non-EHEA countries. The GRE test result of one of the subject tests or a prep test does not satisfy this requirement.",
+          "doc_id": "de/saarland/masters-application-guide"
+        },
+        {
+          "quote": "- Proof of sufficient merit in their academic achievements in school and higher education\n\n- A letter of motivation or personal statement documenting the student's particular interest in the M.Sc. programme\n\n- Two relevant academic references\n\n- Details about relevant work/study periods abroad and relevant work experience or internships",
+          "doc_id": "de/saarland/cs-msc/programme"
+        }
+      ]
     },
     "tuition_eur_per_semester_non_eu": {
       "status": "stated",
       "value": 0.0,
       "quote": "| Tuition fees | Not applicable |",
-      "doc_id": "de/saarland/cs-msc/programme"
+      "doc_id": "de/saarland/cs-msc/programme",
+      "supporting_citations": []
     },
     "semester_fee_eur": {
       "status": "not_published",
       "value": null,
       "quote": null,
-      "doc_id": null
+      "doc_id": null,
+      "supporting_citations": []
     },
     "language_of_instruction": {
       "status": "stated",
       "value": "English",
       "quote": "The teaching language of the master’s degree programme is English.",
-      "doc_id": "de/saarland/masters-application-guide"
+      "doc_id": "de/saarland/masters-application-guide",
+      "supporting_citations": []
     },
     "verified": true
   }

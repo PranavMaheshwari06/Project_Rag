@@ -110,9 +110,9 @@ Per phase: what was built, why (interview answers), quiz questions, the DECISION
 
 ---
 
-## Phase 4: Eval baseline (in progress)
+## Phase 4: Eval baseline (complete locally, 2026-10-27)
 
-Steps 0–2 are done (tiers, extraction accuracy, gold set). Step 3 (`make eval` with real numbers for the four retrieval modes, split by kind) and step 4 (refusal calibration on the refusal and coverage probes) are left, so the Phase 4 "Done when" line is not met yet. Two human steps are pending: the sampled audit of the second-pass records and the review of the gold set.
+All Phase 4 steps are complete locally. The audit and gold acceptance are recorded; `make eval` reports the four modes overall and by kind, extraction accuracy, historical audit results and refusal calibration. PR #4 remains unmerged; Phase 6 follows the closure commit.
 
 ### What was built
 - **Verification tiers.** Every `data/verified/<slug>.json` has a `tier`: `human` (6 programmes, every field ticked in `make review`) or `second_pass` (7: KIT CDS, Saarland CS, TU Darmstadt AIML, TU Dresden CS, TUM DEA, TUM Informatics, Stuttgart CS). A re-save in `extraction/review.py` keeps the existing tier; promoting `second_pass` to `human` is a deliberate hand edit.
@@ -120,7 +120,7 @@ Steps 0–2 are done (tiers, extraction accuracy, gold set). Step 3 (`make eval`
 - **Sampled audit of the second-pass records** (`scripts/audit_sample.py [n] [seed] [--sheet]`): a seeded random sample of `stated` fields from `second_pass` records. `--sheet` writes `data/audit/audit_sheet.md`: for each field the value, quote, doc id, a page excerpt of ±300 characters around the quote, a model pre-check line and an agree/disagree box for the auditor. Run as `scripts/audit_sample.py 35 4 --sheet`: 35 of 69 stated fields, seed 4.
 - **Gold set** (`evaluation/datasets/gold_qa.jsonl`, 104 items): requirement 45, country_rules 24, confusable 11, multi_hop 10, refusal 9, coverage 5. Drafted as student-voice questions from the verified pages, then checked by a separate model review pass; the per-item record is `evaluation/datasets/gold_review.md`.
 - **Gold fields and validator.** `GoldItem` in `evaluation/retrieval_eval.py` gained optional `kind`, `university`, `programme`, `author`, `reviewed_by` and `expect_refusal`, all defaulted so the old test fixture still loads. `scripts/validate_gold.py` checks every label; `make eval` runs it first.
-- 55 tests pass.
+- 68 tests pass, including review/API/model-backed tests; lint and the frontend production build pass.
 
 ### Why (defend these)
 - **Tiers instead of hand-ticking all 13.** The seven second-pass records would cost about 30 minutes each to tick by hand. Labelling each record with how it was verified keeps every claim true without blocking the build. The README and every metric say which tier they use.
@@ -143,7 +143,7 @@ Extraction accuracy (`render()` output):
 | records | programmes | fields | draft unchanged | edited | dropped | added | checker precision | checker recall |
 |---|---|---|---|---|---|---|---|---|
 | human tier (headline) | 6 | 102 | 0.794 | 18 | 0 | 3 | 0.947 | 0.857 |
-| all (second_pass not independent) | 13 | 221 | 0.828 | 32 | 3 | 3 | 0.833 | 0.658 |
+| all (second_pass not independent) | 13 | 221 | 0.814 | 35 | 3 | 3 | 0.867 | 0.634 |
 
 How to read it:
 - **Draft unchanged**: share of fields where the LLM draft survived verification exactly (status, value, quote and doc_id identical). On the human tier, 0.794 of 102 fields; the 0.794 is unchanged from before the tier split.
@@ -151,9 +151,9 @@ How to read it:
 - **Checker precision**: of the fields the cross-check flagged (wrong, partial or missed), the share that really changed. **Checker recall**: of the fields that changed, the share it flagged.
 - **Caveat**: the review screen shows the cross-check verdict next to each field, so the checker numbers mean "predicts what a person who could see its verdict changed". The "all" row includes second-pass records, which were verified with the cross-check's help, so it is not independent; it is shown for completeness, not as the headline.
 
-Audit pre-check on the 35 sampled fields: 33 agree, 2 disagree, 0 unsure. The two disagreements are row 12 (Saarland CS `required_documents` omits the GRE/GATE result and the English certificate that the same section requires) and row 16 (TU Darmstadt AIML `entrance_tests` is recorded as `one_of`, i.e. mandatory, but the page makes the entrance exam conditional, "Only when required entrance competencies cannot be confirmed from the submitted documents", and GRE/GATE an exemption from it; the schema has no "conditional" value). Human audit: pending.
+Audit pre-check on the 35 sampled fields: 33 agree, 2 disagree, 0 unsure. The two disagreements are row 12 (Saarland CS `required_documents` omits the GRE/GATE result and the English certificate that the same section requires) and row 16 (TU Darmstadt AIML `entrance_tests` is recorded as `one_of`, i.e. mandatory, but the page makes the entrance exam conditional, "Only when required entrance competencies cannot be confirmed from the submitted documents", and GRE/GATE an exemption from it; the schema has no "conditional" value). The completed audit covers 35 of the original 69 stated fields (seed 4). Strict passes: 29/35 (82.86%; Wilson 95% interval 0.673–0.919); snapshot passes: 32/35 (91.43%; interval 0.776–0.970). Six confirmed findings (rows 12, 16, 20, 22, 28, 32) were corrected through the review Save path; tiers remain unchanged. These are historical pre-correction scores, not a new accuracy estimate. The original values, completed report, provenance and correction evidence are recorded in `data/audit/second_pass_audit.json`. The remaining 34 stated fields and missed fields are unscored.
 
-Gold set review pass: 107 drafted, 81 unchanged, 23 fixed, 3 dropped, 104 kept. Every item is `author: model`, `reviewed_by: model`; human pass pending.
+Gold set review pass: 107 drafted, 81 unchanged, 23 fixed, 3 dropped, 104 kept. Every retained item is `author: model`, `reviewed_by: human` after maintainer acceptance on 2026-10-27. The maintainer also approved b09/c19 foreign-degree scope, b10 current-semester fee and c05 alternative-source updates. This is assisted review acceptance, not an independent audit of every item.
 
 ### How the human steps are done
 
@@ -168,7 +168,7 @@ Gold set review pass: 107 drafted, 81 unchanged, 23 fixed, 3 dropped, 104 kept. 
 8. Tick agree, or tick disagree and write one line saying what the page says instead. Record the totals in `data/audit/second_pass_audit.json` as `{audited, of, seed, auditor: human, prechecked_by: model, disagreements}`. Fix confirmed disagreements in the verified record through the review Save path (which re-runs the schema and quote check); the tier stays `second_pass`.
 
 **(b) Judging a gold item** (skim `evaluation/datasets/gold_review.md`, then the item):
-- Is the listed doc really where the answer is, and is it the only doc that answers it? If a second page states the same fact, the doc-level label will undercount recall: reword the question or drop it.
+- Do the labelled docs support the answer? Include alternative supporting sources where the question genuinely has multiple valid sources (c05), or reword/drop an ambiguous item. Doc recall then measures source coverage, not whether any single page is sufficient.
 - Is the `answer_hint` supported by that doc, numbers included?
 - Does the question copy the page's wording? A real student does not write "Zugangsvoraussetzungen"; copied phrases make BM25 look better than it is.
 - Is the `kind` right (one doc vs two for `multi_hop`; a real sibling programme for `confusable`)?
@@ -217,4 +217,16 @@ Worked example for k = 0: p = 0, z²/n = 3.8416/35 = 0.1098, centre = (0 + 0.054
   - student work-day limit: TU Darmstadt guide 140 full / 280 half days, Foreign Office FAQ 120 / 240.
   The answer layer (Phase 8) must surface a conflict with both citations instead of picking one.
 - The RWTH language-requirements PDF lost its headings in parsing (all 29 chunks share one `section_path`) and lists two score levels whose scope is unclear.
-- Schema gap: no "conditional" requirement value (TU Darmstadt AIML entrance exam, audit row 16). For Phase 6.
+- Conditional exams now carry an optional `condition`; deadline entries have optional `degree_origin`. Phase 6 must interpret those conditions explicitly and handle the other recorded schema gaps.
+
+### Phase 4 closure measurements
+
+The selected score threshold is `0.13340958034137707`. It refuses 4/14 refusal/coverage probes while falsely refusing 3/90 answerable questions. The constraint is at most 5% false refusals; ties prefer fewer false refusals, then a lower threshold. These are calibration-set results, not held-out estimates. Actual answer refusals are reported separately in the calibration artifact.
+
+The corpus has 74 sources and 600 chunks, with zero embedding truncations. The full four-mode tables and per-kind counts are in the README and benchmark artifact; the score sweep, every qid, actual answer refusals and input hashes are in `evaluation/results/refusal_calibration.json`. The baseline always disables the LLM key; its groundedness is the labelled token-overlap heuristic. Models are warmed before latency measurement.
+
+Optional schema defaults are normalized when comparing extraction records; a changed supporting citation still counts as a correction. All 13 records and their supplemental citations pass validation. The six human-tier programmes remain at 79.4% unchanged over 102 fields, precision 0.947 and recall 0.857.
+
+The review-screen tests stalled in the restricted sandbox and passed outside it. Full test artifacts, including evaluation output, are isolated from real corpus files. CI now covers the new pure-logic and review tests; model-backed API tests remain part of the local full suite.
+
+Additional quiz questions: Why must a threshold sweep reuse scores but latency measurements use real searches? Why does tuning on these probes not establish held-out refusal performance? What does a second valid source change about doc-level Recall@k?

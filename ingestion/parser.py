@@ -58,6 +58,12 @@ def _from_html(html: str) -> tuple[str, str | None]:
         title = soup.title.string.strip()
 
     body = soup.find("main") or soup.find(attrs={"role": "main"}) or soup.body or soup
+    # Accordion titles carry scope just like headings. Preserve them before their
+    # content, including native details/summary and explicitly marked headings.
+    # aria-expanded alone also marks tabs and menus, which are not headings.
+    for el in body.select("summary, .accordion-title, [role='heading']"):
+        if el.name not in {"h1", "h2", "h3", "h4", "h5", "h6"} and not el.find_parent(["p", "li", "table", "dl"]):
+            el.name = "h4"
     lines: list[str] = []
     for el in body.find_all(["h1", "h2", "h3", "h4", "h5", "h6", "p", "pre", "ul", "ol", "table", "dl"]):
         if el.find_parent(["pre", "li", "table", "dl"]):
