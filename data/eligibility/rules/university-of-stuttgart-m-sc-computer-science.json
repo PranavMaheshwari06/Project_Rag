@@ -1,0 +1,212 @@
+{
+  "schema_version": "rules-v1",
+  "slug": "university-of-stuttgart-m-sc-computer-science",
+  "record_sha256": "430b7664c0bc143e8a08fde7f0a1b9ae16e192bdbe8d1aa608a5201f5ef2695c",
+  "rules": [
+    {
+      "id": "degree",
+      "label": "Bachelor's degree (or equivalent) of at least 6 semesters in Computer Science, Software Engineering or a closely related subject",
+      "check": {
+        "type": "university_review",
+        "note": "The University of Stuttgart's Board of Admission decides whether your degree is equivalent and closely related enough; the 6-semester duration is not a profile fact."
+      },
+      "citations": [
+        {
+          "doc_id": "de/ustutt/cs-msc/programme",
+          "quote": "General requirement is a bachelor's degree (or equivalent) with a duration of at least 6 semesters in Computer Science, Software Engineering or in a subject closely related."
+        }
+      ],
+      "reviewed_by": "pending"
+    },
+    {
+      "id": "english",
+      "label": "English at level C1: TOEFL iBT 95, IELTS Academic 7.0, Cambridge CAE/CPE, Oxford Test Advanced, PTE Academic 76, telc, or citizenship and education in a native-English country",
+      "check": {
+        "type": "any_of",
+        "children": [
+          {
+            "type": "min",
+            "fact": "language.IELTS.overall",
+            "value": "7.0"
+          },
+          {
+            "type": "min",
+            "fact": "language.TOEFL iBT.overall",
+            "value": "95"
+          },
+          {
+            "type": "min",
+            "fact": "language.TOEFL iBT (2026 scale).overall",
+            "value": "5"
+          },
+          {
+            "type": "in",
+            "fact": "language.CAE.grade",
+            "values": [
+              "A",
+              "B",
+              "C"
+            ]
+          },
+          {
+            "type": "in",
+            "fact": "language.CPE.grade",
+            "values": [
+              "A",
+              "B",
+              "C"
+            ]
+          },
+          {
+            "type": "in",
+            "fact": "language.Oxford Test of English Advanced.grade",
+            "values": [
+              "C1",
+              "C2"
+            ]
+          },
+          {
+            "type": "min",
+            "fact": "language.PTE Academic.overall",
+            "value": "76"
+          },
+          {
+            "type": "in",
+            "fact": "language.telc University.grade",
+            "values": [
+              "very good",
+              "sehr gut"
+            ]
+          },
+          {
+            "type": "in",
+            "fact": "language.telc.grade",
+            "values": [
+              "C1",
+              "C2"
+            ]
+          },
+          {
+            "type": "all_of",
+            "children": [
+              {
+                "type": "in",
+                "fact": "citizenships",
+                "values": [
+                  "Antigua and Barbuda",
+                  "Australia",
+                  "Bahamas",
+                  "The Bahamas",
+                  "Barbados",
+                  "Belize",
+                  "Canada",
+                  "Dominica",
+                  "Grenada",
+                  "Guyana",
+                  "Ireland",
+                  "Jamaica",
+                  "Malta",
+                  "New Zealand",
+                  "St Kitts and Nevis",
+                  "Saint Kitts and Nevis",
+                  "St Lucia",
+                  "Saint Lucia",
+                  "St Vincent and the Grenadines",
+                  "Saint Vincent and the Grenadines",
+                  "Trinidad and Tobago",
+                  "United Kingdom",
+                  "UK",
+                  "Great Britain",
+                  "England",
+                  "Scotland",
+                  "Wales",
+                  "Northern Ireland",
+                  "United States",
+                  "United States of America",
+                  "USA"
+                ]
+              },
+              {
+                "type": "university_review",
+                "note": "The exception needs citizenship AND education in a listed country (Canada except Quebec); the level and length of education are not specified, so the Admission Committee decides. A proof of citizenship (passport copy) is uploaded instead of a test."
+              }
+            ]
+          }
+        ]
+      },
+      "citations": [
+        {
+          "doc_id": "de/ustutt/cs-msc/english-proofs",
+          "quote": "Accepted proofs are:"
+        },
+        {
+          "doc_id": "de/ustutt/cs-msc/english-proofs",
+          "quote": "TOEFL IBT 95 points / from 2026: 5 or better"
+        },
+        {
+          "doc_id": "de/ustutt/cs-msc/english-proofs",
+          "quote": "IELTS band 7.0 or better (academic)"
+        },
+        {
+          "doc_id": "de/ustutt/cs-msc/english-proofs",
+          "quote": "Cambridge ESOL CAE/CPE University of Cambridge ESOL exams"
+        },
+        {
+          "doc_id": "de/ustutt/cs-msc/english-proofs",
+          "quote": "Oxford Test of English Advanced (C1)"
+        },
+        {
+          "doc_id": "de/ustutt/cs-msc/english-proofs",
+          "quote": "PTE Academic Score 76 or better"
+        },
+        {
+          "doc_id": "de/ustutt/cs-msc/english-proofs",
+          "quote": "telc: telc University B2/C1 (result „very good“); telc C1 / C2 (general examination)"
+        },
+        {
+          "doc_id": "de/ustutt/cs-msc/english-proofs",
+          "quote": "“Medium of Instruction (MOI)”, e.g. certificate confirming your bachelor’s program was conducted in English, is not accepted."
+        },
+        {
+          "doc_id": "de/ustutt/cs-msc/english-proofs",
+          "quote": "If you are a national with citizenship and education in one of the countries listed below, you do not need to upload one of the English proficiency proofs listed above."
+        }
+      ],
+      "reviewed_by": "pending"
+    },
+    {
+      "id": "english_validity",
+      "label": "The English certificate must be valid until the application deadline (most certificates expire after two years)",
+      "check": {
+        "type": "university_review",
+        "note": "The two-year validity and the application deadline are not modelled (no date check); you must check your certificate's expiry yourself."
+      },
+      "citations": [
+        {
+          "doc_id": "de/ustutt/cs-msc/english-proofs",
+          "quote": "The uploaded certificate has to be valid at least until the application deadline (15th of January/July)."
+        }
+      ],
+      "reviewed_by": "pending"
+    },
+    {
+      "id": "admission_board",
+      "label": "The Board of Admission decides whether the conditions are fulfilled, and may require an interview, an entrance examination or conditions",
+      "check": {
+        "type": "university_review",
+        "note": "The Board of Admission decides from your documents; if conditions are not fulfilled an interview or entrance examination may be needed, and missing qualifications may be made up during the studies. Nothing here is computed."
+      },
+      "citations": [
+        {
+          "doc_id": "de/ustutt/cs-msc/department",
+          "quote": "On the basis of the documents presented, the Board of Admission (Zulassungsausschuss) decides whether the conditions of entry are fulfilled or not."
+        },
+        {
+          "doc_id": "de/ustutt/cs-msc/department",
+          "quote": "In case of the latter, an interview or an entrance examination may be necessary."
+        }
+      ],
+      "reviewed_by": "pending"
+    }
+  ]
+}

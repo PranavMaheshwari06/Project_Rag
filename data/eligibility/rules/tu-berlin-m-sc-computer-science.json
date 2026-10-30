@@ -1,0 +1,275 @@
+{
+  "schema_version": "rules-v1",
+  "slug": "tu-berlin-m-sc-computer-science",
+  "record_sha256": "abf4441514dbbeb90cccbf878d66db024bcea1672e7d50cbb17ed826f452feb5",
+  "rules": [
+    {
+      "id": "degree",
+      "label": "A first professionally qualifying degree in Computer Science (Informatik) or a related study programme",
+      "check": {
+        "type": "university_review",
+        "note": "TU Berlin's examination board decides whether your first degree is Computer Science or a related programme and equivalent to a German degree (R01). A matching degree title does not settle it."
+      },
+      "citations": [
+        {
+          "doc_id": "de/tub/cs-msc/application",
+          "quote": "The specific admission requirement is a first professionally qualifying degree in the field of “Informatik” or Computer Science or in a related study program."
+        }
+      ],
+      "reviewed_by": "pending"
+    },
+    {
+      "id": "foundations_total",
+      "label": "At least 36 credits in the foundations of computer science (the three areas below together)",
+      "check": {
+        "type": "min",
+        "fact": "subject_credits.foundations_total",
+        "value": "36"
+      },
+      "citations": [
+        {
+          "doc_id": "de/tub/cs-msc/application",
+          "quote": "36 CP in foundations of computer sciences, including 12 CP in the field of Theoretical Computer Science"
+        }
+      ],
+      "reviewed_by": "pending"
+    },
+    {
+      "id": "theoretical_cs",
+      "label": "At least 12 credits in Theoretical Computer Science (formal languages, automata, computability, complexity, logic)",
+      "check": {
+        "type": "min",
+        "fact": "subject_credits.theoretical_cs",
+        "value": "12"
+      },
+      "citations": [
+        {
+          "doc_id": "de/tub/cs-msc/application",
+          "quote": "12 CP in the field of Theoretical Computer Science"
+        },
+        {
+          "doc_id": "de/tub/cs-msc/application",
+          "quote": "Theoretical Computer Science includes courses i.e. on the topics formal languages, automata, computability, complexity, logic."
+        }
+      ],
+      "reviewed_by": "pending"
+    },
+    {
+      "id": "computer_engineering",
+      "label": "At least 12 credits in Computer Engineering or Information Technology",
+      "check": {
+        "type": "min",
+        "fact": "subject_credits.computer_engineering",
+        "value": "12"
+      },
+      "citations": [
+        {
+          "doc_id": "de/tub/cs-msc/application",
+          "quote": "12 CP in the field of Computer Engineering or Information Technology"
+        }
+      ],
+      "reviewed_by": "pending"
+    },
+    {
+      "id": "practical_cs",
+      "label": "At least 12 credits in Methodological and Practical Computer Science",
+      "check": {
+        "type": "min",
+        "fact": "subject_credits.practical_cs",
+        "value": "12"
+      },
+      "citations": [
+        {
+          "doc_id": "de/tub/cs-msc/application",
+          "quote": "12 CP in the field of Methodological and Practical Computer Science"
+        }
+      ],
+      "reviewed_by": "pending"
+    },
+    {
+      "id": "mathematics",
+      "label": "At least 18 credits in Mathematics",
+      "check": {
+        "type": "min",
+        "fact": "subject_credits.mathematics",
+        "value": "18"
+      },
+      "citations": [
+        {
+          "doc_id": "de/tub/cs-msc/application",
+          "quote": "18 CP in the field of Mathematics"
+        }
+      ],
+      "reviewed_by": "pending"
+    },
+    {
+      "id": "additional_cs",
+      "label": "At least 30 further credits in computer science, not counting your thesis, on top of the credits above",
+      "check": {
+        "type": "min",
+        "fact": "subject_credits.additional_cs",
+        "value": "30"
+      },
+      "citations": [
+        {
+          "doc_id": "de/tub/cs-msc/application",
+          "quote": "at least 30 CP in the field of computer sciences, not including your thesis"
+        }
+      ],
+      "reviewed_by": "pending"
+    },
+    {
+      "id": "subject_allocation",
+      "label": "The examination board decides which of your modules count for each subject area",
+      "check": {
+        "type": "university_review",
+        "note": "The examination board decides the equivalence and which modules fall in which area (R12). Discrete structures, discrete mathematics, algorithms, data structures, digital logic and design and analysis of algorithms do not count as Theoretical Computer Science. Foreign credits are converted to ECTS by the board if needed. The credits you entered are your own allocation."
+      },
+      "citations": [
+        {
+          "doc_id": "de/tub/cs-msc/application",
+          "quote": "The responsible examination board decides on the equivalence and the subject-specific qualification."
+        },
+        {
+          "doc_id": "de/tub/cs-msc/application",
+          "quote": "Courses on discrete structures, discrete mathematics, algorithms, data structures, digital logic, design and analysis of algorithms are not recognized in the field of Theoretical Computer Science"
+        }
+      ],
+      "reviewed_by": "pending"
+    },
+    {
+      "id": "english",
+      "label": "Proof of English above B2: IELTS overall 6.5, or a completed degree from a native-English country",
+      "check": {
+        "type": "any_of",
+        "children": [
+          {
+            "type": "min",
+            "fact": "language.IELTS.overall",
+            "value": "6.5"
+          },
+          {
+            "type": "all_of",
+            "children": [
+              {
+                "type": "in",
+                "fact": "degree_completed",
+                "values": [
+                  true
+                ]
+              },
+              {
+                "type": "in",
+                "fact": "degree_country",
+                "values": [
+                  "Antigua and Barbuda",
+                  "Antigua & Barbuda",
+                  "Australia",
+                  "Bahamas",
+                  "The Bahamas",
+                  "Barbados",
+                  "Belize",
+                  "Cook Islands",
+                  "Dominica",
+                  "Grenada",
+                  "Guyana",
+                  "Ireland",
+                  "Jamaica",
+                  "Canada",
+                  "New Zealand",
+                  "Philippines",
+                  "Saint Kitts and Nevis",
+                  "Saint Kitts & Nevis",
+                  "St Kitts and Nevis",
+                  "Saint Vincent and the Grenadines",
+                  "Saint Vincent",
+                  "Singapore",
+                  "Trinidad and Tobago",
+                  "Trinidad & Tobago",
+                  "United Kingdom",
+                  "UK",
+                  "Great Britain",
+                  "England",
+                  "Scotland",
+                  "Wales",
+                  "Northern Ireland",
+                  "United States",
+                  "United States of America",
+                  "USA"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "university_review",
+            "note": "Other certificates on the Faculty IV list of accepted English proofs (CEFR level above B2) are not captured in the cached pages and the profile has no generic English level; TU Berlin decides. IELTS 5.5 is not enough even if it shows B2."
+          }
+        ]
+      },
+      "citations": [
+        {
+          "doc_id": "de/tub/eecs-application-faq",
+          "quote": "For the IELTS test, an overall band score of 6.5 is required, even if an overall band score of 5.5 confirms a B2 on the certificate."
+        },
+        {
+          "doc_id": "de/tub/eecs-application-faq",
+          "quote": "A successfully completed degree at a university will only be recognized as proof of English proficiency if it meets our definition of “native English.”"
+        },
+        {
+          "doc_id": "de/tub/eecs-application-faq",
+          "quote": "Please note that a higher B2 English level is required."
+        }
+      ],
+      "reviewed_by": "pending"
+    },
+    {
+      "id": "vpd",
+      "label": "VPD from uni-assist for a first degree from a foreign university (applications from summer semester 2026)",
+      "category": "readiness",
+      "check": {
+        "type": "when",
+        "when": {
+          "type": "in",
+          "fact": "degree_country",
+          "values": [
+            "Germany"
+          ],
+          "negate": true
+        },
+        "then": {
+          "type": "in",
+          "fact": "documents",
+          "values": [
+            "vpd"
+          ]
+        }
+      },
+      "citations": [
+        {
+          "doc_id": "de/tub/cs-msc/application",
+          "quote": "will need a preliminary review documentation (VPD) for their application to TU Berlin from the summer semester of 2026 onwards."
+        }
+      ],
+      "reviewed_by": "pending"
+    },
+    {
+      "id": "suitability_form",
+      "label": "Suitability Assessment Form (needed unless your bachelor's was in Computer Science at TU Berlin)",
+      "category": "readiness",
+      "check": {
+        "type": "in",
+        "fact": "documents",
+        "values": [
+          "suitability_assessment_form"
+        ]
+      },
+      "citations": [
+        {
+          "doc_id": "de/tub/cs-msc/application",
+          "quote": "you will need to add the Suitability Assessment Form to your application documents."
+        }
+      ],
+      "reviewed_by": "pending"
+    }
+  ]
+}

@@ -1,0 +1,107 @@
+{
+  "schema_version": "rules-v1",
+  "slug": "tu-dresden-m-sc-computer-science",
+  "record_sha256": "3c7460d2e1249d4929184c6d70ca649ebd091e58807fc7e653ca918376a11487",
+  "rules": [
+    {
+      "id": "degree",
+      "label": "A first professionally qualifying university degree recognised in Germany, or a degree from a state-recognised vocational academy in computer science",
+      "check": {
+        "type": "university_review",
+        "note": "TU Dresden decides whether your degree is recognised in Germany and fits computer science. A degree not yet awarded may be considered once 80% of its credits are achieved (certified by your university)."
+      },
+      "citations": [
+        {
+          "doc_id": "de/tud/cs-msc/programme",
+          "quote": "The prerequisite for admission to the course is a first professionally qualifying university degree recognized in Germany or a degree from a state or state-recognized vocational academy in computer science."
+        }
+      ],
+      "reviewed_by": "pending"
+    },
+    {
+      "id": "english",
+      "label": "English at CEFR C1: IELTS 7.0, TOEFL iBT 95 (or 5.0 on the new TOEFL scale), or another internationally offered C1 test",
+      "check": {
+        "type": "any_of",
+        "children": [
+          {
+            "type": "min",
+            "fact": "language.IELTS.overall",
+            "value": "7.0"
+          },
+          {
+            "type": "min",
+            "fact": "language.TOEFL iBT.overall",
+            "value": "95"
+          },
+          {
+            "type": "min",
+            "fact": "language.TOEFL iBT (2026 scale).overall",
+            "value": "5.0"
+          },
+          {
+            "type": "university_review",
+            "note": "The page deems C1 proven by TOEFL iBT or IELTS 7.0 and asks for a C1 result 'based on an internationally offered test'; other tests at C1 may be accepted. The profile has no generic English level, so TU Dresden decides."
+          }
+        ]
+      },
+      "citations": [
+        {
+          "doc_id": "de/tud/cs-msc/aptitude-assessment",
+          "quote": "Proof of the required English language skills at level C 1 of the Common European Framework of Reference for Languages (CEFR) based on the result of an internationally offered test."
+        },
+        {
+          "doc_id": "de/tud/cs-msc/aptitude-assessment",
+          "quote": "Proof is deemed to have been provided if the “Test of English as a Foreign Language” TOEFL iBt (120-95) (New: 5.0 points) or the IELTS test was passed with at least level 7.0."
+        }
+      ],
+      "reviewed_by": "pending"
+    },
+    {
+      "id": "aptitude_assessment",
+      "label": "TU Dresden aptitude assessment procedure (special aptitude for the Master's programme)",
+      "check": {
+        "type": "university_review",
+        "note": "Admission needs a pass in the faculty's aptitude assessment under its regulations; no scoring formula is published, so it cannot be computed."
+      },
+      "citations": [
+        {
+          "doc_id": "de/tud/cs-msc/programme",
+          "quote": "Proof of special aptitude is provided through aptitude assessment procedures in accordance with the Master Computer Science aptitude assessment regulations."
+        }
+      ],
+      "reviewed_by": "pending"
+    },
+    {
+      "id": "aps",
+      "label": "APS certificate, for Chinese, Vietnamese or Indian educational certificates",
+      "category": "readiness",
+      "check": {
+        "type": "when",
+        "when": {
+          "type": "in",
+          "fact": "degree_country",
+          "values": [
+            "China",
+            "Vietnam",
+            "India"
+          ]
+        },
+        "then": {
+          "type": "in",
+          "fact": "documents",
+          "values": [
+            "aps_certificate"
+          ]
+        }
+      },
+      "citations": [
+        {
+          "doc_id": "de/tud/international-faq",
+          "quote": "Applicants with Chinese, Vietnamese or Indian educational certificates must submit a certificate from the Academic Evaluation Center (APS) with their application."
+        }
+      ],
+      "reviewed_by": "pending"
+    }
+  ]
+}
