@@ -44,7 +44,13 @@ def test_save_writes_verified_and_rejects_invented_quote(client):
     assert c.put(url, json=rec).status_code == 200
     saved = json.loads((tmp / "verified" / f"{SRC.slug}.json").read_text())
     assert ProgramRequirements.model_validate(saved["record"]).verified is True
+    assert saved["tier"] == "human"
     assert c.get("/api/programmes").json()[0]["status"] == "verified"
+
+    saved["tier"] = "second_pass"  # a re-save must not promote an existing tier
+    (tmp / "verified" / f"{SRC.slug}.json").write_text(json.dumps(saved))
+    assert c.put(url, json=rec).status_code == 200
+    assert json.loads((tmp / "verified" / f"{SRC.slug}.json").read_text())["tier"] == "second_pass"
 
     rec["min_total_ects"]["quote"] = "At least 120 ECTS must be proven in mathematics"
     r = c.put(url, json=rec)

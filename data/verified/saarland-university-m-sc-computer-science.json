@@ -1,5 +1,6 @@
 {
   "verified_at": "2026-10-22T23:41:39+00:00",
+  "tier": "second_pass",
   "draft_model": "gemini-3.8-flash",
   "record": {
     "university": "Saarland University",

@@ -36,6 +36,7 @@ review:
 	$(PY) -m uvicorn extraction.review:app --port 8001
 
 eval:
+	$(PY) scripts/validate_gold.py
 	$(PY) scripts/run_eval.py
 
 test:

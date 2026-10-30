@@ -1,5 +1,6 @@
 {
   "verified_at": "2026-10-20T20:48:31+00:00",
+  "tier": "human",
   "draft_model": "gemini-3.8-flash",
   "record": {
     "university": "TU Berlin",
