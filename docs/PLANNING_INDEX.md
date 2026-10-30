@@ -19,11 +19,10 @@ Explicit maintainer instructions take precedence. Keep the detailed phase specif
 
 - [Phase 6 coverage matrix](PHASE_6_RULE_COVERAGE.md): Step 0 draft for all 13 programmes and 17 original fields, with source identities and preserved Phase 4 hashes in `data/eligibility/coverage_inventory.json`.
 - [Phase 6 consequential rule review](PHASE_6_RULE_REVIEW.md): pending semantic interpretations, exceptional-branch evidence, omissions and unresolved source gaps; no rule acceptance is implied.
-- [Five-profile worksheet](PHASE_6_FIVE_PROFILE_WORKSHEET.md): blank maintainer-authored facts and independent expected labels, to be frozen before engine comparisons.
 - `extraction/schemas.py`: the existing 17 cited requirement fields and the Phase 4 additions for conditions, degree origin, and supporting citations.
 - `data/verified/`: the 13 programme records, retaining their `human` or `second_pass` provenance. Verification does not establish automatic machine interpretability.
 - `sources/registry.yaml` and `sources/manifest.json`: official source identities and cached snapshot receipts.
-- `data/audit/Audit_sheet_completed.md` and `data/audit/second_pass_audit.json`: completed audit evidence, original scores, and the six corrections.
+- `data/audit/second_pass_audit.json`: completed audit evidence, original scores, and the six corrections.
 - `frontend/public/benchmark.json` and `evaluation/results/refusal_calibration.json`: Phase 4 aggregate/per-kind results, per-query diagnostics, calibration sweep, and input hashes.
 - `Makefile`, `.github/workflows/ci.yml`, and `tests/`: the established run, validation, and CI conventions.
 

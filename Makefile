@@ -45,6 +45,9 @@ eligibility:
 validate-phase6-inventory:
 	$(PY) scripts/validate_phase6_inventory.py $(ARGS)
 
+check-publish:
+	bash scripts/check_publish.sh
+
 test:
 	$(PY) -m pytest -q
 
@@ -57,4 +60,4 @@ fmt:
 up:
 	docker compose up --build
 
-.PHONY: venv install crawl ingest index extract review eval eligibility validate-phase6-inventory test run fmt up
+.PHONY: check-publish venv install crawl ingest index extract review eval eligibility validate-phase6-inventory test run fmt up

@@ -1,6 +1,6 @@
 # Phase 6 Step 0: consequential rule review
 
-Status: all proposals are model-assisted and pending maintainer review. These are interpretations of cached official evidence, not executable rules. Accepting a semantic interpretation does not promote a programme verification tier.
+Status: all proposals are drafts pending maintainer review. These are interpretations of cached official evidence, not executable rules. Accepting a semantic interpretation does not promote a programme verification tier.
 
 Review the proposal and unresolved boundary for each item; respond with its ID and accept/correct/defer. Acceptance of a conservative unknown does not resolve missing source evidence. Items involving omissions or genuine extraction errors need a separate reviewed Save-path correction; the Phase 4 record remains unchanged here. Step 1 can model these distinctions; consequential comparisons must wait for the relevant acceptance/evidence.
 

@@ -11,7 +11,7 @@ from core.logging import setup_logging
 
 def create_app() -> FastAPI:
     setup_logging()
-    app = FastAPI(title="EngineerDoc AI", version="0.1.0")
+    app = FastAPI(title="Germany Masters Eligibility Assistant", version="0.1.0")
 
     # added last runs first: request_id must wrap the logging middleware
     app.add_middleware(RequestLoggingMiddleware)

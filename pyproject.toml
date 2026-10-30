@@ -3,7 +3,7 @@ requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "engineerdoc-ai"
+name = "germany-masters-assistant"
 version = "0.1.0"
 description = "Hybrid RAG service for technical documentation: dense + BM25 + RRF + cross-encoder rerank, grounded answers with citations."
 requires-python = ">=3.10"

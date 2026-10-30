@@ -35,3 +35,8 @@ CLAUDE.md
 STATUS.md
 REVIEW_AND_FINALIZATION_PLAN.md
 skills-lock.json
+
+# working papers (build-only, not for the public repo)
+docs/working/
+data/audit/audit_sheet.md
+data/audit/Audit_sheet_completed.md

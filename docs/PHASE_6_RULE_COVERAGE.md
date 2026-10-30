@@ -1,8 +1,8 @@
 # Phase 6 Step 0: programme rule coverage
 
-Status: model-assisted draft, 2026-10-27; maintainer review pending. Generated from [coverage_inventory.json](../data/eligibility/coverage_inventory.json).
+Status: draft, 2026-10-27; maintainer review pending. Generated from [coverage_inventory.json](../data/eligibility/coverage_inventory.json).
 
-All 13 programmes and all 17 original fields are inventoried below. Classification describes the proposed automation boundary, not implemented rules or measured coverage. Every interpretation remains pending. See [the review packet](PHASE_6_RULE_REVIEW.md) and [five independent profiles](PHASE_6_FIVE_PROFILE_WORKSHEET.md).
+All 13 programmes and all 17 original fields are inventoried below. Classification describes the proposed automation boundary, not implemented rules or measured coverage. Every interpretation remains pending. See [the review packet](PHASE_6_RULE_REVIEW.md).
 
 `automatic`: deterministic comparisons against entered evidence are possible after rule review. `manual_review`: equivalence, ambiguity or required university assessment remains. `informational_readiness`: process, document, milestone or finance information, separate from academic admission. `not_published`: the original verified field is empty; this never implies exemption. Supplemental evidence can expose omissions without changing the original status.
 
