@@ -1,0 +1,417 @@
+{
+  "schema_version": "rules-v1",
+  "slug": "saarland-university-m-sc-data-science-and-artificial-intelligence",
+  "record_sha256": "d2322b7af0d71ef930eafb2d0b20276153730814691446dbefd25f87d0ff0c8f",
+  "rules": [
+    {
+      "id": "degree_field",
+      "label": "A bachelor's degree in computer science, informatics or a related field, or an equivalent foreign qualification",
+      "check": {
+        "type": "university_review",
+        "note": "Saarland decides whether your degree is in computer science, informatics or a related field and whether a foreign degree counts as equivalent."
+      },
+      "citations": [
+        {
+          "doc_id": "de/saarland/dsai-msc/programme",
+          "quote": "Bachelor's degree from a German university (at least 180 CP) or an equivalent qualification from a foreign university in computer science, informatics or a related field"
+        }
+      ],
+      "reviewed_by": "pending"
+    },
+    {
+      "id": "degree_credits",
+      "label": "A German bachelor's degree needs at least 180 ECTS credits; a foreign degree only has to be equivalent",
+      "check": {
+        "type": "any_of",
+        "children": [
+          {
+            "type": "all_of",
+            "children": [
+              {
+                "type": "in",
+                "fact": "credit_unit",
+                "values": [
+                  "ECTS"
+                ]
+              },
+              {
+                "type": "min",
+                "fact": "total_credits",
+                "value": "180"
+              }
+            ]
+          },
+          {
+            "type": "when",
+            "when": {
+              "type": "in",
+              "fact": "degree_country",
+              "values": [
+                "Germany"
+              ],
+              "negate": true
+            },
+            "then": {
+              "type": "university_review",
+              "note": "A foreign degree does not need 180 ECTS exactly; Saarland judges whether it is equivalent to a German bachelor's degree."
+            }
+          }
+        ]
+      },
+      "citations": [
+        {
+          "doc_id": "de/saarland/dsai-msc/programme",
+          "quote": "Bachelor's degree from a German university (at least 180 CP) or an equivalent qualification from a foreign university in computer science, informatics or a related field"
+        }
+      ],
+      "reviewed_by": "pending"
+    },
+    {
+      "id": "curricular_content",
+      "label": "Enough content in the required subject areas: mathematics (including statistics), theoretical informatics, practical informatics, and machine learning, AI and data mining",
+      "check": {
+        "type": "university_review",
+        "note": "The page names the subject areas but publishes no credit numbers; Saarland judges whether your degree covers them at the level of its own bachelor's programme."
+      },
+      "citations": [
+        {
+          "doc_id": "de/saarland/masters-application-guide",
+          "quote": "Applicants to the DSAI Master’s Program are expected to have a solid background in computer science, machine learning, and artificial intelligence."
+        }
+      ],
+      "reviewed_by": "pending"
+    },
+    {
+      "id": "grade_cgpa",
+      "label": "Cumulative grade of at least 75% (percentage scale) or 3.00 on a 4-point scale",
+      "check": {
+        "type": "any_of",
+        "children": [
+          {
+            "type": "all_of",
+            "children": [
+              {
+                "type": "in",
+                "fact": "grade.best",
+                "values": [
+                  "100"
+                ]
+              },
+              {
+                "type": "min",
+                "fact": "grade.percent_of_best",
+                "value": "75"
+              }
+            ]
+          },
+          {
+            "type": "all_of",
+            "children": [
+              {
+                "type": "in",
+                "fact": "grade.best",
+                "values": [
+                  "4"
+                ]
+              },
+              {
+                "type": "min",
+                "fact": "grade.obtained",
+                "value": "3"
+              }
+            ]
+          },
+          {
+            "type": "when",
+            "when": {
+              "type": "in",
+              "fact": "grade.best",
+              "values": [
+                "100",
+                "4"
+              ],
+              "negate": true
+            },
+            "then": {
+              "type": "university_review",
+              "note": "Your grade scale is neither a percentage nor a 4-point scale; Saarland decides how it compares with 75% or 3.00 out of 4."
+            }
+          }
+        ]
+      },
+      "citations": [
+        {
+          "doc_id": "de/saarland/masters-application-guide",
+          "quote": "Minimal application prerequisite is a cumulative undergraduate grade point average (CGPA) of 75% or 3.00 GPA on a 4 point scale and ranking in the top 10% of the graduating class."
+        }
+      ],
+      "reviewed_by": "pending"
+    },
+    {
+      "id": "class_rank",
+      "label": "Ranked in the top 10% of your graduating class",
+      "check": {
+        "type": "max",
+        "fact": "grade.class_rank_percentile",
+        "value": "10"
+      },
+      "citations": [
+        {
+          "doc_id": "de/saarland/masters-application-guide",
+          "quote": "ranking in the top 10% of the graduating class"
+        }
+      ],
+      "reviewed_by": "pending"
+    },
+    {
+      "id": "entrance_test",
+      "label": "GRE General or Indian GATE result (any score), unless your degree is from the EHEA, Switzerland or the UK",
+      "check": {
+        "type": "when",
+        "when": {
+          "type": "in",
+          "fact": "degree_country",
+          "values": [
+            "@EHEA",
+            "Switzerland",
+            "United Kingdom"
+          ],
+          "negate": true
+        },
+        "then": {
+          "type": "any_of",
+          "children": [
+            {
+              "type": "min",
+              "fact": "gre.quant",
+              "value": "130"
+            },
+            {
+              "type": "in",
+              "fact": "gate.qualified",
+              "values": [
+                true,
+                false
+              ]
+            }
+          ]
+        }
+      },
+      "citations": [
+        {
+          "doc_id": "de/saarland/masters-application-guide",
+          "quote": "have no degree certificate earned within the European Higher Education Area (EHEA) region, Switzerland, or the UK are required to upload the test result from the GRE General Test or the Indian GATE test"
+        },
+        {
+          "doc_id": "de/saarland/masters-application-guide",
+          "quote": "There is no minimum score requirement and we accept home editions of the GRE/GATE tests"
+        }
+      ],
+      "reviewed_by": "pending"
+    },
+    {
+      "id": "branch_campus",
+      "label": "A degree from a branch campus in a non-EHEA country is not exempt from the GRE/GATE requirement",
+      "severity": "info",
+      "check": {
+        "type": "university_review",
+        "note": "Enter the country where you studied, not where the awarding university is based; a branch campus outside the EHEA does not get the exemption."
+      },
+      "citations": [
+        {
+          "doc_id": "de/saarland/masters-application-guide",
+          "quote": "There are no exceptions from this requirement for degrees from branch campuses located in non-EHEA countries."
+        }
+      ],
+      "reviewed_by": "pending"
+    },
+    {
+      "id": "english",
+      "label": "English at level C1: IELTS 7.0, TOEFL iBT 95, TOEFL paper-based 600, Cambridge C1 Advanced or C2 Proficiency (grade A to C), or PTE Academic 76",
+      "check": {
+        "type": "any_of",
+        "children": [
+          {
+            "type": "min",
+            "fact": "language.IELTS.overall",
+            "value": "7.0"
+          },
+          {
+            "type": "min",
+            "fact": "language.TOEFL iBT.overall",
+            "value": "95"
+          },
+          {
+            "type": "min",
+            "fact": "language.TOEFL PBT.overall",
+            "value": "600"
+          },
+          {
+            "type": "in",
+            "fact": "language.CAE.grade",
+            "values": [
+              "A",
+              "B",
+              "C"
+            ]
+          },
+          {
+            "type": "in",
+            "fact": "language.CPE.grade",
+            "values": [
+              "A",
+              "B",
+              "C"
+            ]
+          },
+          {
+            "type": "min",
+            "fact": "language.PTE Academic.overall",
+            "value": "76"
+          },
+          {
+            "type": "when",
+            "when": {
+              "type": "any_of",
+              "children": [
+                {
+                  "type": "max",
+                  "fact": "language.TOEFL iBT.overall",
+                  "value": "6"
+                },
+                {
+                  "type": "max",
+                  "fact": "language.TOEFL PBT.overall",
+                  "value": "6"
+                }
+              ]
+            },
+            "then": {
+              "type": "university_review",
+              "note": "Scores up to 6 look like the new 2026 TOEFL scale, where the page asks for 5 out of 6; the profile cannot tell the scale, so Saarland decides."
+            }
+          },
+          {
+            "type": "when",
+            "when": {
+              "type": "any_of",
+              "children": [
+                {
+                  "type": "in",
+                  "fact": "degree_country",
+                  "values": [
+                    "Australia",
+                    "Ireland",
+                    "Canada",
+                    "New Zealand",
+                    "United Kingdom",
+                    "United States"
+                  ]
+                },
+                {
+                  "type": "in",
+                  "fact": "school_country",
+                  "values": [
+                    "Australia",
+                    "Ireland",
+                    "Canada",
+                    "New Zealand",
+                    "United Kingdom",
+                    "United States",
+                    "Germany"
+                  ]
+                },
+                {
+                  "type": "in",
+                  "fact": "citizenships",
+                  "values": [
+                    "Australia",
+                    "Ireland",
+                    "Canada",
+                    "New Zealand",
+                    "United Kingdom",
+                    "United States",
+                    "Germany"
+                  ]
+                }
+              ]
+            },
+            "then": {
+              "type": "university_review",
+              "note": "Native speakers from Australia, Ireland, Canada, New Zealand, the UK or the USA, people who studied in person in one of them, and German applicants with a good English school certificate may be excused; Saarland decides from your documents."
+            }
+          }
+        ]
+      },
+      "citations": [
+        {
+          "doc_id": "de/saarland/masters-application-guide",
+          "quote": "The following certificates will be accepted: _ IELTS (academic test): min. 7.0 out of 9 _ TOEFL (internet based): min. 95 out of 120 (2026: 5 out of 6) _ TOEFL (paper based): min. 600 out of 677 (2026: 5 out of 6) _ Cambridge English Certificate: C1 Advanced (CAE) or C2 Proficiency (CPE) _ PTE Academic: min. 76"
+        },
+        {
+          "doc_id": "de/saarland/masters-application-guide",
+          "quote": "Home editions of all of the above-mentioned English tests are accepted as well as expired tests."
+        },
+        {
+          "doc_id": "de/saarland/masters-application-guide",
+          "quote": "A confirmation of your university or a MOI (Medium of Instruction) is not a sufficient equivalent."
+        },
+        {
+          "doc_id": "de/saarland/masters-application-guide",
+          "quote": "Only native speakers from Australia, Ireland, Canada, New Zealand, the UK, and the USA, or applicants who have completed in-person studies while physically residing in one of these countries at a university located there , are excluded from this rule."
+        },
+        {
+          "doc_id": "de/saarland/masters-application-guide",
+          "quote": "certificates with good or very good grades are examined individually"
+        }
+      ],
+      "reviewed_by": "pending"
+    },
+    {
+      "id": "examination_board",
+      "label": "The Examination Board decides whether you meet the admission requirements; meeting the minimums does not guarantee a place",
+      "check": {
+        "type": "university_review",
+        "note": "Admission is competitive; the Examination Board judges your academic profile as a whole."
+      },
+      "citations": [
+        {
+          "doc_id": "de/saarland/masters-application-guide",
+          "quote": "The decision whether the programme admission requirements have been met is made by the Examination Board."
+        }
+      ],
+      "reviewed_by": "pending"
+    },
+    {
+      "id": "aps",
+      "label": "APS certificate, for degrees from China, India or Vietnam",
+      "category": "readiness",
+      "check": {
+        "type": "when",
+        "when": {
+          "type": "in",
+          "fact": "degree_country",
+          "values": [
+            "China",
+            "India",
+            "Vietnam"
+          ]
+        },
+        "then": {
+          "type": "in",
+          "fact": "documents",
+          "values": [
+            "aps_certificate"
+          ]
+        }
+      },
+      "citations": [
+        {
+          "doc_id": "de/saarland/masters-application-guide",
+          "quote": "Applicants who have obtained their university degree in China, India or Vietnam are required to submit the original ( digitally signed ) APS Certificate issued by the Academic Evaluation Center (Akademische Prüfstelle) in the corresponding country with the application."
+        }
+      ],
+      "reviewed_by": "pending"
+    }
+  ]
+}
