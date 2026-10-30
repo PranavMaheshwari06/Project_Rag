@@ -1,0 +1,248 @@
+{
+  "schema_version": "rules-v1",
+  "slug": "rwth-aachen-m-sc-computer-science",
+  "record_sha256": "c4cf2e21fa8f8f52204fb3e33844ac6b06f92041822bff236fb0016b81d8f627",
+  "rules": [
+    {
+      "id": "degree",
+      "label": "First degree with the Computer Science background RWTH requires (applied, technical and theoretical computer science, and mathematics)",
+      "check": {
+        "type": "university_review",
+        "note": "The RWTH examination board decides from your transcript and module descriptions whether your degree has the required background in applied, technical and theoretical computer science and mathematics (R01)."
+      },
+      "citations": [
+        {
+          "doc_id": "de/rwth/cs-msc/department",
+          "quote": "Based on the application documents, the examination board will decide on whether the applicant meets the above educational admission requirements."
+        },
+        {
+          "doc_id": "de/rwth/cs-msc/department",
+          "quote": "Applied computer science: programming, data structures and algorithms, databases and information systems, software engineering"
+        }
+      ],
+      "reviewed_by": "pending"
+    },
+    {
+      "id": "gre",
+      "label": "GRE General Test if your first degree is from outside the European Union: Quantitative above the 75th percentile, Verbal above the 15th percentile, Writing at least 3.5",
+      "check": {
+        "type": "when",
+        "when": {
+          "type": "in",
+          "fact": "degree_country",
+          "values": [
+            "@EU"
+          ],
+          "negate": true
+        },
+        "then": {
+          "type": "all_of",
+          "children": [
+            {
+              "type": "min",
+              "fact": "gre.quant_percentile",
+              "value": "75",
+              "strict": true
+            },
+            {
+              "type": "min",
+              "fact": "gre.verbal_percentile",
+              "value": "15",
+              "strict": true
+            },
+            {
+              "type": "min",
+              "fact": "gre.writing",
+              "value": "3.5"
+            }
+          ]
+        }
+      },
+      "citations": [
+        {
+          "doc_id": "de/rwth/cs-msc/application",
+          "quote": "if your first degree is from outside the European Union, you are required to submit a GRE test certificate."
+        },
+        {
+          "doc_id": "de/rwth/cs-msc/application",
+          "quote": "You need to be above 75th percentile in quantitative reasoning (GRE-QR) and above 15th percentile in verbal reasoning (GRE-VR)."
+        },
+        {
+          "doc_id": "de/rwth/cs-msc/application",
+          "quote": "Additionally you need at least 3.5 points in analytical writing (GRE-AW)."
+        }
+      ],
+      "reviewed_by": "pending"
+    },
+    {
+      "id": "english",
+      "label": "Proof of English, needed to enrol: TOEFL iBT 90, IELTS 6.0, Cambridge B2 First grade B or better, C1 Advanced, C2 Proficiency, PTE Academic 60, UNIcert II or higher",
+      "category": "readiness",
+      "check": {
+        "type": "any_of",
+        "children": [
+          {
+            "type": "min",
+            "fact": "language.TOEFL iBT.overall",
+            "value": "90"
+          },
+          {
+            "type": "min",
+            "fact": "language.IELTS.overall",
+            "value": "6.0"
+          },
+          {
+            "type": "in",
+            "fact": "language.FCE.grade",
+            "values": [
+              "A",
+              "B"
+            ]
+          },
+          {
+            "type": "in",
+            "fact": "language.CAE.grade",
+            "values": [
+              "A",
+              "B",
+              "C",
+              "pass"
+            ]
+          },
+          {
+            "type": "in",
+            "fact": "language.CPE.grade",
+            "values": [
+              "A",
+              "B",
+              "C",
+              "pass"
+            ]
+          },
+          {
+            "type": "min",
+            "fact": "language.PTE Academic.overall",
+            "value": "60"
+          },
+          {
+            "type": "in",
+            "fact": "language.UNIcert.grade",
+            "values": [
+              "II",
+              "III",
+              "IV"
+            ]
+          },
+          {
+            "type": "in",
+            "fact": "degree_country",
+            "values": [
+              "United Kingdom",
+              "Ireland",
+              "Australia",
+              "New Zealand",
+              "Canada",
+              "United States"
+            ]
+          },
+          {
+            "type": "in",
+            "fact": "school_country",
+            "values": [
+              "United Kingdom",
+              "Ireland",
+              "Australia",
+              "New Zealand",
+              "Canada",
+              "United States"
+            ]
+          },
+          {
+            "type": "university_review",
+            "note": "Other English proof RWTH accepts is not modelled: a school certificate at level B2, an English-language bachelor's thesis (the examination board decides), the TOEFL total score of 4.5, the RWTH placement test for enrolled students. RWTH decides."
+          }
+        ]
+      },
+      "citations": [
+        {
+          "doc_id": "de/rwth/language-requirements-pdf",
+          "quote": "a) Test of English as Foreign Language (TOEFL) Internet-based Test (IBT) with a result of at least 90 points or a total score of 4,5"
+        },
+        {
+          "doc_id": "de/rwth/language-requirements-pdf",
+          "quote": "b) IELTS test with a score of at least 6.0"
+        },
+        {
+          "doc_id": "de/rwth/language-requirements-pdf",
+          "quote": "c) Cambridge Test -B2 First with a grade of at least B"
+        },
+        {
+          "doc_id": "de/rwth/language-requirements-pdf",
+          "quote": "d) Cambridge Test – C1 Advanced"
+        },
+        {
+          "doc_id": "de/rwth/language-requirements-pdf",
+          "quote": "e) Cambridge Test – c2 Proficiency"
+        },
+        {
+          "doc_id": "de/rwth/language-requirements-pdf",
+          "quote": "f) Pearson Test of English (PTE) Academic with a result of at least 60 points"
+        },
+        {
+          "doc_id": "de/rwth/language-requirements-pdf",
+          "quote": "g) UNIcert II or higher"
+        },
+        {
+          "doc_id": "de/rwth/language-requirements",
+          "quote": "Applicants who have earned a high school diploma or academic degree in an English-speaking country are exempt from submitting proof of English language proficiency."
+        },
+        {
+          "doc_id": "de/rwth/cs-msc/application",
+          "quote": "After a successful application, you still have submit proof of German and English language proficiency."
+        },
+        {
+          "doc_id": "de/rwth/cs-msc/department",
+          "quote": "Aside from the evidence of English language proficiency listed there, other comparable evidence is also accepted."
+        }
+      ],
+      "reviewed_by": "pending"
+    },
+    {
+      "id": "german",
+      "label": "Proof of German at level C1, needed to enrol (not to be admitted), unless you are exempt",
+      "category": "readiness",
+      "check": {
+        "type": "any_of",
+        "children": [
+          {
+            "type": "in",
+            "fact": "german_level",
+            "values": [
+              "C1",
+              "C2"
+            ]
+          },
+          {
+            "type": "university_review",
+            "note": "RWTH exempts some applicants from the German certificate (for example a German-language degree or a school-leaving certificate from a German-speaking country, or an Austrian degree). These exemptions are not modelled; RWTH decides."
+          }
+        ]
+      },
+      "citations": [
+        {
+          "doc_id": "de/rwth/cs-msc/application",
+          "quote": "After a successful application, you still have submit proof of German and English language proficiency."
+        },
+        {
+          "doc_id": "de/rwth/cs-msc/application",
+          "quote": "Only applicants with a degree from certain German or English speaking countries are excempt from this regulation."
+        },
+        {
+          "doc_id": "de/rwth/language-requirements",
+          "quote": "Applicants do not need to submit proof of German language proficiency if they meet one of the following criteria:"
+        }
+      ],
+      "reviewed_by": "pending"
+    }
+  ]
+}

@@ -1,0 +1,223 @@
+{
+  "schema_version": "rules-v1",
+  "slug": "rwth-aachen-m-sc-data-science",
+  "record_sha256": "09f2c8e081e0830a38692bb8f3020e6c063c6b5a4ab257103bae03232ad1830f",
+  "rules": [
+    {
+      "id": "degree",
+      "label": "First degree in Computer Science, Mathematics, Physics or a closely related area from an internationally recognised university",
+      "check": {
+        "type": "university_review",
+        "note": "RWTH decides whether your degree subject counts as Computer Science, Mathematics, Physics or a closely related area (R01)."
+      },
+      "citations": [
+        {
+          "doc_id": "de/rwth/ds-msc/application",
+          "quote": "An applicant must have a first degree in Computer Science, Mathematics, Physics or a closely related area awarded by an internationally recognised university-level institution"
+        }
+      ],
+      "reviewed_by": "pending"
+    },
+    {
+      "id": "module_profile",
+      "label": "One of three module profiles (Computer Science, Mathematics or Physics) with module contents comparable to RWTH's",
+      "check": {
+        "type": "university_review",
+        "note": "RWTH checks module by module (for example Programming 8 CP, Linear Algebra 6 CP) whether your content is comparable to one of the three profiles. A bachelor's in one of these profiles from RWTH itself is accepted automatically. This is not computed here (R01)."
+      },
+      "citations": [
+        {
+          "doc_id": "de/rwth/ds-msc/application",
+          "quote": "Additionally, one of the profiles mentioned below must be fulfilled."
+        },
+        {
+          "doc_id": "de/rwth/ds-msc/application",
+          "quote": "The contents of the modules must be comparable to the RWTH’s modules."
+        }
+      ],
+      "reviewed_by": "pending"
+    },
+    {
+      "id": "gre",
+      "label": "GRE General Test: Quantitative above the 75th percentile, Verbal above the 15th percentile, Writing at least 3.5, unless you are an EU/EEA citizen or completed secondary education in Germany",
+      "check": {
+        "type": "any_of",
+        "children": [
+          {
+            "type": "all_of",
+            "children": [
+              {
+                "type": "min",
+                "fact": "gre.quant_percentile",
+                "value": "75",
+                "strict": true
+              },
+              {
+                "type": "min",
+                "fact": "gre.verbal_percentile",
+                "value": "15",
+                "strict": true
+              },
+              {
+                "type": "min",
+                "fact": "gre.writing",
+                "value": "3.5"
+              }
+            ]
+          },
+          {
+            "type": "university_review",
+            "note": "The GRE is not required for citizens of the EU or the EEA, or for applicants who completed secondary education in Germany (Abitur or equivalent). These exemptions are not modelled yet, so a failing or missing GRE is never shown as a failure: RWTH decides."
+          }
+        ]
+      },
+      "citations": [
+        {
+          "doc_id": "de/rwth/ds-msc/application",
+          "quote": "quantitative reasoning score: above 75th percentile (among 25% best) verbal reasoning score: above 15th percentile (among 85% best) analytical writing: minimum score 3.5"
+        },
+        {
+          "doc_id": "de/rwth/ds-msc/application",
+          "quote": "The GRE is not required for applicants with citizenship of the European Union or European Economic Area or who completed their secondary education in Germany"
+        },
+        {
+          "doc_id": "de/rwth/ds-msc/application",
+          "quote": "The GRE general test result must be provided with the application for admission before the application for admission deadline."
+        }
+      ],
+      "reviewed_by": "pending"
+    },
+    {
+      "id": "english",
+      "label": "Proof of English with the application: TOEFL iBT 90, academic IELTS 6.0, Cambridge B2 First grade B or better, C1 Advanced, C2 Proficiency, PTE Academic 60, UNIcert II or higher",
+      "check": {
+        "type": "any_of",
+        "children": [
+          {
+            "type": "min",
+            "fact": "language.TOEFL iBT.overall",
+            "value": "90"
+          },
+          {
+            "type": "min",
+            "fact": "language.IELTS.overall",
+            "value": "6.0"
+          },
+          {
+            "type": "in",
+            "fact": "language.FCE.grade",
+            "values": [
+              "A",
+              "B"
+            ]
+          },
+          {
+            "type": "in",
+            "fact": "language.CAE.grade",
+            "values": [
+              "A",
+              "B",
+              "C",
+              "pass"
+            ]
+          },
+          {
+            "type": "in",
+            "fact": "language.CPE.grade",
+            "values": [
+              "A",
+              "B",
+              "C",
+              "pass"
+            ]
+          },
+          {
+            "type": "min",
+            "fact": "language.PTE Academic.overall",
+            "value": "60"
+          },
+          {
+            "type": "in",
+            "fact": "language.UNIcert.grade",
+            "values": [
+              "II",
+              "III",
+              "IV"
+            ]
+          },
+          {
+            "type": "in",
+            "fact": "degree_country",
+            "values": [
+              "United Kingdom",
+              "Ireland",
+              "Australia",
+              "New Zealand",
+              "Canada",
+              "United States"
+            ]
+          },
+          {
+            "type": "in",
+            "fact": "school_country",
+            "values": [
+              "United Kingdom",
+              "Ireland",
+              "Australia",
+              "New Zealand",
+              "Canada",
+              "United States"
+            ]
+          },
+          {
+            "type": "university_review",
+            "note": "Other English proof RWTH accepts is not modelled: a school certificate at level B2, the TOEFL total score of 4.5, the RWTH placement test for enrolled students; the general IELTS does not count, only the academic one. RWTH decides."
+          }
+        ]
+      },
+      "citations": [
+        {
+          "doc_id": "de/rwth/language-requirements-pdf",
+          "quote": "a) Test of English as Foreign Language (TOEFL) Internet-based Test (IBT) with a result of at least 90 points or a total score of 4,5"
+        },
+        {
+          "doc_id": "de/rwth/language-requirements-pdf",
+          "quote": "b) IELTS test with a score of at least 6.0"
+        },
+        {
+          "doc_id": "de/rwth/language-requirements-pdf",
+          "quote": "c) Cambridge Test -B2 First with a grade of at least B"
+        },
+        {
+          "doc_id": "de/rwth/language-requirements-pdf",
+          "quote": "d) Cambridge Test – C1 Advanced"
+        },
+        {
+          "doc_id": "de/rwth/language-requirements-pdf",
+          "quote": "e) Cambridge Test – c2 Proficiency"
+        },
+        {
+          "doc_id": "de/rwth/language-requirements-pdf",
+          "quote": "f) Pearson Test of English (PTE) Academic with a result of at least 60 points"
+        },
+        {
+          "doc_id": "de/rwth/language-requirements-pdf",
+          "quote": "g) UNIcert II or higher"
+        },
+        {
+          "doc_id": "de/rwth/language-requirements",
+          "quote": "Applicants who have earned a high school diploma or academic degree in an English-speaking country are exempt from submitting proof of English language proficiency."
+        },
+        {
+          "doc_id": "de/rwth/ds-msc/application",
+          "quote": "An applicant must have an English language certificate that proofs that he/she is able to speak and write fluently in English"
+        },
+        {
+          "doc_id": "de/rwth/ds-msc/application",
+          "quote": "For an IELTS test, note that it must be the academic IELTS test, not the general IELTS test."
+        }
+      ],
+      "reviewed_by": "pending"
+    }
+  ]
+}
