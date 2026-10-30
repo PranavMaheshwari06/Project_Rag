@@ -4,7 +4,7 @@ from datetime import date
 
 import pytest
 
-from core.config import get_settings
+from core.config import load_settings
 from eligibility.engine import check_eligibility, default_groups, evaluate
 from eligibility.groups import load_groups
 from eligibility.profile import Profile
@@ -76,7 +76,7 @@ def test_negated_group_keeps_uncertainty():
 def test_old_country_lists_produce_a_notice():
     from eligibility.rules import load_ruleset
 
-    rules, _ = load_ruleset(get_settings(), "kit-m-sc-computer-science")
+    rules, _ = load_ruleset(load_settings(), "kit-m-sc-computer-science")
     p = Profile(degree_country="India")
     assert check_eligibility(p, rules, as_of=date(2027, 10, 29)).notices == []     # on the last valid day
     late = check_eligibility(p, rules, as_of=date(2027, 10, 30)).notices

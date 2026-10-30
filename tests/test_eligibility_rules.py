@@ -3,7 +3,7 @@
 import json
 from pathlib import Path
 
-from core.config import get_settings
+from core.config import load_settings
 from eligibility.engine import check_eligibility, evaluate
 from eligibility.profile import Profile
 from eligibility.rules import Rule, load_ruleset, uncited_quotes
@@ -51,7 +51,7 @@ def test_inactive_rules_do_not_count_in_groups_or_headline():
 
 
 def tum_report(**facts):
-    return {c.rule_id: c for c in check_eligibility(Profile(**facts), *load_ruleset(get_settings(), TUM)).criteria}
+    return {c.rule_id: c for c in check_eligibility(Profile(**facts), *load_ruleset(load_settings(), TUM)).criteria}
 
 
 def test_tum_gre_or_gate():
@@ -73,13 +73,13 @@ def test_tum_gre_or_gate():
 
 
 def test_tum_never_positive_while_university_decides():
-    rep = check_eligibility(Profile(degree_country="Germany"), *load_ruleset(get_settings(), TUM))
+    rep = check_eligibility(Profile(degree_country="Germany"), *load_ruleset(load_settings(), TUM))
     assert rep.headline == "needs_information_or_review"
     assert rep.criteria[0].reason == "university_review"
 
 
 def test_tum_rules_cite_the_verified_record():
-    s = get_settings()
+    s = load_settings()
     rules, stale = load_ruleset(s, TUM)
     record = json.loads((Path(s.paths.verified_dir) / f"{TUM}.json").read_text())["record"]
     assert not stale
@@ -108,7 +108,7 @@ def test_tum_english_alternatives():
 
 
 def test_tum_review_status():
-    rules, _ = load_ruleset(get_settings(), TUM)
+    rules, _ = load_ruleset(load_settings(), TUM)
     status = {r.id: r.reviewed_by for r in rules.rules}
     hard = ("degree", "gre_or_gate", "english", "aptitude_assessment")
     assert all(status[i] == "human" for i in hard)
@@ -120,7 +120,7 @@ KIT = "kit-m-sc-computer-science"
 
 
 def kit(**facts):
-    return {c.rule_id: c for c in check_eligibility(Profile(**facts), *load_ruleset(get_settings(), KIT)).criteria}
+    return {c.rule_id: c for c in check_eligibility(Profile(**facts), *load_ruleset(load_settings(), KIT)).criteria}
 
 
 FULL = {"theoretical_cs": "15", "practical_cs": "30", "computer_engineering": "8", "mathematics": "25"}
@@ -200,7 +200,7 @@ def test_kit_english_routes():
 def test_kit_headline_never_positive_while_the_university_decides():
     p = Profile(subject_credits=FULL, total_credits="180", credit_unit="ECTS",
                 language=[{"test": "TOEFL iBT", "overall": "95"}])
-    rep = check_eligibility(p, *load_ruleset(get_settings(), KIT))
+    rep = check_eligibility(p, *load_ruleset(load_settings(), KIT))
     assert rep.headline == "needs_information_or_review"
     info = [c for c in rep.criteria if c.rule_id == "module_assignment"][0]
     assert info.severity == "info"  # shown, but never part of the headline

@@ -4,7 +4,7 @@ from decimal import Decimal
 import pytest
 from pydantic import ValidationError
 
-from core.config import get_settings
+from core.config import load_settings
 from eligibility.profile import Profile
 from eligibility.rules import Group, Rule, RuleSet, load_ruleset, record_hash
 
@@ -58,7 +58,7 @@ def test_nested_group_parses():
 
 
 def test_ruleset_bound_to_record_hash(tmp_path):
-    s = get_settings()
+    s = load_settings()
     s.paths.verified_dir, s.paths.rules_dir = str(tmp_path / "v"), str(tmp_path / "r")
     (tmp_path / "v").mkdir(), (tmp_path / "r").mkdir()
     record = {"university": "U", "programme": "P"}
