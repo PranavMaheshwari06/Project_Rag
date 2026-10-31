@@ -1,0 +1,214 @@
+{
+  "schema_version": "rules-v1",
+  "slug": "tu-darmstadt-m-sc-computer-science",
+  "record_sha256": "b87f9260300eb3c064033b3fdd76663bcaf6c373bc1a928bb9b53bb9e8759c17",
+  "rules": [
+    {
+      "id": "degree",
+      "label": "A bachelor's in Informatik (TU Darmstadt's B.Sc. Informatik or an equivalent degree)",
+      "category": "admission",
+      "severity": "hard",
+      "check": {
+        "type": "university_review",
+        "note": "TU Darmstadt decides whether your degree is equivalent to its B.Sc. Informatik (R08). The equivalence decision is separate from the entrance exam result."
+      },
+      "citations": [
+        {
+          "doc_id": "de/tu-darmstadt/cs-msc/programme",
+          "quote": "A degree B.Sc. Informatik of TU Darmstadt (reference programme), or an equivalent degree."
+        }
+      ],
+      "reviewed_by": "pending"
+    },
+    {
+      "id": "degree_ects",
+      "label": "A bachelor's degree of at least 180 ECTS credits (or an equivalent workload)",
+      "category": "admission",
+      "severity": "hard",
+      "check": {
+        "type": "any_of",
+        "children": [
+          {
+            "type": "all_of",
+            "children": [
+              {
+                "type": "in",
+                "fact": "credit_unit",
+                "values": [
+                  "ECTS"
+                ]
+              },
+              {
+                "type": "min",
+                "fact": "total_credits",
+                "value": "180"
+              }
+            ]
+          },
+          {
+            "type": "all_of",
+            "children": [
+              {
+                "type": "in",
+                "fact": "credit_unit",
+                "values": [
+                  "ECTS"
+                ],
+                "negate": true
+              },
+              {
+                "type": "university_review",
+                "note": "Your credits are not in ECTS. The page accepts 'an equivalent workload'; TU Darmstadt decides whether yours equals 180 ECTS."
+              }
+            ]
+          }
+        ]
+      },
+      "citations": [
+        {
+          "doc_id": "de/tu-darmstadt/informatics-master-admission-guide",
+          "quote": "Bachelor’s degree comprising at least 180 ECTS (or an equivalent workload)"
+        }
+      ],
+      "reviewed_by": "pending"
+    },
+    {
+      "id": "core_courses",
+      "label": "At least 60 ECTS of your courses match the core courses of the B.Sc. Informatik (your own count; partial overlaps count proportionally)",
+      "category": "admission",
+      "severity": "hard",
+      "check": {
+        "type": "min",
+        "fact": "subject_credits.core_courses",
+        "value": "60"
+      },
+      "citations": [
+        {
+          "doc_id": "de/tu-darmstadt/informatics-master-admission-guide",
+          "quote": "Minimum 60 ECTS must match the core courses of our B.Sc. Informatik in content, academic level, and depth"
+        },
+        {
+          "doc_id": "de/tu-darmstadt/cs-msc/programme",
+          "quote": "partial overlaps are to be counted proportionally"
+        }
+      ],
+      "reviewed_by": "pending"
+    },
+    {
+      "id": "core_courses_match",
+      "label": "TU Darmstadt confirms that your courses match its core courses in content, level and depth",
+      "category": "admission",
+      "severity": "hard",
+      "check": {
+        "type": "university_review",
+        "note": "Your 60-ECTS count is a self-assessment. TU Darmstadt makes the official content-related evaluation and gives no individual pre-assessment."
+      },
+      "citations": [
+        {
+          "doc_id": "de/tu-darmstadt/informatics-master-admission-guide",
+          "quote": "We do not offer individual pre-assessments of eligibility"
+        },
+        {
+          "doc_id": "de/tu-darmstadt/informatics-master-admission-guide",
+          "quote": "in content, academic level, and depth"
+        }
+      ],
+      "reviewed_by": "pending"
+    },
+    {
+      "id": "entrance_exam",
+      "label": "Entrance exam, only if your documents do not confirm the required competencies: a GRE (verbal 155, quantitative 165, writing 3.5, all in one sitting) or GATE 750 exempts you",
+      "category": "admission",
+      "severity": "hard",
+      "check": {
+        "type": "any_of",
+        "children": [
+          {
+            "type": "all_of",
+            "children": [
+              {
+                "type": "min",
+                "fact": "gre.verbal",
+                "value": "155"
+              },
+              {
+                "type": "min",
+                "fact": "gre.quant",
+                "value": "165"
+              },
+              {
+                "type": "min",
+                "fact": "gre.writing",
+                "value": "3.5"
+              }
+            ]
+          },
+          {
+            "type": "university_review",
+            "note": "TU Darmstadt decides from your documents whether you must sit the 90-minute on-site entrance exam, and what the result is. A GATE overall score of 750 also exempts, but the profile has no GATE score and no exam-result fact yet (ENGINE-GAP). Even with qualifying scores, ask the university if it still invites you."
+          }
+        ]
+      },
+      "citations": [
+        {
+          "doc_id": "de/tu-darmstadt/cs-msc/programme",
+          "quote": "If the required entrance competencies cannot be verified based on the submitted application documents, applicants will be required to take a 90-minute written Entrance Exam held on campus at TU Darmstadt"
+        },
+        {
+          "doc_id": "de/tu-darmstadt/cs-msc/programme",
+          "quote": "Submission of valid GRE or GATE scores meeting the specified thresholds may qualify applicants for exemption from the Entrance Exam."
+        },
+        {
+          "doc_id": "de/tu-darmstadt/informatics-master-admission-guide",
+          "quote": "Verbal Reasoning ≥ 155 Quantitative Reasoning ≥ 165 Analytical Writing ≥ 3.5"
+        },
+        {
+          "doc_id": "de/tu-darmstadt/informatics-master-admission-guide",
+          "quote": "GATE | Overall ≥ 750"
+        },
+        {
+          "doc_id": "de/tu-darmstadt/informatics-master-admission-guide",
+          "quote": "The required minimum scores are binding – there are no exceptions. Missing points in one category cannot be compensated by higher scores in another."
+        }
+      ],
+      "reviewed_by": "pending"
+    },
+    {
+      "id": "english",
+      "label": "Proof of English: IELTS 7.0, TOEFL iBT 95, or official confirmation that your whole bachelor's was taught in English",
+      "category": "admission",
+      "severity": "hard",
+      "check": {
+        "type": "any_of",
+        "children": [
+          {
+            "type": "min",
+            "fact": "language.IELTS.overall",
+            "value": "7.0"
+          },
+          {
+            "type": "min",
+            "fact": "language.TOEFL iBT.overall",
+            "value": "95"
+          },
+          {
+            "type": "min",
+            "fact": "english_instruction_share",
+            "value": "100"
+          }
+        ]
+      },
+      "citations": [
+        {
+          "doc_id": "de/tu-darmstadt/informatics-master-admission-guide",
+          "quote": "IELTS overall ≥ 7.0 or TOEFL iBT ≥ 95"
+        },
+        {
+          "doc_id": "de/tu-darmstadt/informatics-master-admission-guide",
+          "quote": "Or an official confirmation that English was the language of instruction for your entire Bachelor’s programme"
+        }
+      ],
+      "reviewed_by": "pending"
+    }
+  ]
+}

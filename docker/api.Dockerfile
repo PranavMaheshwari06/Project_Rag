@@ -7,7 +7,7 @@ WORKDIR /app
 
 # torch CPU wheels are large; keep them cached in their own layer
 COPY pyproject.toml ./
-RUN pip install --no-cache-dir . && pip uninstall -y engineerdoc-ai
+RUN pip install --no-cache-dir . && pip uninstall -y germany-masters-assistant
 
 COPY api ./api
 COPY core ./core

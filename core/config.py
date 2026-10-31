@@ -29,6 +29,9 @@ class PathsCfg(BaseModel):
     extracted_dir: str = "data/extracted"  # LLM drafts (committed)
     verified_dir: str = "data/verified"  # human-verified records (committed)
     checked_dir: str = "data/checked"  # second-model cross-check of each draft (committed)
+    # reviewed rule catalogue (committed); not in settings.yaml, whose hash the Phase 4 baseline pins
+    rules_dir: str = "data/eligibility/rules"
+    country_groups_path: str = "data/eligibility/country_groups.json"
 
 
 class CrawlCfg(BaseModel):

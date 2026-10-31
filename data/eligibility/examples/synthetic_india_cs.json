@@ -1,0 +1,10 @@
+{
+  "degree_country": "India",
+  "citizenships": ["India"],
+  "degree_title": "B.Tech Computer Science and Engineering",
+  "degree_completed": true,
+  "grade": {"obtained": "8.1", "best": "10", "passing": "5"},
+  "gre": {"quant": "166", "writing": "3.5"},
+  "gate": {"paper": "CS", "year": 2026, "qualified": true},
+  "documents": ["vpd"]
+}

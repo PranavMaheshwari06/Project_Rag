@@ -1,0 +1,250 @@
+{
+  "schema_version": "rules-v1",
+  "slug": "tum-m-sc-informatics",
+  "record_sha256": "b67527c84ef26cfa5b7023fbc2c48784e0bf14b9d1bd94fd1b5d3f55aff1b2a4",
+  "rules": [
+    {
+      "id": "degree",
+      "label": "Bachelor's in Informatics / CS equivalent to the TUM B.Sc. Informatics",
+      "check": {
+        "type": "university_review",
+        "note": "TUM decides whether the degree is equivalent to its B.Sc. Informatics (R01)."
+      },
+      "citations": [
+        {
+          "doc_id": "de/tum/informatics-msc/department",
+          "quote": "Students with a Bachelor’s degree in Informatics / Computer Science which is equivalent to the B.Sc. Informatics taught at TUM are eligible to apply."
+        }
+      ],
+      "reviewed_by": "human"
+    },
+    {
+      "id": "gre_or_gate",
+      "label": "GRE (QR >= 164 and AW >= 4.0) or a qualifying GATE CS scorecard, for degrees from Bangladesh, China, India, Iran or Pakistan",
+      "check": {
+        "type": "when",
+        "when": {
+          "type": "in",
+          "fact": "degree_country",
+          "values": [
+            "Bangladesh",
+            "China",
+            "India",
+            "Iran",
+            "Pakistan"
+          ]
+        },
+        "then": {
+          "type": "any_of",
+          "children": [
+            {
+              "type": "all_of",
+              "children": [
+                {
+                  "type": "min",
+                  "fact": "gre.quant",
+                  "value": "164"
+                },
+                {
+                  "type": "min",
+                  "fact": "gre.writing",
+                  "value": "4.0"
+                }
+              ]
+            },
+            {
+              "type": "all_of",
+              "children": [
+                {
+                  "type": "in",
+                  "fact": "gate.paper",
+                  "values": [
+                    "CS"
+                  ]
+                },
+                {
+                  "type": "in",
+                  "fact": "gate.qualified",
+                  "values": [
+                    true
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "citations": [
+        {
+          "doc_id": "de/tum/informatics-msc/department",
+          "quote": "Applicants with a Degree from Bangladesh, China, India, Iran or Pakistan have to submit a GRE (General) Test. We have defined required minimum scores, lower scores will not be accepted!"
+        },
+        {
+          "doc_id": "de/tum/informatics-msc/department",
+          "quote": "Quantitative reasoning: 164 Analytical writing: 4.0"
+        },
+        {
+          "doc_id": "de/tum/informatics-msc/department",
+          "quote": "Alternatively, students can submit a scorecard of the Indian GATE test (Computer Science; for M.Sc. CSE the Mechanical Engineering Test will also be accepted). The minimal qualifying score of the respective year is necessary."
+        }
+      ],
+      "reviewed_by": "human"
+    },
+    {
+      "id": "english",
+      "label": "Proof of English proficiency: IELTS 6.5, TOEFL iBT 88, PTE 65, Cambridge CAE/CPE grade A-C, or at least 50% of the prior programme taught in English",
+      "check": {
+        "type": "any_of",
+        "children": [
+          {
+            "type": "min",
+            "fact": "language.IELTS.overall",
+            "value": "6.5"
+          },
+          {
+            "type": "min",
+            "fact": "language.TOEFL iBT.overall",
+            "value": "88"
+          },
+          {
+            "type": "min",
+            "fact": "language.PTE Academic.overall",
+            "value": "65"
+          },
+          {
+            "type": "in",
+            "fact": "language.CAE.grade",
+            "values": [
+              "A",
+              "B",
+              "C"
+            ]
+          },
+          {
+            "type": "in",
+            "fact": "language.CPE.grade",
+            "values": [
+              "A",
+              "B",
+              "C"
+            ]
+          },
+          {
+            "type": "min",
+            "fact": "english_instruction_share",
+            "value": "50"
+          },
+          {
+            "type": "university_review",
+            "note": "Other proof TUM may accept (alternative proof under the programme's FPSO, the new TOEFL 1-6 scale) is not modelled; TUM decides."
+          }
+        ]
+      },
+      "citations": [
+        {
+          "doc_id": "de/tum/language-certificates",
+          "quote": "Only English language certificates of the below mentioned list are recognized. Other English language certificates are not recognized."
+        },
+        {
+          "doc_id": "de/tum/language-certificates",
+          "quote": "Internet based Test (iBT): 88. Only the Test Date Score is valid, MyBest Score will not be accepted."
+        },
+        {
+          "doc_id": "de/tum/language-certificates",
+          "quote": "IELTS Academic with a minimum overall band score of 6.5."
+        },
+        {
+          "doc_id": "de/tum/language-certificates",
+          "quote": "PTE Academic with an Overall Score of at least 65 points."
+        },
+        {
+          "doc_id": "de/tum/language-certificates",
+          "quote": "CAE (Cambridge Advanced English), Grades A, B, C"
+        },
+        {
+          "doc_id": "de/tum/language-certificates",
+          "quote": "The language of instruction needs to have been English in at least 50% of the program."
+        },
+        {
+          "doc_id": "de/tum/language-certificates",
+          "quote": "In some cases, an alternative form of proof of language proficiency may be submitted in place of a language certificate."
+        }
+      ],
+      "reviewed_by": "human"
+    },
+    {
+      "id": "aptitude_assessment",
+      "label": "TUM aptitude assessment (points on grades and documents, possibly an interview)",
+      "check": {
+        "type": "university_review",
+        "note": "TUM scores grades and documents and admits, rejects or invites to an interview; no published formula to compute."
+      },
+      "citations": [
+        {
+          "doc_id": "de/tum/informatics-msc/programme",
+          "quote": "Depending on the amount of points accumulated, applicants are either immediately admitted, rejected, or invited to an admissions interview."
+        }
+      ],
+      "reviewed_by": "human"
+    },
+    {
+      "id": "aps",
+      "label": "APS certificate, for degrees from China, India or Vietnam",
+      "category": "readiness",
+      "check": {
+        "type": "when",
+        "when": {
+          "type": "in",
+          "fact": "degree_country",
+          "values": [
+            "China",
+            "India",
+            "Vietnam"
+          ]
+        },
+        "then": {
+          "type": "in",
+          "fact": "documents",
+          "values": [
+            "aps_certificate"
+          ]
+        }
+      },
+      "citations": [
+        {
+          "doc_id": "de/tum/informatics-msc/department",
+          "quote": "Applicants with an undergraduate degree from China, India and Vietnam have to submit a certificate from the German Evaluation Center (APS)."
+        }
+      ]
+    },
+    {
+      "id": "vpd",
+      "label": "VPD from uni-assist, for a qualifying degree from outside Germany",
+      "category": "readiness",
+      "check": {
+        "type": "when",
+        "when": {
+          "type": "in",
+          "fact": "degree_country",
+          "values": [
+            "Germany"
+          ],
+          "negate": true
+        },
+        "then": {
+          "type": "in",
+          "fact": "documents",
+          "values": [
+            "vpd"
+          ]
+        }
+      },
+      "citations": [
+        {
+          "doc_id": "de/tum/informatics-msc/department",
+          "quote": "Applicants who did not obtain their qualification for postgraduate studies (usually a bachelor's degree) in Germany must apply for a preliminary documentation (VPD) from uni-assist, additionally to the TUM application."
+        }
+      ]
+    }
+  ]
+}

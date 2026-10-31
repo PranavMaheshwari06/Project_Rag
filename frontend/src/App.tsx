@@ -11,7 +11,7 @@ export default function App() {
     <div className="app">
       <header className="app-header">
         <div>
-          <h1>EngineerDoc AI</h1>
+          <h1>Germany Masters Eligibility Assistant</h1>
           <p className="subtitle">Hybrid retrieval over technical docs — dense + BM25 + RRF + rerank</p>
         </div>
         <nav className="tabs">

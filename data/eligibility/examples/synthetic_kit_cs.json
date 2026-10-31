@@ -1,0 +1,10 @@
+{
+  "degree_country": "India",
+  "total_credits": "180",
+  "credit_unit": "ECTS",
+  "subject_credits": {"theoretical_cs": "16", "practical_cs": "31", "computer_engineering": "6", "mathematics": "26"},
+  "grade": {"obtained": "8.8", "best": "10", "passing": "5", "class_rank_percentile": "8"},
+  "gre": {"verbal": "152", "quant": "167", "writing": "4.5"},
+  "gate": {"paper": "CS", "qualified": false},
+  "language": [{"test": "TOEFL iBT", "overall": "96"}]
+}
