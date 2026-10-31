@@ -9,8 +9,6 @@
   "hash_method": "sha256; files are raw bytes; record hashes use original record JSON with sorted keys, compact separators and UTF-8 ensure_ascii=False; text hashes use cleaned source UTF-8.",
   "baseline_inputs": {
     "config/settings.yaml": "fc4759c12f5452628b227c9ef8f96ba7ffda82217b39323b8ada24b0eaf15d76",
-    "data/audit/Audit_sheet_completed.md": "02fe07ff1412744792d022708f60a542fb3cdc55689981d20df9c9ce02e9c8ab",
-    "data/audit/audit_sheet.md": "cd3a3c2c811603ea3490c895b02da7742e5499babe47ac08ee666fa7c2bb1df6",
     "data/audit/second_pass_audit.json": "1380635bf248f8087012260c785823a3a720dfebdc30ffa6195174f6d818c096",
     "data/checked/kit-m-sc-computational-and-data-science.json": "b5bf8372c3e1988d3b3d383cdce04f3c7455270036d38234abb3c2f7adc17161",
     "data/checked/kit-m-sc-computer-science.json": "fe21342cf7d081c1bd0bbb1afe13af1cdac4398f40072cd42e5e96dfb3d49779",
