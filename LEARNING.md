@@ -290,3 +290,28 @@ Possible quiz question: why is a quote that is on the page but missing from the 
 Cambridge guard (kept): KIT publishes no minimum grade for CAE, CPE or FCE; the engine counts grades A to C ("passed at the exam's own level") and does not count a certificate issued at a lower level, such as a Level B2 CAE result.
 
 Possible quiz question: why does a country missing from a list mean "test needed" but a disputed member mean "university decides"?
+
+### Phase 6 Step 3 batch (2026-11-02): rule files for the other 11 programmes
+
+**What was built.** Rule files for RWTH Aachen (CS, Data Science), Saarland (CS, Data Science and AI), TU Darmstadt (CS, AI and ML), TUM Data Engineering and Analytics, KIT Computational and Data Science, TU Berlin CS, TU Dresden CS and Stuttgart CS, each with its test file. Together with TUM Informatics and KIT CS that is 13 files. `make eligibility ARGS="--validate"` checks all 13 for staleness against the verified records and, where the raw page cache exists, every quote.
+
+**Maintainer decisions (2026-11-02).** The 70 rules in the 11 new files are `reviewed_by: human`. The cross-cutting answers:
+- X2: the 2026 TOEFL 1-6 scale is a separate test name wherever a page publishes a new-scale minimum (RWTH 4.5, Saarland 5, Dresden 5.0, Stuttgart 5). A new-scale score can now pass or fail on its own.
+- X3: a credit total in a unit other than ECTS is "the university decides" everywhere, because the engine does not convert units; KIT CS and KIT CDS no longer fail it.
+- X4: where a page gives a closed list of English proofs, failing every listed proof is "does not meet"; where the page says other proof may count, the rule falls back to "the university decides".
+- D14 corrected: TU Darmstadt's programme pages ask for English at C1 while the admission guide lists only IELTS, TOEFL iBT and English-taught study, so any other proof is "TU Darmstadt decides" instead of a fail. This is the one place where X4 was overridden because two official pages disagree.
+- D05: the RWTH Data Science GRE exemption is built from existing facts (citizenship of an EU country, Iceland, Liechtenstein or Norway, or schooling in Germany). A known non-exempt student can fail it; unknown facts never exempt.
+- X1 (accepted, not yet built): a profile fact for "the university confirmed my degree equivalence". It is deferred to before Step 5 because it changes the degree rule in all 13 files, including the already-accepted TUM Informatics rule, and because it alone does not unlock a positive headline: programmes that also have a hard selection or aptitude step (Saarland, TUM, Dresden, Stuttgart, Darmstadt, KIT) stay "needs review" even with it.
+
+**Known limits carried forward.**
+- Dates are not modelled (test age, certificate validity, deadlines), so those are notes.
+- Quotes added from the cached pages (TUM English, KIT CDS English, D05) are only checked where `data/raw` exists; CI prints "not checked". Run `make eligibility ARGS="--validate --check-cache"` locally before relying on them.
+- The credit unit is free text, so "LP" or "ECTS credits" sends KIT to "KIT decides". The profile form should offer a fixed list of units.
+- IELTS Academic versus General is not recorded; any IELTS score is read as Academic.
+
+**Possible quiz questions.**
+1. Why does a closed list of accepted English tests produce "does not meet" while an open list produces "the university decides"? Name the case where two official pages disagree and what was decided.
+2. Why can the engine not convert a credit total from another unit, and what does it say instead?
+3. Why does accepting the degree-equivalence fact (X1) not by itself make every programme show a positive verdict?
+4. Why does a missing citizenship make the RWTH Data Science GRE rule "unknown" rather than "exempt"?
+
