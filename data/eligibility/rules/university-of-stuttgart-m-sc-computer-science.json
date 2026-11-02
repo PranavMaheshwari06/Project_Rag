@@ -16,7 +16,7 @@
           "quote": "General requirement is a bachelor's degree (or equivalent) with a duration of at least 6 semesters in Computer Science, Software Engineering or in a subject closely related."
         }
       ],
-      "reviewed_by": "pending"
+      "reviewed_by": "human"
     },
     {
       "id": "english",
@@ -172,7 +172,7 @@
           "quote": "If you are a national with citizenship and education in one of the countries listed below, you do not need to upload one of the English proficiency proofs listed above."
         }
       ],
-      "reviewed_by": "pending"
+      "reviewed_by": "human"
     },
     {
       "id": "english_validity",
@@ -187,7 +187,7 @@
           "quote": "The uploaded certificate has to be valid at least until the application deadline (15th of January/July)."
         }
       ],
-      "reviewed_by": "pending"
+      "reviewed_by": "human"
     },
     {
       "id": "admission_board",
@@ -206,7 +206,7 @@
           "quote": "In case of the latter, an interview or an entrance examination may be necessary."
         }
       ],
-      "reviewed_by": "pending"
+      "reviewed_by": "human"
     }
   ]
 }

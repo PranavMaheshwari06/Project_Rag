@@ -89,6 +89,19 @@ def test_english_routes_boundaries():
         assert fn()["english"] == "unknown"
 
 
+def test_english_new_toefl_scale_is_a_separate_test():
+    for fn in (cs, ds):
+        new = lambda score: fn(language=[{"test": "TOEFL iBT (2026 scale)", "overall": score}])["english"]  # noqa: E731
+        assert new("4.5") == "meets"
+        assert new("6") == "meets"
+        assert new("4.0") == "unknown"   # RWTH may accept other proof: not a failure
+        # a new-scale score entered as TOEFL iBT is read on the 0-120 scale, never guessed
+        assert fn(language=[{"test": "TOEFL iBT", "overall": "5"}])["english"] == "unknown"
+    rules, _ = load_ruleset(load_settings(), DS)
+    review = {r.id: r for r in rules.rules}["english"].check.children[-1]
+    assert review.type == "university_review" and "4.5" not in review.note
+
+
 def test_english_exemption_needs_a_known_country():
     for fn in (cs, ds):
         assert fn(degree_country="Canada")["english"] == "meets"
@@ -105,21 +118,52 @@ def test_cs_degree_is_the_examination_boards_call():
 
 
 # --- Data Science ---------------------------------------------------------------
-def test_ds_gre_strict_bounds():
-    assert ds(gre=gre())["gre"] == "meets"
-    # failing GRE is never shown as a failure: EU/EEA citizens and German schooling are exempt (not built)
-    for g in (gre(q="75"), gre(v="15"), gre(w="3.4")):
-        assert ds(gre=g)["gre"] == "unknown"
+INDIAN = {"citizenships": ["India"], "school_country": "India"}   # known, not exempt
+
+
+def test_ds_gre_strict_bounds_for_a_non_exempt_student():
+    assert ds(**INDIAN, gre=gre())["gre"] == "meets"
+    assert ds(**INDIAN, gre=gre(w="3.5"))["gre"] == "meets"          # "minimum score 3.5"
+    for g in (gre(q="75"), gre(v="15"), gre(w="3.4")):                # "above": equality fails
+        assert ds(**INDIAN, gre=g)["gre"] == "does_not_meet"
+    # needed but no GRE entered: the normal missing-fact unknown, not a failure
+    r = {c.rule_id: c for c in report(DS, **INDIAN).criteria}["gre"]
+    assert (r.verdict, r.reason) == ("unknown", "missing_fact")
+    assert ds(**INDIAN, gre={})["gre"] == "unknown"
+
+
+def test_ds_gre_exempt_by_eu_or_eea_citizenship():
+    for country in ("Germany", "France", "Czechia", "Norway", "Iceland", "Liechtenstein"):
+        assert ds(citizenships=[country], school_country="India")["gre"] == "not_applicable", country
+        # exempt whatever the score, and whether or not the school country is known
+        assert ds(citizenships=[country], gre=gre(q="1"))["gre"] == "not_applicable", country
+    # one exempting citizenship is enough
+    assert ds(citizenships=["India", "France"], school_country="India")["gre"] == "not_applicable"
+
+
+def test_ds_gre_exempt_by_secondary_education_in_germany():
+    assert ds(citizenships=["India"], school_country="Germany")["gre"] == "not_applicable"
+    assert ds(school_country="Germany", gre=gre(q="1"))["gre"] == "not_applicable"   # citizenship not needed
+
+
+def test_ds_gre_not_exempt_outside_the_eu_and_eea():
+    # Switzerland and the UK are neither EU nor EEA: the GRE is needed
+    for country in ("Switzerland", "United Kingdom", "India"):
+        assert ds(citizenships=[country], school_country="India", gre=gre(q="60"))["gre"] == "does_not_meet"
+    # the CS basis is not reused: a degree from an EU country does not exempt
+    assert ds(**INDIAN, degree_country="Germany", gre=gre(q="60"))["gre"] == "does_not_meet"
+    # "no citizenship" said explicitly is not an exemption
+    assert ds(citizenships=[], school_country="India", gre=gre(q="60"))["gre"] == "does_not_meet"
+
+
+def test_ds_gre_exemption_never_granted_on_unknown():
     assert ds()["gre"] == "unknown"
-
-
-def test_ds_never_exempt_on_citizenship_or_schooling():
-    # the exemption is a university decision, not computed: an EU citizen without a GRE is not "meets"
-    assert ds(citizenships=["Germany"])["gre"] == "unknown"
-    assert ds(school_country="Germany")["gre"] == "unknown"
-    assert ds(citizenships=["Germany"], school_country="Germany", gre=gre(q="1"))["gre"] == "unknown"
-    # the CS country basis must not be reused here: a degree from an EU country does not exempt
+    assert ds(gre=gre(q="1"))["gre"] == "unknown"                          # condition unresolved, not a fail
+    assert ds(citizenships=["India"])["gre"] == "unknown"                  # school country might be Germany
+    assert ds(school_country="India")["gre"] == "unknown"                  # citizenship might be EU
     assert ds(degree_country="Germany")["gre"] == "unknown"
+    r = {c.rule_id: c for c in report(DS, citizenships=["India"]).criteria}["gre"]
+    assert (r.verdict, r.reason) == ("unknown", "missing_fact")
 
 
 def test_ds_degree_and_profile_are_university_reviews():
@@ -136,10 +180,17 @@ def test_ds_english_is_an_admission_rule():
 
 
 def test_ds_headline_never_positive_while_a_hard_review_remains():
-    rep = report(DS, gre=gre(), degree_country="India", **ielts("7.5"))
+    rep = report(DS, **INDIAN, gre=gre(), degree_country="India", **ielts("7.5"))
     assert rep.headline == "needs_information_or_review"
-    # a known failure elsewhere still wins over pending review: needs a rule that can fail, here none can for DS
     assert all(c.verdict != "does_not_meet" for c in rep.criteria)
+    # an exempt student is not held back by the GRE, but the hard reviews remain
+    assert report(DS, citizenships=["Germany"], **ielts("7.5")).headline == "needs_information_or_review"
+
+
+def test_ds_headline_fails_on_known_gre_failure():
+    assert report(DS, **INDIAN, gre=gre(q="40")).headline == "does_not_meet_published_requirements"
+    # the same score from an exempt student does not fail the headline
+    assert report(DS, citizenships=["Norway"], gre=gre(q="40")).headline == "needs_information_or_review"
 
 
 def test_cs_headline_fails_on_known_gre_failure():
@@ -147,12 +198,12 @@ def test_cs_headline_fails_on_known_gre_failure():
 
 
 # --- Both: citations and review status ------------------------------------------
-def test_rules_cite_the_verified_record_and_are_pending():
+def test_rules_cite_the_verified_record_and_are_reviewed():
     s = load_settings()
     for slug in (CS, DS):
         rules, stale = load_ruleset(s, slug)
         record = json.loads((Path(s.paths.verified_dir) / f"{slug}.json").read_text())["record"]
         assert not stale
-        assert all(r.reviewed_by == "pending" for r in rules.rules)
+        assert all(r.reviewed_by == "human" for r in rules.rules)
         # quotes the record omits must sit on cached HTML pages: the PDF cannot be re-checked from raw
         assert all(doc != "de/rwth/language-requirements-pdf" for _, doc, _ in uncited_quotes(rules, record))

@@ -16,7 +16,7 @@
           "quote": "Bachelor's degree from a German university (at least 180 CP) or an equivalent qualification from a foreign university in computer science, informatics or a related field"
         }
       ],
-      "reviewed_by": "pending"
+      "reviewed_by": "human"
     },
     {
       "id": "degree_credits",
@@ -64,7 +64,7 @@
           "quote": "Bachelor's degree from a German university (at least 180 CP) or an equivalent qualification from a foreign university in computer science, informatics or a related field"
         }
       ],
-      "reviewed_by": "pending"
+      "reviewed_by": "human"
     },
     {
       "id": "curricular_content",
@@ -79,7 +79,7 @@
           "quote": "Applicants to the DSAI Master’s Program are expected to have a solid background in computer science, machine learning, and artificial intelligence."
         }
       ],
-      "reviewed_by": "pending"
+      "reviewed_by": "human"
     },
     {
       "id": "grade_cgpa",
@@ -145,7 +145,7 @@
           "quote": "Minimal application prerequisite is a cumulative undergraduate grade point average (CGPA) of 75% or 3.00 GPA on a 4 point scale and ranking in the top 10% of the graduating class."
         }
       ],
-      "reviewed_by": "pending"
+      "reviewed_by": "human"
     },
     {
       "id": "class_rank",
@@ -161,7 +161,7 @@
           "quote": "ranking in the top 10% of the graduating class"
         }
       ],
-      "reviewed_by": "pending"
+      "reviewed_by": "human"
     },
     {
       "id": "entrance_test",
@@ -207,7 +207,7 @@
           "quote": "There is no minimum score requirement and we accept home editions of the GRE/GATE tests"
         }
       ],
-      "reviewed_by": "pending"
+      "reviewed_by": "human"
     },
     {
       "id": "branch_campus",
@@ -223,11 +223,11 @@
           "quote": "There are no exceptions from this requirement for degrees from branch campuses located in non-EHEA countries."
         }
       ],
-      "reviewed_by": "pending"
+      "reviewed_by": "human"
     },
     {
       "id": "english",
-      "label": "English at level C1: IELTS 7.0, TOEFL iBT 95, TOEFL paper-based 600, Cambridge C1 Advanced or C2 Proficiency (grade A to C), or PTE Academic 76",
+      "label": "English at level C1: IELTS 7.0, TOEFL iBT 95 (5 on the 2026 scale), TOEFL paper-based 600, Cambridge C1 Advanced or C2 Proficiency (grade A to C), or PTE Academic 76",
       "check": {
         "type": "any_of",
         "children": [
@@ -240,6 +240,11 @@
             "type": "min",
             "fact": "language.TOEFL iBT.overall",
             "value": "95"
+          },
+          {
+            "type": "min",
+            "fact": "language.TOEFL iBT (2026 scale).overall",
+            "value": "5"
           },
           {
             "type": "min",
@@ -268,28 +273,6 @@
             "type": "min",
             "fact": "language.PTE Academic.overall",
             "value": "76"
-          },
-          {
-            "type": "when",
-            "when": {
-              "type": "any_of",
-              "children": [
-                {
-                  "type": "max",
-                  "fact": "language.TOEFL iBT.overall",
-                  "value": "6"
-                },
-                {
-                  "type": "max",
-                  "fact": "language.TOEFL PBT.overall",
-                  "value": "6"
-                }
-              ]
-            },
-            "then": {
-              "type": "university_review",
-              "note": "Scores up to 6 look like the new 2026 TOEFL scale, where the page asks for 5 out of 6; the profile cannot tell the scale, so Saarland decides."
-            }
           },
           {
             "type": "when",
@@ -365,7 +348,7 @@
           "quote": "certificates with good or very good grades are examined individually"
         }
       ],
-      "reviewed_by": "pending"
+      "reviewed_by": "human"
     },
     {
       "id": "examination_board",
@@ -380,7 +363,7 @@
           "quote": "The decision whether the programme admission requirements have been met is made by the Examination Board."
         }
       ],
-      "reviewed_by": "pending"
+      "reviewed_by": "human"
     },
     {
       "id": "aps",
@@ -411,7 +394,7 @@
           "quote": "Applicants who have obtained their university degree in China, India or Vietnam are required to submit the original ( digitally signed ) APS Certificate issued by the Academic Evaluation Center (Akademische Prüfstelle) in the corresponding country with the application."
         }
       ],
-      "reviewed_by": "pending"
+      "reviewed_by": "human"
     }
   ]
 }

@@ -16,7 +16,7 @@
           "quote": "An applicant must have a first degree in Computer Science, Mathematics, Physics or a closely related area awarded by an internationally recognised university-level institution"
         }
       ],
-      "reviewed_by": "pending"
+      "reviewed_by": "human"
     },
     {
       "id": "module_profile",
@@ -35,41 +35,59 @@
           "quote": "The contents of the modules must be comparable to the RWTH’s modules."
         }
       ],
-      "reviewed_by": "pending"
+      "reviewed_by": "human"
     },
     {
       "id": "gre",
-      "label": "GRE General Test: Quantitative above the 75th percentile, Verbal above the 15th percentile, Writing at least 3.5, unless you are an EU/EEA citizen or completed secondary education in Germany",
+      "label": "GRE General Test: Quantitative above the 75th percentile, Verbal above the 15th percentile, Writing at least 3.5; not needed if you are a citizen of an EU country, Iceland, Liechtenstein or Norway, or completed secondary education in Germany",
       "check": {
-        "type": "any_of",
-        "children": [
-          {
-            "type": "all_of",
-            "children": [
-              {
-                "type": "min",
-                "fact": "gre.quant_percentile",
-                "value": "75",
-                "strict": true
-              },
-              {
-                "type": "min",
-                "fact": "gre.verbal_percentile",
-                "value": "15",
-                "strict": true
-              },
-              {
-                "type": "min",
-                "fact": "gre.writing",
-                "value": "3.5"
-              }
-            ]
-          },
-          {
-            "type": "university_review",
-            "note": "The GRE is not required for citizens of the EU or the EEA, or for applicants who completed secondary education in Germany (Abitur or equivalent). These exemptions are not modelled yet, so a failing or missing GRE is never shown as a failure: RWTH decides."
-          }
-        ]
+        "type": "when",
+        "when": {
+          "type": "all_of",
+          "children": [
+            {
+              "type": "in",
+              "fact": "citizenships",
+              "values": [
+                "@EU",
+                "Iceland",
+                "Liechtenstein",
+                "Norway"
+              ],
+              "negate": true
+            },
+            {
+              "type": "in",
+              "fact": "school_country",
+              "values": [
+                "Germany"
+              ],
+              "negate": true
+            }
+          ]
+        },
+        "then": {
+          "type": "all_of",
+          "children": [
+            {
+              "type": "min",
+              "fact": "gre.quant_percentile",
+              "value": "75",
+              "strict": true
+            },
+            {
+              "type": "min",
+              "fact": "gre.verbal_percentile",
+              "value": "15",
+              "strict": true
+            },
+            {
+              "type": "min",
+              "fact": "gre.writing",
+              "value": "3.5"
+            }
+          ]
+        }
       },
       "citations": [
         {
@@ -85,11 +103,11 @@
           "quote": "The GRE general test result must be provided with the application for admission before the application for admission deadline."
         }
       ],
-      "reviewed_by": "pending"
+      "reviewed_by": "human"
     },
     {
       "id": "english",
-      "label": "Proof of English with the application: TOEFL iBT 90, academic IELTS 6.0, Cambridge B2 First grade B or better, C1 Advanced, C2 Proficiency, PTE Academic 60, UNIcert II or higher",
+      "label": "Proof of English with the application: TOEFL iBT 90 (4.5 on the 2026 scale), academic IELTS 6.0, Cambridge B2 First grade B or better, C1 Advanced, C2 Proficiency, PTE Academic 60, UNIcert II or higher",
       "check": {
         "type": "any_of",
         "children": [
@@ -97,6 +115,11 @@
             "type": "min",
             "fact": "language.TOEFL iBT.overall",
             "value": "90"
+          },
+          {
+            "type": "min",
+            "fact": "language.TOEFL iBT (2026 scale).overall",
+            "value": "4.5"
           },
           {
             "type": "min",
@@ -171,7 +194,7 @@
           },
           {
             "type": "university_review",
-            "note": "Other English proof RWTH accepts is not modelled: a school certificate at level B2, the TOEFL total score of 4.5, the RWTH placement test for enrolled students; the general IELTS does not count, only the academic one. RWTH decides."
+            "note": "Other English proof RWTH accepts is not modelled: a school certificate at level B2, the RWTH placement test for enrolled students; the general IELTS does not count, only the academic one. RWTH decides."
           }
         ]
       },
@@ -217,7 +240,7 @@
           "quote": "For an IELTS test, note that it must be the academic IELTS test, not the general IELTS test."
         }
       ],
-      "reviewed_by": "pending"
+      "reviewed_by": "human"
     }
   ]
 }

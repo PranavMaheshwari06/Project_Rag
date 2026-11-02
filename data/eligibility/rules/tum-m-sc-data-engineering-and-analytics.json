@@ -16,7 +16,7 @@
           "quote": "Students with a Bachelor’s degree in Informatics / Computer Science which is equivalent to the B.Sc. Informatics taught at TUM are eligible to apply."
         }
       ],
-      "reviewed_by": "pending"
+      "reviewed_by": "human"
     },
     {
       "id": "gre_or_gate",
@@ -88,7 +88,7 @@
           "quote": "Alternatively, students can submit a scorecard of the Indian GATE test (Computer Science; for M.Sc. CSE the Mechanical Engineering Test will also be accepted). The minimal qualifying score of the respective year is necessary."
         }
       ],
-      "reviewed_by": "pending"
+      "reviewed_by": "human"
     },
     {
       "id": "english",
@@ -178,7 +178,7 @@
           "quote": "Evidence of your language proficiency has to be submitted before the end of the application deadline."
         }
       ],
-      "reviewed_by": "pending"
+      "reviewed_by": "human"
     },
     {
       "id": "aptitude_assessment",
@@ -197,7 +197,7 @@
           "quote": "Depending on the amount of points accumulated, applicants are either immediately admitted, rejected, or invited to an admissions interview."
         }
       ],
-      "reviewed_by": "pending"
+      "reviewed_by": "human"
     },
     {
       "id": "aps",
@@ -228,7 +228,7 @@
           "quote": "Applicants with an undergraduate degree from China, India and Vietnam have to submit a certificate from the German Evaluation Center (APS)."
         }
       ],
-      "reviewed_by": "pending"
+      "reviewed_by": "human"
     },
     {
       "id": "vpd",
@@ -258,7 +258,7 @@
           "quote": "Applicants who did not obtain their qualification for postgraduate studies (usually a bachelor's degree) in Germany must apply for a preliminary documentation (VPD) from uni-assist, additionally to the TUM application."
         }
       ],
-      "reviewed_by": "pending"
+      "reviewed_by": "human"
     }
   ]
 }

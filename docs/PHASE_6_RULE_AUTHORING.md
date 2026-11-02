@@ -126,8 +126,12 @@ ENGINE-GAP (section 9).
 - Cambridge: grades A-C count; a certificate issued at a lower level does not.
 - Age limits on GRE/GATE/language certificates are not modelled (no date engine):
   write a hard `university_review` with a clear note. Skip deadlines and fees.
-- EEA is not a group; RWTH DS citizenship/schooling exemptions are not built:
-  `university_review` + ENGINE-GAP.
+- EEA is not a group. Write the three non-EU EEA countries (Iceland, Liechtenstein,
+  Norway) next to `@EU` in the `in` values (see the RWTH Data Science GRE rule).
+- The 2026 TOEFL 1-6 scale is its own test name, `TOEFL iBT (2026 scale)`; add a
+  branch for it wherever a page publishes a new-scale minimum.
+- A credit minimum that pairs with `credit_unit` uses `any_of[all_of[ECTS, min], all_of[not ECTS,
+  university_review]]`: another unit is the university's call, never a fail.
 - Rule citations may quote the cached raw page where the cleaned corpus lost text
   (TUM language page parser bug, fix deferred to Phase 5).
 - Never invent a threshold. Unresolved or non-modelled items become

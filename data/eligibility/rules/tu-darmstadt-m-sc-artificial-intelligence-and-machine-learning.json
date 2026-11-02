@@ -18,7 +18,7 @@
           "quote": "A degree B.Sc. Informatik of TU Darmstadt (reference programme), or an equivalent degree."
         }
       ],
-      "reviewed_by": "pending"
+      "reviewed_by": "human"
     },
     {
       "id": "degree_ects",
@@ -70,7 +70,7 @@
           "quote": "Bachelor’s degree comprising at least 180 ECTS (or an equivalent workload)"
         }
       ],
-      "reviewed_by": "pending"
+      "reviewed_by": "human"
     },
     {
       "id": "core_courses",
@@ -92,7 +92,7 @@
           "quote": "partial overlaps are to be counted proportionally"
         }
       ],
-      "reviewed_by": "pending"
+      "reviewed_by": "human"
     },
     {
       "id": "core_courses_match",
@@ -113,7 +113,7 @@
           "quote": "in content, academic level, and depth"
         }
       ],
-      "reviewed_by": "pending"
+      "reviewed_by": "human"
     },
     {
       "id": "entrance_exam",
@@ -171,11 +171,11 @@
           "quote": "The required minimum scores are binding – there are no exceptions. Missing points in one category cannot be compensated by higher scores in another."
         }
       ],
-      "reviewed_by": "pending"
+      "reviewed_by": "human"
     },
     {
       "id": "english",
-      "label": "Proof of English: IELTS 7.0, TOEFL iBT 95, or official confirmation that your whole bachelor's was taught in English",
+      "label": "Proof of English: IELTS 7.0, TOEFL iBT 95, or official confirmation that your whole bachelor's was taught in English; TU Darmstadt decides on any other proof",
       "category": "admission",
       "severity": "hard",
       "check": {
@@ -195,6 +195,10 @@
             "type": "min",
             "fact": "english_instruction_share",
             "value": "100"
+          },
+          {
+            "type": "university_review",
+            "note": "The admission guide lists only IELTS, TOEFL iBT and English-taught bachelor's study; TU Darmstadt decides whether any other proof of English counts."
           }
         ]
       },
@@ -208,7 +212,7 @@
           "quote": "Or an official confirmation that English was the language of instruction for your entire Bachelor’s programme"
         }
       ],
-      "reviewed_by": "pending"
+      "reviewed_by": "human"
     }
   ]
 }

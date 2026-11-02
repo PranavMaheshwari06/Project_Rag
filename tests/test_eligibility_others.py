@@ -25,10 +25,10 @@ def lang(*entries):
 
 
 @pytest.mark.parametrize("slug", [TUB, TUD, STU])
-def test_rule_files_are_current_and_pending(slug):
+def test_rule_files_are_current_and_reviewed(slug):
     rules, stale = load_ruleset(load_settings(), slug)
     assert not stale
-    assert all(r.reviewed_by == "pending" for r in rules.rules)
+    assert all(r.reviewed_by == "human" for r in rules.rules)
 
 
 @pytest.mark.parametrize("slug", [TUB, TUD, STU])

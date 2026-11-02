@@ -75,10 +75,25 @@ def test_english_alternatives(slug):
     assert eng(**{"language": [{"test": "TOEFL iBT", "overall": "94"}]}) == "unknown"
     assert eng(english_instruction_share="100") == "meets"
     assert eng(english_instruction_share="99") == "unknown"
-    # every published route failed
-    assert eng(language=[{"test": "IELTS", "overall": "6.5"}, {"test": "TOEFL iBT", "overall": "90"}],
-               english_instruction_share="80") == "does_not_meet"
+    # every listed route failed: other C1 proof is TU Darmstadt's call (D14), never a fail
+    r = crit(slug, language=[{"test": "IELTS", "overall": "6.5"}, {"test": "TOEFL iBT", "overall": "90"}],
+             english_instruction_share="80")["english"]
+    assert (r.verdict, r.reason) == ("unknown", "university_review")
     assert eng() == "unknown"
+
+
+@BOTH
+def test_english_other_c1_proof_is_the_universitys_call(slug):
+    eng = lambda **f: crit(slug, **f)["english"]  # noqa: E731
+    # Cambridge C1 Advanced only: not on the guide's list, so TU Darmstadt decides
+    cae = eng(language=[{"test": "CAE", "grade": "A"}], english_instruction_share="0")
+    assert (cae.verdict, cae.reason) == ("unknown", "university_review")
+    assert eng(language=[{"test": "CAE", "grade": "A"}]).verdict == "unknown"
+    # TOEFL one point short and nothing else: unknown, not does_not_meet
+    toefl = eng(language=[{"test": "TOEFL iBT", "overall": "94"}], english_instruction_share="0")
+    assert (toefl.verdict, toefl.reason) == ("unknown", "university_review")
+    # a listed proof still meets on its own
+    assert eng(language=[{"test": "IELTS", "overall": "7.0"}, {"test": "CAE", "grade": "A"}]).verdict == "meets"
 
 
 @BOTH
@@ -98,9 +113,9 @@ def test_a_known_failure_still_shows_in_the_headline(slug):
     assert rep.headline == "does_not_meet_published_requirements"
 
 
-def test_rules_are_pending_and_all_hard():
+def test_rules_are_reviewed_and_all_hard():
     for slug in (CS, AIML):
         rules, stale = load_ruleset(load_settings(), slug)
         assert not stale
-        assert {r.reviewed_by for r in rules.rules} == {"pending"}
+        assert {r.reviewed_by for r in rules.rules} == {"human"}
         assert {r.severity for r in rules.rules} == {"hard"}

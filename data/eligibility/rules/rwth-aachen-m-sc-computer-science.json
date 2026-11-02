@@ -20,7 +20,7 @@
           "quote": "Applied computer science: programming, data structures and algorithms, databases and information systems, software engineering"
         }
       ],
-      "reviewed_by": "pending"
+      "reviewed_by": "human"
     },
     {
       "id": "gre",
@@ -72,11 +72,11 @@
           "quote": "Additionally you need at least 3.5 points in analytical writing (GRE-AW)."
         }
       ],
-      "reviewed_by": "pending"
+      "reviewed_by": "human"
     },
     {
       "id": "english",
-      "label": "Proof of English, needed to enrol: TOEFL iBT 90, IELTS 6.0, Cambridge B2 First grade B or better, C1 Advanced, C2 Proficiency, PTE Academic 60, UNIcert II or higher",
+      "label": "Proof of English, needed to enrol: TOEFL iBT 90 (4.5 on the 2026 scale), IELTS 6.0, Cambridge B2 First grade B or better, C1 Advanced, C2 Proficiency, PTE Academic 60, UNIcert II or higher",
       "category": "readiness",
       "check": {
         "type": "any_of",
@@ -85,6 +85,11 @@
             "type": "min",
             "fact": "language.TOEFL iBT.overall",
             "value": "90"
+          },
+          {
+            "type": "min",
+            "fact": "language.TOEFL iBT (2026 scale).overall",
+            "value": "4.5"
           },
           {
             "type": "min",
@@ -159,7 +164,7 @@
           },
           {
             "type": "university_review",
-            "note": "Other English proof RWTH accepts is not modelled: a school certificate at level B2, an English-language bachelor's thesis (the examination board decides), the TOEFL total score of 4.5, the RWTH placement test for enrolled students. RWTH decides."
+            "note": "Other English proof RWTH accepts is not modelled: a school certificate at level B2, an English-language bachelor's thesis (the examination board decides), the RWTH placement test for enrolled students. RWTH decides."
           }
         ]
       },
@@ -205,7 +210,7 @@
           "quote": "Aside from the evidence of English language proficiency listed there, other comparable evidence is also accepted."
         }
       ],
-      "reviewed_by": "pending"
+      "reviewed_by": "human"
     },
     {
       "id": "german",
@@ -242,7 +247,7 @@
           "quote": "Applicants do not need to submit proof of German language proficiency if they meet one of the following criteria:"
         }
       ],
-      "reviewed_by": "pending"
+      "reviewed_by": "human"
     }
   ]
 }
