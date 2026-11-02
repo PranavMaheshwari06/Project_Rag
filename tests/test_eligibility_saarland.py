@@ -23,12 +23,12 @@ def grade(obtained, best, rank=None):
 
 
 @both
-def test_rule_files_are_fresh_and_cited(slug):
+def test_rule_files_are_fresh_reviewed_and_cited(slug):
     s = load_settings()
     rules, stale = load_ruleset(s, slug)
     record = json.loads((Path(s.paths.verified_dir) / f"{slug}.json").read_text())["record"]
     assert not stale
-    assert all(r.reviewed_by == "pending" for r in rules.rules)
+    assert all(r.reviewed_by == "human" for r in rules.rules)
     # only the subject-area sentence (and the English exceptions for DSAI) cite the page beyond the record
     assert {r for r, _, _ in uncited_quotes(rules, record)} <= {"curricular_content", "english"}
 
@@ -139,11 +139,20 @@ def test_english_native_speaker_and_study_exceptions_go_to_the_university(slug):
 
 
 @both
-def test_english_new_toefl_scale_is_not_guessed(slug):
+def test_english_new_toefl_scale_is_a_separate_test(slug):
     base = {"degree_country": "India", "school_country": "India", "citizenships": ["India"]}
-    r = rep(slug, language=[{"test": "TOEFL iBT", "overall": "5"}], **base)["english"]
-    assert (r.verdict, r.reason) == ("unknown", "university_review")
-    assert rep(slug, language=[{"test": "TOEFL iBT", "overall": "80"}], **base)["english"].verdict == "does_not_meet"
+    new = lambda score: rep(slug, language=[{"test": "TOEFL iBT (2026 scale)", "overall": score}], **base)["english"]  # noqa: E731
+    assert new("5").verdict == "meets"
+    assert new("6").verdict == "meets"
+    assert new("4.5").verdict == "does_not_meet"   # closed list: below 5 fails
+    # a low score entered as TOEFL iBT is read on the 0-120 scale: no longer sent to the university
+    for score in ("5", "6", "80"):
+        r = rep(slug, language=[{"test": "TOEFL iBT", "overall": score}], **base)["english"]
+        assert r.verdict == "does_not_meet", score
+    assert rep(slug, language=[{"test": "TOEFL PBT", "overall": "5"}], **base)["english"].verdict == "does_not_meet"
+    # new-scale score without citizenship and study countries: an exception might still apply
+    r = rep(slug, language=[{"test": "TOEFL iBT (2026 scale)", "overall": "4"}])["english"]
+    assert (r.verdict, r.reason) == ("unknown", "missing_fact")
 
 
 @both
