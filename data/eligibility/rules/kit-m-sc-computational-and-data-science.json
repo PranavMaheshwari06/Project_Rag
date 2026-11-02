@@ -16,25 +16,47 @@
           "quote": "Bachelorabschluss ein bestandener Bachelorabschluss (oder mindestens gleichwertiger Abschluss) im Studiengang Computational and Data Science, Mathematik, Informatik (oder einem Studiengang mit im Wesentlichen gleichem Inhalt)"
         }
       ],
-      "reviewed_by": "pending"
+      "reviewed_by": "human"
     },
     {
       "id": "degree_ects",
-      "label": "At least 180 ECTS credits in the first degree",
+      "label": "At least 180 ECTS credits in the first degree (credits in another unit: KIT decides)",
       "check": {
-        "type": "all_of",
+        "type": "any_of",
         "children": [
           {
-            "type": "in",
-            "fact": "credit_unit",
-            "values": [
-              "ECTS"
+            "type": "all_of",
+            "children": [
+              {
+                "type": "in",
+                "fact": "credit_unit",
+                "values": [
+                  "ECTS"
+                ]
+              },
+              {
+                "type": "min",
+                "fact": "total_credits",
+                "value": "180"
+              }
             ]
           },
           {
-            "type": "min",
-            "fact": "total_credits",
-            "value": "180"
+            "type": "all_of",
+            "children": [
+              {
+                "type": "in",
+                "fact": "credit_unit",
+                "values": [
+                  "ECTS"
+                ],
+                "negate": true
+              },
+              {
+                "type": "university_review",
+                "note": "Your credits are not in ECTS. The engine does not convert credit units; KIT decides whether your credits meet the 180 ECTS minimum."
+              }
+            ]
           }
         ]
       },
@@ -44,7 +66,7 @@
           "quote": "Das Studium muss im Rahmen einer mindestens dreijährigen Regelstudienzeit und mit einer Mindestanzahl von 180 ECTS-Punkten absolviert worden sein."
         }
       ],
-      "reviewed_by": "pending"
+      "reviewed_by": "human"
     },
     {
       "id": "credit_minimums",
@@ -186,7 +208,7 @@
           "quote": "Es besteht kein Anspruch auf eine Zulassung unter Auflagen. Die Entscheidung liegt im Ermessen der Zugangskommission."
         }
       ],
-      "reviewed_by": "pending"
+      "reviewed_by": "human"
     },
     {
       "id": "credit_counting",
@@ -201,7 +223,7 @@
           "quote": "Mindestens 40 LP aus einem und mindestens 12 LP aus den beiden verbleibenden Gebieten:"
         }
       ],
-      "reviewed_by": "pending"
+      "reviewed_by": "human"
     },
     {
       "id": "english",
@@ -370,7 +392,7 @@
           "quote": "if it certifies English language proficiency at CEFR level B2 or higher"
         }
       ],
-      "reviewed_by": "pending"
+      "reviewed_by": "human"
     }
   ]
 }

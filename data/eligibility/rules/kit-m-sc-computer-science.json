@@ -21,21 +21,43 @@
     },
     {
       "id": "degree_ects",
-      "label": "At least 180 ECTS credits in the first degree",
+      "label": "At least 180 ECTS credits in the first degree (credits in another unit: KIT decides)",
       "check": {
-        "type": "all_of",
+        "type": "any_of",
         "children": [
           {
-            "type": "in",
-            "fact": "credit_unit",
-            "values": [
-              "ECTS"
+            "type": "all_of",
+            "children": [
+              {
+                "type": "in",
+                "fact": "credit_unit",
+                "values": [
+                  "ECTS"
+                ]
+              },
+              {
+                "type": "min",
+                "fact": "total_credits",
+                "value": "180"
+              }
             ]
           },
           {
-            "type": "min",
-            "fact": "total_credits",
-            "value": "180"
+            "type": "all_of",
+            "children": [
+              {
+                "type": "in",
+                "fact": "credit_unit",
+                "values": [
+                  "ECTS"
+                ],
+                "negate": true
+              },
+              {
+                "type": "university_review",
+                "note": "Your credits are not in ECTS. The engine does not convert credit units; KIT decides whether your credits meet the 180 ECTS minimum."
+              }
+            ]
           }
         ]
       },

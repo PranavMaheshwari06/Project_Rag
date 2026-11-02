@@ -24,13 +24,13 @@ def cds(**facts):
     return report(CDS, **facts)
 
 
-def test_files_are_fresh_pending_and_cite_the_record():
+def test_files_are_fresh_reviewed_and_cite_the_record():
     s = load_settings()
     for slug, outside in ((DEA, {"english", "aptitude_assessment"}), (CDS, {"credit_minimums", "english"})):
         rules, stale = load_ruleset(s, slug)
         record = json.loads((Path(s.paths.verified_dir) / f"{slug}.json").read_text())["record"]
         assert not stale
-        assert all(r.reviewed_by == "pending" for r in rules.rules)
+        assert all(r.reviewed_by == "human" for r in rules.rules)
         # only evidence the record omits may be cited from the cached page instead
         assert {r for r, _, _ in uncited_quotes(rules, record)} <= outside
 
@@ -142,10 +142,18 @@ def test_cds_counting_policy_is_a_hard_university_decision():
 
 
 def test_cds_credits_need_ects():
-    assert cds(total_credits="180", credit_unit="ECTS")["degree_ects"].verdict == "meets"
-    assert cds(total_credits="179", credit_unit="ECTS")["degree_ects"].verdict == "does_not_meet"
-    assert cds(total_credits="180", credit_unit="US credits")["degree_ects"].verdict == "does_not_meet"
-    assert cds(total_credits="180")["degree_ects"].verdict == "unknown"
+    ects = lambda **f: cds(**f)["degree_ects"]  # noqa: E731
+    assert ects(total_credits="180", credit_unit="ECTS").verdict == "meets"
+    assert ects(total_credits="179", credit_unit="ECTS").verdict == "does_not_meet"
+    assert ects(total_credits="170", credit_unit="ECTS").verdict == "does_not_meet"
+    assert ects(credit_unit="ECTS").verdict == "unknown"  # total not stated
+    # another unit is not converted: KIT decides (X3), never a fail, whatever the number
+    for unit in ("credits", "CP", "US credits"):
+        for total in ("240", "120"):
+            r = ects(total_credits=total, credit_unit=unit)
+            assert (r.verdict, r.reason) == ("unknown", "university_review"), (unit, total)
+    r = ects(total_credits="180")  # unit not stated
+    assert (r.verdict, r.reason) == ("unknown", "missing_fact")
 
 
 def test_cds_english_routes_and_no_gre():
