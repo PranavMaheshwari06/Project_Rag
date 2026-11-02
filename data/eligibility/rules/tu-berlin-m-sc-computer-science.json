@@ -16,7 +16,7 @@
           "quote": "The specific admission requirement is a first professionally qualifying degree in the field of “Informatik” or Computer Science or in a related study program."
         }
       ],
-      "reviewed_by": "pending"
+      "reviewed_by": "human"
     },
     {
       "id": "foundations_total",
@@ -32,7 +32,7 @@
           "quote": "36 CP in foundations of computer sciences, including 12 CP in the field of Theoretical Computer Science"
         }
       ],
-      "reviewed_by": "pending"
+      "reviewed_by": "human"
     },
     {
       "id": "theoretical_cs",
@@ -52,7 +52,7 @@
           "quote": "Theoretical Computer Science includes courses i.e. on the topics formal languages, automata, computability, complexity, logic."
         }
       ],
-      "reviewed_by": "pending"
+      "reviewed_by": "human"
     },
     {
       "id": "computer_engineering",
@@ -68,7 +68,7 @@
           "quote": "12 CP in the field of Computer Engineering or Information Technology"
         }
       ],
-      "reviewed_by": "pending"
+      "reviewed_by": "human"
     },
     {
       "id": "practical_cs",
@@ -84,7 +84,7 @@
           "quote": "12 CP in the field of Methodological and Practical Computer Science"
         }
       ],
-      "reviewed_by": "pending"
+      "reviewed_by": "human"
     },
     {
       "id": "mathematics",
@@ -100,7 +100,7 @@
           "quote": "18 CP in the field of Mathematics"
         }
       ],
-      "reviewed_by": "pending"
+      "reviewed_by": "human"
     },
     {
       "id": "additional_cs",
@@ -116,7 +116,7 @@
           "quote": "at least 30 CP in the field of computer sciences, not including your thesis"
         }
       ],
-      "reviewed_by": "pending"
+      "reviewed_by": "human"
     },
     {
       "id": "subject_allocation",
@@ -135,7 +135,7 @@
           "quote": "Courses on discrete structures, discrete mathematics, algorithms, data structures, digital logic, design and analysis of algorithms are not recognized in the field of Theoretical Computer Science"
         }
       ],
-      "reviewed_by": "pending"
+      "reviewed_by": "human"
     },
     {
       "id": "english",
@@ -220,7 +220,7 @@
           "quote": "Please note that a higher B2 English level is required."
         }
       ],
-      "reviewed_by": "pending"
+      "reviewed_by": "human"
     },
     {
       "id": "vpd",
@@ -250,7 +250,7 @@
           "quote": "will need a preliminary review documentation (VPD) for their application to TU Berlin from the summer semester of 2026 onwards."
         }
       ],
-      "reviewed_by": "pending"
+      "reviewed_by": "human"
     },
     {
       "id": "suitability_form",
@@ -269,7 +269,7 @@
           "quote": "you will need to add the Suitability Assessment Form to your application documents."
         }
       ],
-      "reviewed_by": "pending"
+      "reviewed_by": "human"
     }
   ]
 }

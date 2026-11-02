@@ -16,7 +16,7 @@
           "quote": "The prerequisite for admission to the course is a first professionally qualifying university degree recognized in Germany or a degree from a state or state-recognized vocational academy in computer science."
         }
       ],
-      "reviewed_by": "pending"
+      "reviewed_by": "human"
     },
     {
       "id": "english",
@@ -55,7 +55,7 @@
           "quote": "Proof is deemed to have been provided if the “Test of English as a Foreign Language” TOEFL iBt (120-95) (New: 5.0 points) or the IELTS test was passed with at least level 7.0."
         }
       ],
-      "reviewed_by": "pending"
+      "reviewed_by": "human"
     },
     {
       "id": "aptitude_assessment",
@@ -70,7 +70,7 @@
           "quote": "Proof of special aptitude is provided through aptitude assessment procedures in accordance with the Master Computer Science aptitude assessment regulations."
         }
       ],
-      "reviewed_by": "pending"
+      "reviewed_by": "human"
     },
     {
       "id": "aps",
@@ -101,7 +101,7 @@
           "quote": "Applicants with Chinese, Vietnamese or Indian educational certificates must submit a certificate from the Academic Evaluation Center (APS) with their application."
         }
       ],
-      "reviewed_by": "pending"
+      "reviewed_by": "human"
     }
   ]
 }
