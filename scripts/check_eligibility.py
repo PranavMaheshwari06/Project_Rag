@@ -58,7 +58,9 @@ def validate(settings, check_cache: bool = False) -> list[str]:
     for rule in finance.rules:  # no verified record behind these: the cached page is the only check
         for c in rule.citations:
             page = raw_page_words(settings, c.doc_id)
-            if page is None:
+            if page is None and check_cache:
+                errors.append(f"finance: {rule.id}: cached page unavailable")
+            elif page is None:
                 print(f"finance: {rule.id}: cached page unavailable, not checked")
             elif _words(c.quote) not in page:
                 errors.append(f"finance: {rule.id}: quote not in cached page: {c.quote[:60]!r}")
