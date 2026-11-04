@@ -12,7 +12,8 @@ from typing import Literal
 
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
-SCHEMA_VERSION = "profile-v3"  # v2: gre/gate accept "none"; v3: funds per proof route, visa_country
+SCHEMA_VERSION = "profile-v4"  # v2: gre/gate accept "none"; v3: funds per proof route, visa_country;
+# v4: credit_unit is a closed choice
 # an older profile is a valid newer one
 NoTest = Literal["none"]
 
@@ -73,7 +74,7 @@ class FundsProof(Strict):
 
 
 class Profile(Strict):
-    schema_version: Literal["profile-v1", "profile-v2", "profile-v3"] = SCHEMA_VERSION
+    schema_version: Literal["profile-v1", "profile-v2", "profile-v3", "profile-v4"] = SCHEMA_VERSION
     # countries as English short names, as the university pages publish them ("India")
     citizenships: list[str] | None = None
     degree_country: str | None = None
@@ -81,7 +82,9 @@ class Profile(Strict):
     degree_title: str | None = None
     degree_completed: bool | None = None
     total_credits: Decimal | None = None
-    credit_unit: str | None = None  # "ECTS" or another unit; other units are not converted
+    # "LP", "CP" or "ECTS credits" are entered as "ECTS" only by the student, who knows
+    # what the transcript means; any other unit is "other" and is never converted
+    credit_unit: Literal["ECTS", "other"] | None = None
     # student-confirmed credits per area, keyed in snake_case as the rules name them
     # (theoretical_cs, practical_cs, computer_engineering, mathematics, ...)
     subject_credits: dict[str, Decimal] | None = None
@@ -101,6 +104,6 @@ class Profile(Strict):
     def _fields_match_version(self):
         if self.schema_version == "profile-v1" and "none" in (self.gre, self.gate):
             raise ValueError('"none" for gre or gate needs schema_version profile-v2')
-        if self.schema_version != "profile-v3" and (self.funds is not None or self.visa_country is not None):
+        if self.schema_version in ("profile-v1", "profile-v2") and (self.funds is not None or self.visa_country is not None):
             raise ValueError("funds and visa_country need schema_version profile-v3")
         return self

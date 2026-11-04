@@ -31,7 +31,7 @@ def blocked(amount):
 
 # --- profile ------------------------------------------------------------------------
 def test_profile_v3_round_trip_and_routes_are_a_closed_list():
-    assert SCHEMA_VERSION == "profile-v3"
+    assert SCHEMA_VERSION in ("profile-v3", "profile-v4")  # v3 introduced funds
     p = Profile(funds=blocked("11904.00"), visa_country="India")
     assert Profile.model_validate_json(p.model_dump_json()) == p
     assert p.funds[0].amount_eur == D("11904.00")

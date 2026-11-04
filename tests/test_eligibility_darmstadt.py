@@ -39,8 +39,8 @@ def test_180_ects_and_other_units(slug):
     assert ects(total_credits="179", credit_unit="ECTS") == "does_not_meet"
     assert ects(total_credits="180") == "unknown"  # unit not stated
     # not ECTS: "equivalent workload" is the university's call, never a fail
-    assert ects(total_credits="240", credit_unit="US credits") == "unknown"
-    assert ects(total_credits="120", credit_unit="US credits") == "unknown"
+    assert ects(total_credits="240", credit_unit="other") == "unknown"
+    assert ects(total_credits="120", credit_unit="other") == "unknown"
 
 
 @BOTH
