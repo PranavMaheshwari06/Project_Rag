@@ -14,7 +14,8 @@ from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 SCHEMA_VERSION = "profile-v5"  # v2: gre/gate accept "none"; v3: funds per proof route, visa_country;
 # v4: credit_unit is a closed choice; v5: university_assessments
-# an older profile is a valid newer one
+# an older profile is a valid newer one, except a free-text credit_unit from v1-v3,
+# which must be re-entered as "ECTS" (LP, CP, ECTS credits) or "other"
 ProfileVersion = Literal["profile-v1", "profile-v2", "profile-v3", "profile-v4", "profile-v5"]
 NoTest = Literal["none"]
 
