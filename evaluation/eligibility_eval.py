@@ -3,12 +3,14 @@
 comparison with entered facts, not an official admission verification.
 
 Metrics: headline and criterion agreement, false-positive headlines (engine
-says "meets" where the label does not), automatic-check coverage (share of
-applicable hard and soft criteria the engine decided), unknown reasons, per-programme counts,
-the human/assisted split, latency and the hashes of every input."""
+says "meets" where the label does not), automatic-check coverage, unknown
+reasons, per-programme counts, author and reviewer splits, latency and the
+hashes of every input. Related variants of a base case are counted as cases but
+not as independent observations (`independent_cases`)."""
 
 import hashlib
 import json
+import math
 import statistics
 import time
 from collections import Counter
@@ -22,6 +24,10 @@ from eligibility.rules import load_ruleset, record_tier, ruleset_hash
 from evaluation.eligibility_dataset import DATASET_SCHEMA_VERSION, EligibilityCase
 
 POSITIVE = "meets_checked_published_requirements"
+COVERAGE_NOTE = (
+    "automatic_check_coverage counts every applicable hard and soft criterion of every case's report "
+    "(admission, readiness and finance; related variants included); decided = meets or does_not_meet"
+)
 
 
 def _rate(agree: int, total: int) -> dict:
@@ -41,20 +47,29 @@ def _agreement(rows: list[dict]) -> dict:
 
 
 def _compare(case: EligibilityCase, report: Report) -> dict:
-    verdicts = {c.rule_id: c.verdict for c in report.criteria}
-    criteria = [
-        {"rule_id": e.rule_id, "expected": e.verdict, "engine": verdicts.get(e.rule_id),
-         "agree": verdicts.get(e.rule_id) == e.verdict}
-        for e in case.expected_criteria
-    ]
+    found = {c.rule_id: c for c in report.criteria}
+    criteria = []
+    for e in case.expected_criteria:
+        c = found.get(e.rule_id)
+        criteria.append({
+            "rule_id": e.rule_id,
+            "expected": e.verdict,
+            "engine": c.verdict if c else "absent",  # absent: stale rules give no criteria
+            "engine_reason": c.reason if c else None,
+            "agree": c is not None and c.verdict == e.verdict,
+        })
     return {
         "case_id": case.case_id,
         "slug": case.slug,
         "author": case.author,
+        "reviewer": case.reviewer,
+        "related_to": case.related_to,
+        "rules_stale": report.rules_stale,
         "expected_headline": case.expected_headline,
         "engine_headline": report.headline,
         "headline_agree": report.headline == case.expected_headline,
         "criteria": criteria,
+        "rationale": case.rationale,
     }
 
 
@@ -62,11 +77,12 @@ def _latency(ms: list[float]) -> dict:
     if not ms:
         return {"p50": None, "p95": None, "max": None}
     ordered = sorted(ms)
-    return {"p50": statistics.median(ordered), "p95": ordered[round(0.95 * (len(ordered) - 1))], "max": ordered[-1]}
+    return {"p50": statistics.median(ordered), "p95": ordered[math.ceil(0.95 * len(ordered)) - 1], "max": ordered[-1]}
 
 
 def run_cases(cases: list[EligibilityCase], settings: Settings, dataset_path: Path | None = None) -> dict:
-    """Engine output never feeds back into a label: labels are read, compared, reported."""
+    """Engine output never feeds back into a label: labels are read, compared,
+    reported. Call `validate_cases` first; this function does not re-validate."""
     groups = load_groups(settings.paths.country_groups_path)
     rows, reports, latencies, programmes = [], [], [], {}
     for case in cases:
@@ -81,23 +97,30 @@ def run_cases(cases: list[EligibilityCase], settings: Settings, dataset_path: Pa
         reports.append(report)
     # hard and soft criteria that apply, as counted in the report summaries
     applicable = [c for r in reports for c in r.criteria if c.verdict != "not_applicable" and c.severity != "info"]
+    decided = sum(c.verdict in ("meets", "does_not_meet") for c in applicable)
     metrics = _agreement(rows)
+    metrics["independent_cases"] = sum(r["related_to"] is None for r in rows)
     metrics["automatic_check_coverage"] = {
-        "decided": sum(c.verdict in ("meets", "does_not_meet") for c in applicable),
-        "applicable": len(applicable),
-        "rate": sum(c.verdict in ("meets", "does_not_meet") for c in applicable) / len(applicable) if applicable else None,
+        "decided": decided, "applicable": len(applicable), "rate": decided / len(applicable) if applicable else None,
     }
-    metrics["unknown_reasons"] = dict(Counter(c.reason or "unspecified" for c in applicable if c.verdict == "unknown"))
+    unknown = Counter(c.reason or "unspecified" for c in applicable if c.verdict == "unknown")
+    unknown.update({"rules_stale": sum(r.rules_stale for r in reports)} if any(r.rules_stale for r in reports) else {})
+    metrics["unknown_reasons"] = dict(unknown)
+    metrics["not_published"] = sum(c.verdict == "not_published" for c in applicable)
     metrics["per_programme"] = {
-        slug: {"cases": sum(r["slug"] == slug for r in rows),
-               "headline_agree": sum(r["headline_agree"] for r in rows if r["slug"] == slug)}
-        for slug in sorted({r["slug"] for r in rows})
+        slug: _agreement([r for r in rows if r["slug"] == slug]) for slug in sorted({r["slug"] for r in rows})
     }
+    all_slugs = sorted(p.stem for p in Path(settings.paths.rules_dir).glob("*.json"))
+    metrics["programmes_without_cases"] = [s for s in all_slugs if s not in programmes]
     metrics["by_author"] = {a: _agreement([r for r in rows if r["author"] == a]) for a in ("human", "assisted")}
+    metrics["by_reviewer"] = {
+        str(v): _agreement([r for r in rows if r["reviewer"] == v]) for v in ("human", "model", None)
+    }
     metrics["latency_ms"] = _latency(latencies)
     return {
         "dataset_schema_version": DATASET_SCHEMA_VERSION,
         "note": "Agreement with labels written from the cited sources; not an official admission verification.",
+        "coverage_note": COVERAGE_NOTE,
         "metrics": metrics,
         "disagreements": [r for r in rows if not r["headline_agree"] or not all(e["agree"] for e in r["criteria"])],
         "hashes": {

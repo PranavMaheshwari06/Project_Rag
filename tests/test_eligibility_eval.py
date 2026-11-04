@@ -127,7 +127,11 @@ def test_agreement_false_positive_and_splits(settings):
     assert m["false_positive_headlines"] == 1
     assert m["by_author"]["human"]["cases"] == 1 and m["by_author"]["human"]["headline_agreement"]["agree"] == 1
     assert m["by_author"]["assisted"]["cases"] == 3
-    assert m["per_programme"]["fixture-msc"] == {"cases": 4, "headline_agree": 3}
+    assert m["per_programme"]["fixture-msc"]["headline_agreement"]["agree"] == 3
+    assert m["per_programme"]["fixture-msc"]["false_positive_headlines"] == 1
+    assert m["independent_cases"] == 3  # C03 is a variant of C01
+    assert m["by_reviewer"]["None"]["cases"] == 4
+    assert m["programmes_without_cases"] == []
     assert [d["case_id"] for d in out["disagreements"]] == ["C03"]
 
 
@@ -195,3 +199,47 @@ def test_default_dataset_path_is_a_setting():
     s = load_settings()
     assert s.evaluation.eligibility_cases_path.endswith("eligibility_cases.jsonl")
     assert s.evaluation.eligibility_results_out == "evaluation/results/eligibility_baseline.json"
+
+
+def test_validator_refuses_future_freeze_self_reference_and_broken_rules(settings, tmp_path):
+    from pathlib import Path
+
+    problems = validate_cases(
+        [case("C01", author="human", frozen_on="2099-01-01"), case("C02", related_to="C02")],
+        settings, today=date(2027, 1, 1),
+    )
+    assert any("C01: frozen_on 2099-01-01 is in the future" in p for p in problems)
+    assert any("C02: related_to C02" in p for p in problems)
+    (Path(settings.paths.verified_dir) / "fixture-msc.json").unlink()
+    assert any("cannot load the rules" in p for p in validate_cases([case()], settings))
+
+
+def test_schema_refuses_duplicate_expected_rule_and_not_covered():
+    with pytest.raises(ValidationError, match="twice"):
+        case(expected_criteria=[{"rule_id": "credits", "verdict": "meets", "citations": [CITE]}] * 2)
+    with pytest.raises(ValidationError, match="coverage check"):
+        case(headline="not_covered")
+
+
+def test_stale_rules_are_reported_as_stale_not_as_disagreement_noise(settings):
+    from pathlib import Path
+
+    path = Path(settings.paths.verified_dir) / "fixture-msc.json"
+    path.write_text(json.dumps({"tier": "human", "record": {**RECORD, "extra": 1}}))
+    out = run_cases([case("C01", headline="needs_information_or_review")], settings)
+    row = out["disagreements"][0]
+    assert row["rules_stale"] and row["criteria"][0]["engine"] == "absent"
+    assert out["metrics"]["unknown_reasons"] == {"rules_stale": 1}
+
+
+def test_bom_file_loads(tmp_path):
+    path = tmp_path / "cases.jsonl"
+    path.write_bytes(b"\xef\xbb\xbf" + case().model_dump_json().encode() + b"\r\n")
+    assert len(load_cases(path)) == 1
+
+
+def test_p95_is_nearest_rank():
+    from evaluation.eligibility_eval import _latency
+
+    assert _latency([float(i) for i in range(1, 32)])["p95"] == 30.0  # ceil(0.95*31) = 30th value
+    assert _latency([5.0])["p95"] == 5.0
