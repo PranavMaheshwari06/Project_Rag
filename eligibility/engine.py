@@ -10,7 +10,7 @@ from typing import Literal
 
 from core.config import get_settings
 from eligibility.groups import CountryGroups, load_groups
-from eligibility.profile import Profile
+from eligibility.profile import Gate, Gre, Profile
 from eligibility.report import AdmissionSummary, Criterion, FinanceSummary, ReadinessSummary, Report
 from eligibility.rules import (
     Category,
@@ -36,7 +36,8 @@ class Result(BaseModel):
     reason: str | None = None  # why the verdict is unknown
 
 
-ABSENT = object()  # the student listed their tests and this one is not among them
+ABSENT = object()  # the student listed their tests and this one is not among them, or said "none"
+NO_TEST_FIELDS = {"gre": Gre, "gate": Gate}  # profile fields that accept "none"
 
 
 def resolve(profile: Profile, path: str) -> object:
@@ -44,12 +45,15 @@ def resolve(profile: Profile, path: str) -> object:
     of language results a path part selects the entry by test name, e.g.
     `language.IELTS.overall`; a test missing from a supplied list is ABSENT, and
     so is any score of a test the student reported as "none"."""
+    head, _, rest = path.partition(".")
+    if head in NO_TEST_FIELDS and getattr(profile, head) == "none":
+        if rest not in NO_TEST_FIELDS[head].model_fields:  # a typo must still fail loudly
+            raise ValueError(f"unknown profile fact: {path}")
+        return ABSENT
     cur: object = profile
     for part in path.split("."):
         if cur is None or cur is ABSENT:
             return cur
-        if cur == "none":
-            return ABSENT
         if isinstance(cur, list):
             cur = next((e for e in cur if e.test.casefold() == part.casefold()), ABSENT)
         elif isinstance(cur, dict):
@@ -104,8 +108,8 @@ def _in(check: In, profile: Profile, groups: CountryGroups | None) -> Result:
     observed = resolve(profile, check.fact)
     if observed is None:
         return Result(verdict="unknown", required=required, reason="missing_fact")
-    if observed is ABSENT:
-        return Result(verdict="does_not_meet", entered="not reported", required=required)
+    if observed is ABSENT:  # no such test: it is in no list, so a negated check is met
+        return Result(verdict="meets" if check.negate else "does_not_meet", entered="not reported", required=required)
     items = observed if isinstance(observed, list) else [observed]
     literals = {_norm(v) for v in check.values if not (isinstance(v, str) and v.startswith("@"))}
     refs = [v[1:] for v in check.values if isinstance(v, str) and v.startswith("@")]
@@ -147,10 +151,13 @@ def evaluate(check: Check, profile: Profile, groups: CountryGroups | None = None
             if check.type == "all_of"
             else ("meets", "does_not_meet")
         )
+        # keep "not reported" visible when every failing child is a test the student does not have
+        failing = {r.entered for r in results if r.verdict == "does_not_meet"}
+        entered = "not reported" if failing == {"not reported"} else None
         if decisive in verdicts:
-            return Result(verdict=decisive)
+            return Result(verdict=decisive, entered=entered if decisive == "does_not_meet" else None)
         if verdicts == {other}:
-            return Result(verdict=other)
+            return Result(verdict=other, entered=entered if other == "does_not_meet" else None)
         reason = next((r.reason for r in results if r.verdict == "unknown"), None)
         return Result(verdict="unknown", reason=reason)
     return Result(verdict="unknown", reason="university_review", required=check.note)
@@ -277,6 +284,7 @@ def check_eligibility(
         rules_stale=stale,
         notices=notices,
         rules_schema_version=rules.schema_version,
+        profile_schema_version=profile.schema_version,
         ruleset_sha256=ruleset_hash(rules),
         record_sha256=rules.record_sha256,
         as_of=as_of,

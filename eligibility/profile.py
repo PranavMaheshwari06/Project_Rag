@@ -10,7 +10,7 @@ from datetime import date
 from decimal import Decimal
 from typing import Literal
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 SCHEMA_VERSION = "profile-v2"  # v2: gre/gate accept "none"; a v1 profile is valid v2
 NoTest = Literal["none"]
@@ -83,3 +83,9 @@ class Profile(Strict):
     german_level: Literal["A1", "A2", "B1", "B2", "C1", "C2"] | None = None  # CEFR, as certified
     documents: list[str] | None = None  # document keys the student already has, e.g. "aps_certificate"
     funds_eur: Decimal | None = Field(default=None, ge=0)
+
+    @model_validator(mode="after")
+    def _none_needs_v2(self):
+        if self.schema_version == "profile-v1" and "none" in (self.gre, self.gate):
+            raise ValueError('"none" for gre or gate needs schema_version profile-v2')
+        return self

@@ -3,6 +3,7 @@ stays "unknown"; "none" makes a score bound fail as "not reported". Scores are
 compared exactly as before."""
 
 import json
+from pathlib import Path
 
 import pytest
 from pydantic import ValidationError
@@ -88,3 +89,56 @@ def test_kit_cs_gre_or_gate_with_no_tests():
     # a degree country exempt from the test: "none" does not matter
     rep = check_eligibility(Profile(degree_country="Germany", gre="none", gate="none"), rules, stale)
     assert next(c for c in rep.criteria if c.rule_id == "gre_or_gate").verdict == "not_applicable"
+
+
+def test_empty_gate_stays_unknown():
+    assert ev(GATE_OK, gate={}).verdict == "unknown"
+
+
+def test_negated_check_on_a_test_the_student_does_not_have_is_met():
+    not_cs = {"type": "in", "fact": "gate.paper", "values": ["CS"], "negate": True}
+    assert ev(not_cs, gate="none").verdict == "meets"
+    # so a requirement keyed on "no qualifying GATE" applies instead of being skipped
+    when = {"type": "when", "when": {"type": "in", "fact": "gate.qualified", "values": [True], "negate": True},
+            "then": QUANT}
+    assert ev(when, gate="none", gre="none").verdict == "does_not_meet"
+
+
+def test_a_misspelled_path_still_fails_loudly_with_none():
+    with pytest.raises(ValueError, match="unknown profile fact"):
+        ev({"type": "min", "fact": "gre.qaunt", "value": "1"}, gre="none")
+    with pytest.raises(ValueError, match="unknown profile fact"):
+        ev({"type": "in", "fact": "degree_country.code", "values": ["x"]}, degree_country="none")
+
+
+def test_none_in_other_fields_is_a_plain_value():
+    assert ev({"type": "in", "fact": "degree_country", "values": ["none"]}, degree_country="none").verdict == "meets"
+
+
+def test_v1_profile_cannot_say_none():
+    with pytest.raises(ValidationError, match="profile-v2"):
+        Profile(schema_version="profile-v1", gre="none")
+
+
+def test_not_reported_reaches_group_criteria_and_report_has_profile_version():
+    settings = load_settings()
+    rules, stale = load_ruleset(settings, "kit-m-sc-computer-science")
+    rep = check_eligibility(Profile(degree_country="India", gre="none", gate="none"), rules, stale)
+    crit = next(c for c in rep.criteria if c.rule_id == "gre_or_gate")
+    assert crit.entered == "not reported"
+    assert rep.profile_schema_version == "profile-v2"
+
+
+RULE_FILES = sorted(p.stem for p in Path(load_settings().paths.rules_dir).glob("*.json"))
+
+
+@pytest.mark.parametrize("slug", RULE_FILES)
+@pytest.mark.parametrize("country", ["India", "China", "Germany", "United States", None])
+def test_none_never_helps_in_a_real_rule_file(slug, country):
+    """Saying "none" may only turn unknown into does_not_meet, never into a pass or an exemption."""
+    settings = load_settings()
+    rules, stale = load_ruleset(settings, slug)
+    before = check_eligibility(Profile(degree_country=country), rules, stale).criteria
+    after = check_eligibility(Profile(degree_country=country, gre="none", gate="none"), rules, stale).criteria
+    for b, a in zip(before, after):
+        assert a.verdict == b.verdict or (b.verdict, a.verdict) == ("unknown", "does_not_meet"), (slug, b.rule_id)
