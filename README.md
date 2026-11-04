@@ -187,6 +187,7 @@ make eligibility ARGS="--profile data/eligibility/examples/synthetic_kit_cs.json
                 # eligibility report for one profile: admission, readiness and finance summaries, one line per rule
 make eligibility ARGS="--validate"                # every rule file: bound to its verified record, quotes in the record
 make eligibility ARGS="--validate --check-cache"  # also requires the cached page for quotes the record lacks (needs data/raw)
+make eval-eligibility  # validate evaluation/datasets/eligibility_cases.jsonl, run it, write evaluation/results/eligibility_baseline.json
 ```
 
 Frontend (Node 18+):
