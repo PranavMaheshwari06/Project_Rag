@@ -163,6 +163,8 @@ def test_cli_takes_the_request_date_intake_and_year(capsys, monkeypatch):
     spec = importlib.util.spec_from_file_location("check_eligibility_cli", root / "scripts" / "check_eligibility.py")
     cli = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(cli)
+    # the shared cached settings may have been repointed by the corpus fixture of the full suite
+    monkeypatch.setattr(cli, "get_settings", load_settings)
     monkeypatch.setattr(sys, "argv", [
         "x", "--profile", str(root / "data/eligibility/examples/synthetic_kit_cs.json"),
         "--programme", "kit-m-sc-computer-science", "--as-of", "2027-06-16",
