@@ -47,8 +47,8 @@ Answer: "closed" or "aliases".
 
 ## 6. Finish the source sheet, then freeze H01-H05 — BLOCKING (Step 5 evaluation on the five cases)
 Where: your computer (VS Code), `docs/working/PHASE_6_FIVE_PROFILE_SOURCE_CHECK.md` and your local worksheet.
-- Rows still needing your reading: S7 funds (loan/scholarship bullets read as additions, not alternatives), S3 Suitability Assessment Form exemption wording, S6 first-degree length/ECTS (section 3 of the PDF), S14 conversion formula clause.
-- Then commit H01-H05 as `author: human` with `frozen_on` in `evaluation/datasets/eligibility_cases.jsonl` (one JSON object per line; schema `evaluation/eligibility_dataset.py`, PR #8) BEFORE any evaluation code runs on them. The commit date is the proof of the freeze. Each line needs: `case_id`, `profile` (profile-v2), `slug`, `intake` (winter/summer), `starting_year`, `as_of`, `expected_headline`, `expected_criteria` (each with `rule_id`, `verdict`, at least one citation), `rationale`, `citations`, `author: "human"`, `reviewer`, `related_to` (or null), `frozen_on`. The validator refuses `author: human` without `frozen_on` and a `frozen_on` in the future.
+- Rows still needing your reading: S7 funds (loan/scholarship bullets read as additions, not alternatives; see 12i), S3 Suitability Assessment Form exemption wording, S6 first-degree length/ECTS (section 3 of the PDF), S14 conversion formula clause.
+- Then commit H01-H05 as `author: human` with `frozen_on` in `evaluation/datasets/eligibility_cases.jsonl` (one JSON object per line; schema `evaluation/eligibility_dataset.py`, PR #8) BEFORE any evaluation code runs on them. The commit date is the proof of the freeze. Each line needs: `case_id`, `profile` (profile-v3; a funds case needs `funds` and `visa_country`), `slug`, `intake` (winter/summer), `starting_year`, `as_of`, `expected_headline`, `expected_criteria` (each with `rule_id`, `verdict`, at least one citation), `rationale`, `citations`, `author: "human"`, `reviewer`, `related_to` (or null), `frozen_on`. The validator refuses `author: human` without `frozen_on` and a `frozen_on` in the future.
 - There is no validate-only mode: `make eval-eligibility` runs the engine as soon as validation passes. So: commit and push the labels first, then run it.
 Blocks: any engine run on the five cases.
 Answer: "frozen at <commit>".
@@ -159,4 +159,13 @@ Answer: "accept" or the rule ids to change.
 ### 12h. KIT CS test age (`test_validity`) — NOT BLOCKING
 `max_age` now exists, but encoding "GRE not older than 5 years, GATE 3 years" correctly means folding it into the accepted `gre_or_gate` rule (a passing but stale GRE must not count). That changes an accepted rule, so it is your call; the reference date is also unstated on S12 (the engine would use the request's `as_of`).
 Answer: "fold into gre_or_gate (back to pending)" or "keep as review".
+
+### 12i. Stage E (PR #10): review the visa funds rule — BLOCKING (any positive finance headline)
+Rule `blocked_account_first_year` in `data/eligibility/finance.json` (pending): `visa_country` India; a lone blocked account >= 11,904 EUR; any other route or combination "unknown". Quotes to check with ACTION 2: the S7 blocked-account bullet (de/rules/embassy-india-studies-visa) and the S8 sentence "The blocked account must have sufficient credit ... (unless other proof of financial support is presented in addition)." (de/rules/foreign-office-blocked-account). The cached copies are from 2026-10-05; `fetched_on` is the 2026-11-04 live read.
+Choices to confirm: profile-v3 route list (S7 + S9 names); combinations stay unknown even when the blocked account alone covers the amount (literal reading of the spec); the 992 EUR monthly limit is stated, not checked; no period field (the S7 amount is for the first year by definition); the old `funds_eur` total and `check_funds` helper stay (keep, or remove in a later schema version); a scope by citizenship was dropped because S7 does not state one. A DECISIONS entry is owed once accepted.
+Answer: "accept" or what to change.
+
+### 12j. Follow-ups once PR #4 and PR #10 are both merged — NOT BLOCKING
+`--check-cache` (PR #4) does not yet cover the finance quotes added in PR #10 (they print "not checked" without the cache in either mode). One-line follow-up in `scripts/check_eligibility.py` after both merge. Also: `visa_country` and citizenship values are matched case-insensitively but not trimmed (" India" does not match), as before for all country facts.
+Answer: "do it" or "skip".
 
