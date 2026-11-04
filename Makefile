@@ -42,6 +42,9 @@ eval:
 eligibility:
 	$(PY) scripts/check_eligibility.py $(ARGS)
 
+parse-profile:
+	$(PY) scripts/parse_profile.py $(ARGS)
+
 eval-eligibility:
 	$(PY) scripts/eval_eligibility.py $(ARGS)
 
@@ -63,4 +66,4 @@ fmt:
 up:
 	docker compose up --build
 
-.PHONY: check-publish venv install crawl ingest index extract review eval eval-eligibility eligibility validate-phase6-inventory test run fmt up
+.PHONY: check-publish venv install crawl ingest index extract review eval eval-eligibility eligibility parse-profile validate-phase6-inventory test run fmt up

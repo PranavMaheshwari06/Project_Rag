@@ -4,7 +4,7 @@ from fastapi.responses import JSONResponse
 
 from api.middleware.logging_mw import RequestLoggingMiddleware
 from api.middleware.request_id import RequestIdMiddleware
-from api.routes import answer, evaluate, health, ingest, search
+from api.routes import answer, eligibility, evaluate, health, ingest, search
 from core.exceptions import AppError
 from core.logging import setup_logging
 
@@ -30,7 +30,7 @@ def create_app() -> FastAPI:
             content={"detail": exc.message, "request_id": getattr(request.state, "request_id", "-")},
         )
 
-    for module in (health, search, answer, ingest, evaluate):
+    for module in (health, search, answer, ingest, evaluate, eligibility):
         app.include_router(module.router)
     return app
 
