@@ -62,3 +62,6 @@ evaluation:
   calibration_out: evaluation/results/refusal_calibration.json
   audit_path: data/audit/second_pass_audit.json
   max_false_refusal_rate: 0.05
+  # eligibility cases: labels written from sources and frozen before any engine run
+  eligibility_cases_path: evaluation/datasets/eligibility_cases.jsonl
+  eligibility_results_out: evaluation/results/eligibility_baseline.json

@@ -90,6 +90,8 @@ class EvalCfg(BaseModel):
     calibration_out: str = "evaluation/results/refusal_calibration.json"
     audit_path: str = "data/audit/second_pass_audit.json"
     max_false_refusal_rate: float = 0.05
+    eligibility_cases_path: str = "evaluation/datasets/eligibility_cases.jsonl"
+    eligibility_results_out: str = "evaluation/results/eligibility_baseline.json"
 
 
 class Settings(BaseModel):
