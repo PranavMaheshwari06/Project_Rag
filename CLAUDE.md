@@ -44,11 +44,11 @@ Build order: **1 → 2 → 3 → 4 → 6 → 5 → 7 → 8 → 9 → 10 → 11 �
 
 | # | Phase | Status |
 |---|---|---|
-| 1 | Clean base | done (PR #1) |
-| 2 | Sources and ingestion, 5 pilot unis | done (PR #2) |
-| 3 | Extraction + cross-check + review screen, then batch 2 (KIT, TU Darmstadt, Stuttgart) | done (PR #3) |
-| 4 | Eval baseline: verification tiers + sampled audit, extraction accuracy, gold Q&A with refusal/coverage probes, retrieval numbers, refusal calibration | done locally at `b85ae75` (audit and gold review recorded, `make eval` numbers and refusal calibration generated); PR #4 open, not merged |
-| 6 | Eligibility engine: rules, grade conversion, funds check, ~40 synthetic profiles (moved from Phase 4) | in progress on `phase-6-eligibility-engine`: Step 0 inventory done; Step 1 (types) next. Spec: `docs/PHASE_6_IMPLEMENTATION_PLAN.md` |
+| 1 | Clean base | done (merged, old PR series) |
+| 2 | Sources and ingestion, 5 pilot unis | done (merged, old PR series) |
+| 3 | Extraction + cross-check + review screen, then batch 2 (KIT, TU Darmstadt, Stuttgart) | done (merged, old PR series) |
+| 4 | Eval baseline: verification tiers + sampled audit, extraction accuracy, gold Q&A with refusal/coverage probes, retrieval numbers, refusal calibration | done; merged as PR #1 of this repo (audit and gold review recorded, `make eval` numbers and refusal calibration generated) |
+| 6 | Eligibility engine: rules, grade conversion, funds check, ~40 synthetic profiles (moved from Phase 4) | in progress: Steps 0-3 merged (PR #2, #3); session branches (see STATUS.md table) add report summaries, explicit no-test answers, the eval harness, date and finance rules; Step 4 (API) and Step 5 (frozen five-case evaluation) remain. Spec: `docs/PHASE_6_IMPLEMENTATION_PLAN.md` |
 | 5 | Retrieval upgrades (filters first; rewrite / parent-child only if the ablation improves) | |
 | 7 | Small agent (tool-use loop with step budget) | |
 | 8 | Production layer (SSE, guardrails, cache, caps, structured-log tracing, Docker, CI eval gate) | |
@@ -106,6 +106,11 @@ make eval        # validate_gold.py, then 4-way benchmark -> frontend/public/ben
 make test        # pytest -q
 make run         # uvicorn api.main:app --port 8000
 make fmt         # ruff format .
+make eligibility ARGS="--profile p.json --programme <slug>"   # report: admission/readiness/finance summaries + one line per rule
+make eligibility ARGS="--validate"                # rule files bound to records, quotes in record (cache where data/raw exists)
+make eligibility ARGS="--validate --check-cache"  # a missing cached page is an error (local, needs data/raw)
+make validate-phase6-inventory [ARGS="--check-cache"]   # Step 0 inventory and Phase 4 hashes
+make check-publish  # publish rule on staged paths and phrases
 
 .venv/bin/python scripts/dump_pages.py [slug-filter]   # data/pages/<slug>/ for the cross-checker
 .venv/bin/python scripts/validate_gold.py [file]      # gold-set label check (make eval runs it first); exit 1 on any problem
@@ -151,7 +156,7 @@ Data flow: **registry** -> **crawl** -> raw cache + manifest -> **ingestion** ->
 
 ### To build (phase in brackets)
 - `evaluation/` [4, left]: `make eval` numbers for the four modes split by kind; refusal calibration on the 14 refusal/coverage probes. Synthetic profiles (~40) moved to [6].
-- `eligibility/` [6]: profile schema; rules engine returning `meets | does_not_meet | unknown | not_published` per requirement with hard/soft flags and margins; modified Bavarian grade conversion; funds check; applies entrance-test country conditions; ~40 synthetic profiles with expected verdicts; a "conditional" requirement value (TU Darmstadt AIML entrance exam). Pure Python, fully unit-tested.
+- `eligibility/` [6, mostly built: profile, rules, engine, grade, groups, report; see `docs/PHASE_6_IMPLEMENTATION_PLAN.md` step statuses]: profile schema; rules engine returning `meets | does_not_meet | unknown | not_published` per requirement with hard/soft flags and margins; modified Bavarian grade conversion; funds check; applies entrance-test country conditions; ~40 synthetic profiles with expected verdicts; a "conditional" requirement value (TU Darmstadt AIML entrance exam). Pure Python, fully unit-tested.
 - `retrieval/` [5]: metadata filters (university, programme, stage, layer); rewrite and parent-child only if the ablation improves.
 - `agent/` [7]: hand-rolled tool loop, step budget, read-only tools (`search_sources`, `get_requirements`, `check_eligibility`, `convert_grade`, optional `find_scholarships`; `Scholarship` schema deferred until then).
 - `generation/` [8]: answer contract rejecting uncited output, guardrails, response cache.
