@@ -124,3 +124,61 @@ def test_real_files_report_their_record_tier():
     assert tier in ("human", "second_pass")
     rep = check_eligibility(Profile(), rules, stale, tier=tier)
     assert rep.tier == tier and rep.record_sha256 == rules.record_sha256
+
+
+def test_soft_or_info_only_area_reads_no_checked_items_but_counts_soft():
+    rep = check_eligibility(
+        P, ruleset((PASS, {}), (FAIL, {**READY, "severity": "soft"}), (REVIEW, {**MONEY, "severity": "info"}))
+    )
+    assert rep.readiness.headline == "no_checked_items"
+    assert rep.readiness.counts["does_not_meet"] == 1
+    assert rep.finance.headline == "no_checked_items"
+    assert sum(rep.finance.counts.values()) == 0
+
+
+def test_all_rules_inactive_gives_nothing_to_count():
+    rep = check_eligibility(P, ruleset((INACTIVE, {}), (INACTIVE, READY)))
+    assert rep.headline == "needs_information_or_review"
+    assert rep.readiness.headline == "no_checked_items"
+    assert sum(rep.admission.counts.values()) == 0
+
+
+def test_area_headline_words_are_typed_per_area():
+    import pytest
+    from pydantic import ValidationError
+
+    from eligibility.report import ReadinessSummary
+
+    with pytest.raises(ValidationError):
+        ReadinessSummary(headline="funds_shortfall", counts={})
+
+
+def test_report_cannot_contradict_its_admission_summary():
+    import pytest
+    from pydantic import ValidationError
+
+    from eligibility.report import Report
+
+    data = check_eligibility(P, ruleset((FAIL, {}))).model_dump(mode="json")
+    assert Report.model_validate(data).headline == "does_not_meet_published_requirements"
+    data["headline"] = "meets_checked_published_requirements"
+    with pytest.raises(ValidationError):
+        Report.model_validate(data)
+    data = check_eligibility(P, ruleset((PASS, {}))).model_dump(mode="json")
+    data["readiness"]["counts"] = {"bogus": 1}
+    with pytest.raises(ValidationError):
+        Report.model_validate(data)
+
+
+def test_every_real_rule_file_gives_a_consistent_report_for_an_empty_profile():
+    settings = load_settings()
+    from pathlib import Path
+
+    for path in sorted(Path(settings.paths.rules_dir).glob("*.json")):
+        rules, stale = load_ruleset(settings, path.stem)
+        rep = check_eligibility(Profile(), rules, stale, tier=record_tier(settings, path.stem))
+        assert rep.headline == rep.admission.headline == "needs_information_or_review", path.stem
+        assert not any(c.verdict == "does_not_meet" for c in rep.criteria), path.stem
+        counted = [c for c in rep.criteria if c.verdict != "not_applicable" and c.severity != "info"]
+        total = sum(sum(s.counts.values()) for s in (rep.admission, rep.readiness, rep.finance))
+        assert total == len(counted), path.stem

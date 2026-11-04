@@ -123,7 +123,9 @@ def record_hash(record: dict) -> str:
 
 
 def ruleset_hash(rules: RuleSet) -> str:
-    """Canonical hash of the rule set as loaded, so formatting changes do not count."""
+    """Canonical hash of the rule set as loaded (defaults filled in): whitespace
+    and key order do not count; a number written differently ("4" vs "4.0") or
+    a changed code default does."""
     return record_hash(rules.model_dump(mode="json"))
 
 

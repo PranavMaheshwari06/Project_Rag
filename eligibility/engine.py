@@ -11,7 +11,7 @@ from typing import Literal
 from core.config import get_settings
 from eligibility.groups import CountryGroups, load_groups
 from eligibility.profile import Profile
-from eligibility.report import Criterion, Report, Summary
+from eligibility.report import AdmissionSummary, Criterion, FinanceSummary, ReadinessSummary, Report
 from eligibility.rules import (
     Category,
     Check,
@@ -209,7 +209,7 @@ def _group_refs(check: Check) -> set[str]:
     return set()
 
 
-def _summary(category: Category, results: list[tuple[Rule, Result]], stale: bool) -> Summary:
+def _summary(category: Category, results: list[tuple[Rule, Result]], stale: bool) -> dict:
     """The admission summary's headline is the report headline (plan section 4)."""
     mine = [(rule, r) for rule, r in results if rule.category == category and r.verdict != "not_applicable"]
     counts = {v: sum(1 for rule, r in mine if r.verdict == v and rule.severity != "info") for v in COUNTED}
@@ -224,7 +224,7 @@ def _summary(category: Category, results: list[tuple[Rule, Result]], stale: bool
         state = "pass"
     else:  # unresolved fact, university judgment, or a rule nobody has reviewed yet
         state = "open"
-    return Summary(headline=AREA_HEADLINES[category][state], counts=counts)
+    return {"headline": AREA_HEADLINES[category][state], "counts": counts}
 
 
 def check_eligibility(
@@ -254,7 +254,9 @@ def check_eligibility(
         )
         for rule, r in results
     ]
-    admission, readiness, finance = (_summary(c, results, stale) for c in ("admission", "readiness", "finance"))
+    admission = AdmissionSummary(**_summary("admission", results, stale))
+    readiness = ReadinessSummary(**_summary("readiness", results, stale))
+    finance = FinanceSummary(**_summary("finance", results, stale))
     notices = []
     used = set().union(*(_group_refs(r.check) for r in rules.rules))
     if as_of and used and not stale:
