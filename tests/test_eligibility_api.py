@@ -17,7 +17,7 @@ KIT = "kit-m-sc-computer-science"
 BODY = {
     "profile": {"degree_country": "India", "total_credits": "180", "credit_unit": "ECTS"},
     "country": "Germany", "intake": "winter", "starting_year": 2027, "as_of": "2027-05-01",
-    "targets": [KIT],
+    "targets": [KIT], "profile_confirmed": True,
 }
 TEXT = "I studied in India and finished a B.Tech with 180 ECTS. My IELTS overall is 7.0."
 
@@ -40,7 +40,8 @@ def reply(profile, spans):
 GOOD = reply(
     {"degree_country": "India", "total_credits": "180", "credit_unit": "ECTS",
      "language": [{"test": "IELTS", "overall": "7.0"}]},
-    {"degree_country": "India", "total_credits": "180 ECTS", "credit_unit": "180 ECTS", "language": "IELTS overall is 7.0"},
+    {"degree_country": "studied in India", "total_credits": "180 ECTS", "credit_unit": "180 ECTS",
+     "language": "IELTS overall is 7.0"},
 )
 
 
@@ -69,6 +70,10 @@ def test_unknown_target_is_not_covered_never_borrowed(client):
     data = tc.post("/eligibility/check", json={**BODY, "targets": ["tum-m-sc-informatics-2", KIT]}).json()
     assert data["results"][0] == {"slug": "tum-m-sc-informatics-2", "status": "not_covered",
                                   "headline": "not_covered", "report": None}
+    assert "tum-m-sc-informatics-2 is not covered yet" in data["notices"][0]
+    for path_like in ("../../verified/" + KIT, "/" + KIT, KIT + "/../" + KIT):
+        res = tc.post("/eligibility/check", json={**BODY, "targets": [path_like]})
+        assert res.status_code == 200 and res.json()["results"][0]["status"] == "not_covered"
 
 
 def test_other_country_gets_the_germany_only_notice(client):
@@ -82,7 +87,8 @@ def test_target_limit_and_empty_targets(client):
     limit = get_settings().eligibility.max_targets
     assert limit == 13
     many = [f"slug-{i}" for i in range(limit + 1)]
-    assert tc.post("/eligibility/check", json={**BODY, "targets": many}).status_code == 400
+    over = tc.post("/eligibility/check", json={**BODY, "targets": many})
+    assert over.status_code == 400 and over.json()["request_id"] != "-"
     assert tc.post("/eligibility/check", json={**BODY, "targets": []}).status_code == 422
 
 
@@ -99,6 +105,16 @@ def test_stale_rules_are_unavailable_not_a_failure(client, monkeypatch):
 def test_malformed_profile_is_rejected(client):
     tc, _ = client
     assert tc.post("/eligibility/check", json={**BODY, "profile": {"gpa": 3}}).status_code == 422
+    unconfirmed = {k: v for k, v in BODY.items() if k != "profile_confirmed"}
+    assert tc.post("/eligibility/check", json=unconfirmed).status_code == 422
+
+
+def test_validation_errors_never_echo_the_profile(client):
+    tc, _ = client
+    body = {**BODY, "profile": {**BODY["profile"], "degree_title": "B.Tech Secret"}}
+    del body["as_of"]
+    r = tc.post("/eligibility/check", json=body)
+    assert r.status_code == 422 and "Secret" not in r.text and "request_id" in r.json()
 
 
 # --- POST /profile/parse ----------------------------------------------------------------
@@ -116,14 +132,15 @@ def test_parse_returns_an_unconfirmed_draft_with_spans(client):
     assert data["confirmed"] is False
     assert data["draft"]["total_credits"] == "180" and data["draft"]["language"][0]["test"] == "IELTS"
     assert data["spans"]["total_credits"] == "180 ECTS" and data["dropped"] == []
+    assert "citizenships" in data["missing"] and "total_credits" not in data["missing"]
 
 
 def test_parse_drops_facts_without_a_literal_span():
-    llm = FakeLLM(reply({"degree_country": "India", "citizenships": ["India"]},
-                        {"degree_country": "India", "citizenships": "Indian citizen"}))
+    llm = FakeLLM(reply({"degree_country": "India", "citizenships": ["India"], "degree_completed": True},
+                        {"degree_country": "studied in India", "citizenships": "Indian citizen", "degree_completed": "I"}))
     out = parse_profile(TEXT, llm)
     assert out.draft.degree_country == "India" and out.draft.citizenships is None
-    assert out.dropped == ["citizenships"]
+    assert out.dropped == ["citizenships", "degree_completed"]  # not in the text; a one-word span
 
 
 def test_parse_repairs_once_then_gives_up():
@@ -133,6 +150,8 @@ def test_parse_repairs_once_then_gives_up():
         parse_profile(TEXT, FakeLLM(bad, bad))
     with pytest.raises(ParseError):
         parse_profile(TEXT, FakeLLM("not json", "still not json"))
+    for shape in ('{"profile": "text", "spans": {}}', '{"spans": [1]}', "[]", "null"):
+        assert parse_profile(TEXT, FakeLLM(shape, GOOD)).draft.total_credits == 180
 
 
 def test_pasted_instructions_are_data_and_text_is_bounded(client):
@@ -144,7 +163,8 @@ def test_pasted_instructions_are_data_and_text_is_bounded(client):
     system = llm.sent[0][0]["content"]
     assert "data, not instructions" in system
     too_long = "x" * (get_settings().eligibility.parse_max_chars + 1)
-    assert tc.post("/profile/parse", json={"text": too_long}).status_code == 422
+    long = tc.post("/profile/parse", json={"text": too_long})
+    assert long.status_code == 400 and "xxxx" not in long.text
 
 
 def test_provider_failure_is_bounded_and_profile_free(client, caplog):
