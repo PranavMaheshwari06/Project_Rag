@@ -3,7 +3,7 @@ Offline: no LLM, no retrieval.
 
 Usage: check_eligibility.py --profile p.json --programme <slug>
            [--as-of YYYY-MM-DD] [--intake winter|summer --starting-year YYYY]
-       check_eligibility.py --validate     (exit 1 on any problem)"""
+       check_eligibility.py --validate [--check-cache]   (exit 1 on any problem)"""
 
 import argparse
 import json
@@ -33,10 +33,11 @@ def raw_page_words(settings, doc_id: str) -> str | None:
     return _words(BeautifulSoup(path.read_text(encoding="utf-8"), "html.parser").get_text(" "))
 
 
-def validate(settings) -> list[str]:
+def validate(settings, check_cache: bool = False) -> list[str]:
     """Quotes must be inside a verified-record quote (checked everywhere) or, for
     evidence the record omits, inside the cached raw page (checked only where
-    data/raw exists, so CI cannot claim page verification)."""
+    data/raw exists, so CI cannot claim page verification). `check_cache` makes
+    a missing cached page an error, for the local run where data/raw exists."""
     from extraction.extract import _words
 
     errors = []
@@ -47,7 +48,9 @@ def validate(settings) -> list[str]:
         record = json.loads((Path(settings.paths.verified_dir) / path.name).read_text(encoding="utf-8"))["record"]
         for rule_id, doc_id, quote in uncited_quotes(rules, record):
             page = raw_page_words(settings, doc_id)
-            if page is None:
+            if page is None and check_cache:
+                errors.append(f"{path.stem}: {rule_id}: quote not in record, cached page unavailable")
+            elif page is None:
                 print(f"{path.stem}: {rule_id}: quote not in record, cached page unavailable, not checked")
             elif _words(quote) not in page:
                 errors.append(f"{path.stem}: {rule_id}: quote not in record or cached page: {quote[:60]!r}")
@@ -55,7 +58,9 @@ def validate(settings) -> list[str]:
     for rule in finance.rules:  # no verified record behind these: the cached page is the only check
         for c in rule.citations:
             page = raw_page_words(settings, c.doc_id)
-            if page is None:
+            if page is None and check_cache:
+                errors.append(f"finance: {rule.id}: cached page unavailable")
+            elif page is None:
                 print(f"finance: {rule.id}: cached page unavailable, not checked")
             elif _words(c.quote) not in page:
                 errors.append(f"finance: {rule.id}: quote not in cached page: {c.quote[:60]!r}")
@@ -75,10 +80,11 @@ def main() -> int:
     ap.add_argument("--intake", choices=["winter", "summer"])
     ap.add_argument("--starting-year", type=int)
     ap.add_argument("--validate", action="store_true")
+    ap.add_argument("--check-cache", action="store_true", help="with --validate: a missing cached page is an error")
     args = ap.parse_args()
     settings = get_settings()
     if args.validate:
-        errors = validate(settings)
+        errors = validate(settings, args.check_cache)
         print("\n".join(errors) or f"{len(list(Path(settings.paths.rules_dir).glob('*.json')))} rule files OK")
         return 1 if errors else 0
     if not (args.profile and args.programme):
