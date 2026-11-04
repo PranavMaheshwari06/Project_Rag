@@ -43,3 +43,11 @@ def test_profile_v5_and_values_are_closed():
     assert SCHEMA_VERSION == "profile-v5"  # introduced university_assessments
     with pytest.raises(ValidationError):
         Profile(university_assessments={TUB: "maybe"})
+
+
+
+def test_no_assessment_keeps_the_university_note():
+    rules, stale = load_ruleset(load_settings(), TUB)
+    rep = check_eligibility(Profile(), rules, stale)
+    degree = next(c for c in rep.criteria if c.rule_id == "degree")
+    assert degree.action.startswith("The university decides: ") and "None" not in degree.action

@@ -260,8 +260,8 @@ def evaluate(
             if len(results) == 1:
                 return results[0]
             return Result(verdict=other, entered=entered if other == "does_not_meet" else None)
-        reason = next((r.reason for r in results if r.verdict == "unknown"), None)
-        return Result(verdict="unknown", reason=reason)
+        first = next(r for r in results if r.verdict == "unknown")
+        return Result(verdict="unknown", reason=first.reason, required=first.required)
     return Result(verdict="unknown", reason="university_review", required=check.note)
 
 
