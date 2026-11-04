@@ -12,7 +12,8 @@ from typing import Literal
 
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
-SCHEMA_VERSION = "profile-v2"  # v2: gre/gate accept "none"; a v1 profile is valid v2
+SCHEMA_VERSION = "profile-v3"  # v2: gre/gate accept "none"; v3: funds per proof route, visa_country
+# an older profile is a valid newer one
 NoTest = Literal["none"]
 
 
@@ -61,8 +62,18 @@ class Gate(Strict):
     qualified: bool | None = None  # as reported on the scorecard; no cutoff is invented
 
 
+class FundsProof(Strict):
+    """One proof of funds for the visa, as the mission pages name the routes."""
+
+    route: Literal[
+        "blocked_account", "declaration_of_commitment", "scholarship", "education_loan",
+        "parental_income", "bank_guarantee",
+    ]
+    amount_eur: Decimal = Field(ge=0)
+
+
 class Profile(Strict):
-    schema_version: Literal["profile-v1", "profile-v2"] = SCHEMA_VERSION
+    schema_version: Literal["profile-v1", "profile-v2", "profile-v3"] = SCHEMA_VERSION
     # countries as English short names, as the university pages publish them ("India")
     citizenships: list[str] | None = None
     degree_country: str | None = None
@@ -82,7 +93,9 @@ class Profile(Strict):
     gate: Gate | NoTest | None = None
     german_level: Literal["A1", "A2", "B1", "B2", "C1", "C2"] | None = None  # CEFR, as certified
     documents: list[str] | None = None  # document keys the student already has, e.g. "aps_certificate"
-    funds_eur: Decimal | None = Field(default=None, ge=0)
+    funds_eur: Decimal | None = Field(default=None, ge=0)  # a total with no route; the visa rule reads `funds`
+    funds: list[FundsProof] | None = None  # [] = the student has no proof of funds yet
+    visa_country: str | None = None  # where the student applies for the visa (the mission's country)
 
     @model_validator(mode="after")
     def _none_needs_v2(self):

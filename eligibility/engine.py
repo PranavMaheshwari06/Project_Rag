@@ -11,10 +11,12 @@ from decimal import Decimal, InvalidOperation
 from typing import Literal
 
 from core.config import get_settings
+from eligibility.finance import FinanceRules, finance_hash
 from eligibility.groups import CountryGroups, load_groups
 from eligibility.profile import Gate, Gre, Profile
 from eligibility.report import AdmissionSummary, Criterion, FinanceSummary, ReadinessSummary, Report
 from eligibility.rules import (
+    BlockedAccount,
     Category,
     Check,
     Deadline,
@@ -195,10 +197,27 @@ def _in(check: In, profile: Profile, groups: CountryGroups | None) -> Result:
     return Result(verdict="meets" if hit != check.negate else "does_not_meet", entered=str(observed), required=required)
 
 
+def _blocked_account(check: BlockedAccount, profile: Profile) -> Result:
+    required = f">= {check.min_eur} EUR in a blocked account"
+    if profile.funds is None:
+        return Result(verdict="unknown", required=required, reason="missing_fact")
+    if not profile.funds:
+        return Result(verdict="does_not_meet", entered="not reported", required=required)
+    if len(profile.funds) > 1 or profile.funds[0].route != "blocked_account":
+        routes = ", ".join(f.route for f in profile.funds)
+        return Result(verdict="unknown", entered=routes, required=required, reason="funds_route_not_comparable")
+    amount = profile.funds[0].amount_eur
+    margin = amount - check.min_eur
+    return Result(verdict="meets" if margin >= 0 else "does_not_meet", entered=f"{amount} EUR",
+                  required=required, margin=margin)
+
+
 def evaluate(
     check: Check, profile: Profile, groups: CountryGroups | None = None, target: Target | None = None
 ) -> Result:
     target = target or Target()
+    if isinstance(check, BlockedAccount):
+        return _blocked_account(check, profile)
     if isinstance(check, Deadline):
         return _deadline(check, target)
     if isinstance(check, MaxAge):
@@ -289,6 +308,8 @@ def _action(rule: Rule, r: Result) -> str | None:
         return f"Provide the missing fact for: {rule.label}."
     if r.reason == "university_review":
         return f"The university decides: {r.required}"
+    if r.reason == "funds_route_not_comparable":
+        return f"The embassy decides whether this proof of funds is enough: {rule.label}."
     if r.reason == "group_membership_uncertain":
         return f"The university decides whether your degree country counts: {rule.label}."
     return None
@@ -331,12 +352,15 @@ def check_eligibility(
     tier: Literal["human", "second_pass"] | None = None,
     intake: Literal["winter", "summer"] | None = None,
     starting_year: int | None = None,
+    finance: FinanceRules | None = None,
 ) -> Report:
     """One criterion per top-level rule; alternatives live inside their group.
     `as_of`, `intake` and `starting_year` come from the request: they place
-    deadlines and test ages, and flag country lists past their re-check date."""
+    deadlines and test ages, and flag country lists past their re-check date.
+    `finance` holds the visa funds rules, which apply to every programme."""
     target = Target(as_of=as_of, intake=intake, starting_year=starting_year)
-    results = [] if stale else [(rule, evaluate(rule.check, profile, groups, target)) for rule in rules.rules]
+    all_rules = rules.rules + (finance.rules if finance else [])
+    results = [] if stale else [(rule, evaluate(rule.check, profile, groups, target)) for rule in all_rules]
     criteria = [
         Criterion(
             rule_id=rule.id,
@@ -355,9 +379,11 @@ def check_eligibility(
     ]
     admission = AdmissionSummary(**_summary("admission", results, stale))
     readiness = ReadinessSummary(**_summary("readiness", results, stale))
-    finance = FinanceSummary(**_summary("finance", results, stale))
+    funds = FinanceSummary(**_summary("finance", results, stale))
     notices = []
-    used = set().union(*(_group_refs(r.check) for r in rules.rules))
+    used = set().union(*(_group_refs(r.check) for r in all_rules))
+    if as_of and finance and not stale and as_of > finance.recheck_after:
+        notices.append(f"The financial rules were read on {finance.fetched_on}; re-check the amounts on the cited pages.")
     if as_of and used and not stale:
         for name in sorted(used):
             g = (groups or default_groups()).groups[name]
@@ -368,7 +394,7 @@ def check_eligibility(
         headline=admission.headline,
         admission=admission,
         readiness=readiness,
-        finance=finance,
+        finance=funds,
         criteria=criteria,
         rules_stale=stale,
         notices=notices,
@@ -376,6 +402,7 @@ def check_eligibility(
         profile_schema_version=profile.schema_version,
         ruleset_sha256=ruleset_hash(rules),
         record_sha256=rules.record_sha256,
+        finance_sha256=finance_hash(finance) if finance else None,
         as_of=as_of,
         intake=intake,
         starting_year=starting_year,

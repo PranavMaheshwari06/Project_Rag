@@ -18,6 +18,7 @@ from pathlib import Path
 
 from core.config import Settings
 from eligibility.engine import check_eligibility
+from eligibility.finance import finance_hash, load_finance
 from eligibility.groups import load_groups
 from eligibility.report import Report
 from eligibility.rules import load_ruleset, record_tier, ruleset_hash
@@ -84,13 +85,14 @@ def run_cases(cases: list[EligibilityCase], settings: Settings, dataset_path: Pa
     """Engine output never feeds back into a label: labels are read, compared,
     reported. Call `validate_cases` first; this function does not re-validate."""
     groups = load_groups(settings.paths.country_groups_path)
+    finance = load_finance(settings.paths.finance_rules_path)
     rows, reports, latencies, programmes = [], [], [], {}
     for case in cases:
         rules, stale = load_ruleset(settings, case.slug)
         tier = record_tier(settings, case.slug)
         start = time.perf_counter()
         report = check_eligibility(case.profile, rules, stale, as_of=case.as_of, groups=groups, tier=tier,
-                                   intake=case.intake, starting_year=case.starting_year)
+                                   intake=case.intake, starting_year=case.starting_year, finance=finance)
         latencies.append((time.perf_counter() - start) * 1000)
         programmes[case.slug] = {"ruleset_sha256": ruleset_hash(rules), "record_sha256": rules.record_sha256,
                                  "rules_stale": stale, "tier": tier}
@@ -126,6 +128,7 @@ def run_cases(cases: list[EligibilityCase], settings: Settings, dataset_path: Pa
         "disagreements": [r for r in rows if not r["headline_agree"] or not all(e["agree"] for e in r["criteria"])],
         "hashes": {
             "dataset_sha256": hashlib.sha256(Path(dataset_path).read_bytes()).hexdigest() if dataset_path else None,
+            "finance_sha256": finance_hash(finance),
             "country_groups_sha256": hashlib.sha256(Path(settings.paths.country_groups_path).read_bytes()).hexdigest(),
             "programmes": programmes,
         },
