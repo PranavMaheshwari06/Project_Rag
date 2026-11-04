@@ -55,3 +55,20 @@ def test_a_claim_the_record_contradicts_is_caught():
     rules, _ = load_ruleset(load_settings(), "kit-m-sc-computer-science")
     record = {"min_grade_german_scale": {"status": "stated", "value": "2.5"}}
     assert not_published_mismatches(rules, record) == ["min_grade"]
+
+
+
+@pytest.mark.parametrize("check", [
+    {"type": "all_of", "children": [PASS, NP]},
+    {"type": "any_of", "children": [NP]},
+    {"type": "when", "when": PASS, "then": NP},
+    {"type": "when", "when": NP, "then": PASS},
+])
+def test_not_published_cannot_hide_inside_a_rule(check):
+    with pytest.raises(ValidationError, match="never inside a group"):
+        Rule.model_validate({"id": "r", "label": "l", "check": check, "citations": [CITE]})
+
+
+def test_record_field_that_is_not_a_field_object_is_a_mismatch():
+    rules, _ = load_ruleset(load_settings(), "kit-m-sc-computer-science")
+    assert not_published_mismatches(rules, {"min_grade_german_scale": "text"}) == ["min_grade"]

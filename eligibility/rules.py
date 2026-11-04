@@ -161,6 +161,16 @@ Group.model_rebuild()
 When.model_rebuild()
 
 
+def _nests_not_published(check: "Check") -> bool:
+    if isinstance(check, NotPublished):
+        return True
+    if isinstance(check, When):
+        return _nests_not_published(check.when) or _nests_not_published(check.then)
+    if isinstance(check, Group):
+        return any(_nests_not_published(c) for c in check.children)
+    return False
+
+
 class Rule(Strict):
     id: str
     label: str
@@ -174,6 +184,8 @@ class Rule(Strict):
     def _not_published_is_info(self):
         if isinstance(self.check, NotPublished) and self.severity != "info":
             raise ValueError("a not_published rule is informational: severity must be info")
+        if not isinstance(self.check, NotPublished) and _nests_not_published(self.check):
+            raise ValueError("not_published is only allowed as a rule's whole check, never inside a group")
         return self
 
 
@@ -206,8 +218,12 @@ def ruleset_hash(rules: RuleSet) -> str:
 
 def not_published_mismatches(rules: RuleSet, record: dict) -> list[str]:
     """Rule ids whose not_published claim is not backed by the record field."""
+    def backed(field: str) -> bool:
+        value = record.get(field)
+        return isinstance(value, dict) and value.get("status") == "not_published"
+
     return [r.id for r in rules.rules if isinstance(r.check, NotPublished) and r.check.record_field
-            and record.get(r.check.record_field, {}).get("status") != "not_published"]
+            and not backed(r.check.record_field)]
 
 
 def uncited_quotes(rules: RuleSet, record: dict) -> list[tuple[str, str, str]]:

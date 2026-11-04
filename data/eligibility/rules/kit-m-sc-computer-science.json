@@ -572,7 +572,7 @@
     },
     {
       "id": "min_grade",
-      "label": "Minimum grade: none is published for admission",
+      "label": "Minimum grade: none is published for entry to the selection (the interview route asks for proof of being in the best 10%, checked elsewhere)",
       "severity": "info",
       "check": {
         "type": "not_published",
