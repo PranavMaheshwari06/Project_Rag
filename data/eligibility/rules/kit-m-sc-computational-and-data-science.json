@@ -393,6 +393,126 @@
         }
       ],
       "reviewed_by": "human"
+    },
+    {
+      "id": "deadline_winter",
+      "label": "Apply by 30 September (German and EU nationals) or 15 July (non-EU nationals) for the winter term",
+      "category": "readiness",
+      "check": {
+        "type": "all_of",
+        "children": [
+          {
+            "type": "when",
+            "when": {
+              "type": "in",
+              "fact": "citizenships",
+              "values": [
+                "@EU"
+              ]
+            },
+            "then": {
+              "type": "deadline",
+              "intake": "winter",
+              "close": {
+                "month": 9,
+                "day": 30,
+                "year_offset": 0
+              }
+            }
+          },
+          {
+            "type": "when",
+            "when": {
+              "type": "in",
+              "fact": "citizenships",
+              "values": [
+                "@EU"
+              ],
+              "negate": true
+            },
+            "then": {
+              "type": "deadline",
+              "intake": "winter",
+              "close": {
+                "month": 7,
+                "day": 15,
+                "year_offset": 0
+              }
+            }
+          }
+        ]
+      },
+      "citations": [
+        {
+          "doc_id": "de/kit/cds-msc/programme",
+          "quote": "German and EU nationals First semester: September 30 for winter term, March 31 for summer term"
+        },
+        {
+          "doc_id": "de/kit/cds-msc/programme",
+          "quote": "Non-EU nationals First semester: July 15 for winter term, January 15 for summer term"
+        }
+      ],
+      "reviewed_by": "pending"
+    },
+    {
+      "id": "deadline_summer",
+      "label": "Apply by 31 March (German and EU nationals) or 15 January (non-EU nationals) for the summer term",
+      "category": "readiness",
+      "check": {
+        "type": "all_of",
+        "children": [
+          {
+            "type": "when",
+            "when": {
+              "type": "in",
+              "fact": "citizenships",
+              "values": [
+                "@EU"
+              ]
+            },
+            "then": {
+              "type": "deadline",
+              "intake": "summer",
+              "close": {
+                "month": 3,
+                "day": 31,
+                "year_offset": 0
+              }
+            }
+          },
+          {
+            "type": "when",
+            "when": {
+              "type": "in",
+              "fact": "citizenships",
+              "values": [
+                "@EU"
+              ],
+              "negate": true
+            },
+            "then": {
+              "type": "deadline",
+              "intake": "summer",
+              "close": {
+                "month": 1,
+                "day": 15,
+                "year_offset": 0
+              }
+            }
+          }
+        ]
+      },
+      "citations": [
+        {
+          "doc_id": "de/kit/cds-msc/programme",
+          "quote": "German and EU nationals First semester: September 30 for winter term, March 31 for summer term"
+        },
+        {
+          "doc_id": "de/kit/cds-msc/programme",
+          "quote": "Non-EU nationals First semester: July 15 for winter term, January 15 for summer term"
+        }
+      ],
+      "reviewed_by": "pending"
     }
   ]
 }
