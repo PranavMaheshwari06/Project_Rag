@@ -88,7 +88,7 @@ Visa rules are national but connect to the university at specific points. Each s
 | Arrival and during study (`arrival`) | City registration (Anmeldung), residence permit, work-hour limits | City of the university |
 | After graduation (`after_graduation`) | 18-month job-seeker residence permit, EU Blue Card route | Some depend on the degree |
 
-- The **funds check** is a deterministic rule: the profile budget is compared with the required financial proof, with a margin and a citation.
+- The **funds check** is a deterministic rule: the funds the student enters per proof route are compared with the cited required amount, with a margin and a citation. Only a lone blocked account is compared; any other route or a combination is left to the embassy, because no rule for combining proofs is published.
 - **Extensions and status changes** are answered as cited official procedure only, never as personal advice.
 - **City-level offices** (for example foreigners' offices) are covered only for the cities of covered universities.
 
