@@ -143,6 +143,7 @@ def test_validate_reads_the_finance_file_and_cli_reports_finance(capsys, monkeyp
     settings.paths.raw_dir = str(tmp_path)  # no cache: finance quotes are reported, not silently passed
     assert cli.validate(settings) == []
     assert "finance: blocked_account_first_year: cached page unavailable, not checked" in capsys.readouterr().out
+    monkeypatch.setattr(cli, "get_settings", load_settings)  # the full suite repoints the cached settings
     profile = tmp_path / "p.json"
     profile.write_text(Profile(**INDIA, funds=blocked("12000")).model_dump_json())
     monkeypatch.setattr(sys, "argv", ["x", "--profile", str(profile), "--programme", "kit-m-sc-computer-science",
