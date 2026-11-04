@@ -65,6 +65,7 @@ and `data/eligibility/rules/kit-m-sc-computer-science.json`, with their tests in
 | `all_of` / `any_of` | `children` (non-empty) | groups |
 | `university_review` | `note` | only the university can decide; never `meets` |
 | `deadline` | `intake`, `close`, `open`, `starting_years` | apply by `close` (inclusive) for that intake; each date is `{month, day, year_offset}` from the starting year (the calendar year the term starts); `starting_years` limits dated windows to the years a page publishes. Reads the request's `as_of`, `intake`, `starting_year` |
+| `blocked_account` | `min_eur` | visa funds, only in `data/eligibility/finance.json`: a lone blocked account in `funds` is compared with `min_eur` (Decimal, margin); any other route or a combination is `unknown` |
 | `max_age` | `fact`, `years` | a test or certificate not older than `years` on the request's `as_of`; a year-only fact decides only when every day of that year agrees |
 
 ## 4. Profile facts (`eligibility/profile.py`)
@@ -85,10 +86,12 @@ Null means not supplied; `[]` or `0` means the student said none.
 | `english_instruction_share` | 0-100 | % of the prior programme taught in English |
 | `german_level` | `A1`..`C2` | CEFR as certified; "at least C1" = `in ["C1", "C2"]` |
 | `interview_passed` | bool | the target's interview actually passed (an invitation is not a pass) |
-| `gre.quant` / `verbal` / `writing` and `*_percentile`, `gre.taken_on` | Decimal | scaled scores and percentiles are different facts |
-| `gate.paper`, `gate.year`, `gate.qualified` | str, int, bool | `qualified` as reported on the scorecard |
+| `gre.quant` / `verbal` / `writing` and `*_percentile`, `gre.taken_on` | Decimal | scaled scores and percentiles are different facts; `gre: "none"` = no GRE |
+| `gate.paper`, `gate.year`, `gate.qualified` | str, int, bool | `qualified` as reported on the scorecard; `gate: "none"` = no GATE |
 | `documents` | list of keys | `aps_certificate`, `vpd`, ... |
-| `funds_eur` | Decimal | |
+| `funds_eur` | Decimal | a total with no proof route; the visa funds rule does not read it |
+| `funds` | list of `{route, amount_eur}` | routes: `blocked_account`, `declaration_of_commitment`, `scholarship`, `education_loan`, `parental_income`, `bank_guarantee`; `[]` = no proof yet |
+| `visa_country` | country name | where the student applies for the visa |
 
 A fact path that does not exist raises an error in tests: do not invent one. If
 a rule needs a fact that is missing, use `university_review` and list it as an

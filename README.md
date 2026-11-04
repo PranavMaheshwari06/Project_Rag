@@ -185,7 +185,7 @@ make eval       # validate, benchmark, calibrate, and persist the selected thres
 make run        # API on :8000
 make eligibility ARGS="--profile data/eligibility/examples/synthetic_kit_cs.json --programme kit-m-sc-computer-science --as-of 2027-05-01 --intake winter --starting-year 2027"
                 # eligibility report for one profile and intake: admission, readiness and finance summaries, one line per rule
-make eligibility ARGS="--validate"                # every rule file: bound to its verified record, quotes in the record
+make eligibility ARGS="--validate"                # rule files bound to their records, quotes in the record; visa funds quotes against the cached page
 make eligibility ARGS="--validate --check-cache"  # also requires the cached page for quotes the record lacks (needs data/raw)
 make eval-eligibility  # validate evaluation/datasets/eligibility_cases.jsonl, run it, write evaluation/results/eligibility_baseline.json
 ```
