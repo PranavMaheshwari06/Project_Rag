@@ -98,7 +98,9 @@ class Profile(Strict):
     visa_country: str | None = None  # where the student applies for the visa (the mission's country)
 
     @model_validator(mode="after")
-    def _none_needs_v2(self):
+    def _fields_match_version(self):
         if self.schema_version == "profile-v1" and "none" in (self.gre, self.gate):
             raise ValueError('"none" for gre or gate needs schema_version profile-v2')
+        if self.schema_version != "profile-v3" and (self.funds is not None or self.visa_country is not None):
+            raise ValueError("funds and visa_country need schema_version profile-v3")
         return self

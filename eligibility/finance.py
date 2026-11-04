@@ -1,7 +1,8 @@
 """Financial rules: visa proof of funds from a cited mission page, kept apart
 from the programme rule files because they belong to the visa route, not to a
-programme's verified record. The file carries its fetch and re-check dates;
-after the re-check date a report says so."""
+programme's verified record. The file carries the date the amounts were read
+on the live page (the cached copy the validator checks may be older) and a
+re-check date; after it, a report where a funds rule applies says so."""
 
 import json
 from datetime import date
@@ -22,6 +23,8 @@ class FinanceRules(BaseModel):
 
     @model_validator(mode="after")
     def _finance_only(self):
+        if self.recheck_after <= self.fetched_on:
+            raise ValueError("recheck_after must be after fetched_on")
         if any(r.category != "finance" for r in self.rules):
             raise ValueError("a financial-rule file holds finance rules only")
         if len({r.id for r in self.rules}) != len(self.rules):

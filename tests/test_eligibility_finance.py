@@ -106,8 +106,9 @@ def test_india_mission_applicant_with_a_lone_blocked_account():
 
 
 def test_finance_rule_scope():
+    # the page is the India mission's: the scope is where the visa is applied for, not citizenship
     eu = report(Profile(citizenships=["Germany"], funds=blocked("1")))
-    assert next(c for c in eu.criteria if c.category == "finance").verdict == "not_applicable"
+    assert next(c for c in eu.criteria if c.category == "finance").verdict == "unknown"
     other_mission = report(Profile(citizenships=["India"], visa_country="Nepal", funds=blocked("1")))
     assert next(c for c in other_mission.criteria if c.category == "finance").verdict == "not_applicable"
     unknown = report(Profile(funds=blocked("1")))
@@ -154,3 +155,67 @@ def test_eval_results_hash_the_finance_file():
 
     out = run_cases([], load_settings())
     assert len(out["hashes"]["finance_sha256"]) == 64
+
+
+def test_min_eur_must_be_positive():
+    with pytest.raises(ValidationError):
+        ev({"type": "blocked_account", "min_eur": "0"})
+
+
+@pytest.mark.parametrize("bad", ["NaN", "Infinity", "sNaN"])
+def test_non_finite_amount_rejected(bad):
+    with pytest.raises(ValidationError):
+        Profile(funds=blocked(bad))
+
+
+def test_old_profile_versions_cannot_hold_v3_fields():
+    with pytest.raises(ValidationError, match="profile-v3"):
+        Profile(schema_version="profile-v2", funds=blocked("1"))
+
+
+def test_no_proof_reads_as_proof_still_needed():
+    rep = report(Profile(**INDIA, funds=[]))
+    crit = next(c for c in rep.criteria if c.category == "finance")
+    assert crit.verdict == "does_not_meet" and crit.action.startswith("Proof of funds still needed")
+
+
+def test_stale_programme_rules_keep_the_visa_rule():
+    s = load_settings()
+    rules, _ = load_ruleset(s, "kit-m-sc-computer-science")
+    rep = check_eligibility(Profile(**INDIA, funds=blocked("11000")), rules, True, finance=load_finance(s.paths.finance_rules_path))
+    assert rep.rules_stale and [c.category for c in rep.criteria] == ["finance"]
+    assert rep.finance.headline == "funds_shortfall"
+
+
+def test_finance_id_cannot_shadow_a_programme_rule():
+    rules, _ = load_ruleset(load_settings(), "kit-m-sc-computer-science")
+    fin = FinanceRules.model_validate({
+        "schema_version": "finance-v1", "fetched_on": "2026-11-04", "recheck_after": "2027-05-04",
+        "rules": [{"id": rules.rules[0].id, "label": "l", "category": "finance", "check": LONE, "citations": [CITE]}]})
+    with pytest.raises(ValueError, match="repeats"):
+        check_eligibility(Profile(**INDIA), rules, False, finance=fin)
+
+
+def test_recheck_date_must_follow_fetch_date():
+    with pytest.raises(ValidationError):
+        FinanceRules.model_validate({"schema_version": "finance-v1", "fetched_on": "2026-11-04",
+                                     "recheck_after": "2026-11-04", "rules": []})
+
+
+def test_notice_only_where_the_funds_rule_applies():
+    fin = load_finance(load_settings().paths.finance_rules_path)
+    late = fin.recheck_after + timedelta(days=1)
+    elsewhere = report(Profile(visa_country="Nepal"), as_of=late)
+    assert not any("financial rules" in n for n in elsewhere.notices)
+
+
+def test_the_eval_can_label_the_visa_rule(tmp_path):
+    from evaluation.eligibility_dataset import EligibilityCase, validate_cases
+
+    case = EligibilityCase.model_validate({
+        "case_id": "F1", "profile": {**INDIA, "funds": blocked("11904")}, "slug": "kit-m-sc-computer-science",
+        "intake": "winter", "starting_year": 2027, "as_of": "2027-03-01",
+        "expected_headline": "needs_information_or_review",
+        "expected_criteria": [{"rule_id": "blocked_account_first_year", "verdict": "meets", "citations": [CITE]}],
+        "rationale": "synthetic harness fixture", "citations": [CITE], "author": "assisted"})
+    assert validate_cases([case], load_settings()) == []

@@ -302,6 +302,8 @@ COUNTED = ("meets", "does_not_meet", "unknown", "not_published")
 def _action(rule: Rule, r: Result) -> str | None:
     if r.reason == "window_closed":
         return f"Application window closed: {rule.label}."
+    if r.verdict == "does_not_meet" and rule.category == "finance" and r.entered == "not reported":
+        return f"Proof of funds still needed: {rule.label}."
     if r.verdict == "does_not_meet":
         return f"{FAILED_ACTION[rule.category]}: {rule.label}."
     if r.reason == "missing_fact":
@@ -359,8 +361,14 @@ def check_eligibility(
     deadlines and test ages, and flag country lists past their re-check date.
     `finance` holds the visa funds rules, which apply to every programme."""
     target = Target(as_of=as_of, intake=intake, starting_year=starting_year)
-    all_rules = rules.rules + (finance.rules if finance else [])
-    results = [] if stale else [(rule, evaluate(rule.check, profile, groups, target)) for rule in all_rules]
+    finance_rules = finance.rules if finance else []
+    all_rules = rules.rules + finance_rules
+    ids = [r.id for r in all_rules]
+    if len(ids) != len(set(ids)):
+        raise ValueError(f"a finance rule id repeats a programme rule id in {rules.slug}")
+    # visa funds do not depend on the programme record, so stale programme rules do not hide them
+    results = [(rule, evaluate(rule.check, profile, groups, target))
+               for rule in ([] if stale else rules.rules) + finance_rules]
     criteria = [
         Criterion(
             rule_id=rule.id,
@@ -379,10 +387,11 @@ def check_eligibility(
     ]
     admission = AdmissionSummary(**_summary("admission", results, stale))
     readiness = ReadinessSummary(**_summary("readiness", results, stale))
-    funds = FinanceSummary(**_summary("finance", results, stale))
+    funds = FinanceSummary(**_summary("finance", results, False))
     notices = []
     used = set().union(*(_group_refs(r.check) for r in all_rules))
-    if as_of and finance and not stale and as_of > finance.recheck_after:
+    funds_apply = any(rule.category == "finance" and r.verdict != "not_applicable" for rule, r in results)
+    if as_of and finance and funds_apply and as_of > finance.recheck_after:
         notices.append(f"The financial rules were read on {finance.fetched_on}; re-check the amounts on the cited pages.")
     if as_of and used and not stale:
         for name in sorted(used):

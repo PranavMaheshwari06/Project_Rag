@@ -129,7 +129,7 @@ class BlockedAccount(Strict):
     route, or a combination, is unknown: no rule for combining proofs is published."""
 
     type: Literal["blocked_account"] = "blocked_account"
-    min_eur: Decimal
+    min_eur: Decimal = Field(gt=0)
 
 
 class Group(Strict):

@@ -5,16 +5,21 @@
   "rules": [
     {
       "id": "blocked_account_first_year",
-      "label": "Student visa through the German Mission in India: a blocked account with at least 11,904 EUR for the first year of studies (no more than 992 EUR released per month)",
+      "label": "Student visa through the German Mission in India: a blocked account with at least 11,904 EUR for the first year of studies (the page also requires a blocking confirmation of no more than 992 EUR per month, which is not checked)",
       "category": "finance",
       "severity": "hard",
       "check": {
         "type": "when",
-        "when": {"type": "in", "fact": "citizenships", "values": ["@EU"], "negate": true},
+        "when": {
+          "type": "in",
+          "fact": "visa_country",
+          "values": [
+            "India"
+          ]
+        },
         "then": {
-          "type": "when",
-          "when": {"type": "in", "fact": "visa_country", "values": ["India"]},
-          "then": {"type": "blocked_account", "min_eur": "11904"}
+          "type": "blocked_account",
+          "min_eur": "11904"
         }
       },
       "citations": [
