@@ -15,7 +15,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from core.config import get_settings  # noqa: E402
 from eligibility.engine import check_eligibility, default_groups  # noqa: E402
 from eligibility.profile import Profile  # noqa: E402
-from eligibility.rules import load_ruleset, uncited_quotes  # noqa: E402
+from eligibility.rules import load_ruleset, record_tier, uncited_quotes  # noqa: E402
 
 
 def raw_page_words(settings, doc_id: str) -> str | None:
@@ -69,8 +69,15 @@ def main() -> int:
     if not (args.profile and args.programme):
         ap.error("--profile and --programme are required unless --validate")
     profile = Profile.model_validate_json(Path(args.profile).read_text(encoding="utf-8"))
-    report = check_eligibility(profile, *load_ruleset(settings, args.programme), as_of=date.today())
+    report = check_eligibility(
+        profile, *load_ruleset(settings, args.programme), as_of=date.today(),
+        tier=record_tier(settings, args.programme),
+    )
     print(f"{report.slug}: {report.headline}{' (rules stale)' if report.rules_stale else ''}")
+    for area in ("admission", "readiness", "finance"):
+        summary = getattr(report, area)
+        counts = ", ".join(f"{n} {v}" for v, n in summary.counts.items() if n)
+        print(f"  {area}: {summary.headline}" + (f" ({counts})" if counts else ""))
     for c in report.criteria:
         margin = f" margin {c.margin}" if c.margin is not None else ""
         print(f"  [{c.verdict}] {c.label}{margin}" + (f"\n      -> {c.action}" if c.action else ""))
