@@ -3,7 +3,7 @@
 Local only (gitignored; the copy of record is on branch `handoff-private`). Read this first in every session, then `docs/PROJECT_PLAN.md`.
 Update it at the end of every session and at every "Commit Phase N": rewrite **Now** and **Next**, add one line to **Log**.
 
-In progress: final audit (section 6).
+In progress: none. Session ended after the final audit; see Next.
 
 ## Now
 - `main` = `e36c977`; nothing merged in this session (merging is the maintainer's). All work is on open PRs, listed in the table below in merge order.
@@ -24,12 +24,12 @@ In progress: final audit (section 6).
 ## Branches (this session)
 | Branch | Base | PR | State | Merge order | Provisional |
 |---|---|---|---|---|---|
-| eligibility-validate-check-cache-flag | main | #4 | open | any time (independent) | no |
-| report-admission-readiness-finance-summaries | main | #5 | open | 1 | no |
-| profile-explicit-no-gre-gate | report-admission-readiness-finance-summaries | #7 | open | 2 | no |
-| eval-eligibility-harness | profile-explicit-no-gre-gate | #8 | open | 3 | no |
-| date-logic-deadline-readiness | eval-eligibility-harness | #9 | open | 4 | no |
-| finance-blocked-account-funds | date-logic-deadline-readiness | #10 | open | 5 | no |
+| eligibility-validate-check-cache-flag | main | #4 | open | 1 (it is merged into #9, so merge it first) | no |
+| report-admission-readiness-finance-summaries | main | #5 | open | 2 | no |
+| profile-explicit-no-gre-gate | report-admission-readiness-finance-summaries | #7 | open | 3 | no |
+| eval-eligibility-harness | profile-explicit-no-gre-gate | #8 | open | 4 | no |
+| date-logic-deadline-readiness | eval-eligibility-harness | #9 | open | 5 | no |
+| finance-blocked-account-funds | date-logic-deadline-readiness | #10 | open | 6 | no |
 | provisional-credit-unit-closed-choice | finance-blocked-account-funds | #12 | open | after #10, if accepted | YES (F1) |
 | provisional-not-published-info-rules | finance-blocked-account-funds | #11 | open | after #10, if accepted | YES (F2) |
 | provisional-university-assessment-fact | provisional-credit-unit-closed-choice | #13 | open | after #12, if accepted | YES (F3) |
@@ -44,7 +44,7 @@ Stacking: later Phase 6 stages build on the report shape (A) and the profile ver
 3. **Credit unit**: closed choice ECTS/other (recommended) or aliases (ACTION 5).
 
 ## Next
-1. Maintainer: ACTIONS 1-3, review and merge #4, #5, #7, #8, #9, #10 in that order (retarget each to `main` after its base merges), decide F1-F4 (ACTION 12k), merge #6 last.
+1. Maintainer: ACTIONS 1-3 and 12a (footers), review and merge #4, #5, #7, #8, #9, #10 in that order (retarget each to `main` after its base merges), decide F1-F4 (ACTION 12k), merge #6 last.
 2. Maintainer: finish the source check and freeze H01-H05 in `evaluation/datasets/eligibility_cases.jsonl` (ACTION 6) BEFORE `make eval-eligibility` runs on them.
 3. Next build session (after merges): docs follow-ups for whichever F branches were accepted (list from the final audit in ACTIONS), the 35 assisted cases once their slots are approved (ACTION 9), other programmes' deadlines once sourced (ACTION 8).
 
@@ -54,6 +54,7 @@ Stacking: later Phase 6 stages build on the report shape (A) and the profile ver
 - Reviewer sub-agents read the shared working tree: do not switch branches in `/home/user/Project_Rag` while they run (one review ran against a `git archive` copy because of that).
 
 ## Log (newest first)
+- 2026-11-04: Final audit (agent, whole repo): #4 conflicted with #9/#10 on the CLI usage lines, so #4 was merged into #9 and forward (now merge #4 first); `--check-cache` now covers the finance quotes (#10); docs reworded for the merged state; PR-number references fixed. Full suite on #14: 434 passed. CI green on every PR head checked.
 - 2026-11-04: F1-F4 reviewed (combined agent reviews) and fixed; PRs #11-#14 opened. CLI/API tests now patch `get_settings` because the full-suite corpus fixture (tests/conftest.py) repoints the shared cached settings; fix committed on #9 and #10 and merged forward into #11-#14 (merge commits, no force-push).
 - 2026-11-04: F1-F4 provisional branches built and pushed (each an ACTION accept-or-revert). F2 and F3 both edit the pending-rule sets in tests/test_eligibility_others.py and tests/test_eligibility_siblings.py: whichever merges second needs a small conflict resolution (union of the sets). F1/F3 bump the profile version (v4, v5); F2 and F4 do not.
 - 2026-11-04: Stage E built (PR #10); S7 re-read via Firecrawl; agent reviews: scope by visa mission (EU condition unsourced, dropped), stale rules no longer hide funds, id-collision guard; CI list 398 passed, frontend built. Stages A-E done.
