@@ -46,7 +46,11 @@ GOOD = reply(
 
 
 @pytest.fixture
-def client():
+def client(monkeypatch):
+    import api.routes.eligibility as route
+    from core.config import load_settings
+
+    monkeypatch.setattr(route, "get_settings", load_settings)  # the full suite repoints the cached settings
     app = create_app()
     yield TestClient(app), app
     app.dependency_overrides.clear()
