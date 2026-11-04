@@ -72,6 +72,8 @@ def main() -> int:
         return 1 if errors else 0
     if not (args.profile and args.programme):
         ap.error("--profile and --programme are required unless --validate")
+    if (args.intake is None) != (args.starting_year is None):
+        ap.error("--intake and --starting-year go together")
     profile = Profile.model_validate_json(Path(args.profile).read_text(encoding="utf-8"))
     report = check_eligibility(
         profile, *load_ruleset(settings, args.programme), as_of=args.as_of,

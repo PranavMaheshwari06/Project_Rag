@@ -88,10 +88,12 @@ def _max_age(check: MaxAge, profile: Profile, target: Target) -> Result:
         return Result(verdict="unknown", required=required, reason="missing_request_date")
     if isinstance(observed, date):
         earliest = latest = observed
-    elif isinstance(observed, int):
+    elif isinstance(observed, int) and not isinstance(observed, bool):
         earliest, latest = date(observed, 1, 1), date(observed, 12, 31)
     else:
         raise ValueError(f"fact {check.fact} is not a date or a year")
+    if earliest > target.as_of:  # a result dated after the request date: a typo or a test not yet taken
+        return Result(verdict="unknown", entered=str(observed), required=required, reason="date_after_as_of")
     if shift_years(earliest, check.years) >= target.as_of:
         verdict, margin = "meets", shift_years(earliest, check.years) - target.as_of
     elif shift_years(latest, check.years) < target.as_of:
@@ -211,6 +213,9 @@ def evaluate(
             return evaluate(check.then, profile, groups, target)
         if cond.verdict == "does_not_meet":
             return Result(verdict="not_applicable", entered=cond.entered)
+        # an unresolved condition cannot make a requirement apply that is off anyway (e.g. the other intake)
+        if evaluate(check.then, profile, groups, target).verdict == "not_applicable":
+            return Result(verdict="not_applicable")
         return Result(verdict="unknown", reason=cond.reason or "condition_unresolved", required=cond.required)
     if isinstance(check, Group):
         results = [r for r in (evaluate(c, profile, groups, target) for c in check.children)
@@ -228,8 +233,13 @@ def evaluate(
         failing = {r.entered for r in results if r.verdict == "does_not_meet"}
         entered = "not reported" if failing == {"not reported"} else None
         if decisive in verdicts:
+            deciding = [r for r in results if r.verdict == decisive]
+            if len(deciding) == 1:  # one child decides: keep its value, margin and reason
+                return deciding[0]
             return Result(verdict=decisive, entered=entered if decisive == "does_not_meet" else None)
         if verdicts == {other}:
+            if len(results) == 1:
+                return results[0]
             return Result(verdict=other, entered=entered if other == "does_not_meet" else None)
         reason = next((r.reason for r in results if r.verdict == "unknown"), None)
         return Result(verdict="unknown", reason=reason)

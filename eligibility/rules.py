@@ -79,8 +79,9 @@ class UniversityReview(Strict):
 
 
 class DayOfYear(Strict):
-    """A recurring date, placed relative to the intake's starting year: a summer
-    intake of 2027 with a deadline in November 2026 has year_offset -1."""
+    """A recurring date, placed relative to the intake's starting year (the
+    calendar year the term starts: winter 2027/28 and summer 2027 both have
+    2027). A summer 2027 intake with a deadline in November 2026 has -1."""
 
     month: int = Field(ge=1, le=12)
     day: int = Field(ge=1, le=31)
@@ -105,10 +106,17 @@ class Deadline(Strict):
     open: DayOfYear | None = None
     starting_years: list[int] | None = None
 
+    @model_validator(mode="after")
+    def _opens_before_it_closes(self):
+        if self.open and self.open.on(2001) > self.close.on(2001):
+            raise ValueError("a window cannot open after it closes")
+        return self
+
 
 class MaxAge(Strict):
-    """A test or certificate not older than `years` on the request's as_of date.
-    The fact is a date, or a year when only the year is known."""
+    """A test or certificate not older than `years` on the request's as_of date
+    (pages that name another reference date need another check). The fact is a
+    date, or a year when only the year is known."""
 
     type: Literal["max_age"] = "max_age"
     fact: str

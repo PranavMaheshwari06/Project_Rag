@@ -171,3 +171,46 @@ def test_cli_takes_the_request_date_intake_and_year(capsys, monkeypatch):
     out = capsys.readouterr().out
     assert "readiness: items_still_needed (1 does_not_meet)" in out
     assert "Application window closed: Apply by 15 June for the winter term." in out
+
+
+def kit(slug, citizenships, as_of, rule_id="deadline_winter", intake="winter"):
+    rules, stale = load_ruleset(load_settings(), slug)
+    rep = check_eligibility(Profile(citizenships=citizenships), rules, stale,
+                            as_of=as_of, intake=intake, starting_year=2027)
+    return next(c for c in rep.criteria if c.rule_id == rule_id)
+
+
+def test_kit_cds_late_shows_window_closed_with_date_and_days():
+    c = kit("kit-m-sc-computational-and-data-science", ["India"], date(2027, 7, 16))
+    assert c.action.startswith("Application window closed")
+    assert c.required == "apply by 2027-07-15" and c.margin == -1
+
+
+def test_unknown_citizenship_keeps_the_other_intake_not_applicable():
+    cds = "kit-m-sc-computational-and-data-science"
+    assert kit(cds, None, date(2027, 7, 16), rule_id="deadline_summer").verdict == "not_applicable"
+    assert kit(cds, None, date(2027, 7, 16)).verdict == "unknown"
+
+
+def test_open_after_close_is_rejected():
+    with pytest.raises(ValueError, match="open after it closes"):
+        Rule.model_validate({"id": "r", "label": "l", "citations": [CITE],
+                             "check": {**WINTER, "open": {"month": 8, "day": 1}}})
+
+
+def test_max_age_refuses_a_bool_and_a_result_after_as_of():
+    with pytest.raises(ValueError, match="not a date or a year"):
+        ev({"type": "max_age", "fact": "degree_completed", "years": 3}, degree_completed=True)
+    assert ev(GATE_AGE, as_of=date(2027, 5, 1), gate={"year": 2031}).reason == "date_after_as_of"
+    assert ev(GRE_AGE, as_of=date(2027, 5, 1), gre={"taken_on": date(2027, 5, 2)}).reason == "date_after_as_of"
+
+
+@pytest.mark.parametrize("as_of,verdict", [(date(2029, 2, 28), "meets"), (date(2029, 3, 1), "does_not_meet")])
+def test_leap_day_result(as_of, verdict):
+    assert ev(GRE_AGE, as_of=as_of, gre={"taken_on": date(2024, 2, 29)}).verdict == verdict
+
+
+def test_kit_cs_pending_rules_are_exactly_the_unreviewed_ones():
+    rules, _ = load_ruleset(load_settings(), "kit-m-sc-computer-science")
+    assert {r.id for r in rules.rules if r.reviewed_by == "pending"} == {
+        "degree", "degree_ects", "module_assignment", "test_validity", "english", "deadline_winter", "deadline_summer"}
