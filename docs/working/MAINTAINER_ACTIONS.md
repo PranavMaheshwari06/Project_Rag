@@ -136,3 +136,7 @@ Answer: "accept" or the words to change.
 ### 12c. RWTH CS English and German rules are tagged `readiness` — NOT BLOCKING
 Found by the Stage A spec review (agent review, not verified by a person): in `data/eligibility/rules/rwth-aachen-m-sc-computer-science.json` the English and German proof rules have `category: readiness`, so a failed language proof reads as `items_still_needed`, not as an admission failure. This was in the accepted 2026-11-02 rule file; nothing was changed. Decide whether that is intended (e.g. proof due by enrolment) or should be `admission`.
 Answer: "intended" or "make admission".
+
+### 12d. Stage B (PR #7): accept the literal "none" for GRE/GATE — NOT BLOCKING
+`gre: "none"` / `gate: "none"` = the student has no such test; `null` or `{}` = not supplied. Profile schema `profile-v2`. Alternative was a boolean flag per test. If accepted, a DECISIONS entry is owed.
+Answer: "accept" or "use a flag".

@@ -301,7 +301,7 @@ TU Berlin and Stuttgart). "Not published" is never read as "exempt".
 | No "university confirmed my degree" fact (X1) | all 13 | Never a positive verdict |
 | No dates: test age, certificate validity, deadlines | KIT, Stuttgart, all deadlines | "University decides" note; no deadline check |
 | No GATE score (only "qualified") | TU Darmstadt (GATE 750) | GATE route is "university decides" |
-| No "I have no GRE/GATE" answer for tests without a minimum | Saarland | "Missing information" instead of "still needed" |
+| No "I have no GRE/GATE" answer for tests without a minimum (closed on branch profile-explicit-no-gre-gate, PR #7, 2026-11-04: `gre`/`gate` accept "none") | Saarland | "Missing information" instead of "still needed" |
 | No generic English CEFR level, school English certificate or UNIcert for KIT | TU Berlin, Dresden, KIT, RWTH | Those routes are "university decides" |
 | No module-content or module-allocation facts | RWTH DS, TU Berlin, KIT CDS, Darmstadt | "University decides" |
 | No total-shortfall arithmetic | KIT CDS | Cut-offs from D17 |
