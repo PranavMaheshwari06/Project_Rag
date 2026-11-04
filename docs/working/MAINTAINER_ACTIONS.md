@@ -48,7 +48,8 @@ Answer: "closed" or "aliases".
 ## 6. Finish the source sheet, then freeze H01-H05 — BLOCKING (Step 5 evaluation on the five cases)
 Where: your computer (VS Code), `docs/working/PHASE_6_FIVE_PROFILE_SOURCE_CHECK.md` and your local worksheet.
 - Rows still needing your reading: S7 funds (loan/scholarship bullets read as additions, not alternatives), S3 Suitability Assessment Form exemption wording, S6 first-degree length/ECTS (section 3 of the PDF), S14 conversion formula clause.
-- Then commit H01-H05 as `author: human` with `frozen_on` in a dataset file (format: `evaluation/datasets/eligibility_cases.jsonl`, schema in `evaluation/eligibility_dataset.py` once stage C is merged) BEFORE any evaluation code runs on them. The commit date is the proof of the freeze. The validator refuses `author: human` without `frozen_on`.
+- Then commit H01-H05 as `author: human` with `frozen_on` in `evaluation/datasets/eligibility_cases.jsonl` (one JSON object per line; schema `evaluation/eligibility_dataset.py`, PR #8) BEFORE any evaluation code runs on them. The commit date is the proof of the freeze. Each line needs: `case_id`, `profile` (profile-v2), `slug`, `intake` (winter/summer), `starting_year`, `as_of`, `expected_headline`, `expected_criteria` (each with `rule_id`, `verdict`, at least one citation), `rationale`, `citations`, `author: "human"`, `reviewer`, `related_to` (or null), `frozen_on`. The validator refuses `author: human` without `frozen_on` and a `frozen_on` in the future.
+- There is no validate-only mode: `make eval-eligibility` runs the engine as soon as validation passes. So: commit and push the labels first, then run it.
 Blocks: any engine run on the five cases.
 Answer: "frozen at <commit>".
 
@@ -140,3 +141,12 @@ Answer: "intended" or "make admission".
 ### 12d. Stage B (PR #7): accept the literal "none" for GRE/GATE — NOT BLOCKING
 `gre: "none"` / `gate: "none"` = the student has no such test; `null` or `{}` = not supplied. Profile schema `profile-v2`. Alternative was a boolean flag per test. If accepted, a DECISIONS entry is owed.
 Answer: "accept" or "use a flag".
+
+### 12e. Stage C (PR #8): eval harness choices — NOT BLOCKING
+Author values are `human` / `assisted`; reviewer `human` / `model` / null; `not_covered` is refused in cases (only the Step 4 API can produce it); coverage counts every applicable hard and soft criterion (all three areas).
+Answer: "accept" or what to change.
+
+### 12f. settings.yaml is hash-locked as a Phase 4 input — NOT BLOCKING
+`data/eligibility/coverage_inventory.json` locks `config/settings.yaml`, so Phase 6 settings (rules dir, country groups, eval paths) are Python defaults in `core/config.py`. To move them into YAML, the lock must be refreshed deliberately (`scripts/validate_phase6_inventory.py` never refreshes it implicitly). Same for `evaluation/datasets/README.md` (locked), which therefore has no section on the eligibility dataset yet.
+Answer: "keep code defaults" or "refresh the lock and move them".
+
