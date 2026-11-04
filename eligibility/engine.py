@@ -42,11 +42,14 @@ ABSENT = object()  # the student listed their tests and this one is not among th
 def resolve(profile: Profile, path: str) -> object:
     """Dotted lookup; a missing link (None, absent dict key) gives None. In a list
     of language results a path part selects the entry by test name, e.g.
-    `language.IELTS.overall`; a test missing from a supplied list is ABSENT."""
+    `language.IELTS.overall`; a test missing from a supplied list is ABSENT, and
+    so is any score of a test the student reported as "none"."""
     cur: object = profile
     for part in path.split("."):
         if cur is None or cur is ABSENT:
             return cur
+        if cur == "none":
+            return ABSENT
         if isinstance(cur, list):
             cur = next((e for e in cur if e.test.casefold() == part.casefold()), ABSENT)
         elif isinstance(cur, dict):
