@@ -12,9 +12,10 @@ from typing import Literal
 
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
-SCHEMA_VERSION = "profile-v4"  # v2: gre/gate accept "none"; v3: funds per proof route, visa_country;
-# v4: credit_unit is a closed choice
+SCHEMA_VERSION = "profile-v5"  # v2: gre/gate accept "none"; v3: funds per proof route, visa_country;
+# v4: credit_unit is a closed choice; v5: university_assessments
 # an older profile is a valid newer one
+ProfileVersion = Literal["profile-v1", "profile-v2", "profile-v3", "profile-v4", "profile-v5"]
 NoTest = Literal["none"]
 
 
@@ -74,7 +75,7 @@ class FundsProof(Strict):
 
 
 class Profile(Strict):
-    schema_version: Literal["profile-v1", "profile-v2", "profile-v3", "profile-v4"] = SCHEMA_VERSION
+    schema_version: ProfileVersion = SCHEMA_VERSION
     # countries as English short names, as the university pages publish them ("India")
     citizenships: list[str] | None = None
     degree_country: str | None = None
@@ -97,6 +98,9 @@ class Profile(Strict):
     german_level: Literal["A1", "A2", "B1", "B2", "C1", "C2"] | None = None  # CEFR, as certified
     documents: list[str] | None = None  # document keys the student already has, e.g. "aps_certificate"
     funds_eur: Decimal | None = Field(default=None, ge=0)  # a total with no route; the visa rule reads `funds`
+    # the university's written assessment of the degree (equivalence and subject allocation)
+    # as the student reports it, per programme slug; only a reported "positive" can meet
+    university_assessments: dict[str, Literal["positive", "negative"]] | None = None
     funds: list[FundsProof] | None = None  # [] = the student has no proof of funds yet
     visa_country: str | None = None  # where the student applies for the visa (the mission's country)
 

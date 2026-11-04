@@ -4,6 +4,7 @@ or a combination, is "unknown" because no rule for combining proofs is
 published. A shortfall is a finance outcome, never an academic failure."""
 
 from datetime import date, timedelta
+from typing import get_args
 from decimal import Decimal as D
 
 import pytest
@@ -12,7 +13,7 @@ from pydantic import ValidationError
 from core.config import load_settings
 from eligibility.engine import check_eligibility, evaluate
 from eligibility.finance import FinanceRules, load_finance
-from eligibility.profile import SCHEMA_VERSION, Profile
+from eligibility.profile import SCHEMA_VERSION, Profile, ProfileVersion
 from eligibility.rules import Rule, RuleSet, load_ruleset
 
 CITE = {"doc_id": "de/x/y", "quote": "q"}
@@ -31,7 +32,7 @@ def blocked(amount):
 
 # --- profile ------------------------------------------------------------------------
 def test_profile_v3_round_trip_and_routes_are_a_closed_list():
-    assert SCHEMA_VERSION in ("profile-v3", "profile-v4")  # v3 introduced funds
+    assert "profile-v3" in get_args(ProfileVersion) and SCHEMA_VERSION == get_args(ProfileVersion)[-1]  # v3 introduced funds
     p = Profile(funds=blocked("11904.00"), visa_country="India")
     assert Profile.model_validate_json(p.model_dump_json()) == p
     assert p.funds[0].amount_eur == D("11904.00")
