@@ -148,3 +148,10 @@ URL: https://www.coe.int/en/web/conventions/full-list?module=signatures-by-treat
 - The chart lists Council of Europe members, then "Non-Members of Council of Europe" (Australia, Belarus, Canada, Holy See, Israel, Kazakhstan, Kyrgyzstan, New Zealand, Russian Federation, Tajikistan, Turkmenistan, United States of America) and the European Union. India does not appear.
 - "Total number of ratifications/accessions | 57"; the United States has a signature and no ratification.
 - Agrees (also consistent with `data/eligibility/country_groups.json`, fetched 2026-10-29). Checked by: ____
+
+## C. Re-reads on 2026-11-04 for the session rules (agent reads through the page-reading connector, not checked by the maintainer)
+
+- S10 (KIT CDS), deadline block as returned: "Application deadline: / German and EU nationals / First semester: September 30 for winter term, March 31 for summer term / Higher semester: September 30 for winter term, March 31 for summer term / Non-EU nationals / First semester: July 15 for winter term, January 15 for summer term / Higher semester: July 15 for winter term, January 15 for summer term". Page date 11.09.2026 08:31. Used by PR #9.
+- S11 (KIT CS), deadline block: "German and EU nationals / First semester: June 15 for winter term, January 15 for summer term / ... / Non-EU nationals / First semester: June 15 for winter term, January 15 for summer term". Page date 02.11.2026 13:48. Used by PR #9.
+- S7 (German Mission India), funds bullets as returned: "by one of the following means / • Blocked bank account (“Sperrkonto”) in Germany with sufficient funds to cover the first year of studies, currently amounting to 11,904.—EUR and with a blocking confirmation stating that no more than 992.—EUR per month can be withdrawn. / • Formal Declaration of Commitment / Formal Obligation Lettter (“Verpflichtungserklärung”) by a sponsor residing in Germany. ... / • If you receive a scholarship, proof of a German or EU scholarship or stipend / • If you have taken out an education loan, please also provide proof of that". No page date returned. Used by the finance branch.
+

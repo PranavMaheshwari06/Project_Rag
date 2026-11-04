@@ -106,7 +106,8 @@ make eval        # validate_gold.py, then 4-way benchmark -> frontend/public/ben
 make test        # pytest -q
 make run         # uvicorn api.main:app --port 8000
 make fmt         # ruff format .
-make eligibility ARGS="--profile p.json --programme <slug>"   # report: admission/readiness/finance summaries + one line per rule
+make eligibility ARGS="--profile p.json --programme <slug> [--as-of YYYY-MM-DD --intake winter|summer --starting-year YYYY]"   # report
+make eval-eligibility [ARGS="--cases f.jsonl --out f.json"]   # validate + run eligibility cases -> evaluation/results/eligibility_baseline.json (exit 1 if missing/invalid)
 make eligibility ARGS="--validate"                # rule files bound to records, quotes in record (cache where data/raw exists)
 make eligibility ARGS="--validate --check-cache"  # a missing cached page is an error (local, needs data/raw)
 make validate-phase6-inventory [ARGS="--check-cache"]   # Step 0 inventory and Phase 4 hashes

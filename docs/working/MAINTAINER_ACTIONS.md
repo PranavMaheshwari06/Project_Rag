@@ -60,7 +60,7 @@ Answer: "merged #N, #M".
 
 ## 8. Deadlines for the other programmes — NOT BLOCKING
 Where: official pages; add each as a row in the source-check sheet.
-Deadline readiness rules exist only for TU Berlin CS (S1), KIT CDS (S10) and KIT CS (S11). Still to source (data, no code): RWTH CS, RWTH DS, Saarland CS, Saarland DSAI, TU Darmstadt CS, TU Darmstadt AIML, TU Dresden CS, TUM Informatics, TUM DEA, Stuttgart CS.
+Deadline readiness rules exist only for KIT CDS (S10) and KIT CS (S11) (PR #9, pending). Still to source (data, no code): TU Berlin CS (S1 was read, but its dates page https://www.tu.berlin/en/go167 is not in `sources/registry.yaml`; adding it changes the corpus and needs `make crawl` — decide whether to add it), RWTH CS, RWTH DS, Saarland CS, Saarland DSAI, TU Darmstadt CS, TU Darmstadt AIML, TU Dresden CS, TUM Informatics, TUM DEA, Stuttgart CS.
 Answer: "sourced: <slugs>".
 
 ## 9. The 35 assisted-case slots — BLOCKING (assisted part of Step 5)
@@ -149,4 +149,14 @@ Answer: "accept" or what to change.
 ### 12f. settings.yaml is hash-locked as a Phase 4 input — NOT BLOCKING
 `data/eligibility/coverage_inventory.json` locks `config/settings.yaml`, so Phase 6 settings (rules dir, country groups, eval paths) are Python defaults in `core/config.py`. To move them into YAML, the lock must be refreshed deliberately (`scripts/validate_phase6_inventory.py` never refreshes it implicitly). Same for `evaluation/datasets/README.md` (locked), which therefore has no section on the eligibility dataset yet.
 Answer: "keep code defaults" or "refresh the lock and move them".
+
+### 12g. Stage D (PR #9): review the four KIT deadline rules — BLOCKING (a positive readiness headline for KIT)
+Rules `deadline_winter` / `deadline_summer` in `kit-m-sc-computer-science.json` and `kit-m-sc-computational-and-data-science.json`, all `pending`. KIT CDS: 30 Sep / 31 Mar for German and EU nationals, 15 Jul / 15 Jan for non-EU nationals (page read 2026-11-04). KIT CS: 15 Jun / 15 Jan for everyone. Its verified record says `deadlines: not_published` for KIT CDS: an extraction omission; decide whether to correct the record through the Save path.
+New quotes to check with ACTION 2: KIT CDS "German and EU nationals First semester: September 30 for winter term, March 31 for summer term", "Non-EU nationals First semester: July 15 for winter term, January 15 for summer term" (de/kit/cds-msc/programme); KIT CS "First semester: June 15 for winter term, January 15 for summer term" (de/kit/cs-msc/programme).
+Open questions: EEA/Swiss citizens get the non-EU dates (the page says "EU nationals"); `citizenships: []` reads as non-EU (as in the RWTH DS rule).
+Answer: "accept" or the rule ids to change.
+
+### 12h. KIT CS test age (`test_validity`) — NOT BLOCKING
+`max_age` now exists, but encoding "GRE not older than 5 years, GATE 3 years" correctly means folding it into the accepted `gre_or_gate` rule (a passing but stale GRE must not count). That changes an accepted rule, so it is your call; the reference date is also unstated on S12 (the engine would use the request's `as_of`).
+Answer: "fold into gre_or_gate (back to pending)" or "keep as review".
 
