@@ -1,6 +1,6 @@
 # Phase 6 implementation plan: cited eligibility and gap reports
 
-Status: Step 0 inventory drafted, 2026-10-27; [consequential interpretations await maintainer review](PHASE_6_RULE_REVIEW.md). Phase 4 is complete locally at `b85ae75`; executable Phase 6 rules are not implemented. This specification follows [the project roadmap](PROJECT_PLAN.md) and the [planning index](PLANNING_INDEX.md).
+Status (2026-11-04): Steps 0-3 are done and merged: the inventory, the profile/rule/report types, the deterministic primitives and reviewed rule files for all 13 programmes (decisions recorded 2026-11-02 in LEARNING.md). Built on open branches, not merged: report summaries per area and the validation `--check-cache` flag. Step 4 (API and paste-to-fill) and Step 5 (independent evaluation) are not started; the five maintainer cases are not frozen. This specification follows [the project roadmap](PROJECT_PLAN.md) and the [planning index](PLANNING_INDEX.md).
 
 ## 1. Purpose and boundaries
 
@@ -131,17 +131,17 @@ Use the current Python/Pydantic/FastAPI stack, direct SDK wrapper, YAML settings
 
 ## 6. Build sequence and the maintainer's role
 
-Start a `phase-6-eligibility-engine` branch based on the completed Phase 4 commit. If PR #4 is still open, use a stacked branch based on it and retarget after merge; do not merge Phase 4 as a hidden prerequisite. One Phase 6 PR describes only its own changes.
+Phase 6 started on `phase-6-eligibility-engine` from the completed Phase 4 commit; Phase 4 and the engine are merged. Later work uses one branch and one PR per piece of work; a branch is stacked on another only when it needs it, and each PR describes only its own changes.
 
 | Step | Runnable increment | Maintainer task and evidence |
 |---|---|---|
-| 0. Lock the rule inventory | Produce the 13-programme/17-field coverage matrix, source references, unresolved interpretations and the five-profile worksheet (kept local until the cases are frozen). Preserve Phase 4 artifacts and hashes. | Done. The R01–R17 interpretations are not a gate for Steps 1–2; each programme's items are decided with the maintainer when its catalogue is built in Step 3, defaulting to the conservative `unknown`. |
-| 1. Types and validation | Profile, rule, citation and report models; rule loader/version checks; profile round-trip and invalid-input tests. | Walk through one incomplete profile and explain missing versus zero and unknown versus not published. |
-| 2. Deterministic primitives | Numeric/grade/credit/proof/date/country predicates, all/any logic, margins, funds helper and explicit clock input. | Check worked boundary examples by hand before looking at engine output. |
-| 3. Programme rules and reports | Populate all 13 catalogues from cited evidence; validate local quotes; add conditional cases and deterministic action text. Run `make eligibility` on a sample JSON profile. | Decide that programme's R-items in a short batch as each catalogue is built (TUM Informatics first, KIT CS next). Review provenance stays separate from record tiers. |
-| 4. API and paste-to-fill | Add `POST /eligibility/check`, `POST /profile/parse` and the CLI parse workflow. Demonstrate paste → draft → edit/confirm → report using synthetic text. | Confirm that an ambiguous extraction can be corrected and that no key is needed for manual-profile checking. |
-| 5. Independent evaluation | Validate and run the profile dataset, emit the eligibility results and update its separate README section. | Write five realistic anonymised/synthetic profiles and expected criterion/headline outcomes **before** comparing with engine results; resolve disagreements against citations. |
-| 6. Close and explain | Full tests, lint, existing frontend build, local source/rule validation, CI coverage, a short demo and updated project status. | Run the commands, explain a successful comparison, a real gap and an unknown, then review the learning/decision draft. |
+| 0. Lock the rule inventory (done) | Produce the 13-programme/17-field coverage matrix, source references, unresolved interpretations and the five-profile worksheet (kept local until the cases are frozen). Preserve Phase 4 artifacts and hashes. | Done. The R01–R17 interpretations are not a gate for Steps 1–2; each programme's items are decided with the maintainer when its catalogue is built in Step 3, defaulting to the conservative `unknown`. |
+| 1. Types and validation (done) | Profile, rule, citation and report models; rule loader/version checks; profile round-trip and invalid-input tests. | Walk through one incomplete profile and explain missing versus zero and unknown versus not published. |
+| 2. Deterministic primitives (done, except date predicates) | Numeric/grade/credit/proof/date/country predicates, all/any logic, margins, funds helper and explicit clock input. | Check worked boundary examples by hand before looking at engine output. |
+| 3. Programme rules and reports (done; KIT CS degree, degree_ects, module_assignment, test_validity, English and TUM Informatics APS/VPD still `pending`) | Populate all 13 catalogues from cited evidence; validate local quotes; add conditional cases and deterministic action text. Run `make eligibility` on a sample JSON profile. | Decide that programme's R-items in a short batch as each catalogue is built (TUM Informatics first, KIT CS next). Review provenance stays separate from record tiers. |
+| 4. API and paste-to-fill (not started) | Add `POST /eligibility/check`, `POST /profile/parse` and the CLI parse workflow. Demonstrate paste → draft → edit/confirm → report using synthetic text. | Confirm that an ambiguous extraction can be corrected and that no key is needed for manual-profile checking. |
+| 5. Independent evaluation (not started; five cases not frozen) | Validate and run the profile dataset, emit the eligibility results and update its separate README section. | Write five realistic anonymised/synthetic profiles and expected criterion/headline outcomes **before** comparing with engine results; resolve disagreements against citations. |
+| 6. Close and explain (not started) | Full tests, lint, existing frontend build, local source/rule validation, CI coverage, a short demo and updated project status. | Run the commands, explain a successful comparison, a real gap and an unknown, then review the learning/decision draft. |
 
 New Make targets: `eligibility ARGS="--profile ... --programme ... --as-of YYYY-MM-DD"`, `parse-profile ARGS="--input ..."`, and `eval-eligibility`; catalogue validation is a flag of the first. They reuse the same models/functions as the API. Profile JSON can be imported/exported locally; browser storage and the public form wait for Phase 9.
 

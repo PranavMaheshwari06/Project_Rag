@@ -301,3 +301,13 @@ Phase 6 starts on `phase-6-eligibility-engine` from `b85ae75`, stacked on the st
 Why: extracting the right words and deciding how conditions combine are different tasks. KIT alternatives, RWTH exemption bases and conditional Darmstadt exams can change a decision even when each quoted value is correct. The cost is a separate semantic review and explicit unknowns for unresolved evidence, including KIT CDS overlap policy and incomplete language-proof coverage. A successful quote/hash check proves consistency with a snapshot, not current university policy or correctness of the interpretation.
 
 The five maintainer-authored profiles and expected labels remain blank until authored independently; the model must not supply them and claim human provenance. The LLM extracts information, while deterministic code will compare confirmed facts under reviewed rules. No engine accuracy or completed Phase 6 claim follows from this inventory.
+
+## 2026-11-02 — Step 3 rule decisions: closed versus open proof lists, units, equivalence
+
+DRAFT for the maintainer to rewrite in their own words (written 2026-11-04 from the decisions recorded in LEARNING.md on 2026-11-02).
+
+The 70 rules in the 11 new rule files were accepted (`reviewed_by: human`), with these cross-cutting answers. X2: the 2026 TOEFL 1-6 scale is a separate test name wherever a page publishes a new-scale minimum, so a new-scale score passes or fails on its own and is never converted. X3: a credit total in a unit other than ECTS is "the university decides" everywhere, because the engine does not convert units. X4: where a page gives a closed list of English proofs, failing every listed proof is "does not meet"; where the page says other proof may count, the rule falls back to "the university decides". D14 overrides X4 for TU Darmstadt, because the programme pages ask for C1 while the admission guide lists only three proofs; two official pages disagree, so any other proof is the university's call. D05 builds the RWTH Data Science GRE exemption from citizenship and schooling facts; unknown facts never exempt.
+
+X1 (a profile fact for a reported university equivalence assessment) was accepted but not built, because it changes the degree rule in all 13 files and does not by itself unlock a positive headline where a hard selection or aptitude step remains.
+
+Why: each answer keeps a verdict tied to what a page actually says. The cost is more "the university decides" outcomes, which the coverage breakdown in the evaluation makes visible.

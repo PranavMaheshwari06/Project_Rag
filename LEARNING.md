@@ -112,7 +112,7 @@ Per phase: what was built, why (interview answers), quiz questions, the DECISION
 
 ## Phase 4: Eval baseline (complete locally, 2026-10-27)
 
-All Phase 4 steps are complete locally. The audit and gold acceptance are recorded; `make eval` reports the four modes overall and by kind, extraction accuracy, historical audit results and refusal calibration. PR #4 remains unmerged; Phase 6 follows the closure commit.
+All Phase 4 steps are complete locally. The audit and gold acceptance are recorded; `make eval` reports the four modes overall and by kind, extraction accuracy, historical audit results and refusal calibration. PR #4 remained unmerged at the time; Phase 4 was later merged (PR #1). Phase 6 follows the closure commit.
 
 ### What was built
 - **Verification tiers.** Every `data/verified/<slug>.json` has a `tier`: `human` (6 programmes, every field ticked in `make review`) or `second_pass` (7: KIT CDS, Saarland CS, TU Darmstadt AIML, TU Dresden CS, TUM DEA, TUM Informatics, Stuttgart CS). A re-save in `extraction/review.py` keeps the existing tier; promoting `second_pass` to `human` is a deliberate hand edit.
@@ -235,7 +235,7 @@ Additional quiz questions: Why must a threshold sweep reuse scores but latency m
 
 ### What is runnable
 
-- `phase-6-eligibility-engine` branches from the completed Phase 4 commit `b85ae75`. PR #4 remains a separate, unmerged prerequisite; nothing was merged during kickoff.
+- `phase-6-eligibility-engine` branches from the completed Phase 4 commit `b85ae75`. PR #4 was then a separate, unmerged prerequisite (later merged as PR #1); nothing was merged during kickoff.
 - [The coverage matrix](docs/PHASE_6_RULE_COVERAGE.md) accounts for all 13 programmes and 221 original fields: 24 proposed automatic comparisons, 78 information/readiness fields, 29 manual-review fields and 90 `not_published` fields. These classify possible implementation, not measured engine coverage or eligibility accuracy. No eligibility engine exists yet.
 - `data/eligibility/coverage_inventory.json` preserves raw-byte hashes for 51 Phase 4 inputs, canonical hashes of all 13 original records and raw/cleaned hashes for 42 official cached sources. Existing verified records, tiers, audit scores, gold labels and benchmark artifacts remain unchanged.
 - [The rule-review packet](docs/PHASE_6_RULE_REVIEW.md) contains 17 pending interpretations and 44 supplemental cached-source excerpts. It exposes the missing KIT CDS thesis prerequisite, conditional Darmstadt exams, RWTH country-basis differences and unresolved language/overlap evidence. It does not claim maintainer acceptance or current live-page verification.
@@ -315,3 +315,19 @@ Possible quiz question: why does a country missing from a list mean "test needed
 3. Why does accepting the degree-equivalence fact (X1) not by itself make every programme show a positive verdict?
 4. Why does a missing citizenship make the RWTH Data Science GRE rule "unknown" rather than "exempt"?
 
+
+**DECISIONS entries owed for Step 3 (maintainer, own words).**
+- [x] 2026-11-02: Step 3 rule decisions X1-X4, D05 and D14 (DRAFT entry written in DECISIONS.md, to rewrite).
+
+### Phase 6 after Step 3 (2026-11-04): report summaries and validation
+
+Built on open branches; each PR lists the commands it ran. Nothing here is merged until the maintainer merges it.
+
+**Separate summaries per area.** A report now has an `admission`, a `readiness` and a `finance` summary. Each counts the area's applicable hard and soft criteria by verdict (inactive and informational rules are not counted) and has its own headline words: readiness reads `ready_on_checked_items`, `items_still_needed`, `needs_information_or_review` or `no_checked_items`; finance reads `funds_cover_checked_reference`, `funds_shortfall`, `needs_information_or_review` or `no_checked_items`. Only hard rules set an area headline, exactly as for admission. The old `headline` is unchanged and must equal the admission summary's headline. Plan section 4 asks for this: a missing document or a funds shortfall is a real problem, but it is not an academic qualification failure, so it must not use the same words. The report also carries its schema versions, the rule-set hash, the hash of the verified record the rules are bound to, `as_of` and the record's verification tier, so a stored report says what it was computed from.
+
+**`--check-cache`.** `make eligibility ARGS="--validate --check-cache"` was named in these notes but the flag did not exist. It now makes a quote whose cached page is missing an error instead of a "not checked" line, so the local run cannot pass silently.
+
+**Possible quiz questions.**
+1. Why does a funds shortfall get its own headline word instead of `does_not_meet_published_requirements`?
+2. What does a rule-set hash in a stored report let you prove later, and what can it not prove?
+3. Why do only hard rules set an area headline, and what does an area with only soft rules read?

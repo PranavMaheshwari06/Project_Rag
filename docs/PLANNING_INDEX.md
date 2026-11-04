@@ -1,6 +1,6 @@
 # Planning and evidence index
 
-Updated 2026-10-27. The product is a Germany master's eligibility assistant for students, and an applied AI / LLM systems engineering portfolio project for its maintainer.
+Updated 2026-11-04. The product is a Germany master's eligibility assistant for students, and an applied AI / LLM systems engineering portfolio project for its maintainer.
 
 ## Current planning documents
 
@@ -18,7 +18,7 @@ Explicit maintainer instructions take precedence. Keep the detailed phase specif
 ## Implementation evidence and inputs
 
 - [Phase 6 coverage matrix](PHASE_6_RULE_COVERAGE.md): Step 0 draft for all 13 programmes and 17 original fields, with source identities and preserved Phase 4 hashes in `data/eligibility/coverage_inventory.json`.
-- [Phase 6 consequential rule review](PHASE_6_RULE_REVIEW.md): pending semantic interpretations, exceptional-branch evidence, omissions and unresolved source gaps; no rule acceptance is implied.
+- [Phase 6 consequential rule review](PHASE_6_RULE_REVIEW.md): the Step 0 packet of semantic interpretations, exceptional-branch evidence, omissions and unresolved source gaps. The maintainer's decisions were taken in Step 3 (2026-10-29, 2026-11-02) and are recorded in LEARNING.md and in each rule's `reviewed_by`; seven rules remain `pending` (KIT CS degree, degree_ects, module_assignment, test_validity and English; TUM Informatics APS and VPD).
 - `extraction/schemas.py`: the existing 17 cited requirement fields and the Phase 4 additions for conditions, degree origin, and supporting citations.
 - `data/verified/`: the 13 programme records, retaining their `human` or `second_pass` provenance. Verification does not establish automatic machine interpretability.
 - `sources/registry.yaml` and `sources/manifest.json`: official source identities and cached snapshot receipts.
