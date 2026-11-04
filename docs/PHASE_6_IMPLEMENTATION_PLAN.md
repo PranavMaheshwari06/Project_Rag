@@ -45,7 +45,7 @@ Use Pydantic models with a schema version. Represent these families explicitly:
 
 The check request owns target country, programme slugs, intake/starting year and `as_of`; these must not be overridden by a second copy inside the profile. Target names found in pasted text are unconfirmed suggestions, not permission to map an ambiguous university name to a covered programme.
 
-Missing values are `null`, not fabricated zeros or false booleans. For evidence lists, `null` means not supplied and `[]` means the student explicitly reports none. Missing credit categories remain unknown unless the student explicitly supplies zero. Reject malformed values; do not reject an otherwise valid incomplete profile. Use Decimal for money, grades, and score comparisons.
+Missing values are `null`, not fabricated zeros or false booleans. For evidence lists, `null` means not supplied and `[]` means the student explicitly reports none. GRE and GATE are objects, so the literal `"none"` means the student has no such test; `null` and an empty object stay not supplied. Missing credit categories remain unknown unless the student explicitly supplies zero. Reject malformed values; do not reject an otherwise valid incomplete profile. Use Decimal for money, grades, and score comparisons.
 
 ### Reviewed rule catalogue
 

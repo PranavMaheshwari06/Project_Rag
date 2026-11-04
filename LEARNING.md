@@ -327,7 +327,10 @@ Built on open branches; each PR lists the commands it ran. Nothing here is merge
 
 **`--check-cache`.** `make eligibility ARGS="--validate --check-cache"` was named in these notes but the flag did not exist. It now makes a quote whose cached page is missing an error instead of a "not checked" line, so the local run cannot pass silently.
 
+**Explicit "no GRE" and "no GATE".** `gre` and `gate` accept the literal `"none"`; `null` and an empty object still mean "not supplied" and stay `unknown`. With `"none"` a score bound fails with entered value "not reported", while a GRE-or-GATE alternative stays `unknown` if the other test is not supplied. A negated check on a missing test is met (no GATE is "not a CS GATE"), so "none" can never skip a requirement through a `when` condition. A sweep over all 13 rule files checks that "none" only ever turns `unknown` into `does_not_meet`. The profile schema is `profile-v2`; a v1 file still loads but cannot say "none". Decided in this session, not by the maintainer yet: a literal string instead of `[]` or a boolean flag, because GRE and GATE are single objects, not lists (DECISIONS draft owed after the maintainer accepts it).
+
 **Possible quiz questions.**
 1. Why does a funds shortfall get its own headline word instead of `does_not_meet_published_requirements`?
 2. What does a rule-set hash in a stored report let you prove later, and what can it not prove?
 3. Why do only hard rules set an area headline, and what does an area with only soft rules read?
+4. Why must "no GRE" be a different value from "GRE not supplied", and which verdict does each give?
