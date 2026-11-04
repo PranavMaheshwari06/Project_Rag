@@ -3,7 +3,7 @@
 Local only (gitignored; the copy of record is on branch `handoff-private`). Read this first in every session, then `docs/PROJECT_PLAN.md`.
 Update it at the end of every session and at every "Commit Phase N": rewrite **Now** and **Next**, add one line to **Log**.
 
-In progress: Stage F1 (provisional: credit unit as a closed choice).
+In progress: review fixes for F1-F4 (provisional), then PRs for F1/F3/F4 and the final audit.
 
 ## Now
 - `main` = `e36c977` (Phases 1-4, Phase 6 engine, 13 rule files, Step 3 decisions). Nothing merged in this session; merging is the maintainer's.
@@ -28,6 +28,10 @@ In progress: Stage F1 (provisional: credit unit as a closed choice).
 | eval-eligibility-harness | profile-explicit-no-gre-gate | #8 | open | 3 | no |
 | date-logic-deadline-readiness | eval-eligibility-harness | #9 | open | 4 | no |
 | finance-blocked-account-funds | date-logic-deadline-readiness | #10 | open | 5 | no |
+| provisional-credit-unit-closed-choice | finance-blocked-account-funds | (PR after review) | pushed | after #10, if accepted | YES (F1) |
+| provisional-not-published-info-rules | finance-blocked-account-funds | #11 | open | after #10, if accepted | YES (F2) |
+| provisional-university-assessment-fact | provisional-credit-unit-closed-choice | (PR after review) | pushed | after F1, if accepted | YES (F3) |
+| provisional-eligibility-api-profile-parse | finance-blocked-account-funds | (PR after review) | pushed | after #10, if accepted | YES (F4) |
 | docs-phase-6-progress | main | #6 | open | last (after every code PR) | no |
 
 Stacking: later Phase 6 stages build on the report shape (A) and the profile version (B, E), so they form one chain A → B → C → D → E; merge in that order and retarget each PR to `main` after its base merges. Docs-only refresh goes on its own branch and merges last.
@@ -48,6 +52,7 @@ Stacking: later Phase 6 stages build on the report shape (A) and the profile ver
 - Reviewer sub-agents read the shared working tree: do not switch branches in `/home/user/Project_Rag` while they run (one review ran against a `git archive` copy because of that).
 
 ## Log (newest first)
+- 2026-11-04: F1-F4 provisional branches built and pushed (each an ACTION accept-or-revert). F2 and F3 both edit the pending-rule sets in tests/test_eligibility_others.py and tests/test_eligibility_siblings.py: whichever merges second needs a small conflict resolution (union of the sets). F1/F3 bump the profile version (v4, v5); F2 and F4 do not.
 - 2026-11-04: Stage E built (PR #10); S7 re-read via Firecrawl; agent reviews: scope by visa mission (EU condition unsourced, dropped), stale rules no longer hide funds, id-collision guard; CI list 398 passed, frontend built. Stages A-E done.
 - 2026-11-04: Stage D built (PR #9); S10 and S11 re-read via Firecrawl for exact deadline lines (KIT CDS has separate German/EU dates); TU Berlin S1 not encoded (not a registry source); agent reviews: group pass-through and intake/condition fixes; CI list 375 passed.
 - 2026-11-04: Stage C built (PR #8); agent reviews led to stale-rule reporting, reviewer split, stricter validator; settings.yaml left unchanged because it is hash-locked as a Phase 4 input (ACTION 12f); CI list 347 passed.

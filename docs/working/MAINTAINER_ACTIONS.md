@@ -169,3 +169,12 @@ Answer: "accept" or what to change.
 `--check-cache` (PR #4) does not yet cover the finance quotes added in PR #10 (they print "not checked" without the cache in either mode). One-line follow-up in `scripts/check_eligibility.py` after both merge. Also: `visa_country` and citizenship values are matched case-insensitively but not trimmed (" India" does not match), as before for all country facts.
 Answer: "do it" or "skip".
 
+### 12k. Provisional branches F1-F4 — accept or revert each — BLOCKING (each is unmerged until you decide)
+All are provisional: every commit message says so. Merge only the ones you accept (after #10); close the PR of the others.
+- F1 `provisional-credit-unit-closed-choice` (answers ACTION 5 with "closed"): profile-v4, `credit_unit` is "ECTS" or "other"; free text is refused. Tests that used "US credits"/"CP" now use "other" with the same expected verdicts.
+- F2 `provisional-not-published-info-rules` (PR #11, answers ACTION 4 with "info rules"): check type `not_published` (info only, never counted); rules for TU Berlin IELTS section scores, KIT CS minimum grade, KIT CDS GRE/GATE, taken from the source-check sheet because your filled worksheet was not available here; add or remove rows as your worksheet says.
+- F3 `provisional-university-assessment-fact` (answers ACTION 3 with "B"; stacked on F1): profile-v5 `university_assessments` {programme slug: positive|negative}. Changed accepted rules, now back to `pending`: TU Berlin `degree`, `subject_allocation`; KIT CDS `degree`, `credit_counting`. The other 11 programmes' degree rules are unchanged (still "the university decides"); extend if you want X1 everywhere.
+- F4 `provisional-eligibility-api-profile-parse`: POST /eligibility/check (no key needed, max 13 targets, deduplicated, not_covered / rules_stale / Germany-only notices), POST /profile/parse (16,000 characters, literal spans, one repair, 503 without key, 502 on provider errors, nothing logged), `make parse-profile`. The 13 and 16,000 limits are code defaults, not YAML, because settings.yaml is hash-locked (ACTION 12f).
+Merge conflicts to expect: F2 vs F3 on the pending-rule sets in two test files (take the union).
+Answer: "accept F1 F2 F3 F4" or the ones to revert.
+
