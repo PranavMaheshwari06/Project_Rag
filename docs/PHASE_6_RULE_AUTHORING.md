@@ -64,6 +64,8 @@ and `data/eligibility/rules/kit-m-sc-computer-science.json`, with their tests in
 | `when` | `when`, `then` | `then` applies only if `when` meets |
 | `all_of` / `any_of` | `children` (non-empty) | groups |
 | `university_review` | `note` | only the university can decide; never `meets` |
+| `deadline` | `intake`, `close`, `open`, `starting_years` | apply by `close` (inclusive) for that intake; each date is `{month, day, year_offset}` from the starting year (the calendar year the term starts); `starting_years` limits dated windows to the years a page publishes. Reads the request's `as_of`, `intake`, `starting_year` |
+| `max_age` | `fact`, `years` | a test or certificate not older than `years` on the request's `as_of`; a year-only fact decides only when every day of that year agrees |
 
 ## 4. Profile facts (`eligibility/profile.py`)
 
@@ -124,8 +126,10 @@ ENGINE-GAP (section 9).
 - A university's aptitude/selection assessment with no computable formula is a
   hard `university_review`.
 - Cambridge: grades A-C count; a certificate issued at a lower level does not.
-- Age limits on GRE/GATE/language certificates are not modelled (no date engine):
-  write a hard `university_review` with a clear note. Skip deadlines and fees.
+- Age limits: use `max_age` only where the page measures age on the application date
+  (it compares with `as_of`); otherwise write a hard `university_review` with a clear
+  note. Deadlines are `readiness` rules with `deadline`; cite only pages in the
+  registry. Skip fees.
 - EEA is not a group. Write the three non-EU EEA countries (Iceland, Liechtenstein,
   Norway) next to `@EU` in the `in` values (see the RWTH Data Science GRE rule).
 - The 2026 TOEFL 1-6 scale is its own test name, `TOEFL iBT (2026 scale)`; add a
@@ -149,7 +153,7 @@ than long ones that cross a line break or table cell boundary.
 
 ```bash
 make eligibility ARGS="--validate"          # every rule file: hash, quotes, groups in date
-make eligibility ARGS="--profile data/eligibility/examples/<p>.json --programme <slug>"
+make eligibility ARGS="--profile data/eligibility/examples/<p>.json --programme <slug> --as-of 2027-05-01 --intake winter --starting-year 2027"
 .venv/bin/python -m pytest -q tests/test_eligibility_*.py
 .venv/bin/ruff check .                      # never run ruff format on existing files
 ```

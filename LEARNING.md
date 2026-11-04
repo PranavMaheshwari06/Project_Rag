@@ -304,7 +304,7 @@ Possible quiz question: why does a country missing from a list mean "test needed
 - X1 (accepted, not yet built): a profile fact for "the university confirmed my degree equivalence". It is deferred to before Step 5 because it changes the degree rule in all 13 files, including the already-accepted TUM Informatics rule, and because it alone does not unlock a positive headline: programmes that also have a hard selection or aptitude step (Saarland, TUM, Dresden, Stuttgart, Darmstadt, KIT) stay "needs review" even with it.
 
 **Known limits carried forward.**
-- Dates are not modelled (test age, certificate validity, deadlines), so those are notes.
+- Dates are not modelled (test age, certificate validity, deadlines), so those are notes. (Updated 2026-11-04: deadline and test-age checks exist; see "Phase 6 after Step 3".)
 - Quotes added from the cached pages (TUM English, KIT CDS English, D05) are only checked where `data/raw` exists; CI prints "not checked". Run `make eligibility ARGS="--validate --check-cache"` locally before relying on them.
 - The credit unit is free text, so "LP" or "ECTS credits" sends KIT to "KIT decides". The profile form should offer a fixed list of units.
 - IELTS Academic versus General is not recorded; any IELTS score is read as Academic.
@@ -331,9 +331,12 @@ Built on open branches; each PR lists the commands it ran. Nothing here is merge
 
 **Evaluation harness (`make eval-eligibility`).** A case is a profile, a target, `as_of` and labels written from the cited sources: the expected headline and expected criteria, each criterion with its own citation, a rationale, the author (`human` or `assisted`), the reviewer, `related_to` for a variant of a base case, and `frozen_on`. The schema refuses a human case without `frozen_on`, and the validator refuses a `frozen_on` in the future: the commit that adds the labels is the proof that they were written before the engine ran on them. There is no validate-only mode, so the order is: commit the frozen labels, then run. The output reports human and assisted cases separately, counts related variants apart from independent cases, separates unknown reasons (missing fact, university review, stale rules), and records the hashes of the dataset, rule sets, records and country lists. A stale rule file is a scenario, not an error: its criteria read "absent". The two file paths are code defaults because `config/settings.yaml` is one of the hash-locked Phase 4 inputs.
 
+**Deadlines and test age.** Two typed checks were added to the closed set. `deadline` compares the request's `as_of` with a closing day for one intake; the closing day is still in time, and each date carries an explicit year offset from the starting year (the calendar year the term starts), so a summer deadline in the previous year is written with -1 instead of being guessed. `max_age` says a test or certificate is not older than N years on `as_of`; with only a year known (GATE), it decides only when every day of that year gives the same answer. KIT CS and KIT CDS have deadline rules (readiness, pending review); KIT CDS has different dates for German/EU and non-EU nationals. A missed window reads "Application window closed" with the days late, never as an academic failure. Not encoded: TU Berlin (its dates page is not a registry source, so the quote could never be checked) and the KIT test-age rule (folding it into the accepted GRE/GATE rule is the maintainer's call). The CLI takes `--as-of`, `--intake` and `--starting-year`.
+
 **Possible quiz questions.**
 1. Why does a funds shortfall get its own headline word instead of `does_not_meet_published_requirements`?
 2. What does a rule-set hash in a stored report let you prove later, and what can it not prove?
 3. Why do only hard rules set an area headline, and what does an area with only soft rules read?
 4. Why must "no GRE" be a different value from "GRE not supplied", and which verdict does each give?
 5. Why are human and assisted cases reported separately, and why does a related variant not count as an independent observation?
+6. Why does a GATE result known only by its year sometimes give "unknown" for a three-year validity rule, and on which dates does it decide?
