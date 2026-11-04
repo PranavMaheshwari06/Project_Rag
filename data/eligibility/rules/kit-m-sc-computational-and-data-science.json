@@ -513,6 +513,23 @@
         }
       ],
       "reviewed_by": "pending"
+    },
+    {
+      "id": "gre_gate",
+      "label": "GRE or GATE: none is required in the published admission requirements",
+      "severity": "info",
+      "check": {
+        "type": "not_published",
+        "note": "KIT publishes no GRE or GATE requirement for this programme.",
+        "record_field": "entrance_tests"
+      },
+      "citations": [
+        {
+          "doc_id": "de/kit/cds-msc/programme",
+          "quote": "- Bachelorabschluss ein bestandener Bachelorabschluss (oder mindestens gleichwertiger Abschluss) im Studiengang Computational and Data Science, Mathematik, Informatik (oder einem Studiengang mit im Wesentlichen gleichem Inhalt) oder einem Bachelorstudiengang in den Bereichen Wirtschaftswissenschaften, Chemie, Erdsystemwissenschaften, Maschinenbau, Physik, Elektro- und Informationstechnik, Chemieingenieurwesen, Verfahrenstechnik oder Robotik  an einer Universität, Fachhochschule oder Berufsakademie bzw. Dualen Hochschule oder an einer ausländischen Hochschule. Das Studium muss im Rahmen einer mindestens dreijährigen Regelstudienzeit und mit einer Mindestanzahl von 180 ECTS-Punkten absolviert worden sein."
+        }
+      ],
+      "reviewed_by": "pending"
     }
   ]
 }

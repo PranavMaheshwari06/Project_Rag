@@ -132,6 +132,16 @@ class BlockedAccount(Strict):
     min_eur: Decimal = Field(gt=0)
 
 
+class NotPublished(Strict):
+    """The source publishes no minimum here: shown in the trace, never met or
+    failed, never counted. `record_field` names a verified-record field whose
+    status must be not_published, so the claim is tied to the verified record."""
+
+    type: Literal["not_published"] = "not_published"
+    note: str
+    record_field: str | None = None
+
+
 class Group(Strict):
     type: Literal["all_of", "any_of"]
     children: list["Check"]
@@ -144,7 +154,7 @@ class Group(Strict):
 
 
 Check = Annotated[
-    Minimum | Maximum | In | When | UniversityReview | Deadline | MaxAge | BlockedAccount | Group,
+    Minimum | Maximum | In | When | UniversityReview | Deadline | MaxAge | BlockedAccount | NotPublished | Group,
     Field(discriminator="type"),
 ]
 Group.model_rebuild()
@@ -159,6 +169,12 @@ class Rule(Strict):
     check: Check
     citations: list[Citation] = Field(min_length=1)
     reviewed_by: Literal["pending", "model", "human"] = "pending"
+
+    @model_validator(mode="after")
+    def _not_published_is_info(self):
+        if isinstance(self.check, NotPublished) and self.severity != "info":
+            raise ValueError("a not_published rule is informational: severity must be info")
+        return self
 
 
 class RuleSet(Strict):
@@ -186,6 +202,12 @@ def ruleset_hash(rules: RuleSet) -> str:
     and key order do not count; a number written differently ("4" vs "4.0") or
     a changed code default does."""
     return record_hash(rules.model_dump(mode="json"))
+
+
+def not_published_mismatches(rules: RuleSet, record: dict) -> list[str]:
+    """Rule ids whose not_published claim is not backed by the record field."""
+    return [r.id for r in rules.rules if isinstance(r.check, NotPublished) and r.check.record_field
+            and record.get(r.check.record_field, {}).get("status") != "not_published"]
 
 
 def uncited_quotes(rules: RuleSet, record: dict) -> list[tuple[str, str, str]]:

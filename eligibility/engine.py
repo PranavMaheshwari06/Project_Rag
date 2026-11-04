@@ -25,6 +25,7 @@ from eligibility.rules import (
     Maximum,
     MaxAge,
     Minimum,
+    NotPublished,
     Rule,
     RuleSet,
     Verdict,
@@ -218,6 +219,8 @@ def evaluate(
     target = target or Target()
     if isinstance(check, BlockedAccount):
         return _blocked_account(check, profile)
+    if isinstance(check, NotPublished):
+        return Result(verdict="not_published", required=check.note)
     if isinstance(check, Deadline):
         return _deadline(check, target)
     if isinstance(check, MaxAge):
@@ -300,6 +303,8 @@ COUNTED = ("meets", "does_not_meet", "unknown", "not_published")
 
 
 def _action(rule: Rule, r: Result) -> str | None:
+    if r.verdict == "not_published":
+        return f"No minimum is published: {r.required}"
     if r.reason == "window_closed":
         return f"Application window closed: {rule.label}."
     if r.verdict == "does_not_meet" and rule.category == "finance" and r.entered == "not reported":

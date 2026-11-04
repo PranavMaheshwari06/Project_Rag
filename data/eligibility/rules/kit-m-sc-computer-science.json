@@ -569,6 +569,23 @@
         }
       ],
       "reviewed_by": "pending"
+    },
+    {
+      "id": "min_grade",
+      "label": "Minimum grade: none is published for admission",
+      "severity": "info",
+      "check": {
+        "type": "not_published",
+        "note": "KIT publishes no minimum grade for admission to the selection; the grade counts in the ranking.",
+        "record_field": "min_grade_german_scale"
+      },
+      "citations": [
+        {
+          "doc_id": "de/kit/cs-msc/programme",
+          "quote": "You can participate in the selection process if you fulfill one of the following three conditions:"
+        }
+      ],
+      "reviewed_by": "pending"
     }
   ]
 }
