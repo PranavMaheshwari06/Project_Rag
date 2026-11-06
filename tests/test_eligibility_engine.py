@@ -1,6 +1,6 @@
 """Worked boundary examples, small enough to check by hand.
 
-Checked and accepted by the maintainer on 2026-10-29 (items C1-C10 in LEARNING.md):
+Checked by hand on 2026-10-29:
 grade conversion, bounds and margins, missing vs zero, group logic, headline rules."""
 
 from decimal import Decimal as D

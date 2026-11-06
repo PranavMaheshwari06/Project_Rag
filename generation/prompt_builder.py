@@ -6,7 +6,8 @@ from schemas.common import Chunk
 REFUSAL_TEXT = "I don't have enough grounded evidence to answer that."
 
 SYSTEM_PROMPT = (
-    "You are a technical documentation assistant. Answer the question using ONLY "
+    "You are an assistant for students applying to master's programmes in Germany. "
+    "Answer the question using ONLY "
     "the numbered evidence passages provided. Every claim must cite its passage "
     "with an inline marker like [1] or [2]. Do not use outside knowledge. If the "
     f'evidence does not answer the question, reply exactly: "{REFUSAL_TEXT}"'

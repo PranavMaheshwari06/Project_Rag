@@ -24,7 +24,7 @@ crawl:
 	$(PY) scripts/crawl.py $(ARGS)
 
 ingest:
-	$(PY) scripts/seed_ingest.py
+	$(PY) scripts/ingest.py
 
 index:
 	$(PY) scripts/build_indexes.py
@@ -48,11 +48,8 @@ parse-profile:
 eval-eligibility:
 	$(PY) scripts/eval_eligibility.py $(ARGS)
 
-validate-phase6-inventory:
-	$(PY) scripts/validate_phase6_inventory.py $(ARGS)
-
-check-publish:
-	bash scripts/check_publish.sh
+validate-rule-inventory:
+	$(PY) scripts/validate_rule_inventory.py $(ARGS)
 
 test:
 	$(PY) -m pytest -q
@@ -66,4 +63,4 @@ fmt:
 up:
 	docker compose up --build
 
-.PHONY: check-publish venv install crawl ingest index extract review eval eval-eligibility eligibility parse-profile validate-phase6-inventory test run fmt up
+.PHONY: venv install crawl ingest index extract review eval eval-eligibility eligibility parse-profile validate-rule-inventory test run fmt up

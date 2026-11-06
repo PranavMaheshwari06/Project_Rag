@@ -56,7 +56,7 @@ class EligibilityCase(Strict):
         if len(ids) != len(set(ids)):
             raise ValueError("an expected criterion is listed twice")
         if self.expected_headline == "not_covered":
-            raise ValueError("not_covered comes from the coverage check of the API (Step 4), not from a rule file")
+            raise ValueError("not_covered comes from the coverage check of the API, not from a rule file")
         return self
 
 

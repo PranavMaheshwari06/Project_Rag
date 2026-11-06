@@ -4,7 +4,7 @@ Status: living document. Last updated 2026-11-06. Phases 1–4 are complete and 
 
 **Build order:** 1 → 2 → 3 → 4 → **6 → 5** → 7 → 8 → 9 → 10 → 11 → 12. Phase 6 (eligibility engine) runs before Phase 5 (retrieval upgrades) because the engine is the product and needs only the verified records (decided 2026-10-13).
 
-The eligibility engine is specified in [PHASE_6_IMPLEMENTATION_PLAN.md](PHASE_6_IMPLEMENTATION_PLAN.md), including the schema gaps carried from Phase 3, the API and CLI, and its evaluation.
+The eligibility engine is specified in [the engine spec](eligibility-engine-spec.md), including the schema gaps carried from Phase 3, the API and CLI, and its evaluation.
 
 **Goal of the build:** a deployed, working system, shipped as soon as possible without lowering data quality: a live URL, a README with real evaluation numbers and an architecture diagram, a CI eval gate, an agent and an MCP server. Visual polish comes after deploy (Phase 12).
 

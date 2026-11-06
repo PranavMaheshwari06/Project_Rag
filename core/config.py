@@ -29,7 +29,7 @@ class PathsCfg(BaseModel):
     extracted_dir: str = "data/extracted"  # LLM drafts (committed)
     verified_dir: str = "data/verified"  # human-verified records (committed)
     checked_dir: str = "data/checked"  # second-model cross-check of each draft (committed)
-    # reviewed rule catalogue (committed); not in settings.yaml, whose hash the Phase 4 baseline pins
+    # reviewed rule catalogue (committed); not in settings.yaml, whose hash the rule inventory pins
     rules_dir: str = "data/eligibility/rules"
     country_groups_path: str = "data/eligibility/country_groups.json"
     finance_rules_path: str = "data/eligibility/finance.json"
@@ -91,14 +91,14 @@ class EvalCfg(BaseModel):
     calibration_out: str = "evaluation/results/refusal_calibration.json"
     audit_path: str = "data/audit/second_pass_audit.json"
     max_false_refusal_rate: float = 0.05
-    # Phase 6 paths are code defaults, like paths.rules_dir: settings.yaml is hash-locked
-    # as a Phase 4 input (data/eligibility/coverage_inventory.json)
+    # code defaults, like paths.rules_dir: settings.yaml is hash-locked
+    # as a baseline input (data/eligibility/coverage_inventory.json)
     eligibility_cases_path: str = "evaluation/datasets/eligibility_cases.jsonl"
     eligibility_results_out: str = "evaluation/results/eligibility_baseline.json"
 
 
 class EligibilityCfg(BaseModel):
-    # code defaults, like paths.rules_dir: settings.yaml is hash-locked as a Phase 4 input
+    # code defaults, like paths.rules_dir: settings.yaml is hash-locked as a baseline input
     max_targets: int = 13  # programmes per /eligibility/check request (plan section 5)
     parse_max_chars: int = 16000  # pasted text per /profile/parse request (plan section 5)
 

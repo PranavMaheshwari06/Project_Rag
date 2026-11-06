@@ -21,7 +21,7 @@ from eligibility.rules import load_ruleset, not_published_mismatches, record_tie
 
 
 def raw_page_words(settings, doc_id: str) -> str | None:
-    """Plain text of the cached page, for quotes the parsed corpus lost (see LEARNING)."""
+    """Plain text of the cached page, for quotes the parsed corpus lost."""
     from bs4 import BeautifulSoup
     from extraction.extract import _words
 

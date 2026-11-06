@@ -15,8 +15,8 @@ jobs:
           tests/test_parser.py tests/test_extraction.py tests/test_extraction_schemas.py
           tests/test_extraction_eval.py tests/test_review.py tests/test_validate_gold.py
           tests/test_refusal_eval.py tests/test_eval_runner.py
-          tests/test_phase6_inventory.py tests/test_eligibility_*.py
-      - run: python scripts/validate_phase6_inventory.py
+          tests/test_rule_inventory.py tests/test_eligibility_*.py
+      - run: python scripts/validate_rule_inventory.py
       - run: python scripts/check_eligibility.py --validate
   frontend:
     runs-on: ubuntu-latest
@@ -25,5 +25,5 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with: { node-version: 20 }
-      - run: npm install
+      - run: npm ci
       - run: npm run build

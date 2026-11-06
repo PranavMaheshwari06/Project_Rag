@@ -204,7 +204,7 @@ class RuleSet(Strict):
 
 
 def record_hash(record: dict) -> str:
-    """Same canonical form as scripts/validate_phase6_inventory.py."""
+    """Same canonical form as scripts/validate_rule_inventory.py."""
     blob = json.dumps(record, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
     return hashlib.sha256(blob.encode("utf-8")).hexdigest()
 
