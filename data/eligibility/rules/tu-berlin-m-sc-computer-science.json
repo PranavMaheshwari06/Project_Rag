@@ -320,6 +320,22 @@
         }
       ],
       "reviewed_by": "human"
+    },
+    {
+      "id": "english_components",
+      "label": "IELTS section (component) scores: no minimum is published, only the overall band",
+      "severity": "info",
+      "check": {
+        "type": "not_published",
+        "note": "TU Berlin publishes an IELTS overall band of 6.5 and no minimum per section."
+      },
+      "citations": [
+        {
+          "doc_id": "de/tub/eecs-application-faq",
+          "quote": "For the IELTS test, an overall band score of 6.5 is required, even if an overall band score of 5.5 confirms a B2 on the certificate."
+        }
+      ],
+      "reviewed_by": "pending"
     }
   ]
 }

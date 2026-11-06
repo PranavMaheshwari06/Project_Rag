@@ -215,4 +215,5 @@ def test_leap_day_result(as_of, verdict):
 def test_kit_cs_pending_rules_are_exactly_the_unreviewed_ones():
     rules, _ = load_ruleset(load_settings(), "kit-m-sc-computer-science")
     assert {r.id for r in rules.rules if r.reviewed_by == "pending"} == {
-        "degree", "degree_ects", "module_assignment", "test_validity", "english", "deadline_winter", "deadline_summer"}
+        "degree", "degree_ects", "module_assignment", "test_validity", "english", "deadline_winter", "deadline_summer",
+        "min_grade"}  # "no minimum published" rule
