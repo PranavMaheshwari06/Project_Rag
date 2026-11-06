@@ -26,7 +26,7 @@ def ev(check, **facts):
 
 def test_schema_version_bumped_and_none_round_trips():
     # profile-v2 introduced "none"; later versions keep it
-    assert SCHEMA_VERSION in ("profile-v2", "profile-v3") and Profile().schema_version == SCHEMA_VERSION
+    assert SCHEMA_VERSION in ("profile-v2", "profile-v3", "profile-v4") and Profile().schema_version == SCHEMA_VERSION
     p = Profile(gre="none", gate="none")
     back = Profile.model_validate_json(p.model_dump_json())
     assert back == p and back.gre == "none" and back.gate == "none"
