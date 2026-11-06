@@ -1,4 +1,4 @@
-"""Validate/render Step 0 without providers, retrieval, or writes to product data.
+"""Validate/render the rule inventory without providers, retrieval, or writes to product data.
 
 Default: check committed identities, record bindings, baseline hashes and matrix.
 --check-cache: additionally parse cached official snapshots and check every quote.
@@ -23,8 +23,8 @@ FIELDS = tuple(k for k in ProgramRequirements.model_fields
 CLASSES = {"automatic", "informational_readiness", "manual_review", "not_published"}
 ROOT = Path(__file__).resolve().parent.parent
 INVENTORY = Path("data/eligibility/coverage_inventory.json")
-MATRIX = Path("docs/PHASE_6_RULE_COVERAGE.md")
-REVIEW = Path("docs/PHASE_6_RULE_REVIEW.md")
+MATRIX = Path("docs/eligibility-rule-coverage.md")
+REVIEW = Path("docs/eligibility-rule-review.md")
 
 
 def digest(data: bytes) -> str:
@@ -45,11 +45,11 @@ def validate(inventory: dict, records: dict, registry: list, manifest: dict,
              texts: dict[str, str] | None = None) -> list[str]:
     """Pure inventory/evidence checks. None means raw pages were NOT checked."""
     errors = []
-    if inventory.get("schema_version") != "phase6-inventory-v1":
+    if inventory.get("schema_version") != "rule-inventory-v1":
         errors.append("unsupported inventory schema")
     if (inventory.get("status"), inventory.get("reviewed_by")) != (
-            "draft_for_maintainer_review", "pending"):
-        errors.append("Step 0 must retain pending maintainer review")
+            "draft_for_review", "pending"):
+        errors.append("The inventory must retain pending review")
     registered = {e.id: e for e in registry}
     expected_slugs = {
         re.sub(r"[^a-z0-9]+", "-", f"{e.university} {e.programme}".lower()).strip("-")
@@ -148,18 +148,18 @@ def validate(inventory: dict, records: dict, registry: list, manifest: dict,
 
 
 def validate_baseline(inventory: dict, root: Path) -> list[str]:
-    """Preserve the recorded Phase 4 inputs; never refresh a lock implicitly."""
+    """Preserve the recorded baseline inputs; never refresh a lock implicitly."""
     errors = []
     required = {f"data/verified/{s}.json" for s in inventory["programmes"]}
     required.update({"sources/registry.yaml", "sources/manifest.json",
                      "frontend/public/benchmark.json", "evaluation/results/refusal_calibration.json",
                      "data/audit/second_pass_audit.json", "evaluation/datasets/gold_qa.jsonl"})
     if not required.issubset(inventory["baseline_inputs"]):
-        errors.append("baseline lock omits required Phase 4 inputs")
+        errors.append("baseline lock omits required baseline inputs")
     for name, expected in inventory["baseline_inputs"].items():
         path = root / name
         if not path.is_file() or digest(path.read_bytes()) != expected:
-            errors.append(f"{name}: Phase 4 baseline changed/missing; review explicitly")
+            errors.append(f"{name}: baseline changed/missing; review explicitly")
     return errors
 
 
@@ -172,12 +172,12 @@ def source_link(inventory: dict, doc_id: str) -> str:
 
 
 def render_matrix(inventory: dict) -> str:
-    lines = ["# Phase 6 Step 0: programme rule coverage", "",
-             "Status: draft, 2026-10-27; maintainer review pending. "
+    lines = ["# Programme rule coverage", "",
+             "Snapshot of the rule inventory from 2026-10-27; the accepted rules are in data/eligibility/rules/. "
              "Generated from [coverage_inventory.json](../data/eligibility/coverage_inventory.json).", "",
              "All 13 programmes and all 17 original fields are inventoried below. "
              "Classification describes the proposed automation boundary, not implemented rules or measured coverage. "
-             "Every interpretation remains pending. See [the review packet](PHASE_6_RULE_REVIEW.md).", "",
+             "See [the rule review notes](eligibility-rule-review.md).", "",
              "`automatic`: deterministic comparisons against entered evidence are possible after rule review. "
              "`manual_review`: equivalence, ambiguity or required university assessment remains. "
              "`informational_readiness`: process, document, milestone or finance information, separate from academic admission. "
@@ -206,36 +206,34 @@ def render_matrix(inventory: dict) -> str:
                   "|---|---|---|---|"]
         for field, entry in programme["fields"].items():
             refs = [source_link(inventory, d) for d in entry["source_doc_ids"]]
-            refs += [f"[{e}](PHASE_6_RULE_REVIEW.md#{e.lower()})" for e in entry["evidence_ids"]]
-            refs += [f"[{r}](PHASE_6_RULE_REVIEW.md#{r.lower()})" for r in entry["review_ids"]]
+            refs += [f"[{e}](eligibility-rule-review.md#{e.lower()})" for e in entry["evidence_ids"]]
+            refs += [f"[{r}](eligibility-rule-review.md#{r.lower()})" for r in entry["review_ids"]]
             lines.append(f"| `{field}` | `{entry['classification']}` | {cell(entry['note'])} | {'; '.join(refs) or '—'} |")
         lines.append("")
     lines += ["## Snapshot bindings", "",
-              "The inventory locks raw-byte hashes for 51 Phase 4 inputs, canonical original-record hashes "
+              f"The inventory locks raw-byte hashes for {len(inventory['baseline_inputs'])} baseline inputs, canonical original-record hashes "
               "for 13 programmes, and raw/cleaned snapshot hashes for 42 source documents. "
               "No extraction record, verification tier, audit score, retrieval label or benchmark is changed.", "",
-              "Run `make validate-phase6-inventory` for identities, bindings and rendered-document consistency. "
-              "Run `make validate-phase6-inventory ARGS=\"--check-cache\"` locally to also validate "
+              "Run `make validate-rule-inventory` for identities, bindings and rendered-document consistency. "
+              "Run `make validate-rule-inventory ARGS=\"--check-cache\"` locally to also validate "
               "raw/cleaned snapshot hashes and every original/supplemental quote. "
               "The default check does not claim raw-page or live-page verification. "
               "To explicitly regenerate the Markdown after editing the draft inventory, run "
-              "`.venv/bin/python scripts/validate_phase6_inventory.py --render`.", ""]
+              "`.venv/bin/python scripts/validate_rule_inventory.py --render`.", ""]
     return "\n".join(lines)
 
 
 def render_review(inventory: dict) -> str:
-    lines = ["# Phase 6 Step 0: consequential rule review", "",
-             "Status: all proposals are drafts pending maintainer review. "
+    lines = ["# Rule review notes", "",
+             "Interpretation notes and supporting evidence from the 2026-10-27 rule inventory; decisions are recorded in the rule files. "
              "These are interpretations of cached official evidence, not executable rules. "
              "Accepting a semantic interpretation does not promote a programme verification tier.", "",
-             "Review the proposal and unresolved boundary for each item; respond with its ID and accept/correct/defer. "
-             "Acceptance of a conservative unknown does not resolve missing source evidence. "
+                          "Acceptance of a conservative unknown does not resolve missing source evidence. "
              "Items involving omissions or genuine extraction errors need a separate reviewed Save-path correction; "
-             "the Phase 4 record remains unchanged here. "
-             "Step 1 can model these distinctions; consequential comparisons must wait for the relevant acceptance/evidence.", "",
+             "the verified record remains unchanged here.", "",
              "Record references below link the original values and quotes. Supplemental excerpts appear afterward "
              "with their cached snapshot hashes. New source collection, corrections and live verification are not "
-             "claimed by Step 0. Source gaps must remain explicit in later catalogue readiness.", "",
+             "claimed here. Source gaps must remain explicit in later catalogue readiness.", "",
              "| Item | Decision to review | Status |", "|---|---|---|"]
     lines += [f"| [{rid}](#{rid.lower()}) | {review['title']} | pending |"
               for rid, review in inventory["reviews"].items()]
@@ -298,8 +296,8 @@ def main() -> int:
         print("\n".join(errors))
         return 1
     count = sum(len(p["fields"]) for p in inventory["programmes"].values())
-    print(f"Step 0: {len(records)} programmes / {count} fields; "
-          f"{len(inventory['reviews'])} pending reviews; Phase 4 hashes unchanged.")
+    print(f"Inventory: {len(records)} programmes / {count} fields; "
+          f"{len(inventory['reviews'])} pending reviews; baseline hashes unchanged.")
     print("Cached hashes and original/supplemental quotes checked; no live-page verification."
           if args.check_cache else "Cached pages NOT checked (use --check-cache locally); no live-page verification.")
     return 0

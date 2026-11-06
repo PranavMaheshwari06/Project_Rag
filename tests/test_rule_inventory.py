@@ -5,7 +5,7 @@ import pytest
 
 from extraction.schemas import ProgramRequirements
 from ingestion.registry import RegistryEntry
-from scripts.validate_phase6_inventory import (
+from scripts.validate_rule_inventory import (
     FIELDS,
     digest,
     record_hash,
@@ -35,7 +35,7 @@ def inventory_fixture():
     fields["min_total_ects"] = {"classification": "automatic", "note": "Confirmed ECTS only.",
                                 "review_ids": ["R01"], "source_doc_ids": [doc_id], "evidence_ids": ["E01"]}
     inventory = {
-        "schema_version": "phase6-inventory-v1", "status": "draft_for_maintainer_review", "reviewed_by": "pending",
+        "schema_version": "rule-inventory-v1", "status": "draft_for_review", "reviewed_by": "pending",
         "sources": {doc_id: source}, "additional_evidence": {"E01": {"doc_id": doc_id, "quote": "at least 180 ECTS"}},
         "reviews": {"R01": {"status": "pending", "reviewed_by": "pending", "proposed_interpretation": "Compare ECTS.",
                              "unresolved": "Other units require review.", "evidence_ids": ["E01"],
@@ -93,12 +93,12 @@ def test_unknown_sources_and_review_ids_fail(inventory_fixture):
         assert any(expected in e for e in errors)
 
 
-def test_model_draft_cannot_claim_maintainer_acceptance(inventory_fixture):
+def test_draft_cannot_claim_human_acceptance(inventory_fixture):
     inventory, records, registry, manifest, texts = inventory_fixture
     inventory["reviewed_by"] = "human"
     inventory["reviews"]["R01"].update(status="accepted", reviewed_by="human")
     errors = validate(inventory, records, registry, manifest, texts)
-    assert any("pending maintainer review" in e for e in errors)
+    assert any("pending review" in e for e in errors)
     assert any("cannot claim acceptance" in e for e in errors)
 
 
@@ -116,7 +116,7 @@ def test_baseline_check_is_read_only_and_catches_artifact_drift(tmp_path, invent
     assert validate_baseline(inventory, tmp_path) == []
     benchmark = tmp_path / "frontend/public/benchmark.json"
     benchmark.write_text('{"original": false}')
-    assert any("benchmark.json: Phase 4 baseline changed" in e for e in validate_baseline(inventory, tmp_path))
+    assert any("benchmark.json: baseline changed" in e for e in validate_baseline(inventory, tmp_path))
     assert benchmark.read_text() == '{"original": false}'
     del inventory["baseline_inputs"]["data/audit/second_pass_audit.json"]
     assert any("omits required" in e for e in validate_baseline(inventory, tmp_path))

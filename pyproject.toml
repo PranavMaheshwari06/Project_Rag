@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "germany-masters-assistant"
 version = "0.1.0"
-description = "Hybrid RAG service for technical documentation: dense + BM25 + RRF + cross-encoder rerank, grounded answers with citations."
+description = "Admissions and eligibility assistant for English-taught master's programmes in Germany: hybrid RAG plus a deterministic rules engine."
 requires-python = ">=3.10"
 dependencies = [
     "fastapi~=0.115",

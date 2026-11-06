@@ -12,8 +12,8 @@ and `data/eligibility/rules/kit-m-sc-computer-science.json`, with their tests in
 | What | Where |
 |---|---|
 | Verified record (the authority) | `data/verified/<slug>.json`, key `record` |
-| Interpretation notes R01-R17, supplemental quotes E01-E42 | `docs/PHASE_6_RULE_REVIEW.md` |
-| Field coverage per programme | `docs/PHASE_6_RULE_COVERAGE.md` |
+| Interpretation notes R01-R17, supplemental quotes E01-E42 | `docs/eligibility-rule-review.md` |
+| Field coverage per programme | `docs/eligibility-rule-coverage.md` |
 | Cleaned page text | `.venv/bin/python scripts/dump_pages.py <slug>` -> `data/pages/<slug>/` (gitignored) |
 | Raw pages (when cleaned text lost a section) | `data/raw/de/...` (file per doc id in `sources/manifest.json`) |
 | Doc id -> official URL | `sources/registry.yaml` |

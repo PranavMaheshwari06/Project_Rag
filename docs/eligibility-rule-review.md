@@ -1,10 +1,10 @@
-# Phase 6 Step 0: consequential rule review
+# Rule review notes
 
-Status: all proposals are drafts pending maintainer review. These are interpretations of cached official evidence, not executable rules. Accepting a semantic interpretation does not promote a programme verification tier.
+Interpretation notes and supporting evidence from the 2026-10-27 rule inventory; decisions are recorded in the rule files. These are interpretations of cached official evidence, not executable rules. Accepting a semantic interpretation does not promote a programme verification tier.
 
-Review the proposal and unresolved boundary for each item; respond with its ID and accept/correct/defer. Acceptance of a conservative unknown does not resolve missing source evidence. Items involving omissions or genuine extraction errors need a separate reviewed Save-path correction; the Phase 4 record remains unchanged here. Step 1 can model these distinctions; consequential comparisons must wait for the relevant acceptance/evidence.
+Acceptance of a conservative unknown does not resolve missing source evidence. Items involving omissions or genuine extraction errors need a separate reviewed Save-path correction; the verified record remains unchanged here.
 
-Record references below link the original values and quotes. Supplemental excerpts appear afterward with their cached snapshot hashes. New source collection, corrections and live verification are not claimed by Step 0. Source gaps must remain explicit in later catalogue readiness.
+Record references below link the original values and quotes. Supplemental excerpts appear afterward with their cached snapshot hashes. New source collection, corrections and live verification are not claimed here. Source gaps must remain explicit in later catalogue readiness.
 
 | Item | Decision to review | Status |
 |---|---|---|

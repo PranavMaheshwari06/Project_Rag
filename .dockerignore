@@ -1,6 +1,4 @@
 .git
-.agents
-.codex
 .aws
 .venv
 **/__pycache__

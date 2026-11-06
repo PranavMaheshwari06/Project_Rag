@@ -1,6 +1,6 @@
 # Phase 6 implementation plan: cited eligibility and gap reports
 
-Status (2026-11-06): Steps 0-4 are done and merged: the inventory, the profile/rule/report types, the deterministic primitives, rule files for all 13 programmes, and the API with paste-to-fill. Report summaries per area, the `--check-cache` validation flag, an explicit "no GRE/GATE" answer, the evaluation harness, deadline and test-age checks, a cited visa funds rule, no-minimum-published info rules and a reported university assessment (TU Berlin and KIT CDS) are merged too. 19 rules are still pending review. The five human-authored cases are not frozen, so no evaluation has run. This specification follows [the project roadmap](PROJECT_PLAN.md).
+Status (2026-11-06): Steps 0-4 are done and merged: the inventory, the profile/rule/report types, the deterministic primitives, rule files for all 13 programmes, and the API with paste-to-fill. Report summaries per area, the `--check-cache` validation flag, an explicit "no GRE/GATE" answer, the evaluation harness, deadline and test-age checks, a cited visa funds rule, no-minimum-published info rules and a reported university assessment (TU Berlin and KIT CDS) are merged too. 19 rules are still pending review. The five human-authored cases are not frozen, so no evaluation has run. This specification follows [the project roadmap](project-plan.md).
 
 ## 1. Purpose and boundaries
 
