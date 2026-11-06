@@ -5,9 +5,11 @@ FROM python:3.12-slim
 
 WORKDIR /app
 
+RUN pip install --no-cache-dir uv==0.9.21
+
 # torch CPU wheels are large; keep them cached in their own layer
-COPY pyproject.toml ./
-RUN pip install --no-cache-dir . && pip uninstall -y germany-masters-assistant
+COPY requirements.lock ./
+RUN uv pip install --system --no-cache --torch-backend cpu -r requirements.lock
 
 COPY api ./api
 COPY core ./core
@@ -16,10 +18,13 @@ COPY ingestion ./ingestion
 COPY retrieval ./retrieval
 COPY generation ./generation
 COPY evaluation ./evaluation
+COPY extraction ./extraction
+COPY eligibility ./eligibility
 COPY scripts ./scripts
 COPY config ./config
 COPY sources ./sources
-RUN pip install --no-cache-dir --no-deps .
+COPY pyproject.toml ./
+RUN uv pip install --system --no-cache --no-deps .
 
 EXPOSE 8000
 
