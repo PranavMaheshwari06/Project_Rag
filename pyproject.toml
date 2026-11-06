@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "germany-masters-assistant"
 version = "0.1.0"
 description = "Admissions and eligibility assistant for English-taught master's programmes in Germany: hybrid RAG plus a deterministic rules engine."
-requires-python = ">=3.10"
+requires-python = ">=3.12"
 dependencies = [
     "fastapi~=0.115",
     "uvicorn[standard]~=0.34",

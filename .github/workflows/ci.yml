@@ -6,8 +6,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
-        with: { python-version: "3.12", cache: pip }
-      - run: pip install -e '.[dev]'
+        with: { python-version: "3.12" }
+      - uses: astral-sh/setup-uv@v6
+        with: { version: "0.9.21", enable-cache: true }
+      - run: uv pip install --system --torch-backend cpu -r requirements.lock
+      - run: uv pip install --system --no-deps -e .
       - run: ruff check .
       # pure-logic tests only; model-backed tests download ~1.2GB
       - run: >-

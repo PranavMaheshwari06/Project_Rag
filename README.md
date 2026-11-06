@@ -172,10 +172,10 @@ The selected score threshold is `0.13340958034137707`. It refuses 4/14 refusal/c
 
 ## Run it locally
 
-Python 3.12 is recommended (3.10+ supported). `crawl` fills the git-ignored `data/raw/`; `ingest`, `index`, `review` and `eval` need it, while `test`, `eligibility` and `--validate` work on a fresh clone. The first run downloads two models from Hugging Face (bge-small ~130MB, bge-reranker-base ~1.1GB). After that, everything except `make crawl` runs offline.
+Needs [uv](https://docs.astral.sh/uv/) and Python 3.12. `crawl` fills the git-ignored `data/raw/`; `ingest`, `index`, `review` and `eval` need it, while `test`, `eligibility` and `--validate` work on a fresh clone. The first run downloads two models from Hugging Face (bge-small ~130MB, bge-reranker-base ~1.1GB). After that, everything except `make crawl` runs offline.
 
 ```bash
-make install    # creates .venv and installs .[dev]
+make install    # creates .venv and installs the pinned versions from requirements.lock
 make crawl      # fetch every registry source into data/raw/ (the only network step; cached pages are skipped)
 make ingest     # parse, clean and chunk -> data/processed/chunks.jsonl
 make index      # dense (NumPy) + BM25 indexes
@@ -203,7 +203,7 @@ npm run dev     # :5173, talks to the API on :8000
 
 No API key is needed, except for `POST /profile/parse` and `make parse-profile`. Without one, answers come from an extractive fallback, which stitches together quoted sentences from the cited evidence. For the LLM path (Gemini, free tier) and `make extract`, copy `.env.example` to `.env` and set `GEMINI_API_KEY`. The free tier allows about 20 requests a day per model; `make extract` skips finished programmes, so re-running it the next day fills the gaps. All tunables live in `config/settings.yaml`.
 
-Without Make (including Windows): `python -m venv .venv`, then `.venv/bin/python -m pip install -e '.[dev]'` (Windows: `.venv/Scripts/python.exe`). Optional CPU-only install: `make venv && uv pip install --python .venv/bin/python --torch-backend cpu -e '.[dev]'`.
+`requirements.lock` pins every package for Linux with CPU-only torch, the same setup CI and Docker use. On another platform, or without Make: `uv venv --python 3.12`, then `uv pip install -e '.[dev]'`.
 
 `docker-compose.yml` (Qdrant + API + frontend) is a starting point for a containerised setup; hosting is not verified yet.
 

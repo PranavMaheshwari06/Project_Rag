@@ -5,20 +5,19 @@
 VENV := .venv
 ifeq ($(OS),Windows_NT)
 PY ?= $(VENV)/Scripts/python.exe
-PYTHON ?= python
 else
 PY ?= $(VENV)/bin/python
-PYTHON ?= python3
 endif
 
 venv:
-	$(PYTHON) -m venv $(VENV)
+	uv venv $(VENV) --python 3.12
 
 $(PY):
 	$(MAKE) venv
 
 install: $(PY)
-	$(PY) -m pip install -e '.[dev]'
+	uv pip install --python $(PY) --torch-backend cpu -r requirements.lock
+	uv pip install --python $(PY) --no-deps -e .
 
 crawl:
 	$(PY) scripts/crawl.py $(ARGS)
