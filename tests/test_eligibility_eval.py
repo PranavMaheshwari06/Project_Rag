@@ -37,6 +37,10 @@ def settings(tmp_path):
     (rules_dir / "fixture-msc.json").write_text(json.dumps(RULES))
     (verified_dir / "fixture-msc.json").write_text(json.dumps({"tier": "human", "record": RECORD}))
     s.paths.rules_dir, s.paths.verified_dir = str(rules_dir), str(verified_dir)
+    finance = tmp_path / "finance.json"  # no visa rules: the fixture measures programme rules only
+    finance.write_text(json.dumps({"schema_version": "finance-v1", "fetched_on": "2026-11-04",
+                                   "recheck_after": "2027-05-04", "rules": []}))
+    s.paths.finance_rules_path = str(finance)
     return s
 
 

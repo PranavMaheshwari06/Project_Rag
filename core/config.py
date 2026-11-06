@@ -32,6 +32,7 @@ class PathsCfg(BaseModel):
     # reviewed rule catalogue (committed); not in settings.yaml, whose hash the Phase 4 baseline pins
     rules_dir: str = "data/eligibility/rules"
     country_groups_path: str = "data/eligibility/country_groups.json"
+    finance_rules_path: str = "data/eligibility/finance.json"
 
 
 class CrawlCfg(BaseModel):

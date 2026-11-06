@@ -76,6 +76,7 @@ class Report(BaseModel):
     rules_schema_version: str
     profile_schema_version: str
     ruleset_sha256: str  # canonical hash of the rule set as loaded (defaults filled in)
+    finance_sha256: str | None = None  # canonical hash of the financial rules used, if any
     record_sha256: str  # the verified record the rules are bound to; differs from disk when rules_stale
     as_of: date | None = None
     intake: Literal["winter", "summer"] | None = None
