@@ -14,6 +14,14 @@ class BadRequestError(AppError):
     status_code = 400
 
 
+class ServiceUnavailableError(AppError):
+    status_code = 503
+
+
+class UpstreamError(AppError):
+    status_code = 502
+
+
 class CorpusNotIngestedError(AppError):
     status_code = 409
 

@@ -1,10 +1,11 @@
 from fastapi import FastAPI, Request
+from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
 from api.middleware.logging_mw import RequestLoggingMiddleware
 from api.middleware.request_id import RequestIdMiddleware
-from api.routes import answer, evaluate, health, ingest, search
+from api.routes import answer, eligibility, evaluate, health, ingest, search
 from core.exceptions import AppError
 from core.logging import setup_logging
 
@@ -30,7 +31,16 @@ def create_app() -> FastAPI:
             content={"detail": exc.message, "request_id": getattr(request.state, "request_id", "-")},
         )
 
-    for module in (health, search, answer, ingest, evaluate):
+    @app.exception_handler(RequestValidationError)
+    async def validation_error_handler(request: Request, exc: RequestValidationError):
+        # FastAPI's default echoes the request body: a profile must never come back in an error
+        errors = [{"loc": e["loc"], "msg": e["msg"], "type": e["type"]} for e in exc.errors()]
+        return JSONResponse(
+            status_code=422,
+            content={"detail": errors, "request_id": getattr(request.state, "request_id", "-")},
+        )
+
+    for module in (health, search, answer, ingest, evaluate, eligibility):
         app.include_router(module.router)
     return app
 
