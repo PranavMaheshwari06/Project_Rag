@@ -26,7 +26,7 @@ def main():
         value = repr(calibration["selected_threshold"])
         content = DEFAULT_CONFIG.read_text(encoding="utf-8")
         content, replacements = re.subn(r"(?m)^(  refusal_threshold:) [^\n]+$",
-                                       lambda m: f"{m[1]} {value}  # Phase 4 calibration; see evaluation/results/", content)
+                                       lambda m: f"{m[1]} {value}  # calibrated; see evaluation/results/", content)
         if replacements != 1:
             raise SystemExit("Could not locate exactly one refusal_threshold setting.")
         DEFAULT_CONFIG.write_text(content, encoding="utf-8")

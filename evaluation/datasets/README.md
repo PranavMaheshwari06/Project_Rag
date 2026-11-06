@@ -1,6 +1,6 @@
 # Gold QA set
 
-`gold_qa.jsonl` is the study-abroad gold set used by `make eval`: 104 items,
+`gold_qa.jsonl` is the gold set used by `make eval`: 104 items,
 one JSON object per line. `tests/fixtures/gold_qa.jsonl` is a separate, small
 fixture for the test corpus only; the tests never read this file.
 
