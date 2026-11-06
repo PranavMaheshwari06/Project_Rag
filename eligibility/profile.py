@@ -1,5 +1,6 @@
 """A student's confirmed facts. `None` means not supplied; `[]` or `0` means the
-student said none. The engine never turns a missing value into a zero or a
+student said none; for GRE and GATE, which are objects, the literal "none"
+means the student has no such test. The engine never turns a missing value into a zero or a
 False, so an incomplete profile is valid and yields `unknown`, not a failure.
 
 Country of citizenship, of the qualifying degree and of schooling are separate
@@ -9,9 +10,10 @@ from datetime import date
 from decimal import Decimal
 from typing import Literal
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, model_validator
 
-SCHEMA_VERSION = "profile-v1"
+SCHEMA_VERSION = "profile-v2"  # v2: gre/gate accept "none"; a v1 profile is valid v2
+NoTest = Literal["none"]
 
 
 class Strict(BaseModel):
@@ -60,7 +62,7 @@ class Gate(Strict):
 
 
 class Profile(Strict):
-    schema_version: str = SCHEMA_VERSION
+    schema_version: Literal["profile-v1", "profile-v2"] = SCHEMA_VERSION
     # countries as English short names, as the university pages publish them ("India")
     citizenships: list[str] | None = None
     degree_country: str | None = None
@@ -76,8 +78,14 @@ class Profile(Strict):
     language: list[LanguageEvidence] | None = None  # [] = student has no test
     english_instruction_share: Decimal | None = Field(default=None, ge=0, le=100)  # % of prior programme taught in English
     interview_passed: bool | None = None  # the target's aptitude interview, once taken (invited != passed)
-    gre: Gre | None = None
-    gate: Gate | None = None
+    gre: Gre | NoTest | None = None  # None or Gre() = not supplied; "none" = has no GRE
+    gate: Gate | NoTest | None = None
     german_level: Literal["A1", "A2", "B1", "B2", "C1", "C2"] | None = None  # CEFR, as certified
     documents: list[str] | None = None  # document keys the student already has, e.g. "aps_certificate"
     funds_eur: Decimal | None = Field(default=None, ge=0)
+
+    @model_validator(mode="after")
+    def _none_needs_v2(self):
+        if self.schema_version == "profile-v1" and "none" in (self.gre, self.gate):
+            raise ValueError('"none" for gre or gate needs schema_version profile-v2')
+        return self

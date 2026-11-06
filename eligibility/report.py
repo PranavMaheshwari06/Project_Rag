@@ -74,6 +74,7 @@ class Report(BaseModel):
     rules_stale: bool = False
     notices: list[str] = []  # e.g. a country list past its re-check date
     rules_schema_version: str
+    profile_schema_version: str
     ruleset_sha256: str  # canonical hash of the rule set as loaded (defaults filled in)
     record_sha256: str  # the verified record the rules are bound to; differs from disk when rules_stale
     as_of: date | None = None
