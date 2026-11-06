@@ -97,8 +97,15 @@ class EvalCfg(BaseModel):
     eligibility_results_out: str = "evaluation/results/eligibility_baseline.json"
 
 
+class EligibilityCfg(BaseModel):
+    # code defaults, like paths.rules_dir: settings.yaml is hash-locked as a Phase 4 input
+    max_targets: int = 13  # programmes per /eligibility/check request (plan section 5)
+    parse_max_chars: int = 16000  # pasted text per /profile/parse request (plan section 5)
+
+
 class Settings(BaseModel):
     paths: PathsCfg = PathsCfg()
+    eligibility: EligibilityCfg = EligibilityCfg()
     crawl: CrawlCfg = CrawlCfg()
     chunking: ChunkingCfg = ChunkingCfg()
     retrieval: RetrievalCfg = RetrievalCfg()
