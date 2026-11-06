@@ -7,8 +7,33 @@
       "id": "degree",
       "label": "Bachelor's (or equivalent) in Computational and Data Science, Mathematics, Computer Science or a listed science, engineering or economics subject",
       "check": {
-        "type": "university_review",
-        "note": "KIT decides whether your degree is one of the listed subjects or equivalent, and that it ran for a standard period of at least three years (R01)."
+        "type": "all_of",
+        "children": [
+          {
+            "type": "any_of",
+            "children": [
+              {
+                "type": "university_review",
+                "note": "KIT decides whether your degree is one of the listed subjects or equivalent, and that it ran for a standard period of at least three years (R01)."
+              },
+              {
+                "type": "in",
+                "fact": "university_assessments.kit-m-sc-computational-and-data-science",
+                "values": [
+                  "positive"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "in",
+            "fact": "university_assessments.kit-m-sc-computational-and-data-science",
+            "values": [
+              "negative"
+            ],
+            "negate": true
+          }
+        ]
       },
       "citations": [
         {
@@ -16,7 +41,7 @@
           "quote": "Bachelorabschluss ein bestandener Bachelorabschluss (oder mindestens gleichwertiger Abschluss) im Studiengang Computational and Data Science, Mathematik, Informatik (oder einem Studiengang mit im Wesentlichen gleichem Inhalt)"
         }
       ],
-      "reviewed_by": "human"
+      "reviewed_by": "pending"
     },
     {
       "id": "degree_ects",
@@ -214,8 +239,33 @@
       "id": "credit_counting",
       "label": "How your courses are counted towards the credit areas",
       "check": {
-        "type": "university_review",
-        "note": "The page does not say whether one course may count towards both basic maths and a subject area, or towards the thesis, nor which area a module belongs to. Credits per area are your own allocation; KIT decides the official count."
+        "type": "all_of",
+        "children": [
+          {
+            "type": "any_of",
+            "children": [
+              {
+                "type": "university_review",
+                "note": "The page does not say whether one course may count towards both basic maths and a subject area, or towards the thesis, nor which area a module belongs to. Credits per area are your own allocation; KIT decides the official count."
+              },
+              {
+                "type": "in",
+                "fact": "university_assessments.kit-m-sc-computational-and-data-science",
+                "values": [
+                  "positive"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "in",
+            "fact": "university_assessments.kit-m-sc-computational-and-data-science",
+            "values": [
+              "negative"
+            ],
+            "negate": true
+          }
+        ]
       },
       "citations": [
         {
@@ -223,7 +273,7 @@
           "quote": "Mindestens 40 LP aus einem und mindestens 12 LP aus den beiden verbleibenden Gebieten:"
         }
       ],
-      "reviewed_by": "human"
+      "reviewed_by": "pending"
     },
     {
       "id": "english",

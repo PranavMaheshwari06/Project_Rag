@@ -3,6 +3,7 @@ stays "unknown"; "none" makes a score bound fail as "not reported". Scores are
 compared exactly as before."""
 
 import json
+from typing import get_args
 from pathlib import Path
 
 import pytest
@@ -10,7 +11,7 @@ from pydantic import ValidationError
 
 from core.config import load_settings
 from eligibility.engine import check_eligibility, evaluate
-from eligibility.profile import SCHEMA_VERSION, Profile
+from eligibility.profile import SCHEMA_VERSION, Profile, ProfileVersion
 from eligibility.rules import Rule, load_ruleset
 
 CITE = {"doc_id": "de/x/y", "quote": "q"}
@@ -26,7 +27,7 @@ def ev(check, **facts):
 
 def test_schema_version_bumped_and_none_round_trips():
     # profile-v2 introduced "none"; later versions keep it
-    assert SCHEMA_VERSION in ("profile-v2", "profile-v3", "profile-v4") and Profile().schema_version == SCHEMA_VERSION
+    assert "profile-v2" in get_args(ProfileVersion) and Profile().schema_version == SCHEMA_VERSION == get_args(ProfileVersion)[-1]
     p = Profile(gre="none", gate="none")
     back = Profile.model_validate_json(p.model_dump_json())
     assert back == p and back.gre == "none" and back.gate == "none"
