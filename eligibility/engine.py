@@ -1,9 +1,11 @@
 """Deterministic comparison of a Profile with a RuleSet. No LLM, no retrieval,
-no clock. A fact that was not supplied is `unknown`, never a failure.
+no clock: dates are compared with the request's `as_of`. A fact that was not
+supplied is `unknown`, never a failure.
 
 Margin: positive is favourable (observed - minimum, or maximum - observed). A
 strict bound keeps its strictness at a zero margin."""
 
+from dataclasses import dataclass
 from datetime import date
 from decimal import Decimal, InvalidOperation
 from typing import Literal
@@ -15,9 +17,11 @@ from eligibility.report import AdmissionSummary, Criterion, FinanceSummary, Read
 from eligibility.rules import (
     Category,
     Check,
+    Deadline,
     Group,
     In,
     Maximum,
+    MaxAge,
     Minimum,
     Rule,
     RuleSet,
@@ -33,7 +37,70 @@ class Result(BaseModel):
     entered: str | None = None
     required: str | None = None
     margin: Decimal | None = None
-    reason: str | None = None  # why the verdict is unknown
+    reason: str | None = None  # why the verdict is unknown; "window_closed" for a missed deadline
+
+
+@dataclass(frozen=True)
+class Target:
+    """What the check request owns, not the profile (plan section 3)."""
+
+    as_of: date | None = None
+    intake: Literal["winter", "summer"] | None = None
+    starting_year: int | None = None
+
+
+def shift_years(d: date, years: int) -> date:
+    """Same day `years` later; 29 February becomes 28 February in a common year."""
+    try:
+        return d.replace(year=d.year + years)
+    except ValueError:
+        return d.replace(year=d.year + years, day=28)
+
+
+def _deadline(check: Deadline, target: Target) -> Result:
+    if target.intake is None:
+        return Result(verdict="unknown", reason="missing_request_date")
+    if target.intake != check.intake:
+        return Result(verdict="not_applicable", entered=f"{target.intake} intake")
+    if target.as_of is None or target.starting_year is None:
+        return Result(verdict="unknown", reason="missing_request_date")
+    if check.starting_years is not None and target.starting_year not in check.starting_years:
+        return Result(verdict="unknown", reason="deadline_not_published_for_year")
+    close = check.close.on(target.starting_year)
+    entered = f"as of {target.as_of}"
+    if check.open and target.as_of < check.open.on(target.starting_year):
+        entered += f"; the window opens {check.open.on(target.starting_year)}"
+    margin = Decimal((close - target.as_of).days)  # days left; negative = days late
+    ok = margin >= 0  # the closing day itself is still in time
+    return Result(verdict="meets" if ok else "does_not_meet", entered=entered, required=f"apply by {close}",
+                  margin=margin, reason=None if ok else "window_closed")
+
+
+def _max_age(check: MaxAge, profile: Profile, target: Target) -> Result:
+    """With only a year known, decide only when every day of that year agrees."""
+    required = f"not older than {check.years} years"
+    observed = resolve(profile, check.fact)
+    if observed is None:
+        return Result(verdict="unknown", required=required, reason="missing_fact")
+    if observed is ABSENT:
+        return Result(verdict="does_not_meet", entered="not reported", required=required)
+    if target.as_of is None:
+        return Result(verdict="unknown", required=required, reason="missing_request_date")
+    if isinstance(observed, date):
+        earliest = latest = observed
+    elif isinstance(observed, int) and not isinstance(observed, bool):
+        earliest, latest = date(observed, 1, 1), date(observed, 12, 31)
+    else:
+        raise ValueError(f"fact {check.fact} is not a date or a year")
+    if earliest > target.as_of:  # a result dated after the request date: a typo or a test not yet taken
+        return Result(verdict="unknown", entered=str(observed), required=required, reason="date_after_as_of")
+    if shift_years(earliest, check.years) >= target.as_of:
+        verdict, margin = "meets", shift_years(earliest, check.years) - target.as_of
+    elif shift_years(latest, check.years) < target.as_of:
+        verdict, margin = "does_not_meet", shift_years(latest, check.years) - target.as_of
+    else:
+        return Result(verdict="unknown", entered=str(observed), required=required, reason="date_imprecise")
+    return Result(verdict=verdict, entered=str(observed), required=required, margin=Decimal(margin.days))
 
 
 ABSENT = object()  # the student listed their tests and this one is not among them, or said "none"
@@ -128,20 +195,31 @@ def _in(check: In, profile: Profile, groups: CountryGroups | None) -> Result:
     return Result(verdict="meets" if hit != check.negate else "does_not_meet", entered=str(observed), required=required)
 
 
-def evaluate(check: Check, profile: Profile, groups: CountryGroups | None = None) -> Result:
+def evaluate(
+    check: Check, profile: Profile, groups: CountryGroups | None = None, target: Target | None = None
+) -> Result:
+    target = target or Target()
+    if isinstance(check, Deadline):
+        return _deadline(check, target)
+    if isinstance(check, MaxAge):
+        return _max_age(check, profile, target)
     if isinstance(check, (Minimum, Maximum)):
         return _bound(check, profile)
     if isinstance(check, In):
         return _in(check, profile, groups)
     if isinstance(check, When):
-        cond = evaluate(check.when, profile, groups)
+        cond = evaluate(check.when, profile, groups, target)
         if cond.verdict == "meets":
-            return evaluate(check.then, profile, groups)
+            return evaluate(check.then, profile, groups, target)
         if cond.verdict == "does_not_meet":
             return Result(verdict="not_applicable", entered=cond.entered)
+        # an unresolved condition cannot make a requirement apply that is off anyway (e.g. the other intake)
+        if evaluate(check.then, profile, groups, target).verdict == "not_applicable":
+            return Result(verdict="not_applicable")
         return Result(verdict="unknown", reason=cond.reason or "condition_unresolved", required=cond.required)
     if isinstance(check, Group):
-        results = [r for r in (evaluate(c, profile, groups) for c in check.children) if r.verdict != "not_applicable"]
+        results = [r for r in (evaluate(c, profile, groups, target) for c in check.children)
+                   if r.verdict != "not_applicable"]
         if not results:
             return Result(verdict="not_applicable")
         verdicts = {r.verdict for r in results}
@@ -155,8 +233,13 @@ def evaluate(check: Check, profile: Profile, groups: CountryGroups | None = None
         failing = {r.entered for r in results if r.verdict == "does_not_meet"}
         entered = "not reported" if failing == {"not reported"} else None
         if decisive in verdicts:
+            deciding = [r for r in results if r.verdict == decisive]
+            if len(deciding) == 1:  # one child decides: keep its value, margin and reason
+                return deciding[0]
             return Result(verdict=decisive, entered=entered if decisive == "does_not_meet" else None)
         if verdicts == {other}:
+            if len(results) == 1:
+                return results[0]
             return Result(verdict=other, entered=entered if other == "does_not_meet" else None)
         reason = next((r.reason for r in results if r.verdict == "unknown"), None)
         return Result(verdict="unknown", reason=reason)
@@ -198,6 +281,8 @@ COUNTED = ("meets", "does_not_meet", "unknown", "not_published")
 
 
 def _action(rule: Rule, r: Result) -> str | None:
+    if r.reason == "window_closed":
+        return f"Application window closed: {rule.label}."
     if r.verdict == "does_not_meet":
         return f"{FAILED_ACTION[rule.category]}: {rule.label}."
     if r.reason == "missing_fact":
@@ -244,10 +329,14 @@ def check_eligibility(
     as_of: date | None = None,
     groups: CountryGroups | None = None,
     tier: Literal["human", "second_pass"] | None = None,
+    intake: Literal["winter", "summer"] | None = None,
+    starting_year: int | None = None,
 ) -> Report:
     """One criterion per top-level rule; alternatives live inside their group.
-    `as_of` is only used to flag country lists past their re-check date."""
-    results = [] if stale else [(rule, evaluate(rule.check, profile, groups)) for rule in rules.rules]
+    `as_of`, `intake` and `starting_year` come from the request: they place
+    deadlines and test ages, and flag country lists past their re-check date."""
+    target = Target(as_of=as_of, intake=intake, starting_year=starting_year)
+    results = [] if stale else [(rule, evaluate(rule.check, profile, groups, target)) for rule in rules.rules]
     criteria = [
         Criterion(
             rule_id=rule.id,
@@ -288,5 +377,7 @@ def check_eligibility(
         ruleset_sha256=ruleset_hash(rules),
         record_sha256=rules.record_sha256,
         as_of=as_of,
+        intake=intake,
+        starting_year=starting_year,
         tier=tier,
     )

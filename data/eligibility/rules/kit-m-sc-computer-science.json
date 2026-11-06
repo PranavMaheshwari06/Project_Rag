@@ -519,6 +519,56 @@
         }
       ],
       "reviewed_by": "pending"
+    },
+    {
+      "id": "deadline_winter",
+      "label": "Apply by 15 June for the winter term",
+      "category": "readiness",
+      "check": {
+        "type": "deadline",
+        "intake": "winter",
+        "close": {
+          "month": 6,
+          "day": 15,
+          "year_offset": 0
+        }
+      },
+      "citations": [
+        {
+          "doc_id": "de/kit/cs-msc/admission",
+          "quote": "Application deadline : June 15 for winter term, January 15 for summer term"
+        },
+        {
+          "doc_id": "de/kit/cs-msc/programme",
+          "quote": "First semester: June 15 for winter term, January 15 for summer term"
+        }
+      ],
+      "reviewed_by": "pending"
+    },
+    {
+      "id": "deadline_summer",
+      "label": "Apply by 15 January for the summer term",
+      "category": "readiness",
+      "check": {
+        "type": "deadline",
+        "intake": "summer",
+        "close": {
+          "month": 1,
+          "day": 15,
+          "year_offset": 0
+        }
+      },
+      "citations": [
+        {
+          "doc_id": "de/kit/cs-msc/admission",
+          "quote": "Application deadline : June 15 for winter term, January 15 for summer term"
+        },
+        {
+          "doc_id": "de/kit/cs-msc/programme",
+          "quote": "First semester: June 15 for winter term, January 15 for summer term"
+        }
+      ],
+      "reviewed_by": "pending"
     }
   ]
 }

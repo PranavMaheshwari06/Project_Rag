@@ -2,6 +2,7 @@
 Offline: no LLM, no retrieval.
 
 Usage: check_eligibility.py --profile p.json --programme <slug>
+           [--as-of YYYY-MM-DD] [--intake winter|summer --starting-year YYYY]
        check_eligibility.py --validate [--check-cache]   (exit 1 on any problem)"""
 
 import argparse
@@ -62,6 +63,9 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--profile")
     ap.add_argument("--programme")
+    ap.add_argument("--as-of", type=date.fromisoformat, default=date.today(), help="date to check against (default today)")
+    ap.add_argument("--intake", choices=["winter", "summer"])
+    ap.add_argument("--starting-year", type=int)
     ap.add_argument("--validate", action="store_true")
     ap.add_argument("--check-cache", action="store_true", help="with --validate: a missing cached page is an error")
     args = ap.parse_args()
@@ -72,10 +76,12 @@ def main() -> int:
         return 1 if errors else 0
     if not (args.profile and args.programme):
         ap.error("--profile and --programme are required unless --validate")
+    if (args.intake is None) != (args.starting_year is None):
+        ap.error("--intake and --starting-year go together")
     profile = Profile.model_validate_json(Path(args.profile).read_text(encoding="utf-8"))
     report = check_eligibility(
-        profile, *load_ruleset(settings, args.programme), as_of=date.today(),
-        tier=record_tier(settings, args.programme),
+        profile, *load_ruleset(settings, args.programme), as_of=args.as_of,
+        tier=record_tier(settings, args.programme), intake=args.intake, starting_year=args.starting_year,
     )
     print(f"{report.slug}: {report.headline}{' (rules stale)' if report.rules_stale else ''}")
     for area in ("admission", "readiness", "finance"):

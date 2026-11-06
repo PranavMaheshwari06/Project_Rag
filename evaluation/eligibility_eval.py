@@ -89,7 +89,8 @@ def run_cases(cases: list[EligibilityCase], settings: Settings, dataset_path: Pa
         rules, stale = load_ruleset(settings, case.slug)
         tier = record_tier(settings, case.slug)
         start = time.perf_counter()
-        report = check_eligibility(case.profile, rules, stale, as_of=case.as_of, groups=groups, tier=tier)
+        report = check_eligibility(case.profile, rules, stale, as_of=case.as_of, groups=groups, tier=tier,
+                                   intake=case.intake, starting_year=case.starting_year)
         latencies.append((time.perf_counter() - start) * 1000)
         programmes[case.slug] = {"ruleset_sha256": ruleset_hash(rules), "record_sha256": rules.record_sha256,
                                  "rules_stale": stale, "tier": tier}

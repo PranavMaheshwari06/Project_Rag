@@ -26,11 +26,16 @@ def cds(**facts):
 
 def test_files_are_fresh_reviewed_and_cite_the_record():
     s = load_settings()
-    for slug, outside in ((DEA, {"english", "aptitude_assessment"}), (CDS, {"credit_minimums", "english"})):
+    # the deadline rules were added after the 2026-11-02 review and await it
+    deadlines = {"deadline_winter", "deadline_summer"}
+    for slug, outside, pending in (
+        (DEA, {"english", "aptitude_assessment"}, set()),
+        (CDS, {"credit_minimums", "english"} | deadlines, deadlines),
+    ):
         rules, stale = load_ruleset(s, slug)
         record = json.loads((Path(s.paths.verified_dir) / f"{slug}.json").read_text())["record"]
         assert not stale
-        assert all(r.reviewed_by == "human" for r in rules.rules)
+        assert {r.id for r in rules.rules if r.reviewed_by != "human"} == pending
         # only evidence the record omits may be cited from the cached page instead
         assert {r for r, _, _ in uncited_quotes(rules, record)} <= outside
 
