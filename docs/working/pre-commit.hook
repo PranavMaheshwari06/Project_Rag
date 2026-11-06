@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# Local publish guard: stops build-only paths and blocked phrases from being committed.
+cd "$(git rev-parse --show-toplevel)" || exit 1
+[ "$(git rev-parse --abbrev-ref HEAD)" = "handoff-private" ] && exit 0
+bad=0
+paths=$(git diff --cached --name-only --diff-filter=AMR | grep -E '(^docs/working/|(^|/)(STATUS|CLAUDE|LEARNING)\.md$|PLANNING_INDEX|WORKSHEET|audit_sheet|Audit_sheet|^graphify-out/|^\.claude/|^\.env$|^some_to_do)')
+if [ -n "$paths" ]; then echo "build-only paths staged:"; echo "$paths"; bad=1; fi
+hits=$(git diff --cached -U0 | grep -E '^\+[^+]' | grep -n -i -E 'you answer|co-authored-by|generated (with|by)|claude|codex|anthropic|chatgpt|copilot' || true)
+if [ -n "$hits" ]; then echo "staged text matches a blocked phrase:"; echo "$hits" | cut -c1-160; bad=1; fi
+[ "$bad" -eq 0 ] && echo "publish check: ok"
+exit "$bad"

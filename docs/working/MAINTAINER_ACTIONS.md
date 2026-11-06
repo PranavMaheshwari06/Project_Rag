@@ -4,6 +4,8 @@ Private working paper (gitignored; lives only on branch `handoff-private`). Numb
 
 Legend: **BLOCKING** = a later build step waits for it. **NOT BLOCKING** = work continues without it.
 
+> Updated 2026-11-06: ACTIONS 1, 2, 3, 4, 5, 7, 12a, 12k and 12m are done (F1-F4 accepted, all merged as PRs #15-#25; `--check-cache` passes). PR numbers below are the old closed ones. Still open: 6, 8, 9, 10, 11, 12b-12j, 12l. Script and doc names changed: see `CLAUDE.md`.
+
 ## 1. Sync your computer without overwriting your worksheet — BLOCKING (for everything else on your computer)
 Where: your computer, VS Code terminal in the repo.
 ```bash
