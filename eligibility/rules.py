@@ -122,6 +122,13 @@ def record_hash(record: dict) -> str:
     return hashlib.sha256(blob.encode("utf-8")).hexdigest()
 
 
+def ruleset_hash(rules: RuleSet) -> str:
+    """Canonical hash of the rule set as loaded (defaults filled in): whitespace
+    and key order do not count; a number written differently ("4" vs "4.0") or
+    a changed code default does."""
+    return record_hash(rules.model_dump(mode="json"))
+
+
 def uncited_quotes(rules: RuleSet, record: dict) -> list[tuple[str, str, str]]:
     """(rule id, doc id, quote) for citations not inside a quote of the verified
     record from the same doc (word-normalised, as the extraction quote check)."""
@@ -135,6 +142,11 @@ def uncited_quotes(rules: RuleSet, record: dict) -> list[tuple[str, str, str]]:
                 cited.setdefault(s["doc_id"], []).append(_words(s["quote"]))
     return [(r.id, c.doc_id, c.quote) for r in rules.rules for c in r.citations
             if not any(_words(c.quote) in q for q in cited.get(c.doc_id, []))]
+
+
+def record_tier(settings: Settings, slug: str) -> Literal["human", "second_pass"]:
+    wrapper = json.loads((Path(settings.paths.verified_dir) / f"{slug}.json").read_text(encoding="utf-8"))
+    return wrapper["tier"]
 
 
 def load_ruleset(settings: Settings, slug: str) -> tuple[RuleSet, bool]:

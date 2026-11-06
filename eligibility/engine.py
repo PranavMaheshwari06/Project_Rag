@@ -6,12 +6,14 @@ strict bound keeps its strictness at a zero margin."""
 
 from datetime import date
 from decimal import Decimal, InvalidOperation
+from typing import Literal
 
 from core.config import get_settings
 from eligibility.groups import CountryGroups, load_groups
 from eligibility.profile import Profile
-from eligibility.report import Criterion, Headline, Report
+from eligibility.report import AdmissionSummary, Criterion, FinanceSummary, ReadinessSummary, Report
 from eligibility.rules import (
+    Category,
     Check,
     Group,
     In,
@@ -21,6 +23,7 @@ from eligibility.rules import (
     RuleSet,
     Verdict,
     When,
+    ruleset_hash,
 )
 from pydantic import BaseModel
 
@@ -157,9 +160,36 @@ def check_funds(funds_eur: Decimal | None, required_eur: Decimal) -> Result:
     )
 
 
+FAILED_ACTION = {"admission": "Not met", "readiness": "Still needed", "finance": "Funds below the reference"}
+
+# area headline per resolved state: one known hard failure, all hard checks met
+# and reviewed, something unresolved, or no applicable hard check at all
+AREA_HEADLINES: dict[Category, dict[str, str]] = {
+    "admission": {
+        "fail": "does_not_meet_published_requirements",
+        "pass": "meets_checked_published_requirements",
+        "open": "needs_information_or_review",
+        "none": "needs_information_or_review",
+    },
+    "readiness": {
+        "fail": "items_still_needed",
+        "pass": "ready_on_checked_items",
+        "open": "needs_information_or_review",
+        "none": "no_checked_items",
+    },
+    "finance": {
+        "fail": "funds_shortfall",
+        "pass": "funds_cover_checked_reference",
+        "open": "needs_information_or_review",
+        "none": "no_checked_items",
+    },
+}
+COUNTED = ("meets", "does_not_meet", "unknown", "not_published")
+
+
 def _action(rule: Rule, r: Result) -> str | None:
     if r.verdict == "does_not_meet":
-        return f"{'Still needed' if rule.category == 'readiness' else 'Not met'}: {rule.label}."
+        return f"{FAILED_ACTION[rule.category]}: {rule.label}."
     if r.reason == "missing_fact":
         return f"Provide the missing fact for: {rule.label}."
     if r.reason == "university_review":
@@ -179,52 +209,73 @@ def _group_refs(check: Check) -> set[str]:
     return set()
 
 
+def _summary(category: Category, results: list[tuple[Rule, Result]], stale: bool) -> dict:
+    """The admission summary's headline is the report headline (plan section 4)."""
+    mine = [(rule, r) for rule, r in results if rule.category == category and r.verdict != "not_applicable"]
+    counts = {v: sum(1 for rule, r in mine if r.verdict == v and rule.severity != "info") for v in COUNTED}
+    hard = [(rule, r) for rule, r in mine if rule.severity == "hard"]
+    if stale:
+        state = "open"
+    elif any(r.verdict == "does_not_meet" for _, r in hard):
+        state = "fail"
+    elif not hard:
+        state = "none"
+    elif all(r.verdict == "meets" and rule.reviewed_by != "pending" for rule, r in hard):
+        state = "pass"
+    else:  # unresolved fact, university judgment, or a rule nobody has reviewed yet
+        state = "open"
+    return {"headline": AREA_HEADLINES[category][state], "counts": counts}
+
+
 def check_eligibility(
     profile: Profile,
     rules: RuleSet,
     stale: bool = False,
     as_of: date | None = None,
     groups: CountryGroups | None = None,
+    tier: Literal["human", "second_pass"] | None = None,
 ) -> Report:
     """One criterion per top-level rule; alternatives live inside their group.
     `as_of` is only used to flag country lists past their re-check date."""
-    if stale:  # the record changed since the rules were reviewed: no verdicts
-        return Report(
-            slug=rules.slug, headline="needs_information_or_review", rules_stale=True
+    results = [] if stale else [(rule, evaluate(rule.check, profile, groups)) for rule in rules.rules]
+    criteria = [
+        Criterion(
+            rule_id=rule.id,
+            label=rule.label,
+            category=rule.category,
+            severity=rule.severity,
+            verdict=r.verdict,
+            entered=r.entered,
+            required=r.required,
+            margin=r.margin,
+            reason=r.reason,
+            action=_action(rule, r),
+            citations=rule.citations,
         )
-    criteria, admission = [], []
-    for rule in rules.rules:
-        r = evaluate(rule.check, profile, groups)
-        criteria.append(
-            Criterion(
-                rule_id=rule.id,
-                label=rule.label,
-                severity=rule.severity,
-                verdict=r.verdict,
-                entered=r.entered,
-                required=r.required,
-                margin=r.margin,
-                reason=r.reason,
-                action=_action(rule, r),
-                citations=rule.citations,
-            )
-        )
-        if rule.category == "admission" and rule.severity == "hard" and r.verdict != "not_applicable":
-            admission.append((rule, r))
-    headline: Headline
-    if any(r.verdict == "does_not_meet" for _, r in admission):
-        headline = "does_not_meet_published_requirements"
-    elif admission and all(
-        r.verdict == "meets" and rule.reviewed_by != "pending" for rule, r in admission
-    ):
-        headline = "meets_checked_published_requirements"
-    else:  # unresolved fact, university judgment, or a rule nobody has reviewed yet
-        headline = "needs_information_or_review"
+        for rule, r in results
+    ]
+    admission = AdmissionSummary(**_summary("admission", results, stale))
+    readiness = ReadinessSummary(**_summary("readiness", results, stale))
+    finance = FinanceSummary(**_summary("finance", results, stale))
     notices = []
     used = set().union(*(_group_refs(r.check) for r in rules.rules))
-    if as_of and used:
+    if as_of and used and not stale:
         for name in sorted(used):
             g = (groups or default_groups()).groups[name]
             if as_of > g.recheck_after:
                 notices.append(f"The {g.label} country list was last checked on {g.fetched_on}; re-check it ({g.source_url}).")
-    return Report(slug=rules.slug, headline=headline, criteria=criteria, notices=notices)
+    return Report(
+        slug=rules.slug,
+        headline=admission.headline,
+        admission=admission,
+        readiness=readiness,
+        finance=finance,
+        criteria=criteria,
+        rules_stale=stale,
+        notices=notices,
+        rules_schema_version=rules.schema_version,
+        ruleset_sha256=ruleset_hash(rules),
+        record_sha256=rules.record_sha256,
+        as_of=as_of,
+        tier=tier,
+    )
