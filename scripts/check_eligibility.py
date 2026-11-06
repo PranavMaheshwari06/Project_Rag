@@ -17,7 +17,7 @@ from core.config import get_settings  # noqa: E402
 from eligibility.engine import check_eligibility, default_groups  # noqa: E402
 from eligibility.finance import load_finance  # noqa: E402
 from eligibility.profile import Profile  # noqa: E402
-from eligibility.rules import load_ruleset, record_tier, uncited_quotes  # noqa: E402
+from eligibility.rules import load_ruleset, not_published_mismatches, record_tier, uncited_quotes  # noqa: E402
 
 
 def raw_page_words(settings, doc_id: str) -> str | None:
@@ -46,6 +46,8 @@ def validate(settings, check_cache: bool = False) -> list[str]:
         if stale:
             errors.append(f"{path.stem}: stale, the verified record changed")
         record = json.loads((Path(settings.paths.verified_dir) / path.name).read_text(encoding="utf-8"))["record"]
+        for rule_id in not_published_mismatches(rules, record):
+            errors.append(f"{path.stem}: {rule_id}: the record field is not not_published")
         for rule_id, doc_id, quote in uncited_quotes(rules, record):
             page = raw_page_words(settings, doc_id)
             if page is None and check_cache:

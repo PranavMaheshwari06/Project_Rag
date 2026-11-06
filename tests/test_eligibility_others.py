@@ -28,8 +28,8 @@ def lang(*entries):
 def test_rule_files_are_current_and_reviewed(slug):
     rules, stale = load_ruleset(load_settings(), slug)
     assert not stale
-    # rules changed after the 2026-11-02 review await it again
-    awaiting = {"degree", "subject_allocation"} if slug == TUB else set()
+    # rules changed or added after the 2026-11-02 review await it again
+    awaiting = {"degree", "subject_allocation", "english_components"} if slug == TUB else set()
     assert {r.id for r in rules.rules if r.reviewed_by != "human"} == awaiting
 
 
