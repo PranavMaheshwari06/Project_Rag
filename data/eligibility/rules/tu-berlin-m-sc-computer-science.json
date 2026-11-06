@@ -7,8 +7,33 @@
       "id": "degree",
       "label": "A first professionally qualifying degree in Computer Science (Informatik) or a related study programme",
       "check": {
-        "type": "university_review",
-        "note": "TU Berlin's examination board decides whether your first degree is Computer Science or a related programme and equivalent to a German degree (R01). A matching degree title does not settle it."
+        "type": "all_of",
+        "children": [
+          {
+            "type": "any_of",
+            "children": [
+              {
+                "type": "university_review",
+                "note": "TU Berlin's examination board decides whether your first degree is Computer Science or a related programme and equivalent to a German degree (R01). A matching degree title does not settle it."
+              },
+              {
+                "type": "in",
+                "fact": "university_assessments.tu-berlin-m-sc-computer-science",
+                "values": [
+                  "positive"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "in",
+            "fact": "university_assessments.tu-berlin-m-sc-computer-science",
+            "values": [
+              "negative"
+            ],
+            "negate": true
+          }
+        ]
       },
       "citations": [
         {
@@ -16,7 +41,7 @@
           "quote": "The specific admission requirement is a first professionally qualifying degree in the field of “Informatik” or Computer Science or in a related study program."
         }
       ],
-      "reviewed_by": "human"
+      "reviewed_by": "pending"
     },
     {
       "id": "foundations_total",
@@ -122,8 +147,33 @@
       "id": "subject_allocation",
       "label": "The examination board decides which of your modules count for each subject area",
       "check": {
-        "type": "university_review",
-        "note": "The examination board decides the equivalence and which modules fall in which area (R12). Discrete structures, discrete mathematics, algorithms, data structures, digital logic and design and analysis of algorithms do not count as Theoretical Computer Science. Foreign credits are converted to ECTS by the board if needed. The credits you entered are your own allocation."
+        "type": "all_of",
+        "children": [
+          {
+            "type": "any_of",
+            "children": [
+              {
+                "type": "university_review",
+                "note": "The examination board decides the equivalence and which modules fall in which area (R12). Discrete structures, discrete mathematics, algorithms, data structures, digital logic and design and analysis of algorithms do not count as Theoretical Computer Science. Foreign credits are converted to ECTS by the board if needed. The credits you entered are your own allocation."
+              },
+              {
+                "type": "in",
+                "fact": "university_assessments.tu-berlin-m-sc-computer-science",
+                "values": [
+                  "positive"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "in",
+            "fact": "university_assessments.tu-berlin-m-sc-computer-science",
+            "values": [
+              "negative"
+            ],
+            "negate": true
+          }
+        ]
       },
       "citations": [
         {
@@ -135,7 +185,7 @@
           "quote": "Courses on discrete structures, discrete mathematics, algorithms, data structures, digital logic, design and analysis of algorithms are not recognized in the field of Theoretical Computer Science"
         }
       ],
-      "reviewed_by": "human"
+      "reviewed_by": "pending"
     },
     {
       "id": "english",
