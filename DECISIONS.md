@@ -311,3 +311,16 @@ The 70 rules in the 11 new rule files were accepted (`reviewed_by: human`), with
 X1 (a profile fact for a reported university equivalence assessment) was accepted but not built, because it changes the degree rule in all 13 files and does not by itself unlock a positive headline where a hard selection or aptitude step remains.
 
 Why: each answer keeps a verdict tied to what a page actually says. The cost is more "the university decides" outcomes, which the coverage breakdown in the evaluation makes visible.
+
+Updated 2026-11-06: X1 is built for TU Berlin and KIT CDS as `university_assessments`. The other 11 programmes still leave equivalence to the university.
+
+## 2026-11-06 — profile facts, date checks, funds and the API
+
+- **No GRE or GATE is an explicit answer.** `"none"` means no such test and `null` means not supplied, so a blank can never read as an exemption.
+- **Credit unit is a closed choice, ECTS or other.** Free text sent "LP" to "the university decides" by accident. Units are still never converted.
+- **"No minimum published" is an explicit info rule.** A silent page is not the same as "not required". The rule shows in the trace, is never counted, and is tied to the verified record's field.
+- **Degree equivalence stays the university's decision**, resolved only by an assessment the student reports. Softening the rules would give more positive headlines but claim something the pages do not say. The cost: four accepted rules went back to pending review.
+- **Deadlines and funds have their own summaries.** A missed window or a funding gap is not an academic failure.
+- **Only a lone blocked account is compared with the visa amount.** No page publishes how proofs combine, so any other route or combination stays "ask the embassy".
+- **Evaluation labels are frozen before the first run.** The commit date shows they were not derived from engine output.
+- **Paste-to-fill only drafts.** Every field needs a literal span of the text, and the check endpoint accepts confirmed profiles only.

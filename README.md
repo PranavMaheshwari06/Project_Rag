@@ -1,6 +1,6 @@
 # Germany Master's Eligibility Assistant
 
-> **Status: in development (Phases 1-4 done; Phase 6, the eligibility engine, in progress).** The data pipeline, retrieval core and requirement extraction with review are built. All 13 programmes have verified requirement records: 6 verified by hand field by field, 7 by a second pass over the cited pages (see [Verification](#verification)). The eligibility engine and rule files for all 13 programmes (most rules reviewed by the maintainer) run from the command line (`make eligibility`); its API, independent evaluation, agent, UI and public demo come next. See [the project plan](docs/PROJECT_PLAN.md).
+> **Status: in development.** The data pipeline, retrieval core, requirement extraction with review, the eligibility engine and its API are built. All 13 programmes have verified requirement records: 6 verified by hand field by field, 7 by a second pass over the cited pages (see [Verification](#verification)). The engine has rule files for all 13 programmes, with 19 rules still pending review. Independent evaluation, the agent, the UI and a public demo come next. See [the project plan](docs/PROJECT_PLAN.md).
 
 Applying for a master's in Germany means checking a dozen official websites: the programme page, uni-assist, APS, the embassy, the blocked-account rules, the city's foreigners' office. Each one says something slightly different, and some of it is only in PDFs. This project reads those official pages for you and answers from them, with a citation and a crawl date on every claim.
 
@@ -71,14 +71,15 @@ flowchart LR
   - every field is either "not published" or carries a verbatim quote and the page it came from, and a field whose quote is not in that page is dropped;
   - a second model from a different family cross-checks every field and may suggest a fix, which must pass the same quote check;
   - a local review screen shows each field next to its quote, the full page, automatic warnings and the cross-check verdict. Every field is confirmed against its quote and page before the record is saved as verified: six programmes by hand in this screen, the other seven by a second pass over the cited pages that saves through the same quote check. Verified records are both the product data and the evaluation gold set.
+- **Eligibility engine and API** (`make eligibility`, `POST /eligibility/check`): a deterministic engine checks a confirmed profile against cited rule files for all 13 programmes. Each rule returns meets, does not meet, unknown or not published, with a margin and citations, and admission, readiness and finance get separate summaries. A rule still pending review cannot produce a positive headline. `POST /profile/parse` and `make parse-profile` turn pasted text into an unconfirmed draft, keeping only fields backed by a literal span of the text.
 - **Evaluation harness**: a 4-way benchmark (vector, BM25, hybrid, hybrid+rerank) on Recall@k, MRR, nDCG and p50/p95 latency, and extraction accuracy (LLM draft vs verified record). The gold question set has 104 items (requirement 45, country rules 24, confusable programmes 11, multi-hop 10, refusal 9, coverage 5), model-drafted from the verified pages and accepted by the maintainer (assisted review, not blinded). `scripts/validate_gold.py` checks every label before `make eval` runs.
 - **Observability**: request ids, structured JSON logs and per-stage latency.
 
 ### Coming next
 
-Finish the eligibility engine (Phase 6: other programmes' deadlines, review of the pending rules, API, independent evaluation) → retrieval upgrades kept only if the numbers improve → small tool-using agent → streaming, guardrails and rate limits → UI → free public deployment → MCP server → UI polish. Details and the "done when" check for each phase are in [docs/PROJECT_PLAN.md](docs/PROJECT_PLAN.md).
+Finish the eligibility engine (other programmes' deadlines, review of the pending rules, independent evaluation) → retrieval upgrades kept only if the numbers improve → small tool-using agent → streaming, guardrails and rate limits → UI → free public deployment → MCP server → UI polish. Details and the "done when" check for each phase are in [docs/PROJECT_PLAN.md](docs/PROJECT_PLAN.md).
 
-The [planning index](docs/PLANNING_INDEX.md) collects the current specification, decisions and evidence. The [Phase 6 implementation plan](docs/PHASE_6_IMPLEMENTATION_PLAN.md) defines the next runnable increments and the maintainer's review and learning tasks.
+The [eligibility engine spec](docs/PHASE_6_IMPLEMENTATION_PLAN.md) defines its rules, interfaces and evaluation.
 
 ## Verification
 
@@ -187,6 +188,7 @@ make eligibility ARGS="--profile data/eligibility/examples/synthetic_kit_cs.json
                 # eligibility report for one profile and intake: admission, readiness and finance summaries, one line per rule
 make eligibility ARGS="--validate"                # rule files bound to their records, quotes in the record; visa funds quotes against the cached page
 make eligibility ARGS="--validate --check-cache"  # also requires the cached page for quotes the record lacks (needs data/raw)
+make parse-profile ARGS="--input draft.txt"  # pasted text -> unconfirmed draft profile (needs GEMINI_API_KEY; synthetic text only)
 make eval-eligibility  # validate evaluation/datasets/eligibility_cases.jsonl, run it, write evaluation/results/eligibility_baseline.json
                        # (exits 1 until the labelled cases are frozen and committed)
 ```
@@ -199,11 +201,11 @@ npm install
 npm run dev     # :5173, talks to the API on :8000
 ```
 
-No API key is needed. Without one, answers come from an extractive fallback, which stitches together quoted sentences from the cited evidence. For the LLM path (Gemini, free tier) and `make extract`, copy `.env.example` to `.env` and set `GEMINI_API_KEY`. The free tier allows about 20 requests a day per model; `make extract` skips finished programmes, so re-running it the next day fills the gaps. All tunables live in `config/settings.yaml`.
+No API key is needed, except for `POST /profile/parse` and `make parse-profile`. Without one, answers come from an extractive fallback, which stitches together quoted sentences from the cited evidence. For the LLM path (Gemini, free tier) and `make extract`, copy `.env.example` to `.env` and set `GEMINI_API_KEY`. The free tier allows about 20 requests a day per model; `make extract` skips finished programmes, so re-running it the next day fills the gaps. All tunables live in `config/settings.yaml`.
 
 Without Make (including Windows): `python -m venv .venv`, then `.venv/bin/python -m pip install -e '.[dev]'` (Windows: `.venv/Scripts/python.exe`). Optional CPU-only install: `make venv && uv pip install --python .venv/bin/python --torch-backend cpu -e '.[dev]'`.
 
-`docker-compose.yml` (Qdrant + API + frontend) is a starting point for the containerised setup in Phase 8; hosting is not verified yet.
+`docker-compose.yml` (Qdrant + API + frontend) is a starting point for a containerised setup; hosting is not verified yet.
 
 ## Honest limitations (current)
 
@@ -218,4 +220,4 @@ Without Make (including Windows): `python -m venv .venv`, then `.venv/bin/python
 
 ## Privacy
 
-Profiles will stay in the browser. The server is stateless and keeps no accounts and no personal data. Answers cite public official pages only.
+Profiles will stay in the browser. The server is stateless and keeps no accounts and no personal data. Answers cite public official pages only. `POST /profile/parse` sends the pasted text to the configured LLM provider and never logs or stores it. The Gemini free tier may use prompts to improve its products, so use synthetic text there until a hosted privacy notice and a suitable provider are in place.
