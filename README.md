@@ -1,6 +1,6 @@
 # Germany Master's Eligibility Assistant
 
-> **Status: in development (Phase 4 of 12 complete locally; PR #4 awaiting merge).** The data pipeline, retrieval core and requirement extraction with review are built. All 13 programmes have verified requirement records: 6 verified by hand field by field, 7 by a second pass over the cited pages (see [Verification](#verification)). The eligibility report, agent, UI and public demo come in later phases. See [the project plan](docs/PROJECT_PLAN.md).
+> **Status: in development (Phases 1-4 done; Phase 6, the eligibility engine, in progress).** The data pipeline, retrieval core and requirement extraction with review are built. All 13 programmes have verified requirement records: 6 verified by hand field by field, 7 by a second pass over the cited pages (see [Verification](#verification)). The eligibility engine and rule files for all 13 programmes (most rules reviewed by the maintainer) run from the command line (`make eligibility`); its API, independent evaluation, agent, UI and public demo come next. See [the project plan](docs/PROJECT_PLAN.md).
 
 Applying for a master's in Germany means checking a dozen official websites: the programme page, uni-assist, APS, the embassy, the blocked-account rules, the city's foreigners' office. Each one says something slightly different, and some of it is only in PDFs. This project reads those official pages for you and answers from them, with a citation and a crawl date on every claim.
 
@@ -76,7 +76,7 @@ flowchart LR
 
 ### Coming next
 
-Eligibility rules engine (Phase 6; Phase 4 baseline complete) → retrieval upgrades kept only if the numbers improve → small tool-using agent → streaming, guardrails and rate limits → UI → free public deployment → MCP server → UI polish. Details and the "done when" check for each phase are in [docs/PROJECT_PLAN.md](docs/PROJECT_PLAN.md).
+Finish the eligibility engine (Phase 6: other programmes' deadlines, review of the pending rules, API, independent evaluation) → retrieval upgrades kept only if the numbers improve → small tool-using agent → streaming, guardrails and rate limits → UI → free public deployment → MCP server → UI polish. Details and the "done when" check for each phase are in [docs/PROJECT_PLAN.md](docs/PROJECT_PLAN.md).
 
 The [planning index](docs/PLANNING_INDEX.md) collects the current specification, decisions and evidence. The [Phase 6 implementation plan](docs/PHASE_6_IMPLEMENTATION_PLAN.md) defines the next runnable increments and the maintainer's review and learning tasks.
 
@@ -171,7 +171,7 @@ The selected score threshold is `0.13340958034137707`. It refuses 4/14 refusal/c
 
 ## Run it locally
 
-Python 3.12 is recommended (3.10+ supported). The first run downloads two models from Hugging Face (bge-small ~130MB, bge-reranker-base ~1.1GB). After that, everything except `make crawl` runs offline.
+Python 3.12 is recommended (3.10+ supported). `crawl` fills the git-ignored `data/raw/`; `ingest`, `index`, `review` and `eval` need it, while `test`, `eligibility` and `--validate` work on a fresh clone. The first run downloads two models from Hugging Face (bge-small ~130MB, bge-reranker-base ~1.1GB). After that, everything except `make crawl` runs offline.
 
 ```bash
 make install    # creates .venv and installs .[dev]
@@ -183,6 +183,12 @@ make review     # review screen on http://127.0.0.1:8001 -> data/verified/
 make test       # pytest (offline, uses its own fixture corpus)
 make eval       # validate, benchmark, calibrate, and persist the selected threshold
 make run        # API on :8000
+make eligibility ARGS="--profile data/eligibility/examples/synthetic_kit_cs.json --programme kit-m-sc-computer-science --as-of 2027-05-01 --intake winter --starting-year 2027"
+                # eligibility report for one profile and intake: admission, readiness and finance summaries, one line per rule
+make eligibility ARGS="--validate"                # rule files bound to their records, quotes in the record; visa funds quotes against the cached page
+make eligibility ARGS="--validate --check-cache"  # also requires the cached page for quotes the record lacks (needs data/raw)
+make eval-eligibility  # validate evaluation/datasets/eligibility_cases.jsonl, run it, write evaluation/results/eligibility_baseline.json
+                       # (exits 1 until the labelled cases are frozen and committed)
 ```
 
 Frontend (Node 18+):

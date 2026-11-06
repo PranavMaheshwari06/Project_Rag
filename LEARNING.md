@@ -112,7 +112,7 @@ Per phase: what was built, why (interview answers), quiz questions, the DECISION
 
 ## Phase 4: Eval baseline (complete locally, 2026-10-27)
 
-All Phase 4 steps are complete locally. The audit and gold acceptance are recorded; `make eval` reports the four modes overall and by kind, extraction accuracy, historical audit results and refusal calibration. PR #4 remains unmerged; Phase 6 follows the closure commit.
+All Phase 4 steps are complete locally. The audit and gold acceptance are recorded; `make eval` reports the four modes overall and by kind, extraction accuracy, historical audit results and refusal calibration. The Phase 4 PR (old PR series) remained unmerged at the time; Phase 4 was later merged as PR #1 of this repository. Phase 6 follows the closure commit.
 
 ### What was built
 - **Verification tiers.** Every `data/verified/<slug>.json` has a `tier`: `human` (6 programmes, every field ticked in `make review`) or `second_pass` (7: KIT CDS, Saarland CS, TU Darmstadt AIML, TU Dresden CS, TUM DEA, TUM Informatics, Stuttgart CS). A re-save in `extraction/review.py` keeps the existing tier; promoting `second_pass` to `human` is a deliberate hand edit.
@@ -235,7 +235,7 @@ Additional quiz questions: Why must a threshold sweep reuse scores but latency m
 
 ### What is runnable
 
-- `phase-6-eligibility-engine` branches from the completed Phase 4 commit `b85ae75`. PR #4 remains a separate, unmerged prerequisite; nothing was merged during kickoff.
+- `phase-6-eligibility-engine` branches from the completed Phase 4 commit `b85ae75`. the Phase 4 PR (old PR series) was then a separate, unmerged prerequisite (later merged as PR #1 of this repository); nothing was merged during kickoff.
 - [The coverage matrix](docs/PHASE_6_RULE_COVERAGE.md) accounts for all 13 programmes and 221 original fields: 24 proposed automatic comparisons, 78 information/readiness fields, 29 manual-review fields and 90 `not_published` fields. These classify possible implementation, not measured engine coverage or eligibility accuracy. No eligibility engine exists yet.
 - `data/eligibility/coverage_inventory.json` preserves raw-byte hashes for 51 Phase 4 inputs, canonical hashes of all 13 original records and raw/cleaned hashes for 42 official cached sources. Existing verified records, tiers, audit scores, gold labels and benchmark artifacts remain unchanged.
 - [The rule-review packet](docs/PHASE_6_RULE_REVIEW.md) contains 17 pending interpretations and 44 supplemental cached-source excerpts. It exposes the missing KIT CDS thesis prerequisite, conditional Darmstadt exams, RWTH country-basis differences and unresolved language/overlap evidence. It does not claim maintainer acceptance or current live-page verification.
@@ -304,7 +304,7 @@ Possible quiz question: why does a country missing from a list mean "test needed
 - X1 (accepted, not yet built): a profile fact for "the university confirmed my degree equivalence". It is deferred to before Step 5 because it changes the degree rule in all 13 files, including the already-accepted TUM Informatics rule, and because it alone does not unlock a positive headline: programmes that also have a hard selection or aptitude step (Saarland, TUM, Dresden, Stuttgart, Darmstadt, KIT) stay "needs review" even with it.
 
 **Known limits carried forward.**
-- Dates are not modelled (test age, certificate validity, deadlines), so those are notes.
+- Dates are not modelled (test age, certificate validity, deadlines), so those are notes. (Updated 2026-11-04: deadline and test-age checks exist; see "Phase 6 after Step 3".)
 - Quotes added from the cached pages (TUM English, KIT CDS English, D05) are only checked where `data/raw` exists; CI prints "not checked". Run `make eligibility ARGS="--validate --check-cache"` locally before relying on them.
 - The credit unit is free text, so "LP" or "ECTS credits" sends KIT to "KIT decides". The profile form should offer a fixed list of units.
 - IELTS Academic versus General is not recorded; any IELTS score is read as Academic.
@@ -315,3 +315,31 @@ Possible quiz question: why does a country missing from a list mean "test needed
 3. Why does accepting the degree-equivalence fact (X1) not by itself make every programme show a positive verdict?
 4. Why does a missing citizenship make the RWTH Data Science GRE rule "unknown" rather than "exempt"?
 
+
+**DECISIONS entries owed for Step 3 (maintainer, own words).**
+- [x] 2026-11-02: Step 3 rule decisions X1-X4, D05 and D14 (DRAFT entry written in DECISIONS.md, to rewrite).
+
+### Phase 6 after Step 3 (2026-11-04): report summaries and validation
+
+Added in PRs #4, #5 and #7-#10 (each PR lists the commands it ran).
+
+**Separate summaries per area.** A report now has an `admission`, a `readiness` and a `finance` summary. Each counts the area's applicable hard and soft criteria by verdict (inactive and informational rules are not counted) and has its own headline words: readiness reads `ready_on_checked_items`, `items_still_needed`, `needs_information_or_review` or `no_checked_items`; finance reads `funds_cover_checked_reference`, `funds_shortfall`, `needs_information_or_review` or `no_checked_items`. Only hard rules set an area headline, exactly as for admission. The old `headline` is unchanged and must equal the admission summary's headline. Plan section 4 asks for this: a missing document or a funds shortfall is a real problem, but it is not an academic qualification failure, so it must not use the same words. The report also carries its schema versions, the rule-set hash, the hash of the verified record the rules are bound to, `as_of` and the record's verification tier, so a stored report says what it was computed from.
+
+**`--check-cache`.** `make eligibility ARGS="--validate --check-cache"` was named in these notes but the flag did not exist. It now makes a quote whose cached page is missing an error instead of a "not checked" line, so the local run cannot pass silently.
+
+**Explicit "no GRE" and "no GATE".** `gre` and `gate` accept the literal `"none"`; `null` and an empty object still mean "not supplied" and stay `unknown`. With `"none"` a score bound fails with entered value "not reported", while a GRE-or-GATE alternative stays `unknown` if the other test is not supplied. A negated check on a missing test is met (no GATE is "not a CS GATE"), so "none" can never skip a requirement through a `when` condition. A sweep over all 13 rule files checks that "none" only ever turns `unknown` into `does_not_meet`. The profile schema is `profile-v2`; a v1 file still loads but cannot say "none". Pending the maintainer's acceptance: a literal string instead of `[]` or a boolean flag, because GRE and GATE are single objects, not lists (DECISIONS draft owed after the maintainer accepts it).
+
+**Evaluation harness (`make eval-eligibility`).** A case is a profile, a target, `as_of` and labels written from the cited sources: the expected headline and expected criteria, each criterion with its own citation, a rationale, the author (`human` or `assisted`), the reviewer, `related_to` for a variant of a base case, and `frozen_on`. The schema refuses a human case without `frozen_on`, and the validator refuses a `frozen_on` in the future: the commit that adds the labels is the proof that they were written before the engine ran on them. There is no validate-only mode, so the order is: commit the frozen labels, then run. The output reports human and assisted cases separately, counts related variants apart from independent cases, separates unknown reasons (missing fact, university review, stale rules), and records the hashes of the dataset, rule sets, records, country lists and the financial-rule file. A stale rule file is a scenario, not an error: its criteria read "absent". The two file paths are code defaults because `config/settings.yaml` is one of the hash-locked Phase 4 inputs.
+
+**Deadlines and test age.** Two typed checks were added to the closed set. `deadline` compares the request's `as_of` with a closing day for one intake; the closing day is still in time, and each date carries an explicit year offset from the starting year (the calendar year the term starts), so a summer deadline in the previous year is written with -1 instead of being guessed. `max_age` says a test or certificate is not older than N years on `as_of`; with only a year known (GATE), it decides only when every day of that year gives the same answer. KIT CS and KIT CDS have deadline rules (readiness, pending review); KIT CDS has different dates for German/EU and non-EU nationals. A missed window reads "Application window closed" with the days late, never as an academic failure. Not encoded: TU Berlin (its dates page is not a registry source, so the quote could never be checked) and the KIT test-age rule (folding it into the accepted GRE/GATE rule is the maintainer's call). The CLI takes `--as-of`, `--intake` and `--starting-year`.
+
+**Visa funds.** `data/eligibility/finance.json` is a cited financial-rule file, separate from the programme files because the amount belongs to the visa route, not to a programme record. Its one rule (pending review) comes from the German Mission in India's student visa page: a blocked account with 11,904 EUR for the first year, no more than 992 EUR released per month. It applies to students who apply for the visa in India (`visa_country`); the page is the India mission's and does not scope by citizenship. The 992 EUR monthly limit is stated in the rule's label and not checked. The profile (`profile-v3`) lists funds per proof route with EUR amounts. A lone blocked account is compared with the amount in Decimal, with a margin; any other route or a combination is `unknown`, because the pages list the routes but publish no rule for combining them, and the Federal Foreign Office says the account must cover the costs "unless other proof of financial support is presented in addition". The file has a fetch date and a re-check date; after the re-check date a report where the funds rule applies carries a notice, and `make eligibility ARGS="--validate"` (and so CI) fails until the page is read again. A shortfall reads `funds_shortfall` in the finance summary and never touches the admission headline.
+
+**Possible quiz questions.**
+1. Why does a funds shortfall get its own headline word instead of `does_not_meet_published_requirements`?
+2. What does a rule-set hash in a stored report let you prove later, and what can it not prove?
+3. Why do only hard rules set an area headline, and what does an area with only soft rules read?
+4. Why must "no GRE" be a different value from "GRE not supplied", and which verdict does each give?
+5. Why are human and assisted cases reported separately, and why does a related variant not count as an independent observation?
+6. Why does a GATE result known only by its year sometimes give "unknown" for a three-year validity rule, and on which dates does it decide?
+7. Why is a blocked account plus a scholarship "unknown" even when the blocked account alone covers the amount?
