@@ -54,7 +54,7 @@ class ChunkingCfg(BaseModel):
 class RetrievalCfg(BaseModel):
     vector_backend: str = "memory"
     qdrant_url: str = "http://localhost:6333"
-    collection: str = "engineerdoc_chunks"
+    collection: str = "germany_masters_chunks"
     dense_top_k: int = 20
     bm25_top_k: int = 20
     rrf_k: int = 60
