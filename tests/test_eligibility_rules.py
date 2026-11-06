@@ -165,7 +165,7 @@ def test_kit_credits_need_ects():
     assert ects(total_credits="170", credit_unit="ECTS").verdict == "does_not_meet"
     assert ects(credit_unit="ECTS").verdict == "unknown"  # total not stated
     # another unit is not converted: KIT decides (X3), never a fail, whatever the number
-    for unit in ("credits", "CP", "US credits"):
+    for unit in ("other",):  # profile-v4: the unit is a closed choice
         for total in ("240", "120"):
             r = ects(total_credits=total, credit_unit=unit)
             assert (r.verdict, r.reason) == ("unknown", "university_review"), (unit, total)
