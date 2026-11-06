@@ -1,8 +1,7 @@
-# Phase 6: writing a programme's rule file
+# Writing a programme's rule file
 
 How to turn a verified record (`data/verified/<slug>.json`) into a rule file
-(`data/eligibility/rules/<slug>.json`) that the eligibility engine runs. Used for
-the Step 3 batch and for every programme added later (data-only long tail).
+(`data/eligibility/rules/<slug>.json`) that the eligibility engine runs.
 
 Finished examples to imitate: `data/eligibility/rules/tum-m-sc-informatics.json`
 and `data/eligibility/rules/kit-m-sc-computer-science.json`, with their tests in
@@ -51,7 +50,7 @@ and `data/eligibility/rules/kit-m-sc-computer-science.json`, with their tests in
   German for enrolment), `finance`. `severity`: `hard`, `soft`, `info` (a note
   shown to the student, e.g. "the committee assigns your modules"; never in the
   headline).
-- `reviewed_by` is always `"pending"` when written. Only the maintainer's
+- `reviewed_by` is always `"pending"` when written. Only a person's
   acceptance turns it into `"human"`; that never changes a record's verification tier.
 - `label`: one plain-English sentence a non-programmer can read.
 
@@ -66,6 +65,7 @@ and `data/eligibility/rules/kit-m-sc-computer-science.json`, with their tests in
 | `university_review` | `note` | only the university can decide; never `meets` |
 | `deadline` | `intake`, `close`, `open`, `starting_years` | apply by `close` (inclusive) for that intake; each date is `{month, day, year_offset}` from the starting year (the calendar year the term starts); `starting_years` limits dated windows to the years a page publishes. Reads the request's `as_of`, `intake`, `starting_year` |
 | `blocked_account` | `min_eur` | visa funds, only in `data/eligibility/finance.json`: a lone blocked account in `funds` is compared with `min_eur` (Decimal, margin); any other route or a combination is `unknown` |
+| `not_published` | `note`, `record_field` | a rule's whole check, severity `info`: the source publishes no minimum here. Shown in the trace, never met, failed or counted. `record_field` ties it to a not_published field of the verified record |
 | `max_age` | `fact`, `years` | a test or certificate not older than `years` on the request's `as_of`; a year-only fact decides only when every day of that year agrees |
 
 ## 4. Profile facts (`eligibility/profile.py`)
@@ -77,12 +77,12 @@ Null means not supplied; `[]` or `0` means the student said none.
 | `citizenships` | list of country names | |
 | `degree_country`, `school_country` | country name (English short name, "India") | never substitute one for another |
 | `degree_title`, `degree_completed` | str, bool | |
-| `total_credits`, `credit_unit` | Decimal, str | units are not converted: pair a credit minimum with `in credit_unit ["ECTS"]` |
-| `subject_credits.<area>` | Decimal | `<area>` is snake_case chosen by the rule file (`mathematics`, `theoretical_cs`, `core_courses`); list every new key in the decision list |
+| `total_credits`, `credit_unit` | Decimal, `"ECTS"` or `"other"` | units are not converted: pair a credit minimum with `in credit_unit ["ECTS"]` |
+| `subject_credits.<area>` | Decimal | `<area>` is snake_case chosen by the rule file (`mathematics`, `theoretical_cs`, `core_courses`); name every new key in the PR |
 | `grade.obtained`, `grade.best`, `grade.passing` | Decimal | original scale |
 | `grade.percent_of_best` | Decimal | obtained / best * 100; only meaningful next to a check on `grade.best` |
 | `grade.class_rank_percentile` | Decimal | 10 = top 10% |
-| `language.<TEST>.overall` / `.components.<Listening>` / `.grade` / `.taken_on` | | test names used so far: `IELTS`, `TOEFL iBT`, `PTE Academic`, `TOEIC`, `CAE`, `CPE`, `FCE` (Cambridge B2 First); add a new name (e.g. `TOEFL PBT`, `UNIcert`) only if no existing one fits, and list it in the decision list. A test missing from a supplied list counts as not taken |
+| `language.<TEST>.overall` / `.components.<Listening>` / `.grade` / `.taken_on` | | test names used so far: `IELTS`, `TOEFL iBT`, `PTE Academic`, `TOEIC`, `CAE`, `CPE`, `FCE` (Cambridge B2 First); add a new name (e.g. `TOEFL PBT`, `UNIcert`) only if no existing one fits, and name it in the PR. A test missing from a supplied list counts as not taken |
 | `english_instruction_share` | 0-100 | % of the prior programme taught in English |
 | `german_level` | `A1`..`C2` | CEFR as certified; "at least C1" = `in ["C1", "C2"]` |
 | `interview_passed` | bool | the target's interview actually passed (an invitation is not a pass) |
@@ -92,10 +92,11 @@ Null means not supplied; `[]` or `0` means the student said none.
 | `funds_eur` | Decimal | a total with no proof route; the visa funds rule does not read it |
 | `funds` | list of `{route, amount_eur}` | routes: `blocked_account`, `declaration_of_commitment`, `scholarship`, `education_loan`, `parental_income`, `bank_guarantee`; `[]` = no proof yet |
 | `visa_country` | country name | where the student applies for the visa |
+| `university_assessments.<slug>` | `positive` or `negative` | the university's assessment the student reports for that programme |
 
 A fact path that does not exist raises an error in tests: do not invent one. If
-a rule needs a fact that is missing, use `university_review` and list it as an
-ENGINE-GAP (section 9).
+a rule needs a fact that is missing, use `university_review` and note the gap in
+the PR.
 
 ## 5. Semantics
 
@@ -118,14 +119,14 @@ ENGINE-GAP (section 9).
 - Unknown country-group membership is never an exemption; a country missing from
   a group counts as not exempt (test required).
 
-## 6. Decided conventions (do not re-ask the maintainer)
+## 6. Conventions
 
 - Separate the admission route alternatives from the GRE/GATE condition (KIT CS:
   degree AND selection-entry `any_of` AND GRE-by-country). An interview route
   needs `interview_passed: true`; an invitation is not a pass.
 - Degree equivalence is always the university's call: a hard `university_review`.
-  Consequence: no programme can reach a positive headline until the profile can
-  carry "the university confirmed my degree equivalence" (open item).
+  TU Berlin and KIT CDS also accept a reported `university_assessments.<slug>`;
+  the other programmes do not yet.
 - A university's aptitude/selection assessment with no computable formula is a
   hard `university_review`.
 - Cambridge: grades A-C count; a certificate issued at a lower level does not.
@@ -166,18 +167,3 @@ offline, and cover: boundary values (at, just below), unknown vs fail, each
 alternative route, the never-exempt-on-unknown rule, and that the headline is not
 positive while a hard `university_review` remains. Assert verdicts, not reasons,
 unless the child order makes the reason certain.
-
-## 9. Decision list format
-
-For the maintainer, who reads plain language, not JSON. One block per decision:
-
-```
-D?? | <Programme> | <rule in one plain sentence>
-Source: <doc id> "<short quote>" <URL from sources/registry.yaml>
-Assumed: <what the rule file assumes beyond the quote>
-University decides: <what stays university_review>
-Mechanical copy: yes|no   (yes = a number or list copied as published)
-```
-
-End with `ENGINE-GAP:` items (a fact or check the engine cannot express yet, and
-what the student sees meanwhile) and open questions for the maintainer.

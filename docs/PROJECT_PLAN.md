@@ -1,14 +1,14 @@
 # Project plan: Germany admissions and eligibility assistant
 
-Status: living document. Last updated 2026-11-04. Phases 1–3 are merged. Phase 4 is complete: sampled audit and gold acceptance recorded, six findings corrected, four-mode benchmark and refusal calibration generated. In this repository's PR list, Phase 4 is PR #1, the Phase 6 engine and rule files PR #2 and the Step 3 rule decisions PR #3, all merged. Phase 6 Steps 4-6 (API, independent evaluation, closure) remain; work after Step 3 is on open PRs until the maintainer merges it.
+Status: living document. Last updated 2026-11-06. Phases 1–4 are complete and merged. The Phase 6 engine, its rule files and its API are merged; independent evaluation and closure remain.
 
 **Build order:** 1 → 2 → 3 → 4 → **6 → 5** → 7 → 8 → 9 → 10 → 11 → 12. Phase 6 (eligibility engine) runs before Phase 5 (retrieval upgrades) because the engine is the product and needs only the verified records (decided 2026-10-13).
 
-Planning documents and their roles are collected in [PLANNING_INDEX.md](PLANNING_INDEX.md). The next phase is specified in [PHASE_6_IMPLEMENTATION_PLAN.md](PHASE_6_IMPLEMENTATION_PLAN.md), including the schema gaps carried from Phase 3, APIs/CLI, five maintainer-authored cases, synthetic evaluation and the existing phase learning/review loop. It is a plan, not a claim that Phase 6 is implemented.
+The eligibility engine is specified in [PHASE_6_IMPLEMENTATION_PLAN.md](PHASE_6_IMPLEMENTATION_PLAN.md), including the schema gaps carried from Phase 3, the API and CLI, and its evaluation.
 
-**Goal of the build:** a deployed, working system that proves real GenAI / RAG / LLM-systems skills on a CV, shipped as soon as possible without lowering data quality. A reviewer should find a live URL, a README with real evaluation numbers and an architecture diagram, a CI eval gate, an agent and an MCP server. Visual polish comes after deploy (Phase 12).
+**Goal of the build:** a deployed, working system, shipped as soon as possible without lowering data quality: a live URL, a README with real evaluation numbers and an architecture diagram, a CI eval gate, an agent and an MCP server. Visual polish comes after deploy (Phase 12).
 
-This repository started as EngineerDoc AI, a hybrid RAG service over technical documentation. It is being turned into an admissions and eligibility assistant for international students applying to master's programmes in Germany. The hand-written retrieval core is kept; the corpus, extraction, eligibility logic, agent, UI and deployment are new. `DECISIONS.md` records the reasoning behind each major choice.
+This repository started as a hybrid RAG service over technical documentation. It is being turned into an admissions and eligibility assistant for international students applying to master's programmes in Germany. The hand-written retrieval core is kept; the corpus, extraction, eligibility logic, agent, UI and deployment are new. `DECISIONS.md` records the reasoning behind each major choice.
 
 ## 1. The product
 
@@ -221,33 +221,20 @@ data/audit/             sampled audit sheet and result for the second_pass tier 
 
 Each phase ends runnable and measured. A phase starts only when the previous one meets its "Done when" line and is committed. Rows are in build order (Phase 6 before 5).
 
-| # | Phase | What gets built | Manual task | Concepts | Done when |
-|---|---|---|---|---|---|
-| 1 | Clean base | Done: reranker normalisation, test isolation, `vite-env.d.ts`, CI workflow, stale docs removed | — | — | Merged (PR #1) |
-| 2 | Sources and ingestion | Source registry checked against live sites; polite crawler (robots.txt, cache, crawl date); HTML/PDF parsing; chunks with metadata; journey-stage sources, on the 5 pilot universities | Review the source list, confirm programmes, decide robots.txt / terms-of-use issues (~30 min); run `make crawl`, `make ingest`, `make index` | Crawling ethics, parsing, chunking, provenance | `make crawl/ingest/index` run clean; tests green; Phase 2 section in `LEARNING.md`. Merged (old PR series) |
-| 3 | Extraction + batch 2 | Done: Gemini `base_url` + model fallback, `ProgramRequirements` with cited fields, `make extract` with quote check, second-model cross-check (`data/checked/`), review screen (`make review`). Registry gap pages and batch 2 (KIT, TU Darmstadt, Stuttgart) crawled, extracted, cross-checked and verified | Run crawl/ingest/index/extract; verify records in `make review` (6 programmes by hand; the other 7 by a second pass over the cited pages, first record checked against its pages) | Structured outputs, schema design, field-level accuracy, verification design | `ls data/verified \| wc -l` = 13 (all registry programmes) and committed; Phase 3 in `LEARNING.md`. Merged (old PR series) |
-| 4 | Eval baseline | Verification tiers (`human` / `second_pass`) and a seeded sampled audit of the `second_pass` tier; extraction accuracy (LLM draft vs verified, cross-check precision and recall); a model-drafted gold set (104 items) with refusal and coverage probes, `author` / `reviewed_by` recorded per item, and a label validator; first benchmark numbers with the four retrieval modes split by kind; refusal calibration on the probes. Synthetic profiles moved to Phase 6 | Tick the audit sheet, review the gold set (accept, edit or drop; optionally write a few items) (~1 h) | Recall, MRR, nDCG; gold sets; sampling and confidence intervals; judge bias | Complete locally: `make eval` prints overall/per-kind numbers for all four modes, extraction accuracy and calibrated refusal counts; merged as PR #1 |
-| 6 | Eligibility engine | Profile schema, rules engine, grade conversion, funds check, hard/soft flags, margins, entrance-test country conditions, paste-to-fill; ~40 synthetic profiles with expected verdicts (moved from Phase 4) | Write 5 realistic anonymised profiles and check verdicts | Deterministic logic vs LLM | Verdicts correct on the 5 profiles; engine fully unit-tested. Progress 2026-11-04: engine primitives, grade conversion, the CLI (`make eligibility`) and rule files for all 13 programmes merged (70 rules reviewed by the maintainer on 2026-11-02; KIT CS degree, degree_ects, module_assignment, test_validity and English, and TUM APS/VPD still pending). Added after Step 3: separate admission, readiness and finance summaries, an explicit "no GRE/GATE" answer, the evaluation harness (`make eval-eligibility`) and deadline/test-age checks with four pending KIT deadline rules. A cited visa funds rule (blocked account, pending review) too. Remaining: other programmes' deadlines, ~40 synthetic profiles, the API and the five-profile check |
-| 5 | Retrieval upgrades | Parser fix first (2026-10-29: `<main>` closes early on the TUM language page and drops its English section; re-ingest, re-run the unchanged retrieval baseline, then correct TUM `english` through the Save path and rebind the rule hash); metadata filters; query rewriting and parent-child only if time allows; ablation table; each kept only if the benchmark improves | Read results and decide what stays | Ablation method | Ablation table committed; only upgrades that beat the baseline remain |
-| 7 | Small agent | Tool-use loop over the existing functions (search, get_requirements, check_eligibility, convert_grade; find_scholarships optional) with a step budget; compared with one-shot RAG on multi-hop questions | Try multi-part questions and try to break it | Agent loops, tool design | Agent beats one-shot RAG on the multi-hop eval subset |
-| 8 | Production layer | SSE streaming, guardrails, response caching, rate and request caps, tracing as structured logs (no vendor), model fallback, user-source path, feedback queue, privacy notice, Docker, CI eval gate | Run the Docker setup and attempt prompt injections | LLMOps, security, containers | Docker run verified; injection attempts handled; CI gate green |
-| 9 | Functional UI | Wireframes first (started during Phase 8), then a clean, working, plain UI: profile form, report, process panel, chat, coverage page, dashboard. No animation | Approve wireframes, give usability feedback | Streaming UIs, UX for AI | Wireframes approved; form, report, process panel and chat working |
-| 10 | Deploy and showcase | HF Space and Cloudflare Pages config, weekly re-crawl workflow, README with real numbers, architecture diagram, `LEARNING.md` | Create accounts, add secrets, press deploy | Deployment, CI/CD, operations | Public URL serves a cited answer and an eligibility report |
-| 11 | MCP server (after deploy) | MCP server exposing the agent's tools | Connect the server to an MCP client and try to break it | MCP, tool contracts | Same tools usable from an MCP client |
-| 12 | UI polish (after deploy) | The user-friendly UI with animations, as its own design pass | Approve the wireframes and design | Interaction design | Polished UI deployed; no regression in the eval gate |
-
-**One-time setup:** GitHub repo (done); Gemini API key in `.env` before Phase 3; Docker Desktop with WSL integration (done); Hugging Face and Cloudflare accounts before Phase 10; product name chosen before Phase 9; MCP client installed before Phase 11.
-
-### The loop for every phase
-1. **Kick off.** "Start Phase N" → a short brief: what gets built, what the maintainer must do, what "done" means.
-2. **Build** in small steps, each leaving a test or check behind.
-3. **Hands-on task** (the manual column above).
-4. **Run it yourself** with the commands provided.
-5. **Explain.** "Explain Phase N" → a walkthrough of how it works and why.
-6. **Park the learning.** Append the phase's notes, 3–5 interview-style quiz questions and the owed `DECISIONS.md` entry to `LEARNING.md`. DECISIONS entries are drafted from the decisions taken in the session and then edited by the maintainer into their own words; the quizzes are taken in one batch after Phase 10, before Phase 11. Neither gates the next phase.
-7. **Commit.** "Commit Phase N": one branch and one PR per phase.
-
-Other commands: "Continue Phase N, step X", "Pause, explain why X", "Status?", "I disagree with X because Y". New session: "Continue the project, Phase N".
+| # | Phase | What gets built | Done when |
+|---|---|---|---|
+| 1 | Clean base | Done: reranker normalisation, test isolation, `vite-env.d.ts`, CI workflow, stale docs removed | Merged |
+| 2 | Sources and ingestion | Source registry checked against live sites; polite crawler (robots.txt, cache, crawl date); HTML/PDF parsing; chunks with metadata; journey-stage sources, on the 5 pilot universities | `make crawl/ingest/index` run clean; tests green. Merged |
+| 3 | Extraction + batch 2 | Done: Gemini `base_url` + model fallback, `ProgramRequirements` with cited fields, `make extract` with quote check, second-model cross-check (`data/checked/`), review screen (`make review`). Registry gap pages and batch 2 (KIT, TU Darmstadt, Stuttgart) crawled, extracted, cross-checked and verified | `ls data/verified \| wc -l` = 13 (all registry programmes) and committed. Merged |
+| 4 | Eval baseline | Verification tiers (`human` / `second_pass`) and a seeded sampled audit of the `second_pass` tier; extraction accuracy (LLM draft vs verified, cross-check precision and recall); a model-drafted gold set (104 items) with refusal and coverage probes, `author` / `reviewed_by` recorded per item, and a label validator; first benchmark numbers with the four retrieval modes split by kind; refusal calibration on the probes. Synthetic profiles moved to Phase 6 | Complete locally: `make eval` prints overall/per-kind numbers for all four modes, extraction accuracy and calibrated refusal counts. Merged |
+| 6 | Eligibility engine | Profile schema, rules engine, grade conversion, funds check, hard/soft flags, margins, entrance-test country conditions, paste-to-fill; ~40 synthetic profiles with expected verdicts (moved from Phase 4) | Verdicts correct on the 5 profiles; engine fully unit-tested. Progress 2026-11-06: merged: engine primitives, grade conversion, the CLI, rule files for all 13 programmes, area summaries, an explicit "no GRE/GATE" answer, deadline and test-age checks, a cited visa funds rule, no-minimum-published info rules, a reported university assessment for TU Berlin and KIT CDS, the evaluation harness, the API and paste-to-fill. 19 rules are pending review. Remaining: other programmes' deadlines, ~40 synthetic profiles and the five-profile check |
+| 5 | Retrieval upgrades | Parser fix first (2026-10-29: `<main>` closes early on the TUM language page and drops its English section; re-ingest, re-run the unchanged retrieval baseline, then correct TUM `english` through the Save path and rebind the rule hash); metadata filters; query rewriting and parent-child only if time allows; ablation table; each kept only if the benchmark improves | Ablation table committed; only upgrades that beat the baseline remain |
+| 7 | Small agent | Tool-use loop over the existing functions (search, get_requirements, check_eligibility, convert_grade; find_scholarships optional) with a step budget; compared with one-shot RAG on multi-hop questions | Agent beats one-shot RAG on the multi-hop eval subset |
+| 8 | Production layer | SSE streaming, guardrails, response caching, rate and request caps, tracing as structured logs (no vendor), model fallback, user-source path, feedback queue, privacy notice, Docker, CI eval gate | Docker run verified; injection attempts handled; CI gate green |
+| 9 | Functional UI | Wireframes first (started during Phase 8), then a clean, working, plain UI: profile form, report, process panel, chat, coverage page, dashboard. No animation | Wireframes approved; form, report, process panel and chat working |
+| 10 | Deploy and showcase | HF Space and Cloudflare Pages config, weekly re-crawl workflow, README with real numbers, architecture diagram | Public URL serves a cited answer and an eligibility report |
+| 11 | MCP server (after deploy) | MCP server exposing the agent's tools | Same tools usable from an MCP client |
+| 12 | UI polish (after deploy) | The user-friendly UI with animations, as its own design pass | Polished UI deployed; no regression in the eval gate |
 
 ## 8. Carried over from the earlier review
 Items from the October review that still apply and are folded into the phases above:
@@ -261,34 +248,20 @@ Items from the October review that still apply and are folded into the phases ab
 - Tests: no test may write real data, README or benchmark files, or call a paid provider (Phase 1 started this).
 - Deployment: same-origin or configurable API base and CORS; benchmark published as a build artifact, not an API write (Phase 10).
 
-## 9. Skills covered
-
-| Area | What gets built |
-|---|---|
-| Data engineering | Crawling, PDF/HTML/tables, provenance, freshness |
-| Retrieval and RAG | Hybrid search, reranking, filters, rewriting, citations |
-| LLM engineering | Structured extraction, schema validation, model routing |
-| Agentic AI | Tool-use loop (Phase 7); MCP server after deploy (Phase 11) |
-| Evaluation | Gold sets, judge, ablations, CI gate |
-| LLMOps | Tracing, usage, caching, caps |
-| Backend and DevOps | FastAPI, Docker, CI/CD, free deployment |
-| Frontend | React UI |
-| Responsible AI | No-advice framing, stateless privacy, honest limits |
-
-## 10. Constraints
+## 9. Constraints
 - No LangChain or LlamaIndex; the LLM SDK is used directly through the thin client.
 - Settings stay in `config/settings.yaml`.
 - Each feature leaves a runnable check or test behind.
 - The LLM never makes the eligibility decision.
 
-## 11. Verification (end state)
+## 10. Verification (end state)
 - `make test` and CI are green.
 - `make crawl ingest index eval` produces non-PENDING numbers that the dashboard renders.
 - Extraction accuracy and eligibility-verdict accuracy are reported against the verified gold data.
 - The deployed URL serves a streamed, cited answer and an eligibility report for a pasted profile.
 - After deploy (Phase 11): the MCP server works from an MCP client.
 
-## 12. Open items
+## 11. Open items
 - Product name: to be chosen before Phase 9.
 - Long tail of further German universities (LMU, Bonn, Tübingen, Mannheim first): after deploy.
 - Content-hash noise: some pages change their raw hash without a text change; hash the cleaned text before the Phase 10 re-crawl relies on it.
