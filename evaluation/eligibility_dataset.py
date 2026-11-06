@@ -13,6 +13,7 @@ from typing import Literal
 from pydantic import BaseModel, ConfigDict, Field, ValidationError, model_validator
 
 from core.config import Settings
+from eligibility.finance import load_finance
 from eligibility.profile import Profile
 from eligibility.report import Headline
 from eligibility.rules import Citation, Verdict, load_ruleset
@@ -92,6 +93,7 @@ def validate_cases(cases: list[EligibilityCase], settings: Settings, today: date
             continue
         try:
             rule_ids = {r.id for r in load_ruleset(settings, c.slug)[0].rules}
+            rule_ids |= {r.id for r in load_finance(settings.paths.finance_rules_path).rules}
         except (OSError, ValueError) as e:  # missing verified record, malformed rule file
             problems.append(f"{c.case_id}: cannot load the rules for {c.slug}: {e}")
             continue

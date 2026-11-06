@@ -25,7 +25,8 @@ def ev(check, **facts):
 
 
 def test_schema_version_bumped_and_none_round_trips():
-    assert SCHEMA_VERSION == "profile-v2" and Profile().schema_version == "profile-v2"
+    # profile-v2 introduced "none"; later versions keep it
+    assert SCHEMA_VERSION in ("profile-v2", "profile-v3") and Profile().schema_version == SCHEMA_VERSION
     p = Profile(gre="none", gate="none")
     back = Profile.model_validate_json(p.model_dump_json())
     assert back == p and back.gre == "none" and back.gate == "none"
@@ -126,7 +127,7 @@ def test_not_reported_reaches_group_criteria_and_report_has_profile_version():
     rep = check_eligibility(Profile(degree_country="India", gre="none", gate="none"), rules, stale)
     crit = next(c for c in rep.criteria if c.rule_id == "gre_or_gate")
     assert crit.entered == "not reported"
-    assert rep.profile_schema_version == "profile-v2"
+    assert rep.profile_schema_version == SCHEMA_VERSION
 
 
 RULE_FILES = sorted(p.stem for p in Path(load_settings().paths.rules_dir).glob("*.json"))

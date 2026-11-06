@@ -7,7 +7,8 @@ record changes, the catalogue is `stale` and the engine must not use it.
 
 Checks are a small closed set (no expression language): numeric bounds,
 membership, conditions, all_of / any_of groups, an explicit university-review
-step, and two date checks (an application deadline and a maximum age)."""
+step, two date checks (an application deadline and a maximum age) and the
+blocked-account funds check."""
 
 import hashlib
 import json
@@ -123,6 +124,14 @@ class MaxAge(Strict):
     years: int = Field(ge=1)
 
 
+class BlockedAccount(Strict):
+    """Visa funds: a lone blocked account compared with `min_eur`. Any other
+    route, or a combination, is unknown: no rule for combining proofs is published."""
+
+    type: Literal["blocked_account"] = "blocked_account"
+    min_eur: Decimal = Field(gt=0)
+
+
 class Group(Strict):
     type: Literal["all_of", "any_of"]
     children: list["Check"]
@@ -135,7 +144,8 @@ class Group(Strict):
 
 
 Check = Annotated[
-    Minimum | Maximum | In | When | UniversityReview | Deadline | MaxAge | Group, Field(discriminator="type")
+    Minimum | Maximum | In | When | UniversityReview | Deadline | MaxAge | BlockedAccount | Group,
+    Field(discriminator="type"),
 ]
 Group.model_rebuild()
 When.model_rebuild()

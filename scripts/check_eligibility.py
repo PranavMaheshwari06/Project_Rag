@@ -15,6 +15,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from core.config import get_settings  # noqa: E402
 from eligibility.engine import check_eligibility, default_groups  # noqa: E402
+from eligibility.finance import load_finance  # noqa: E402
 from eligibility.profile import Profile  # noqa: E402
 from eligibility.rules import load_ruleset, record_tier, uncited_quotes  # noqa: E402
 
@@ -53,6 +54,18 @@ def validate(settings, check_cache: bool = False) -> list[str]:
                 print(f"{path.stem}: {rule_id}: quote not in record, cached page unavailable, not checked")
             elif _words(quote) not in page:
                 errors.append(f"{path.stem}: {rule_id}: quote not in record or cached page: {quote[:60]!r}")
+    finance = load_finance(settings.paths.finance_rules_path)
+    for rule in finance.rules:  # no verified record behind these: the cached page is the only check
+        for c in rule.citations:
+            page = raw_page_words(settings, c.doc_id)
+            if page is None and check_cache:
+                errors.append(f"finance: {rule.id}: cached page unavailable")
+            elif page is None:
+                print(f"finance: {rule.id}: cached page unavailable, not checked")
+            elif _words(c.quote) not in page:
+                errors.append(f"finance: {rule.id}: quote not in cached page: {c.quote[:60]!r}")
+    if date.today() > finance.recheck_after:
+        errors.append(f"financial rules are past their re-check date {finance.recheck_after}")
     for name, g in default_groups().groups.items():
         if date.today() > g.recheck_after:
             errors.append(f"country list {name} is past its re-check date {g.recheck_after}")
@@ -82,6 +95,7 @@ def main() -> int:
     report = check_eligibility(
         profile, *load_ruleset(settings, args.programme), as_of=args.as_of,
         tier=record_tier(settings, args.programme), intake=args.intake, starting_year=args.starting_year,
+        finance=load_finance(settings.paths.finance_rules_path),
     )
     print(f"{report.slug}: {report.headline}{' (rules stale)' if report.rules_stale else ''}")
     for area in ("admission", "readiness", "finance"):

@@ -91,11 +91,13 @@ def test_counts_by_verdict_per_area_skip_inactive_and_info_rules():
     assert [c.category for c in rep.criteria][-2:] == ["readiness", "finance"]
 
 
-def test_stale_rules_give_review_in_every_area():
+def test_stale_rules_give_review_in_the_programme_areas():
     rep = check_eligibility(P, ruleset((PASS, {}), (PASS, READY)), stale=True)
-    for area in (rep.admission, rep.readiness, rep.finance):
+    for area in (rep.admission, rep.readiness):
         assert area.headline == "needs_information_or_review"
         assert sum(area.counts.values()) == 0
+    # visa funds rules do not come from the programme record (see test_eligibility_finance)
+    assert rep.finance.headline == "no_checked_items"
 
 
 def test_report_carries_versions_hashes_date_and_tier():

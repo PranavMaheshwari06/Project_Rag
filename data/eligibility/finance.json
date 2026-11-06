@@ -1,0 +1,38 @@
+{
+  "schema_version": "finance-v1",
+  "fetched_on": "2026-11-04",
+  "recheck_after": "2027-05-04",
+  "rules": [
+    {
+      "id": "blocked_account_first_year",
+      "label": "Student visa through the German Mission in India: a blocked account with at least 11,904 EUR for the first year of studies (the page also requires a blocking confirmation of no more than 992 EUR per month, which is not checked)",
+      "category": "finance",
+      "severity": "hard",
+      "check": {
+        "type": "when",
+        "when": {
+          "type": "in",
+          "fact": "visa_country",
+          "values": [
+            "India"
+          ]
+        },
+        "then": {
+          "type": "blocked_account",
+          "min_eur": "11904"
+        }
+      },
+      "citations": [
+        {
+          "doc_id": "de/rules/embassy-india-studies-visa",
+          "quote": "Blocked bank account (“Sperrkonto”) in Germany with sufficient funds to cover the first year of studies, currently amounting to 11,904.—EUR and with a blocking confirmation stating that no more than 992.—EUR per month can be withdrawn."
+        },
+        {
+          "doc_id": "de/rules/foreign-office-blocked-account",
+          "quote": "The blocked account must have sufficient credit in order to cover the costs of daily life in Germany (unless other proof of financial support is presented in addition)."
+        }
+      ],
+      "reviewed_by": "pending"
+    }
+  ]
+}
