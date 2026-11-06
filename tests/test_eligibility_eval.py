@@ -243,3 +243,18 @@ def test_p95_is_nearest_rank():
 
     assert _latency([float(i) for i in range(1, 32)])["p95"] == 30.0  # ceil(0.95*31) = 30th value
     assert _latency([5.0])["p95"] == 5.0
+
+
+def test_runner_passes_intake_and_year_to_the_engine(settings):
+    from pathlib import Path
+
+    rules = json.loads((Path(settings.paths.rules_dir) / "fixture-msc.json").read_text())
+    rules["rules"].append({"id": "deadline", "label": "apply by 15 July", "category": "readiness",
+                           "check": {"type": "deadline", "intake": "winter", "close": {"month": 7, "day": 15}},
+                           "citations": [CITE], "reviewed_by": "human"})
+    (Path(settings.paths.rules_dir) / "fixture-msc.json").write_text(json.dumps(rules))
+    expect = [{"rule_id": "deadline", "verdict": "does_not_meet", "citations": [CITE]}]
+    late = case(as_of="2027-07-16", expected_criteria=expect)
+    assert run_cases([late], settings)["metrics"]["criterion_agreement"]["agree"] == 1
+    summer = case(as_of="2027-07-16", intake="summer", expected_criteria=[{**expect[0], "verdict": "not_applicable"}])
+    assert run_cases([summer], settings)["metrics"]["criterion_agreement"]["agree"] == 1

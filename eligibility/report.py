@@ -78,6 +78,8 @@ class Report(BaseModel):
     ruleset_sha256: str  # canonical hash of the rule set as loaded (defaults filled in)
     record_sha256: str  # the verified record the rules are bound to; differs from disk when rules_stale
     as_of: date | None = None
+    intake: Literal["winter", "summer"] | None = None
+    starting_year: int | None = None
     tier: Literal["human", "second_pass"] | None = None  # verification tier of the record
 
     @model_validator(mode="after")

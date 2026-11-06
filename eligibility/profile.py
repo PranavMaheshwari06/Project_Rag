@@ -57,7 +57,7 @@ class Gre(Strict):
 
 class Gate(Strict):
     paper: str | None = None  # GATE paper code, e.g. "CS", "DA"
-    year: int | None = None
+    year: int | None = Field(default=None, ge=1900, le=2100)
     qualified: bool | None = None  # as reported on the scorecard; no cutoff is invented
 
 

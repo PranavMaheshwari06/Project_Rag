@@ -6,10 +6,12 @@ file is bound to the SHA-256 of the verified record it was derived from. If the
 record changes, the catalogue is `stale` and the engine must not use it.
 
 Checks are a small closed set (no expression language): numeric bounds,
-all_of / any_of groups and an explicit university-review step."""
+membership, conditions, all_of / any_of groups, an explicit university-review
+step, and two date checks (an application deadline and a maximum age)."""
 
 import hashlib
 import json
+from datetime import date
 from decimal import Decimal
 from pathlib import Path
 from typing import Annotated, Literal
@@ -76,6 +78,51 @@ class UniversityReview(Strict):
     note: str
 
 
+class DayOfYear(Strict):
+    """A recurring date, placed relative to the intake's starting year (the
+    calendar year the term starts: winter 2027/28 and summer 2027 both have
+    2027). A summer 2027 intake with a deadline in November 2026 has -1."""
+
+    month: int = Field(ge=1, le=12)
+    day: int = Field(ge=1, le=31)
+    year_offset: int = 0
+
+    @model_validator(mode="after")
+    def _real_day(self):
+        date(2001, self.month, self.day)  # raises for 30 February; 29 February is refused too
+        return self
+
+    def on(self, starting_year: int) -> date:
+        return date(starting_year + self.year_offset, self.month, self.day)
+
+
+class Deadline(Strict):
+    """Apply by `close` (inclusive) for this intake. `starting_years`: the page
+    publishes dated windows only for these years; other years stay unknown."""
+
+    type: Literal["deadline"] = "deadline"
+    intake: Literal["winter", "summer"]
+    close: DayOfYear
+    open: DayOfYear | None = None
+    starting_years: list[int] | None = None
+
+    @model_validator(mode="after")
+    def _opens_before_it_closes(self):
+        if self.open and self.open.on(2001) > self.close.on(2001):
+            raise ValueError("a window cannot open after it closes")
+        return self
+
+
+class MaxAge(Strict):
+    """A test or certificate not older than `years` on the request's as_of date
+    (pages that name another reference date need another check). The fact is a
+    date, or a year when only the year is known."""
+
+    type: Literal["max_age"] = "max_age"
+    fact: str
+    years: int = Field(ge=1)
+
+
 class Group(Strict):
     type: Literal["all_of", "any_of"]
     children: list["Check"]
@@ -87,7 +134,9 @@ class Group(Strict):
         return self
 
 
-Check = Annotated[Minimum | Maximum | In | When | UniversityReview | Group, Field(discriminator="type")]
+Check = Annotated[
+    Minimum | Maximum | In | When | UniversityReview | Deadline | MaxAge | Group, Field(discriminator="type")
+]
 Group.model_rebuild()
 When.model_rebuild()
 
