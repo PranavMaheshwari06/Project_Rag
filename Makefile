@@ -16,7 +16,7 @@ $(PY):
 	$(MAKE) venv
 
 install: $(PY)
-	uv pip install --python $(PY) --torch-backend cpu -r requirements.lock
+	uv pip sync --python $(PY) --torch-backend cpu requirements.lock
 	uv pip install --python $(PY) --no-deps -e .
 
 crawl:
