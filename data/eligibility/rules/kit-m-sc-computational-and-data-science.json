@@ -41,7 +41,7 @@
           "quote": "Bachelorabschluss ein bestandener Bachelorabschluss (oder mindestens gleichwertiger Abschluss) im Studiengang Computational and Data Science, Mathematik, Informatik (oder einem Studiengang mit im Wesentlichen gleichem Inhalt)"
         }
       ],
-      "reviewed_by": "pending"
+      "reviewed_by": "human"
     },
     {
       "id": "degree_ects",
@@ -273,7 +273,7 @@
           "quote": "Mindestens 40 LP aus einem und mindestens 12 LP aus den beiden verbleibenden Gebieten:"
         }
       ],
-      "reviewed_by": "pending"
+      "reviewed_by": "human"
     },
     {
       "id": "english",
@@ -502,7 +502,7 @@
           "quote": "Non-EU nationals First semester: July 15 for winter term, January 15 for summer term"
         }
       ],
-      "reviewed_by": "pending"
+      "reviewed_by": "human"
     },
     {
       "id": "deadline_summer",
@@ -562,7 +562,7 @@
           "quote": "Non-EU nationals First semester: July 15 for winter term, January 15 for summer term"
         }
       ],
-      "reviewed_by": "pending"
+      "reviewed_by": "human"
     },
     {
       "id": "gre_gate",
@@ -579,7 +579,7 @@
           "quote": "- Bachelorabschluss ein bestandener Bachelorabschluss (oder mindestens gleichwertiger Abschluss) im Studiengang Computational and Data Science, Mathematik, Informatik (oder einem Studiengang mit im Wesentlichen gleichem Inhalt) oder einem Bachelorstudiengang in den Bereichen Wirtschaftswissenschaften, Chemie, Erdsystemwissenschaften, Maschinenbau, Physik, Elektro- und Informationstechnik, Chemieingenieurwesen, Verfahrenstechnik oder Robotik  an einer Universität, Fachhochschule oder Berufsakademie bzw. Dualen Hochschule oder an einer ausländischen Hochschule. Das Studium muss im Rahmen einer mindestens dreijährigen Regelstudienzeit und mit einer Mindestanzahl von 180 ECTS-Punkten absolviert worden sein."
         }
       ],
-      "reviewed_by": "pending"
+      "reviewed_by": "human"
     }
   ]
 }

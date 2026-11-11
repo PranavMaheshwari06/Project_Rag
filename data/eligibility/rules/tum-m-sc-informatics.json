@@ -215,7 +215,8 @@
           "doc_id": "de/tum/informatics-msc/department",
           "quote": "Applicants with an undergraduate degree from China, India and Vietnam have to submit a certificate from the German Evaluation Center (APS)."
         }
-      ]
+      ],
+      "reviewed_by": "human"
     },
     {
       "id": "vpd",
@@ -244,7 +245,8 @@
           "doc_id": "de/tum/informatics-msc/department",
           "quote": "Applicants who did not obtain their qualification for postgraduate studies (usually a bachelor's degree) in Germany must apply for a preliminary documentation (VPD) from uni-assist, additionally to the TUM application."
         }
-      ]
+      ],
+      "reviewed_by": "human"
     }
   ]
 }

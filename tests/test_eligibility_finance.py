@@ -71,10 +71,10 @@ def test_old_funds_eur_total_is_not_a_proof_route():
 
 
 # --- the cited file -----------------------------------------------------------------
-def test_finance_file_is_cited_dated_and_pending():
+def test_finance_file_is_cited_dated_and_reviewed():
     fin = load_finance(load_settings().paths.finance_rules_path)
     assert fin.fetched_on == date(2026, 11, 4) and fin.recheck_after > fin.fetched_on
-    assert all(r.category == "finance" and r.reviewed_by == "pending" for r in fin.rules)
+    assert all(r.category == "finance" and r.reviewed_by == "human" for r in fin.rules)
     assert any("11,904" in c.quote for r in fin.rules for c in r.citations)
 
 
@@ -102,8 +102,8 @@ def test_india_mission_applicant_with_a_lone_blocked_account():
     )
     assert rep.finance_sha256 and len(rep.finance_sha256) == 64
     ok = report(Profile(**INDIA, funds=blocked("11904")))
-    # pending rule: a met amount still reads as review, never as settled
-    assert ok.finance.headline == "needs_information_or_review"
+    # a reviewed rule with the full amount covers the reference
+    assert ok.finance.headline == "funds_cover_checked_reference"
 
 
 def test_finance_rule_scope():
@@ -150,7 +150,7 @@ def test_validate_reads_the_finance_file_and_cli_reports_finance(capsys, monkeyp
     monkeypatch.setattr(sys, "argv", ["x", "--profile", str(profile), "--programme", "kit-m-sc-computer-science",
                                       "--as-of", "2027-03-01"])
     assert cli.main() == 0
-    assert "finance: needs_information_or_review (1 meets)" in capsys.readouterr().out
+    assert "finance: funds_cover_checked_reference (1 meets)" in capsys.readouterr().out
 
 
 def test_eval_results_hash_the_finance_file():

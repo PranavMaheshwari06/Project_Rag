@@ -46,7 +46,7 @@ def test_real_rules_are_backed_by_the_record(slug, rule_id):
     record = json.loads((Path(s.paths.verified_dir) / f"{slug}.json").read_text())["record"]
     assert not stale and not_published_mismatches(rules, record) == []
     rule = next(r for r in rules.rules if r.id == rule_id)
-    assert rule.severity == "info" and rule.reviewed_by == "pending"
+    assert rule.severity == "info" and rule.reviewed_by == "human"
     rep = check_eligibility(Profile(), rules, stale)
     assert next(c for c in rep.criteria if c.rule_id == rule_id).verdict == "not_published"
 

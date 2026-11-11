@@ -41,7 +41,7 @@
           "quote": "The specific admission requirement is a first professionally qualifying degree in the field of “Informatik” or Computer Science or in a related study program."
         }
       ],
-      "reviewed_by": "pending"
+      "reviewed_by": "human"
     },
     {
       "id": "foundations_total",
@@ -185,7 +185,7 @@
           "quote": "Courses on discrete structures, discrete mathematics, algorithms, data structures, digital logic, design and analysis of algorithms are not recognized in the field of Theoretical Computer Science"
         }
       ],
-      "reviewed_by": "pending"
+      "reviewed_by": "human"
     },
     {
       "id": "english",
@@ -335,7 +335,7 @@
           "quote": "For the IELTS test, an overall band score of 6.5 is required, even if an overall band score of 5.5 confirms a B2 on the certificate."
         }
       ],
-      "reviewed_by": "pending"
+      "reviewed_by": "human"
     }
   ]
 }

@@ -133,7 +133,7 @@ def test_kit_winter_deadlines(slug, as_of, verdict):
     crit = next(c for c in rep.criteria if c.rule_id == "deadline_winter")
     assert crit.verdict == verdict and crit.category == "readiness"
     assert next(c for c in rep.criteria if c.rule_id == "deadline_summer").verdict == "not_applicable"
-    assert next(r for r in rules.rules if r.id == "deadline_winter").reviewed_by == "pending"
+    assert next(r for r in rules.rules if r.id == "deadline_winter").reviewed_by == "human"
 
 
 def test_kit_cds_deadline_depends_on_citizenship():
@@ -212,8 +212,6 @@ def test_leap_day_result(as_of, verdict):
     assert ev(GRE_AGE, as_of=as_of, gre={"taken_on": date(2024, 2, 29)}).verdict == verdict
 
 
-def test_kit_cs_pending_rules_are_exactly_the_unreviewed_ones():
+def test_kit_cs_rules_are_all_human_reviewed():
     rules, _ = load_ruleset(load_settings(), "kit-m-sc-computer-science")
-    assert {r.id for r in rules.rules if r.reviewed_by == "pending"} == {
-        "degree", "degree_ects", "module_assignment", "test_validity", "english", "deadline_winter", "deadline_summer",
-        "min_grade"}  # "no minimum published" rule
+    assert {r.id for r in rules.rules if r.reviewed_by != "human"} == set()
