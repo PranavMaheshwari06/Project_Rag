@@ -13,6 +13,8 @@ from bs4 import BeautifulSoup
 from ingestion.crawler import RawDoc
 
 H1_RE = re.compile(r"^#\s+(.*)", re.MULTILINE)
+MAIN_RE = re.compile(r"<main[\s>].*</main>", re.DOTALL | re.IGNORECASE)
+BOILERPLATE = ["nav", "header", "footer", "aside", "script", "style", "form", "noscript"]
 
 
 @dataclass
@@ -50,14 +52,19 @@ def _from_markdown(md: str) -> tuple[str, str | None]:
 
 def _from_html(html: str) -> tuple[str, str | None]:
     soup = BeautifulSoup(html, "html.parser")
-    for tag in soup(["nav", "header", "footer", "aside", "script", "style", "form", "noscript"]):
-        tag.decompose()
-
     title = None
     if soup.title and soup.title.string:
         title = soup.title.string.strip()
 
-    body = soup.find("main") or soup.find(attrs={"role": "main"}) or soup.body or soup
+    # A stray end tag inside <main> makes html.parser close <main> early and strand the rest of
+    # the section outside it (the TUM language page lost its English accordion). Parsing only the
+    # raw <main>...</main> slice leaves such a tag with nothing to close, so the section survives.
+    slice_ = MAIN_RE.search(html)
+    if slice_:
+        soup = BeautifulSoup(slice_.group(0), "html.parser")
+    for tag in soup(BOILERPLATE):
+        tag.decompose()
+    body = (soup.find("main") if slice_ else None) or soup.find(attrs={"role": "main"}) or soup.body or soup
     # Accordion titles carry scope just like headings. Preserve them before their
     # content, including native details/summary and explicitly marked headings.
     # aria-expanded alone also marks tabs and menus, which are not headings.
