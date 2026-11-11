@@ -34,9 +34,9 @@ def test_an_assessment_counts_only_for_its_own_programme():
 
 
 @pytest.mark.parametrize("slug", [TUB, CDS])
-def test_changed_rules_are_back_to_pending(slug):
+def test_assessment_rules_are_human_reviewed(slug):
     rules, _ = load_ruleset(load_settings(), slug)
-    assert {r.id for r in rules.rules if r.id in RULES[slug] and r.reviewed_by == "pending"} == set(RULES[slug])
+    assert {r.id for r in rules.rules if r.id in RULES[slug] and r.reviewed_by == "human"} == set(RULES[slug])
 
 
 def test_profile_v5_and_values_are_closed():

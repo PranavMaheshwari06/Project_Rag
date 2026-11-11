@@ -26,11 +26,10 @@ def cds(**facts):
 
 def test_files_are_fresh_reviewed_and_cite_the_record():
     s = load_settings()
-    # the deadline rules were added after the 2026-11-02 review and await it
     deadlines = {"deadline_winter", "deadline_summer"}
     for slug, outside, pending in (
         (DEA, {"english", "aptitude_assessment"}, set()),
-        (CDS, {"credit_minimums", "english"} | deadlines, deadlines | {"degree", "credit_counting", "gre_gate"}),
+        (CDS, {"credit_minimums", "english"} | deadlines, set()),
     ):
         rules, stale = load_ruleset(s, slug)
         record = json.loads((Path(s.paths.verified_dir) / f"{slug}.json").read_text())["record"]

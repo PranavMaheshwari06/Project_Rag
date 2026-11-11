@@ -110,9 +110,7 @@ def test_tum_english_alternatives():
 def test_tum_review_status():
     rules, _ = load_ruleset(load_settings(), TUM)
     status = {r.id: r.reviewed_by for r in rules.rules}
-    hard = ("degree", "gre_or_gate", "english", "aptitude_assessment")
-    assert all(status[i] == "human" for i in hard)
-    assert status["aps"] == status["vpd"] == "pending"  # readiness rules (R16) not yet decided
+    assert set(status.values()) == {"human"}  # includes the readiness rules aps and vpd (R16)
 
 
 # --- KIT Computer Science -------------------------------------------------------

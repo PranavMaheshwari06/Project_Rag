@@ -17,7 +17,7 @@
           "quote": "The degree program must have been completed within a standard period of study of at least three years and with a minimum number of 180 ECTS credits."
         }
       ],
-      "reviewed_by": "pending"
+      "reviewed_by": "human"
     },
     {
       "id": "degree_ects",
@@ -67,7 +67,7 @@
           "quote": "The degree program must have been completed within a standard period of study of at least three years and with a minimum number of 180 ECTS credits."
         }
       ],
-      "reviewed_by": "pending"
+      "reviewed_by": "human"
     },
     {
       "id": "selection_entry",
@@ -262,7 +262,7 @@
           "quote": "The modules are assigned to the above-mentioned subject areas by the selection committee."
         }
       ],
-      "reviewed_by": "pending"
+      "reviewed_by": "human"
     },
     {
       "id": "gre_or_gate",
@@ -353,7 +353,7 @@
           "quote": "GRE certificates must not be older than 5 years (GATE 3 years)."
         }
       ],
-      "reviewed_by": "pending"
+      "reviewed_by": "human"
     },
     {
       "id": "english",
@@ -518,7 +518,7 @@
           "quote": "Cambridge Certificate C1 Advanced (CAE)"
         }
       ],
-      "reviewed_by": "pending"
+      "reviewed_by": "human"
     },
     {
       "id": "deadline_winter",
@@ -543,7 +543,7 @@
           "quote": "First semester: June 15 for winter term, January 15 for summer term"
         }
       ],
-      "reviewed_by": "pending"
+      "reviewed_by": "human"
     },
     {
       "id": "deadline_summer",
@@ -568,7 +568,7 @@
           "quote": "First semester: June 15 for winter term, January 15 for summer term"
         }
       ],
-      "reviewed_by": "pending"
+      "reviewed_by": "human"
     },
     {
       "id": "min_grade",
@@ -585,7 +585,7 @@
           "quote": "You can participate in the selection process if you fulfill one of the following three conditions:"
         }
       ],
-      "reviewed_by": "pending"
+      "reviewed_by": "human"
     }
   ]
 }
