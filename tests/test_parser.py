@@ -20,6 +20,19 @@ def _parse(html):
     return parse(RawDoc(source="s", doc_id="d", title_hint="t", url="https://x", kind="html", content=html))
 
 
+STRAY_END_TAG = (
+    '<html><head><title>Language</title></head><body><div class="wrap"><nav>menu</nav><main><h1>Language</h1><p>Intro</p></div>'
+    '<div class="accordion"><h4>English</h4><ul><li>IELTS Academic 6.5</li></ul></div></main><footer>foot</footer></div></body></html>'
+)
+
+
+def test_stray_end_tag_does_not_cut_main_short():
+    doc = _parse(STRAY_END_TAG)
+    assert doc.title == "Language"
+    assert "IELTS Academic 6.5" in doc.text and "#### English" in doc.text
+    assert "menu" not in doc.text and "foot" not in doc.text
+
+
 def test_main_preferred_and_tables_kept():
     doc = _parse(HTML)
     assert doc.title == "MSc Informatics"
