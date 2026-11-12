@@ -244,7 +244,7 @@
     },
     {
       "id": "deadline_winter",
-      "label": "Apply by 15 July (EU and EEA nationals) or 1 March (other nationals) for the winter term",
+      "label": "Apply by 15 July (EU/EEA citizens or a German degree) or 1 March (everyone else) for the winter term",
       "category": "readiness",
       "check": {
         "type": "all_of",
@@ -252,13 +252,25 @@
           {
             "type": "when",
             "when": {
-              "type": "in",
-              "fact": "citizenships",
-              "values": [
-                "@EU",
-                "Iceland",
-                "Liechtenstein",
-                "Norway"
+              "type": "any_of",
+              "children": [
+                {
+                  "type": "in",
+                  "fact": "citizenships",
+                  "values": [
+                    "@EU",
+                    "Iceland",
+                    "Liechtenstein",
+                    "Norway"
+                  ]
+                },
+                {
+                  "type": "in",
+                  "fact": "degree_country",
+                  "values": [
+                    "Germany"
+                  ]
+                }
               ]
             },
             "then": {
@@ -274,15 +286,28 @@
           {
             "type": "when",
             "when": {
-              "type": "in",
-              "fact": "citizenships",
-              "values": [
-                "@EU",
-                "Iceland",
-                "Liechtenstein",
-                "Norway"
-              ],
-              "negate": true
+              "type": "all_of",
+              "children": [
+                {
+                  "type": "in",
+                  "fact": "citizenships",
+                  "values": [
+                    "@EU",
+                    "Iceland",
+                    "Liechtenstein",
+                    "Norway"
+                  ],
+                  "negate": true
+                },
+                {
+                  "type": "in",
+                  "fact": "degree_country",
+                  "values": [
+                    "Germany"
+                  ],
+                  "negate": true
+                }
+              ]
             },
             "then": {
               "type": "deadline",
@@ -304,12 +329,20 @@
         {
           "doc_id": "de/rwth/ds-msc/application",
           "quote": "Non-EU & Non-EEA applicants\n\nWinter Term: December to March 1 st\n\nSummer Term: June to September 1 st"
+        },
+        {
+          "doc_id": "de/rwth/master-application-international",
+          "quote": "Deadlines for Applicants from Non-EU/EEA Countries"
+        },
+        {
+          "doc_id": "de/rwth/master-application-international",
+          "quote": "your application deadline is July 15 for the winter semester and January 15 for the summer semester. These application deadlines also apply to applicants who hold a German university degree relevant to the qualification for the Master's program they are applying for."
         }
       ]
     },
     {
       "id": "deadline_summer",
-      "label": "Apply by 15 January (EU and EEA nationals) or 1 September of the previous year (other nationals) for the summer term",
+      "label": "Apply by 15 January (EU/EEA citizens or a German degree) or 1 September of the previous year (everyone else) for the summer term",
       "category": "readiness",
       "check": {
         "type": "all_of",
@@ -317,13 +350,25 @@
           {
             "type": "when",
             "when": {
-              "type": "in",
-              "fact": "citizenships",
-              "values": [
-                "@EU",
-                "Iceland",
-                "Liechtenstein",
-                "Norway"
+              "type": "any_of",
+              "children": [
+                {
+                  "type": "in",
+                  "fact": "citizenships",
+                  "values": [
+                    "@EU",
+                    "Iceland",
+                    "Liechtenstein",
+                    "Norway"
+                  ]
+                },
+                {
+                  "type": "in",
+                  "fact": "degree_country",
+                  "values": [
+                    "Germany"
+                  ]
+                }
               ]
             },
             "then": {
@@ -339,15 +384,28 @@
           {
             "type": "when",
             "when": {
-              "type": "in",
-              "fact": "citizenships",
-              "values": [
-                "@EU",
-                "Iceland",
-                "Liechtenstein",
-                "Norway"
-              ],
-              "negate": true
+              "type": "all_of",
+              "children": [
+                {
+                  "type": "in",
+                  "fact": "citizenships",
+                  "values": [
+                    "@EU",
+                    "Iceland",
+                    "Liechtenstein",
+                    "Norway"
+                  ],
+                  "negate": true
+                },
+                {
+                  "type": "in",
+                  "fact": "degree_country",
+                  "values": [
+                    "Germany"
+                  ],
+                  "negate": true
+                }
+              ]
             },
             "then": {
               "type": "deadline",
@@ -369,6 +427,14 @@
         {
           "doc_id": "de/rwth/ds-msc/application",
           "quote": "Non-EU & Non-EEA applicants\n\nWinter Term: December to March 1 st\n\nSummer Term: June to September 1 st"
+        },
+        {
+          "doc_id": "de/rwth/master-application-international",
+          "quote": "Deadlines for Applicants from Non-EU/EEA Countries"
+        },
+        {
+          "doc_id": "de/rwth/master-application-international",
+          "quote": "your application deadline is July 15 for the winter semester and January 15 for the summer semester. These application deadlines also apply to applicants who hold a German university degree relevant to the qualification for the Master's program they are applying for."
         }
       ]
     }

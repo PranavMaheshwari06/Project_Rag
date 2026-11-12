@@ -201,7 +201,7 @@ def test_cs_headline_fails_on_known_gre_failure():
 # --- Both: citations and review status ------------------------------------------
 def test_rules_cite_the_verified_record_and_are_reviewed():
     s = load_settings()
-    for slug, pending in ((CS, {"deadline_winter"}), (DS, {"deadline_winter", "deadline_summer"})):
+    for slug, pending in ((CS, {"deadline_winter", "deadline_summer"}), (DS, {"deadline_winter", "deadline_summer"})):
         rules, stale = load_ruleset(s, slug)
         record = json.loads((Path(s.paths.verified_dir) / f"{slug}.json").read_text())["record"]
         assert not stale

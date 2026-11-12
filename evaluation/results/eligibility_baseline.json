@@ -287,9 +287,9 @@
       }
     },
     "latency_ms": {
-      "p50": 0.47816099959163694,
-      "p95": 0.7031459999780054,
-      "max": 1.1163799999849289
+      "p50": 0.4873299999417213,
+      "p95": 0.6663150006716023,
+      "max": 1.143178999882366
     }
   },
   "disagreements": [],
@@ -329,13 +329,13 @@
         "tier": "second_pass"
       },
       "rwth-aachen-m-sc-computer-science": {
-        "ruleset_sha256": "7c7f3dc40aa1ec700aa0d8556758fe70323b8f983a6e05ffbb18f72913510f76",
+        "ruleset_sha256": "a0556f63e843dd94769872bd37f105aa00ff8dba68a843f8069029ae51639f80",
         "record_sha256": "c4cf2e21fa8f8f52204fb3e33844ac6b06f92041822bff236fb0016b81d8f627",
         "rules_stale": false,
         "tier": "human"
       },
       "rwth-aachen-m-sc-data-science": {
-        "ruleset_sha256": "e4d255e6e73260af817f36759c35c69778b5c91d654c23fa39043ada5888c862",
+        "ruleset_sha256": "63d129990ead328b8b54f089cb08bcc6fc1db4f4be0e7feb3b6a88ca9046912c",
         "record_sha256": "09f2c8e081e0830a38692bb8f3020e6c063c6b5a4ab257103bae03232ad1830f",
         "rules_stale": false,
         "tier": "human"

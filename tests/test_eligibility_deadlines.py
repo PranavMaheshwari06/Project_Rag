@@ -35,12 +35,21 @@ def test_stuttgart_winter_closes_in_january_and_summer_the_july_before():
     assert verdict(slug, "deadline_summer", date(2026, 7, 16), "summer")[1] == "window_closed"
 
 
-def test_rwth_data_science_dates_depend_on_citizenship():
-    slug = "rwth-aachen-m-sc-data-science"
-    assert verdict(slug, "deadline_winter", date(2027, 3, 2), "winter")[1] == "window_closed"
-    assert verdict(slug, "deadline_winter", date(2027, 7, 15), "winter", ["France"])[0] == "meets"
-    assert verdict(slug, "deadline_summer", date(2026, 9, 1), "summer")[0] == "meets"
-    assert verdict(slug, "deadline_summer", date(2026, 9, 2), "summer")[1] == "window_closed"
+@pytest.mark.parametrize("slug", ["rwth-aachen-m-sc-computer-science", "rwth-aachen-m-sc-data-science"])
+def test_rwth_dates_depend_on_citizenship_and_degree_country(slug):
+    abroad = {"degree_country": "India"}
+    assert verdict(slug, "deadline_winter", date(2027, 3, 1), "winter", **abroad)[0] == "meets"
+    assert verdict(slug, "deadline_winter", date(2027, 3, 2), "winter", **abroad)[1] == "window_closed"
+    assert verdict(slug, "deadline_summer", date(2026, 9, 1), "summer", **abroad)[0] == "meets"
+    assert verdict(slug, "deadline_summer", date(2026, 9, 2), "summer", **abroad)[1] == "window_closed"
+    # EU/EEA citizens, and anyone with a German degree, have until 15 July / 15 January
+    for citizenships, degree in ((["France"], "India"), (["Norway"], "India"), (["India"], "Germany")):
+        assert verdict(slug, "deadline_winter", date(2027, 7, 15), "winter", citizenships,
+                       degree_country=degree)[0] == "meets"
+        assert verdict(slug, "deadline_summer", date(2027, 1, 15), "summer", citizenships,
+                       degree_country=degree)[0] == "meets"
+    # a non-EU citizen with no degree country stated: which date applies is not known yet
+    assert verdict(slug, "deadline_winter", date(2027, 5, 1), "winter")[0] == "unknown"
 
 
 def test_dresden_dates_apply_to_a_foreign_degree_only():
