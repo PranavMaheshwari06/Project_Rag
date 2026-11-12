@@ -97,6 +97,7 @@ class EvalCfg(BaseModel):
     eligibility_results_out: str = "evaluation/results/eligibility_baseline.json"
     bootstrap_resamples: int = 2000  # 0 turns the retrieval intervals off
     bootstrap_seed: int = 0
+    ablation_out: str = "evaluation/results/ablation.json"
 
 
 class EligibilityCfg(BaseModel):

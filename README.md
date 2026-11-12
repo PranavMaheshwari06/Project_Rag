@@ -174,6 +174,14 @@ _Answer quality (hybrid+rerank, extractive): groundedness 1.000, unsupported-cla
 
 The selected score threshold is `0.20149040532450285`. It refuses 5/14 refusal/coverage probes while falsely refusing 4/108 answerable questions. The constraint is at most 5% false refusals; ties prefer fewer false refusals, then a lower threshold. These are calibration-set results, not held-out estimates. Actual answer refusals are reported separately in the calibration artifact.
 
+### Retrieval ablation (Phase 5)
+
+`make ablation` runs hybrid+rerank three ways on the same gold set: no filter (baseline), filters taken from each question's gold metadata (an upper bound no deployed system has) and the rule-based detector in `retrieval/filters.py` (what `/answer` could do). A filter only counts as an improvement if the 95% paired bootstrap interval of its per-question MRR gain lies above zero, and it must not change refusal behaviour. Result file: [ablation.json](evaluation/results/ablation.json).
+
+<!-- ABLATION:START -->
+Not run yet.
+<!-- ABLATION:END -->
+
 ## Run it locally
 
 Needs [uv](https://docs.astral.sh/uv/) and Python 3.12. `crawl` fills the git-ignored `data/raw/`; `ingest`, `index`, `review` and `eval` need it, while `test`, `eligibility` and `--validate` work on a fresh clone. The first run downloads two models from Hugging Face (bge-small ~130MB, bge-reranker-base ~1.1GB). After that, everything except `make crawl` runs offline.
