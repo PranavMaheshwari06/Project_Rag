@@ -1,14 +1,14 @@
 # Germany Master's Eligibility Assistant
 
-> **Status: in development.** The data pipeline, retrieval core, requirement extraction with review, the eligibility engine and its API are built. All 13 programmes have verified requirement records: 6 verified by hand field by field, 7 by a second pass over the cited pages (see [Verification](#verification)). The engine has rule files for all 13 programmes, with every rule reviewed by hand and evaluated on 40 frozen cases (see [Eligibility evaluation](#eligibility-evaluation)). The agent, the UI and a public demo come next. See [the project plan](docs/project-plan.md).
+> **Status: in development.** The data pipeline, retrieval core, requirement extraction with review, the eligibility engine and its API are built. All 13 programmes have verified requirement records: 6 verified by hand field by field, 7 by a second pass over the cited pages (see [Verification](#verification)). The engine has rule files for all 13 programmes, reviewed by hand except the deadline rules added on 2026-11-12 (still pending), and is evaluated on 40 frozen cases (see [Eligibility evaluation](#eligibility-evaluation)). The agent, the UI and a public demo come next. See [the project plan](docs/project-plan.md).
 
 Applying for a master's in Germany means checking a dozen official websites: the programme page, uni-assist, APS, the embassy, the blocked-account rules, the city's foreigners' office. Each one says something slightly different, and some of it is only in PDFs. This project reads those official pages for you and answers from them, with a citation and a crawl date on every claim.
 
 A student enters their profile and gets, for each programme:
 
 - **which published requirements they meet, miss, or haven't provided yet**, with margins ("IELTS 6.5 vs 7.0 required, short by 0.5");
-- **what to fix**;
-- **the visa, financial-proof and arrival rules that apply**, plus matching scholarships.
+- **what is still missing** for each undecided one (a fact, or the university's assessment);
+- **the visa, financial-proof and arrival rules that apply** (scholarship matching is planned).
 
 When the sources don't cover a question, it says so instead of guessing.
 
@@ -59,12 +59,13 @@ flowchart LR
   - follows and records redirects, and caps download size;
   - records a crawl date and a content hash for every page, so later re-crawls can spot changes.
   - Sites that block bots are dropped, not worked around.
-- **Parsing**: HTML via BeautifulSoup, PDFs via pdfplumber, with tables kept as markdown. A structure-aware chunker splits on headings and fits the embedding model's 512-token limit. Every chunk carries its source's labels and crawl date, so retrieval can later filter by university or stage.
+- **Parsing**: HTML via BeautifulSoup, PDFs via pdfplumber, with tables kept as markdown. A structure-aware chunker splits on headings and fits the embedding model's 512-token limit. Every chunk carries its source's labels and crawl date, which the retrieval filters use.
 - **Hybrid retrieval**, all hand-written (no LangChain or LlamaIndex):
   - dense embeddings (bge-small) and BM25;
   - fused with Reciprocal Rank Fusion;
   - reranked with a cross-encoder (bge-reranker-base).
   - Every result carries its full score trace.
+- **Metadata filters** by university, programme, journey stage and layer, with a rule-based detector that reads them from the question. Whether they stay depends on the [retrieval ablation](#retrieval-ablation-phase-5).
 - **Grounded answers with a refusal gate**: if the best reranked evidence scores below a threshold, the system declines. Answers cite `[n]` markers mapped back to the source URL. Citation markers that point at no source are stripped.
 - **Requirement extraction with review** (`make extract`, `make review`):
   - an LLM reads each programme's official pages and fills a typed `ProgramRequirements` record: degree, credits, grade minimums, English and entrance tests (with the countries they apply to or exempt), German level, APS, deadlines, fees, documents;
@@ -72,12 +73,12 @@ flowchart LR
   - a second model from a different family cross-checks every field and may suggest a fix, which must pass the same quote check;
   - a local review screen shows each field next to its quote, the full page, automatic warnings and the cross-check verdict. Every field is confirmed against its quote and page before the record is saved as verified: six programmes by hand in this screen, the other seven by a second pass over the cited pages that saves through the same quote check. Verified records are both the product data and the evaluation gold set.
 - **Eligibility engine and API** (`make eligibility`, `POST /eligibility/check`): a deterministic engine checks a confirmed profile against cited rule files for all 13 programmes. Each rule returns meets, does not meet, unknown or not published, with a margin and citations, and admission, readiness and finance get separate summaries. A rule still pending review cannot produce a positive headline. `POST /profile/parse` and `make parse-profile` turn pasted text into an unconfirmed draft, keeping only fields backed by a literal span of the text.
-- **Evaluation harness**: a 4-way benchmark (vector, BM25, hybrid, hybrid+rerank) on Recall@k, MRR, nDCG and p50/p95 latency, and extraction accuracy (LLM draft vs verified record). The gold question set has 122 items (requirement 45, country rules 24, confusable programmes 11, multi-hop 28, refusal 9, coverage 5), model-drafted from the verified pages; 104 are accepted by the maintainer (assisted review, not blinded) and the 18 multi-hop items added on 2026-11-12 await that review. `scripts/validate_gold.py` checks every label before `make eval` runs.
+- **Evaluation harness**: a 4-way benchmark (vector, BM25, hybrid, hybrid+rerank) on Recall@k, MRR, nDCG and p50/p95 latency, with 95% bootstrap intervals over queries, and extraction accuracy (LLM draft vs verified record). The gold question set has 122 items (requirement 45, country rules 24, confusable programmes 11, multi-hop 28, refusal 9, coverage 5), model-drafted from the verified pages; 104 are accepted by the maintainer (assisted review, not blinded) and the 18 multi-hop items added on 2026-11-12 await that review. `scripts/validate_gold.py` checks every label before `make eval` runs.
 - **Observability**: request ids, structured JSON logs and per-stage latency.
 
 ### Coming next
 
-Finish the eligibility engine (other programmes' deadlines, review of the pending rules, independent evaluation) → retrieval upgrades kept only if the numbers improve → small tool-using agent → streaming, guardrails and rate limits → UI → free public deployment → MCP server → UI polish. Details and the "done when" check for each phase are in [docs/project-plan.md](docs/project-plan.md).
+Finish the eligibility engine (human review of the deadline rules added on 2026-11-12, independent evaluation) → retrieval upgrades kept only if the numbers improve → small tool-using agent → streaming, guardrails and rate limits → UI → free public deployment → MCP server → UI polish. Details and the "done when" check for each phase are in [docs/project-plan.md](docs/project-plan.md).
 
 The [eligibility engine spec](docs/eligibility-engine-spec.md) defines its rules, interfaces and evaluation.
 
@@ -97,7 +98,7 @@ Every record went through the same automatic gates first: a field survives only 
 | records | programmes | fields | draft unchanged | edited | dropped | added | checker precision | checker recall |
 |---|---|---|---|---|---|---|---|---|
 | human tier (headline) | 6 | 102 | 0.794 | 18 | 0 | 3 | 0.947 | 0.857 |
-| all (second_pass not independent) | 13 | 221 | 0.814 | 35 | 3 | 3 | 0.867 | 0.634 |
+| all (second_pass not independent) | 13 | 221 | 0.805 | 35 | 3 | 5 | 0.867 | 0.605 |
 
 How to read it: a field counts as "draft unchanged" only if its status, value, primary citation and any supporting citations are identical after normalizing absent optional defaults between the LLM draft and the verified record, so a corrected citation counts as a correction. On the 6 hand-verified programmes, 79.4% of 102 fields survived verification unchanged. Checker precision is the share of fields the cross-check flagged (wrong, partial or missed) that really changed; checker recall is the share of changed fields it flagged. The headline row uses the human tier only. Caveat: the review screen shows the cross-check verdict, so the checker numbers mean "predicts what a person who could see its verdict changed", and second-pass records were verified with the cross-check's help, so the "all" row is not independent.
 
@@ -174,6 +175,41 @@ _Answer quality (hybrid+rerank, extractive): groundedness 1.000, unsupported-cla
 
 The selected score threshold is `0.20149040532450285`. It refuses 5/14 refusal/coverage probes while falsely refusing 4/108 answerable questions. The constraint is at most 5% false refusals; ties prefer fewer false refusals, then a lower threshold. These are calibration-set results, not held-out estimates. Actual answer refusals are reported separately in the calibration artifact.
 
+### Retrieval ablation (Phase 5)
+
+`make ablation` runs hybrid+rerank three ways on the same gold set: no filter (baseline), filters taken from each question's gold metadata (an upper bound no deployed system has) and the rule-based detector in `retrieval/filters.py` (what `/answer` could do). A filter only counts as an improvement if the 95% paired bootstrap interval of its per-question MRR gain lies above zero, and it must not change refusal behaviour. Result file: [ablation.json](evaluation/results/ablation.json).
+
+<!-- ABLATION:START -->
+| questions | arm | n | MRR [95% CI] | MRR gain vs baseline [95% CI] | Recall@5 | p50 ms |
+|---|---|---|---|---|---|---|
+| all | baseline | 108 | 0.748 [0.678, 0.813] | — | 0.801 | 3883 |
+| all | oracle_filter | 108 | 0.785 [0.720, 0.849] | +0.037 [+0.001, +0.074] **win** | 0.856 | 3727 |
+| all | detected_filter | 108 | 0.785 [0.719, 0.849] | +0.037 [+0.001, +0.074] **win** | 0.867 | 3785 |
+| human_reviewed | baseline | 90 | 0.766 [0.691, 0.844] | — | 0.839 | 3679 |
+| human_reviewed | oracle_filter | 90 | 0.796 [0.727, 0.865] | +0.030 [-0.009, +0.073] | 0.894 | 3612 |
+| human_reviewed | detected_filter | 90 | 0.796 [0.727, 0.865] | +0.030 [-0.009, +0.073] | 0.894 | 3626 |
+| confusable | baseline | 11 | 0.768 [0.577, 0.955] | — | 1.000 | 3751 |
+| confusable | oracle_filter | 11 | 0.814 [0.623, 1.000] | +0.045 [+0.000, +0.136] | 1.000 | 3402 |
+| confusable | detected_filter | 11 | 0.814 [0.623, 1.000] | +0.045 [+0.000, +0.136] | 1.000 | 3496 |
+| country_rules | baseline | 24 | 0.948 [0.865, 1.000] | — | 1.000 | 3560 |
+| country_rules | oracle_filter | 24 | 0.951 [0.875, 1.000] | +0.003 [+0.000, +0.010] | 1.000 | 3496 |
+| country_rules | detected_filter | 24 | 0.951 [0.875, 1.000] | +0.003 [+0.000, +0.010] | 1.000 | 3572 |
+| multi_hop | baseline | 28 | 0.654 [0.517, 0.790] | — | 0.536 | 5162 |
+| multi_hop | oracle_filter | 28 | 0.689 [0.558, 0.815] | +0.035 [-0.026, +0.100] | 0.589 | 4843 |
+| multi_hop | detected_filter | 28 | 0.690 [0.561, 0.816] | +0.035 [-0.026, +0.100] | 0.631 | 4863 |
+| requirement | baseline | 45 | 0.695 [0.579, 0.805] | — | 0.811 | 3738 |
+| requirement | oracle_filter | 45 | 0.749 [0.643, 0.847] | +0.054 [-0.022, +0.130] | 0.911 | 3624 |
+| requirement | detected_filter | 45 | 0.749 [0.643, 0.847] | +0.054 [-0.022, +0.130] | 0.911 | 3726 |
+
+| arm | refusal probes refused | answerable questions refused |
+|---|---|---|
+| baseline | 5/14 | 4/108 |
+| oracle_filter | 5/14 | 6/108 |
+| detected_filter | 5/14 | 6/108 |
+<!-- ABLATION:END -->
+
+**Result: filters stay off in `/answer`.** The detector matches the oracle upper bound and lifts overall MRR by +0.037, but the interval's lower edge is +0.001 and it includes zero on the 90 human-reviewed questions. It also raises false refusals from 4 to 6 of 108 (5.6%, above the 5% limit), because the refusal threshold was calibrated without filters. Revisit only together with a recalibration of the threshold on filtered scores. The 18 multi-hop items are not yet human-reviewed, so the "all" row is provisional.
+
 ## Run it locally
 
 Needs [uv](https://docs.astral.sh/uv/) and Python 3.12. `crawl` fills the git-ignored `data/raw/`; `ingest`, `index`, `review` and `eval` need it, while `test`, `eligibility` and `--validate` work on a fresh clone. The first run downloads two models from Hugging Face (bge-small ~130MB, bge-reranker-base ~1.1GB). After that, everything except `make crawl` runs offline.
@@ -194,7 +230,7 @@ make eligibility ARGS="--validate"                # rule files bound to their re
 make eligibility ARGS="--validate --check-cache"  # also requires the cached page for quotes the record lacks (needs data/raw)
 make parse-profile ARGS="--input draft.txt"  # pasted text -> unconfirmed draft profile (needs GEMINI_API_KEY; synthetic text only)
 make eval-eligibility  # validate evaluation/datasets/eligibility_cases.jsonl, run it, write evaluation/results/eligibility_baseline.json
-                       # (exits 1 until the labelled cases are frozen and committed)
+                       # (exits 1 if the cases file is missing or invalid)
 ```
 
 Frontend (Node 18+):

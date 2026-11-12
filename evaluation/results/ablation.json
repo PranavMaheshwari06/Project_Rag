@@ -1,0 +1,8420 @@
+{
+  "generated_at": "2026-11-12T22:38:23+00:00",
+  "mode": "hybrid_rerank",
+  "refusal_threshold": 0.20149040532450285,
+  "bootstrap_resamples": 2000,
+  "bootstrap_seed": 0,
+  "gold_items": 122,
+  "chunk_count": 614,
+  "reviewer_counts": {
+    "human": 104,
+    "model": 18
+  },
+  "summary": {
+    "all": {
+      "baseline": {
+        "name": "baseline",
+        "recall": {
+          "@5": 0.801,
+          "@10": 0.853
+        },
+        "mrr": 0.748,
+        "ndcg": {
+          "@5": 0.462,
+          "@10": 0.404
+        },
+        "latency_p50_ms": 3883.2,
+        "latency_p95_ms": 6162.3,
+        "query_count": 108,
+        "recall_ci": {
+          "@5": [
+            0.731,
+            0.861
+          ],
+          "@10": [
+            0.793,
+            0.906
+          ]
+        },
+        "mrr_ci": [
+          0.678,
+          0.813
+        ]
+      },
+      "oracle_filter": {
+        "name": "oracle_filter",
+        "recall": {
+          "@5": 0.856,
+          "@10": 0.895
+        },
+        "mrr": 0.785,
+        "ndcg": {
+          "@5": 0.553,
+          "@10": 0.508
+        },
+        "latency_p50_ms": 3726.9,
+        "latency_p95_ms": 6285.4,
+        "query_count": 108,
+        "recall_ci": {
+          "@5": [
+            0.796,
+            0.907
+          ],
+          "@10": [
+            0.844,
+            0.937
+          ]
+        },
+        "mrr_ci": [
+          0.72,
+          0.849
+        ],
+        "mrr_gain": {
+          "mean": 0.037,
+          "ci": [
+            0.001,
+            0.074
+          ]
+        },
+        "recall@5_gain": {
+          "mean": 0.056,
+          "ci": [
+            0.009,
+            0.106
+          ]
+        },
+        "wins": true
+      },
+      "detected_filter": {
+        "name": "detected_filter",
+        "recall": {
+          "@5": 0.867,
+          "@10": 0.903
+        },
+        "mrr": 0.785,
+        "ndcg": {
+          "@5": 0.558,
+          "@10": 0.513
+        },
+        "latency_p50_ms": 3785.1,
+        "latency_p95_ms": 6848.5,
+        "query_count": 108,
+        "recall_ci": {
+          "@5": [
+            0.813,
+            0.914
+          ],
+          "@10": [
+            0.852,
+            0.944
+          ]
+        },
+        "mrr_ci": [
+          0.719,
+          0.849
+        ],
+        "mrr_gain": {
+          "mean": 0.037,
+          "ci": [
+            0.001,
+            0.074
+          ]
+        },
+        "recall@5_gain": {
+          "mean": 0.066,
+          "ci": [
+            0.019,
+            0.117
+          ]
+        },
+        "wins": true
+      }
+    },
+    "human_reviewed": {
+      "baseline": {
+        "name": "baseline",
+        "recall": {
+          "@5": 0.839,
+          "@10": 0.894
+        },
+        "mrr": 0.766,
+        "ndcg": {
+          "@5": 0.466,
+          "@10": 0.411
+        },
+        "latency_p50_ms": 3678.8,
+        "latency_p95_ms": 4654.1,
+        "query_count": 90,
+        "recall_ci": {
+          "@5": [
+            0.767,
+            0.906
+          ],
+          "@10": [
+            0.828,
+            0.95
+          ]
+        },
+        "mrr_ci": [
+          0.691,
+          0.844
+        ]
+      },
+      "oracle_filter": {
+        "name": "oracle_filter",
+        "recall": {
+          "@5": 0.894,
+          "@10": 0.928
+        },
+        "mrr": 0.796,
+        "ndcg": {
+          "@5": 0.564,
+          "@10": 0.522
+        },
+        "latency_p50_ms": 3611.8,
+        "latency_p95_ms": 4668.6,
+        "query_count": 90,
+        "recall_ci": {
+          "@5": [
+            0.833,
+            0.944
+          ],
+          "@10": [
+            0.872,
+            0.972
+          ]
+        },
+        "mrr_ci": [
+          0.727,
+          0.865
+        ],
+        "mrr_gain": {
+          "mean": 0.03,
+          "ci": [
+            -0.009,
+            0.073
+          ]
+        },
+        "recall@5_gain": {
+          "mean": 0.056,
+          "ci": [
+            0.006,
+            0.117
+          ]
+        },
+        "wins": false
+      },
+      "detected_filter": {
+        "name": "detected_filter",
+        "recall": {
+          "@5": 0.894,
+          "@10": 0.928
+        },
+        "mrr": 0.796,
+        "ndcg": {
+          "@5": 0.564,
+          "@10": 0.522
+        },
+        "latency_p50_ms": 3625.8,
+        "latency_p95_ms": 4583.8,
+        "query_count": 90,
+        "recall_ci": {
+          "@5": [
+            0.833,
+            0.944
+          ],
+          "@10": [
+            0.872,
+            0.972
+          ]
+        },
+        "mrr_ci": [
+          0.727,
+          0.865
+        ],
+        "mrr_gain": {
+          "mean": 0.03,
+          "ci": [
+            -0.009,
+            0.073
+          ]
+        },
+        "recall@5_gain": {
+          "mean": 0.056,
+          "ci": [
+            0.006,
+            0.117
+          ]
+        },
+        "wins": false
+      }
+    },
+    "confusable": {
+      "baseline": {
+        "name": "baseline",
+        "recall": {
+          "@5": 1.0,
+          "@10": 1.0
+        },
+        "mrr": 0.768,
+        "ndcg": {
+          "@5": 0.504,
+          "@10": 0.408
+        },
+        "latency_p50_ms": 3751.3,
+        "latency_p95_ms": 4199.5,
+        "query_count": 11,
+        "recall_ci": {
+          "@5": [
+            1.0,
+            1.0
+          ],
+          "@10": [
+            1.0,
+            1.0
+          ]
+        },
+        "mrr_ci": [
+          0.577,
+          0.955
+        ]
+      },
+      "oracle_filter": {
+        "name": "oracle_filter",
+        "recall": {
+          "@5": 1.0,
+          "@10": 1.0
+        },
+        "mrr": 0.814,
+        "ndcg": {
+          "@5": 0.724,
+          "@10": 0.674
+        },
+        "latency_p50_ms": 3401.6,
+        "latency_p95_ms": 4409.1,
+        "query_count": 11,
+        "recall_ci": {
+          "@5": [
+            1.0,
+            1.0
+          ],
+          "@10": [
+            1.0,
+            1.0
+          ]
+        },
+        "mrr_ci": [
+          0.623,
+          1.0
+        ],
+        "mrr_gain": {
+          "mean": 0.045,
+          "ci": [
+            0.0,
+            0.136
+          ]
+        },
+        "recall@5_gain": {
+          "mean": 0.0,
+          "ci": [
+            0.0,
+            0.0
+          ]
+        },
+        "wins": false
+      },
+      "detected_filter": {
+        "name": "detected_filter",
+        "recall": {
+          "@5": 1.0,
+          "@10": 1.0
+        },
+        "mrr": 0.814,
+        "ndcg": {
+          "@5": 0.724,
+          "@10": 0.674
+        },
+        "latency_p50_ms": 3496.3,
+        "latency_p95_ms": 4796.5,
+        "query_count": 11,
+        "recall_ci": {
+          "@5": [
+            1.0,
+            1.0
+          ],
+          "@10": [
+            1.0,
+            1.0
+          ]
+        },
+        "mrr_ci": [
+          0.623,
+          1.0
+        ],
+        "mrr_gain": {
+          "mean": 0.045,
+          "ci": [
+            0.0,
+            0.136
+          ]
+        },
+        "recall@5_gain": {
+          "mean": 0.0,
+          "ci": [
+            0.0,
+            0.0
+          ]
+        },
+        "wins": false
+      }
+    },
+    "country_rules": {
+      "baseline": {
+        "name": "baseline",
+        "recall": {
+          "@5": 1.0,
+          "@10": 1.0
+        },
+        "mrr": 0.948,
+        "ndcg": {
+          "@5": 0.602,
+          "@10": 0.58
+        },
+        "latency_p50_ms": 3560.3,
+        "latency_p95_ms": 4291.6,
+        "query_count": 24,
+        "recall_ci": {
+          "@5": [
+            1.0,
+            1.0
+          ],
+          "@10": [
+            1.0,
+            1.0
+          ]
+        },
+        "mrr_ci": [
+          0.865,
+          1.0
+        ]
+      },
+      "oracle_filter": {
+        "name": "oracle_filter",
+        "recall": {
+          "@5": 1.0,
+          "@10": 1.0
+        },
+        "mrr": 0.951,
+        "ndcg": {
+          "@5": 0.622,
+          "@10": 0.595
+        },
+        "latency_p50_ms": 3496.4,
+        "latency_p95_ms": 5129.3,
+        "query_count": 24,
+        "recall_ci": {
+          "@5": [
+            1.0,
+            1.0
+          ],
+          "@10": [
+            1.0,
+            1.0
+          ]
+        },
+        "mrr_ci": [
+          0.875,
+          1.0
+        ],
+        "mrr_gain": {
+          "mean": 0.003,
+          "ci": [
+            0.0,
+            0.01
+          ]
+        },
+        "recall@5_gain": {
+          "mean": 0.0,
+          "ci": [
+            0.0,
+            0.0
+          ]
+        },
+        "wins": false
+      },
+      "detected_filter": {
+        "name": "detected_filter",
+        "recall": {
+          "@5": 1.0,
+          "@10": 1.0
+        },
+        "mrr": 0.951,
+        "ndcg": {
+          "@5": 0.622,
+          "@10": 0.595
+        },
+        "latency_p50_ms": 3572.3,
+        "latency_p95_ms": 4322.9,
+        "query_count": 24,
+        "recall_ci": {
+          "@5": [
+            1.0,
+            1.0
+          ],
+          "@10": [
+            1.0,
+            1.0
+          ]
+        },
+        "mrr_ci": [
+          0.875,
+          1.0
+        ],
+        "mrr_gain": {
+          "mean": 0.003,
+          "ci": [
+            0.0,
+            0.01
+          ]
+        },
+        "recall@5_gain": {
+          "mean": 0.0,
+          "ci": [
+            0.0,
+            0.0
+          ]
+        },
+        "wins": false
+      }
+    },
+    "multi_hop": {
+      "baseline": {
+        "name": "baseline",
+        "recall": {
+          "@5": 0.536,
+          "@10": 0.649
+        },
+        "mrr": 0.654,
+        "ndcg": {
+          "@5": 0.384,
+          "@10": 0.325
+        },
+        "latency_p50_ms": 5162.1,
+        "latency_p95_ms": 6907.8,
+        "query_count": 28,
+        "recall_ci": {
+          "@5": [
+            0.429,
+            0.643
+          ],
+          "@10": [
+            0.542,
+            0.756
+          ]
+        },
+        "mrr_ci": [
+          0.517,
+          0.79
+        ]
+      },
+      "oracle_filter": {
+        "name": "oracle_filter",
+        "recall": {
+          "@5": 0.589,
+          "@10": 0.738
+        },
+        "mrr": 0.689,
+        "ndcg": {
+          "@5": 0.422,
+          "@10": 0.379
+        },
+        "latency_p50_ms": 4843.3,
+        "latency_p95_ms": 7524.9,
+        "query_count": 28,
+        "recall_ci": {
+          "@5": [
+            0.482,
+            0.696
+          ],
+          "@10": [
+            0.631,
+            0.833
+          ]
+        },
+        "mrr_ci": [
+          0.558,
+          0.815
+        ],
+        "mrr_gain": {
+          "mean": 0.035,
+          "ci": [
+            -0.026,
+            0.1
+          ]
+        },
+        "recall@5_gain": {
+          "mean": 0.054,
+          "ci": [
+            0.0,
+            0.125
+          ]
+        },
+        "wins": false
+      },
+      "detected_filter": {
+        "name": "detected_filter",
+        "recall": {
+          "@5": 0.631,
+          "@10": 0.768
+        },
+        "mrr": 0.69,
+        "ndcg": {
+          "@5": 0.441,
+          "@10": 0.396
+        },
+        "latency_p50_ms": 4863.0,
+        "latency_p95_ms": 10492.1,
+        "query_count": 28,
+        "recall_ci": {
+          "@5": [
+            0.524,
+            0.732
+          ],
+          "@10": [
+            0.661,
+            0.875
+          ]
+        },
+        "mrr_ci": [
+          0.561,
+          0.816
+        ],
+        "mrr_gain": {
+          "mean": 0.035,
+          "ci": [
+            -0.026,
+            0.1
+          ]
+        },
+        "recall@5_gain": {
+          "mean": 0.095,
+          "ci": [
+            0.024,
+            0.179
+          ]
+        },
+        "wins": false
+      }
+    },
+    "requirement": {
+      "baseline": {
+        "name": "baseline",
+        "recall": {
+          "@5": 0.811,
+          "@10": 0.867
+        },
+        "mrr": 0.695,
+        "ndcg": {
+          "@5": 0.425,
+          "@10": 0.359
+        },
+        "latency_p50_ms": 3738.0,
+        "latency_p95_ms": 4926.9,
+        "query_count": 45,
+        "recall_ci": {
+          "@5": [
+            0.689,
+            0.911
+          ],
+          "@10": [
+            0.756,
+            0.956
+          ]
+        },
+        "mrr_ci": [
+          0.579,
+          0.805
+        ]
+      },
+      "oracle_filter": {
+        "name": "oracle_filter",
+        "recall": {
+          "@5": 0.911,
+          "@10": 0.911
+        },
+        "mrr": 0.749,
+        "ndcg": {
+          "@5": 0.556,
+          "@10": 0.501
+        },
+        "latency_p50_ms": 3624.3,
+        "latency_p95_ms": 4529.5,
+        "query_count": 45,
+        "recall_ci": {
+          "@5": [
+            0.822,
+            0.978
+          ],
+          "@10": [
+            0.822,
+            0.978
+          ]
+        },
+        "mrr_ci": [
+          0.643,
+          0.847
+        ],
+        "mrr_gain": {
+          "mean": 0.054,
+          "ci": [
+            -0.022,
+            0.13
+          ]
+        },
+        "recall@5_gain": {
+          "mean": 0.1,
+          "ci": [
+            0.0,
+            0.211
+          ]
+        },
+        "wins": false
+      },
+      "detected_filter": {
+        "name": "detected_filter",
+        "recall": {
+          "@5": 0.911,
+          "@10": 0.911
+        },
+        "mrr": 0.749,
+        "ndcg": {
+          "@5": 0.556,
+          "@10": 0.501
+        },
+        "latency_p50_ms": 3726.1,
+        "latency_p95_ms": 4558.7,
+        "query_count": 45,
+        "recall_ci": {
+          "@5": [
+            0.822,
+            0.978
+          ],
+          "@10": [
+            0.822,
+            0.978
+          ]
+        },
+        "mrr_ci": [
+          0.643,
+          0.847
+        ],
+        "mrr_gain": {
+          "mean": 0.054,
+          "ci": [
+            -0.022,
+            0.13
+          ]
+        },
+        "recall@5_gain": {
+          "mean": 0.1,
+          "ci": [
+            0.0,
+            0.211
+          ]
+        },
+        "wins": false
+      }
+    }
+  },
+  "refusal": {
+    "baseline": {
+      "probes": 14,
+      "probes_refused": 5,
+      "answerable": 108,
+      "answerable_refused": 4
+    },
+    "oracle_filter": {
+      "probes": 14,
+      "probes_refused": 5,
+      "answerable": 108,
+      "answerable_refused": 6
+    },
+    "detected_filter": {
+      "probes": 14,
+      "probes_refused": 5,
+      "answerable": 108,
+      "answerable_refused": 6
+    }
+  },
+  "per_query": {
+    "baseline": [
+      {
+        "qid": "a01",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3255.0396980004734,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.6164336326286644,
+            "@10": 0.4662774717636409
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "a02",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3077.355526998872,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.5087403079104241,
+            "@10": 0.33013764944712026
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "a03",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 4654.084063000482,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 0.0,
+            "@10": 0.0
+          },
+          "ndcg": {
+            "@5": 0.0,
+            "@10": 0.0
+          },
+          "rr": 0.0
+        }
+      },
+      {
+        "qid": "a04",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 4192.753321000055,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.7227265726449519,
+            "@10": 0.5988751049740155
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "a05",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 4137.442956001905,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.5087403079104241,
+            "@10": 0.33013764944712026
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "a06",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3337.6105059978727,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 0.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.0,
+            "@10": 0.07075576072108063
+          },
+          "rr": 0.1111111111111111
+        }
+      },
+      {
+        "qid": "a07",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3656.90576599809,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.6608397947263839,
+            "@10": 0.5806020001118017
+          },
+          "rr": 0.5
+        }
+      },
+      {
+        "qid": "a08",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3549.48352500287,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.38685280723454163,
+            "@10": 0.38685280723454163
+          },
+          "rr": 0.5
+        }
+      },
+      {
+        "qid": "a09",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 4926.907203000155,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.2640681225725909,
+            "@10": 0.2640681225725909
+          },
+          "rr": 0.25
+        }
+      },
+      {
+        "qid": "a10",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3761.728948997188,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 0.0,
+            "@10": 0.0
+          },
+          "ndcg": {
+            "@5": 0.0,
+            "@10": 0.0
+          },
+          "rr": 0.0
+        }
+      },
+      {
+        "qid": "a11",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3067.8084139981365,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.3391602052736161,
+            "@10": 0.3026024134988135
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "a12",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3030.8871660017758,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.48522855511632257,
+            "@10": 0.5240185826326421
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "a13",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3002.880855001422,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.5531464700081437,
+            "@10": 0.5809949937791564
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "a14",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 2768.6252089988557,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.3391602052736161,
+            "@10": 0.3026024134988135
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "a15",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3170.291840997379,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.3391602052736161,
+            "@10": 0.4599715079731103
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "a17",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3277.965753997705,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.24630238874073,
+            "@10": 0.24630238874073
+          },
+          "rr": 0.5
+        }
+      },
+      {
+        "qid": "a18",
+        "kind": "confusable",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 2946.712357999786,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.639945385422766,
+            "@10": 0.41528076708874123
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "a19",
+        "kind": "confusable",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 2926.6582330019446,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.6548086577531307,
+            "@10": 0.5766882048947064
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "a20",
+        "kind": "confusable",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3299.0040160002536,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.13120507751234178,
+            "@10": 0.10633668103022986
+          },
+          "rr": 0.2
+        }
+      },
+      {
+        "qid": "a21",
+        "kind": "confusable",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3469.895894999354,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.38685280723454163,
+            "@10": 0.5714285040141098
+          },
+          "rr": 0.5
+        }
+      },
+      {
+        "qid": "a22",
+        "kind": "confusable",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 4199.545401999785,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.6843515475204855,
+            "@10": 0.6105858728157117
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "a23",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 4275.113601001067,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 0.0,
+            "@10": 0.0
+          },
+          "ndcg": {
+            "@5": 0.0,
+            "@10": 0.0
+          },
+          "rr": 0.0
+        }
+      },
+      {
+        "qid": "b01",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 4242.76953899971,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.3391602052736161,
+            "@10": 0.2934556883974402
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "b02",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3487.163158999465,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 0.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.0,
+            "@10": 0.07839826897867533
+          },
+          "rr": 0.16666666666666666
+        }
+      },
+      {
+        "qid": "b04",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3276.652009000827,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.48522855511632257,
+            "@10": 0.31488013066763093
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "b05",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3932.3577799987106,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 0.0,
+            "@10": 0.0
+          },
+          "ndcg": {
+            "@5": 0.0,
+            "@10": 0.0
+          },
+          "rr": 0.0
+        }
+      },
+      {
+        "qid": "b06",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3555.5893189994094,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.7227265726449519,
+            "@10": 0.4690000933206748
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "b07",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3678.7973280006554,
+        "refused": true,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.13120507751234178,
+            "@10": 0.08514311764162098
+          },
+          "rr": 0.2
+        }
+      },
+      {
+        "qid": "b08",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3377.0671589991252,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 0.0,
+            "@10": 0.0
+          },
+          "ndcg": {
+            "@5": 0.0,
+            "@10": 0.0
+          },
+          "rr": 0.0
+        }
+      },
+      {
+        "qid": "b09",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3635.995704000379,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.13120507751234178,
+            "@10": 0.13120507751234178
+          },
+          "rr": 0.2
+        }
+      },
+      {
+        "qid": "b10",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3755.488773000252,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.5087403079104241,
+            "@10": 0.33013764944712026
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "b11",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3660.7701829998405,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.5531464700081437,
+            "@10": 0.5531464700081437
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "b12",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 4326.46762999866,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.7227265726449519,
+            "@10": 0.4690000933206748
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "b13",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3883.2772160021705,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.3391602052736161,
+            "@10": 0.2984900352767555
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "b14",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3700.4806300028577,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.24630238874073,
+            "@10": 0.24630238874073
+          },
+          "rr": 0.5
+        }
+      },
+      {
+        "qid": "b15",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3955.739307002659,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 0.0,
+            "@10": 0.0
+          },
+          "ndcg": {
+            "@5": 0.0,
+            "@10": 0.0
+          },
+          "rr": 0.0
+        }
+      },
+      {
+        "qid": "b16",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3901.144314000703,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.5147714448836774,
+            "@10": 0.3340514446642156
+          },
+          "rr": 0.5
+        }
+      },
+      {
+        "qid": "b17",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3540.1383450007415,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.4703652827859579,
+            "@10": 0.4480300279758384
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "b18",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3644.7137750001275,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.8687949224876582,
+            "@10": 0.6421867266689009
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "b19",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3921.7547990010644,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 1.0,
+            "@10": 0.6489315753318465
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "b21",
+        "kind": "confusable",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3751.2585099975695,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.7860137352654724,
+            "@10": 0.5100691314582919
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "b22",
+        "kind": "confusable",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3883.172737001587,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.5531464700081437,
+            "@10": 0.3589542101716347
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "b23",
+        "kind": "confusable",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3900.3141729990602,
+        "refused": true,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.3391602052736161,
+            "@10": 0.22009176629808017
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "b24",
+        "kind": "confusable",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3668.0861659988295,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.7227265726449519,
+            "@10": 0.4690000933206748
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "c01",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3536.5818829995987,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.3156484524795145,
+            "@10": 0.3476293915547282
+          },
+          "rr": 0.3333333333333333
+        }
+      },
+      {
+        "qid": "c02",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 4111.04890900242,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.5087403079104241,
+            "@10": 0.4658230948382866
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "c03",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 4289.153343997896,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.8539316501572937,
+            "@10": 0.6275071330616558
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "c04",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3974.3168549975962,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.48522855511632257,
+            "@10": 0.5141863642577489
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "c05",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 4320.8966060010425,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 0.5,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.48522855511632257,
+            "@10": 0.388244052766991
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "c06",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3737.9968040004314,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.4144299250118475,
+            "@10": 0.4144299250118475
+          },
+          "rr": 0.5
+        }
+      },
+      {
+        "qid": "c07",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3965.816628999164,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.8687949224876582,
+            "@10": 0.8829374068620365
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "c08",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 4279.510263000702,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.6843515475204855,
+            "@10": 0.4440973278132557
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "c09",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 5255.430557997897,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.8772153153380493,
+            "@10": 0.8772153153380493
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "c10",
+        "kind": "confusable",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3877.7369700001145,
+        "refused": true,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.2640681225725909,
+            "@10": 0.2640681225725909
+          },
+          "rr": 0.25
+        }
+      },
+      {
+        "qid": "c11",
+        "kind": "confusable",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 4161.085310999624,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.38685280723454163,
+            "@10": 0.38685280723454163
+          },
+          "rr": 0.5
+        }
+      },
+      {
+        "qid": "c12",
+        "kind": "multi_hop",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3828.754543999821,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 0.0,
+            "@10": 0.0
+          },
+          "ndcg": {
+            "@5": 0.0,
+            "@10": 0.0
+          },
+          "rr": 0.0
+        }
+      },
+      {
+        "qid": "c13",
+        "kind": "multi_hop",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3990.4443949999404,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 0.5,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.4703652827859579,
+            "@10": 0.3785988060390612
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "c14",
+        "kind": "multi_hop",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 4210.498712000117,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 0.5,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.3391602052736161,
+            "@10": 0.28371255449703187
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "c15",
+        "kind": "multi_hop",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3968.057885002054,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 0.5,
+            "@10": 0.5
+          },
+          "ndcg": {
+            "@5": 0.6164336326286644,
+            "@10": 0.542042305486879
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "c16",
+        "kind": "multi_hop",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 4064.4675360017573,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 0.5,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.16958010263680806,
+            "@10": 0.24573132854020638
+          },
+          "rr": 0.3333333333333333
+        }
+      },
+      {
+        "qid": "c17",
+        "kind": "multi_hop",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 4338.596517001861,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 0.0,
+            "@10": 0.0
+          },
+          "ndcg": {
+            "@5": 0.0,
+            "@10": 0.0
+          },
+          "rr": 0.0
+        }
+      },
+      {
+        "qid": "c18",
+        "kind": "multi_hop",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3952.9967149974254,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.5531464700081437,
+            "@10": 0.3589542101716347
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "c19",
+        "kind": "multi_hop",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 4441.492546000518,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 0.5,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.3391602052736161,
+            "@10": 0.2984900352767555
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "c20",
+        "kind": "multi_hop",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 4199.661937000201,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 0.0,
+            "@10": 0.5
+          },
+          "ndcg": {
+            "@5": 0.0,
+            "@10": 0.07336392209936005
+          },
+          "rr": 0.14285714285714285
+        }
+      },
+      {
+        "qid": "c21",
+        "kind": "multi_hop",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3655.234540001402,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 0.5,
+            "@10": 0.5
+          },
+          "ndcg": {
+            "@5": 0.3391602052736161,
+            "@10": 0.22009176629808017
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "d01",
+        "kind": "country_rules",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3894.1888569970615,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.3391602052736161,
+            "@10": 0.3391602052736161
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "d02",
+        "kind": "country_rules",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3344.839295001293,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.5087403079104241,
+            "@10": 0.5696160022325947
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "d03",
+        "kind": "country_rules",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3327.0326210003986,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.8687949224876582,
+            "@10": 0.6968404678259545
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "d04",
+        "kind": "country_rules",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3577.951175997441,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "d05",
+        "kind": "country_rules",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 4095.5146129999775,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.3903800499921017,
+            "@10": 0.3903800499921017
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "d06",
+        "kind": "country_rules",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3456.508022998605,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "d07",
+        "kind": "country_rules",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3645.2565559993673,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.6992148198508501,
+            "@10": 0.6992148198508501
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "d08",
+        "kind": "country_rules",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3614.7311179993267,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.4703652827859579,
+            "@10": 0.6705019637402266
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "d09",
+        "kind": "country_rules",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3725.2287339979375,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.3391602052736161,
+            "@10": 0.3260595412115671
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "d10",
+        "kind": "country_rules",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3525.1690149998467,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.6366824387328317,
+            "@10": 0.6366824387328317
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "d11",
+        "kind": "country_rules",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3467.2542910011543,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.21398626473452756,
+            "@10": 0.13886244387355454
+          },
+          "rr": 0.5
+        }
+      },
+      {
+        "qid": "d12",
+        "kind": "country_rules",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3353.17342900089,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.8687949224876582,
+            "@10": 0.7791714369672127
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "d13",
+        "kind": "country_rules",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3319.172632000118,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.5087403079104241,
+            "@10": 0.4205117250400189
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "d14",
+        "kind": "country_rules",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3440.0307780015282,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.4703652827859579,
+            "@10": 0.5206888446176334
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "d15",
+        "kind": "country_rules",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 4822.968322998349,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.3391602052736161,
+            "@10": 0.41918605213740834
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "d16",
+        "kind": "country_rules",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 4291.6431679987,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.6131471927654584,
+            "@10": 0.7977228895450266
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "d17",
+        "kind": "country_rules",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3687.456221003231,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "d18",
+        "kind": "country_rules",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3513.0068710022897,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.46927872602275644,
+            "@10": 0.46927872602275644
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "d19",
+        "kind": "country_rules",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3595.421843998338,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.5087403079104241,
+            "@10": 0.40853591842579556
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "d20",
+        "kind": "country_rules",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3560.335581001709,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.3391602052736161,
+            "@10": 0.22009176629808017
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "d21",
+        "kind": "country_rules",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3580.1706969978113,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.14606834984270645,
+            "@10": 0.1731866333482261
+          },
+          "rr": 0.25
+        }
+      },
+      {
+        "qid": "d22",
+        "kind": "country_rules",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3560.2930290006043,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.8687949224876582,
+            "@10": 0.5637884576902256
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "d23",
+        "kind": "country_rules",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3473.1539919994248,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.8539316501572937,
+            "@10": 0.6755184993100496
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "d24",
+        "kind": "country_rules",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3442.68591600121,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "d25",
+        "kind": "refusal",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 4163.076486001955,
+        "refused": false
+      },
+      {
+        "qid": "d26",
+        "kind": "refusal",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3721.242916999472,
+        "refused": false
+      },
+      {
+        "qid": "d27",
+        "kind": "refusal",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 4262.228129002324,
+        "refused": false
+      },
+      {
+        "qid": "d28",
+        "kind": "refusal",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 23770.986260999052,
+        "refused": false
+      },
+      {
+        "qid": "d29",
+        "kind": "refusal",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 5921.01231199922,
+        "refused": false
+      },
+      {
+        "qid": "d30",
+        "kind": "refusal",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 8013.5581829999865,
+        "refused": true
+      },
+      {
+        "qid": "d31",
+        "kind": "refusal",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 9201.33561500188,
+        "refused": true
+      },
+      {
+        "qid": "d32",
+        "kind": "refusal",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 5973.918440002308,
+        "refused": true
+      },
+      {
+        "qid": "d33",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 6954.596158997447,
+        "refused": true,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.6164336326286644,
+            "@10": 0.40002324830925196
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "d34",
+        "kind": "refusal",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 6589.268673000333,
+        "refused": true
+      },
+      {
+        "qid": "d35",
+        "kind": "coverage",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 7770.053645002918,
+        "refused": true
+      },
+      {
+        "qid": "d36",
+        "kind": "coverage",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 6237.198729002557,
+        "refused": false
+      },
+      {
+        "qid": "d37",
+        "kind": "coverage",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 5852.867084999161,
+        "refused": false
+      },
+      {
+        "qid": "d38",
+        "kind": "coverage",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 5188.499830001092,
+        "refused": false
+      },
+      {
+        "qid": "d39",
+        "kind": "coverage",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 5029.148557001463,
+        "refused": false
+      },
+      {
+        "qid": "mh02",
+        "kind": "multi_hop",
+        "reviewed_by": "model",
+        "filters": null,
+        "latency_ms": 4340.816752999672,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 0.5,
+            "@10": 0.5
+          },
+          "ndcg": {
+            "@5": 0.13120507751234178,
+            "@10": 0.08514311764162098
+          },
+          "rr": 0.2
+        }
+      },
+      {
+        "qid": "mh03",
+        "kind": "multi_hop",
+        "reviewed_by": "model",
+        "filters": null,
+        "latency_ms": 5162.1438060028595,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 0.5,
+            "@10": 0.5
+          },
+          "ndcg": {
+            "@5": 0.5531464700081437,
+            "@10": 0.43231813227099475
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "mh04",
+        "kind": "multi_hop",
+        "reviewed_by": "model",
+        "filters": null,
+        "latency_ms": 5505.557145002967,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 0.5,
+            "@10": 0.5
+          },
+          "ndcg": {
+            "@5": 0.16958010263680806,
+            "@10": 0.16958010263680806
+          },
+          "rr": 0.3333333333333333
+        }
+      },
+      {
+        "qid": "mh05",
+        "kind": "multi_hop",
+        "reviewed_by": "model",
+        "filters": null,
+        "latency_ms": 5216.561312998238,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 0.5,
+            "@10": 0.5
+          },
+          "ndcg": {
+            "@5": 0.3391602052736161,
+            "@10": 0.22009176629808017
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "mh06",
+        "kind": "multi_hop",
+        "reviewed_by": "model",
+        "filters": null,
+        "latency_ms": 4929.213914001593,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.8687949224876582,
+            "@10": 0.7116179486056782
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "mh07",
+        "kind": "multi_hop",
+        "reviewed_by": "model",
+        "filters": null,
+        "latency_ms": 4565.5193900020095,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.5147714448836774,
+            "@10": 0.40741536676357565
+          },
+          "rr": 0.5
+        }
+      },
+      {
+        "qid": "mh09",
+        "kind": "multi_hop",
+        "reviewed_by": "model",
+        "filters": null,
+        "latency_ms": 5831.465093997394,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 0.5,
+            "@10": 0.5
+          },
+          "ndcg": {
+            "@5": 0.5531464700081437,
+            "@10": 0.501749354207772
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "mh10",
+        "kind": "multi_hop",
+        "reviewed_by": "model",
+        "filters": null,
+        "latency_ms": 5836.4556369997445,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 0.5,
+            "@10": 0.5
+          },
+          "ndcg": {
+            "@5": 0.6608397947263839,
+            "@10": 0.4288398090337664
+          },
+          "rr": 0.5
+        }
+      },
+      {
+        "qid": "mh11",
+        "kind": "multi_hop",
+        "reviewed_by": "model",
+        "filters": null,
+        "latency_ms": 5483.045565000793,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 0.0,
+            "@10": 0.6666666666666666
+          },
+          "ndcg": {
+            "@5": 0.0,
+            "@10": 0.14279514403613733
+          },
+          "rr": 0.14285714285714285
+        }
+      },
+      {
+        "qid": "mh13",
+        "kind": "multi_hop",
+        "reviewed_by": "model",
+        "filters": null,
+        "latency_ms": 4832.11343199946,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 0.5,
+            "@10": 0.5
+          },
+          "ndcg": {
+            "@5": 0.3391602052736161,
+            "@10": 0.3570764765963919
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "mh15",
+        "kind": "multi_hop",
+        "reviewed_by": "model",
+        "filters": null,
+        "latency_ms": 5310.252982999373,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.6608397947263839,
+            "@10": 0.5072380780124417
+          },
+          "rr": 0.5
+        }
+      },
+      {
+        "qid": "mh18",
+        "kind": "multi_hop",
+        "reviewed_by": "model",
+        "filters": null,
+        "latency_ms": 5924.059254000895,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.5087403079104241,
+            "@10": 0.6625602459390023
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "mh19",
+        "kind": "multi_hop",
+        "reviewed_by": "model",
+        "filters": null,
+        "latency_ms": 5317.385627000476,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 0.5,
+            "@10": 0.5
+          },
+          "ndcg": {
+            "@5": 0.4468535299918563,
+            "@10": 0.28997736516021183
+          },
+          "rr": 0.3333333333333333
+        }
+      },
+      {
+        "qid": "mh20",
+        "kind": "multi_hop",
+        "reviewed_by": "model",
+        "filters": null,
+        "latency_ms": 6162.333260999731,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 0.5,
+            "@10": 0.5
+          },
+          "ndcg": {
+            "@5": 0.5531464700081437,
+            "@10": 0.3589542101716347
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "mh21",
+        "kind": "multi_hop",
+        "reviewed_by": "model",
+        "filters": null,
+        "latency_ms": 6337.885393000761,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 0.5,
+            "@10": 0.5
+          },
+          "ndcg": {
+            "@5": 0.30078518014914984,
+            "@10": 0.3558355139887785
+          },
+          "rr": 0.3333333333333333
+        }
+      },
+      {
+        "qid": "mh22",
+        "kind": "multi_hop",
+        "reviewed_by": "model",
+        "filters": null,
+        "latency_ms": 6350.24478899868,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 0.5,
+            "@10": 0.5
+          },
+          "ndcg": {
+            "@5": 0.21398626473452756,
+            "@10": 0.1909208661789347
+          },
+          "rr": 0.5
+        }
+      },
+      {
+        "qid": "mh23",
+        "kind": "multi_hop",
+        "reviewed_by": "model",
+        "filters": null,
+        "latency_ms": 6907.7812649993575,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 0.5,
+            "@10": 0.5
+          },
+          "ndcg": {
+            "@5": 0.38356636737133565,
+            "@10": 0.32730659600126993
+          },
+          "rr": 0.5
+        }
+      },
+      {
+        "qid": "mh24",
+        "kind": "multi_hop",
+        "reviewed_by": "model",
+        "filters": null,
+        "latency_ms": 8114.959983002336,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.7227265726449519,
+            "@10": 0.5390031312763821
+          },
+          "rr": 1.0
+        }
+      }
+    ],
+    "oracle_filter": [
+      {
+        "qid": "a01",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "TUM"
+          ],
+          "programme": [
+            "M.Sc. Informatics"
+          ]
+        },
+        "latency_ms": 3066.2134630001674,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.8687949224876582,
+            "@10": 0.5637884576902256
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "a02",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "TUM"
+          ],
+          "programme": [
+            "M.Sc. Informatics"
+          ]
+        },
+        "latency_ms": 3402.5015010010975,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.7227265726449519,
+            "@10": 0.5473983622993501
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "a03",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "TUM"
+          ],
+          "programme": [
+            "M.Sc. Informatics"
+          ]
+        },
+        "latency_ms": 3624.3075860002136,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 0.0,
+            "@10": 0.0
+          },
+          "ndcg": {
+            "@5": 0.0,
+            "@10": 0.0
+          },
+          "rr": 0.0
+        }
+      },
+      {
+        "qid": "a04",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "TUM"
+          ],
+          "programme": [
+            "M.Sc. Informatics"
+          ]
+        },
+        "latency_ms": 4005.917059002968,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 1.0,
+            "@10": 0.7935840677649109
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "a05",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "TUM"
+          ],
+          "programme": [
+            "M.Sc. Data Engineering and Analytics"
+          ]
+        },
+        "latency_ms": 3867.1301350004796,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.5531464700081437,
+            "@10": 0.3589542101716347
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "a06",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "TUM"
+          ],
+          "programme": [
+            "M.Sc. Data Engineering and Analytics"
+          ]
+        },
+        "latency_ms": 3738.3410380025452,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 0.0,
+            "@10": 0.0
+          },
+          "ndcg": {
+            "@5": 0.0,
+            "@10": 0.0
+          },
+          "rr": 0.0
+        }
+      },
+      {
+        "qid": "a07",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "TUM"
+          ],
+          "programme": [
+            "M.Sc. Data Engineering and Analytics"
+          ]
+        },
+        "latency_ms": 3570.174603999476,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 1.0,
+            "@10": 0.7967610662472991
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "a08",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "RWTH Aachen"
+          ],
+          "programme": [
+            "M.Sc. Computer Science"
+          ]
+        },
+        "latency_ms": 4494.357284002035,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "a09",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "RWTH Aachen"
+          ],
+          "programme": [
+            "M.Sc. Computer Science"
+          ]
+        },
+        "latency_ms": 4279.328454998904,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.5706417189553201,
+            "@10": 0.5706417189553201
+          },
+          "rr": 0.3333333333333333
+        }
+      },
+      {
+        "qid": "a10",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "RWTH Aachen"
+          ],
+          "programme": [
+            "M.Sc. Computer Science"
+          ]
+        },
+        "latency_ms": 4046.4064500010863,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 0.0,
+            "@10": 0.0
+          },
+          "ndcg": {
+            "@5": 0.0,
+            "@10": 0.0
+          },
+          "rr": 0.0
+        }
+      },
+      {
+        "qid": "a11",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "RWTH Aachen"
+          ],
+          "programme": [
+            "M.Sc. Computer Science"
+          ]
+        },
+        "latency_ms": 3101.8594829984067,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.4703652827859579,
+            "@10": 0.419665006636777
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "a12",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "RWTH Aachen"
+          ],
+          "programme": [
+            "M.Sc. Data Science"
+          ]
+        },
+        "latency_ms": 2678.6634370000684,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.5087403079104241,
+            "@10": 0.7536526491624604
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "a13",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "RWTH Aachen"
+          ],
+          "programme": [
+            "M.Sc. Data Science"
+          ]
+        },
+        "latency_ms": 2894.343880001543,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.5531464700081437,
+            "@10": 0.6898511839334867
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "a14",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "RWTH Aachen"
+          ],
+          "programme": [
+            "M.Sc. Data Science"
+          ]
+        },
+        "latency_ms": 3148.001781999483,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.3391602052736161,
+            "@10": 0.39806284658828084
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "a15",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "TU Berlin"
+          ],
+          "programme": [
+            "M.Sc. Computer Science"
+          ]
+        },
+        "latency_ms": 3283.879277001688,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.48522855511632257,
+            "@10": 0.5922216874835863
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "a17",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "TU Berlin"
+          ],
+          "programme": [
+            "M.Sc. Computer Science"
+          ]
+        },
+        "latency_ms": 2908.032995001122,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.24630238874073,
+            "@10": 0.24630238874073
+          },
+          "rr": 0.5
+        }
+      },
+      {
+        "qid": "a18",
+        "kind": "confusable",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "TUM"
+          ],
+          "programme": [
+            "M.Sc. Informatics"
+          ]
+        },
+        "latency_ms": 2871.457797999028,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.8539316501572937,
+            "@10": 0.6325414799409711
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "a19",
+        "kind": "confusable",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "TUM"
+          ],
+          "programme": [
+            "M.Sc. Data Engineering and Analytics"
+          ]
+        },
+        "latency_ms": 2776.9834700011415,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 1.0,
+            "@10": 0.7917267193679838
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "a20",
+        "kind": "confusable",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "TUM"
+          ],
+          "programme": [
+            "M.Sc. Informatics"
+          ]
+        },
+        "latency_ms": 2943.862881002133,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.13120507751234178,
+            "@10": 0.10633668103022986
+          },
+          "rr": 0.2
+        }
+      },
+      {
+        "qid": "a21",
+        "kind": "confusable",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "RWTH Aachen"
+          ],
+          "programme": [
+            "M.Sc. Computer Science"
+          ]
+        },
+        "latency_ms": 3072.6509669984807,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.38685280723454163,
+            "@10": 0.5802792108518124
+          },
+          "rr": 0.5
+        }
+      },
+      {
+        "qid": "a22",
+        "kind": "confusable",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "RWTH Aachen"
+          ],
+          "programme": [
+            "M.Sc. Data Science"
+          ]
+        },
+        "latency_ms": 3870.5214590008836,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.6843515475204855,
+            "@10": 0.7183750273402226
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "a23",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "RWTH Aachen"
+          ],
+          "programme": [
+            "M.Sc. Computer Science"
+          ]
+        },
+        "latency_ms": 3530.651732999104,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.3065735963827292,
+            "@10": 0.3065735963827292
+          },
+          "rr": 0.3333333333333333
+        }
+      },
+      {
+        "qid": "b01",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "Saarland University"
+          ],
+          "programme": [
+            "M.Sc. Computer Science"
+          ]
+        },
+        "latency_ms": 4550.8469289998175,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.8539316501572937,
+            "@10": 0.5541432109622958
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "b02",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "Saarland University"
+          ],
+          "programme": [
+            "M.Sc. Computer Science"
+          ]
+        },
+        "latency_ms": 3182.1038510024664,
+        "refused": true,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.3156484524795145,
+            "@10": 0.28323251649726616
+          },
+          "rr": 0.3333333333333333
+        }
+      },
+      {
+        "qid": "b04",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "Saarland University"
+          ],
+          "programme": [
+            "M.Sc. Computer Science"
+          ]
+        },
+        "latency_ms": 3387.2655969971674,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.48522855511632257,
+            "@10": 0.31488013066763093
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "b05",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "Saarland University"
+          ],
+          "programme": [
+            "M.Sc. Data Science and Artificial Intelligence"
+          ]
+        },
+        "latency_ms": 3175.454734999221,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.21398626473452756,
+            "@10": 0.13886244387355454
+          },
+          "rr": 0.5
+        }
+      },
+      {
+        "qid": "b06",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "Saarland University"
+          ],
+          "programme": [
+            "M.Sc. Data Science and Artificial Intelligence"
+          ]
+        },
+        "latency_ms": 4529.522148000979,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.7227265726449519,
+            "@10": 0.4690000933206748
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "b07",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "Saarland University"
+          ],
+          "programme": [
+            "M.Sc. Data Science and Artificial Intelligence"
+          ]
+        },
+        "latency_ms": 3619.8178119993827,
+        "refused": true,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.14606834984270645,
+            "@10": 0.09478836436955078
+          },
+          "rr": 0.25
+        }
+      },
+      {
+        "qid": "b08",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "TU Dresden"
+          ],
+          "programme": [
+            "M.Sc. Computer Science"
+          ]
+        },
+        "latency_ms": 3482.1070589969167,
+        "refused": true,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.5531464700081437,
+            "@10": 0.5531464700081437
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "b09",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "TU Dresden"
+          ],
+          "programme": [
+            "M.Sc. Computer Science"
+          ]
+        },
+        "latency_ms": 3592.075640000985,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.13120507751234178,
+            "@10": 0.13120507751234178
+          },
+          "rr": 0.2
+        }
+      },
+      {
+        "qid": "b10",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "TU Dresden"
+          ]
+        },
+        "latency_ms": 3865.857368000434,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 0.0,
+            "@10": 0.0
+          },
+          "ndcg": {
+            "@5": 0.0,
+            "@10": 0.0
+          },
+          "rr": 0.0
+        }
+      },
+      {
+        "qid": "b11",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "TU Dresden"
+          ],
+          "programme": [
+            "M.Sc. Computer Science"
+          ]
+        },
+        "latency_ms": 3677.4899619995267,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.48522855511632257,
+            "@10": 0.48522855511632257
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "b12",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "TU Dresden"
+          ],
+          "programme": [
+            "M.Sc. Computer Science"
+          ]
+        },
+        "latency_ms": 3611.7568829977245,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.8539316501572937,
+            "@10": 0.7059054020403311
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "b13",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "KIT"
+          ],
+          "programme": [
+            "M.Sc. Computer Science"
+          ]
+        },
+        "latency_ms": 3675.3617459980887,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.6164336326286644,
+            "@10": 0.5428183923453893
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "b14",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "KIT"
+          ],
+          "programme": [
+            "M.Sc. Computer Science"
+          ]
+        },
+        "latency_ms": 3726.9185580007615,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.4144299250118475,
+            "@10": 0.553486104522623
+          },
+          "rr": 0.5
+        }
+      },
+      {
+        "qid": "b15",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "KIT"
+          ],
+          "programme": [
+            "M.Sc. Computer Science"
+          ]
+        },
+        "latency_ms": 3343.1775810022373,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.16812753627111746,
+            "@10": 0.16812753627111746
+          },
+          "rr": 0.25
+        }
+      },
+      {
+        "qid": "b16",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "KIT"
+          ],
+          "programme": [
+            "M.Sc. Computer Science"
+          ]
+        },
+        "latency_ms": 4107.120766999287,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.5296347172140421,
+            "@10": 0.48649183542828267
+          },
+          "rr": 0.5
+        }
+      },
+      {
+        "qid": "b17",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "KIT"
+          ]
+        },
+        "latency_ms": 3324.7583090014814,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.830419897363192,
+            "@10": 0.6835381846158708
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "b18",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "KIT"
+          ],
+          "programme": [
+            "M.Sc. Computational and Data Science"
+          ]
+        },
+        "latency_ms": 3554.106130002765,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "b19",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "KIT"
+          ],
+          "programme": [
+            "M.Sc. Computational and Data Science"
+          ]
+        },
+        "latency_ms": 3425.2355429998715,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "b21",
+        "kind": "confusable",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "KIT"
+          ],
+          "programme": [
+            "M.Sc. Computational and Data Science"
+          ]
+        },
+        "latency_ms": 3666.8594570001005,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "b22",
+        "kind": "confusable",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "KIT"
+          ],
+          "programme": [
+            "M.Sc. Computer Science"
+          ]
+        },
+        "latency_ms": 3474.1995979966305,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.7227265726449519,
+            "@10": 0.6722390270733756
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "b23",
+        "kind": "confusable",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "KIT"
+          ],
+          "programme": [
+            "M.Sc. Computational and Data Science"
+          ]
+        },
+        "latency_ms": 3401.6306449993863,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 1.0,
+            "@10": 0.7935840677649109
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "b24",
+        "kind": "confusable",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "KIT"
+          ],
+          "programme": [
+            "M.Sc. Computational and Data Science"
+          ]
+        },
+        "latency_ms": 3054.269125997962,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 1.0,
+            "@10": 0.9363792118010481
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "c01",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "TU Darmstadt"
+          ],
+          "programme": [
+            "M.Sc. Computer Science"
+          ]
+        },
+        "latency_ms": 3873.4655709995423,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.5147714448836774,
+            "@10": 0.47870393709728
+          },
+          "rr": 0.5
+        }
+      },
+      {
+        "qid": "c02",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "TU Darmstadt"
+          ],
+          "programme": [
+            "M.Sc. Computer Science"
+          ]
+        },
+        "latency_ms": 4196.752952000679,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.6843515475204855,
+            "@10": 0.72891152902702
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "c03",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "TU Darmstadt"
+          ],
+          "programme": [
+            "M.Sc. Artificial Intelligence and Machine Learning"
+          ]
+        },
+        "latency_ms": 3648.62182700017,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.8539316501572937,
+            "@10": 0.6911279212606075
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "c04",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "TU Darmstadt"
+          ],
+          "programme": [
+            "M.Sc. Artificial Intelligence and Machine Learning"
+          ]
+        },
+        "latency_ms": 3539.130073997512,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.639945385422766,
+            "@10": 0.6364741801035538
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "c05",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "University of Stuttgart"
+          ],
+          "programme": [
+            "M.Sc. Computer Science"
+          ]
+        },
+        "latency_ms": 4496.054391001962,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.6164336326286644,
+            "@10": 0.40002324830925196
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "c06",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "University of Stuttgart"
+          ],
+          "programme": [
+            "M.Sc. Computer Science"
+          ]
+        },
+        "latency_ms": 3635.6464290001895,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.592512031964586,
+            "@10": 0.592512031964586
+          },
+          "rr": 0.5
+        }
+      },
+      {
+        "qid": "c07",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "University of Stuttgart"
+          ]
+        },
+        "latency_ms": 3974.6567359979963,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.8687949224876582,
+            "@10": 0.8829374068620365
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "c08",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "University of Stuttgart"
+          ],
+          "programme": [
+            "M.Sc. Computer Science"
+          ]
+        },
+        "latency_ms": 4368.896820000373,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.7227265726449519,
+            "@10": 0.6086182388744239
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "c09",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "TU Darmstadt"
+          ],
+          "programme": [
+            "M.Sc. Computer Science"
+          ]
+        },
+        "latency_ms": 4175.385291997372,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.9197207891481876,
+            "@10": 0.9197207891481876
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "c10",
+        "kind": "confusable",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "TU Darmstadt"
+          ],
+          "programme": [
+            "M.Sc. Artificial Intelligence and Machine Learning"
+          ]
+        },
+        "latency_ms": 4409.120737000194,
+        "refused": true,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.2640681225725909,
+            "@10": 0.2640681225725909
+          },
+          "rr": 0.25
+        }
+      },
+      {
+        "qid": "c11",
+        "kind": "confusable",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "TU Darmstadt"
+          ],
+          "programme": [
+            "M.Sc. Computer Science"
+          ]
+        },
+        "latency_ms": 3669.6216620002815,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.9197207891481876,
+            "@10": 0.9197207891481876
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "c12",
+        "kind": "multi_hop",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "TUM"
+          ],
+          "programme": [
+            "M.Sc. Data Engineering and Analytics"
+          ]
+        },
+        "latency_ms": 3755.5122789999587,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 0.0,
+            "@10": 0.5
+          },
+          "ndcg": {
+            "@5": 0.0,
+            "@10": 0.06625422345438903
+          },
+          "rr": 0.1111111111111111
+        }
+      },
+      {
+        "qid": "c13",
+        "kind": "multi_hop",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "University of Stuttgart"
+          ],
+          "programme": [
+            "M.Sc. Computer Science"
+          ]
+        },
+        "latency_ms": 4843.260862999159,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 0.5,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.5087403079104241,
+            "@10": 0.6078421520159136
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "c14",
+        "kind": "multi_hop",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "TU Dresden"
+          ],
+          "programme": [
+            "M.Sc. Computer Science"
+          ]
+        },
+        "latency_ms": 4463.841277000029,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 0.5,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.3391602052736161,
+            "@10": 0.28371255449703187
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "c15",
+        "kind": "multi_hop",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "Saarland University"
+          ],
+          "programme": [
+            "M.Sc. Computer Science"
+          ]
+        },
+        "latency_ms": 4518.297463000636,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 0.5,
+            "@10": 0.5
+          },
+          "ndcg": {
+            "@5": 0.6164336326286644,
+            "@10": 0.5446757407423163
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "c16",
+        "kind": "multi_hop",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "TUM"
+          ],
+          "programme": [
+            "M.Sc. Informatics"
+          ]
+        },
+        "latency_ms": 4668.587367003056,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 0.5,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.16958010263680806,
+            "@10": 0.2528410271851774
+          },
+          "rr": 0.3333333333333333
+        }
+      },
+      {
+        "qid": "c17",
+        "kind": "multi_hop",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3875.1673650003795,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 0.0,
+            "@10": 0.0
+          },
+          "ndcg": {
+            "@5": 0.0,
+            "@10": 0.0
+          },
+          "rr": 0.0
+        }
+      },
+      {
+        "qid": "c18",
+        "kind": "multi_hop",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3736.272784000903,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.5531464700081437,
+            "@10": 0.3589542101716347
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "c19",
+        "kind": "multi_hop",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "TU Dresden"
+          ],
+          "programme": [
+            "M.Sc. Computer Science"
+          ]
+        },
+        "latency_ms": 4338.143237000622,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 0.5,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.21398626473452756,
+            "@10": 0.21726071285222986
+          },
+          "rr": 0.5
+        }
+      },
+      {
+        "qid": "c20",
+        "kind": "multi_hop",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "TUM"
+          ],
+          "programme": [
+            "M.Sc. Data Engineering and Analytics"
+          ]
+        },
+        "latency_ms": 4029.9188110002433,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 0.5,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.13120507751234178,
+            "@10": 0.1635413866202963
+          },
+          "rr": 0.2
+        }
+      },
+      {
+        "qid": "c21",
+        "kind": "multi_hop",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "TUM"
+          ],
+          "programme": [
+            "M.Sc. Informatics"
+          ]
+        },
+        "latency_ms": 3956.0317830000713,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 0.5,
+            "@10": 0.5
+          },
+          "ndcg": {
+            "@5": 0.3391602052736161,
+            "@10": 0.22009176629808017
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "d01",
+        "kind": "country_rules",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3496.3675729995884,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.3391602052736161,
+            "@10": 0.3391602052736161
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "d02",
+        "kind": "country_rules",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3232.4107739987085,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.5087403079104241,
+            "@10": 0.5696160022325947
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "d03",
+        "kind": "country_rules",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3772.9717880029057,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.8687949224876582,
+            "@10": 0.6968404678259545
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "d04",
+        "kind": "country_rules",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3876.6162490028364,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "d05",
+        "kind": "country_rules",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3436.983985000552,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.3903800499921017,
+            "@10": 0.3903800499921017
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "d06",
+        "kind": "country_rules",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3372.604541000328,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "d07",
+        "kind": "country_rules",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3442.108396000549,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.6992148198508501,
+            "@10": 0.6992148198508501
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "d08",
+        "kind": "country_rules",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3688.95303699901,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.4703652827859579,
+            "@10": 0.6705019637402266
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "d09",
+        "kind": "country_rules",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3576.0540340015723,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.3391602052736161,
+            "@10": 0.3260595412115671
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "d10",
+        "kind": "country_rules",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3489.407712000684,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.6366824387328317,
+            "@10": 0.6366824387328317
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "d11",
+        "kind": "country_rules",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3392.4620970028627,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.21398626473452756,
+            "@10": 0.13886244387355454
+          },
+          "rr": 0.5
+        }
+      },
+      {
+        "qid": "d12",
+        "kind": "country_rules",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3530.5477719994087,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.8687949224876582,
+            "@10": 0.7791714369672127
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "d13",
+        "kind": "country_rules",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3454.6092260025034,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.5087403079104241,
+            "@10": 0.4205117250400189
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "d14",
+        "kind": "country_rules",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3504.761027998029,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.4703652827859579,
+            "@10": 0.5206888446176334
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "d15",
+        "kind": "country_rules",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3260.7458810016396,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.3391602052736161,
+            "@10": 0.41918605213740834
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "d16",
+        "kind": "country_rules",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 5287.809975998243,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.6131471927654584,
+            "@10": 0.7977228895450266
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "d17",
+        "kind": "country_rules",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 5129.269074997865,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "d18",
+        "kind": "country_rules",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "TUM"
+          ]
+        },
+        "latency_ms": 4176.5402980017825,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.46927872602275644,
+            "@10": 0.46927872602275644
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "d19",
+        "kind": "country_rules",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "RWTH Aachen"
+          ]
+        },
+        "latency_ms": 3455.8832270013227,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.6843515475204855,
+            "@10": 0.4440973278132557
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "d20",
+        "kind": "country_rules",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "TU Berlin"
+          ]
+        },
+        "latency_ms": 4003.378874996997,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.3391602052736161,
+            "@10": 0.28371255449703187
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "d21",
+        "kind": "country_rules",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "TU Berlin"
+          ]
+        },
+        "latency_ms": 3519.454533998214,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.16958010263680806,
+            "@10": 0.1884441521277154
+          },
+          "rr": 0.3333333333333333
+        }
+      },
+      {
+        "qid": "d22",
+        "kind": "country_rules",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "KIT"
+          ]
+        },
+        "latency_ms": 3483.642590999807,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 1.0,
+            "@10": 0.6489315753318465
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "d23",
+        "kind": "country_rules",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "University of Stuttgart"
+          ]
+        },
+        "latency_ms": 3370.749161000276,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 1.0,
+            "@10": 0.8508957228074243
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "d24",
+        "kind": "country_rules",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "Saarland University"
+          ]
+        },
+        "latency_ms": 3360.879349998868,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "d25",
+        "kind": "refusal",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3609.567055998923,
+        "refused": false
+      },
+      {
+        "qid": "d26",
+        "kind": "refusal",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 4080.238040001859,
+        "refused": false
+      },
+      {
+        "qid": "d27",
+        "kind": "refusal",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 4561.6955919977045,
+        "refused": false
+      },
+      {
+        "qid": "d28",
+        "kind": "refusal",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 10017.295704998105,
+        "refused": false
+      },
+      {
+        "qid": "d29",
+        "kind": "refusal",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 7378.961312999309,
+        "refused": false
+      },
+      {
+        "qid": "d30",
+        "kind": "refusal",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 6807.812091999949,
+        "refused": true
+      },
+      {
+        "qid": "d31",
+        "kind": "refusal",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 7306.28079500093,
+        "refused": true
+      },
+      {
+        "qid": "d32",
+        "kind": "refusal",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 6424.57184000159,
+        "refused": true
+      },
+      {
+        "qid": "d33",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "TU Darmstadt"
+          ]
+        },
+        "latency_ms": 6848.892485999386,
+        "refused": true,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.6548086577531307,
+            "@10": 0.424926013816671
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "d34",
+        "kind": "refusal",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 6736.654216001625,
+        "refused": true
+      },
+      {
+        "qid": "d35",
+        "kind": "coverage",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 7777.704160998837,
+        "refused": true
+      },
+      {
+        "qid": "d36",
+        "kind": "coverage",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 5643.506020998757,
+        "refused": false
+      },
+      {
+        "qid": "d37",
+        "kind": "coverage",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 5328.250070000649,
+        "refused": false
+      },
+      {
+        "qid": "d38",
+        "kind": "coverage",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 4981.399846998102,
+        "refused": false
+      },
+      {
+        "qid": "d39",
+        "kind": "coverage",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 4581.087897000543,
+        "refused": false
+      },
+      {
+        "qid": "mh02",
+        "kind": "multi_hop",
+        "reviewed_by": "model",
+        "filters": {
+          "university": [
+            "Saarland University"
+          ],
+          "programme": [
+            "M.Sc. Data Science and Artificial Intelligence"
+          ]
+        },
+        "latency_ms": 4420.0440690001415,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 0.5,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.21398626473452756,
+            "@10": 0.21726071285222986
+          },
+          "rr": 0.5
+        }
+      },
+      {
+        "qid": "mh03",
+        "kind": "multi_hop",
+        "reviewed_by": "model",
+        "filters": {
+          "university": [
+            "TUM"
+          ],
+          "programme": [
+            "M.Sc. Data Engineering and Analytics"
+          ]
+        },
+        "latency_ms": 5295.648824998352,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.830419897363192,
+            "@10": 0.6816808362189437
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "mh04",
+        "kind": "multi_hop",
+        "reviewed_by": "model",
+        "filters": {
+          "university": [
+            "TU Berlin"
+          ],
+          "programme": [
+            "M.Sc. Computer Science"
+          ]
+        },
+        "latency_ms": 4738.886061000812,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 0.5,
+            "@10": 0.5
+          },
+          "ndcg": {
+            "@5": 0.16958010263680806,
+            "@10": 0.16958010263680806
+          },
+          "rr": 0.3333333333333333
+        }
+      },
+      {
+        "qid": "mh05",
+        "kind": "multi_hop",
+        "reviewed_by": "model",
+        "filters": {
+          "university": [
+            "KIT"
+          ],
+          "programme": [
+            "M.Sc. Computer Science"
+          ]
+        },
+        "latency_ms": 4789.100334000977,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 0.5,
+            "@10": 0.5
+          },
+          "ndcg": {
+            "@5": 0.3391602052736161,
+            "@10": 0.28371255449703187
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "mh06",
+        "kind": "multi_hop",
+        "reviewed_by": "model",
+        "filters": {
+          "university": [
+            "RWTH Aachen"
+          ],
+          "programme": [
+            "M.Sc. Data Science"
+          ]
+        },
+        "latency_ms": 4464.472555999237,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.7860137352654724,
+            "@10": 0.6528642754944294
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "mh07",
+        "kind": "multi_hop",
+        "reviewed_by": "model",
+        "filters": {
+          "university": [
+            "University of Stuttgart"
+          ],
+          "programme": [
+            "M.Sc. Computer Science"
+          ]
+        },
+        "latency_ms": 4935.959239999647,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.5147714448836774,
+            "@10": 0.6214990811334172
+          },
+          "rr": 0.5
+        }
+      },
+      {
+        "qid": "mh09",
+        "kind": "multi_hop",
+        "reviewed_by": "model",
+        "filters": null,
+        "latency_ms": 5293.575286003033,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 0.5,
+            "@10": 0.5
+          },
+          "ndcg": {
+            "@5": 0.5531464700081437,
+            "@10": 0.501749354207772
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "mh10",
+        "kind": "multi_hop",
+        "reviewed_by": "model",
+        "filters": null,
+        "latency_ms": 5636.122479001642,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 0.5,
+            "@10": 0.5
+          },
+          "ndcg": {
+            "@5": 0.6608397947263839,
+            "@10": 0.4288398090337664
+          },
+          "rr": 0.5
+        }
+      },
+      {
+        "qid": "mh11",
+        "kind": "multi_hop",
+        "reviewed_by": "model",
+        "filters": null,
+        "latency_ms": 5358.615777000523,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 0.0,
+            "@10": 0.6666666666666666
+          },
+          "ndcg": {
+            "@5": 0.0,
+            "@10": 0.14279514403613733
+          },
+          "rr": 0.14285714285714285
+        }
+      },
+      {
+        "qid": "mh13",
+        "kind": "multi_hop",
+        "reviewed_by": "model",
+        "filters": {
+          "university": [
+            "TU Berlin"
+          ]
+        },
+        "latency_ms": 4415.000176999456,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.6548086577531307,
+            "@10": 0.49435723575344825
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "mh15",
+        "kind": "multi_hop",
+        "reviewed_by": "model",
+        "filters": {
+          "university": [
+            "TU Darmstadt"
+          ]
+        },
+        "latency_ms": 5308.047744001669,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.6608397947263839,
+            "@10": 0.5806020001118017
+          },
+          "rr": 0.5
+        }
+      },
+      {
+        "qid": "mh18",
+        "kind": "multi_hop",
+        "reviewed_by": "model",
+        "filters": {
+          "university": [
+            "Saarland University"
+          ],
+          "programme": [
+            "M.Sc. Data Science and Artificial Intelligence"
+          ]
+        },
+        "latency_ms": 6285.371325000597,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.5087403079104241,
+            "@10": 0.6625602459390023
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "mh19",
+        "kind": "multi_hop",
+        "reviewed_by": "model",
+        "filters": null,
+        "latency_ms": 5694.425637997483,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 0.5,
+            "@10": 0.5
+          },
+          "ndcg": {
+            "@5": 0.4468535299918563,
+            "@10": 0.28997736516021183
+          },
+          "rr": 0.3333333333333333
+        }
+      },
+      {
+        "qid": "mh20",
+        "kind": "multi_hop",
+        "reviewed_by": "model",
+        "filters": null,
+        "latency_ms": 5820.636533000652,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 0.5,
+            "@10": 0.5
+          },
+          "ndcg": {
+            "@5": 0.5531464700081437,
+            "@10": 0.3589542101716347
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "mh21",
+        "kind": "multi_hop",
+        "reviewed_by": "model",
+        "filters": null,
+        "latency_ms": 11865.619605003303,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 0.5,
+            "@10": 0.5
+          },
+          "ndcg": {
+            "@5": 0.30078518014914984,
+            "@10": 0.3558355139887785
+          },
+          "rr": 0.3333333333333333
+        }
+      },
+      {
+        "qid": "mh22",
+        "kind": "multi_hop",
+        "reviewed_by": "model",
+        "filters": {
+          "university": [
+            "RWTH Aachen"
+          ],
+          "programme": [
+            "M.Sc. Data Science"
+          ]
+        },
+        "latency_ms": 6737.187619000906,
+        "refused": true,
+        "metrics": {
+          "recall": {
+            "@5": 0.5,
+            "@10": 0.5
+          },
+          "ndcg": {
+            "@5": 0.4703652827859579,
+            "@10": 0.419665006636777
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "mh23",
+        "kind": "multi_hop",
+        "reviewed_by": "model",
+        "filters": {
+          "university": [
+            "TU Berlin"
+          ],
+          "programme": [
+            "M.Sc. Computer Science"
+          ]
+        },
+        "latency_ms": 7524.857013999281,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 0.5,
+            "@10": 0.5
+          },
+          "ndcg": {
+            "@5": 0.5531464700081437,
+            "@10": 0.494639655562801
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "mh24",
+        "kind": "multi_hop",
+        "reviewed_by": "model",
+        "filters": {
+          "university": [
+            "KIT"
+          ],
+          "programme": [
+            "M.Sc. Computer Science"
+          ]
+        },
+        "latency_ms": 7505.978181998216,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.7227265726449519,
+            "@10": 0.5390031312763821
+          },
+          "rr": 1.0
+        }
+      }
+    ],
+    "detected_filter": [
+      {
+        "qid": "a01",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "TUM"
+          ],
+          "programme": [
+            "M.Sc. Informatics"
+          ]
+        },
+        "latency_ms": 3007.3448630027997,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.8687949224876582,
+            "@10": 0.5637884576902256
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "a02",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "TUM"
+          ],
+          "programme": [
+            "M.Sc. Informatics"
+          ]
+        },
+        "latency_ms": 4583.830255000066,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.7227265726449519,
+            "@10": 0.5473983622993501
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "a03",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "TUM"
+          ],
+          "programme": [
+            "M.Sc. Informatics"
+          ]
+        },
+        "latency_ms": 3726.098375998845,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 0.0,
+            "@10": 0.0
+          },
+          "ndcg": {
+            "@5": 0.0,
+            "@10": 0.0
+          },
+          "rr": 0.0
+        }
+      },
+      {
+        "qid": "a04",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "TUM"
+          ],
+          "programme": [
+            "M.Sc. Informatics"
+          ]
+        },
+        "latency_ms": 4259.923967001669,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 1.0,
+            "@10": 0.7935840677649109
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "a05",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "TUM"
+          ],
+          "programme": [
+            "M.Sc. Data Engineering and Analytics"
+          ]
+        },
+        "latency_ms": 3625.8060799991654,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.5531464700081437,
+            "@10": 0.3589542101716347
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "a06",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "TUM"
+          ],
+          "programme": [
+            "M.Sc. Data Engineering and Analytics"
+          ]
+        },
+        "latency_ms": 3497.915276999265,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 0.0,
+            "@10": 0.0
+          },
+          "ndcg": {
+            "@5": 0.0,
+            "@10": 0.0
+          },
+          "rr": 0.0
+        }
+      },
+      {
+        "qid": "a07",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "TUM"
+          ],
+          "programme": [
+            "M.Sc. Data Engineering and Analytics"
+          ]
+        },
+        "latency_ms": 3541.2629159982316,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 1.0,
+            "@10": 0.7967610662472991
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "a08",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "RWTH Aachen"
+          ],
+          "programme": [
+            "M.Sc. Computer Science"
+          ]
+        },
+        "latency_ms": 4558.746828999574,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "a09",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "RWTH Aachen"
+          ],
+          "programme": [
+            "M.Sc. Computer Science"
+          ]
+        },
+        "latency_ms": 3938.1478689974756,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.5706417189553201,
+            "@10": 0.5706417189553201
+          },
+          "rr": 0.3333333333333333
+        }
+      },
+      {
+        "qid": "a10",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "RWTH Aachen"
+          ],
+          "programme": [
+            "M.Sc. Computer Science"
+          ]
+        },
+        "latency_ms": 3718.591976998141,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 0.0,
+            "@10": 0.0
+          },
+          "ndcg": {
+            "@5": 0.0,
+            "@10": 0.0
+          },
+          "rr": 0.0
+        }
+      },
+      {
+        "qid": "a11",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "RWTH Aachen"
+          ],
+          "programme": [
+            "M.Sc. Computer Science"
+          ]
+        },
+        "latency_ms": 2976.1275199998636,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.4703652827859579,
+            "@10": 0.419665006636777
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "a12",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "RWTH Aachen"
+          ],
+          "programme": [
+            "M.Sc. Data Science"
+          ]
+        },
+        "latency_ms": 2665.933710999525,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.5087403079104241,
+            "@10": 0.7536526491624604
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "a13",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "RWTH Aachen"
+          ],
+          "programme": [
+            "M.Sc. Data Science"
+          ]
+        },
+        "latency_ms": 2863.4559090023686,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.5531464700081437,
+            "@10": 0.6898511839334867
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "a14",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "RWTH Aachen"
+          ],
+          "programme": [
+            "M.Sc. Data Science"
+          ]
+        },
+        "latency_ms": 3090.5481619993225,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.3391602052736161,
+            "@10": 0.39806284658828084
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "a15",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "TU Berlin"
+          ],
+          "programme": [
+            "M.Sc. Computer Science"
+          ]
+        },
+        "latency_ms": 3075.559647000773,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.48522855511632257,
+            "@10": 0.5922216874835863
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "a17",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "TU Berlin"
+          ],
+          "programme": [
+            "M.Sc. Computer Science"
+          ]
+        },
+        "latency_ms": 3033.518970001751,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.24630238874073,
+            "@10": 0.24630238874073
+          },
+          "rr": 0.5
+        }
+      },
+      {
+        "qid": "a18",
+        "kind": "confusable",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "TUM"
+          ],
+          "programme": [
+            "M.Sc. Informatics"
+          ]
+        },
+        "latency_ms": 3009.773743997357,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.8539316501572937,
+            "@10": 0.6325414799409711
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "a19",
+        "kind": "confusable",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "TUM"
+          ],
+          "programme": [
+            "M.Sc. Data Engineering and Analytics"
+          ]
+        },
+        "latency_ms": 2868.5479030027636,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 1.0,
+            "@10": 0.7917267193679838
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "a20",
+        "kind": "confusable",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "TUM"
+          ],
+          "programme": [
+            "M.Sc. Informatics"
+          ]
+        },
+        "latency_ms": 2930.3945409992593,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.13120507751234178,
+            "@10": 0.10633668103022986
+          },
+          "rr": 0.2
+        }
+      },
+      {
+        "qid": "a21",
+        "kind": "confusable",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "RWTH Aachen"
+          ],
+          "programme": [
+            "M.Sc. Computer Science"
+          ]
+        },
+        "latency_ms": 3496.336518001044,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.38685280723454163,
+            "@10": 0.5802792108518124
+          },
+          "rr": 0.5
+        }
+      },
+      {
+        "qid": "a22",
+        "kind": "confusable",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "RWTH Aachen"
+          ],
+          "programme": [
+            "M.Sc. Data Science"
+          ]
+        },
+        "latency_ms": 4796.533382999769,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.6843515475204855,
+            "@10": 0.7183750273402226
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "a23",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "RWTH Aachen"
+          ],
+          "programme": [
+            "M.Sc. Computer Science"
+          ]
+        },
+        "latency_ms": 3420.433340001182,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.3065735963827292,
+            "@10": 0.3065735963827292
+          },
+          "rr": 0.3333333333333333
+        }
+      },
+      {
+        "qid": "b01",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "Saarland University"
+          ],
+          "programme": [
+            "M.Sc. Computer Science"
+          ]
+        },
+        "latency_ms": 3463.199778998387,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.8539316501572937,
+            "@10": 0.5541432109622958
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "b02",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "Saarland University"
+          ],
+          "programme": [
+            "M.Sc. Computer Science"
+          ]
+        },
+        "latency_ms": 3242.4521909997566,
+        "refused": true,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.3156484524795145,
+            "@10": 0.28323251649726616
+          },
+          "rr": 0.3333333333333333
+        }
+      },
+      {
+        "qid": "b04",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "Saarland University"
+          ],
+          "programme": [
+            "M.Sc. Computer Science"
+          ]
+        },
+        "latency_ms": 3523.662506999244,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.48522855511632257,
+            "@10": 0.31488013066763093
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "b05",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "Saarland University"
+          ],
+          "programme": [
+            "M.Sc. Data Science and Artificial Intelligence"
+          ]
+        },
+        "latency_ms": 3535.7380699970236,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.21398626473452756,
+            "@10": 0.13886244387355454
+          },
+          "rr": 0.5
+        }
+      },
+      {
+        "qid": "b06",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "Saarland University"
+          ],
+          "programme": [
+            "M.Sc. Data Science and Artificial Intelligence"
+          ]
+        },
+        "latency_ms": 3859.2080870002974,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.7227265726449519,
+            "@10": 0.4690000933206748
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "b07",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "Saarland University"
+          ],
+          "programme": [
+            "M.Sc. Data Science and Artificial Intelligence"
+          ]
+        },
+        "latency_ms": 4233.825387000252,
+        "refused": true,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.14606834984270645,
+            "@10": 0.09478836436955078
+          },
+          "rr": 0.25
+        }
+      },
+      {
+        "qid": "b08",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "TU Dresden"
+          ],
+          "programme": [
+            "M.Sc. Computer Science"
+          ]
+        },
+        "latency_ms": 3851.622774000134,
+        "refused": true,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.5531464700081437,
+            "@10": 0.5531464700081437
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "b09",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "TU Dresden"
+          ],
+          "programme": [
+            "M.Sc. Computer Science"
+          ]
+        },
+        "latency_ms": 3542.8553050005576,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.13120507751234178,
+            "@10": 0.13120507751234178
+          },
+          "rr": 0.2
+        }
+      },
+      {
+        "qid": "b10",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "TU Dresden"
+          ]
+        },
+        "latency_ms": 4068.302362000395,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 0.0,
+            "@10": 0.0
+          },
+          "ndcg": {
+            "@5": 0.0,
+            "@10": 0.0
+          },
+          "rr": 0.0
+        }
+      },
+      {
+        "qid": "b11",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "TU Dresden"
+          ],
+          "programme": [
+            "M.Sc. Computer Science"
+          ]
+        },
+        "latency_ms": 4379.882598997938,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.48522855511632257,
+            "@10": 0.48522855511632257
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "b12",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "TU Dresden"
+          ],
+          "programme": [
+            "M.Sc. Computer Science"
+          ]
+        },
+        "latency_ms": 3521.397157001047,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.8539316501572937,
+            "@10": 0.7059054020403311
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "b13",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "KIT"
+          ],
+          "programme": [
+            "M.Sc. Computer Science"
+          ]
+        },
+        "latency_ms": 3406.601837003109,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.6164336326286644,
+            "@10": 0.5428183923453893
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "b14",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "KIT"
+          ],
+          "programme": [
+            "M.Sc. Computer Science"
+          ]
+        },
+        "latency_ms": 4149.102257997583,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.4144299250118475,
+            "@10": 0.553486104522623
+          },
+          "rr": 0.5
+        }
+      },
+      {
+        "qid": "b15",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "KIT"
+          ],
+          "programme": [
+            "M.Sc. Computer Science"
+          ]
+        },
+        "latency_ms": 3447.549746997538,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.16812753627111746,
+            "@10": 0.16812753627111746
+          },
+          "rr": 0.25
+        }
+      },
+      {
+        "qid": "b16",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "KIT"
+          ],
+          "programme": [
+            "M.Sc. Computer Science"
+          ]
+        },
+        "latency_ms": 4261.847711000883,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.5296347172140421,
+            "@10": 0.48649183542828267
+          },
+          "rr": 0.5
+        }
+      },
+      {
+        "qid": "b17",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "KIT"
+          ]
+        },
+        "latency_ms": 3782.454495998536,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.830419897363192,
+            "@10": 0.6835381846158708
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "b18",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "KIT"
+          ],
+          "programme": [
+            "M.Sc. Computational and Data Science"
+          ]
+        },
+        "latency_ms": 3524.569176002842,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "b19",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "KIT"
+          ],
+          "programme": [
+            "M.Sc. Computational and Data Science"
+          ]
+        },
+        "latency_ms": 3785.065433999989,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "b21",
+        "kind": "confusable",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "KIT"
+          ],
+          "programme": [
+            "M.Sc. Computational and Data Science"
+          ]
+        },
+        "latency_ms": 3587.0256970010814,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "b22",
+        "kind": "confusable",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "KIT"
+          ],
+          "programme": [
+            "M.Sc. Computer Science"
+          ]
+        },
+        "latency_ms": 3646.327662998374,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.7227265726449519,
+            "@10": 0.6722390270733756
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "b23",
+        "kind": "confusable",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "KIT"
+          ],
+          "programme": [
+            "M.Sc. Computational and Data Science"
+          ]
+        },
+        "latency_ms": 3484.934546999284,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 1.0,
+            "@10": 0.7935840677649109
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "b24",
+        "kind": "confusable",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "KIT"
+          ],
+          "programme": [
+            "M.Sc. Computational and Data Science"
+          ]
+        },
+        "latency_ms": 3261.4325639988238,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 1.0,
+            "@10": 0.9363792118010481
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "c01",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "TU Darmstadt"
+          ],
+          "programme": [
+            "M.Sc. Computer Science"
+          ]
+        },
+        "latency_ms": 3878.0338110009325,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.5147714448836774,
+            "@10": 0.47870393709728
+          },
+          "rr": 0.5
+        }
+      },
+      {
+        "qid": "c02",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "TU Darmstadt"
+          ],
+          "programme": [
+            "M.Sc. Computer Science"
+          ]
+        },
+        "latency_ms": 4034.6430850004253,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.6843515475204855,
+            "@10": 0.72891152902702
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "c03",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "TU Darmstadt"
+          ],
+          "programme": [
+            "M.Sc. Artificial Intelligence and Machine Learning"
+          ]
+        },
+        "latency_ms": 3796.666393001942,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.8539316501572937,
+            "@10": 0.6911279212606075
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "c04",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "TU Darmstadt"
+          ],
+          "programme": [
+            "M.Sc. Artificial Intelligence and Machine Learning"
+          ]
+        },
+        "latency_ms": 4293.814445001772,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.639945385422766,
+            "@10": 0.6364741801035538
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "c05",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "University of Stuttgart"
+          ],
+          "programme": [
+            "M.Sc. Computer Science"
+          ]
+        },
+        "latency_ms": 3950.8919049985707,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.6164336326286644,
+            "@10": 0.40002324830925196
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "c06",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "University of Stuttgart"
+          ],
+          "programme": [
+            "M.Sc. Computer Science"
+          ]
+        },
+        "latency_ms": 3490.4879089990573,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.592512031964586,
+            "@10": 0.592512031964586
+          },
+          "rr": 0.5
+        }
+      },
+      {
+        "qid": "c07",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "University of Stuttgart"
+          ]
+        },
+        "latency_ms": 4167.826441000216,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.8687949224876582,
+            "@10": 0.8829374068620365
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "c08",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "University of Stuttgart"
+          ],
+          "programme": [
+            "M.Sc. Computer Science"
+          ]
+        },
+        "latency_ms": 4523.800457001926,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.7227265726449519,
+            "@10": 0.6086182388744239
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "c09",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "TU Darmstadt"
+          ],
+          "programme": [
+            "M.Sc. Computer Science"
+          ]
+        },
+        "latency_ms": 4034.0399679989787,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.9197207891481876,
+            "@10": 0.9197207891481876
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "c10",
+        "kind": "confusable",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "TU Darmstadt"
+          ],
+          "programme": [
+            "M.Sc. Artificial Intelligence and Machine Learning"
+          ]
+        },
+        "latency_ms": 3669.2636070001754,
+        "refused": true,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.2640681225725909,
+            "@10": 0.2640681225725909
+          },
+          "rr": 0.25
+        }
+      },
+      {
+        "qid": "c11",
+        "kind": "confusable",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "TU Darmstadt"
+          ],
+          "programme": [
+            "M.Sc. Computer Science"
+          ]
+        },
+        "latency_ms": 3747.041740996792,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.9197207891481876,
+            "@10": 0.9197207891481876
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "c12",
+        "kind": "multi_hop",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "TUM"
+          ],
+          "programme": [
+            "M.Sc. Data Engineering and Analytics"
+          ]
+        },
+        "latency_ms": 4113.658648999262,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 0.0,
+            "@10": 0.5
+          },
+          "ndcg": {
+            "@5": 0.0,
+            "@10": 0.06625422345438903
+          },
+          "rr": 0.1111111111111111
+        }
+      },
+      {
+        "qid": "c13",
+        "kind": "multi_hop",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "University of Stuttgart"
+          ],
+          "programme": [
+            "M.Sc. Computer Science"
+          ]
+        },
+        "latency_ms": 4191.448551999201,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 0.5,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.5087403079104241,
+            "@10": 0.6078421520159136
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "c14",
+        "kind": "multi_hop",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "TU Dresden"
+          ],
+          "programme": [
+            "M.Sc. Computer Science"
+          ]
+        },
+        "latency_ms": 4197.26884299962,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 0.5,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.3391602052736161,
+            "@10": 0.28371255449703187
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "c15",
+        "kind": "multi_hop",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "Saarland University"
+          ],
+          "programme": [
+            "M.Sc. Computer Science"
+          ]
+        },
+        "latency_ms": 3789.4352250004886,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 0.5,
+            "@10": 0.5
+          },
+          "ndcg": {
+            "@5": 0.6164336326286644,
+            "@10": 0.5446757407423163
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "c16",
+        "kind": "multi_hop",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "TUM"
+          ],
+          "programme": [
+            "M.Sc. Informatics"
+          ]
+        },
+        "latency_ms": 5523.632486998395,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 0.5,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.16958010263680806,
+            "@10": 0.2528410271851774
+          },
+          "rr": 0.3333333333333333
+        }
+      },
+      {
+        "qid": "c17",
+        "kind": "multi_hop",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "RWTH Aachen",
+            "KIT"
+          ],
+          "programme": [
+            "M.Sc. Computer Science"
+          ]
+        },
+        "latency_ms": 3813.478144998953,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 0.0,
+            "@10": 0.0
+          },
+          "ndcg": {
+            "@5": 0.0,
+            "@10": 0.0
+          },
+          "rr": 0.0
+        }
+      },
+      {
+        "qid": "c18",
+        "kind": "multi_hop",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "TU Berlin",
+            "TU Darmstadt"
+          ],
+          "programme": [
+            "M.Sc. Computer Science"
+          ]
+        },
+        "latency_ms": 4296.719072000997,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.5531464700081437,
+            "@10": 0.3589542101716347
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "c19",
+        "kind": "multi_hop",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "TU Dresden"
+          ],
+          "programme": [
+            "M.Sc. Computer Science"
+          ]
+        },
+        "latency_ms": 4129.349424998509,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 0.5,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.21398626473452756,
+            "@10": 0.21726071285222986
+          },
+          "rr": 0.5
+        }
+      },
+      {
+        "qid": "c20",
+        "kind": "multi_hop",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "TUM"
+          ],
+          "programme": [
+            "M.Sc. Data Engineering and Analytics"
+          ]
+        },
+        "latency_ms": 4142.72116400025,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 0.5,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.13120507751234178,
+            "@10": 0.1635413866202963
+          },
+          "rr": 0.2
+        }
+      },
+      {
+        "qid": "c21",
+        "kind": "multi_hop",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "TUM"
+          ],
+          "programme": [
+            "M.Sc. Informatics"
+          ]
+        },
+        "latency_ms": 4136.830780997116,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 0.5,
+            "@10": 0.5
+          },
+          "ndcg": {
+            "@5": 0.3391602052736161,
+            "@10": 0.22009176629808017
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "d01",
+        "kind": "country_rules",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3662.3768090030353,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.3391602052736161,
+            "@10": 0.3391602052736161
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "d02",
+        "kind": "country_rules",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3277.3615199985215,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.5087403079104241,
+            "@10": 0.5696160022325947
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "d03",
+        "kind": "country_rules",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3633.21430400174,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.8687949224876582,
+            "@10": 0.6968404678259545
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "d04",
+        "kind": "country_rules",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3545.3295839979546,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "d05",
+        "kind": "country_rules",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3984.057456997107,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.3903800499921017,
+            "@10": 0.3903800499921017
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "d06",
+        "kind": "country_rules",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3929.8289799990016,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "d07",
+        "kind": "country_rules",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3606.8823770001472,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.6992148198508501,
+            "@10": 0.6992148198508501
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "d08",
+        "kind": "country_rules",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3504.257852000592,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.4703652827859579,
+            "@10": 0.6705019637402266
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "d09",
+        "kind": "country_rules",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3572.296353002457,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.3391602052736161,
+            "@10": 0.3260595412115671
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "d10",
+        "kind": "country_rules",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3592.577479001193,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.6366824387328317,
+            "@10": 0.6366824387328317
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "d11",
+        "kind": "country_rules",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3610.8990239990817,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.21398626473452756,
+            "@10": 0.13886244387355454
+          },
+          "rr": 0.5
+        }
+      },
+      {
+        "qid": "d12",
+        "kind": "country_rules",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3184.9542050003947,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.8687949224876582,
+            "@10": 0.7791714369672127
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "d13",
+        "kind": "country_rules",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 2895.335953999165,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.5087403079104241,
+            "@10": 0.4205117250400189
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "d14",
+        "kind": "country_rules",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3642.58709799833,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.4703652827859579,
+            "@10": 0.5206888446176334
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "d15",
+        "kind": "country_rules",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 3370.4073730004893,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.3391602052736161,
+            "@10": 0.41918605213740834
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "d16",
+        "kind": "country_rules",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 5309.223403000942,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.6131471927654584,
+            "@10": 0.7977228895450266
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "d17",
+        "kind": "country_rules",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 4322.85158599916,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "d18",
+        "kind": "country_rules",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "TUM"
+          ]
+        },
+        "latency_ms": 3527.56506699734,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.46927872602275644,
+            "@10": 0.46927872602275644
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "d19",
+        "kind": "country_rules",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "RWTH Aachen"
+          ]
+        },
+        "latency_ms": 3582.5467290014785,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.6843515475204855,
+            "@10": 0.4440973278132557
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "d20",
+        "kind": "country_rules",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "TU Berlin"
+          ]
+        },
+        "latency_ms": 3508.861041998898,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.3391602052736161,
+            "@10": 0.28371255449703187
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "d21",
+        "kind": "country_rules",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "TU Berlin"
+          ]
+        },
+        "latency_ms": 3442.1711760005564,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.16958010263680806,
+            "@10": 0.1884441521277154
+          },
+          "rr": 0.3333333333333333
+        }
+      },
+      {
+        "qid": "d22",
+        "kind": "country_rules",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "KIT"
+          ]
+        },
+        "latency_ms": 3422.3660710013064,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 1.0,
+            "@10": 0.6489315753318465
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "d23",
+        "kind": "country_rules",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "University of Stuttgart"
+          ]
+        },
+        "latency_ms": 3565.0468679996266,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 1.0,
+            "@10": 0.8508957228074243
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "d24",
+        "kind": "country_rules",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "Saarland University"
+          ]
+        },
+        "latency_ms": 3216.359193000244,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "d25",
+        "kind": "refusal",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "TUM"
+          ],
+          "programme": [
+            "M.Sc. Informatics"
+          ]
+        },
+        "latency_ms": 3529.0042810011073,
+        "refused": false
+      },
+      {
+        "qid": "d26",
+        "kind": "refusal",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "RWTH Aachen",
+            "TU Berlin"
+          ],
+          "programme": [
+            "M.Sc. Computer Science"
+          ]
+        },
+        "latency_ms": 4405.987247999292,
+        "refused": false
+      },
+      {
+        "qid": "d27",
+        "kind": "refusal",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "KIT"
+          ],
+          "programme": [
+            "M.Sc. Computer Science"
+          ]
+        },
+        "latency_ms": 5300.572717002069,
+        "refused": false
+      },
+      {
+        "qid": "d28",
+        "kind": "refusal",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 6450.73084500109,
+        "refused": false
+      },
+      {
+        "qid": "d29",
+        "kind": "refusal",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 7654.719400998147,
+        "refused": false
+      },
+      {
+        "qid": "d30",
+        "kind": "refusal",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 7426.273604000016,
+        "refused": true
+      },
+      {
+        "qid": "d31",
+        "kind": "refusal",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 7082.165824002004,
+        "refused": true
+      },
+      {
+        "qid": "d32",
+        "kind": "refusal",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "TUM"
+          ]
+        },
+        "latency_ms": 6567.618425000546,
+        "refused": true
+      },
+      {
+        "qid": "d33",
+        "kind": "requirement",
+        "reviewed_by": "human",
+        "filters": {
+          "university": [
+            "TU Darmstadt"
+          ]
+        },
+        "latency_ms": 7063.492880002741,
+        "refused": true,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.6548086577531307,
+            "@10": 0.424926013816671
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "d34",
+        "kind": "refusal",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 6834.024867002881,
+        "refused": true
+      },
+      {
+        "qid": "d35",
+        "kind": "coverage",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 5821.488570996735,
+        "refused": true
+      },
+      {
+        "qid": "d36",
+        "kind": "coverage",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 6298.431473001983,
+        "refused": false
+      },
+      {
+        "qid": "d37",
+        "kind": "coverage",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 7136.915472001419,
+        "refused": false
+      },
+      {
+        "qid": "d38",
+        "kind": "coverage",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 4386.401636998926,
+        "refused": false
+      },
+      {
+        "qid": "d39",
+        "kind": "coverage",
+        "reviewed_by": "human",
+        "filters": null,
+        "latency_ms": 4319.809603999602,
+        "refused": false
+      },
+      {
+        "qid": "mh02",
+        "kind": "multi_hop",
+        "reviewed_by": "model",
+        "filters": {
+          "university": [
+            "Saarland University"
+          ],
+          "programme": [
+            "M.Sc. Data Science and Artificial Intelligence"
+          ]
+        },
+        "latency_ms": 4791.415966999921,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 0.5,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.21398626473452756,
+            "@10": 0.21726071285222986
+          },
+          "rr": 0.5
+        }
+      },
+      {
+        "qid": "mh03",
+        "kind": "multi_hop",
+        "reviewed_by": "model",
+        "filters": {
+          "university": [
+            "TUM"
+          ],
+          "programme": [
+            "M.Sc. Data Engineering and Analytics"
+          ]
+        },
+        "latency_ms": 4908.889663998707,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.830419897363192,
+            "@10": 0.6816808362189437
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "mh04",
+        "kind": "multi_hop",
+        "reviewed_by": "model",
+        "filters": {
+          "university": [
+            "TU Berlin"
+          ],
+          "programme": [
+            "M.Sc. Computer Science"
+          ]
+        },
+        "latency_ms": 4735.808084999007,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 0.5,
+            "@10": 0.5
+          },
+          "ndcg": {
+            "@5": 0.16958010263680806,
+            "@10": 0.16958010263680806
+          },
+          "rr": 0.3333333333333333
+        }
+      },
+      {
+        "qid": "mh05",
+        "kind": "multi_hop",
+        "reviewed_by": "model",
+        "filters": {
+          "university": [
+            "KIT"
+          ],
+          "programme": [
+            "M.Sc. Computer Science"
+          ]
+        },
+        "latency_ms": 4662.76454400213,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 0.5,
+            "@10": 0.5
+          },
+          "ndcg": {
+            "@5": 0.3391602052736161,
+            "@10": 0.28371255449703187
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "mh06",
+        "kind": "multi_hop",
+        "reviewed_by": "model",
+        "filters": {
+          "university": [
+            "RWTH Aachen"
+          ],
+          "programme": [
+            "M.Sc. Data Science"
+          ]
+        },
+        "latency_ms": 4679.654524999933,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.7860137352654724,
+            "@10": 0.6528642754944294
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "mh07",
+        "kind": "multi_hop",
+        "reviewed_by": "model",
+        "filters": {
+          "university": [
+            "University of Stuttgart"
+          ],
+          "programme": [
+            "M.Sc. Computer Science"
+          ]
+        },
+        "latency_ms": 6848.50390399879,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.5147714448836774,
+            "@10": 0.6214990811334172
+          },
+          "rr": 0.5
+        }
+      },
+      {
+        "qid": "mh09",
+        "kind": "multi_hop",
+        "reviewed_by": "model",
+        "filters": {
+          "university": [
+            "Saarland University",
+            "TU Darmstadt"
+          ]
+        },
+        "latency_ms": 4863.024387999758,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.7227265726449519,
+            "@10": 0.6901935063354874
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "mh10",
+        "kind": "multi_hop",
+        "reviewed_by": "model",
+        "filters": {
+          "university": [
+            "TU Dresden",
+            "University of Stuttgart"
+          ]
+        },
+        "latency_ms": 5637.912965998112,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 0.5,
+            "@10": 0.5
+          },
+          "ndcg": {
+            "@5": 0.6608397947263839,
+            "@10": 0.4288398090337664
+          },
+          "rr": 0.5
+        }
+      },
+      {
+        "qid": "mh11",
+        "kind": "multi_hop",
+        "reviewed_by": "model",
+        "filters": {
+          "university": [
+            "TUM",
+            "KIT",
+            "University of Stuttgart"
+          ],
+          "programme": [
+            "M.Sc. Computer Science",
+            "M.Sc. Informatics"
+          ]
+        },
+        "latency_ms": 6378.664864001621,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 0.6666666666666666,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.27727342735504823,
+            "@10": 0.3098064936645125
+          },
+          "rr": 0.25
+        }
+      },
+      {
+        "qid": "mh13",
+        "kind": "multi_hop",
+        "reviewed_by": "model",
+        "filters": {
+          "university": [
+            "TU Berlin"
+          ]
+        },
+        "latency_ms": 4851.263987002312,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.6548086577531307,
+            "@10": 0.49435723575344825
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "mh15",
+        "kind": "multi_hop",
+        "reviewed_by": "model",
+        "filters": {
+          "university": [
+            "TU Darmstadt"
+          ]
+        },
+        "latency_ms": 6065.825944002427,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.6608397947263839,
+            "@10": 0.5806020001118017
+          },
+          "rr": 0.5
+        }
+      },
+      {
+        "qid": "mh18",
+        "kind": "multi_hop",
+        "reviewed_by": "model",
+        "filters": {
+          "university": [
+            "Saarland University"
+          ],
+          "programme": [
+            "M.Sc. Data Science and Artificial Intelligence"
+          ]
+        },
+        "latency_ms": 26237.861555000563,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.5087403079104241,
+            "@10": 0.6625602459390023
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "mh19",
+        "kind": "multi_hop",
+        "reviewed_by": "model",
+        "filters": {
+          "university": [
+            "RWTH Aachen",
+            "Saarland University"
+          ],
+          "programme": [
+            "M.Sc. Data Science",
+            "M.Sc. Data Science and Artificial Intelligence"
+          ]
+        },
+        "latency_ms": 5415.697459000512,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 0.5,
+            "@10": 0.5
+          },
+          "ndcg": {
+            "@5": 0.4468535299918563,
+            "@10": 0.3594085870969891
+          },
+          "rr": 0.3333333333333333
+        }
+      },
+      {
+        "qid": "mh20",
+        "kind": "multi_hop",
+        "reviewed_by": "model",
+        "filters": {
+          "university": [
+            "Saarland University",
+            "TU Dresden"
+          ],
+          "programme": [
+            "M.Sc. Computer Science"
+          ]
+        },
+        "latency_ms": 6368.955386999005,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 0.5,
+            "@10": 0.5
+          },
+          "ndcg": {
+            "@5": 0.6548086577531307,
+            "@10": 0.424926013816671
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "mh21",
+        "kind": "multi_hop",
+        "reviewed_by": "model",
+        "filters": {
+          "university": [
+            "TU Berlin",
+            "University of Stuttgart"
+          ],
+          "programme": [
+            "M.Sc. Computer Science"
+          ]
+        },
+        "latency_ms": 10492.07600400041,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 0.5,
+            "@10": 0.5
+          },
+          "ndcg": {
+            "@5": 0.27727342735504823,
+            "@10": 0.3348580731497424
+          },
+          "rr": 0.25
+        }
+      },
+      {
+        "qid": "mh22",
+        "kind": "multi_hop",
+        "reviewed_by": "model",
+        "filters": {
+          "university": [
+            "RWTH Aachen"
+          ],
+          "programme": [
+            "M.Sc. Data Science"
+          ]
+        },
+        "latency_ms": 7533.369733002473,
+        "refused": true,
+        "metrics": {
+          "recall": {
+            "@5": 0.5,
+            "@10": 0.5
+          },
+          "ndcg": {
+            "@5": 0.4703652827859579,
+            "@10": 0.419665006636777
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "mh23",
+        "kind": "multi_hop",
+        "reviewed_by": "model",
+        "filters": {
+          "university": [
+            "TU Berlin"
+          ],
+          "programme": [
+            "M.Sc. Computer Science"
+          ]
+        },
+        "latency_ms": 6602.11457299738,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 0.5,
+            "@10": 0.5
+          },
+          "ndcg": {
+            "@5": 0.5531464700081437,
+            "@10": 0.494639655562801
+          },
+          "rr": 1.0
+        }
+      },
+      {
+        "qid": "mh24",
+        "kind": "multi_hop",
+        "reviewed_by": "model",
+        "filters": {
+          "university": [
+            "KIT"
+          ],
+          "programme": [
+            "M.Sc. Computer Science"
+          ]
+        },
+        "latency_ms": 8770.667839999078,
+        "refused": false,
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.7227265726449519,
+            "@10": 0.5390031312763821
+          },
+          "rr": 1.0
+        }
+      }
+    ]
+  }
+}
