@@ -157,3 +157,38 @@ These are the items I am least sure about:
 - **d09**: The Darmstadt guide gives a different student insurance range (125-150 €). The question is country-level, so the DAAD page stays the label.
 - **d27**: Refusal is correct for KIT, but a model might wrongly cite TU Berlin's "<5% admitted". It is a good adversarial probe.
 - **d35-d39**: Please confirm that coverage items should carry `university: null` rather than the out-of-corpus name.
+
+## Multi-hop extension (2026-11-12, pending human acceptance)
+
+18 `multi_hop` items were drafted by a model from the page text in
+`data/processed/chunks.jsonl`, each with an `evidence` quote for every relevant
+doc. `scripts/validate_gold.py` checks every quote against its doc (122 items
+ok). A second-model review of the first 18 drafts dropped mh01 (ambiguous
+embassy sentence), mh08 (early deadline left out; a second Saarland page
+answers), mh12 (both hops answered equally by other pages), mh14 (one page
+answers both parts), mh16 and mh17 (another page answers a hop just as well),
+fixed mh02 (asks both hops), mh05 (programme metadata) and mh10 (asks facts only
+its two docs state), and six replacements (mh19-mh24) were drafted with a
+corpus-wide check that no other doc answers either hop. They keep
+`reviewed_by: model` until the maintainer accepts them.
+
+| qid | kind | status | docs |
+|---|---|---|---|
+| mh02 | multi_hop | pending | de/saarland/masters-application-guide, de/rules/embassy-india-studies-visa |
+| mh03 | multi_hop | pending | de/tum/dea-msc/department, de/rules/uni-assist-faq-plan-application |
+| mh04 | multi_hop | pending | de/tub/cs-msc/application, de/rules/uni-assist-apply-in-6-steps |
+| mh05 | multi_hop | pending | de/scholarship/daad-study-scholarships-stem, de/kit/tuition-fees |
+| mh06 | multi_hop | pending | de/rwth/ds-msc/application, de/aachen/residence-permit |
+| mh07 | multi_hop | pending | de/stuttgart/residence-permit, de/rules/daad-health-insurance |
+| mh09 | multi_hop | pending | de/saarland/masters-application-guide, de/tu-darmstadt/informatics-master-admission-guide |
+| mh10 | multi_hop | pending | de/ustutt/tuition-fees, de/tud/semester-contribution |
+| mh11 | multi_hop | pending | de/tum/language-certificates, de/kit/cs-msc/programme, de/ustutt/cs-msc/english-proofs |
+| mh13 | multi_hop | pending | de/berlin/anmeldung, de/berlin/residence-permit-study |
+| mh15 | multi_hop | pending | de/rules/foreign-office-blocked-account, de/darmstadt/residence-permit |
+| mh18 | multi_hop | pending | de/saarland/dsai-msc/programme, de/saarbruecken/residence-permit |
+| mh19 | multi_hop | pending | de/rwth/ds-msc/programme, de/saarland/dsai-msc/study-regulations |
+| mh20 | multi_hop | pending | de/saarland/cs-msc/programme, de/tud/cs-msc/programme |
+| mh21 | multi_hop | pending | de/tub/eecs-application-faq, de/ustutt/cs-msc/english-proofs |
+| mh22 | multi_hop | pending | de/rwth/ds-msc/requirements, de/rules/embassy-india-studies-visa |
+| mh23 | multi_hop | pending | de/tub/cs-msc/programme, de/rules/daad-health-insurance |
+| mh24 | multi_hop | pending | de/kit/cs-msc/department, de/scholarship/deutschlandstipendium |

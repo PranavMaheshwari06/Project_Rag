@@ -24,10 +24,13 @@ class GoldItem:
     author: str = "model"  # who wrote the question: model | human
     reviewed_by: str = "model"  # who last checked the label: model | human
     expect_refusal: bool = False
+    # [{"doc_id", "quote"}]: verbatim support for the hint, checked by scripts/validate_gold.py
+    evidence: list[dict] = field(default_factory=list)
 
 
 KINDS = {"requirement", "country_rules", "confusable", "multi_hop", "refusal", "coverage"}
-OPTIONAL = ("relevant_sections", "answer_hint", "kind", "university", "programme", "author", "reviewed_by", "expect_refusal")
+OPTIONAL = ("relevant_sections", "answer_hint", "kind", "university", "programme", "author", "reviewed_by",
+            "expect_refusal", "evidence")
 
 
 def load_gold(path: Path) -> list[GoldItem]:

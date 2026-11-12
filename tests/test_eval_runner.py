@@ -76,3 +76,13 @@ def test_aggregate_attaches_intervals_only_when_asked():
     assert with_ci.mrr_ci is not None
     plain = aggregate("hybrid", rows, [5])
     assert plain.recall_ci == {} and plain.mrr_ci is None
+
+
+def test_table_flags_unreviewed_gold_as_provisional():
+    from evaluation.runner import render_markdown_table
+    from schemas.eval import BenchmarkResult
+
+    result = BenchmarkResult(generated_at="t", gold_size=1, chunk_count=1, settings_snapshot={}, configs=[],
+                             reviewer_counts={"human": 3, "model": 2})
+    assert "2 gold items are not yet human-reviewed" in render_markdown_table(result)
+    assert "provisional" not in render_markdown_table(result.model_copy(update={"reviewer_counts": {"human": 5}}))

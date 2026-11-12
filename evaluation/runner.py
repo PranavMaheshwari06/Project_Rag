@@ -200,6 +200,8 @@ def render_markdown_table(result: BenchmarkResult) -> str:
     parts = [_retrieval_table(result.configs),
              f"\n_{result.gold_size} answerable questions; {result.total_gold_size} total items; "
              f"{result.chunk_count} chunks. Generated {result.generated_at}._"]
+    if unreviewed := result.reviewer_counts.get("model"):
+        parts.append(f"\n_{unreviewed} gold items are not yet human-reviewed: numbers that include them are provisional._")
     if any(c.mrr_ci for c in result.configs):
         snap = result.settings_snapshot
         parts.append(f"\n_Brackets: 95% percentile bootstrap interval over queries "

@@ -13,7 +13,8 @@ def item(**kw):
 
 
 def test_good_items_pass():
-    ok = [item(relevant_sections=["language"], answer_hint="IELTS 6.5, fee 6000"),
+    ok = [item(relevant_sections=["language"], answer_hint="IELTS 6.5, fee 6000",
+               evidence=[{"doc_id": "de/tum/x/page", "quote": "IELTS 6.5 or\n TOEFL 88."}]),
           item(qid="r", kind="refusal", relevant_doc_ids=[], expect_refusal=True)]
     assert validate(ok, REG, SECTIONS, TEXTS) == []
 
@@ -25,9 +26,11 @@ def test_each_rule_fails():
            item(qid="s", relevant_sections=["deadlines"]),
            item(qid="n", answer_hint="IELTS 7.0"),
            item(qid="c", kind="coverage"),
-           item(qid="w", reviewed_by="robot")]
+           item(qid="w", reviewed_by="robot"),
+           item(qid="e", evidence=[{"doc_id": "de/tum/x/page", "quote": "IELTS 7.0"}]),
+           item(qid="o", evidence=[{"doc_id": "de/other", "quote": "IELTS 6.5"}])]
     errs = validate(bad, REG, SECTIONS, TEXTS)
-    for qid in ("a", "k", "d", "s", "n", "c", "w"):
+    for qid in ("a", "k", "d", "s", "n", "c", "w", "e", "o"):
         assert any(e.startswith(f"{qid}:") for e in errs), qid
 
 

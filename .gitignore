@@ -29,5 +29,6 @@ frontend/dist/
 
 # local working notes
 docs/working/
+docs/agents/
 data/audit/audit_sheet.md
 data/audit/Audit_sheet_completed.md

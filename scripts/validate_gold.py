@@ -47,6 +47,11 @@ def validate(items: list[GoldItem], registry_ids: set[str], sections: dict[str, 
         missing = _numbers(g.answer_hint) - _numbers(text)
         if missing:
             err(f"hint numbers not in doc text: {sorted(missing)}")
+        for e in g.evidence:
+            if e.get("doc_id") not in g.relevant_doc_ids:
+                err(f"evidence doc {e.get('doc_id')} is not a relevant doc")
+            elif " ".join(str(e.get("quote", "")).split()) not in " ".join(texts.get(e["doc_id"], "").split()):
+                err(f"evidence quote not in {e['doc_id']}: {str(e.get('quote'))[:60]!r}")
     return errors
 
 
