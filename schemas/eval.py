@@ -9,6 +9,9 @@ class ConfigMetrics(BaseModel):
     latency_p50_ms: float
     latency_p95_ms: float
     query_count: int = 0
+    # 95% bootstrap intervals over queries; empty when not computed
+    recall_ci: dict[str, tuple[float, float]] = Field(default_factory=dict)
+    mrr_ci: tuple[float, float] | None = None
 
 
 class AnswerMetrics(BaseModel):

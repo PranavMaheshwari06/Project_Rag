@@ -10,6 +10,7 @@ from datetime import datetime, timezone
 
 from core.config import Settings
 from evaluation.answer_eval import METHOD_LABEL, evaluate_answer
+from evaluation.bootstrap import bootstrap_ci
 from evaluation.extraction_eval import compare, summarize
 from evaluation.latency_eval import summarize_latencies
 from evaluation.refusal_eval import calibrate, confusion
@@ -24,9 +25,10 @@ README_START = "<!-- BENCHMARK:START -->"
 README_END = "<!-- BENCHMARK:END -->"
 
 
-def aggregate(mode: str, rows: list[dict], ks: list[int]) -> ConfigMetrics:
+def aggregate(mode: str, rows: list[dict], ks: list[int], resamples: int = 0, seed: int = 0) -> ConfigMetrics:
     n = len(rows)
     lat = summarize_latencies([r["latency_ms"] for r in rows])
+    ci = resamples > 0 and n > 0
     return ConfigMetrics(
         name=mode, query_count=n,
         recall={f"@{k}": round(sum(r["metrics"]["recall"][f"@{k}"] for r in rows) / n, 3)
@@ -35,6 +37,9 @@ def aggregate(mode: str, rows: list[dict], ks: list[int]) -> ConfigMetrics:
         ndcg={f"@{k}": round(sum(r["metrics"]["ndcg"][f"@{k}"] for r in rows) / n, 3)
               if n else 0.0 for k in ks},
         latency_p50_ms=lat["p50_ms"], latency_p95_ms=lat["p95_ms"],
+        recall_ci={f"@{k}": bootstrap_ci([r["metrics"]["recall"][f"@{k}"] for r in rows], resamples, seed)
+                   for k in ks} if ci else {},
+        mrr_ci=bootstrap_ci([r["metrics"]["rr"] for r in rows], resamples, seed) if ci else None,
     )
 
 
@@ -55,6 +60,7 @@ def run_benchmark(settings: Settings) -> BenchmarkResult:
     # startup costs, not steady-state retrieval latency.
     pipeline.search(gold[0].question, mode="hybrid_rerank", top_k=max(ks))
     total_relevant = {g.qid: count_relevant_chunks(corpus, g) for g in gold_retrieval}
+    boot = (settings.evaluation.bootstrap_resamples, settings.evaluation.bootstrap_seed)
     cache, retrieval_rows, configs = {}, {}, []
     by_kind = {kind: [] for kind in sorted({g.kind for g in gold_retrieval})}
     for mode in MODES:
@@ -70,9 +76,9 @@ def run_benchmark(settings: Settings) -> BenchmarkResult:
                 if len(rows) % 10 == 0:
                     log.info("benchmark rerank progress=%d/%d", len(rows), len(gold_retrieval))
         retrieval_rows[mode] = rows
-        configs.append(aggregate(mode, rows, ks))
+        configs.append(aggregate(mode, rows, ks, *boot))
         for kind in by_kind:
-            by_kind[kind].append(aggregate(mode, [r for r in rows if r["kind"] == kind], ks))
+            by_kind[kind].append(aggregate(mode, [r for r in rows if r["kind"] == kind], ks, *boot))
         log.info("benchmark mode=%s done (%d queries)", mode, len(rows))
 
     for item in gold:
@@ -122,6 +128,7 @@ def run_benchmark(settings: Settings) -> BenchmarkResult:
             "embed_model": settings.models.embed_model, "rerank_model": settings.models.rerank_model,
             "generation_mode": "extractive",
             "latency_method": "warm CPU models; actual uncached query timings",
+            "bootstrap_resamples": boot[0], "bootstrap_seed": boot[1],
         },
         configs=configs, retrieval_by_kind=by_kind, answers=answers,
         extraction={"human": summarize(extraction_rows), "all": summarize(extraction_rows, None)},
@@ -172,14 +179,18 @@ def _write_outputs(settings: Settings, result: BenchmarkResult) -> None:
     log.info("wrote %s", out_path)
 
 
+def _with_ci(value: float, ci: tuple[float, float] | None) -> str:
+    return f"{value:.3f} [{ci[0]:.3f}, {ci[1]:.3f}]" if ci else f"{value:.3f}"
+
+
 def _retrieval_table(configs: list[ConfigMetrics]) -> str:
     ks = sorted(configs[0].recall, key=lambda s: int(s[1:])) if configs else []
     rows = ["| config | queries | " + " | ".join(f"Recall{k}" for k in ks) + " | MRR | "
             + " | ".join(f"nDCG{k}" for k in ks) + " | p50 ms | p95 ms |",
             "|" + "---|" * (2 * len(ks) + 5)]
     for c in configs:
-        cells = [c.name, str(c.query_count)] + [f"{c.recall[k]:.3f}" for k in ks]
-        cells += [f"{c.mrr:.3f}"] + [f"{c.ndcg[k]:.3f}" for k in ks]
+        cells = [c.name, str(c.query_count)] + [_with_ci(c.recall[k], c.recall_ci.get(k)) for k in ks]
+        cells += [_with_ci(c.mrr, c.mrr_ci)] + [f"{c.ndcg[k]:.3f}" for k in ks]
         cells += [f"{c.latency_p50_ms:.0f}", f"{c.latency_p95_ms:.0f}"]
         rows.append("| " + " | ".join(cells) + " |")
     return "\n".join(rows)
@@ -189,6 +200,11 @@ def render_markdown_table(result: BenchmarkResult) -> str:
     parts = [_retrieval_table(result.configs),
              f"\n_{result.gold_size} answerable questions; {result.total_gold_size} total items; "
              f"{result.chunk_count} chunks. Generated {result.generated_at}._"]
+    if any(c.mrr_ci for c in result.configs):
+        snap = result.settings_snapshot
+        parts.append(f"\n_Brackets: 95% percentile bootstrap interval over queries "
+                     f"({snap.get('bootstrap_resamples')} resamples, seed {snap.get('bootstrap_seed')}). "
+                     f"Small kinds have wide intervals; read them before comparing configs._")
     for kind, configs in result.retrieval_by_kind.items():
         parts += [f"\n**{kind}**\n", _retrieval_table(configs)]
     if result.extraction:

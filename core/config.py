@@ -95,6 +95,8 @@ class EvalCfg(BaseModel):
     # as a baseline input (data/eligibility/coverage_inventory.json)
     eligibility_cases_path: str = "evaluation/datasets/eligibility_cases.jsonl"
     eligibility_results_out: str = "evaluation/results/eligibility_baseline.json"
+    bootstrap_resamples: int = 2000  # 0 turns the retrieval intervals off
+    bootstrap_seed: int = 0
 
 
 class EligibilityCfg(BaseModel):
