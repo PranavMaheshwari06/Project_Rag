@@ -1,6 +1,6 @@
 # Gold QA set
 
-`gold_qa.jsonl` is the gold set used by `make eval`: 104 items,
+`gold_qa.jsonl` is the gold set used by `make eval`: 122 items,
 one JSON object per line. `tests/fixtures/gold_qa.jsonl` is a separate, small
 fixture for the test corpus only; the tests never read this file.
 
@@ -30,7 +30,7 @@ file with only the first five fields still loads.
 | `requirement` | 45 | a programme requirement stated on one page (grade, credits, tests, deadlines, fees, documents) |
 | `country_rules` | 24 | national rules: APS, uni-assist, visa, blocked account, insurance, residence and work permits |
 | `confusable` | 11 | two sibling programmes whose pages read alike; retrieval must find the right one |
-| `multi_hop` | 10 | the answer needs two docs |
+| `multi_hop` | 28 | the answer needs two (or three) docs |
 | `refusal` | 9 | the corpus does not answer it; the system should decline |
 | `coverage` | 5 | an uncovered university or another country; the system should say it is not covered |
 
@@ -43,6 +43,11 @@ file with only the first five fields still loads.
   `reviewed_by: human`. The maintainer accepted the model review and explicitly
   approved the four audit-related updates (b09, c19, b10, c05). This is human
   acceptance of assisted review, not a blinded, independently written gold set.
+- Added 2026-11-12: 18 `multi_hop` items (mh01-mh18), drafted by a model from
+  the cached pages with a verbatim evidence quote per doc, checked by
+  `scripts/validate_gold.py` and an evidence-substring check. They stay
+  `reviewed_by: model` until the maintainer accepts them; results that include
+  them are provisional until then.
 - `expect_refusal: true` marks the 14 refusal and coverage items. They have
   `relevant_doc_ids: []`, so the retrieval metrics (Recall@k, MRR, nDCG) skip
   them; they are used to calibrate the refusal threshold.

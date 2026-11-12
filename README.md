@@ -72,7 +72,7 @@ flowchart LR
   - a second model from a different family cross-checks every field and may suggest a fix, which must pass the same quote check;
   - a local review screen shows each field next to its quote, the full page, automatic warnings and the cross-check verdict. Every field is confirmed against its quote and page before the record is saved as verified: six programmes by hand in this screen, the other seven by a second pass over the cited pages that saves through the same quote check. Verified records are both the product data and the evaluation gold set.
 - **Eligibility engine and API** (`make eligibility`, `POST /eligibility/check`): a deterministic engine checks a confirmed profile against cited rule files for all 13 programmes. Each rule returns meets, does not meet, unknown or not published, with a margin and citations, and admission, readiness and finance get separate summaries. A rule still pending review cannot produce a positive headline. `POST /profile/parse` and `make parse-profile` turn pasted text into an unconfirmed draft, keeping only fields backed by a literal span of the text.
-- **Evaluation harness**: a 4-way benchmark (vector, BM25, hybrid, hybrid+rerank) on Recall@k, MRR, nDCG and p50/p95 latency, and extraction accuracy (LLM draft vs verified record). The gold question set has 104 items (requirement 45, country rules 24, confusable programmes 11, multi-hop 10, refusal 9, coverage 5), model-drafted from the verified pages and accepted by the maintainer (assisted review, not blinded). `scripts/validate_gold.py` checks every label before `make eval` runs.
+- **Evaluation harness**: a 4-way benchmark (vector, BM25, hybrid, hybrid+rerank) on Recall@k, MRR, nDCG and p50/p95 latency, and extraction accuracy (LLM draft vs verified record). The gold question set has 122 items (requirement 45, country rules 24, confusable programmes 11, multi-hop 28, refusal 9, coverage 5), model-drafted from the verified pages; 104 are accepted by the maintainer (assisted review, not blinded) and the 18 multi-hop items added on 2026-11-12 await that review. `scripts/validate_gold.py` checks every label before `make eval` runs.
 - **Observability**: request ids, structured JSON logs and per-stage latency.
 
 ### Coming next
@@ -106,12 +106,14 @@ How to read it: a field counts as "draft unchanged" only if its status, value, p
 <!-- BENCHMARK:START -->
 | config | queries | Recall@5 | Recall@10 | MRR | nDCG@5 | nDCG@10 | p50 ms | p95 ms |
 |---|---|---|---|---|---|---|---|---|
-| vector | 90 | 0.817 [0.739, 0.883] | 0.906 [0.844, 0.956] | 0.642 [0.564, 0.714] | 0.391 | 0.382 | 16 | 19 |
-| bm25 | 90 | 0.739 [0.650, 0.822] | 0.828 [0.756, 0.894] | 0.612 [0.529, 0.693] | 0.363 | 0.345 | 1 | 2 |
-| hybrid | 90 | 0.789 [0.706, 0.861] | 0.906 [0.844, 0.956] | 0.701 [0.617, 0.778] | 0.429 | 0.399 | 17 | 22 |
-| hybrid_rerank | 90 | 0.872 [0.806, 0.928] | 0.906 [0.844, 0.956] | 0.768 [0.697, 0.842] | 0.475 | 0.416 | 2549 | 2679 |
+| vector | 108 | 0.765 [0.693, 0.836] | 0.875 [0.823, 0.926] | 0.656 [0.587, 0.728] | 0.399 | 0.389 | 15 | 19 |
+| bm25 | 108 | 0.708 [0.633, 0.785] | 0.812 [0.744, 0.875] | 0.621 [0.546, 0.698] | 0.367 | 0.343 | 2 | 3 |
+| hybrid | 108 | 0.745 [0.673, 0.816] | 0.864 [0.804, 0.918] | 0.714 [0.642, 0.793] | 0.438 | 0.401 | 19 | 23 |
+| hybrid_rerank | 108 | 0.823 [0.758, 0.883] | 0.864 [0.804, 0.918] | 0.746 [0.675, 0.816] | 0.465 | 0.411 | 2436 | 2689 |
 
-_90 answerable questions; 104 total items; 605 chunks. Generated 2026-11-12T18:06:53+00:00._
+_108 answerable questions; 122 total items; 605 chunks. Generated 2026-11-12T18:29:34+00:00._
+
+_18 gold items are not yet human-reviewed: numbers that include them are provisional._
 
 _Brackets: 95% percentile bootstrap interval over queries (2000 resamples, seed 0). Small kinds have wide intervals; read them before comparing configs._
 
@@ -119,37 +121,37 @@ _Brackets: 95% percentile bootstrap interval over queries (2000 resamples, seed 
 
 | config | queries | Recall@5 | Recall@10 | MRR | nDCG@5 | nDCG@10 | p50 ms | p95 ms |
 |---|---|---|---|---|---|---|---|---|
-| vector | 11 | 0.818 [0.545, 1.000] | 0.909 [0.727, 1.000] | 0.594 [0.367, 0.809] | 0.317 | 0.354 | 16 | 19 |
+| vector | 11 | 0.818 [0.545, 1.000] | 0.909 [0.727, 1.000] | 0.594 [0.367, 0.809] | 0.317 | 0.354 | 16 | 18 |
 | bm25 | 11 | 0.818 [0.545, 1.000] | 0.909 [0.727, 1.000] | 0.710 [0.463, 0.939] | 0.407 | 0.391 | 1 | 2 |
-| hybrid | 11 | 0.909 [0.727, 1.000] | 1.000 [1.000, 1.000] | 0.735 [0.523, 0.939] | 0.415 | 0.405 | 18 | 22 |
-| hybrid_rerank | 11 | 1.000 [1.000, 1.000] | 1.000 [1.000, 1.000] | 0.780 [0.598, 0.955] | 0.521 | 0.420 | 2598 | 2636 |
+| hybrid | 11 | 0.909 [0.727, 1.000] | 1.000 [1.000, 1.000] | 0.735 [0.523, 0.939] | 0.415 | 0.405 | 17 | 23 |
+| hybrid_rerank | 11 | 1.000 [1.000, 1.000] | 1.000 [1.000, 1.000] | 0.780 [0.598, 0.955] | 0.521 | 0.420 | 2451 | 2627 |
 
 **country_rules**
 
 | config | queries | Recall@5 | Recall@10 | MRR | nDCG@5 | nDCG@10 | p50 ms | p95 ms |
 |---|---|---|---|---|---|---|---|---|
-| vector | 24 | 1.000 [1.000, 1.000] | 1.000 [1.000, 1.000] | 0.762 [0.633, 0.882] | 0.548 | 0.535 | 15 | 18 |
+| vector | 24 | 1.000 [1.000, 1.000] | 1.000 [1.000, 1.000] | 0.762 [0.633, 0.882] | 0.548 | 0.535 | 15 | 17 |
 | bm25 | 24 | 0.875 [0.708, 1.000] | 0.958 [0.875, 1.000] | 0.708 [0.562, 0.849] | 0.462 | 0.460 | 2 | 2 |
-| hybrid | 24 | 1.000 [1.000, 1.000] | 1.000 [1.000, 1.000] | 0.887 [0.774, 0.972] | 0.602 | 0.563 | 17 | 19 |
-| hybrid_rerank | 24 | 1.000 [1.000, 1.000] | 1.000 [1.000, 1.000] | 0.948 [0.865, 1.000] | 0.602 | 0.580 | 2480 | 2618 |
+| hybrid | 24 | 1.000 [1.000, 1.000] | 1.000 [1.000, 1.000] | 0.887 [0.774, 0.972] | 0.602 | 0.563 | 18 | 21 |
+| hybrid_rerank | 24 | 1.000 [1.000, 1.000] | 1.000 [1.000, 1.000] | 0.948 [0.865, 1.000] | 0.602 | 0.580 | 2450 | 2571 |
 
 **multi_hop**
 
 | config | queries | Recall@5 | Recall@10 | MRR | nDCG@5 | nDCG@10 | p50 ms | p95 ms |
 |---|---|---|---|---|---|---|---|---|
-| vector | 10 | 0.550 [0.350, 0.750] | 0.650 [0.450, 0.850] | 0.598 [0.348, 0.850] | 0.306 | 0.255 | 17 | 22 |
-| bm25 | 10 | 0.400 [0.200, 0.600] | 0.550 [0.350, 0.750] | 0.441 [0.212, 0.687] | 0.251 | 0.212 | 2 | 2 |
-| hybrid | 10 | 0.400 [0.200, 0.600] | 0.750 [0.500, 0.950] | 0.466 [0.243, 0.702] | 0.232 | 0.242 | 18 | 24 |
-| hybrid_rerank | 10 | 0.500 [0.350, 0.650] | 0.750 [0.500, 0.950] | 0.687 [0.420, 0.933] | 0.313 | 0.274 | 2510 | 2768 |
+| vector | 28 | 0.524 [0.411, 0.643] | 0.696 [0.589, 0.798] | 0.679 [0.539, 0.817] | 0.390 | 0.363 | 17 | 20 |
+| bm25 | 28 | 0.500 [0.387, 0.613] | 0.667 [0.547, 0.786] | 0.586 [0.451, 0.732] | 0.339 | 0.288 | 2 | 3 |
+| hybrid | 28 | 0.482 [0.363, 0.595] | 0.690 [0.571, 0.798] | 0.669 [0.520, 0.807] | 0.394 | 0.350 | 20 | 23 |
+| hybrid_rerank | 28 | 0.548 [0.429, 0.661] | 0.690 [0.571, 0.798] | 0.655 [0.522, 0.789] | 0.380 | 0.345 | 2425 | 2722 |
 
 **requirement**
 
 | config | queries | Recall@5 | Recall@10 | MRR | nDCG@5 | nDCG@10 | p50 ms | p95 ms |
 |---|---|---|---|---|---|---|---|---|
-| vector | 45 | 0.778 [0.644, 0.889] | 0.911 [0.822, 0.978] | 0.601 [0.492, 0.708] | 0.344 | 0.334 | 15 | 19 |
+| vector | 45 | 0.778 [0.644, 0.889] | 0.911 [0.822, 0.978] | 0.601 [0.492, 0.708] | 0.344 | 0.334 | 14 | 17 |
 | bm25 | 45 | 0.722 [0.589, 0.844] | 0.800 [0.667, 0.911] | 0.574 [0.449, 0.692] | 0.325 | 0.303 | 1 | 2 |
 | hybrid | 45 | 0.733 [0.600, 0.867] | 0.867 [0.756, 0.956] | 0.646 [0.519, 0.765] | 0.385 | 0.345 | 17 | 22 |
-| hybrid_rerank | 45 | 0.856 [0.744, 0.944] | 0.867 [0.756, 0.956] | 0.686 [0.572, 0.796] | 0.432 | 0.359 | 2556 | 2679 |
+| hybrid_rerank | 45 | 0.856 [0.744, 0.944] | 0.867 [0.756, 0.956] | 0.686 [0.572, 0.796] | 0.432 | 0.359 | 2409 | 2736 |
 
 | extraction records | programmes | fields | draft unchanged | checker precision | checker recall |
 |---|---|---|---|---|---|
@@ -158,14 +160,14 @@ _Brackets: 95% percentile bootstrap interval over queries (2000 resamples, seed 
 
 _Historical audit: 29/35 strict passes; 32/35 snapshot passes from 69 stated fields (seed 4). These are pre-correction results._
 
-_Refusal calibration: threshold 0.13340958; 4/14 probes refused; 3/90 answerable questions falsely refused. Status: calibrated. Calibration-set results, not held-out evaluation._
+_Refusal calibration: threshold 0.13340958; 4/14 probes refused; 4/108 answerable questions falsely refused. Status: calibrated. Calibration-set results, not held-out evaluation._
 
 | probe kind | probes | refused | missed |
 |---|---|---|---|
 | refusal | 9 | 3 | 6 |
 | coverage | 5 | 1 | 4 |
 
-_Answer quality (hybrid+rerank, extractive): groundedness 1.000, unsupported-claim rate 0.000, refusal rate 0.067 — token-overlap heuristic (not an LLM judge)._
+_Answer quality (hybrid+rerank, extractive): groundedness 1.000, unsupported-claim rate 0.000, refusal rate 0.066 — token-overlap heuristic (not an LLM judge)._
 <!-- BENCHMARK:END -->
 
 `make eval` validates the gold set, uses the extractive answer path regardless of API keys, calibrates the score gate, and refreshes these results. Models are warmed before timing; the score sweep reuses retrieval results. The detailed artifact is [refusal_calibration.json](evaluation/results/refusal_calibration.json).
@@ -219,7 +221,7 @@ This measures agreement with the sources as read by the maintainer, not an indep
 
 - **Free-tier LLM quota.** About 20 requests a day per model, so extraction of many programmes takes more than one day and the hosted chat will need caching.
 - **Small corpus, single node.** In-memory BM25 and brute-force cosine search. Fine for thousands of chunks, not millions.
-- **Small, assisted gold set.** All 104 model-authored items were accepted by the maintainer. Labels still have known source overlap; this is not an independent human-written evaluation. Refusal results use the calibration set itself.
+- **Small, assisted gold set.** 104 of the 122 model-authored items were accepted by the maintainer; the other 18 (multi-hop) are not yet human-reviewed, so numbers that include them are provisional. Labels still have known source overlap; this is not an independent human-written evaluation. Refusal results use the calibration set itself.
 - **Score-only refusal remains weak.** The selected threshold misses 10 of 14 refusal/coverage probes while falsely refusing 3 of 90 answerable questions. Coverage checks need more than a relevance score; calibration is a measured baseline, not a solved coverage policy.
 - **Seven of 13 programme records are not hand-verified.** They were verified by a second pass over the cited pages and are labelled `second_pass`; a completed 35-field sample found six strict failures, now corrected; unsampled fields remain unscored.
 - **Official pages change.** Every answer shows its crawl date. A weekly re-crawl with human review of changed pages comes with deployment.
