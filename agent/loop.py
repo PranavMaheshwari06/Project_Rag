@@ -70,8 +70,9 @@ def _parse(reply: str) -> dict | None:
         return None
     if not isinstance(obj, dict):
         return None
-    if isinstance(obj.get("answer"), str):
-        return obj
+    answer = obj.get("answer")
+    if isinstance(answer, str) and (answer.strip() or "tool" not in obj):
+        return {"answer": answer}  # an empty answer next to a tool call is not a final answer
     if isinstance(obj.get("tool"), str) and isinstance(obj.get("args", {}), dict):
         return {"tool": obj["tool"], "args": obj.get("args", {})}
     return None
@@ -83,7 +84,9 @@ def system_prompt(toolbox: Toolbox) -> str:
 
 
 def run_agent(question: str, toolbox: Toolbox, llm, max_steps: int | None = None) -> AgentAnswer:
-    max_steps = max_steps or toolbox.settings.agent.max_steps
+    max_steps = toolbox.settings.agent.max_steps if max_steps is None else max_steps
+    if max_steps < 1:
+        raise ValueError("max_steps must be at least 1")
     messages = [{"role": "system", "content": system_prompt(toolbox)}, {"role": "user", "content": question}]
     evidence: list[Chunk] = []
     steps: list[Step] = []

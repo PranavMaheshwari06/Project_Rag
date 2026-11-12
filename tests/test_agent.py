@@ -150,3 +150,39 @@ def test_not_published_fields_are_said_not_cited(settings):
 def test_fenced_json_reply_is_accepted(settings):
     llm = FakeLLM("```json\n" + json.dumps(call("search_sources", query="a")) + "\n```", {"answer": "y [1]."})
     assert run_agent("q", toolbox(settings), llm).stop_reason == "answered"
+
+
+class BrokenPipeline:
+    def search(self, *a, **k):
+        raise OSError("index missing at /secret/path")
+
+
+def test_a_failing_tool_is_a_tool_error_not_a_crash(settings):
+    tb = Toolbox(settings, BrokenPipeline())
+    llm = FakeLLM(call("search_sources", query="a"), call("convert_grade", best="9e999999",
+                                                          passing="-9e999999", obtained=0), {"answer": REFUSAL_TEXT})
+    out = run_agent("q", tb, llm)
+    assert [s.ok for s in out.steps] == [False, False] and out.stop_reason == "refused"
+    assert "search_sources failed (OSError)" in llm.sent[1][-1]["content"]
+    assert "/secret/path" not in json.dumps(llm.sent)
+
+
+def test_empty_answer_next_to_a_tool_call_runs_the_tool(settings):
+    llm = FakeLLM({"tool": "search_sources", "args": {"query": "a"}, "answer": ""}, {"answer": "x [1]."})
+    out = run_agent("q", toolbox(settings), llm)
+    assert [s.tool for s in out.steps] == ["search_sources"] and out.stop_reason == "answered"
+
+
+def test_step_budget_must_be_positive(settings):
+    with pytest.raises(ValueError):
+        run_agent("q", toolbox(settings), FakeLLM(), max_steps=0)
+
+
+def test_stale_rules_are_said(settings, monkeypatch):
+    import agent.tools as tools
+
+    real = tools.load_ruleset
+    monkeypatch.setattr(tools, "load_ruleset", lambda s, slug: (real(s, slug)[0], True))
+    profile = Profile(degree_country="India", total_credits="180", credit_unit="ECTS")
+    r = toolbox(settings, profile).call("check_eligibility", {"programme": KIT})
+    assert r.ok and "out of date against the verified record" in r.text and r.data["stale"]

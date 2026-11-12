@@ -97,7 +97,10 @@ class Toolbox:
             return ToolResult(ok=False, text=f"bad arguments for {name}: {e.errors(include_url=False)}")
         if isinstance(parsed, ProgrammeArgs) and parsed.programme not in self.programmes:
             return ToolResult(ok=False, text=f"{parsed.programme!r} is not covered; covered: {', '.join(self.programmes)}")
-        return getattr(self, name)(parsed)
+        try:
+            return getattr(self, name)(parsed)
+        except Exception as e:  # a failing tool is a tool error, not a crash; the message stays out
+            return ToolResult(ok=False, text=f"{name} failed ({type(e).__name__}).")
 
     def search_sources(self, a: SearchArgs) -> ToolResult:
         hits = self.pipeline.search(a.query, mode="hybrid_rerank", top_k=self.settings.agent.search_top_k)
@@ -146,6 +149,9 @@ class Toolbox:
                                    starting_year=self.starting_year,
                                    finance=load_finance(self.settings.paths.finance_rules_path))
         lines = [f"Engine headline (report it as is, do not change it): {report.headline}"]
+        if stale:
+            lines.append("The programme rules are out of date against the verified record, so only the visa "
+                         "funds rules were checked; the programme's own requirements need a re-check.")
         evidence = []
         for c in report.criteria:  # verdicts and requirements only: the student's values stay out
             line = f"- {c.label}: {c.verdict}" + (f", required {c.required.rstrip('.')}" if c.required else "")
@@ -162,5 +168,7 @@ class Toolbox:
             g = convert_grade(a.best, a.passing, a.obtained)
         except ValueError as e:
             return ToolResult(ok=False, text=str(e))
+        except ArithmeticError:  # e.g. 9e999999 overflows the Decimal context
+            return ToolResult(ok=False, text="grade values out of range")
         return ToolResult(ok=True, text=f"Estimated German grade {g.german:.2f} ({g.formula}); an estimate, "
                           "not an official conversion.", data={"german": str(g.german)})
