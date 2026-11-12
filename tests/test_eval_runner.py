@@ -55,3 +55,24 @@ def test_benchmark_reuses_scores_and_cannot_call_live_llm(tmp_path, monkeypatch)
     details = json.loads((tmp_path / "calibration.json").read_text())
     assert len(details["per_item"]) == 3 and details["answer_confusion"]["true_refusals"] == 1
     assert "gold" in result.input_hashes
+
+
+def test_bootstrap_interval_is_seeded_and_brackets_the_mean():
+    from evaluation.bootstrap import bootstrap_ci
+
+    scores = [1, 0, 0.5, 1, 0.25, 0, 1, 1, 0.33, 0.5]
+    low, high = bootstrap_ci(scores, resamples=500, seed=7)
+    assert (low, high) == bootstrap_ci(scores, resamples=500, seed=7)
+    assert low <= sum(scores) / len(scores) <= high and low < high
+    assert bootstrap_ci([0.5] * 4) == (0.5, 0.5)
+    assert bootstrap_ci([]) == (0.0, 0.0)
+
+
+def test_aggregate_attaches_intervals_only_when_asked():
+    rows = [{"metrics": {"recall": {"@5": r}, "rr": r, "ndcg": {"@5": r}}, "latency_ms": 1}
+            for r in (1, 0, 0.5, 1)]
+    with_ci = aggregate("hybrid", rows, [5], resamples=200, seed=0)
+    assert with_ci.recall_ci["@5"][0] <= with_ci.recall["@5"] <= with_ci.recall_ci["@5"][1]
+    assert with_ci.mrr_ci is not None
+    plain = aggregate("hybrid", rows, [5])
+    assert plain.recall_ci == {} and plain.mrr_ci is None
