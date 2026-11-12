@@ -283,7 +283,8 @@
           "doc_id": "de/tum/dea-msc/programme",
           "quote": "Application period for winter semester: 01.02. – 31.05."
         }
-      ]
+      ],
+      "reviewed_by": "human"
     },
     {
       "id": "deadline_summer",
@@ -308,7 +309,8 @@
           "doc_id": "de/tum/dea-msc/programme",
           "quote": "Application period for summer semester: 01.10. – 30.11."
         }
-      ]
+      ],
+      "reviewed_by": "human"
     }
   ]
 }

@@ -1,4 +1,4 @@
-"""Deadline rules drafted 2026-11-12 from the verified records (pending review):
+"""Deadline rules drafted 2026-11-12 from the verified records (reviewed by the maintainer 2026-11-13):
 each encoding pattern on the real rule files, on the closing day and the day after."""
 
 from datetime import date

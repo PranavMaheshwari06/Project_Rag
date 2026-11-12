@@ -240,7 +240,8 @@
           "doc_id": "de/tu-darmstadt/informatics-master-admission-guide",
           "quote": "before the deadline ( July 15 th for winter semester or January 15 th for summer semester)"
         }
-      ]
+      ],
+      "reviewed_by": "human"
     },
     {
       "id": "deadline_summer",
@@ -264,7 +265,8 @@
           "doc_id": "de/tu-darmstadt/informatics-master-admission-guide",
           "quote": "before the deadline ( July 15 th for winter semester or January 15 th for summer semester)"
         }
-      ]
+      ],
+      "reviewed_by": "human"
     }
   ]
 }

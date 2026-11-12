@@ -232,7 +232,8 @@
           "doc_id": "de/tu-darmstadt/informatics-master-admission-guide",
           "quote": "Cut-off deadline for online application and arrival of hard-copy documents | July 15 | January 15"
         }
-      ]
+      ],
+      "reviewed_by": "human"
     },
     {
       "id": "deadline_summer",
@@ -252,7 +253,8 @@
           "doc_id": "de/tu-darmstadt/informatics-master-admission-guide",
           "quote": "Cut-off deadline for online application and arrival of hard-copy documents | July 15 | January 15"
         }
-      ]
+      ],
+      "reviewed_by": "human"
     }
   ]
 }

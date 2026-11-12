@@ -414,7 +414,8 @@
           "doc_id": "de/saarland/dsai-msc/programme",
           "quote": "Applications should normally be received by 15 May for students seeking to begin studying in the winter semester and by 15 November for students looking to start their studies in summer."
         }
-      ]
+      ],
+      "reviewed_by": "human"
     },
     {
       "id": "deadline_summer",
@@ -434,7 +435,8 @@
           "doc_id": "de/saarland/dsai-msc/programme",
           "quote": "Applications should normally be received by 15 May for students seeking to begin studying in the winter semester and by 15 November for students looking to start their studies in summer."
         }
-      ]
+      ],
+      "reviewed_by": "human"
     },
     {
       "id": "deadline_winter_early",
@@ -455,7 +457,8 @@
           "doc_id": "de/saarland/dsai-msc/programme",
           "quote": "Applicants who apply by November 15th for the following winter semester are expected to receive a letter of admission by mid-February"
         }
-      ]
+      ],
+      "reviewed_by": "human"
     },
     {
       "id": "deadline_summer_early",
@@ -476,7 +479,8 @@
           "doc_id": "de/saarland/dsai-msc/programme",
           "quote": "Applicants who apply by May 15th for the following summer semester are expected to receive a letter of admission by mid-July"
         }
-      ]
+      ],
+      "reviewed_by": "human"
     }
   ]
 }

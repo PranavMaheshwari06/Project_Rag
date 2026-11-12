@@ -287,9 +287,9 @@
       }
     },
     "latency_ms": {
-      "p50": 0.4873299999417213,
-      "p95": 0.6663150006716023,
-      "max": 1.143178999882366
+      "p50": 0.4451255008461885,
+      "p95": 0.660445999528747,
+      "max": 0.847352002892876
     }
   },
   "disagreements": [],
@@ -317,61 +317,61 @@
         "tier": "second_pass"
       },
       "tum-m-sc-informatics": {
-        "ruleset_sha256": "58cdb17e0163e235093d5211eac5576a855dda01667d016fcc6e3fec3fec5262",
+        "ruleset_sha256": "672b0f548048ad23debea011293e263f587d91cb6c7e39158899fdd654dc9678",
         "record_sha256": "4942157e105633bb37c706b14ba06d83fbed29b35a5ac74e029c6d8515bf9123",
         "rules_stale": false,
         "tier": "second_pass"
       },
       "tum-m-sc-data-engineering-and-analytics": {
-        "ruleset_sha256": "18abdb978b20c1f6e30f83965a29f55f13c638979dc949a655035814f15ae3ce",
+        "ruleset_sha256": "ed6461ac4b9e0229c95fedf68cfaff7ebe72ef0905c45a036d235d9b0299a568",
         "record_sha256": "fc6f4eb6ecb39f7206350e7c88ecaf6d816f1a41dcf1d5a69edc87c1e21d97d1",
         "rules_stale": false,
         "tier": "second_pass"
       },
       "rwth-aachen-m-sc-computer-science": {
-        "ruleset_sha256": "a0556f63e843dd94769872bd37f105aa00ff8dba68a843f8069029ae51639f80",
+        "ruleset_sha256": "d3ef284eb369db9ed0e9211490250ab607a6046cbc4329e47c17e33f998f5ec9",
         "record_sha256": "c4cf2e21fa8f8f52204fb3e33844ac6b06f92041822bff236fb0016b81d8f627",
         "rules_stale": false,
         "tier": "human"
       },
       "rwth-aachen-m-sc-data-science": {
-        "ruleset_sha256": "63d129990ead328b8b54f089cb08bcc6fc1db4f4be0e7feb3b6a88ca9046912c",
+        "ruleset_sha256": "d124c68ba1c02085fe6fc047e8e9b807ecb144165853d8696170093623765061",
         "record_sha256": "09f2c8e081e0830a38692bb8f3020e6c063c6b5a4ab257103bae03232ad1830f",
         "rules_stale": false,
         "tier": "human"
       },
       "saarland-university-m-sc-computer-science": {
-        "ruleset_sha256": "675c016dc2a76926340b8bfe4c1899036155b53f606cbf5c30eabf374f411b46",
+        "ruleset_sha256": "761bd8e145aa91b90d2ca9963aaa620e9ceda94ec083a862174429066896f087",
         "record_sha256": "7dddd9fb5d34a431b215b29b75e62621ce5f75b2fa1e678f0c86407e9bea5d56",
         "rules_stale": false,
         "tier": "second_pass"
       },
       "saarland-university-m-sc-data-science-and-artificial-intelligence": {
-        "ruleset_sha256": "aada45a645e5a9012f0839efb4dc7d8675c8eb6ce01ec5c200638268abaf294a",
+        "ruleset_sha256": "f825681196f172459e357c60a1338bb90903998d007e2210e4ad65def6846d5c",
         "record_sha256": "d2322b7af0d71ef930eafb2d0b20276153730814691446dbefd25f87d0ff0c8f",
         "rules_stale": false,
         "tier": "human"
       },
       "tu-dresden-m-sc-computer-science": {
-        "ruleset_sha256": "8a9f5d999a2e9a24c97b491bb7d2d205638d05205e0043019e3ab8350aef3628",
+        "ruleset_sha256": "7977c222f8eecfce3a00d35e1bb3649e7ff2b448154f14671ffd2d23b7d18223",
         "record_sha256": "3c7460d2e1249d4929184c6d70ca649ebd091e58807fc7e653ca918376a11487",
         "rules_stale": false,
         "tier": "second_pass"
       },
       "tu-darmstadt-m-sc-computer-science": {
-        "ruleset_sha256": "4fa22295613fde1ddff01e4f1b3530fe54c652075da04a4877654396080cc1b6",
+        "ruleset_sha256": "229b7d9922c2021815ac3d0f120c5d42931c3b5963290b2746406823387aeae8",
         "record_sha256": "b87f9260300eb3c064033b3fdd76663bcaf6c373bc1a928bb9b53bb9e8759c17",
         "rules_stale": false,
         "tier": "human"
       },
       "tu-darmstadt-m-sc-artificial-intelligence-and-machine-learning": {
-        "ruleset_sha256": "38ae9a608293bf920f5fbe954c156c04579fdc76329a736ed50b87d3acf19703",
+        "ruleset_sha256": "7e9ef014f8dafd38f6fc9dc09201ea8ca2fa9c648c8d691042df2a53260b6f5e",
         "record_sha256": "22bfc9865e47f439e949a6dbd78e9fd3eda2a31eac6d0a382f8bdb75bbaead42",
         "rules_stale": false,
         "tier": "second_pass"
       },
       "university-of-stuttgart-m-sc-computer-science": {
-        "ruleset_sha256": "d9f6101b212cccdc162e92c01c31014dc6fbe974c02c6694a482201e76e38584",
+        "ruleset_sha256": "6473778338b5cd72863e4435160f8e43b5d1f5bf3d2d50d68ba874a5d557896e",
         "record_sha256": "430b7664c0bc143e8a08fde7f0a1b9ae16e192bdbe8d1aa608a5201f5ef2695c",
         "rules_stale": false,
         "tier": "second_pass"

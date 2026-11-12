@@ -338,7 +338,8 @@
           "doc_id": "de/rwth/master-application-international",
           "quote": "your application deadline is July 15 for the winter semester and January 15 for the summer semester. These application deadlines also apply to applicants who hold a German university degree relevant to the qualification for the Master's program they are applying for."
         }
-      ]
+      ],
+      "reviewed_by": "human"
     },
     {
       "id": "deadline_summer",
@@ -436,7 +437,8 @@
           "doc_id": "de/rwth/master-application-international",
           "quote": "your application deadline is July 15 for the winter semester and January 15 for the summer semester. These application deadlines also apply to applicants who hold a German university degree relevant to the qualification for the Master's program they are applying for."
         }
-      ]
+      ],
+      "reviewed_by": "human"
     }
   ]
 }

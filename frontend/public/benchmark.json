@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-12T22:08:20+00:00",
+  "generated_at": "2026-11-12T23:23:52+00:00",
   "gold_size": 108,
   "chunk_count": 614,
   "settings_snapshot": {
@@ -25,8 +25,8 @@
         "@5": 0.392,
         "@10": 0.376
       },
-      "latency_p50_ms": 16.5,
-      "latency_p95_ms": 23.1,
+      "latency_p50_ms": 22.4,
+      "latency_p95_ms": 39.5,
       "query_count": 108,
       "recall_ci": {
         "@5": [
@@ -54,8 +54,8 @@
         "@5": 0.364,
         "@10": 0.344
       },
-      "latency_p50_ms": 1.7,
-      "latency_p95_ms": 3.7,
+      "latency_p50_ms": 2.9,
+      "latency_p95_ms": 5.3,
       "query_count": 108,
       "recall_ci": {
         "@5": [
@@ -83,8 +83,8 @@
         "@5": 0.429,
         "@10": 0.39
       },
-      "latency_p50_ms": 18.7,
-      "latency_p95_ms": 23.7,
+      "latency_p50_ms": 25.0,
+      "latency_p95_ms": 44.2,
       "query_count": 108,
       "recall_ci": {
         "@5": [
@@ -112,8 +112,8 @@
         "@5": 0.462,
         "@10": 0.404
       },
-      "latency_p50_ms": 2770.9,
-      "latency_p95_ms": 3848.4,
+      "latency_p50_ms": 2868.7,
+      "latency_p95_ms": 3438.9,
       "query_count": 108,
       "recall_ci": {
         "@5": [
@@ -159,8 +159,7 @@
     "coverage": 5
   },
   "reviewer_counts": {
-    "human": 104,
-    "model": 18
+    "human": 122
   },
   "retrieval_by_kind": {
     "confusable": [
@@ -175,8 +174,8 @@
           "@5": 0.302,
           "@10": 0.334
         },
-        "latency_p50_ms": 15.6,
-        "latency_p95_ms": 18.3,
+        "latency_p50_ms": 18.3,
+        "latency_p95_ms": 23.4,
         "query_count": 11,
         "recall_ci": {
           "@5": [
@@ -204,8 +203,8 @@
           "@5": 0.364,
           "@10": 0.372
         },
-        "latency_p50_ms": 1.4,
-        "latency_p95_ms": 2.4,
+        "latency_p50_ms": 2.2,
+        "latency_p95_ms": 3.7,
         "query_count": 11,
         "recall_ci": {
           "@5": [
@@ -233,8 +232,8 @@
           "@5": 0.38,
           "@10": 0.38
         },
-        "latency_p50_ms": 17.6,
-        "latency_p95_ms": 20.8,
+        "latency_p50_ms": 25.8,
+        "latency_p95_ms": 32.6,
         "query_count": 11,
         "recall_ci": {
           "@5": [
@@ -262,8 +261,8 @@
           "@5": 0.504,
           "@10": 0.408
         },
-        "latency_p50_ms": 3052.3,
-        "latency_p95_ms": 4067.4,
+        "latency_p50_ms": 3047.3,
+        "latency_p95_ms": 3678.2,
         "query_count": 11,
         "recall_ci": {
           "@5": [
@@ -293,8 +292,8 @@
           "@5": 0.548,
           "@10": 0.535
         },
-        "latency_p50_ms": 16.1,
-        "latency_p95_ms": 18.7,
+        "latency_p50_ms": 23.0,
+        "latency_p95_ms": 97.8,
         "query_count": 24,
         "recall_ci": {
           "@5": [
@@ -322,8 +321,8 @@
           "@5": 0.461,
           "@10": 0.462
         },
-        "latency_p50_ms": 1.7,
-        "latency_p95_ms": 2.2,
+        "latency_p50_ms": 2.9,
+        "latency_p95_ms": 4.0,
         "query_count": 24,
         "recall_ci": {
           "@5": [
@@ -351,8 +350,8 @@
           "@5": 0.58,
           "@10": 0.543
         },
-        "latency_p50_ms": 18.5,
-        "latency_p95_ms": 22.4,
+        "latency_p50_ms": 20.0,
+        "latency_p95_ms": 27.0,
         "query_count": 24,
         "recall_ci": {
           "@5": [
@@ -380,8 +379,8 @@
           "@5": 0.602,
           "@10": 0.58
         },
-        "latency_p50_ms": 2617.4,
-        "latency_p95_ms": 2702.4,
+        "latency_p50_ms": 2824.8,
+        "latency_p95_ms": 2931.5,
         "query_count": 24,
         "recall_ci": {
           "@5": [
@@ -411,8 +410,8 @@
           "@5": 0.388,
           "@10": 0.331
         },
-        "latency_p50_ms": 19.8,
-        "latency_p95_ms": 26.2,
+        "latency_p50_ms": 27.4,
+        "latency_p95_ms": 39.5,
         "query_count": 28,
         "recall_ci": {
           "@5": [
@@ -440,8 +439,8 @@
           "@5": 0.354,
           "@10": 0.308
         },
-        "latency_p50_ms": 2.5,
-        "latency_p95_ms": 5.2,
+        "latency_p50_ms": 4.6,
+        "latency_p95_ms": 5.8,
         "query_count": 28,
         "recall_ci": {
           "@5": [
@@ -469,8 +468,8 @@
           "@5": 0.401,
           "@10": 0.34
         },
-        "latency_p50_ms": 21.1,
-        "latency_p95_ms": 25.8,
+        "latency_p50_ms": 27.2,
+        "latency_p95_ms": 48.7,
         "query_count": 28,
         "recall_ci": {
           "@5": [
@@ -498,8 +497,8 @@
           "@5": 0.384,
           "@10": 0.325
         },
-        "latency_p50_ms": 2749.3,
-        "latency_p95_ms": 2977.0,
+        "latency_p50_ms": 2841.1,
+        "latency_p95_ms": 3438.9,
         "query_count": 28,
         "recall_ci": {
           "@5": [
@@ -529,8 +528,8 @@
           "@5": 0.333,
           "@10": 0.33
         },
-        "latency_p50_ms": 16.0,
-        "latency_p95_ms": 19.0,
+        "latency_p50_ms": 20.2,
+        "latency_p95_ms": 31.2,
         "query_count": 45,
         "recall_ci": {
           "@5": [
@@ -558,8 +557,8 @@
           "@5": 0.318,
           "@10": 0.296
         },
-        "latency_p50_ms": 1.5,
-        "latency_p95_ms": 2.6,
+        "latency_p50_ms": 2.3,
+        "latency_p95_ms": 3.6,
         "query_count": 45,
         "recall_ci": {
           "@5": [
@@ -587,8 +586,8 @@
           "@5": 0.377,
           "@10": 0.343
         },
-        "latency_p50_ms": 17.9,
-        "latency_p95_ms": 22.4,
+        "latency_p50_ms": 26.8,
+        "latency_p95_ms": 46.7,
         "query_count": 45,
         "recall_ci": {
           "@5": [
@@ -616,8 +615,8 @@
           "@5": 0.425,
           "@10": 0.359
         },
-        "latency_p50_ms": 2850.0,
-        "latency_p95_ms": 4407.8,
+        "latency_p50_ms": 2917.4,
+        "latency_p95_ms": 3372.0,
         "query_count": 45,
         "recall_ci": {
           "@5": [
@@ -811,7 +810,7 @@
       "false_refusal_rate": 0.037037037037037035
     },
     "input_hashes": {
-      "gold": "57c58e1e2768e3976b8a2f4f83b4914b893232241a503b3d20e96443fb469726",
+      "gold": "9ac2d58c61516753fdddd47c4f60ebb9825b2619dd18f41b0751b0b0dfd200eb",
       "chunks": "d230ea06ec8f65cd3acb66708da3b817c90ffb76fe1460b60d61d0e77eaaf580",
       "registry": "e9638bdefd8e65238a87e32310afca0459340db34531d87265291294c2dd9f00",
       "manifest": "20f8e6191a8836e6e78c3ad08b7ca334988c2b6ab7bfa46115f1bf5f0d9b4014"
@@ -819,7 +818,7 @@
     "details_path": "evaluation/results/refusal_calibration.json"
   },
   "input_hashes": {
-    "gold": "57c58e1e2768e3976b8a2f4f83b4914b893232241a503b3d20e96443fb469726",
+    "gold": "9ac2d58c61516753fdddd47c4f60ebb9825b2619dd18f41b0751b0b0dfd200eb",
     "chunks": "d230ea06ec8f65cd3acb66708da3b817c90ffb76fe1460b60d61d0e77eaaf580",
     "registry": "e9638bdefd8e65238a87e32310afca0459340db34531d87265291294c2dd9f00",
     "manifest": "20f8e6191a8836e6e78c3ad08b7ca334988c2b6ab7bfa46115f1bf5f0d9b4014"

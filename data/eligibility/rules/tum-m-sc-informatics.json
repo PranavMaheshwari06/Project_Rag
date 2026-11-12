@@ -271,7 +271,8 @@
           "doc_id": "de/tum/informatics-msc/programme",
           "quote": "Application period for the winter semester: 01.02. – 31.05."
         }
-      ]
+      ],
+      "reviewed_by": "human"
     },
     {
       "id": "deadline_summer",
@@ -296,7 +297,8 @@
           "doc_id": "de/tum/informatics-msc/programme",
           "quote": "Application period for the summer semester: 01.10. – 30.11."
         }
-      ]
+      ],
+      "reviewed_by": "human"
     }
   ]
 }

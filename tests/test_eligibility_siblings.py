@@ -26,9 +26,9 @@ def cds(**facts):
 
 def test_files_are_fresh_reviewed_and_cite_the_record():
     s = load_settings()
-    deadlines = {"deadline_winter", "deadline_summer"}
+    deadlines = {"deadline_winter", "deadline_summer"}  # rules the verified record omits
     for slug, outside, pending in (
-        (DEA, {"english", "aptitude_assessment"}, deadlines),  # DEA deadlines drafted 2026-11-12, queued
+        (DEA, {"english", "aptitude_assessment"}, set()),
         (CDS, {"credit_minimums", "english"} | deadlines, set()),
     ):
         rules, stale = load_ruleset(s, slug)
