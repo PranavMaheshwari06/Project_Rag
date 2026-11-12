@@ -55,7 +55,7 @@ generation:
   max_sentences_per_chunk: 3
 
 evaluation:
-  gold_path: evaluation/datasets/gold_qa.jsonl   # 104 model-authored, human-accepted items
+  gold_path: evaluation/datasets/gold_qa.jsonl   # model-authored; reviewed_by per item
   k_values: [5, 10]
   benchmark_out: frontend/public/benchmark.json
   readme_path: README.md

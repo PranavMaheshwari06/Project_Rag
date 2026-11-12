@@ -157,3 +157,32 @@ These are the items I am least sure about:
 - **d09**: The Darmstadt guide gives a different student insurance range (125-150 €). The question is country-level, so the DAAD page stays the label.
 - **d27**: Refusal is correct for KIT, but a model might wrongly cite TU Berlin's "<5% admitted". It is a good adversarial probe.
 - **d35-d39**: Please confirm that coverage items should carry `university: null` rather than the out-of-corpus name.
+
+## Multi-hop extension (2026-11-12, pending human acceptance)
+
+18 `multi_hop` items (mh01-mh18) were drafted by a model from the page text in
+`data/processed/chunks.jsonl`, each with a verbatim evidence quote for every
+relevant doc. Checks run: `scripts/validate_gold.py` (122 items ok) and an
+evidence-substring check (every quote found in its doc). They keep
+`reviewed_by: model` until the maintainer accepts them.
+
+| qid | kind | status | docs |
+|---|---|---|---|
+| mh01 | multi_hop | pending | de/ustutt/cs-msc/english-proofs, de/rules/embassy-india-studies-visa |
+| mh02 | multi_hop | pending | de/saarland/masters-application-guide, de/rules/embassy-india-studies-visa |
+| mh03 | multi_hop | pending | de/tum/dea-msc/department, de/rules/uni-assist-faq-plan-application |
+| mh04 | multi_hop | pending | de/tub/cs-msc/application, de/rules/uni-assist-apply-in-6-steps |
+| mh05 | multi_hop | pending | de/scholarship/daad-study-scholarships-stem, de/kit/tuition-fees |
+| mh06 | multi_hop | pending | de/rwth/ds-msc/application, de/aachen/residence-permit |
+| mh07 | multi_hop | pending | de/stuttgart/residence-permit, de/rules/daad-health-insurance |
+| mh08 | multi_hop | pending | de/saarland/masters-application-guide, de/rwth/ds-msc/application, de/kit/cs-msc/admission |
+| mh09 | multi_hop | pending | de/saarland/masters-application-guide, de/tu-darmstadt/informatics-master-admission-guide |
+| mh10 | multi_hop | pending | de/ustutt/tuition-fees, de/tud/semester-contribution |
+| mh11 | multi_hop | pending | de/tum/language-certificates, de/kit/cs-msc/programme, de/ustutt/cs-msc/english-proofs |
+| mh12 | multi_hop | pending | de/kit/cs-msc/admission, de/tub/cs-msc/application |
+| mh13 | multi_hop | pending | de/berlin/anmeldung, de/berlin/residence-permit-study |
+| mh14 | multi_hop | pending | de/saarbruecken/registration, de/saarbruecken/residence-permit |
+| mh15 | multi_hop | pending | de/rules/foreign-office-blocked-account, de/darmstadt/residence-permit |
+| mh16 | multi_hop | pending | de/tud/international-faq, de/rules/daad-finances |
+| mh17 | multi_hop | pending | de/aachen/residence-permit, de/rules/bamf-skilled-workers-academic |
+| mh18 | multi_hop | pending | de/saarland/dsai-msc/programme, de/saarbruecken/residence-permit |
