@@ -7,7 +7,7 @@ from functools import lru_cache
 from pathlib import Path
 
 import yaml
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_CONFIG = REPO_ROOT / "config" / "settings.yaml"
@@ -106,9 +106,18 @@ class EligibilityCfg(BaseModel):
     parse_max_chars: int = 16000  # pasted text per /profile/parse request (plan section 5)
 
 
+class AgentCfg(BaseModel):
+    # code defaults, like EligibilityCfg: settings.yaml is hash-locked as a baseline input
+    max_steps: int = Field(default=6, ge=1)  # LLM calls per question, the final answer included
+    search_top_k: int = 3  # passages per search_sources call
+    comparison_out: str = "evaluation/results/agent_comparison.jsonl"  # one line per (item, arm)
+    summary_out: str = "evaluation/results/agent_comparison.json"
+
+
 class Settings(BaseModel):
     paths: PathsCfg = PathsCfg()
     eligibility: EligibilityCfg = EligibilityCfg()
+    agent: AgentCfg = AgentCfg()
     crawl: CrawlCfg = CrawlCfg()
     chunking: ChunkingCfg = ChunkingCfg()
     retrieval: RetrievalCfg = RetrievalCfg()

@@ -19,6 +19,7 @@ jobs:
           tests/test_extraction_eval.py tests/test_review.py tests/test_validate_gold.py
           tests/test_refusal_eval.py tests/test_eval_runner.py
           tests/test_rule_inventory.py tests/test_retrieval_filters.py tests/test_ablation.py tests/test_eligibility_*.py
+          tests/test_agent.py
       - run: python scripts/validate_rule_inventory.py
       - run: python scripts/check_eligibility.py --validate
   frontend:
