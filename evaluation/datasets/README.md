@@ -19,6 +19,7 @@ fixture for the test corpus only; the tests never read this file.
 | `author` | no | `model` | who wrote the question: `model` or `human` |
 | `reviewed_by` | no | `model` | who last checked the label: `model` or `human` |
 | `expect_refusal` | no | `false` | `true` when the system should decline (refusal and coverage items) |
+| `evidence` | no | `[]` | `[{"doc_id", "quote"}]`: verbatim support for the hint; each quote must appear in its doc (whitespace-normalised) |
 
 The defaults live in `GoldItem` in `evaluation/retrieval_eval.py`, so an older
 file with only the first five fields still loads.
@@ -43,11 +44,12 @@ file with only the first five fields still loads.
   `reviewed_by: human`. The maintainer accepted the model review and explicitly
   approved the four audit-related updates (b09, c19, b10, c05). This is human
   acceptance of assisted review, not a blinded, independently written gold set.
-- Added 2026-11-12: 18 `multi_hop` items (mh01-mh18), drafted by a model from
-  the cached pages with a verbatim evidence quote per doc, checked by
-  `scripts/validate_gold.py` and an evidence-substring check. They stay
-  `reviewed_by: model` until the maintainer accepts them; results that include
-  them are provisional until then.
+- Added 2026-11-12: 18 `multi_hop` items (qids mh02-mh24, with gaps), drafted
+  by a model from the cached pages, each with an `evidence` quote per doc that
+  `scripts/validate_gold.py` checks. A second-model review dropped six first
+  drafts that another doc answered just as well or that one doc answered alone,
+  and fixed three. They stay `reviewed_by: model` until the maintainer accepts
+  them; results that include them are provisional until then.
 - `expect_refusal: true` marks the 14 refusal and coverage items. They have
   `relevant_doc_ids: []`, so the retrieval metrics (Recall@k, MRR, nDCG) skip
   them; they are used to calibrate the refusal threshold.
@@ -85,9 +87,9 @@ items. Items written by hand get `author: human`.
 
 `make eval` uses the extractive answer path even if an API key is configured.
 It warms the models, reports the four retrieval modes overall and by kind,
-and sweeps cached top reranker scores over all 104 items. The selected threshold
-maximizes refusal recall while falsely refusing at most 5% of the 90 answerable
-questions; ties prefer fewer false refusals, then a lower threshold.
+and sweeps cached top reranker scores over all items (122 since 2026-11-12). The selected
+threshold maximizes refusal recall while falsely refusing at most 5% of the
+answerable questions (108); ties prefer fewer false refusals, then a lower threshold.
 
 The command persists a feasible selected threshold in `config/settings.yaml`.
 `scripts/run_eval.py` without `--apply-threshold` generates results without

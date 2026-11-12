@@ -2,45 +2,45 @@
   "method": "calibration-set score sweep (not held-out evaluation)",
   "status": "calibrated",
   "configured_threshold": 0.13340958034137707,
-  "selected_threshold": 0.13340958034137707,
+  "selected_threshold": 0.20149040532450285,
   "max_false_refusal_rate": 0.05,
   "constraint_met": true,
   "selection_rule": "maximize refusal recall; then fewer false refusals; then lower threshold",
   "selected": {
-    "threshold": 0.13340958034137707,
-    "true_refusals": 4,
-    "false_refusals": 4,
-    "correct_answers": 104,
-    "missed_refusals": 10,
+    "threshold": 0.20149040532450285,
+    "true_refusals": 5,
+    "false_refusals": 5,
+    "correct_answers": 103,
+    "missed_refusals": 9,
     "answerable_count": 108,
     "refusal_count": 14,
-    "refusal_recall": 0.2857142857142857,
+    "refusal_recall": 0.35714285714285715,
     "refusal_precision": 0.5,
-    "false_refusal_rate": 0.037037037037037035
+    "false_refusal_rate": 0.046296296296296294
   },
   "configured": {
     "threshold": 0.13340958034137707,
     "true_refusals": 4,
-    "false_refusals": 4,
-    "correct_answers": 104,
+    "false_refusals": 3,
+    "correct_answers": 105,
     "missed_refusals": 10,
     "answerable_count": 108,
     "refusal_count": 14,
     "refusal_recall": 0.2857142857142857,
-    "refusal_precision": 0.5,
-    "false_refusal_rate": 0.037037037037037035
+    "refusal_precision": 0.5714285714285714,
+    "false_refusal_rate": 0.027777777777777776
   },
   "by_kind": {
     "confusable": {
       "true_refusals": 0,
-      "false_refusals": 1,
-      "correct_answers": 10,
+      "false_refusals": 2,
+      "correct_answers": 9,
       "missed_refusals": 0,
       "answerable_count": 11,
       "refusal_count": 0,
       "refusal_recall": null,
       "refusal_precision": 0.0,
-      "false_refusal_rate": 0.09090909090909091
+      "false_refusal_rate": 0.18181818181818182
     },
     "country_rules": {
       "true_refusals": 0,
@@ -76,13 +76,13 @@
       "false_refusal_rate": 0.03571428571428571
     },
     "refusal": {
-      "true_refusals": 3,
+      "true_refusals": 4,
       "false_refusals": 0,
       "correct_answers": 0,
-      "missed_refusals": 6,
+      "missed_refusals": 5,
       "answerable_count": 0,
       "refusal_count": 9,
-      "refusal_recall": 0.3333333333333333,
+      "refusal_recall": 0.4444444444444444,
       "refusal_precision": 1.0,
       "false_refusal_rate": null
     },
@@ -232,7 +232,7 @@
       "false_refusal_rate": 0.018518518518518517
     },
     {
-      "threshold": 0.09119411404145945,
+      "threshold": 0.12079246290101575,
       "true_refusals": 3,
       "false_refusals": 2,
       "correct_answers": 106,
@@ -244,92 +244,80 @@
       "false_refusal_rate": 0.018518518518518517
     },
     {
-      "threshold": 0.09119411404145947,
-      "true_refusals": 3,
-      "false_refusals": 3,
-      "correct_answers": 105,
-      "missed_refusals": 11,
-      "answerable_count": 108,
-      "refusal_count": 14,
-      "refusal_recall": 0.21428571428571427,
-      "refusal_precision": 0.5,
-      "false_refusal_rate": 0.027777777777777776
-    },
-    {
-      "threshold": 0.12079246290101575,
-      "true_refusals": 3,
-      "false_refusals": 3,
-      "correct_answers": 105,
-      "missed_refusals": 11,
-      "answerable_count": 108,
-      "refusal_count": 14,
-      "refusal_recall": 0.21428571428571427,
-      "refusal_precision": 0.5,
-      "false_refusal_rate": 0.027777777777777776
-    },
-    {
       "threshold": 0.12079246290101577,
       "true_refusals": 3,
-      "false_refusals": 4,
-      "correct_answers": 104,
+      "false_refusals": 3,
+      "correct_answers": 105,
       "missed_refusals": 11,
       "answerable_count": 108,
       "refusal_count": 14,
       "refusal_recall": 0.21428571428571427,
-      "refusal_precision": 0.42857142857142855,
-      "false_refusal_rate": 0.037037037037037035
+      "refusal_precision": 0.5,
+      "false_refusal_rate": 0.027777777777777776
     },
     {
       "threshold": 0.13340958034137704,
       "true_refusals": 3,
-      "false_refusals": 4,
-      "correct_answers": 104,
+      "false_refusals": 3,
+      "correct_answers": 105,
       "missed_refusals": 11,
       "answerable_count": 108,
       "refusal_count": 14,
       "refusal_recall": 0.21428571428571427,
-      "refusal_precision": 0.42857142857142855,
-      "false_refusal_rate": 0.037037037037037035
+      "refusal_precision": 0.5,
+      "false_refusal_rate": 0.027777777777777776
     },
     {
       "threshold": 0.13340958034137707,
       "true_refusals": 4,
-      "false_refusals": 4,
-      "correct_answers": 104,
+      "false_refusals": 3,
+      "correct_answers": 105,
       "missed_refusals": 10,
       "answerable_count": 108,
       "refusal_count": 14,
       "refusal_recall": 0.2857142857142857,
-      "refusal_precision": 0.5,
-      "false_refusal_rate": 0.037037037037037035
-    },
-    {
-      "threshold": 0.15277894916123255,
-      "true_refusals": 4,
-      "false_refusals": 4,
-      "correct_answers": 104,
-      "missed_refusals": 10,
-      "answerable_count": 108,
-      "refusal_count": 14,
-      "refusal_recall": 0.2857142857142857,
-      "refusal_precision": 0.5,
-      "false_refusal_rate": 0.037037037037037035
-    },
-    {
-      "threshold": 0.15277894916123258,
-      "true_refusals": 4,
-      "false_refusals": 5,
-      "correct_answers": 103,
-      "missed_refusals": 10,
-      "answerable_count": 108,
-      "refusal_count": 14,
-      "refusal_recall": 0.2857142857142857,
-      "refusal_precision": 0.4444444444444444,
-      "false_refusal_rate": 0.046296296296296294
+      "refusal_precision": 0.5714285714285714,
+      "false_refusal_rate": 0.027777777777777776
     },
     {
       "threshold": 0.16929444966921794,
       "true_refusals": 4,
+      "false_refusals": 3,
+      "correct_answers": 105,
+      "missed_refusals": 10,
+      "answerable_count": 108,
+      "refusal_count": 14,
+      "refusal_recall": 0.2857142857142857,
+      "refusal_precision": 0.5714285714285714,
+      "false_refusal_rate": 0.027777777777777776
+    },
+    {
+      "threshold": 0.16929444966921797,
+      "true_refusals": 4,
+      "false_refusals": 4,
+      "correct_answers": 104,
+      "missed_refusals": 10,
+      "answerable_count": 108,
+      "refusal_count": 14,
+      "refusal_recall": 0.2857142857142857,
+      "refusal_precision": 0.5,
+      "false_refusal_rate": 0.037037037037037035
+    },
+    {
+      "threshold": 0.1999745756453424,
+      "true_refusals": 4,
+      "false_refusals": 4,
+      "correct_answers": 104,
+      "missed_refusals": 10,
+      "answerable_count": 108,
+      "refusal_count": 14,
+      "refusal_recall": 0.2857142857142857,
+      "refusal_precision": 0.5,
+      "false_refusal_rate": 0.037037037037037035
+    },
+    {
+      "threshold": 0.19997457564534243,
+      "true_refusals": 4,
       "false_refusals": 5,
       "correct_answers": 103,
       "missed_refusals": 10,
@@ -340,68 +328,68 @@
       "false_refusal_rate": 0.046296296296296294
     },
     {
-      "threshold": 0.16929444966921797,
-      "true_refusals": 4,
-      "false_refusals": 6,
-      "correct_answers": 102,
-      "missed_refusals": 10,
-      "answerable_count": 108,
-      "refusal_count": 14,
-      "refusal_recall": 0.2857142857142857,
-      "refusal_precision": 0.4,
-      "false_refusal_rate": 0.05555555555555555
-    },
-    {
-      "threshold": 0.1999745756453424,
-      "true_refusals": 4,
-      "false_refusals": 6,
-      "correct_answers": 102,
-      "missed_refusals": 10,
-      "answerable_count": 108,
-      "refusal_count": 14,
-      "refusal_recall": 0.2857142857142857,
-      "refusal_precision": 0.4,
-      "false_refusal_rate": 0.05555555555555555
-    },
-    {
-      "threshold": 0.19997457564534243,
-      "true_refusals": 4,
-      "false_refusals": 7,
-      "correct_answers": 101,
-      "missed_refusals": 10,
-      "answerable_count": 108,
-      "refusal_count": 14,
-      "refusal_recall": 0.2857142857142857,
-      "refusal_precision": 0.36363636363636365,
-      "false_refusal_rate": 0.06481481481481481
-    },
-    {
       "threshold": 0.20149040532450282,
       "true_refusals": 4,
-      "false_refusals": 7,
-      "correct_answers": 101,
+      "false_refusals": 5,
+      "correct_answers": 103,
       "missed_refusals": 10,
       "answerable_count": 108,
       "refusal_count": 14,
       "refusal_recall": 0.2857142857142857,
-      "refusal_precision": 0.36363636363636365,
-      "false_refusal_rate": 0.06481481481481481
+      "refusal_precision": 0.4444444444444444,
+      "false_refusal_rate": 0.046296296296296294
     },
     {
       "threshold": 0.20149040532450285,
       "true_refusals": 5,
-      "false_refusals": 7,
-      "correct_answers": 101,
+      "false_refusals": 5,
+      "correct_answers": 103,
       "missed_refusals": 9,
       "answerable_count": 108,
       "refusal_count": 14,
       "refusal_recall": 0.35714285714285715,
-      "refusal_precision": 0.4166666666666667,
-      "false_refusal_rate": 0.06481481481481481
+      "refusal_precision": 0.5,
+      "false_refusal_rate": 0.046296296296296294
     },
     {
       "threshold": 0.20264812089153747,
       "true_refusals": 5,
+      "false_refusals": 5,
+      "correct_answers": 103,
+      "missed_refusals": 9,
+      "answerable_count": 108,
+      "refusal_count": 14,
+      "refusal_recall": 0.35714285714285715,
+      "refusal_precision": 0.5,
+      "false_refusal_rate": 0.046296296296296294
+    },
+    {
+      "threshold": 0.2026481208915375,
+      "true_refusals": 5,
+      "false_refusals": 6,
+      "correct_answers": 102,
+      "missed_refusals": 9,
+      "answerable_count": 108,
+      "refusal_count": 14,
+      "refusal_recall": 0.35714285714285715,
+      "refusal_precision": 0.45454545454545453,
+      "false_refusal_rate": 0.05555555555555555
+    },
+    {
+      "threshold": 0.21636168159233632,
+      "true_refusals": 5,
+      "false_refusals": 6,
+      "correct_answers": 102,
+      "missed_refusals": 9,
+      "answerable_count": 108,
+      "refusal_count": 14,
+      "refusal_recall": 0.35714285714285715,
+      "refusal_precision": 0.45454545454545453,
+      "false_refusal_rate": 0.05555555555555555
+    },
+    {
+      "threshold": 0.21636168159233635,
+      "true_refusals": 5,
       "false_refusals": 7,
       "correct_answers": 101,
       "missed_refusals": 9,
@@ -412,116 +400,116 @@
       "false_refusal_rate": 0.06481481481481481
     },
     {
-      "threshold": 0.2026481208915375,
-      "true_refusals": 5,
-      "false_refusals": 8,
-      "correct_answers": 100,
-      "missed_refusals": 9,
-      "answerable_count": 108,
-      "refusal_count": 14,
-      "refusal_recall": 0.35714285714285715,
-      "refusal_precision": 0.38461538461538464,
-      "false_refusal_rate": 0.07407407407407407
-    },
-    {
-      "threshold": 0.21636168159233632,
-      "true_refusals": 5,
-      "false_refusals": 8,
-      "correct_answers": 100,
-      "missed_refusals": 9,
-      "answerable_count": 108,
-      "refusal_count": 14,
-      "refusal_recall": 0.35714285714285715,
-      "refusal_precision": 0.38461538461538464,
-      "false_refusal_rate": 0.07407407407407407
-    },
-    {
-      "threshold": 0.21636168159233635,
-      "true_refusals": 5,
-      "false_refusals": 9,
-      "correct_answers": 99,
-      "missed_refusals": 9,
-      "answerable_count": 108,
-      "refusal_count": 14,
-      "refusal_recall": 0.35714285714285715,
-      "refusal_precision": 0.35714285714285715,
-      "false_refusal_rate": 0.08333333333333333
-    },
-    {
       "threshold": 0.23378753529263827,
       "true_refusals": 5,
-      "false_refusals": 9,
-      "correct_answers": 99,
+      "false_refusals": 7,
+      "correct_answers": 101,
       "missed_refusals": 9,
       "answerable_count": 108,
       "refusal_count": 14,
       "refusal_recall": 0.35714285714285715,
-      "refusal_precision": 0.35714285714285715,
-      "false_refusal_rate": 0.08333333333333333
+      "refusal_precision": 0.4166666666666667,
+      "false_refusal_rate": 0.06481481481481481
     },
     {
       "threshold": 0.2337875352926383,
       "true_refusals": 5,
-      "false_refusals": 10,
-      "correct_answers": 98,
+      "false_refusals": 8,
+      "correct_answers": 100,
       "missed_refusals": 9,
       "answerable_count": 108,
       "refusal_count": 14,
       "refusal_recall": 0.35714285714285715,
-      "refusal_precision": 0.3333333333333333,
-      "false_refusal_rate": 0.09259259259259259
+      "refusal_precision": 0.38461538461538464,
+      "false_refusal_rate": 0.07407407407407407
     },
     {
       "threshold": 0.24410043184828287,
       "true_refusals": 5,
-      "false_refusals": 10,
-      "correct_answers": 98,
+      "false_refusals": 8,
+      "correct_answers": 100,
       "missed_refusals": 9,
       "answerable_count": 108,
       "refusal_count": 14,
       "refusal_recall": 0.35714285714285715,
-      "refusal_precision": 0.3333333333333333,
-      "false_refusal_rate": 0.09259259259259259
+      "refusal_precision": 0.38461538461538464,
+      "false_refusal_rate": 0.07407407407407407
     },
     {
       "threshold": 0.2441004318482829,
       "true_refusals": 5,
-      "false_refusals": 11,
-      "correct_answers": 97,
+      "false_refusals": 9,
+      "correct_answers": 99,
       "missed_refusals": 9,
       "answerable_count": 108,
       "refusal_count": 14,
       "refusal_recall": 0.35714285714285715,
-      "refusal_precision": 0.3125,
-      "false_refusal_rate": 0.10185185185185185
+      "refusal_precision": 0.35714285714285715,
+      "false_refusal_rate": 0.08333333333333333
     },
     {
       "threshold": 0.28288709483329266,
       "true_refusals": 5,
-      "false_refusals": 11,
-      "correct_answers": 97,
+      "false_refusals": 9,
+      "correct_answers": 99,
       "missed_refusals": 9,
       "answerable_count": 108,
       "refusal_count": 14,
       "refusal_recall": 0.35714285714285715,
-      "refusal_precision": 0.3125,
-      "false_refusal_rate": 0.10185185185185185
+      "refusal_precision": 0.35714285714285715,
+      "false_refusal_rate": 0.08333333333333333
     },
     {
       "threshold": 0.2828870948332927,
       "true_refusals": 6,
-      "false_refusals": 11,
-      "correct_answers": 97,
+      "false_refusals": 9,
+      "correct_answers": 99,
       "missed_refusals": 8,
       "answerable_count": 108,
       "refusal_count": 14,
       "refusal_recall": 0.42857142857142855,
-      "refusal_precision": 0.35294117647058826,
-      "false_refusal_rate": 0.10185185185185185
+      "refusal_precision": 0.4,
+      "false_refusal_rate": 0.08333333333333333
     },
     {
       "threshold": 0.31677483664056844,
       "true_refusals": 6,
+      "false_refusals": 9,
+      "correct_answers": 99,
+      "missed_refusals": 8,
+      "answerable_count": 108,
+      "refusal_count": 14,
+      "refusal_recall": 0.42857142857142855,
+      "refusal_precision": 0.4,
+      "false_refusal_rate": 0.08333333333333333
+    },
+    {
+      "threshold": 0.3167748366405685,
+      "true_refusals": 6,
+      "false_refusals": 10,
+      "correct_answers": 98,
+      "missed_refusals": 8,
+      "answerable_count": 108,
+      "refusal_count": 14,
+      "refusal_recall": 0.42857142857142855,
+      "refusal_precision": 0.375,
+      "false_refusal_rate": 0.09259259259259259
+    },
+    {
+      "threshold": 0.33253669723831314,
+      "true_refusals": 6,
+      "false_refusals": 10,
+      "correct_answers": 98,
+      "missed_refusals": 8,
+      "answerable_count": 108,
+      "refusal_count": 14,
+      "refusal_recall": 0.42857142857142855,
+      "refusal_precision": 0.375,
+      "false_refusal_rate": 0.09259259259259259
+    },
+    {
+      "threshold": 0.3325366972383132,
+      "true_refusals": 6,
       "false_refusals": 11,
       "correct_answers": 97,
       "missed_refusals": 8,
@@ -532,44 +520,44 @@
       "false_refusal_rate": 0.10185185185185185
     },
     {
-      "threshold": 0.3167748366405685,
-      "true_refusals": 6,
-      "false_refusals": 12,
-      "correct_answers": 96,
-      "missed_refusals": 8,
-      "answerable_count": 108,
-      "refusal_count": 14,
-      "refusal_recall": 0.42857142857142855,
-      "refusal_precision": 0.3333333333333333,
-      "false_refusal_rate": 0.1111111111111111
-    },
-    {
       "threshold": 0.3410384791988248,
       "true_refusals": 6,
-      "false_refusals": 12,
-      "correct_answers": 96,
+      "false_refusals": 11,
+      "correct_answers": 97,
       "missed_refusals": 8,
       "answerable_count": 108,
       "refusal_count": 14,
       "refusal_recall": 0.42857142857142855,
-      "refusal_precision": 0.3333333333333333,
-      "false_refusal_rate": 0.1111111111111111
+      "refusal_precision": 0.35294117647058826,
+      "false_refusal_rate": 0.10185185185185185
     },
     {
       "threshold": 0.34103847919882485,
       "true_refusals": 6,
-      "false_refusals": 13,
-      "correct_answers": 95,
+      "false_refusals": 12,
+      "correct_answers": 96,
       "missed_refusals": 8,
       "answerable_count": 108,
       "refusal_count": 14,
       "refusal_recall": 0.42857142857142855,
-      "refusal_precision": 0.3157894736842105,
-      "false_refusal_rate": 0.12037037037037036
+      "refusal_precision": 0.3333333333333333,
+      "false_refusal_rate": 0.1111111111111111
     },
     {
       "threshold": 0.34776139574297293,
       "true_refusals": 6,
+      "false_refusals": 12,
+      "correct_answers": 96,
+      "missed_refusals": 8,
+      "answerable_count": 108,
+      "refusal_count": 14,
+      "refusal_recall": 0.42857142857142855,
+      "refusal_precision": 0.3333333333333333,
+      "false_refusal_rate": 0.1111111111111111
+    },
+    {
+      "threshold": 0.347761395742973,
+      "true_refusals": 6,
       "false_refusals": 13,
       "correct_answers": 95,
       "missed_refusals": 8,
@@ -580,44 +568,44 @@
       "false_refusal_rate": 0.12037037037037036
     },
     {
-      "threshold": 0.347761395742973,
-      "true_refusals": 6,
-      "false_refusals": 14,
-      "correct_answers": 94,
-      "missed_refusals": 8,
-      "answerable_count": 108,
-      "refusal_count": 14,
-      "refusal_recall": 0.42857142857142855,
-      "refusal_precision": 0.3,
-      "false_refusal_rate": 0.12962962962962962
-    },
-    {
       "threshold": 0.3496948315264723,
       "true_refusals": 6,
-      "false_refusals": 14,
-      "correct_answers": 94,
+      "false_refusals": 13,
+      "correct_answers": 95,
       "missed_refusals": 8,
       "answerable_count": 108,
       "refusal_count": 14,
       "refusal_recall": 0.42857142857142855,
-      "refusal_precision": 0.3,
-      "false_refusal_rate": 0.12962962962962962
+      "refusal_precision": 0.3157894736842105,
+      "false_refusal_rate": 0.12037037037037036
     },
     {
       "threshold": 0.34969483152647235,
       "true_refusals": 7,
-      "false_refusals": 14,
-      "correct_answers": 94,
+      "false_refusals": 13,
+      "correct_answers": 95,
       "missed_refusals": 7,
       "answerable_count": 108,
       "refusal_count": 14,
       "refusal_recall": 0.5,
-      "refusal_precision": 0.3333333333333333,
-      "false_refusal_rate": 0.12962962962962962
+      "refusal_precision": 0.35,
+      "false_refusal_rate": 0.12037037037037036
     },
     {
       "threshold": 0.41711757757934737,
       "true_refusals": 7,
+      "false_refusals": 13,
+      "correct_answers": 95,
+      "missed_refusals": 7,
+      "answerable_count": 108,
+      "refusal_count": 14,
+      "refusal_recall": 0.5,
+      "refusal_precision": 0.35,
+      "false_refusal_rate": 0.12037037037037036
+    },
+    {
+      "threshold": 0.4171175775793474,
+      "true_refusals": 7,
       "false_refusals": 14,
       "correct_answers": 94,
       "missed_refusals": 7,
@@ -628,44 +616,44 @@
       "false_refusal_rate": 0.12962962962962962
     },
     {
-      "threshold": 0.4171175775793474,
-      "true_refusals": 7,
-      "false_refusals": 15,
-      "correct_answers": 93,
-      "missed_refusals": 7,
-      "answerable_count": 108,
-      "refusal_count": 14,
-      "refusal_recall": 0.5,
-      "refusal_precision": 0.3181818181818182,
-      "false_refusal_rate": 0.1388888888888889
-    },
-    {
       "threshold": 0.43373338322486676,
       "true_refusals": 7,
-      "false_refusals": 15,
-      "correct_answers": 93,
+      "false_refusals": 14,
+      "correct_answers": 94,
       "missed_refusals": 7,
       "answerable_count": 108,
       "refusal_count": 14,
       "refusal_recall": 0.5,
-      "refusal_precision": 0.3181818181818182,
-      "false_refusal_rate": 0.1388888888888889
+      "refusal_precision": 0.3333333333333333,
+      "false_refusal_rate": 0.12962962962962962
     },
     {
       "threshold": 0.4337333832248668,
       "true_refusals": 7,
-      "false_refusals": 16,
-      "correct_answers": 92,
+      "false_refusals": 15,
+      "correct_answers": 93,
       "missed_refusals": 7,
       "answerable_count": 108,
       "refusal_count": 14,
       "refusal_recall": 0.5,
-      "refusal_precision": 0.30434782608695654,
-      "false_refusal_rate": 0.14814814814814814
+      "refusal_precision": 0.3181818181818182,
+      "false_refusal_rate": 0.1388888888888889
     },
     {
       "threshold": 0.43931973387990114,
       "true_refusals": 7,
+      "false_refusals": 15,
+      "correct_answers": 93,
+      "missed_refusals": 7,
+      "answerable_count": 108,
+      "refusal_count": 14,
+      "refusal_recall": 0.5,
+      "refusal_precision": 0.3181818181818182,
+      "false_refusal_rate": 0.1388888888888889
+    },
+    {
+      "threshold": 0.4393197338799012,
+      "true_refusals": 7,
       "false_refusals": 16,
       "correct_answers": 92,
       "missed_refusals": 7,
@@ -676,44 +664,44 @@
       "false_refusal_rate": 0.14814814814814814
     },
     {
-      "threshold": 0.4393197338799012,
-      "true_refusals": 7,
-      "false_refusals": 17,
-      "correct_answers": 91,
-      "missed_refusals": 7,
-      "answerable_count": 108,
-      "refusal_count": 14,
-      "refusal_recall": 0.5,
-      "refusal_precision": 0.2916666666666667,
-      "false_refusal_rate": 0.1574074074074074
-    },
-    {
       "threshold": 0.470892840171975,
       "true_refusals": 7,
-      "false_refusals": 17,
-      "correct_answers": 91,
+      "false_refusals": 16,
+      "correct_answers": 92,
       "missed_refusals": 7,
       "answerable_count": 108,
       "refusal_count": 14,
       "refusal_recall": 0.5,
-      "refusal_precision": 0.2916666666666667,
-      "false_refusal_rate": 0.1574074074074074
+      "refusal_precision": 0.30434782608695654,
+      "false_refusal_rate": 0.14814814814814814
     },
     {
       "threshold": 0.4708928401719751,
       "true_refusals": 7,
-      "false_refusals": 18,
-      "correct_answers": 90,
+      "false_refusals": 17,
+      "correct_answers": 91,
       "missed_refusals": 7,
       "answerable_count": 108,
       "refusal_count": 14,
       "refusal_recall": 0.5,
-      "refusal_precision": 0.28,
-      "false_refusal_rate": 0.16666666666666666
+      "refusal_precision": 0.2916666666666667,
+      "false_refusal_rate": 0.1574074074074074
     },
     {
       "threshold": 0.47116777929041975,
       "true_refusals": 7,
+      "false_refusals": 17,
+      "correct_answers": 91,
+      "missed_refusals": 7,
+      "answerable_count": 108,
+      "refusal_count": 14,
+      "refusal_recall": 0.5,
+      "refusal_precision": 0.2916666666666667,
+      "false_refusal_rate": 0.1574074074074074
+    },
+    {
+      "threshold": 0.4711677792904198,
+      "true_refusals": 7,
       "false_refusals": 18,
       "correct_answers": 90,
       "missed_refusals": 7,
@@ -724,44 +712,44 @@
       "false_refusal_rate": 0.16666666666666666
     },
     {
-      "threshold": 0.4711677792904198,
-      "true_refusals": 7,
-      "false_refusals": 19,
-      "correct_answers": 89,
-      "missed_refusals": 7,
-      "answerable_count": 108,
-      "refusal_count": 14,
-      "refusal_recall": 0.5,
-      "refusal_precision": 0.2692307692307692,
-      "false_refusal_rate": 0.17592592592592593
-    },
-    {
       "threshold": 0.48360183547300634,
       "true_refusals": 7,
-      "false_refusals": 19,
-      "correct_answers": 89,
+      "false_refusals": 18,
+      "correct_answers": 90,
       "missed_refusals": 7,
       "answerable_count": 108,
       "refusal_count": 14,
       "refusal_recall": 0.5,
-      "refusal_precision": 0.2692307692307692,
-      "false_refusal_rate": 0.17592592592592593
+      "refusal_precision": 0.28,
+      "false_refusal_rate": 0.16666666666666666
     },
     {
       "threshold": 0.4836018354730064,
       "true_refusals": 7,
-      "false_refusals": 20,
-      "correct_answers": 88,
+      "false_refusals": 19,
+      "correct_answers": 89,
       "missed_refusals": 7,
       "answerable_count": 108,
       "refusal_count": 14,
       "refusal_recall": 0.5,
-      "refusal_precision": 0.25925925925925924,
-      "false_refusal_rate": 0.18518518518518517
+      "refusal_precision": 0.2692307692307692,
+      "false_refusal_rate": 0.17592592592592593
     },
     {
       "threshold": 0.4927233603586811,
       "true_refusals": 7,
+      "false_refusals": 19,
+      "correct_answers": 89,
+      "missed_refusals": 7,
+      "answerable_count": 108,
+      "refusal_count": 14,
+      "refusal_recall": 0.5,
+      "refusal_precision": 0.2692307692307692,
+      "false_refusal_rate": 0.17592592592592593
+    },
+    {
+      "threshold": 0.49272336035868114,
+      "true_refusals": 7,
       "false_refusals": 20,
       "correct_answers": 88,
       "missed_refusals": 7,
@@ -772,44 +760,44 @@
       "false_refusal_rate": 0.18518518518518517
     },
     {
-      "threshold": 0.49272336035868114,
-      "true_refusals": 7,
-      "false_refusals": 21,
-      "correct_answers": 87,
-      "missed_refusals": 7,
-      "answerable_count": 108,
-      "refusal_count": 14,
-      "refusal_recall": 0.5,
-      "refusal_precision": 0.25,
-      "false_refusal_rate": 0.19444444444444445
-    },
-    {
       "threshold": 0.49891807680309813,
       "true_refusals": 7,
-      "false_refusals": 21,
-      "correct_answers": 87,
+      "false_refusals": 20,
+      "correct_answers": 88,
       "missed_refusals": 7,
       "answerable_count": 108,
       "refusal_count": 14,
       "refusal_recall": 0.5,
-      "refusal_precision": 0.25,
-      "false_refusal_rate": 0.19444444444444445
+      "refusal_precision": 0.25925925925925924,
+      "false_refusal_rate": 0.18518518518518517
     },
     {
       "threshold": 0.4989180768030982,
       "true_refusals": 8,
-      "false_refusals": 21,
-      "correct_answers": 87,
+      "false_refusals": 20,
+      "correct_answers": 88,
       "missed_refusals": 6,
       "answerable_count": 108,
       "refusal_count": 14,
       "refusal_recall": 0.5714285714285714,
-      "refusal_precision": 0.27586206896551724,
-      "false_refusal_rate": 0.19444444444444445
+      "refusal_precision": 0.2857142857142857,
+      "false_refusal_rate": 0.18518518518518517
     },
     {
       "threshold": 0.5582452770913415,
       "true_refusals": 8,
+      "false_refusals": 20,
+      "correct_answers": 88,
+      "missed_refusals": 6,
+      "answerable_count": 108,
+      "refusal_count": 14,
+      "refusal_recall": 0.5714285714285714,
+      "refusal_precision": 0.2857142857142857,
+      "false_refusal_rate": 0.18518518518518517
+    },
+    {
+      "threshold": 0.5582452770913416,
+      "true_refusals": 8,
       "false_refusals": 21,
       "correct_answers": 87,
       "missed_refusals": 6,
@@ -820,44 +808,44 @@
       "false_refusal_rate": 0.19444444444444445
     },
     {
-      "threshold": 0.5582452770913416,
-      "true_refusals": 8,
-      "false_refusals": 22,
-      "correct_answers": 86,
-      "missed_refusals": 6,
-      "answerable_count": 108,
-      "refusal_count": 14,
-      "refusal_recall": 0.5714285714285714,
-      "refusal_precision": 0.26666666666666666,
-      "false_refusal_rate": 0.2037037037037037
-    },
-    {
       "threshold": 0.5623666904766973,
       "true_refusals": 8,
-      "false_refusals": 22,
-      "correct_answers": 86,
+      "false_refusals": 21,
+      "correct_answers": 87,
       "missed_refusals": 6,
       "answerable_count": 108,
       "refusal_count": 14,
       "refusal_recall": 0.5714285714285714,
-      "refusal_precision": 0.26666666666666666,
-      "false_refusal_rate": 0.2037037037037037
+      "refusal_precision": 0.27586206896551724,
+      "false_refusal_rate": 0.19444444444444445
     },
     {
       "threshold": 0.5623666904766974,
       "true_refusals": 8,
-      "false_refusals": 23,
-      "correct_answers": 85,
+      "false_refusals": 22,
+      "correct_answers": 86,
       "missed_refusals": 6,
       "answerable_count": 108,
       "refusal_count": 14,
       "refusal_recall": 0.5714285714285714,
-      "refusal_precision": 0.25806451612903225,
-      "false_refusal_rate": 0.21296296296296297
+      "refusal_precision": 0.26666666666666666,
+      "false_refusal_rate": 0.2037037037037037
     },
     {
       "threshold": 0.5817314837732637,
       "true_refusals": 8,
+      "false_refusals": 22,
+      "correct_answers": 86,
+      "missed_refusals": 6,
+      "answerable_count": 108,
+      "refusal_count": 14,
+      "refusal_recall": 0.5714285714285714,
+      "refusal_precision": 0.26666666666666666,
+      "false_refusal_rate": 0.2037037037037037
+    },
+    {
+      "threshold": 0.5817314837732638,
+      "true_refusals": 8,
       "false_refusals": 23,
       "correct_answers": 85,
       "missed_refusals": 6,
@@ -868,44 +856,44 @@
       "false_refusal_rate": 0.21296296296296297
     },
     {
-      "threshold": 0.5817314837732638,
-      "true_refusals": 8,
-      "false_refusals": 24,
-      "correct_answers": 84,
-      "missed_refusals": 6,
-      "answerable_count": 108,
-      "refusal_count": 14,
-      "refusal_recall": 0.5714285714285714,
-      "refusal_precision": 0.25,
-      "false_refusal_rate": 0.2222222222222222
-    },
-    {
       "threshold": 0.5898800591000676,
       "true_refusals": 8,
-      "false_refusals": 24,
-      "correct_answers": 84,
+      "false_refusals": 23,
+      "correct_answers": 85,
       "missed_refusals": 6,
       "answerable_count": 108,
       "refusal_count": 14,
       "refusal_recall": 0.5714285714285714,
-      "refusal_precision": 0.25,
-      "false_refusal_rate": 0.2222222222222222
+      "refusal_precision": 0.25806451612903225,
+      "false_refusal_rate": 0.21296296296296297
     },
     {
       "threshold": 0.5898800591000677,
       "true_refusals": 8,
-      "false_refusals": 25,
-      "correct_answers": 83,
+      "false_refusals": 24,
+      "correct_answers": 84,
       "missed_refusals": 6,
       "answerable_count": 108,
       "refusal_count": 14,
       "refusal_recall": 0.5714285714285714,
-      "refusal_precision": 0.24242424242424243,
-      "false_refusal_rate": 0.23148148148148148
+      "refusal_precision": 0.25,
+      "false_refusal_rate": 0.2222222222222222
     },
     {
       "threshold": 0.5980983817571166,
       "true_refusals": 8,
+      "false_refusals": 24,
+      "correct_answers": 84,
+      "missed_refusals": 6,
+      "answerable_count": 108,
+      "refusal_count": 14,
+      "refusal_recall": 0.5714285714285714,
+      "refusal_precision": 0.25,
+      "false_refusal_rate": 0.2222222222222222
+    },
+    {
+      "threshold": 0.5980983817571167,
+      "true_refusals": 8,
       "false_refusals": 25,
       "correct_answers": 83,
       "missed_refusals": 6,
@@ -916,92 +904,92 @@
       "false_refusal_rate": 0.23148148148148148
     },
     {
-      "threshold": 0.5980983817571167,
-      "true_refusals": 8,
-      "false_refusals": 26,
-      "correct_answers": 82,
-      "missed_refusals": 6,
-      "answerable_count": 108,
-      "refusal_count": 14,
-      "refusal_recall": 0.5714285714285714,
-      "refusal_precision": 0.23529411764705882,
-      "false_refusal_rate": 0.24074074074074073
-    },
-    {
-      "threshold": 0.6188196187805622,
-      "true_refusals": 8,
-      "false_refusals": 26,
-      "correct_answers": 82,
-      "missed_refusals": 6,
-      "answerable_count": 108,
-      "refusal_count": 14,
-      "refusal_recall": 0.5714285714285714,
-      "refusal_precision": 0.23529411764705882,
-      "false_refusal_rate": 0.24074074074074073
-    },
-    {
-      "threshold": 0.6188196187805624,
-      "true_refusals": 8,
-      "false_refusals": 27,
-      "correct_answers": 81,
-      "missed_refusals": 6,
-      "answerable_count": 108,
-      "refusal_count": 14,
-      "refusal_recall": 0.5714285714285714,
-      "refusal_precision": 0.22857142857142856,
-      "false_refusal_rate": 0.25
-    },
-    {
       "threshold": 0.6213670378680372,
       "true_refusals": 8,
-      "false_refusals": 27,
-      "correct_answers": 81,
+      "false_refusals": 25,
+      "correct_answers": 83,
       "missed_refusals": 6,
       "answerable_count": 108,
       "refusal_count": 14,
       "refusal_recall": 0.5714285714285714,
-      "refusal_precision": 0.22857142857142856,
-      "false_refusal_rate": 0.25
+      "refusal_precision": 0.24242424242424243,
+      "false_refusal_rate": 0.23148148148148148
     },
     {
       "threshold": 0.6213670378680373,
       "true_refusals": 9,
-      "false_refusals": 27,
-      "correct_answers": 81,
+      "false_refusals": 25,
+      "correct_answers": 83,
       "missed_refusals": 5,
       "answerable_count": 108,
       "refusal_count": 14,
       "refusal_recall": 0.6428571428571429,
-      "refusal_precision": 0.25,
-      "false_refusal_rate": 0.25
-    },
-    {
-      "threshold": 0.6560314212832373,
-      "true_refusals": 9,
-      "false_refusals": 27,
-      "correct_answers": 81,
-      "missed_refusals": 5,
-      "answerable_count": 108,
-      "refusal_count": 14,
-      "refusal_recall": 0.6428571428571429,
-      "refusal_precision": 0.25,
-      "false_refusal_rate": 0.25
-    },
-    {
-      "threshold": 0.6560314212832374,
-      "true_refusals": 9,
-      "false_refusals": 28,
-      "correct_answers": 80,
-      "missed_refusals": 5,
-      "answerable_count": 108,
-      "refusal_count": 14,
-      "refusal_recall": 0.6428571428571429,
-      "refusal_precision": 0.24324324324324326,
-      "false_refusal_rate": 0.25925925925925924
+      "refusal_precision": 0.2647058823529412,
+      "false_refusal_rate": 0.23148148148148148
     },
     {
       "threshold": 0.6635011566916083,
       "true_refusals": 9,
+      "false_refusals": 25,
+      "correct_answers": 83,
+      "missed_refusals": 5,
+      "answerable_count": 108,
+      "refusal_count": 14,
+      "refusal_recall": 0.6428571428571429,
+      "refusal_precision": 0.2647058823529412,
+      "false_refusal_rate": 0.23148148148148148
+    },
+    {
+      "threshold": 0.6635011566916084,
+      "true_refusals": 9,
+      "false_refusals": 26,
+      "correct_answers": 82,
+      "missed_refusals": 5,
+      "answerable_count": 108,
+      "refusal_count": 14,
+      "refusal_recall": 0.6428571428571429,
+      "refusal_precision": 0.2571428571428571,
+      "false_refusal_rate": 0.24074074074074073
+    },
+    {
+      "threshold": 0.6791101210253082,
+      "true_refusals": 9,
+      "false_refusals": 26,
+      "correct_answers": 82,
+      "missed_refusals": 5,
+      "answerable_count": 108,
+      "refusal_count": 14,
+      "refusal_recall": 0.6428571428571429,
+      "refusal_precision": 0.2571428571428571,
+      "false_refusal_rate": 0.24074074074074073
+    },
+    {
+      "threshold": 0.6791101210253083,
+      "true_refusals": 9,
+      "false_refusals": 27,
+      "correct_answers": 81,
+      "missed_refusals": 5,
+      "answerable_count": 108,
+      "refusal_count": 14,
+      "refusal_recall": 0.6428571428571429,
+      "refusal_precision": 0.25,
+      "false_refusal_rate": 0.25
+    },
+    {
+      "threshold": 0.680921093580622,
+      "true_refusals": 9,
+      "false_refusals": 27,
+      "correct_answers": 81,
+      "missed_refusals": 5,
+      "answerable_count": 108,
+      "refusal_count": 14,
+      "refusal_recall": 0.6428571428571429,
+      "refusal_precision": 0.25,
+      "false_refusal_rate": 0.25
+    },
+    {
+      "threshold": 0.6809210935806221,
+      "true_refusals": 9,
       "false_refusals": 28,
       "correct_answers": 80,
       "missed_refusals": 5,
@@ -1012,140 +1000,140 @@
       "false_refusal_rate": 0.25925925925925924
     },
     {
-      "threshold": 0.6635011566916084,
-      "true_refusals": 9,
-      "false_refusals": 29,
-      "correct_answers": 79,
-      "missed_refusals": 5,
-      "answerable_count": 108,
-      "refusal_count": 14,
-      "refusal_recall": 0.6428571428571429,
-      "refusal_precision": 0.23684210526315788,
-      "false_refusal_rate": 0.26851851851851855
-    },
-    {
-      "threshold": 0.6791101210253082,
-      "true_refusals": 9,
-      "false_refusals": 29,
-      "correct_answers": 79,
-      "missed_refusals": 5,
-      "answerable_count": 108,
-      "refusal_count": 14,
-      "refusal_recall": 0.6428571428571429,
-      "refusal_precision": 0.23684210526315788,
-      "false_refusal_rate": 0.26851851851851855
-    },
-    {
-      "threshold": 0.6791101210253083,
-      "true_refusals": 9,
-      "false_refusals": 30,
-      "correct_answers": 78,
-      "missed_refusals": 5,
-      "answerable_count": 108,
-      "refusal_count": 14,
-      "refusal_recall": 0.6428571428571429,
-      "refusal_precision": 0.23076923076923078,
-      "false_refusal_rate": 0.2777777777777778
-    },
-    {
-      "threshold": 0.680921093580622,
-      "true_refusals": 9,
-      "false_refusals": 30,
-      "correct_answers": 78,
-      "missed_refusals": 5,
-      "answerable_count": 108,
-      "refusal_count": 14,
-      "refusal_recall": 0.6428571428571429,
-      "refusal_precision": 0.23076923076923078,
-      "false_refusal_rate": 0.2777777777777778
-    },
-    {
-      "threshold": 0.6809210935806221,
-      "true_refusals": 9,
-      "false_refusals": 31,
-      "correct_answers": 77,
-      "missed_refusals": 5,
-      "answerable_count": 108,
-      "refusal_count": 14,
-      "refusal_recall": 0.6428571428571429,
-      "refusal_precision": 0.225,
-      "false_refusal_rate": 0.28703703703703703
-    },
-    {
       "threshold": 0.7206386478071072,
       "true_refusals": 9,
-      "false_refusals": 31,
-      "correct_answers": 77,
+      "false_refusals": 28,
+      "correct_answers": 80,
       "missed_refusals": 5,
       "answerable_count": 108,
       "refusal_count": 14,
       "refusal_recall": 0.6428571428571429,
-      "refusal_precision": 0.225,
-      "false_refusal_rate": 0.28703703703703703
+      "refusal_precision": 0.24324324324324326,
+      "false_refusal_rate": 0.25925925925925924
     },
     {
       "threshold": 0.7206386478071073,
       "true_refusals": 9,
-      "false_refusals": 32,
-      "correct_answers": 76,
+      "false_refusals": 29,
+      "correct_answers": 79,
       "missed_refusals": 5,
       "answerable_count": 108,
       "refusal_count": 14,
       "refusal_recall": 0.6428571428571429,
-      "refusal_precision": 0.21951219512195122,
-      "false_refusal_rate": 0.2962962962962963
+      "refusal_precision": 0.23684210526315788,
+      "false_refusal_rate": 0.26851851851851855
     },
     {
       "threshold": 0.7432352846370014,
       "true_refusals": 9,
-      "false_refusals": 32,
-      "correct_answers": 76,
+      "false_refusals": 29,
+      "correct_answers": 79,
       "missed_refusals": 5,
       "answerable_count": 108,
       "refusal_count": 14,
       "refusal_recall": 0.6428571428571429,
-      "refusal_precision": 0.21951219512195122,
-      "false_refusal_rate": 0.2962962962962963
+      "refusal_precision": 0.23684210526315788,
+      "false_refusal_rate": 0.26851851851851855
     },
     {
       "threshold": 0.7432352846370015,
       "true_refusals": 9,
-      "false_refusals": 33,
-      "correct_answers": 75,
+      "false_refusals": 30,
+      "correct_answers": 78,
       "missed_refusals": 5,
       "answerable_count": 108,
       "refusal_count": 14,
       "refusal_recall": 0.6428571428571429,
-      "refusal_precision": 0.21428571428571427,
-      "false_refusal_rate": 0.3055555555555556
+      "refusal_precision": 0.23076923076923078,
+      "false_refusal_rate": 0.2777777777777778
     },
     {
       "threshold": 0.751926106132505,
       "true_refusals": 9,
-      "false_refusals": 33,
-      "correct_answers": 75,
+      "false_refusals": 30,
+      "correct_answers": 78,
       "missed_refusals": 5,
       "answerable_count": 108,
       "refusal_count": 14,
       "refusal_recall": 0.6428571428571429,
-      "refusal_precision": 0.21428571428571427,
-      "false_refusal_rate": 0.3055555555555556
+      "refusal_precision": 0.23076923076923078,
+      "false_refusal_rate": 0.2777777777777778
     },
     {
       "threshold": 0.7519261061325051,
       "true_refusals": 10,
-      "false_refusals": 33,
-      "correct_answers": 75,
+      "false_refusals": 30,
+      "correct_answers": 78,
       "missed_refusals": 4,
       "answerable_count": 108,
       "refusal_count": 14,
       "refusal_recall": 0.7142857142857143,
-      "refusal_precision": 0.23255813953488372,
-      "false_refusal_rate": 0.3055555555555556
+      "refusal_precision": 0.25,
+      "false_refusal_rate": 0.2777777777777778
     },
     {
       "threshold": 0.7519869624156383,
       "true_refusals": 10,
+      "false_refusals": 30,
+      "correct_answers": 78,
+      "missed_refusals": 4,
+      "answerable_count": 108,
+      "refusal_count": 14,
+      "refusal_recall": 0.7142857142857143,
+      "refusal_precision": 0.25,
+      "false_refusal_rate": 0.2777777777777778
+    },
+    {
+      "threshold": 0.7519869624156384,
+      "true_refusals": 10,
+      "false_refusals": 31,
+      "correct_answers": 77,
+      "missed_refusals": 4,
+      "answerable_count": 108,
+      "refusal_count": 14,
+      "refusal_recall": 0.7142857142857143,
+      "refusal_precision": 0.24390243902439024,
+      "false_refusal_rate": 0.28703703703703703
+    },
+    {
+      "threshold": 0.8065037133605689,
+      "true_refusals": 10,
+      "false_refusals": 31,
+      "correct_answers": 77,
+      "missed_refusals": 4,
+      "answerable_count": 108,
+      "refusal_count": 14,
+      "refusal_recall": 0.7142857142857143,
+      "refusal_precision": 0.24390243902439024,
+      "false_refusal_rate": 0.28703703703703703
+    },
+    {
+      "threshold": 0.806503713360569,
+      "true_refusals": 10,
+      "false_refusals": 32,
+      "correct_answers": 76,
+      "missed_refusals": 4,
+      "answerable_count": 108,
+      "refusal_count": 14,
+      "refusal_recall": 0.7142857142857143,
+      "refusal_precision": 0.23809523809523808,
+      "false_refusal_rate": 0.2962962962962963
+    },
+    {
+      "threshold": 0.8067300701524378,
+      "true_refusals": 10,
+      "false_refusals": 32,
+      "correct_answers": 76,
+      "missed_refusals": 4,
+      "answerable_count": 108,
+      "refusal_count": 14,
+      "refusal_recall": 0.7142857142857143,
+      "refusal_precision": 0.23809523809523808,
+      "false_refusal_rate": 0.2962962962962963
+    },
+    {
+      "threshold": 0.8067300701524379,
+      "true_refusals": 10,
       "false_refusals": 33,
       "correct_answers": 75,
       "missed_refusals": 4,
@@ -1156,116 +1144,116 @@
       "false_refusal_rate": 0.3055555555555556
     },
     {
-      "threshold": 0.7519869624156384,
-      "true_refusals": 10,
-      "false_refusals": 34,
-      "correct_answers": 74,
-      "missed_refusals": 4,
-      "answerable_count": 108,
-      "refusal_count": 14,
-      "refusal_recall": 0.7142857142857143,
-      "refusal_precision": 0.22727272727272727,
-      "false_refusal_rate": 0.3148148148148148
-    },
-    {
-      "threshold": 0.8065037133605689,
-      "true_refusals": 10,
-      "false_refusals": 34,
-      "correct_answers": 74,
-      "missed_refusals": 4,
-      "answerable_count": 108,
-      "refusal_count": 14,
-      "refusal_recall": 0.7142857142857143,
-      "refusal_precision": 0.22727272727272727,
-      "false_refusal_rate": 0.3148148148148148
-    },
-    {
-      "threshold": 0.806503713360569,
-      "true_refusals": 10,
-      "false_refusals": 35,
-      "correct_answers": 73,
-      "missed_refusals": 4,
-      "answerable_count": 108,
-      "refusal_count": 14,
-      "refusal_recall": 0.7142857142857143,
-      "refusal_precision": 0.2222222222222222,
-      "false_refusal_rate": 0.32407407407407407
-    },
-    {
-      "threshold": 0.8067300701524378,
-      "true_refusals": 10,
-      "false_refusals": 35,
-      "correct_answers": 73,
-      "missed_refusals": 4,
-      "answerable_count": 108,
-      "refusal_count": 14,
-      "refusal_recall": 0.7142857142857143,
-      "refusal_precision": 0.2222222222222222,
-      "false_refusal_rate": 0.32407407407407407
-    },
-    {
-      "threshold": 0.8067300701524379,
-      "true_refusals": 10,
-      "false_refusals": 36,
-      "correct_answers": 72,
-      "missed_refusals": 4,
-      "answerable_count": 108,
-      "refusal_count": 14,
-      "refusal_recall": 0.7142857142857143,
-      "refusal_precision": 0.21739130434782608,
-      "false_refusal_rate": 0.3333333333333333
-    },
-    {
       "threshold": 0.8105341830591413,
       "true_refusals": 10,
-      "false_refusals": 36,
-      "correct_answers": 72,
+      "false_refusals": 33,
+      "correct_answers": 75,
       "missed_refusals": 4,
       "answerable_count": 108,
       "refusal_count": 14,
       "refusal_recall": 0.7142857142857143,
-      "refusal_precision": 0.21739130434782608,
-      "false_refusal_rate": 0.3333333333333333
+      "refusal_precision": 0.23255813953488372,
+      "false_refusal_rate": 0.3055555555555556
     },
     {
       "threshold": 0.8105341830591414,
       "true_refusals": 10,
-      "false_refusals": 37,
-      "correct_answers": 71,
+      "false_refusals": 34,
+      "correct_answers": 74,
       "missed_refusals": 4,
       "answerable_count": 108,
       "refusal_count": 14,
       "refusal_recall": 0.7142857142857143,
-      "refusal_precision": 0.2127659574468085,
-      "false_refusal_rate": 0.3425925925925926
+      "refusal_precision": 0.22727272727272727,
+      "false_refusal_rate": 0.3148148148148148
     },
     {
       "threshold": 0.8397818831684256,
       "true_refusals": 10,
-      "false_refusals": 37,
-      "correct_answers": 71,
+      "false_refusals": 34,
+      "correct_answers": 74,
       "missed_refusals": 4,
       "answerable_count": 108,
       "refusal_count": 14,
       "refusal_recall": 0.7142857142857143,
-      "refusal_precision": 0.2127659574468085,
-      "false_refusal_rate": 0.3425925925925926
+      "refusal_precision": 0.22727272727272727,
+      "false_refusal_rate": 0.3148148148148148
     },
     {
       "threshold": 0.8397818831684257,
       "true_refusals": 11,
-      "false_refusals": 37,
-      "correct_answers": 71,
+      "false_refusals": 34,
+      "correct_answers": 74,
       "missed_refusals": 3,
       "answerable_count": 108,
       "refusal_count": 14,
       "refusal_recall": 0.7857142857142857,
-      "refusal_precision": 0.22916666666666666,
-      "false_refusal_rate": 0.3425925925925926
+      "refusal_precision": 0.24444444444444444,
+      "false_refusal_rate": 0.3148148148148148
     },
     {
       "threshold": 0.8434560298107323,
       "true_refusals": 11,
+      "false_refusals": 34,
+      "correct_answers": 74,
+      "missed_refusals": 3,
+      "answerable_count": 108,
+      "refusal_count": 14,
+      "refusal_recall": 0.7857142857142857,
+      "refusal_precision": 0.24444444444444444,
+      "false_refusal_rate": 0.3148148148148148
+    },
+    {
+      "threshold": 0.8434560298107324,
+      "true_refusals": 11,
+      "false_refusals": 35,
+      "correct_answers": 73,
+      "missed_refusals": 3,
+      "answerable_count": 108,
+      "refusal_count": 14,
+      "refusal_recall": 0.7857142857142857,
+      "refusal_precision": 0.2391304347826087,
+      "false_refusal_rate": 0.32407407407407407
+    },
+    {
+      "threshold": 0.8436008161150811,
+      "true_refusals": 11,
+      "false_refusals": 35,
+      "correct_answers": 73,
+      "missed_refusals": 3,
+      "answerable_count": 108,
+      "refusal_count": 14,
+      "refusal_recall": 0.7857142857142857,
+      "refusal_precision": 0.2391304347826087,
+      "false_refusal_rate": 0.32407407407407407
+    },
+    {
+      "threshold": 0.8436008161150812,
+      "true_refusals": 11,
+      "false_refusals": 36,
+      "correct_answers": 72,
+      "missed_refusals": 3,
+      "answerable_count": 108,
+      "refusal_count": 14,
+      "refusal_recall": 0.7857142857142857,
+      "refusal_precision": 0.23404255319148937,
+      "false_refusal_rate": 0.3333333333333333
+    },
+    {
+      "threshold": 0.8490073955869767,
+      "true_refusals": 11,
+      "false_refusals": 36,
+      "correct_answers": 72,
+      "missed_refusals": 3,
+      "answerable_count": 108,
+      "refusal_count": 14,
+      "refusal_recall": 0.7857142857142857,
+      "refusal_precision": 0.23404255319148937,
+      "false_refusal_rate": 0.3333333333333333
+    },
+    {
+      "threshold": 0.8490073955869768,
+      "true_refusals": 11,
       "false_refusals": 37,
       "correct_answers": 71,
       "missed_refusals": 3,
@@ -1276,68 +1264,68 @@
       "false_refusal_rate": 0.3425925925925926
     },
     {
-      "threshold": 0.8434560298107324,
-      "true_refusals": 11,
-      "false_refusals": 38,
-      "correct_answers": 70,
-      "missed_refusals": 3,
-      "answerable_count": 108,
-      "refusal_count": 14,
-      "refusal_recall": 0.7857142857142857,
-      "refusal_precision": 0.22448979591836735,
-      "false_refusal_rate": 0.35185185185185186
-    },
-    {
-      "threshold": 0.8436008161150811,
-      "true_refusals": 11,
-      "false_refusals": 38,
-      "correct_answers": 70,
-      "missed_refusals": 3,
-      "answerable_count": 108,
-      "refusal_count": 14,
-      "refusal_recall": 0.7857142857142857,
-      "refusal_precision": 0.22448979591836735,
-      "false_refusal_rate": 0.35185185185185186
-    },
-    {
-      "threshold": 0.8436008161150812,
-      "true_refusals": 11,
-      "false_refusals": 39,
-      "correct_answers": 69,
-      "missed_refusals": 3,
-      "answerable_count": 108,
-      "refusal_count": 14,
-      "refusal_recall": 0.7857142857142857,
-      "refusal_precision": 0.22,
-      "false_refusal_rate": 0.3611111111111111
-    },
-    {
       "threshold": 0.8640968844376989,
       "true_refusals": 11,
-      "false_refusals": 39,
-      "correct_answers": 69,
+      "false_refusals": 37,
+      "correct_answers": 71,
       "missed_refusals": 3,
       "answerable_count": 108,
       "refusal_count": 14,
       "refusal_recall": 0.7857142857142857,
-      "refusal_precision": 0.22,
-      "false_refusal_rate": 0.3611111111111111
+      "refusal_precision": 0.22916666666666666,
+      "false_refusal_rate": 0.3425925925925926
     },
     {
       "threshold": 0.864096884437699,
       "true_refusals": 12,
-      "false_refusals": 39,
-      "correct_answers": 69,
+      "false_refusals": 37,
+      "correct_answers": 71,
       "missed_refusals": 2,
       "answerable_count": 108,
       "refusal_count": 14,
       "refusal_recall": 0.8571428571428571,
-      "refusal_precision": 0.23529411764705882,
-      "false_refusal_rate": 0.3611111111111111
+      "refusal_precision": 0.24489795918367346,
+      "false_refusal_rate": 0.3425925925925926
     },
     {
       "threshold": 0.8721430416286386,
       "true_refusals": 12,
+      "false_refusals": 37,
+      "correct_answers": 71,
+      "missed_refusals": 2,
+      "answerable_count": 108,
+      "refusal_count": 14,
+      "refusal_recall": 0.8571428571428571,
+      "refusal_precision": 0.24489795918367346,
+      "false_refusal_rate": 0.3425925925925926
+    },
+    {
+      "threshold": 0.8721430416286388,
+      "true_refusals": 12,
+      "false_refusals": 38,
+      "correct_answers": 70,
+      "missed_refusals": 2,
+      "answerable_count": 108,
+      "refusal_count": 14,
+      "refusal_recall": 0.8571428571428571,
+      "refusal_precision": 0.24,
+      "false_refusal_rate": 0.35185185185185186
+    },
+    {
+      "threshold": 0.873426960643457,
+      "true_refusals": 12,
+      "false_refusals": 38,
+      "correct_answers": 70,
+      "missed_refusals": 2,
+      "answerable_count": 108,
+      "refusal_count": 14,
+      "refusal_recall": 0.8571428571428571,
+      "refusal_precision": 0.24,
+      "false_refusal_rate": 0.35185185185185186
+    },
+    {
+      "threshold": 0.8734269606434572,
+      "true_refusals": 12,
       "false_refusals": 39,
       "correct_answers": 69,
       "missed_refusals": 2,
@@ -1348,44 +1336,44 @@
       "false_refusal_rate": 0.3611111111111111
     },
     {
-      "threshold": 0.8721430416286388,
-      "true_refusals": 12,
-      "false_refusals": 40,
-      "correct_answers": 68,
-      "missed_refusals": 2,
-      "answerable_count": 108,
-      "refusal_count": 14,
-      "refusal_recall": 0.8571428571428571,
-      "refusal_precision": 0.23076923076923078,
-      "false_refusal_rate": 0.37037037037037035
-    },
-    {
       "threshold": 0.8801433515804186,
       "true_refusals": 12,
-      "false_refusals": 40,
-      "correct_answers": 68,
+      "false_refusals": 39,
+      "correct_answers": 69,
       "missed_refusals": 2,
       "answerable_count": 108,
       "refusal_count": 14,
       "refusal_recall": 0.8571428571428571,
-      "refusal_precision": 0.23076923076923078,
-      "false_refusal_rate": 0.37037037037037035
+      "refusal_precision": 0.23529411764705882,
+      "false_refusal_rate": 0.3611111111111111
     },
     {
       "threshold": 0.8801433515804187,
       "true_refusals": 12,
-      "false_refusals": 41,
-      "correct_answers": 67,
+      "false_refusals": 40,
+      "correct_answers": 68,
       "missed_refusals": 2,
       "answerable_count": 108,
       "refusal_count": 14,
       "refusal_recall": 0.8571428571428571,
-      "refusal_precision": 0.22641509433962265,
-      "false_refusal_rate": 0.37962962962962965
+      "refusal_precision": 0.23076923076923078,
+      "false_refusal_rate": 0.37037037037037035
     },
     {
       "threshold": 0.8804408704647952,
       "true_refusals": 12,
+      "false_refusals": 40,
+      "correct_answers": 68,
+      "missed_refusals": 2,
+      "answerable_count": 108,
+      "refusal_count": 14,
+      "refusal_recall": 0.8571428571428571,
+      "refusal_precision": 0.23076923076923078,
+      "false_refusal_rate": 0.37037037037037035
+    },
+    {
+      "threshold": 0.8804408704647954,
+      "true_refusals": 12,
       "false_refusals": 41,
       "correct_answers": 67,
       "missed_refusals": 2,
@@ -1396,43 +1384,43 @@
       "false_refusal_rate": 0.37962962962962965
     },
     {
-      "threshold": 0.8804408704647954,
-      "true_refusals": 12,
-      "false_refusals": 42,
-      "correct_answers": 66,
-      "missed_refusals": 2,
-      "answerable_count": 108,
-      "refusal_count": 14,
-      "refusal_recall": 0.8571428571428571,
-      "refusal_precision": 0.2222222222222222,
-      "false_refusal_rate": 0.3888888888888889
-    },
-    {
       "threshold": 0.8824090165630257,
       "true_refusals": 12,
-      "false_refusals": 42,
-      "correct_answers": 66,
+      "false_refusals": 41,
+      "correct_answers": 67,
       "missed_refusals": 2,
       "answerable_count": 108,
       "refusal_count": 14,
       "refusal_recall": 0.8571428571428571,
-      "refusal_precision": 0.2222222222222222,
-      "false_refusal_rate": 0.3888888888888889
+      "refusal_precision": 0.22641509433962265,
+      "false_refusal_rate": 0.37962962962962965
     },
     {
       "threshold": 0.8824090165630258,
       "true_refusals": 12,
-      "false_refusals": 43,
-      "correct_answers": 65,
+      "false_refusals": 42,
+      "correct_answers": 66,
       "missed_refusals": 2,
       "answerable_count": 108,
       "refusal_count": 14,
       "refusal_recall": 0.8571428571428571,
-      "refusal_precision": 0.21818181818181817,
-      "false_refusal_rate": 0.39814814814814814
+      "refusal_precision": 0.2222222222222222,
+      "false_refusal_rate": 0.3888888888888889
     },
     {
       "threshold": 0.8851784799451415,
+      "true_refusals": 12,
+      "false_refusals": 42,
+      "correct_answers": 66,
+      "missed_refusals": 2,
+      "answerable_count": 108,
+      "refusal_count": 14,
+      "refusal_recall": 0.8571428571428571,
+      "refusal_precision": 0.2222222222222222,
+      "false_refusal_rate": 0.3888888888888889
+    },
+    {
+      "threshold": 0.8851784799451416,
       "true_refusals": 12,
       "false_refusals": 43,
       "correct_answers": 65,
@@ -1444,7 +1432,19 @@
       "false_refusal_rate": 0.39814814814814814
     },
     {
-      "threshold": 0.8851784799451416,
+      "threshold": 0.8925689706071038,
+      "true_refusals": 12,
+      "false_refusals": 43,
+      "correct_answers": 65,
+      "missed_refusals": 2,
+      "answerable_count": 108,
+      "refusal_count": 14,
+      "refusal_recall": 0.8571428571428571,
+      "refusal_precision": 0.21818181818181817,
+      "false_refusal_rate": 0.39814814814814814
+    },
+    {
+      "threshold": 0.8925689706071039,
       "true_refusals": 12,
       "false_refusals": 44,
       "correct_answers": 64,
@@ -1552,7 +1552,7 @@
       "false_refusal_rate": 0.4444444444444444
     },
     {
-      "threshold": 0.9152791645230011,
+      "threshold": 0.9244155758123198,
       "true_refusals": 12,
       "false_refusals": 48,
       "correct_answers": 60,
@@ -1564,68 +1564,56 @@
       "false_refusal_rate": 0.4444444444444444
     },
     {
-      "threshold": 0.9152791645230012,
-      "true_refusals": 12,
-      "false_refusals": 49,
-      "correct_answers": 59,
-      "missed_refusals": 2,
-      "answerable_count": 108,
-      "refusal_count": 14,
-      "refusal_recall": 0.8571428571428571,
-      "refusal_precision": 0.19672131147540983,
-      "false_refusal_rate": 0.4537037037037037
-    },
-    {
-      "threshold": 0.9244155758123198,
-      "true_refusals": 12,
-      "false_refusals": 49,
-      "correct_answers": 59,
-      "missed_refusals": 2,
-      "answerable_count": 108,
-      "refusal_count": 14,
-      "refusal_recall": 0.8571428571428571,
-      "refusal_precision": 0.19672131147540983,
-      "false_refusal_rate": 0.4537037037037037
-    },
-    {
       "threshold": 0.9244155758123199,
       "true_refusals": 12,
-      "false_refusals": 50,
-      "correct_answers": 58,
+      "false_refusals": 49,
+      "correct_answers": 59,
       "missed_refusals": 2,
       "answerable_count": 108,
       "refusal_count": 14,
       "refusal_recall": 0.8571428571428571,
-      "refusal_precision": 0.1935483870967742,
-      "false_refusal_rate": 0.46296296296296297
+      "refusal_precision": 0.19672131147540983,
+      "false_refusal_rate": 0.4537037037037037
     },
     {
       "threshold": 0.9284372243360183,
       "true_refusals": 12,
-      "false_refusals": 50,
-      "correct_answers": 58,
+      "false_refusals": 49,
+      "correct_answers": 59,
       "missed_refusals": 2,
       "answerable_count": 108,
       "refusal_count": 14,
       "refusal_recall": 0.8571428571428571,
-      "refusal_precision": 0.1935483870967742,
-      "false_refusal_rate": 0.46296296296296297
+      "refusal_precision": 0.19672131147540983,
+      "false_refusal_rate": 0.4537037037037037
     },
     {
       "threshold": 0.9284372243360184,
       "true_refusals": 13,
-      "false_refusals": 50,
-      "correct_answers": 58,
+      "false_refusals": 49,
+      "correct_answers": 59,
       "missed_refusals": 1,
       "answerable_count": 108,
       "refusal_count": 14,
       "refusal_recall": 0.9285714285714286,
-      "refusal_precision": 0.20634920634920634,
-      "false_refusal_rate": 0.46296296296296297
+      "refusal_precision": 0.20967741935483872,
+      "false_refusal_rate": 0.4537037037037037
     },
     {
       "threshold": 0.9284452394164813,
       "true_refusals": 13,
+      "false_refusals": 49,
+      "correct_answers": 59,
+      "missed_refusals": 1,
+      "answerable_count": 108,
+      "refusal_count": 14,
+      "refusal_recall": 0.9285714285714286,
+      "refusal_precision": 0.20967741935483872,
+      "false_refusal_rate": 0.4537037037037037
+    },
+    {
+      "threshold": 0.9284452394164814,
+      "true_refusals": 13,
       "false_refusals": 50,
       "correct_answers": 58,
       "missed_refusals": 1,
@@ -1636,44 +1624,44 @@
       "false_refusal_rate": 0.46296296296296297
     },
     {
-      "threshold": 0.9284452394164814,
-      "true_refusals": 13,
-      "false_refusals": 51,
-      "correct_answers": 57,
-      "missed_refusals": 1,
-      "answerable_count": 108,
-      "refusal_count": 14,
-      "refusal_recall": 0.9285714285714286,
-      "refusal_precision": 0.203125,
-      "false_refusal_rate": 0.4722222222222222
-    },
-    {
       "threshold": 0.9288918345361009,
       "true_refusals": 13,
-      "false_refusals": 51,
-      "correct_answers": 57,
+      "false_refusals": 50,
+      "correct_answers": 58,
       "missed_refusals": 1,
       "answerable_count": 108,
       "refusal_count": 14,
       "refusal_recall": 0.9285714285714286,
-      "refusal_precision": 0.203125,
-      "false_refusal_rate": 0.4722222222222222
+      "refusal_precision": 0.20634920634920634,
+      "false_refusal_rate": 0.46296296296296297
     },
     {
       "threshold": 0.928891834536101,
       "true_refusals": 13,
-      "false_refusals": 52,
-      "correct_answers": 56,
+      "false_refusals": 51,
+      "correct_answers": 57,
       "missed_refusals": 1,
       "answerable_count": 108,
       "refusal_count": 14,
       "refusal_recall": 0.9285714285714286,
-      "refusal_precision": 0.2,
-      "false_refusal_rate": 0.48148148148148145
+      "refusal_precision": 0.203125,
+      "false_refusal_rate": 0.4722222222222222
     },
     {
       "threshold": 0.9380887139807196,
       "true_refusals": 13,
+      "false_refusals": 51,
+      "correct_answers": 57,
+      "missed_refusals": 1,
+      "answerable_count": 108,
+      "refusal_count": 14,
+      "refusal_recall": 0.9285714285714286,
+      "refusal_precision": 0.203125,
+      "false_refusal_rate": 0.4722222222222222
+    },
+    {
+      "threshold": 0.9380887139807197,
+      "true_refusals": 13,
       "false_refusals": 52,
       "correct_answers": 56,
       "missed_refusals": 1,
@@ -1684,68 +1672,68 @@
       "false_refusal_rate": 0.48148148148148145
     },
     {
-      "threshold": 0.9380887139807197,
-      "true_refusals": 13,
-      "false_refusals": 53,
-      "correct_answers": 55,
-      "missed_refusals": 1,
-      "answerable_count": 108,
-      "refusal_count": 14,
-      "refusal_recall": 0.9285714285714286,
-      "refusal_precision": 0.19696969696969696,
-      "false_refusal_rate": 0.49074074074074076
-    },
-    {
       "threshold": 0.9389921300143216,
       "true_refusals": 13,
-      "false_refusals": 53,
-      "correct_answers": 55,
+      "false_refusals": 52,
+      "correct_answers": 56,
       "missed_refusals": 1,
       "answerable_count": 108,
       "refusal_count": 14,
       "refusal_recall": 0.9285714285714286,
-      "refusal_precision": 0.19696969696969696,
-      "false_refusal_rate": 0.49074074074074076
+      "refusal_precision": 0.2,
+      "false_refusal_rate": 0.48148148148148145
     },
     {
       "threshold": 0.9389921300143217,
       "true_refusals": 13,
-      "false_refusals": 54,
-      "correct_answers": 54,
+      "false_refusals": 53,
+      "correct_answers": 55,
       "missed_refusals": 1,
       "answerable_count": 108,
       "refusal_count": 14,
       "refusal_recall": 0.9285714285714286,
-      "refusal_precision": 0.19402985074626866,
-      "false_refusal_rate": 0.5
+      "refusal_precision": 0.19696969696969696,
+      "false_refusal_rate": 0.49074074074074076
     },
     {
       "threshold": 0.9396696569912413,
       "true_refusals": 13,
-      "false_refusals": 54,
-      "correct_answers": 54,
+      "false_refusals": 53,
+      "correct_answers": 55,
       "missed_refusals": 1,
       "answerable_count": 108,
       "refusal_count": 14,
       "refusal_recall": 0.9285714285714286,
-      "refusal_precision": 0.19402985074626866,
-      "false_refusal_rate": 0.5
+      "refusal_precision": 0.19696969696969696,
+      "false_refusal_rate": 0.49074074074074076
     },
     {
       "threshold": 0.9396696569912414,
       "true_refusals": 14,
-      "false_refusals": 54,
-      "correct_answers": 54,
+      "false_refusals": 53,
+      "correct_answers": 55,
       "missed_refusals": 0,
       "answerable_count": 108,
       "refusal_count": 14,
       "refusal_recall": 1.0,
-      "refusal_precision": 0.20588235294117646,
-      "false_refusal_rate": 0.5
+      "refusal_precision": 0.208955223880597,
+      "false_refusal_rate": 0.49074074074074076
     },
     {
       "threshold": 0.9483020893313406,
       "true_refusals": 14,
+      "false_refusals": 53,
+      "correct_answers": 55,
+      "missed_refusals": 0,
+      "answerable_count": 108,
+      "refusal_count": 14,
+      "refusal_recall": 1.0,
+      "refusal_precision": 0.208955223880597,
+      "false_refusal_rate": 0.49074074074074076
+    },
+    {
+      "threshold": 0.9483020893313407,
+      "true_refusals": 14,
       "false_refusals": 54,
       "correct_answers": 54,
       "missed_refusals": 0,
@@ -1756,7 +1744,19 @@
       "false_refusal_rate": 0.5
     },
     {
-      "threshold": 0.9483020893313407,
+      "threshold": 0.9551815417401225,
+      "true_refusals": 14,
+      "false_refusals": 54,
+      "correct_answers": 54,
+      "missed_refusals": 0,
+      "answerable_count": 108,
+      "refusal_count": 14,
+      "refusal_recall": 1.0,
+      "refusal_precision": 0.20588235294117646,
+      "false_refusal_rate": 0.5
+    },
+    {
+      "threshold": 0.9551815417401226,
       "true_refusals": 14,
       "false_refusals": 55,
       "correct_answers": 53,
@@ -1766,34 +1766,22 @@
       "refusal_recall": 1.0,
       "refusal_precision": 0.2028985507246377,
       "false_refusal_rate": 0.5092592592592593
-    },
-    {
-      "threshold": 0.95498565731615,
-      "true_refusals": 14,
-      "false_refusals": 55,
-      "correct_answers": 53,
-      "missed_refusals": 0,
-      "answerable_count": 108,
-      "refusal_count": 14,
-      "refusal_recall": 1.0,
-      "refusal_precision": 0.2028985507246377,
-      "false_refusal_rate": 0.5092592592592593
-    },
-    {
-      "threshold": 0.9549856573161501,
-      "true_refusals": 14,
-      "false_refusals": 56,
-      "correct_answers": 52,
-      "missed_refusals": 0,
-      "answerable_count": 108,
-      "refusal_count": 14,
-      "refusal_recall": 1.0,
-      "refusal_precision": 0.2,
-      "false_refusal_rate": 0.5185185185185185
     },
     {
       "threshold": 0.955598946126887,
       "true_refusals": 14,
+      "false_refusals": 55,
+      "correct_answers": 53,
+      "missed_refusals": 0,
+      "answerable_count": 108,
+      "refusal_count": 14,
+      "refusal_recall": 1.0,
+      "refusal_precision": 0.2028985507246377,
+      "false_refusal_rate": 0.5092592592592593
+    },
+    {
+      "threshold": 0.9555989461268871,
+      "true_refusals": 14,
       "false_refusals": 56,
       "correct_answers": 52,
       "missed_refusals": 0,
@@ -1804,7 +1792,19 @@
       "false_refusal_rate": 0.5185185185185185
     },
     {
-      "threshold": 0.9555989461268871,
+      "threshold": 0.957479767536346,
+      "true_refusals": 14,
+      "false_refusals": 56,
+      "correct_answers": 52,
+      "missed_refusals": 0,
+      "answerable_count": 108,
+      "refusal_count": 14,
+      "refusal_recall": 1.0,
+      "refusal_precision": 0.2,
+      "false_refusal_rate": 0.5185185185185185
+    },
+    {
+      "threshold": 0.9574797675363461,
       "true_refusals": 14,
       "false_refusals": 57,
       "correct_answers": 51,
@@ -1864,7 +1864,7 @@
       "false_refusal_rate": 0.5462962962962963
     },
     {
-      "threshold": 0.9609472607172381,
+      "threshold": 0.967041700842913,
       "true_refusals": 14,
       "false_refusals": 59,
       "correct_answers": 49,
@@ -1876,44 +1876,32 @@
       "false_refusal_rate": 0.5462962962962963
     },
     {
-      "threshold": 0.9609472607172382,
-      "true_refusals": 14,
-      "false_refusals": 60,
-      "correct_answers": 48,
-      "missed_refusals": 0,
-      "answerable_count": 108,
-      "refusal_count": 14,
-      "refusal_recall": 1.0,
-      "refusal_precision": 0.1891891891891892,
-      "false_refusal_rate": 0.5555555555555556
-    },
-    {
-      "threshold": 0.967041700842913,
-      "true_refusals": 14,
-      "false_refusals": 60,
-      "correct_answers": 48,
-      "missed_refusals": 0,
-      "answerable_count": 108,
-      "refusal_count": 14,
-      "refusal_recall": 1.0,
-      "refusal_precision": 0.1891891891891892,
-      "false_refusal_rate": 0.5555555555555556
-    },
-    {
       "threshold": 0.9670417008429131,
       "true_refusals": 14,
-      "false_refusals": 61,
-      "correct_answers": 47,
+      "false_refusals": 60,
+      "correct_answers": 48,
       "missed_refusals": 0,
       "answerable_count": 108,
       "refusal_count": 14,
       "refusal_recall": 1.0,
-      "refusal_precision": 0.18666666666666668,
-      "false_refusal_rate": 0.5648148148148148
+      "refusal_precision": 0.1891891891891892,
+      "false_refusal_rate": 0.5555555555555556
     },
     {
       "threshold": 0.9680741055836113,
       "true_refusals": 14,
+      "false_refusals": 60,
+      "correct_answers": 48,
+      "missed_refusals": 0,
+      "answerable_count": 108,
+      "refusal_count": 14,
+      "refusal_recall": 1.0,
+      "refusal_precision": 0.1891891891891892,
+      "false_refusal_rate": 0.5555555555555556
+    },
+    {
+      "threshold": 0.9680741055836114,
+      "true_refusals": 14,
       "false_refusals": 61,
       "correct_answers": 47,
       "missed_refusals": 0,
@@ -1924,43 +1912,43 @@
       "false_refusal_rate": 0.5648148148148148
     },
     {
-      "threshold": 0.9680741055836114,
-      "true_refusals": 14,
-      "false_refusals": 62,
-      "correct_answers": 46,
-      "missed_refusals": 0,
-      "answerable_count": 108,
-      "refusal_count": 14,
-      "refusal_recall": 1.0,
-      "refusal_precision": 0.18421052631578946,
-      "false_refusal_rate": 0.5740740740740741
-    },
-    {
       "threshold": 0.9702501136264843,
       "true_refusals": 14,
-      "false_refusals": 62,
-      "correct_answers": 46,
+      "false_refusals": 61,
+      "correct_answers": 47,
       "missed_refusals": 0,
       "answerable_count": 108,
       "refusal_count": 14,
       "refusal_recall": 1.0,
-      "refusal_precision": 0.18421052631578946,
-      "false_refusal_rate": 0.5740740740740741
+      "refusal_precision": 0.18666666666666668,
+      "false_refusal_rate": 0.5648148148148148
     },
     {
       "threshold": 0.9702501136264844,
       "true_refusals": 14,
-      "false_refusals": 63,
-      "correct_answers": 45,
+      "false_refusals": 62,
+      "correct_answers": 46,
       "missed_refusals": 0,
       "answerable_count": 108,
       "refusal_count": 14,
       "refusal_recall": 1.0,
-      "refusal_precision": 0.18181818181818182,
-      "false_refusal_rate": 0.5833333333333334
+      "refusal_precision": 0.18421052631578946,
+      "false_refusal_rate": 0.5740740740740741
     },
     {
       "threshold": 0.9708057989289169,
+      "true_refusals": 14,
+      "false_refusals": 62,
+      "correct_answers": 46,
+      "missed_refusals": 0,
+      "answerable_count": 108,
+      "refusal_count": 14,
+      "refusal_recall": 1.0,
+      "refusal_precision": 0.18421052631578946,
+      "false_refusal_rate": 0.5740740740740741
+    },
+    {
+      "threshold": 0.970805798928917,
       "true_refusals": 14,
       "false_refusals": 63,
       "correct_answers": 45,
@@ -1972,7 +1960,19 @@
       "false_refusal_rate": 0.5833333333333334
     },
     {
-      "threshold": 0.970805798928917,
+      "threshold": 0.9761505106725005,
+      "true_refusals": 14,
+      "false_refusals": 63,
+      "correct_answers": 45,
+      "missed_refusals": 0,
+      "answerable_count": 108,
+      "refusal_count": 14,
+      "refusal_recall": 1.0,
+      "refusal_precision": 0.18181818181818182,
+      "false_refusal_rate": 0.5833333333333334
+    },
+    {
+      "threshold": 0.9761505106725006,
       "true_refusals": 14,
       "false_refusals": 64,
       "correct_answers": 44,
@@ -2032,7 +2032,7 @@
       "false_refusal_rate": 0.6111111111111112
     },
     {
-      "threshold": 0.9811951948545382,
+      "threshold": 0.9811643675633449,
       "true_refusals": 14,
       "false_refusals": 66,
       "correct_answers": 42,
@@ -2044,7 +2044,7 @@
       "false_refusal_rate": 0.6111111111111112
     },
     {
-      "threshold": 0.9811951948545383,
+      "threshold": 0.981164367563345,
       "true_refusals": 14,
       "false_refusals": 67,
       "correct_answers": 41,
@@ -2054,165 +2054,165 @@
       "refusal_recall": 1.0,
       "refusal_precision": 0.1728395061728395,
       "false_refusal_rate": 0.6203703703703703
+    },
+    {
+      "threshold": 0.9811951948545382,
+      "true_refusals": 14,
+      "false_refusals": 67,
+      "correct_answers": 41,
+      "missed_refusals": 0,
+      "answerable_count": 108,
+      "refusal_count": 14,
+      "refusal_recall": 1.0,
+      "refusal_precision": 0.1728395061728395,
+      "false_refusal_rate": 0.6203703703703703
+    },
+    {
+      "threshold": 0.9811951948545383,
+      "true_refusals": 14,
+      "false_refusals": 68,
+      "correct_answers": 40,
+      "missed_refusals": 0,
+      "answerable_count": 108,
+      "refusal_count": 14,
+      "refusal_recall": 1.0,
+      "refusal_precision": 0.17073170731707318,
+      "false_refusal_rate": 0.6296296296296297
     },
     {
       "threshold": 0.9814231061126562,
       "true_refusals": 14,
-      "false_refusals": 67,
-      "correct_answers": 41,
+      "false_refusals": 68,
+      "correct_answers": 40,
       "missed_refusals": 0,
       "answerable_count": 108,
       "refusal_count": 14,
       "refusal_recall": 1.0,
-      "refusal_precision": 0.1728395061728395,
-      "false_refusal_rate": 0.6203703703703703
+      "refusal_precision": 0.17073170731707318,
+      "false_refusal_rate": 0.6296296296296297
     },
     {
       "threshold": 0.9814231061126563,
       "true_refusals": 14,
-      "false_refusals": 68,
-      "correct_answers": 40,
+      "false_refusals": 69,
+      "correct_answers": 39,
       "missed_refusals": 0,
       "answerable_count": 108,
       "refusal_count": 14,
       "refusal_recall": 1.0,
-      "refusal_precision": 0.17073170731707318,
-      "false_refusal_rate": 0.6296296296296297
+      "refusal_precision": 0.1686746987951807,
+      "false_refusal_rate": 0.6388888888888888
     },
     {
       "threshold": 0.9823166983724239,
       "true_refusals": 14,
-      "false_refusals": 68,
-      "correct_answers": 40,
+      "false_refusals": 69,
+      "correct_answers": 39,
       "missed_refusals": 0,
       "answerable_count": 108,
       "refusal_count": 14,
       "refusal_recall": 1.0,
-      "refusal_precision": 0.17073170731707318,
-      "false_refusal_rate": 0.6296296296296297
+      "refusal_precision": 0.1686746987951807,
+      "false_refusal_rate": 0.6388888888888888
     },
     {
       "threshold": 0.982316698372424,
       "true_refusals": 14,
-      "false_refusals": 69,
-      "correct_answers": 39,
+      "false_refusals": 70,
+      "correct_answers": 38,
       "missed_refusals": 0,
       "answerable_count": 108,
       "refusal_count": 14,
       "refusal_recall": 1.0,
-      "refusal_precision": 0.1686746987951807,
-      "false_refusal_rate": 0.6388888888888888
+      "refusal_precision": 0.16666666666666666,
+      "false_refusal_rate": 0.6481481481481481
     },
     {
       "threshold": 0.9835477812273664,
       "true_refusals": 14,
-      "false_refusals": 69,
-      "correct_answers": 39,
+      "false_refusals": 70,
+      "correct_answers": 38,
       "missed_refusals": 0,
       "answerable_count": 108,
       "refusal_count": 14,
       "refusal_recall": 1.0,
-      "refusal_precision": 0.1686746987951807,
-      "false_refusal_rate": 0.6388888888888888
+      "refusal_precision": 0.16666666666666666,
+      "false_refusal_rate": 0.6481481481481481
     },
     {
       "threshold": 0.9835477812273665,
       "true_refusals": 14,
-      "false_refusals": 70,
-      "correct_answers": 38,
+      "false_refusals": 71,
+      "correct_answers": 37,
       "missed_refusals": 0,
       "answerable_count": 108,
       "refusal_count": 14,
       "refusal_recall": 1.0,
-      "refusal_precision": 0.16666666666666666,
-      "false_refusal_rate": 0.6481481481481481
+      "refusal_precision": 0.16470588235294117,
+      "false_refusal_rate": 0.6574074074074074
     },
     {
       "threshold": 0.9842138313399957,
       "true_refusals": 14,
-      "false_refusals": 70,
-      "correct_answers": 38,
+      "false_refusals": 71,
+      "correct_answers": 37,
       "missed_refusals": 0,
       "answerable_count": 108,
       "refusal_count": 14,
       "refusal_recall": 1.0,
-      "refusal_precision": 0.16666666666666666,
-      "false_refusal_rate": 0.6481481481481481
+      "refusal_precision": 0.16470588235294117,
+      "false_refusal_rate": 0.6574074074074074
     },
     {
       "threshold": 0.9842138313399958,
       "true_refusals": 14,
-      "false_refusals": 71,
-      "correct_answers": 37,
+      "false_refusals": 72,
+      "correct_answers": 36,
       "missed_refusals": 0,
       "answerable_count": 108,
       "refusal_count": 14,
       "refusal_recall": 1.0,
-      "refusal_precision": 0.16470588235294117,
-      "false_refusal_rate": 0.6574074074074074
+      "refusal_precision": 0.16279069767441862,
+      "false_refusal_rate": 0.6666666666666666
     },
     {
       "threshold": 0.9842868763503518,
       "true_refusals": 14,
-      "false_refusals": 71,
-      "correct_answers": 37,
+      "false_refusals": 72,
+      "correct_answers": 36,
       "missed_refusals": 0,
       "answerable_count": 108,
       "refusal_count": 14,
       "refusal_recall": 1.0,
-      "refusal_precision": 0.16470588235294117,
-      "false_refusal_rate": 0.6574074074074074
+      "refusal_precision": 0.16279069767441862,
+      "false_refusal_rate": 0.6666666666666666
     },
     {
       "threshold": 0.984286876350352,
       "true_refusals": 14,
-      "false_refusals": 72,
-      "correct_answers": 36,
+      "false_refusals": 73,
+      "correct_answers": 35,
       "missed_refusals": 0,
       "answerable_count": 108,
       "refusal_count": 14,
       "refusal_recall": 1.0,
-      "refusal_precision": 0.16279069767441862,
-      "false_refusal_rate": 0.6666666666666666
+      "refusal_precision": 0.16091954022988506,
+      "false_refusal_rate": 0.6759259259259259
     },
     {
       "threshold": 0.9845515398183811,
       "true_refusals": 14,
-      "false_refusals": 72,
-      "correct_answers": 36,
+      "false_refusals": 73,
+      "correct_answers": 35,
       "missed_refusals": 0,
       "answerable_count": 108,
       "refusal_count": 14,
       "refusal_recall": 1.0,
-      "refusal_precision": 0.16279069767441862,
-      "false_refusal_rate": 0.6666666666666666
+      "refusal_precision": 0.16091954022988506,
+      "false_refusal_rate": 0.6759259259259259
     },
     {
       "threshold": 0.9845515398183812,
-      "true_refusals": 14,
-      "false_refusals": 73,
-      "correct_answers": 35,
-      "missed_refusals": 0,
-      "answerable_count": 108,
-      "refusal_count": 14,
-      "refusal_recall": 1.0,
-      "refusal_precision": 0.16091954022988506,
-      "false_refusal_rate": 0.6759259259259259
-    },
-    {
-      "threshold": 0.9861347415559361,
-      "true_refusals": 14,
-      "false_refusals": 73,
-      "correct_answers": 35,
-      "missed_refusals": 0,
-      "answerable_count": 108,
-      "refusal_count": 14,
-      "refusal_recall": 1.0,
-      "refusal_precision": 0.16091954022988506,
-      "false_refusal_rate": 0.6759259259259259
-    },
-    {
-      "threshold": 0.9861347415559362,
       "true_refusals": 14,
       "false_refusals": 74,
       "correct_answers": 34,
@@ -3565,9 +3565,9 @@
       "has_results": true,
       "top_score": 0.16929444966921794,
       "top_doc_id": "de/kit/cds-msc/programme",
-      "gate_refused": false,
-      "answer_refused": false,
-      "answer_mode": "extractive"
+      "gate_refused": true,
+      "answer_refused": true,
+      "answer_mode": "refusal"
     },
     {
       "qid": "b24",
@@ -3817,9 +3817,9 @@
       "has_results": true,
       "top_score": 0.1999745756453424,
       "top_doc_id": "de/tu-darmstadt/informatics-master-admission-guide",
-      "gate_refused": false,
-      "answer_refused": false,
-      "answer_mode": "extractive"
+      "gate_refused": true,
+      "answer_refused": true,
+      "answer_mode": "refusal"
     },
     {
       "qid": "c21",
@@ -4189,9 +4189,9 @@
       "has_results": true,
       "top_score": 0.20149040532450282,
       "top_doc_id": "de/aachen/residence-permit",
-      "gate_refused": false,
-      "answer_refused": false,
-      "answer_mode": "extractive"
+      "gate_refused": true,
+      "answer_refused": true,
+      "answer_mode": "refusal"
     },
     {
       "qid": "d31",
@@ -4302,25 +4302,13 @@
       "answer_mode": "extractive"
     },
     {
-      "qid": "mh01",
-      "kind": "multi_hop",
-      "question": "I scored PTE Academic 78 and I'm from India. Is that fine for the Stuttgart CS master's application and also for the German student visa?",
-      "expect_refusal": false,
-      "has_results": true,
-      "top_score": 0.15277894916123255,
-      "top_doc_id": "de/ustutt/cs-msc/programme",
-      "gate_refused": false,
-      "answer_refused": false,
-      "answer_mode": "extractive"
-    },
-    {
       "qid": "mh02",
       "kind": "multi_hop",
-      "question": "my TOEFL is a home edition score. Saarland wants English proof for the DSAI master's, but will the same test also work for my visa appointment in India?",
+      "question": "Does Saarland's data science and AI master accept a TOEFL home edition as English proof, and will that same test also work for my visa application in India?",
       "expect_refusal": false,
       "has_results": true,
-      "top_score": 0.9861347415559361,
-      "top_doc_id": "de/saarland/dsai-msc/department",
+      "top_score": 0.9761505106725005,
+      "top_doc_id": "de/saarland/dsai-msc/programme",
       "gate_refused": false,
       "answer_refused": false,
       "answer_mode": "extractive"
@@ -4386,18 +4374,6 @@
       "answer_mode": "extractive"
     },
     {
-      "qid": "mh08",
-      "kind": "multi_hop",
-      "question": "non-EU, want to start in winter: of Saarland's computer science programmes, RWTH data science and KIT computer science, which application deadline closes first?",
-      "expect_refusal": false,
-      "has_results": true,
-      "top_score": 0.95498565731615,
-      "top_doc_id": "de/saarland/cs-msc/programme",
-      "gate_refused": false,
-      "answer_refused": false,
-      "answer_mode": "extractive"
-    },
-    {
       "qid": "mh09",
       "kind": "multi_hop",
       "question": "can I send a GRE Home edition score to both Saarland and TU Darmstadt, and do they set minimum scores?",
@@ -4412,10 +4388,10 @@
     {
       "qid": "mh10",
       "kind": "multi_hop",
-      "question": "what's the regular semester fee in Stuttgart compared with the semester contribution at TU Dresden for on-campus students?",
+      "question": "what's the regular semester fee in Stuttgart, and how much of TU Dresden's semester contribution for on-campus students goes to the semester ticket?",
       "expect_refusal": false,
       "has_results": true,
-      "top_score": 0.9609472607172381,
+      "top_score": 0.9811643675633449,
       "top_doc_id": "de/tud/international-faq",
       "gate_refused": false,
       "answer_refused": false,
@@ -4434,18 +4410,6 @@
       "answer_mode": "extractive"
     },
     {
-      "qid": "mh12",
-      "kind": "multi_hop",
-      "question": "KIT computer science vs TU Berlin computer science: which one asks for more credits in mathematics from my bachelor's?",
-      "expect_refusal": false,
-      "has_results": true,
-      "top_score": 0.9152791645230011,
-      "top_doc_id": "de/tub/cs-msc/programme",
-      "gate_refused": false,
-      "answer_refused": false,
-      "answer_mode": "extractive"
-    },
-    {
       "qid": "mh13",
       "kind": "multi_hop",
       "question": "just landed in Berlin for TU Berlin: do I register my address before applying for the student residence permit, and what do I show as proof of where I live?",
@@ -4453,18 +4417,6 @@
       "has_results": true,
       "top_score": 0.7519869624156383,
       "top_doc_id": "de/berlin/anmeldung",
-      "gate_refused": false,
-      "answer_refused": false,
-      "answer_mode": "extractive"
-    },
-    {
-      "qid": "mh14",
-      "kind": "multi_hop",
-      "question": "moving to Saarbrücken for my master's: what do I need to bring to register my address, and why does the immigration office care about that certificate?",
-      "expect_refusal": false,
-      "has_results": true,
-      "top_score": 0.6560314212832373,
-      "top_doc_id": "de/saarbruecken/residence-permit",
       "gate_refused": false,
       "answer_refused": false,
       "answer_mode": "extractive"
@@ -4482,30 +4434,6 @@
       "answer_mode": "extractive"
     },
     {
-      "qid": "mh16",
-      "kind": "multi_hop",
-      "question": "TU Dresden admitted me but I don't have my enrollment certificate yet. Can I already apply for the visa, and how much money per month do I have to prove?",
-      "expect_refusal": false,
-      "has_results": true,
-      "top_score": 0.6188196187805622,
-      "top_doc_id": "de/rules/daad-finances",
-      "gate_refused": false,
-      "answer_refused": false,
-      "answer_mode": "extractive"
-    },
-    {
-      "qid": "mh17",
-      "kind": "multi_hop",
-      "question": "I'll finish my RWTH master's next year: what do I have to tell the Immigration Office when my last exam is done, and what does the state say about staying to look for work and a later Blue Card?",
-      "expect_refusal": false,
-      "has_results": true,
-      "top_score": 0.09119411404145945,
-      "top_doc_id": "de/aachen/first-steps",
-      "gate_refused": true,
-      "answer_refused": true,
-      "answer_mode": "refusal"
-    },
-    {
       "qid": "mh18",
       "kind": "multi_hop",
       "question": "Does Saarland charge tuition for the data science and AI master's, and what funds does the immigration office want to see for my residence permit?",
@@ -4516,18 +4444,90 @@
       "gate_refused": false,
       "answer_refused": false,
       "answer_mode": "extractive"
+    },
+    {
+      "qid": "mh19",
+      "kind": "multi_hop",
+      "question": "Would a German language course count towards my master's credits? Comparing RWTH's data science master and Saarland's data science & AI master, how many credits could it be worth at each?",
+      "expect_refusal": false,
+      "has_results": true,
+      "top_score": 0.957479767536346,
+      "top_doc_id": "de/saarland/dsai-msc/programme",
+      "gate_refused": false,
+      "answer_refused": false,
+      "answer_mode": "extractive"
+    },
+    {
+      "qid": "mh20",
+      "kind": "multi_hop",
+      "question": "I'll probably need to work while studying. Can Saarland's computer science master be done part-time, and how many semesters would TU Dresden's CS master take if I study part-time?",
+      "expect_refusal": false,
+      "has_results": true,
+      "top_score": 0.8490073955869767,
+      "top_doc_id": "de/saarland/cs-msc/programme",
+      "gate_refused": false,
+      "answer_refused": false,
+      "answer_mode": "extractive"
+    },
+    {
+      "qid": "mh21",
+      "kind": "multi_hop",
+      "question": "My IELTS certificate is almost three years old. Will TU Berlin still accept it for the computer science master, and will Stuttgart for its CS master?",
+      "expect_refusal": false,
+      "has_results": true,
+      "top_score": 0.8925689706071038,
+      "top_doc_id": "de/ustutt/cs-msc/department",
+      "gate_refused": false,
+      "answer_refused": false,
+      "answer_mode": "extractive"
+    },
+    {
+      "qid": "mh22",
+      "kind": "multi_hop",
+      "question": "Do I need any German for RWTH's data science master? I'm applying for the student visa from India and the online visa questionnaire keeps asking about my German level - how should I answer it?",
+      "expect_refusal": false,
+      "has_results": true,
+      "top_score": 0.33253669723831314,
+      "top_doc_id": "de/rules/aps-india-faqs",
+      "gate_refused": false,
+      "answer_refused": false,
+      "answer_mode": "extractive"
+    },
+    {
+      "qid": "mh23",
+      "kind": "multi_hop",
+      "question": "I'm an EU student and want to keep my home country's public health insurance during TU Berlin's computer science master. Would a voluntary internship during the master's earn me any credits, and if the internship is paid, is my home insurance still enough?",
+      "expect_refusal": false,
+      "has_results": true,
+      "top_score": 0.873426960643457,
+      "top_doc_id": "de/kit/cs-msc/programme",
+      "gate_refused": false,
+      "answer_refused": false,
+      "answer_mode": "extractive"
+    },
+    {
+      "qid": "mh24",
+      "kind": "multi_hop",
+      "question": "If KIT's computer science master takes me longer than planned, how many semesters am I allowed at most? And if I got a Deutschlandstipendium, for how long could it be paid?",
+      "expect_refusal": false,
+      "has_results": true,
+      "top_score": 0.9551815417401225,
+      "top_doc_id": "de/kit/cs-msc/department",
+      "gate_refused": false,
+      "answer_refused": false,
+      "answer_mode": "extractive"
     }
   ],
   "answer_confusion": {
-    "true_refusals": 4,
-    "false_refusals": 4,
-    "correct_answers": 104,
-    "missed_refusals": 10,
+    "true_refusals": 5,
+    "false_refusals": 5,
+    "correct_answers": 103,
+    "missed_refusals": 9,
     "answerable_count": 108,
     "refusal_count": 14,
-    "refusal_recall": 0.2857142857142857,
+    "refusal_recall": 0.35714285714285715,
     "refusal_precision": 0.5,
-    "false_refusal_rate": 0.037037037037037035
+    "false_refusal_rate": 0.046296296296296294
   },
   "retrieval_per_query": {
     "vector": [
@@ -4545,7 +4545,7 @@
           },
           "rr": 0.5
         },
-        "latency_ms": 17.70317799946497
+        "latency_ms": 60.18845899961889
       },
       {
         "qid": "a02",
@@ -4561,7 +4561,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 17.194099000334973
+        "latency_ms": 24.139148999893223
       },
       {
         "qid": "a03",
@@ -4577,7 +4577,7 @@
           },
           "rr": 0.3333333333333333
         },
-        "latency_ms": 14.402574000087043
+        "latency_ms": 21.404771000561595
       },
       {
         "qid": "a04",
@@ -4593,7 +4593,7 @@
           },
           "rr": 0.5
         },
-        "latency_ms": 16.366525999728765
+        "latency_ms": 21.858064999833005
       },
       {
         "qid": "a05",
@@ -4609,7 +4609,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 15.275981000741012
+        "latency_ms": 23.62788400023419
       },
       {
         "qid": "a06",
@@ -4625,7 +4625,7 @@
           },
           "rr": 0.5
         },
-        "latency_ms": 14.41659099964454
+        "latency_ms": 25.0350989999788
       },
       {
         "qid": "a07",
@@ -4641,7 +4641,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 14.579589000277338
+        "latency_ms": 21.918731999903684
       },
       {
         "qid": "a08",
@@ -4657,7 +4657,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 14.658119999694463
+        "latency_ms": 21.49582200036093
       },
       {
         "qid": "a09",
@@ -4673,7 +4673,7 @@
           },
           "rr": 0.5
         },
-        "latency_ms": 16.874407000614156
+        "latency_ms": 21.93368499956705
       },
       {
         "qid": "a10",
@@ -4689,7 +4689,7 @@
           },
           "rr": 0.0
         },
-        "latency_ms": 14.07778800057713
+        "latency_ms": 19.32645200031402
       },
       {
         "qid": "a11",
@@ -4705,7 +4705,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 15.66357599949697
+        "latency_ms": 21.344688000681344
       },
       {
         "qid": "a12",
@@ -4721,7 +4721,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 15.646629000002577
+        "latency_ms": 19.07518100051675
       },
       {
         "qid": "a13",
@@ -4737,7 +4737,7 @@
           },
           "rr": 0.25
         },
-        "latency_ms": 14.208124000106181
+        "latency_ms": 18.637864000083937
       },
       {
         "qid": "a14",
@@ -4753,7 +4753,7 @@
           },
           "rr": 0.1
         },
-        "latency_ms": 12.870139999904495
+        "latency_ms": 16.903491000448412
       },
       {
         "qid": "a15",
@@ -4769,7 +4769,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 16.810447000352724
+        "latency_ms": 15.803755999513669
       },
       {
         "qid": "a17",
@@ -4785,7 +4785,7 @@
           },
           "rr": 0.125
         },
-        "latency_ms": 14.82437399954506
+        "latency_ms": 15.61152299927926
       },
       {
         "qid": "a18",
@@ -4801,7 +4801,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 15.740479000669438
+        "latency_ms": 14.464850999502232
       },
       {
         "qid": "a19",
@@ -4817,7 +4817,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 15.206823999506014
+        "latency_ms": 15.472443999897223
       },
       {
         "qid": "a20",
@@ -4833,7 +4833,7 @@
           },
           "rr": 0.3333333333333333
         },
-        "latency_ms": 14.336410999931104
+        "latency_ms": 12.15656200020021
       },
       {
         "qid": "a21",
@@ -4849,7 +4849,7 @@
           },
           "rr": 0.16666666666666666
         },
-        "latency_ms": 14.35486700029287
+        "latency_ms": 15.584693999699084
       },
       {
         "qid": "a22",
@@ -4865,7 +4865,7 @@
           },
           "rr": 0.2
         },
-        "latency_ms": 17.70255400060705
+        "latency_ms": 18.021503999989363
       },
       {
         "qid": "a23",
@@ -4881,7 +4881,7 @@
           },
           "rr": 0.0
         },
-        "latency_ms": 14.942334000807023
+        "latency_ms": 12.950082999850565
       },
       {
         "qid": "b01",
@@ -4897,7 +4897,7 @@
           },
           "rr": 0.3333333333333333
         },
-        "latency_ms": 15.388542999971833
+        "latency_ms": 12.854523999521916
       },
       {
         "qid": "b02",
@@ -4913,7 +4913,7 @@
           },
           "rr": 0.5
         },
-        "latency_ms": 12.80492600017169
+        "latency_ms": 14.700112000355148
       },
       {
         "qid": "b04",
@@ -4929,7 +4929,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 14.341928999783704
+        "latency_ms": 22.97573400028341
       },
       {
         "qid": "b05",
@@ -4945,7 +4945,7 @@
           },
           "rr": 0.14285714285714285
         },
-        "latency_ms": 13.617049000458792
+        "latency_ms": 26.851057999920158
       },
       {
         "qid": "b06",
@@ -4961,7 +4961,7 @@
           },
           "rr": 0.5
         },
-        "latency_ms": 11.48905299942271
+        "latency_ms": 20.147578999967664
       },
       {
         "qid": "b07",
@@ -4977,7 +4977,7 @@
           },
           "rr": 0.5
         },
-        "latency_ms": 12.92070599993167
+        "latency_ms": 22.512827000355173
       },
       {
         "qid": "b08",
@@ -4993,7 +4993,7 @@
           },
           "rr": 0.0
         },
-        "latency_ms": 12.5888530001248
+        "latency_ms": 19.906382000044687
       },
       {
         "qid": "b09",
@@ -5009,7 +5009,7 @@
           },
           "rr": 0.125
         },
-        "latency_ms": 16.292232000523654
+        "latency_ms": 22.333130000333767
       },
       {
         "qid": "b10",
@@ -5025,7 +5025,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 13.984295000227576
+        "latency_ms": 21.88770300017495
       },
       {
         "qid": "b11",
@@ -5041,7 +5041,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 13.96570600081759
+        "latency_ms": 21.21661699948163
       },
       {
         "qid": "b12",
@@ -5057,7 +5057,7 @@
           },
           "rr": 0.5
         },
-        "latency_ms": 14.189217999955872
+        "latency_ms": 18.102834999808692
       },
       {
         "qid": "b13",
@@ -5073,7 +5073,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 17.931958000190207
+        "latency_ms": 21.958941000775667
       },
       {
         "qid": "b14",
@@ -5089,7 +5089,7 @@
           },
           "rr": 0.14285714285714285
         },
-        "latency_ms": 15.952323999954388
+        "latency_ms": 15.356496000094921
       },
       {
         "qid": "b15",
@@ -5105,7 +5105,7 @@
           },
           "rr": 0.0
         },
-        "latency_ms": 13.512456000171369
+        "latency_ms": 16.81241799997224
       },
       {
         "qid": "b16",
@@ -5121,7 +5121,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 13.766807999672892
+        "latency_ms": 18.88048399996478
       },
       {
         "qid": "b17",
@@ -5137,7 +5137,7 @@
           },
           "rr": 0.5
         },
-        "latency_ms": 12.100792000637739
+        "latency_ms": 13.384288999986893
       },
       {
         "qid": "b18",
@@ -5153,7 +5153,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 12.484417000450776
+        "latency_ms": 12.037434999911056
       },
       {
         "qid": "b19",
@@ -5169,7 +5169,7 @@
           },
           "rr": 0.5
         },
-        "latency_ms": 13.339183999960369
+        "latency_ms": 15.078471000379068
       },
       {
         "qid": "b21",
@@ -5185,7 +5185,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 12.98003499960032
+        "latency_ms": 17.329694999716594
       },
       {
         "qid": "b22",
@@ -5201,7 +5201,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 16.786531999969156
+        "latency_ms": 18.444637000357034
       },
       {
         "qid": "b23",
@@ -5217,7 +5217,7 @@
           },
           "rr": 0.0
         },
-        "latency_ms": 15.769294000165246
+        "latency_ms": 17.35687499967753
       },
       {
         "qid": "b24",
@@ -5233,7 +5233,7 @@
           },
           "rr": 0.3333333333333333
         },
-        "latency_ms": 14.548931000717857
+        "latency_ms": 17.724264000207768
       },
       {
         "qid": "c01",
@@ -5249,7 +5249,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 16.169133999937912
+        "latency_ms": 21.339762000025075
       },
       {
         "qid": "c02",
@@ -5265,7 +5265,7 @@
           },
           "rr": 0.3333333333333333
         },
-        "latency_ms": 12.559624000459735
+        "latency_ms": 17.70216199929564
       },
       {
         "qid": "c03",
@@ -5281,7 +5281,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 14.385886000127357
+        "latency_ms": 22.887597000590176
       },
       {
         "qid": "c04",
@@ -5297,7 +5297,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 13.207945999965887
+        "latency_ms": 18.557835000137857
       },
       {
         "qid": "c05",
@@ -5313,7 +5313,7 @@
           },
           "rr": 0.5
         },
-        "latency_ms": 14.557220999449783
+        "latency_ms": 15.23824100058846
       },
       {
         "qid": "c06",
@@ -5329,7 +5329,7 @@
           },
           "rr": 0.14285714285714285
         },
-        "latency_ms": 13.389448999987508
+        "latency_ms": 15.183016000264615
       },
       {
         "qid": "c07",
@@ -5345,7 +5345,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 13.03065100000822
+        "latency_ms": 12.626038000234985
       },
       {
         "qid": "c08",
@@ -5361,7 +5361,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 13.133956999809016
+        "latency_ms": 14.931483000509616
       },
       {
         "qid": "c09",
@@ -5377,7 +5377,7 @@
           },
           "rr": 0.5
         },
-        "latency_ms": 13.428143999590247
+        "latency_ms": 12.997867999729351
       },
       {
         "qid": "c10",
@@ -5393,7 +5393,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 16.494485999828612
+        "latency_ms": 13.2339250003497
       },
       {
         "qid": "c11",
@@ -5409,7 +5409,7 @@
           },
           "rr": 0.5
         },
-        "latency_ms": 15.477033999559353
+        "latency_ms": 17.219692000253417
       },
       {
         "qid": "c12",
@@ -5425,7 +5425,7 @@
           },
           "rr": 0.14285714285714285
         },
-        "latency_ms": 17.361043999699177
+        "latency_ms": 20.601367999915965
       },
       {
         "qid": "c13",
@@ -5441,7 +5441,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 14.81891599996743
+        "latency_ms": 14.326817999972263
       },
       {
         "qid": "c14",
@@ -5457,7 +5457,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 17.631112999879406
+        "latency_ms": 14.52651399995375
       },
       {
         "qid": "c15",
@@ -5473,7 +5473,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 15.47415099958016
+        "latency_ms": 16.346920999239956
       },
       {
         "qid": "c16",
@@ -5489,7 +5489,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 17.325777000223752
+        "latency_ms": 15.250729000399588
       },
       {
         "qid": "c17",
@@ -5505,7 +5505,7 @@
           },
           "rr": 0.0
         },
-        "latency_ms": 14.979907999986608
+        "latency_ms": 16.243662000306358
       },
       {
         "qid": "c18",
@@ -5521,7 +5521,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 15.156647999901907
+        "latency_ms": 17.174099000840215
       },
       {
         "qid": "c19",
@@ -5537,7 +5537,7 @@
           },
           "rr": 0.3333333333333333
         },
-        "latency_ms": 18.189903999882517
+        "latency_ms": 18.57899999959045
       },
       {
         "qid": "c20",
@@ -5553,7 +5553,7 @@
           },
           "rr": 0.25
         },
-        "latency_ms": 16.43108000007487
+        "latency_ms": 14.905699999872013
       },
       {
         "qid": "c21",
@@ -5569,7 +5569,7 @@
           },
           "rr": 0.25
         },
-        "latency_ms": 17.87696999963373
+        "latency_ms": 16.393468999922334
       },
       {
         "qid": "d01",
@@ -5585,7 +5585,7 @@
           },
           "rr": 0.3333333333333333
         },
-        "latency_ms": 17.759493999619735
+        "latency_ms": 16.661994000060076
       },
       {
         "qid": "d02",
@@ -5601,7 +5601,7 @@
           },
           "rr": 0.3333333333333333
         },
-        "latency_ms": 15.543674000582541
+        "latency_ms": 14.751407999938237
       },
       {
         "qid": "d03",
@@ -5617,7 +5617,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 15.151615999457135
+        "latency_ms": 13.233768000645796
       },
       {
         "qid": "d04",
@@ -5633,7 +5633,7 @@
           },
           "rr": 0.2
         },
-        "latency_ms": 14.583086999664374
+        "latency_ms": 15.142807999836805
       },
       {
         "qid": "d05",
@@ -5649,7 +5649,7 @@
           },
           "rr": 0.5
         },
-        "latency_ms": 14.35893899997609
+        "latency_ms": 15.08805299999949
       },
       {
         "qid": "d06",
@@ -5665,7 +5665,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 14.245403000131773
+        "latency_ms": 14.96293699983653
       },
       {
         "qid": "d07",
@@ -5681,7 +5681,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 13.334353000573174
+        "latency_ms": 14.031292000254325
       },
       {
         "qid": "d08",
@@ -5697,7 +5697,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 14.525545000651618
+        "latency_ms": 12.600107000253047
       },
       {
         "qid": "d09",
@@ -5713,7 +5713,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 14.277283999945212
+        "latency_ms": 11.856949000502937
       },
       {
         "qid": "d10",
@@ -5729,7 +5729,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 16.577835999669333
+        "latency_ms": 17.932240999471105
       },
       {
         "qid": "d11",
@@ -5745,7 +5745,7 @@
           },
           "rr": 0.5
         },
-        "latency_ms": 15.573423000205366
+        "latency_ms": 14.967651000006299
       },
       {
         "qid": "d12",
@@ -5761,7 +5761,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 13.400114999967627
+        "latency_ms": 13.584438000179944
       },
       {
         "qid": "d13",
@@ -5777,7 +5777,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 15.285497999684594
+        "latency_ms": 14.42125700032193
       },
       {
         "qid": "d14",
@@ -5793,7 +5793,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 16.384618999836675
+        "latency_ms": 15.586450999762747
       },
       {
         "qid": "d15",
@@ -5809,7 +5809,7 @@
           },
           "rr": 0.3333333333333333
         },
-        "latency_ms": 15.206375000161643
+        "latency_ms": 14.29303599979903
       },
       {
         "qid": "d16",
@@ -5825,7 +5825,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 13.71667500006879
+        "latency_ms": 13.063985999906436
       },
       {
         "qid": "d17",
@@ -5841,7 +5841,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 14.269397999669309
+        "latency_ms": 14.880577999974776
       },
       {
         "qid": "d18",
@@ -5857,7 +5857,7 @@
           },
           "rr": 0.3333333333333333
         },
-        "latency_ms": 14.968902999498823
+        "latency_ms": 17.744148000019777
       },
       {
         "qid": "d19",
@@ -5873,7 +5873,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 16.29466099984711
+        "latency_ms": 13.810201000524103
       },
       {
         "qid": "d20",
@@ -5889,7 +5889,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 13.382267999986652
+        "latency_ms": 15.029585000775114
       },
       {
         "qid": "d21",
@@ -5905,7 +5905,7 @@
           },
           "rr": 0.25
         },
-        "latency_ms": 13.51167400025588
+        "latency_ms": 15.093246999640542
       },
       {
         "qid": "d22",
@@ -5921,7 +5921,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 14.061490000131016
+        "latency_ms": 15.939842999614484
       },
       {
         "qid": "d23",
@@ -5937,7 +5937,7 @@
           },
           "rr": 0.5
         },
-        "latency_ms": 14.791147999858367
+        "latency_ms": 16.352235000340443
       },
       {
         "qid": "d24",
@@ -5953,7 +5953,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 14.787765000619402
+        "latency_ms": 14.690785999846412
       },
       {
         "qid": "d33",
@@ -5969,23 +5969,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 13.660300999617903
-      },
-      {
-        "qid": "mh01",
-        "kind": "multi_hop",
-        "metrics": {
-          "recall": {
-            "@5": 0.5,
-            "@10": 0.5
-          },
-          "ndcg": {
-            "@5": 0.16958010263680806,
-            "@10": 0.16958010263680806
-          },
-          "rr": 0.3333333333333333
-        },
-        "latency_ms": 15.604060999976355
+        "latency_ms": 15.276658999937354
       },
       {
         "qid": "mh02",
@@ -5993,15 +5977,15 @@
         "metrics": {
           "recall": {
             "@5": 0.0,
-            "@10": 1.0
+            "@10": 0.5
           },
           "ndcg": {
             "@5": 0.0,
-            "@10": 0.15176219107803537
+            "@10": 0.06625422345438903
           },
-          "rr": 0.16666666666666666
+          "rr": 0.1111111111111111
         },
-        "latency_ms": 16.554228000131843
+        "latency_ms": 15.879411000241817
       },
       {
         "qid": "mh03",
@@ -6017,7 +6001,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 18.58465899931616
+        "latency_ms": 16.1476399998719
       },
       {
         "qid": "mh04",
@@ -6033,7 +6017,7 @@
           },
           "rr": 0.1111111111111111
         },
-        "latency_ms": 19.26023400028498
+        "latency_ms": 17.413936999219004
       },
       {
         "qid": "mh05",
@@ -6049,7 +6033,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 15.355010999883234
+        "latency_ms": 16.68588499978796
       },
       {
         "qid": "mh06",
@@ -6065,7 +6049,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 17.806457999540726
+        "latency_ms": 18.34798000072624
       },
       {
         "qid": "mh07",
@@ -6081,23 +6065,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 19.74507500017353
-      },
-      {
-        "qid": "mh08",
-        "kind": "multi_hop",
-        "metrics": {
-          "recall": {
-            "@5": 0.3333333333333333,
-            "@10": 0.6666666666666666
-          },
-          "ndcg": {
-            "@5": 0.14606834984270645,
-            "@10": 0.1610425878239398
-          },
-          "rr": 0.25
-        },
-        "latency_ms": 16.90872400013177
+        "latency_ms": 18.170737999753328
       },
       {
         "qid": "mh09",
@@ -6113,7 +6081,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 14.782748000470747
+        "latency_ms": 14.369964999787044
       },
       {
         "qid": "mh10",
@@ -6124,12 +6092,12 @@
             "@10": 0.5
           },
           "ndcg": {
-            "@5": 0.6548086577531307,
-            "@10": 0.5695785062497354
+            "@5": 0.6992148198508501,
+            "@10": 0.5933607200949346
           },
           "rr": 1.0
         },
-        "latency_ms": 14.714936000018497
+        "latency_ms": 15.7053699995231
       },
       {
         "qid": "mh11",
@@ -6145,23 +6113,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 15.753462000247964
-      },
-      {
-        "qid": "mh12",
-        "kind": "multi_hop",
-        "metrics": {
-          "recall": {
-            "@5": 0.0,
-            "@10": 0.5
-          },
-          "ndcg": {
-            "@5": 0.0,
-            "@10": 0.16624334936975121
-          },
-          "rr": 0.16666666666666666
-        },
-        "latency_ms": 16.655355000693817
+        "latency_ms": 15.550938999695063
       },
       {
         "qid": "mh13",
@@ -6177,23 +6129,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 19.529753999449895
-      },
-      {
-        "qid": "mh14",
-        "kind": "multi_hop",
-        "metrics": {
-          "recall": {
-            "@5": 0.5,
-            "@10": 1.0
-          },
-          "ndcg": {
-            "@5": 0.3391602052736161,
-            "@10": 0.5969444043362498
-          },
-          "rr": 1.0
-        },
-        "latency_ms": 20.341456000096514
+        "latency_ms": 18.041934000393667
       },
       {
         "qid": "mh15",
@@ -6209,39 +6145,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 20.37603600001603
-      },
-      {
-        "qid": "mh16",
-        "kind": "multi_hop",
-        "metrics": {
-          "recall": {
-            "@5": 1.0,
-            "@10": 1.0
-          },
-          "ndcg": {
-            "@5": 0.6608397947263839,
-            "@10": 0.7162874455029681
-          },
-          "rr": 0.5
-        },
-        "latency_ms": 18.721047999861185
-      },
-      {
-        "qid": "mh17",
-        "kind": "multi_hop",
-        "metrics": {
-          "recall": {
-            "@5": 0.5,
-            "@10": 0.5
-          },
-          "ndcg": {
-            "@5": 0.36005461457723403,
-            "@10": 0.3764459522792426
-          },
-          "rr": 0.5
-        },
-        "latency_ms": 18.383503000222845
+        "latency_ms": 16.309069999806525
       },
       {
         "qid": "mh18",
@@ -6257,7 +6161,103 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 15.152191999732167
+        "latency_ms": 14.014890999533236
+      },
+      {
+        "qid": "mh19",
+        "kind": "multi_hop",
+        "metrics": {
+          "recall": {
+            "@5": 0.0,
+            "@10": 0.5
+          },
+          "ndcg": {
+            "@5": 0.0,
+            "@10": 0.06362078819895171
+          },
+          "rr": 0.1
+        },
+        "latency_ms": 16.077239999503945
+      },
+      {
+        "qid": "mh20",
+        "kind": "multi_hop",
+        "metrics": {
+          "recall": {
+            "@5": 0.5,
+            "@10": 0.5
+          },
+          "ndcg": {
+            "@5": 0.36005461457723403,
+            "@10": 0.23365080824310533
+          },
+          "rr": 0.5
+        },
+        "latency_ms": 16.51064299949212
+      },
+      {
+        "qid": "mh21",
+        "kind": "multi_hop",
+        "metrics": {
+          "recall": {
+            "@5": 0.5,
+            "@10": 0.5
+          },
+          "ndcg": {
+            "@5": 0.3156484524795145,
+            "@10": 0.28162497265977743
+          },
+          "rr": 0.3333333333333333
+        },
+        "latency_ms": 14.997780999692623
+      },
+      {
+        "qid": "mh22",
+        "kind": "multi_hop",
+        "metrics": {
+          "recall": {
+            "@5": 0.5,
+            "@10": 0.5
+          },
+          "ndcg": {
+            "@5": 0.16958010263680806,
+            "@10": 0.23877292085081495
+          },
+          "rr": 0.3333333333333333
+        },
+        "latency_ms": 17.69361700007721
+      },
+      {
+        "qid": "mh23",
+        "kind": "multi_hop",
+        "metrics": {
+          "recall": {
+            "@5": 0.5,
+            "@10": 0.5
+          },
+          "ndcg": {
+            "@5": 0.36005461457723403,
+            "@10": 0.23365080824310533
+          },
+          "rr": 0.5
+        },
+        "latency_ms": 17.289822999373428
+      },
+      {
+        "qid": "mh24",
+        "kind": "multi_hop",
+        "metrics": {
+          "recall": {
+            "@5": 0.5,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.5531464700081437,
+            "@10": 0.5026317885449212
+          },
+          "rr": 1.0
+        },
+        "latency_ms": 15.901292999842553
       }
     ],
     "bm25": [
@@ -6275,7 +6275,7 @@
           },
           "rr": 0.5
         },
-        "latency_ms": 3.1061270001373487
+        "latency_ms": 3.0841059997328557
       },
       {
         "qid": "a02",
@@ -6291,7 +6291,7 @@
           },
           "rr": 0.2
         },
-        "latency_ms": 2.161485999749857
+        "latency_ms": 2.033466000284534
       },
       {
         "qid": "a03",
@@ -6307,7 +6307,7 @@
           },
           "rr": 0.0
         },
-        "latency_ms": 1.2972880003871978
+        "latency_ms": 1.2234519999765325
       },
       {
         "qid": "a04",
@@ -6323,7 +6323,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 1.5267930002664798
+        "latency_ms": 1.3792420004392625
       },
       {
         "qid": "a05",
@@ -6339,7 +6339,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 1.290027999857557
+        "latency_ms": 1.3485509998645284
       },
       {
         "qid": "a06",
@@ -6355,7 +6355,7 @@
           },
           "rr": 0.14285714285714285
         },
-        "latency_ms": 1.428065000254719
+        "latency_ms": 1.4341639998747269
       },
       {
         "qid": "a07",
@@ -6371,7 +6371,7 @@
           },
           "rr": 0.5
         },
-        "latency_ms": 1.626649999707297
+        "latency_ms": 1.6008000002329936
       },
       {
         "qid": "a08",
@@ -6387,7 +6387,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 1.6289599998344784
+        "latency_ms": 1.6436070000054315
       },
       {
         "qid": "a09",
@@ -6403,7 +6403,7 @@
           },
           "rr": 0.0
         },
-        "latency_ms": 2.254615999845555
+        "latency_ms": 2.417282000351406
       },
       {
         "qid": "a10",
@@ -6419,7 +6419,7 @@
           },
           "rr": 0.0
         },
-        "latency_ms": 1.8723609991866397
+        "latency_ms": 1.3645620001625502
       },
       {
         "qid": "a11",
@@ -6435,7 +6435,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 1.2800690001313342
+        "latency_ms": 1.2047370000800584
       },
       {
         "qid": "a12",
@@ -6451,7 +6451,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 2.040409999608528
+        "latency_ms": 1.8510310001147445
       },
       {
         "qid": "a13",
@@ -6467,7 +6467,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 1.6126760001498042
+        "latency_ms": 1.4634119997936068
       },
       {
         "qid": "a14",
@@ -6483,7 +6483,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 0.8676859997649444
+        "latency_ms": 0.8382229998460389
       },
       {
         "qid": "a15",
@@ -6499,7 +6499,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 1.4169669993862044
+        "latency_ms": 1.342216000011831
       },
       {
         "qid": "a17",
@@ -6515,7 +6515,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 2.02786499994545
+        "latency_ms": 1.546915999824705
       },
       {
         "qid": "a18",
@@ -6531,7 +6531,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 1.2526709997473517
+        "latency_ms": 0.8975149994512321
       },
       {
         "qid": "a19",
@@ -6547,7 +6547,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 1.0998730003848323
+        "latency_ms": 0.8154429997375701
       },
       {
         "qid": "a20",
@@ -6563,7 +6563,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 1.8481970000721049
+        "latency_ms": 1.3070559998595854
       },
       {
         "qid": "a21",
@@ -6579,7 +6579,7 @@
           },
           "rr": 0.14285714285714285
         },
-        "latency_ms": 2.079621999655501
+        "latency_ms": 1.1923570000362815
       },
       {
         "qid": "a22",
@@ -6595,7 +6595,7 @@
           },
           "rr": 0.3333333333333333
         },
-        "latency_ms": 2.430409999760741
+        "latency_ms": 3.4074200002578436
       },
       {
         "qid": "a23",
@@ -6611,7 +6611,7 @@
           },
           "rr": 0.1111111111111111
         },
-        "latency_ms": 1.5334440004153294
+        "latency_ms": 1.8129159998352407
       },
       {
         "qid": "b01",
@@ -6627,7 +6627,7 @@
           },
           "rr": 0.3333333333333333
         },
-        "latency_ms": 1.6926560001593316
+        "latency_ms": 1.7902260005939752
       },
       {
         "qid": "b02",
@@ -6643,7 +6643,7 @@
           },
           "rr": 0.3333333333333333
         },
-        "latency_ms": 0.9951870006261743
+        "latency_ms": 1.027790000080131
       },
       {
         "qid": "b04",
@@ -6659,7 +6659,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 1.3689759998669615
+        "latency_ms": 1.421875999767508
       },
       {
         "qid": "b05",
@@ -6675,7 +6675,7 @@
           },
           "rr": 0.0
         },
-        "latency_ms": 1.5608379999321187
+        "latency_ms": 1.6220769994106377
       },
       {
         "qid": "b06",
@@ -6691,7 +6691,7 @@
           },
           "rr": 0.5
         },
-        "latency_ms": 0.6874540003991569
+        "latency_ms": 0.6800010005463264
       },
       {
         "qid": "b07",
@@ -6707,7 +6707,7 @@
           },
           "rr": 0.0
         },
-        "latency_ms": 1.6049759997258661
+        "latency_ms": 1.623732000552991
       },
       {
         "qid": "b08",
@@ -6723,7 +6723,7 @@
           },
           "rr": 0.0
         },
-        "latency_ms": 0.8699150002939859
+        "latency_ms": 0.8751169998504338
       },
       {
         "qid": "b09",
@@ -6739,7 +6739,7 @@
           },
           "rr": 0.0
         },
-        "latency_ms": 2.4619189998702495
+        "latency_ms": 2.867859999241773
       },
       {
         "qid": "b10",
@@ -6755,7 +6755,7 @@
           },
           "rr": 0.0
         },
-        "latency_ms": 1.6570110001339344
+        "latency_ms": 2.452888999869174
       },
       {
         "qid": "b11",
@@ -6771,7 +6771,7 @@
           },
           "rr": 0.5
         },
-        "latency_ms": 1.3158009996914188
+        "latency_ms": 1.3269410001157667
       },
       {
         "qid": "b12",
@@ -6787,7 +6787,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 1.2545170002340456
+        "latency_ms": 1.3866159997633076
       },
       {
         "qid": "b13",
@@ -6803,7 +6803,7 @@
           },
           "rr": 0.5
         },
-        "latency_ms": 1.7171449999295874
+        "latency_ms": 1.86505399960879
       },
       {
         "qid": "b14",
@@ -6819,7 +6819,7 @@
           },
           "rr": 0.2
         },
-        "latency_ms": 1.2102179998692009
+        "latency_ms": 1.1978259999523289
       },
       {
         "qid": "b15",
@@ -6835,7 +6835,7 @@
           },
           "rr": 0.0
         },
-        "latency_ms": 0.7797230000505806
+        "latency_ms": 0.8585610003137845
       },
       {
         "qid": "b16",
@@ -6851,7 +6851,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 1.2218769998071366
+        "latency_ms": 1.2509019998105941
       },
       {
         "qid": "b17",
@@ -6867,7 +6867,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 0.9699610000097891
+        "latency_ms": 1.007240000035381
       },
       {
         "qid": "b18",
@@ -6883,7 +6883,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 0.7760309999866877
+        "latency_ms": 0.7865480001782998
       },
       {
         "qid": "b19",
@@ -6899,7 +6899,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 0.9142750004684785
+        "latency_ms": 0.8766399996602559
       },
       {
         "qid": "b21",
@@ -6915,7 +6915,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 0.9130040007221396
+        "latency_ms": 0.9287490001952392
       },
       {
         "qid": "b22",
@@ -6931,7 +6931,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 1.9514099994921708
+        "latency_ms": 2.420146999611461
       },
       {
         "qid": "b23",
@@ -6947,7 +6947,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 1.4572009995390545
+        "latency_ms": 1.4600619997509057
       },
       {
         "qid": "b24",
@@ -6963,7 +6963,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 1.1491450004541548
+        "latency_ms": 1.270373999432195
       },
       {
         "qid": "c01",
@@ -6979,7 +6979,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 1.808840999729
+        "latency_ms": 2.293190000273171
       },
       {
         "qid": "c02",
@@ -6995,7 +6995,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 1.3457069999276428
+        "latency_ms": 1.7385319997629267
       },
       {
         "qid": "c03",
@@ -7011,7 +7011,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 1.7811240004448337
+        "latency_ms": 2.0203999993100297
       },
       {
         "qid": "c04",
@@ -7027,7 +7027,7 @@
           },
           "rr": 0.5
         },
-        "latency_ms": 1.1614400000325986
+        "latency_ms": 1.2922760006404133
       },
       {
         "qid": "c05",
@@ -7043,7 +7043,7 @@
           },
           "rr": 0.5
         },
-        "latency_ms": 1.212537000355951
+        "latency_ms": 1.336657000138075
       },
       {
         "qid": "c06",
@@ -7059,7 +7059,7 @@
           },
           "rr": 0.3333333333333333
         },
-        "latency_ms": 1.4572810005120118
+        "latency_ms": 1.2834689996452653
       },
       {
         "qid": "c07",
@@ -7075,7 +7075,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 1.3323830007720971
+        "latency_ms": 1.3854959997843252
       },
       {
         "qid": "c08",
@@ -7091,7 +7091,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 1.3260389996503363
+        "latency_ms": 1.4439099995797733
       },
       {
         "qid": "c09",
@@ -7107,7 +7107,7 @@
           },
           "rr": 0.16666666666666666
         },
-        "latency_ms": 1.0669909997886862
+        "latency_ms": 1.1272140000073705
       },
       {
         "qid": "c10",
@@ -7123,7 +7123,7 @@
           },
           "rr": 0.0
         },
-        "latency_ms": 1.3982769996800926
+        "latency_ms": 1.2230669999553356
       },
       {
         "qid": "c11",
@@ -7139,7 +7139,7 @@
           },
           "rr": 0.3333333333333333
         },
-        "latency_ms": 1.4290899998741224
+        "latency_ms": 1.3331560003280174
       },
       {
         "qid": "c12",
@@ -7155,7 +7155,7 @@
           },
           "rr": 0.2
         },
-        "latency_ms": 2.2987020001892233
+        "latency_ms": 2.323284999874886
       },
       {
         "qid": "c13",
@@ -7171,7 +7171,7 @@
           },
           "rr": 0.5
         },
-        "latency_ms": 2.008356999795069
+        "latency_ms": 1.9488110001475434
       },
       {
         "qid": "c14",
@@ -7187,7 +7187,7 @@
           },
           "rr": 0.125
         },
-        "latency_ms": 1.7690200002107304
+        "latency_ms": 1.7466330000388552
       },
       {
         "qid": "c15",
@@ -7203,7 +7203,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 1.729167999656056
+        "latency_ms": 1.636422999581555
       },
       {
         "qid": "c16",
@@ -7219,7 +7219,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 1.824988999942434
+        "latency_ms": 1.7453010004828684
       },
       {
         "qid": "c17",
@@ -7235,7 +7235,7 @@
           },
           "rr": 0.0
         },
-        "latency_ms": 1.8892889993367135
+        "latency_ms": 2.0960259998901165
       },
       {
         "qid": "c18",
@@ -7251,7 +7251,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 1.6649789995426545
+        "latency_ms": 1.4388350000444916
       },
       {
         "qid": "c19",
@@ -7267,7 +7267,7 @@
           },
           "rr": 0.0
         },
-        "latency_ms": 2.4039840000114054
+        "latency_ms": 2.321994000340055
       },
       {
         "qid": "c20",
@@ -7283,7 +7283,7 @@
           },
           "rr": 0.25
         },
-        "latency_ms": 1.8288609999217442
+        "latency_ms": 1.7705130003378144
       },
       {
         "qid": "c21",
@@ -7299,7 +7299,7 @@
           },
           "rr": 0.3333333333333333
         },
-        "latency_ms": 1.7408590001650737
+        "latency_ms": 1.6540179994990467
       },
       {
         "qid": "d01",
@@ -7315,7 +7315,7 @@
           },
           "rr": 0.0
         },
-        "latency_ms": 1.8509820001781918
+        "latency_ms": 1.7787249998946209
       },
       {
         "qid": "d02",
@@ -7331,7 +7331,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 1.2880530002803425
+        "latency_ms": 1.2751149997711764
       },
       {
         "qid": "d03",
@@ -7347,7 +7347,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 1.7236920002687839
+        "latency_ms": 1.73624099988956
       },
       {
         "qid": "d04",
@@ -7363,7 +7363,7 @@
           },
           "rr": 0.2
         },
-        "latency_ms": 1.699282999652496
+        "latency_ms": 1.7161550003947923
       },
       {
         "qid": "d05",
@@ -7379,7 +7379,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 1.5258479998010444
+        "latency_ms": 2.45159899986902
       },
       {
         "qid": "d06",
@@ -7395,7 +7395,7 @@
           },
           "rr": 0.5
         },
-        "latency_ms": 1.4528949996019946
+        "latency_ms": 1.5888199995970353
       },
       {
         "qid": "d07",
@@ -7411,7 +7411,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 1.078952999705507
+        "latency_ms": 1.0789199995997478
       },
       {
         "qid": "d08",
@@ -7427,7 +7427,7 @@
           },
           "rr": 0.5
         },
-        "latency_ms": 1.2091179996787105
+        "latency_ms": 1.2743690003844677
       },
       {
         "qid": "d09",
@@ -7443,7 +7443,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 1.0414530006528366
+        "latency_ms": 1.0190330003752024
       },
       {
         "qid": "d10",
@@ -7459,7 +7459,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 1.2666909997278708
+        "latency_ms": 1.2939210000695311
       },
       {
         "qid": "d11",
@@ -7475,7 +7475,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 1.372779000121227
+        "latency_ms": 1.3758510003754054
       },
       {
         "qid": "d12",
@@ -7491,7 +7491,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 1.212576999932935
+        "latency_ms": 1.151922000644845
       },
       {
         "qid": "d13",
@@ -7507,7 +7507,7 @@
           },
           "rr": 0.1
         },
-        "latency_ms": 1.728945999275311
+        "latency_ms": 1.7142270007752813
       },
       {
         "qid": "d14",
@@ -7523,7 +7523,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 1.6252489995167707
+        "latency_ms": 1.4009629994689021
       },
       {
         "qid": "d15",
@@ -7539,7 +7539,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 1.9554860000425833
+        "latency_ms": 1.9783510006163851
       },
       {
         "qid": "d16",
@@ -7555,7 +7555,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 0.9760439997990034
+        "latency_ms": 0.9609430007913033
       },
       {
         "qid": "d17",
@@ -7571,7 +7571,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 1.3380820000747917
+        "latency_ms": 1.178425000034622
       },
       {
         "qid": "d18",
@@ -7587,7 +7587,7 @@
           },
           "rr": 0.2
         },
-        "latency_ms": 2.0086199992874754
+        "latency_ms": 1.6304010005114833
       },
       {
         "qid": "d19",
@@ -7603,7 +7603,7 @@
           },
           "rr": 0.5
         },
-        "latency_ms": 2.1683879995180178
+        "latency_ms": 1.7446550000386196
       },
       {
         "qid": "d20",
@@ -7619,7 +7619,7 @@
           },
           "rr": 0.5
         },
-        "latency_ms": 1.3406339994617156
+        "latency_ms": 1.2745710000672261
       },
       {
         "qid": "d21",
@@ -7635,7 +7635,7 @@
           },
           "rr": 0.16666666666666666
         },
-        "latency_ms": 1.56262299969967
+        "latency_ms": 1.4967549996072194
       },
       {
         "qid": "d22",
@@ -7651,7 +7651,7 @@
           },
           "rr": 0.3333333333333333
         },
-        "latency_ms": 1.6754690004745498
+        "latency_ms": 1.5916800002742093
       },
       {
         "qid": "d23",
@@ -7667,7 +7667,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 1.543065999612736
+        "latency_ms": 1.5131689997360809
       },
       {
         "qid": "d24",
@@ -7683,7 +7683,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 1.450564000151644
+        "latency_ms": 1.456511000469618
       },
       {
         "qid": "d33",
@@ -7699,39 +7699,23 @@
           },
           "rr": 0.5
         },
-        "latency_ms": 1.1468040002000635
-      },
-      {
-        "qid": "mh01",
-        "kind": "multi_hop",
-        "metrics": {
-          "recall": {
-            "@5": 0.0,
-            "@10": 0.0
-          },
-          "ndcg": {
-            "@5": 0.0,
-            "@10": 0.0
-          },
-          "rr": 0.0
-        },
-        "latency_ms": 2.1979000002829707
+        "latency_ms": 1.128617000176746
       },
       {
         "qid": "mh02",
         "kind": "multi_hop",
         "metrics": {
           "recall": {
-            "@5": 0.5,
+            "@5": 1.0,
             "@10": 1.0
           },
           "ndcg": {
-            "@5": 0.21398626473452756,
-            "@10": 0.2082936658103318
+            "@5": 0.30078518014914984,
+            "@10": 0.2614432242450501
           },
-          "rr": 0.5
+          "rr": 0.3333333333333333
         },
-        "latency_ms": 2.517040999919118
+        "latency_ms": 2.6406970000607544
       },
       {
         "qid": "mh03",
@@ -7747,7 +7731,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 2.5883210000756662
+        "latency_ms": 3.3131219997812877
       },
       {
         "qid": "mh04",
@@ -7763,7 +7747,7 @@
           },
           "rr": 0.16666666666666666
         },
-        "latency_ms": 2.454133000355796
+        "latency_ms": 3.653969999504625
       },
       {
         "qid": "mh05",
@@ -7779,7 +7763,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 1.8626210003276356
+        "latency_ms": 2.708494000216888
       },
       {
         "qid": "mh06",
@@ -7795,7 +7779,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 2.488558000550256
+        "latency_ms": 3.4151390000261017
       },
       {
         "qid": "mh07",
@@ -7811,23 +7795,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 2.5614509995648405
-      },
-      {
-        "qid": "mh08",
-        "kind": "multi_hop",
-        "metrics": {
-          "recall": {
-            "@5": 0.6666666666666666,
-            "@10": 0.6666666666666666
-          },
-          "ndcg": {
-            "@5": 0.30078518014914984,
-            "@10": 0.19518900079066107
-          },
-          "rr": 0.3333333333333333
-        },
-        "latency_ms": 2.105126000060409
+        "latency_ms": 4.363842999737244
       },
       {
         "qid": "mh09",
@@ -7843,7 +7811,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 1.8654249997780425
+        "latency_ms": 2.479509999830043
       },
       {
         "qid": "mh10",
@@ -7854,12 +7822,12 @@
             "@10": 0.5
           },
           "ndcg": {
-            "@5": 0.34519134224686937,
-            "@10": 0.22400556151517553
+            "@5": 0.16958010263680806,
+            "@10": 0.17947710508581735
           },
-          "rr": 0.5
+          "rr": 0.3333333333333333
         },
-        "latency_ms": 2.0033749997310224
+        "latency_ms": 2.575643999989552
       },
       {
         "qid": "mh11",
@@ -7875,23 +7843,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 2.615242000501894
-      },
-      {
-        "qid": "mh12",
-        "kind": "multi_hop",
-        "metrics": {
-          "recall": {
-            "@5": 0.5,
-            "@10": 0.5
-          },
-          "ndcg": {
-            "@5": 0.16958010263680806,
-            "@10": 0.12647135138382856
-          },
-          "rr": 0.3333333333333333
-        },
-        "latency_ms": 1.7513080001663184
+        "latency_ms": 2.8222740002092905
       },
       {
         "qid": "mh13",
@@ -7907,23 +7859,7 @@
           },
           "rr": 0.3333333333333333
         },
-        "latency_ms": 2.4237630004790844
-      },
-      {
-        "qid": "mh14",
-        "kind": "multi_hop",
-        "metrics": {
-          "recall": {
-            "@5": 0.5,
-            "@10": 1.0
-          },
-          "ndcg": {
-            "@5": 0.3391602052736161,
-            "@10": 0.48116653082367977
-          },
-          "rr": 1.0
-        },
-        "latency_ms": 2.3459470003217575
+        "latency_ms": 2.5167170006170636
       },
       {
         "qid": "mh15",
@@ -7939,39 +7875,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 3.4262979997947696
-      },
-      {
-        "qid": "mh16",
-        "kind": "multi_hop",
-        "metrics": {
-          "recall": {
-            "@5": 0.5,
-            "@10": 0.5
-          },
-          "ndcg": {
-            "@5": 0.38356636737133565,
-            "@10": 0.39673781793804724
-          },
-          "rr": 0.5
-        },
-        "latency_ms": 2.788292999866826
-      },
-      {
-        "qid": "mh17",
-        "kind": "multi_hop",
-        "metrics": {
-          "recall": {
-            "@5": 0.5,
-            "@10": 0.5
-          },
-          "ndcg": {
-            "@5": 1.0,
-            "@10": 0.7183627972686238
-          },
-          "rr": 1.0
-        },
-        "latency_ms": 3.1769889992574463
+        "latency_ms": 3.2073000002128538
       },
       {
         "qid": "mh18",
@@ -7987,7 +7891,103 @@
           },
           "rr": 0.3333333333333333
         },
-        "latency_ms": 2.006511999752547
+        "latency_ms": 2.401089000159118
+      },
+      {
+        "qid": "mh19",
+        "kind": "multi_hop",
+        "metrics": {
+          "recall": {
+            "@5": 0.5,
+            "@10": 0.5
+          },
+          "ndcg": {
+            "@5": 0.4703652827859579,
+            "@10": 0.4569970750177365
+          },
+          "rr": 1.0
+        },
+        "latency_ms": 3.351004000251123
+      },
+      {
+        "qid": "mh20",
+        "kind": "multi_hop",
+        "metrics": {
+          "recall": {
+            "@5": 0.5,
+            "@10": 0.5
+          },
+          "ndcg": {
+            "@5": 0.3391602052736161,
+            "@10": 0.22009176629808017
+          },
+          "rr": 1.0
+        },
+        "latency_ms": 3.2508239992239396
+      },
+      {
+        "qid": "mh21",
+        "kind": "multi_hop",
+        "metrics": {
+          "recall": {
+            "@5": 0.5,
+            "@10": 0.5
+          },
+          "ndcg": {
+            "@5": 0.5531464700081437,
+            "@10": 0.6818624649454276
+          },
+          "rr": 1.0
+        },
+        "latency_ms": 2.437387999634666
+      },
+      {
+        "qid": "mh22",
+        "kind": "multi_hop",
+        "metrics": {
+          "recall": {
+            "@5": 0.5,
+            "@10": 0.5
+          },
+          "ndcg": {
+            "@5": 0.21398626473452756,
+            "@10": 0.1909208661789347
+          },
+          "rr": 0.5
+        },
+        "latency_ms": 3.6219020003045443
+      },
+      {
+        "qid": "mh23",
+        "kind": "multi_hop",
+        "metrics": {
+          "recall": {
+            "@5": 0.5,
+            "@10": 0.5
+          },
+          "ndcg": {
+            "@5": 0.7227265726449519,
+            "@10": 0.4690000933206748
+          },
+          "rr": 1.0
+        },
+        "latency_ms": 3.503173000353854
+      },
+      {
+        "qid": "mh24",
+        "kind": "multi_hop",
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.48522855511632257,
+            "@10": 0.3618791953854131
+          },
+          "rr": 1.0
+        },
+        "latency_ms": 2.4519660000805743
       }
     ],
     "hybrid": [
@@ -8005,7 +8005,7 @@
           },
           "rr": 0.5
         },
-        "latency_ms": 15.6104569996387
+        "latency_ms": 16.35923100002401
       },
       {
         "qid": "a02",
@@ -8021,7 +8021,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 16.39065400013351
+        "latency_ms": 17.455766000239237
       },
       {
         "qid": "a03",
@@ -8037,7 +8037,7 @@
           },
           "rr": 0.0
         },
-        "latency_ms": 15.035123999950883
+        "latency_ms": 14.29957500022283
       },
       {
         "qid": "a04",
@@ -8053,7 +8053,7 @@
           },
           "rr": 0.5
         },
-        "latency_ms": 15.303854000194406
+        "latency_ms": 15.075458999490365
       },
       {
         "qid": "a05",
@@ -8069,7 +8069,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 16.38141999956133
+        "latency_ms": 15.277213999979722
       },
       {
         "qid": "a06",
@@ -8085,7 +8085,7 @@
           },
           "rr": 0.1111111111111111
         },
-        "latency_ms": 17.08620699992025
+        "latency_ms": 17.011568999805604
       },
       {
         "qid": "a07",
@@ -8101,7 +8101,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 16.87199999923905
+        "latency_ms": 18.17182899958425
       },
       {
         "qid": "a08",
@@ -8117,7 +8117,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 18.86320500034344
+        "latency_ms": 17.35499699952925
       },
       {
         "qid": "a09",
@@ -8133,7 +8133,7 @@
           },
           "rr": 0.1111111111111111
         },
-        "latency_ms": 22.198120999746607
+        "latency_ms": 20.300668999880145
       },
       {
         "qid": "a10",
@@ -8149,7 +8149,7 @@
           },
           "rr": 0.0
         },
-        "latency_ms": 18.6346999998932
+        "latency_ms": 17.668967999270535
       },
       {
         "qid": "a11",
@@ -8165,7 +8165,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 15.325972000027832
+        "latency_ms": 17.907794999700855
       },
       {
         "qid": "a12",
@@ -8181,7 +8181,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 20.07164000042394
+        "latency_ms": 20.686442000624083
       },
       {
         "qid": "a13",
@@ -8197,7 +8197,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 16.179649999685353
+        "latency_ms": 17.38100799957465
       },
       {
         "qid": "a14",
@@ -8213,7 +8213,7 @@
           },
           "rr": 0.125
         },
-        "latency_ms": 15.070636000018567
+        "latency_ms": 16.470651000418002
       },
       {
         "qid": "a15",
@@ -8229,7 +8229,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 14.615432000027795
+        "latency_ms": 20.42429599987372
       },
       {
         "qid": "a17",
@@ -8245,7 +8245,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 15.481725999961782
+        "latency_ms": 18.27623200006201
       },
       {
         "qid": "a18",
@@ -8261,7 +8261,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 15.535814000031678
+        "latency_ms": 14.555851000295661
       },
       {
         "qid": "a19",
@@ -8277,7 +8277,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 14.407755000320321
+        "latency_ms": 15.121655999791983
       },
       {
         "qid": "a20",
@@ -8293,7 +8293,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 16.6542050001226
+        "latency_ms": 19.553124000594835
       },
       {
         "qid": "a21",
@@ -8309,7 +8309,7 @@
           },
           "rr": 0.3333333333333333
         },
-        "latency_ms": 17.736957000124676
+        "latency_ms": 15.097059999789053
       },
       {
         "qid": "a22",
@@ -8325,7 +8325,7 @@
           },
           "rr": 0.3333333333333333
         },
-        "latency_ms": 22.872079000080703
+        "latency_ms": 19.64298900020367
       },
       {
         "qid": "a23",
@@ -8341,7 +8341,7 @@
           },
           "rr": 0.0
         },
-        "latency_ms": 19.064285999775166
+        "latency_ms": 20.32204199986154
       },
       {
         "qid": "b01",
@@ -8357,7 +8357,7 @@
           },
           "rr": 0.1111111111111111
         },
-        "latency_ms": 20.265997000024072
+        "latency_ms": 22.2195410005952
       },
       {
         "qid": "b02",
@@ -8373,7 +8373,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 14.936356999896816
+        "latency_ms": 17.865892000372696
       },
       {
         "qid": "b04",
@@ -8389,7 +8389,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 19.710934999238816
+        "latency_ms": 18.934321999950043
       },
       {
         "qid": "b05",
@@ -8405,7 +8405,7 @@
           },
           "rr": 0.0
         },
-        "latency_ms": 22.183923999364197
+        "latency_ms": 17.260818999602634
       },
       {
         "qid": "b06",
@@ -8421,7 +8421,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 17.67146399924968
+        "latency_ms": 15.262959000210685
       },
       {
         "qid": "b07",
@@ -8437,7 +8437,7 @@
           },
           "rr": 0.125
         },
-        "latency_ms": 19.81618499939941
+        "latency_ms": 19.504588000017975
       },
       {
         "qid": "b08",
@@ -8453,7 +8453,7 @@
           },
           "rr": 0.0
         },
-        "latency_ms": 18.961505999868677
+        "latency_ms": 14.851009000267368
       },
       {
         "qid": "b09",
@@ -8469,7 +8469,7 @@
           },
           "rr": 0.125
         },
-        "latency_ms": 26.604153000334918
+        "latency_ms": 18.874956000217935
       },
       {
         "qid": "b10",
@@ -8485,7 +8485,7 @@
           },
           "rr": 0.2
         },
-        "latency_ms": 20.9968459994343
+        "latency_ms": 18.643649999830814
       },
       {
         "qid": "b11",
@@ -8501,7 +8501,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 20.269469999220746
+        "latency_ms": 18.316289999347646
       },
       {
         "qid": "b12",
@@ -8517,7 +8517,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 20.22583100006159
+        "latency_ms": 15.936691999741015
       },
       {
         "qid": "b13",
@@ -8533,7 +8533,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 20.870776000265323
+        "latency_ms": 20.051708999744733
       },
       {
         "qid": "b14",
@@ -8549,7 +8549,7 @@
           },
           "rr": 0.5
         },
-        "latency_ms": 18.676811000659654
+        "latency_ms": 17.201476999616716
       },
       {
         "qid": "b15",
@@ -8565,7 +8565,7 @@
           },
           "rr": 0.0
         },
-        "latency_ms": 18.109807000655564
+        "latency_ms": 14.307047999864153
       },
       {
         "qid": "b16",
@@ -8581,7 +8581,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 19.14983300048334
+        "latency_ms": 14.326470000014524
       },
       {
         "qid": "b17",
@@ -8597,7 +8597,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 16.44092999958957
+        "latency_ms": 14.130411999758508
       },
       {
         "qid": "b18",
@@ -8613,7 +8613,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 15.635128999747394
+        "latency_ms": 12.87251100075082
       },
       {
         "qid": "b19",
@@ -8629,7 +8629,7 @@
           },
           "rr": 0.3333333333333333
         },
-        "latency_ms": 16.560940999625018
+        "latency_ms": 14.57590900008654
       },
       {
         "qid": "b21",
@@ -8645,7 +8645,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 15.753882999888447
+        "latency_ms": 14.30426500064641
       },
       {
         "qid": "b22",
@@ -8661,7 +8661,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 22.80416800022067
+        "latency_ms": 20.48689099956391
       },
       {
         "qid": "b23",
@@ -8677,7 +8677,7 @@
           },
           "rr": 0.25
         },
-        "latency_ms": 20.929301000251144
+        "latency_ms": 16.617518000202836
       },
       {
         "qid": "b24",
@@ -8693,7 +8693,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 21.93315799922857
+        "latency_ms": 14.807657000346808
       },
       {
         "qid": "c01",
@@ -8709,7 +8709,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 20.81043099951785
+        "latency_ms": 17.13837199986301
       },
       {
         "qid": "c02",
@@ -8725,7 +8725,7 @@
           },
           "rr": 0.3333333333333333
         },
-        "latency_ms": 16.277657000500767
+        "latency_ms": 17.127178999544412
       },
       {
         "qid": "c03",
@@ -8741,7 +8741,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 19.42651700028364
+        "latency_ms": 17.916935000357626
       },
       {
         "qid": "c04",
@@ -8757,7 +8757,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 18.43623500008107
+        "latency_ms": 16.19843100070284
       },
       {
         "qid": "c05",
@@ -8773,7 +8773,7 @@
           },
           "rr": 0.5
         },
-        "latency_ms": 16.005176000362553
+        "latency_ms": 17.736289999447763
       },
       {
         "qid": "c06",
@@ -8789,7 +8789,7 @@
           },
           "rr": 0.5
         },
-        "latency_ms": 15.974085999914678
+        "latency_ms": 19.341402999998536
       },
       {
         "qid": "c07",
@@ -8805,7 +8805,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 16.88947200000257
+        "latency_ms": 18.673507000130485
       },
       {
         "qid": "c08",
@@ -8821,7 +8821,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 17.262460999518225
+        "latency_ms": 16.330677999576437
       },
       {
         "qid": "c09",
@@ -8837,7 +8837,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 16.43089999924996
+        "latency_ms": 17.689191000499704
       },
       {
         "qid": "c10",
@@ -8853,7 +8853,7 @@
           },
           "rr": 0.16666666666666666
         },
-        "latency_ms": 17.067503000362194
+        "latency_ms": 15.640069999790285
       },
       {
         "qid": "c11",
@@ -8869,7 +8869,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 16.453394000564003
+        "latency_ms": 15.840722000575624
       },
       {
         "qid": "c12",
@@ -8885,7 +8885,7 @@
           },
           "rr": 0.125
         },
-        "latency_ms": 21.934630999567162
+        "latency_ms": 19.74376799989841
       },
       {
         "qid": "c13",
@@ -8901,7 +8901,7 @@
           },
           "rr": 0.5
         },
-        "latency_ms": 20.801070999368676
+        "latency_ms": 26.079876000039803
       },
       {
         "qid": "c14",
@@ -8917,7 +8917,7 @@
           },
           "rr": 0.14285714285714285
         },
-        "latency_ms": 21.079584999824874
+        "latency_ms": 28.16219399937836
       },
       {
         "qid": "c15",
@@ -8933,7 +8933,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 17.240548999325256
+        "latency_ms": 30.24927399928856
       },
       {
         "qid": "c16",
@@ -8949,7 +8949,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 20.60256999993726
+        "latency_ms": 33.95663800074544
       },
       {
         "qid": "c17",
@@ -8965,7 +8965,7 @@
           },
           "rr": 0.0
         },
-        "latency_ms": 19.031094999263587
+        "latency_ms": 30.3842680004891
       },
       {
         "qid": "c18",
@@ -8981,7 +8981,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 17.308906999460305
+        "latency_ms": 26.937929000268923
       },
       {
         "qid": "c19",
@@ -8997,7 +8997,7 @@
           },
           "rr": 0.14285714285714285
         },
-        "latency_ms": 22.28980500058242
+        "latency_ms": 32.66479300054925
       },
       {
         "qid": "c20",
@@ -9013,7 +9013,7 @@
           },
           "rr": 0.25
         },
-        "latency_ms": 18.17000899973209
+        "latency_ms": 27.797609999652195
       },
       {
         "qid": "c21",
@@ -9029,7 +9029,7 @@
           },
           "rr": 0.5
         },
-        "latency_ms": 19.243286999881093
+        "latency_ms": 23.847747000218078
       },
       {
         "qid": "d01",
@@ -9045,7 +9045,7 @@
           },
           "rr": 0.2
         },
-        "latency_ms": 19.52520899976662
+        "latency_ms": 26.227643000311218
       },
       {
         "qid": "d02",
@@ -9061,7 +9061,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 14.655778999440372
+        "latency_ms": 23.39157799997338
       },
       {
         "qid": "d03",
@@ -9077,7 +9077,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 16.575810000176716
+        "latency_ms": 26.228996999634546
       },
       {
         "qid": "d04",
@@ -9093,7 +9093,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 17.052320999937365
+        "latency_ms": 24.65076099997532
       },
       {
         "qid": "d05",
@@ -9109,7 +9109,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 18.029944000772957
+        "latency_ms": 25.314051999885123
       },
       {
         "qid": "d06",
@@ -9125,7 +9125,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 18.655969000064943
+        "latency_ms": 21.003193000069587
       },
       {
         "qid": "d07",
@@ -9141,7 +9141,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 19.263981999756652
+        "latency_ms": 22.132380000584817
       },
       {
         "qid": "d08",
@@ -9157,7 +9157,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 21.649951999279438
+        "latency_ms": 25.71794699997554
       },
       {
         "qid": "d09",
@@ -9173,7 +9173,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 19.675032000122883
+        "latency_ms": 22.040040999854682
       },
       {
         "qid": "d10",
@@ -9189,7 +9189,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 17.9272219993436
+        "latency_ms": 22.56318400031887
       },
       {
         "qid": "d11",
@@ -9205,7 +9205,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 17.557671999384183
+        "latency_ms": 24.563387999478437
       },
       {
         "qid": "d12",
@@ -9221,7 +9221,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 18.579118000161543
+        "latency_ms": 23.815614000341156
       },
       {
         "qid": "d13",
@@ -9237,7 +9237,7 @@
           },
           "rr": 0.25
         },
-        "latency_ms": 20.93624600001931
+        "latency_ms": 26.461187999302638
       },
       {
         "qid": "d14",
@@ -9253,7 +9253,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 17.448968999815406
+        "latency_ms": 25.996999999733816
       },
       {
         "qid": "d15",
@@ -9269,7 +9269,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 18.403837999358075
+        "latency_ms": 27.973569999630854
       },
       {
         "qid": "d16",
@@ -9285,7 +9285,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 14.959332000216818
+        "latency_ms": 23.0535710006734
       },
       {
         "qid": "d17",
@@ -9301,7 +9301,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 16.150421000020287
+        "latency_ms": 21.86135000010836
       },
       {
         "qid": "d18",
@@ -9317,7 +9317,7 @@
           },
           "rr": 0.3333333333333333
         },
-        "latency_ms": 18.131317999177554
+        "latency_ms": 19.92865200008964
       },
       {
         "qid": "d19",
@@ -9333,7 +9333,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 19.607657000051404
+        "latency_ms": 23.330523000367975
       },
       {
         "qid": "d20",
@@ -9349,7 +9349,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 18.700524999985646
+        "latency_ms": 25.606391000110307
       },
       {
         "qid": "d21",
@@ -9365,7 +9365,7 @@
           },
           "rr": 0.5
         },
-        "latency_ms": 16.36315799987642
+        "latency_ms": 22.033610999642406
       },
       {
         "qid": "d22",
@@ -9381,7 +9381,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 17.00528600031248
+        "latency_ms": 25.72034700006043
       },
       {
         "qid": "d23",
@@ -9397,7 +9397,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 16.66363000003912
+        "latency_ms": 23.28882399979193
       },
       {
         "qid": "d24",
@@ -9413,7 +9413,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 16.10449600048014
+        "latency_ms": 19.285552999463107
       },
       {
         "qid": "d33",
@@ -9429,23 +9429,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 15.482097000131034
-      },
-      {
-        "qid": "mh01",
-        "kind": "multi_hop",
-        "metrics": {
-          "recall": {
-            "@5": 0.0,
-            "@10": 0.0
-          },
-          "ndcg": {
-            "@5": 0.0,
-            "@10": 0.0
-          },
-          "rr": 0.0
-        },
-        "latency_ms": 21.59912400020403
+        "latency_ms": 17.650261000198952
       },
       {
         "qid": "mh02",
@@ -9456,12 +9440,12 @@
             "@10": 0.5
           },
           "ndcg": {
-            "@5": 0.16958010263680806,
-            "@10": 0.11004588314904008
+            "@5": 0.14606834984270645,
+            "@10": 0.09478836436955078
           },
-          "rr": 0.3333333333333333
+          "rr": 0.25
         },
-        "latency_ms": 23.039230999529536
+        "latency_ms": 23.38564599995152
       },
       {
         "qid": "mh03",
@@ -9477,7 +9461,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 21.022619000177656
+        "latency_ms": 23.531577999165165
       },
       {
         "qid": "mh04",
@@ -9493,7 +9477,7 @@
           },
           "rr": 0.14285714285714285
         },
-        "latency_ms": 22.805073000199627
+        "latency_ms": 20.074566999937815
       },
       {
         "qid": "mh05",
@@ -9509,7 +9493,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 18.740401999821188
+        "latency_ms": 19.88741500008473
       },
       {
         "qid": "mh06",
@@ -9525,7 +9509,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 20.94353900065471
+        "latency_ms": 20.1774649995059
       },
       {
         "qid": "mh07",
@@ -9541,23 +9525,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 20.90247299929615
-      },
-      {
-        "qid": "mh08",
-        "kind": "multi_hop",
-        "metrics": {
-          "recall": {
-            "@5": 0.6666666666666666,
-            "@10": 0.6666666666666666
-          },
-          "ndcg": {
-            "@5": 0.48522855511632257,
-            "@10": 0.31488013066763093
-          },
-          "rr": 1.0
-        },
-        "latency_ms": 21.865398999580066
+        "latency_ms": 22.760240000025078
       },
       {
         "qid": "mh09",
@@ -9573,7 +9541,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 17.567679000421776
+        "latency_ms": 18.29190899934474
       },
       {
         "qid": "mh10",
@@ -9584,12 +9552,12 @@
             "@10": 0.5
           },
           "ndcg": {
-            "@5": 0.4703652827859579,
-            "@10": 0.36885567213865283
+            "@5": 0.6164336326286644,
+            "@10": 0.4636440365082036
           },
           "rr": 1.0
         },
-        "latency_ms": 19.388134000109858
+        "latency_ms": 18.29168699987349
       },
       {
         "qid": "mh11",
@@ -9605,23 +9573,7 @@
           },
           "rr": 0.25
         },
-        "latency_ms": 20.10290399994119
-      },
-      {
-        "qid": "mh12",
-        "kind": "multi_hop",
-        "metrics": {
-          "recall": {
-            "@5": 0.5,
-            "@10": 0.5
-          },
-          "ndcg": {
-            "@5": 0.16958010263680806,
-            "@10": 0.21657136003619626
-          },
-          "rr": 0.3333333333333333
-        },
-        "latency_ms": 20.53287399940018
+        "latency_ms": 19.96521599994594
       },
       {
         "qid": "mh13",
@@ -9637,23 +9589,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 22.581952000109595
-      },
-      {
-        "qid": "mh14",
-        "kind": "multi_hop",
-        "metrics": {
-          "recall": {
-            "@5": 0.5,
-            "@10": 1.0
-          },
-          "ndcg": {
-            "@5": 0.3391602052736161,
-            "@10": 0.5014839712467825
-          },
-          "rr": 1.0
-        },
-        "latency_ms": 19.854322999890428
+        "latency_ms": 20.268755999495625
       },
       {
         "qid": "mh15",
@@ -9669,39 +9605,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 20.20259500022803
-      },
-      {
-        "qid": "mh16",
-        "kind": "multi_hop",
-        "metrics": {
-          "recall": {
-            "@5": 0.5,
-            "@10": 1.0
-          },
-          "ndcg": {
-            "@5": 0.830419897363192,
-            "@10": 0.7421246259355072
-          },
-          "rr": 1.0
-        },
-        "latency_ms": 20.47626900002797
-      },
-      {
-        "qid": "mh17",
-        "kind": "multi_hop",
-        "metrics": {
-          "recall": {
-            "@5": 0.5,
-            "@10": 0.5
-          },
-          "ndcg": {
-            "@5": 0.8539316501572937,
-            "@10": 0.6937613565160449
-          },
-          "rr": 1.0
-        },
-        "latency_ms": 20.098437999877206
+        "latency_ms": 23.446588999831874
       },
       {
         "qid": "mh18",
@@ -9717,7 +9621,103 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 19.233222999901045
+        "latency_ms": 18.378286999904958
+      },
+      {
+        "qid": "mh19",
+        "kind": "multi_hop",
+        "metrics": {
+          "recall": {
+            "@5": 0.5,
+            "@10": 0.5
+          },
+          "ndcg": {
+            "@5": 0.14606834984270645,
+            "@10": 0.2426178552850034
+          },
+          "rr": 0.25
+        },
+        "latency_ms": 20.601508999789075
+      },
+      {
+        "qid": "mh20",
+        "kind": "multi_hop",
+        "metrics": {
+          "recall": {
+            "@5": 0.5,
+            "@10": 0.5
+          },
+          "ndcg": {
+            "@5": 0.3391602052736161,
+            "@10": 0.2863459897524692
+          },
+          "rr": 1.0
+        },
+        "latency_ms": 23.697549000644358
+      },
+      {
+        "qid": "mh21",
+        "kind": "multi_hop",
+        "metrics": {
+          "recall": {
+            "@5": 0.5,
+            "@10": 0.5
+          },
+          "ndcg": {
+            "@5": 0.5531464700081437,
+            "@10": 0.5943907508440193
+          },
+          "rr": 1.0
+        },
+        "latency_ms": 19.572345000597124
+      },
+      {
+        "qid": "mh22",
+        "kind": "multi_hop",
+        "metrics": {
+          "recall": {
+            "@5": 0.5,
+            "@10": 0.5
+          },
+          "ndcg": {
+            "@5": 0.3391602052736161,
+            "@10": 0.3026024134988135
+          },
+          "rr": 1.0
+        },
+        "latency_ms": 21.54047900057776
+      },
+      {
+        "qid": "mh23",
+        "kind": "multi_hop",
+        "metrics": {
+          "recall": {
+            "@5": 0.5,
+            "@10": 0.5
+          },
+          "ndcg": {
+            "@5": 0.5531464700081437,
+            "@10": 0.43231813227099475
+          },
+          "rr": 1.0
+        },
+        "latency_ms": 27.157796999745187
+      },
+      {
+        "qid": "mh24",
+        "kind": "multi_hop",
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.6843515475204855,
+            "@10": 0.510383374527714
+          },
+          "rr": 1.0
+        },
+        "latency_ms": 20.776895999915723
       }
     ],
     "hybrid_rerank": [
@@ -9735,7 +9735,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 2670.3297340000063
+        "latency_ms": 2694.1615489995456
       },
       {
         "qid": "a02",
@@ -9751,7 +9751,7 @@
           },
           "rr": 0.5
         },
-        "latency_ms": 2526.0778779993416
+        "latency_ms": 2610.602599000231
       },
       {
         "qid": "a03",
@@ -9767,7 +9767,7 @@
           },
           "rr": 0.0
         },
-        "latency_ms": 2351.24878500028
+        "latency_ms": 2484.7027850000813
       },
       {
         "qid": "a04",
@@ -9783,7 +9783,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 2477.337512000304
+        "latency_ms": 2492.80828999963
       },
       {
         "qid": "a05",
@@ -9799,7 +9799,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 2469.0797560006104
+        "latency_ms": 2424.94729200007
       },
       {
         "qid": "a06",
@@ -9815,7 +9815,7 @@
           },
           "rr": 0.2
         },
-        "latency_ms": 2048.189631000241
+        "latency_ms": 2092.7151440009766
       },
       {
         "qid": "a07",
@@ -9831,7 +9831,7 @@
           },
           "rr": 0.5
         },
-        "latency_ms": 2523.5780320008416
+        "latency_ms": 2435.749983000278
       },
       {
         "qid": "a08",
@@ -9847,7 +9847,7 @@
           },
           "rr": 0.5
         },
-        "latency_ms": 2495.4410300006202
+        "latency_ms": 2526.3941230005003
       },
       {
         "qid": "a09",
@@ -9863,7 +9863,7 @@
           },
           "rr": 0.25
         },
-        "latency_ms": 2547.749425000802
+        "latency_ms": 2487.2192479997466
       },
       {
         "qid": "a10",
@@ -9879,7 +9879,7 @@
           },
           "rr": 0.0
         },
-        "latency_ms": 2474.0124390000346
+        "latency_ms": 2424.900974998309
       },
       {
         "qid": "a11",
@@ -9895,7 +9895,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 2487.213683999471
+        "latency_ms": 2520.7309870002064
       },
       {
         "qid": "a12",
@@ -9911,7 +9911,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 2517.4012449997463
+        "latency_ms": 2693.8151920003293
       },
       {
         "qid": "a13",
@@ -9927,7 +9927,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 2301.5144979999604
+        "latency_ms": 2329.216711999834
       },
       {
         "qid": "a14",
@@ -9943,7 +9943,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 3116.1714210002174
+        "latency_ms": 2384.2181529998925
       },
       {
         "qid": "a15",
@@ -9959,7 +9959,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 2959.255707000011
+        "latency_ms": 2463.398314999722
       },
       {
         "qid": "a17",
@@ -9975,7 +9975,7 @@
           },
           "rr": 0.5
         },
-        "latency_ms": 2383.2346010003675
+        "latency_ms": 2586.2460079988523
       },
       {
         "qid": "a18",
@@ -9991,7 +9991,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 2427.437565999753
+        "latency_ms": 2568.7570509999205
       },
       {
         "qid": "a19",
@@ -10007,7 +10007,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 2360.108114000468
+        "latency_ms": 2470.860093000738
       },
       {
         "qid": "a20",
@@ -10023,7 +10023,7 @@
           },
           "rr": 0.3333333333333333
         },
-        "latency_ms": 2471.037325999532
+        "latency_ms": 2487.2246390004875
       },
       {
         "qid": "a21",
@@ -10039,7 +10039,7 @@
           },
           "rr": 0.5
         },
-        "latency_ms": 2450.8378470000025
+        "latency_ms": 2401.4200440014974
       },
       {
         "qid": "a22",
@@ -10055,7 +10055,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 2457.394131000001
+        "latency_ms": 2510.108897000464
       },
       {
         "qid": "a23",
@@ -10071,7 +10071,7 @@
           },
           "rr": 0.0
         },
-        "latency_ms": 2479.1143700003886
+        "latency_ms": 2531.117488999371
       },
       {
         "qid": "b01",
@@ -10087,7 +10087,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 2492.7326340002764
+        "latency_ms": 2657.4974459999794
       },
       {
         "qid": "b02",
@@ -10103,7 +10103,7 @@
           },
           "rr": 0.2
         },
-        "latency_ms": 2409.400724999614
+        "latency_ms": 2415.451254999425
       },
       {
         "qid": "b04",
@@ -10119,7 +10119,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 2540.5792460005614
+        "latency_ms": 2639.8704319999524
       },
       {
         "qid": "b05",
@@ -10135,7 +10135,7 @@
           },
           "rr": 0.0
         },
-        "latency_ms": 2224.5579079999516
+        "latency_ms": 2354.9308239998936
       },
       {
         "qid": "b06",
@@ -10151,7 +10151,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 2436.8962890002877
+        "latency_ms": 2452.553483999509
       },
       {
         "qid": "b07",
@@ -10167,7 +10167,7 @@
           },
           "rr": 0.2
         },
-        "latency_ms": 2735.899184999653
+        "latency_ms": 2602.716565999799
       },
       {
         "qid": "b08",
@@ -10183,7 +10183,7 @@
           },
           "rr": 0.0
         },
-        "latency_ms": 2177.4070580004263
+        "latency_ms": 2236.967667000499
       },
       {
         "qid": "b09",
@@ -10199,7 +10199,7 @@
           },
           "rr": 0.2
         },
-        "latency_ms": 2409.770872000081
+        "latency_ms": 2505.3300030012906
       },
       {
         "qid": "b10",
@@ -10215,7 +10215,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 2452.457260999836
+        "latency_ms": 2480.980243000886
       },
       {
         "qid": "b11",
@@ -10231,7 +10231,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 2368.2710639996003
+        "latency_ms": 2509.67209800001
       },
       {
         "qid": "b12",
@@ -10247,7 +10247,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 2386.7468150001514
+        "latency_ms": 2435.8934949996183
       },
       {
         "qid": "b13",
@@ -10263,7 +10263,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 2374.087529999997
+        "latency_ms": 2517.742698000802
       },
       {
         "qid": "b14",
@@ -10279,7 +10279,7 @@
           },
           "rr": 0.5
         },
-        "latency_ms": 2203.8859289996253
+        "latency_ms": 2444.2414549994282
       },
       {
         "qid": "b15",
@@ -10295,7 +10295,7 @@
           },
           "rr": 0.0
         },
-        "latency_ms": 2339.113521999934
+        "latency_ms": 2576.0239269984595
       },
       {
         "qid": "b16",
@@ -10311,7 +10311,7 @@
           },
           "rr": 0.5
         },
-        "latency_ms": 2379.749427000206
+        "latency_ms": 2646.87724200121
       },
       {
         "qid": "b17",
@@ -10327,7 +10327,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 2251.279467999666
+        "latency_ms": 2317.0142590006435
       },
       {
         "qid": "b18",
@@ -10343,7 +10343,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 2183.785472000636
+        "latency_ms": 2396.3942370010045
       },
       {
         "qid": "b19",
@@ -10359,7 +10359,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 2361.0465139990993
+        "latency_ms": 2486.8553560008877
       },
       {
         "qid": "b21",
@@ -10375,7 +10375,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 2240.720159000375
+        "latency_ms": 2402.1352759991714
       },
       {
         "qid": "b22",
@@ -10391,7 +10391,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 2383.059755999966
+        "latency_ms": 2743.6533109994343
       },
       {
         "qid": "b23",
@@ -10407,7 +10407,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 2626.7979280000873
+        "latency_ms": 2619.898764000027
       },
       {
         "qid": "b24",
@@ -10423,7 +10423,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 2483.295108000675
+        "latency_ms": 2465.790893000303
       },
       {
         "qid": "c01",
@@ -10439,7 +10439,7 @@
           },
           "rr": 0.3333333333333333
         },
-        "latency_ms": 2538.1800610002756
+        "latency_ms": 2454.839121999612
       },
       {
         "qid": "c02",
@@ -10455,7 +10455,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 2244.224629999735
+        "latency_ms": 2303.591615998812
       },
       {
         "qid": "c03",
@@ -10471,7 +10471,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 2383.551939999961
+        "latency_ms": 2470.184239999071
       },
       {
         "qid": "c04",
@@ -10487,7 +10487,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 2364.0283229997294
+        "latency_ms": 2551.4689280007588
       },
       {
         "qid": "c05",
@@ -10503,7 +10503,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 2358.983592000186
+        "latency_ms": 2876.0522280008445
       },
       {
         "qid": "c06",
@@ -10519,7 +10519,7 @@
           },
           "rr": 0.5
         },
-        "latency_ms": 2348.6645660004797
+        "latency_ms": 2916.4269369994145
       },
       {
         "qid": "c07",
@@ -10535,7 +10535,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 2440.586479000558
+        "latency_ms": 3318.2109240005957
       },
       {
         "qid": "c08",
@@ -10551,7 +10551,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 2369.1074819998903
+        "latency_ms": 2690.6252650005626
       },
       {
         "qid": "c09",
@@ -10567,7 +10567,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 2422.735860999637
+        "latency_ms": 2649.9057759992866
       },
       {
         "qid": "c10",
@@ -10583,7 +10583,7 @@
           },
           "rr": 0.25
         },
-        "latency_ms": 2466.2801429994943
+        "latency_ms": 2525.5887640014407
       },
       {
         "qid": "c11",
@@ -10599,7 +10599,7 @@
           },
           "rr": 0.5
         },
-        "latency_ms": 2435.8159269995667
+        "latency_ms": 2619.7917709996545
       },
       {
         "qid": "c12",
@@ -10615,7 +10615,7 @@
           },
           "rr": 0.3333333333333333
         },
-        "latency_ms": 2498.448248999921
+        "latency_ms": 2639.160911001454
       },
       {
         "qid": "c13",
@@ -10631,7 +10631,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 2536.213633999978
+        "latency_ms": 2652.831592000439
       },
       {
         "qid": "c14",
@@ -10647,7 +10647,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 2688.747354000043
+        "latency_ms": 2604.4210599993676
       },
       {
         "qid": "c15",
@@ -10663,7 +10663,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 2386.0593539993715
+        "latency_ms": 2451.941651999732
       },
       {
         "qid": "c16",
@@ -10679,7 +10679,7 @@
           },
           "rr": 0.3333333333333333
         },
-        "latency_ms": 2506.522397000481
+        "latency_ms": 2975.450207999529
       },
       {
         "qid": "c17",
@@ -10695,7 +10695,7 @@
           },
           "rr": 0.0
         },
-        "latency_ms": 2504.047028000059
+        "latency_ms": 2571.3288610004383
       },
       {
         "qid": "c18",
@@ -10711,7 +10711,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 2425.1570430005813
+        "latency_ms": 2531.668781000917
       },
       {
         "qid": "c19",
@@ -10727,7 +10727,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 2499.870808000196
+        "latency_ms": 2596.2247530005698
       },
       {
         "qid": "c20",
@@ -10743,7 +10743,7 @@
           },
           "rr": 0.2
         },
-        "latency_ms": 2390.9138470007747
+        "latency_ms": 2645.04284800023
       },
       {
         "qid": "c21",
@@ -10759,7 +10759,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 2407.6167180000994
+        "latency_ms": 2633.0873550014076
       },
       {
         "qid": "d01",
@@ -10775,7 +10775,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 2342.8709899999376
+        "latency_ms": 2367.426228998738
       },
       {
         "qid": "d02",
@@ -10791,7 +10791,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 2317.938956999569
+        "latency_ms": 2478.796854000393
       },
       {
         "qid": "d03",
@@ -10807,7 +10807,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 2278.7491630006116
+        "latency_ms": 2260.766067000077
       },
       {
         "qid": "d04",
@@ -10823,7 +10823,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 2183.1110459997944
+        "latency_ms": 2105.980128999363
       },
       {
         "qid": "d05",
@@ -10839,7 +10839,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 2565.3466180001487
+        "latency_ms": 2680.96356299975
       },
       {
         "qid": "d06",
@@ -10855,7 +10855,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 2568.2364690001123
+        "latency_ms": 2863.759683999888
       },
       {
         "qid": "d07",
@@ -10871,7 +10871,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 2442.5528820002
+        "latency_ms": 2440.7984690005833
       },
       {
         "qid": "d08",
@@ -10887,7 +10887,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 2494.1827689999627
+        "latency_ms": 2613.4835520006163
       },
       {
         "qid": "d09",
@@ -10903,7 +10903,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 2523.067543000252
+        "latency_ms": 2687.5173749995156
       },
       {
         "qid": "d10",
@@ -10919,7 +10919,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 2360.6292089998533
+        "latency_ms": 2698.730052999963
       },
       {
         "qid": "d11",
@@ -10935,7 +10935,7 @@
           },
           "rr": 0.5
         },
-        "latency_ms": 2565.110335999634
+        "latency_ms": 2998.458372998357
       },
       {
         "qid": "d12",
@@ -10951,7 +10951,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 2478.0370399994354
+        "latency_ms": 2928.995076999854
       },
       {
         "qid": "d13",
@@ -10967,7 +10967,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 2311.45206400015
+        "latency_ms": 2764.1070839999884
       },
       {
         "qid": "d14",
@@ -10983,7 +10983,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 2490.807966999455
+        "latency_ms": 2645.8439090001775
       },
       {
         "qid": "d15",
@@ -10999,7 +10999,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 2638.6085929998444
+        "latency_ms": 2792.367367999759
       },
       {
         "qid": "d16",
@@ -11015,7 +11015,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 2570.8652310004254
+        "latency_ms": 2703.8917930003663
       },
       {
         "qid": "d17",
@@ -11031,7 +11031,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 2431.2115049997374
+        "latency_ms": 2501.59322699983
       },
       {
         "qid": "d18",
@@ -11047,7 +11047,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 2257.0461799996338
+        "latency_ms": 2419.0960790001554
       },
       {
         "qid": "d19",
@@ -11063,7 +11063,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 2456.9497029997365
+        "latency_ms": 2520.1256159998593
       },
       {
         "qid": "d20",
@@ -11079,7 +11079,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 2450.360957000157
+        "latency_ms": 2836.5807160007535
       },
       {
         "qid": "d21",
@@ -11095,7 +11095,7 @@
           },
           "rr": 0.25
         },
-        "latency_ms": 2479.4402859997717
+        "latency_ms": 2583.3785249997163
       },
       {
         "qid": "d22",
@@ -11111,7 +11111,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 2355.8205779991113
+        "latency_ms": 2559.6546409997245
       },
       {
         "qid": "d23",
@@ -11127,7 +11127,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 2450.52201100043
+        "latency_ms": 2561.6274860003614
       },
       {
         "qid": "d24",
@@ -11143,7 +11143,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 2367.0824839991838
+        "latency_ms": 2545.6258159993013
       },
       {
         "qid": "d33",
@@ -11159,23 +11159,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 2210.296405999543
-      },
-      {
-        "qid": "mh01",
-        "kind": "multi_hop",
-        "metrics": {
-          "recall": {
-            "@5": 0.0,
-            "@10": 0.0
-          },
-          "ndcg": {
-            "@5": 0.0,
-            "@10": 0.0
-          },
-          "rr": 0.0
-        },
-        "latency_ms": 2360.0040110004556
+        "latency_ms": 2515.286335001292
       },
       {
         "qid": "mh02",
@@ -11186,12 +11170,12 @@
             "@10": 0.5
           },
           "ndcg": {
-            "@5": 0.21398626473452756,
-            "@10": 0.13886244387355454
+            "@5": 0.13120507751234178,
+            "@10": 0.08514311764162098
           },
-          "rr": 0.5
+          "rr": 0.2
         },
-        "latency_ms": 2376.78656099979
+        "latency_ms": 2567.057302001558
       },
       {
         "qid": "mh03",
@@ -11207,7 +11191,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 2391.772938000031
+        "latency_ms": 2553.1262530003005
       },
       {
         "qid": "mh04",
@@ -11223,7 +11207,7 @@
           },
           "rr": 0.3333333333333333
         },
-        "latency_ms": 2446.164482000313
+        "latency_ms": 2557.6630699997622
       },
       {
         "qid": "mh05",
@@ -11239,7 +11223,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 2738.70418199931
+        "latency_ms": 2573.672765000083
       },
       {
         "qid": "mh06",
@@ -11255,7 +11239,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 2457.0616689998133
+        "latency_ms": 2523.8497169993934
       },
       {
         "qid": "mh07",
@@ -11271,23 +11255,7 @@
           },
           "rr": 0.5
         },
-        "latency_ms": 2494.770609000625
-      },
-      {
-        "qid": "mh08",
-        "kind": "multi_hop",
-        "metrics": {
-          "recall": {
-            "@5": 0.3333333333333333,
-            "@10": 0.6666666666666666
-          },
-          "ndcg": {
-            "@5": 0.16958010263680806,
-            "@10": 0.1736666713479918
-          },
-          "rr": 0.3333333333333333
-        },
-        "latency_ms": 2402.868393999597
+        "latency_ms": 2627.793677998852
       },
       {
         "qid": "mh09",
@@ -11303,7 +11271,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 2255.727986000238
+        "latency_ms": 2513.337381000383
       },
       {
         "qid": "mh10",
@@ -11314,12 +11282,12 @@
             "@10": 0.5
           },
           "ndcg": {
-            "@5": 0.5296347172140421,
-            "@10": 0.3436966913921454
+            "@5": 0.6608397947263839,
+            "@10": 0.4288398090337664
           },
           "rr": 0.5
         },
-        "latency_ms": 2074.9478629995792
+        "latency_ms": 2651.2090470005205
       },
       {
         "qid": "mh11",
@@ -11335,23 +11303,7 @@
           },
           "rr": 0.14285714285714285
         },
-        "latency_ms": 2506.506796999929
-      },
-      {
-        "qid": "mh12",
-        "kind": "multi_hop",
-        "metrics": {
-          "recall": {
-            "@5": 0.0,
-            "@10": 0.5
-          },
-          "ndcg": {
-            "@5": 0.0,
-            "@10": 0.17441424290825341
-          },
-          "rr": 0.16666666666666666
-        },
-        "latency_ms": 2253.235651000068
+        "latency_ms": 2660.0753880011325
       },
       {
         "qid": "mh13",
@@ -11367,23 +11319,7 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 2095.0561750005363
-      },
-      {
-        "qid": "mh14",
-        "kind": "multi_hop",
-        "metrics": {
-          "recall": {
-            "@5": 1.0,
-            "@10": 1.0
-          },
-          "ndcg": {
-            "@5": 0.7227265726449519,
-            "@10": 0.644824486427155
-          },
-          "rr": 1.0
-        },
-        "latency_ms": 2391.952883999693
+        "latency_ms": 2239.686350998454
       },
       {
         "qid": "mh15",
@@ -11399,39 +11335,7 @@
           },
           "rr": 0.5
         },
-        "latency_ms": 2408.590003000427
-      },
-      {
-        "qid": "mh16",
-        "kind": "multi_hop",
-        "metrics": {
-          "recall": {
-            "@5": 1.0,
-            "@10": 1.0
-          },
-          "ndcg": {
-            "@5": 0.6548086577531307,
-            "@10": 0.7097402150304354
-          },
-          "rr": 1.0
-        },
-        "latency_ms": 2394.173677999788
-      },
-      {
-        "qid": "mh17",
-        "kind": "multi_hop",
-        "metrics": {
-          "recall": {
-            "@5": 0.5,
-            "@10": 0.5
-          },
-          "ndcg": {
-            "@5": 0.5296347172140421,
-            "@10": 0.5648901044069581
-          },
-          "rr": 0.5
-        },
-        "latency_ms": 2722.2928249993856
+        "latency_ms": 2534.4633610002347
       },
       {
         "qid": "mh18",
@@ -11447,12 +11351,108 @@
           },
           "rr": 1.0
         },
-        "latency_ms": 2471.6620960007276
+        "latency_ms": 2486.1495519999153
+      },
+      {
+        "qid": "mh19",
+        "kind": "multi_hop",
+        "metrics": {
+          "recall": {
+            "@5": 0.5,
+            "@10": 0.5
+          },
+          "ndcg": {
+            "@5": 0.4468535299918563,
+            "@10": 0.28997736516021183
+          },
+          "rr": 0.3333333333333333
+        },
+        "latency_ms": 2570.0361380004324
+      },
+      {
+        "qid": "mh20",
+        "kind": "multi_hop",
+        "metrics": {
+          "recall": {
+            "@5": 0.5,
+            "@10": 0.5
+          },
+          "ndcg": {
+            "@5": 0.5531464700081437,
+            "@10": 0.3589542101716347
+          },
+          "rr": 1.0
+        },
+        "latency_ms": 2667.1406749992457
+      },
+      {
+        "qid": "mh21",
+        "kind": "multi_hop",
+        "metrics": {
+          "recall": {
+            "@5": 0.5,
+            "@10": 0.5
+          },
+          "ndcg": {
+            "@5": 0.30078518014914984,
+            "@10": 0.3558355139887785
+          },
+          "rr": 0.3333333333333333
+        },
+        "latency_ms": 2552.236620000258
+      },
+      {
+        "qid": "mh22",
+        "kind": "multi_hop",
+        "metrics": {
+          "recall": {
+            "@5": 0.5,
+            "@10": 0.5
+          },
+          "ndcg": {
+            "@5": 0.21398626473452756,
+            "@10": 0.1909208661789347
+          },
+          "rr": 0.5
+        },
+        "latency_ms": 2398.3680520013877
+      },
+      {
+        "qid": "mh23",
+        "kind": "multi_hop",
+        "metrics": {
+          "recall": {
+            "@5": 0.5,
+            "@10": 0.5
+          },
+          "ndcg": {
+            "@5": 0.38356636737133565,
+            "@10": 0.32730659600126993
+          },
+          "rr": 0.5
+        },
+        "latency_ms": 2651.549784000963
+      },
+      {
+        "qid": "mh24",
+        "kind": "multi_hop",
+        "metrics": {
+          "recall": {
+            "@5": 1.0,
+            "@10": 1.0
+          },
+          "ndcg": {
+            "@5": 0.7227265726449519,
+            "@10": 0.5390031312763821
+          },
+          "rr": 1.0
+        },
+        "latency_ms": 2564.2294499994023
       }
     ]
   },
   "input_hashes": {
-    "gold": "a8c58ed6346d7211d2ffd92873585295953764ade48435f66f13a31843125941",
+    "gold": "ea74a0732c1d94411df52d7eb0c86c18708ee298301e2f06e92ad1fbbd38f1e9",
     "chunks": "27e57f0ace1fe8335371ffd1d6e4cbde2b7dd0b6c04ba05232a71938c1a603c3",
     "registry": "e64624469fe08a9acbd213595a1a8bc87c8a42786220330879cbfd93c3fe318b",
     "manifest": "c3e9250c5b6ca30e1cab7fa12d09da020e8d0e7ef70c1f4d091ec4c15b41521d"
