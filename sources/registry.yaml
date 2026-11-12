@@ -34,6 +34,7 @@
 - {id: de/tum/informatics-msc/department, url: "https://www.cit.tum.de/en/cit/studies/degree-programs/master-informatics/", country: DE, layer: university, university: TUM, programme: M.Sc. Informatics}
 - {id: de/tum/dea-msc/programme, url: "https://www.tum.de/en/studies/degree-programs/detail/data-engineering-and-analytics-master-of-science-msc", country: DE, layer: university, university: TUM, programme: M.Sc. Data Engineering and Analytics}
 - {id: de/tum/language-certificates, url: "https://www.tum.de/en/studies/application/application-info-portal/admission-requirements/language-certificates", country: DE, layer: university, university: TUM, stage: before_applying}
+- {id: de/tum/tuition-fees, url: "https://www.tum.de/en/studies/fees/tuition", country: DE, layer: university, university: TUM, stage: before_applying}
 - {id: de/munich/foreign-students, url: "https://stadt.muenchen.de/infos/new-foreign-students.html", country: DE, layer: rules, stage: arrival, university: TUM}
 - {id: de/munich/residence-permit-study, url: "https://stadt.muenchen.de/service/en-GB/info/servicestelle-fur-zuwanderung-und-einburgerung/10424886/", country: DE, layer: rules, stage: arrival, university: TUM}
 
