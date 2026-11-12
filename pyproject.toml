@@ -31,7 +31,7 @@ dev = [
 ]
 
 [tool.setuptools.packages.find]
-include = ["api*", "core*", "schemas*", "ingestion*", "retrieval*", "generation*", "evaluation*", "extraction*", "eligibility*"]
+include = ["api*", "core*", "schemas*", "ingestion*", "retrieval*", "generation*", "evaluation*", "extraction*", "eligibility*", "agent*"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
