@@ -1,10 +1,12 @@
 from pydantic import BaseModel, Field
 
 from schemas.common import RetrievedChunk
+from schemas.search import Filters
 
 
 class AnswerRequest(BaseModel):
     query: str = Field(min_length=1, max_length=1000)
+    filters: Filters | None = None
 
 
 class Citation(BaseModel):
