@@ -259,6 +259,56 @@
         }
       ],
       "reviewed_by": "human"
+    },
+    {
+      "id": "deadline_winter",
+      "label": "Apply between 1 February and 31 May for the winter term",
+      "category": "readiness",
+      "check": {
+        "type": "deadline",
+        "intake": "winter",
+        "close": {
+          "month": 5,
+          "day": 31,
+          "year_offset": 0
+        },
+        "open": {
+          "month": 2,
+          "day": 1,
+          "year_offset": 0
+        }
+      },
+      "citations": [
+        {
+          "doc_id": "de/tum/dea-msc/programme",
+          "quote": "Application period for winter semester: 01.02. – 31.05."
+        }
+      ]
+    },
+    {
+      "id": "deadline_summer",
+      "label": "Apply between 1 October and 30 November of the previous year for the summer term",
+      "category": "readiness",
+      "check": {
+        "type": "deadline",
+        "intake": "summer",
+        "close": {
+          "month": 11,
+          "day": 30,
+          "year_offset": -1
+        },
+        "open": {
+          "month": 10,
+          "day": 1,
+          "year_offset": -1
+        }
+      },
+      "citations": [
+        {
+          "doc_id": "de/tum/dea-msc/programme",
+          "quote": "Application period for summer semester: 01.10. – 30.11."
+        }
+      ]
     }
   ]
 }

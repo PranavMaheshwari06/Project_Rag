@@ -395,6 +395,88 @@
         }
       ],
       "reviewed_by": "human"
+    },
+    {
+      "id": "deadline_winter",
+      "label": "Apply by 15 May for the winter term (late deadline)",
+      "category": "readiness",
+      "check": {
+        "type": "deadline",
+        "intake": "winter",
+        "close": {
+          "month": 5,
+          "day": 15,
+          "year_offset": 0
+        }
+      },
+      "citations": [
+        {
+          "doc_id": "de/saarland/cs-msc/programme",
+          "quote": "Application deadline for the winter semester | Early deadline: Nov 15 (positive decision: notification at the lastest in February of the following year) Late deadline: May 15"
+        }
+      ]
+    },
+    {
+      "id": "deadline_summer",
+      "label": "Apply by 15 November of the previous year for the summer term (late deadline)",
+      "category": "readiness",
+      "check": {
+        "type": "deadline",
+        "intake": "summer",
+        "close": {
+          "month": 11,
+          "day": 15,
+          "year_offset": -1
+        }
+      },
+      "citations": [
+        {
+          "doc_id": "de/saarland/cs-msc/programme",
+          "quote": "Application deadline for the summer semester | Early deadline: May 15 (positive decision: notification at the lastest in July) Late deadline: Nov 15"
+        }
+      ]
+    },
+    {
+      "id": "deadline_winter_early",
+      "label": "Early deadline: apply by 15 November of the previous year for the winter term to hear by February",
+      "category": "readiness",
+      "severity": "soft",
+      "check": {
+        "type": "deadline",
+        "intake": "winter",
+        "close": {
+          "month": 11,
+          "day": 15,
+          "year_offset": -1
+        }
+      },
+      "citations": [
+        {
+          "doc_id": "de/saarland/cs-msc/programme",
+          "quote": "Application deadline for the winter semester | Early deadline: Nov 15 (positive decision: notification at the lastest in February of the following year) Late deadline: May 15"
+        }
+      ]
+    },
+    {
+      "id": "deadline_summer_early",
+      "label": "Early deadline: apply by 15 May of the previous year for the summer term to hear by July",
+      "category": "readiness",
+      "severity": "soft",
+      "check": {
+        "type": "deadline",
+        "intake": "summer",
+        "close": {
+          "month": 5,
+          "day": 15,
+          "year_offset": -1
+        }
+      },
+      "citations": [
+        {
+          "doc_id": "de/saarland/cs-msc/programme",
+          "quote": "Application deadline for the summer semester | Early deadline: May 15 (positive decision: notification at the lastest in July) Late deadline: Nov 15"
+        }
+      ]
     }
   ]
 }
