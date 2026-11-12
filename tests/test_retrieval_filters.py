@@ -93,13 +93,20 @@ def test_stage_and_layer_match_exactly():
      {"university": ["TU Berlin"], "programme": ["M.Sc. Computer Science"]}),
     ("does Karlsruhe charge tuition?", {"university": ["KIT"]}),
     ("how much goes in a blocked account?", {}),
+    ("TUM computer science master: GRE?", {"university": ["TUM"], "programme": ["M.Sc. Informatics"]}),
+    ("TUDa AI and machine learning english proof",
+     {"university": ["TU Darmstadt"], "programme": ["M.Sc. Artificial Intelligence and Machine Learning"]}),
+    # another institution in a covered city: no scope, so the coverage refusal still works
+    ("what GPA do I need for the LMU Munich data science master?", {}),
+    ("FU Berlin computer science deadline", {}),
+    ("Hochschule Darmstadt informatik", {}),
 ])
 def test_detector(query, expected):
     assert detect_filters(query) == expected
 
 
 def test_detector_keeps_both_sides_of_a_comparison():
-    found = detect_filters("GRE for TUM data engineering vs Stuttgart CS")
+    found = detect_filters("GRE for TUM data engineering vs Stuttgart")
     assert found["university"] == ["TUM", "University of Stuttgart"]
     assert found["programme"] == ["M.Sc. Computer Science", "M.Sc. Data Engineering and Analytics"]
     # a university whose programme is not named keeps all of its programmes
@@ -117,6 +124,6 @@ def test_alias_table_covers_the_registry():
 
 def test_api_rejects_unknown_filter_keys_and_empty_lists():
     assert SearchRequest(query="x", filters={"university": ["TUM"]}).filters == {"university": ["TUM"]}
-    for bad in ({"country": ["DE"]}, {"university": []}):
+    for bad in ({"country": ["DE"]}, {"university": []}, {"university": ["tum"]}, {"stage": ["visa"]}):
         with pytest.raises(ValidationError):
             SearchRequest(query="x", filters=bad)
