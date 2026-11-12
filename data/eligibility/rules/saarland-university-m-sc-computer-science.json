@@ -414,7 +414,8 @@
           "doc_id": "de/saarland/cs-msc/programme",
           "quote": "Application deadline for the winter semester | Early deadline: Nov 15 (positive decision: notification at the lastest in February of the following year) Late deadline: May 15"
         }
-      ]
+      ],
+      "reviewed_by": "human"
     },
     {
       "id": "deadline_summer",
@@ -434,7 +435,8 @@
           "doc_id": "de/saarland/cs-msc/programme",
           "quote": "Application deadline for the summer semester | Early deadline: May 15 (positive decision: notification at the lastest in July) Late deadline: Nov 15"
         }
-      ]
+      ],
+      "reviewed_by": "human"
     },
     {
       "id": "deadline_winter_early",
@@ -455,7 +457,8 @@
           "doc_id": "de/saarland/cs-msc/programme",
           "quote": "Application deadline for the winter semester | Early deadline: Nov 15 (positive decision: notification at the lastest in February of the following year) Late deadline: May 15"
         }
-      ]
+      ],
+      "reviewed_by": "human"
     },
     {
       "id": "deadline_summer_early",
@@ -476,7 +479,8 @@
           "doc_id": "de/saarland/cs-msc/programme",
           "quote": "Application deadline for the summer semester | Early deadline: May 15 (positive decision: notification at the lastest in July) Late deadline: Nov 15"
         }
-      ]
+      ],
+      "reviewed_by": "human"
     }
   ]
 }

@@ -110,9 +110,9 @@ def test_tum_english_alternatives():
 def test_tum_review_status():
     rules, _ = load_ruleset(load_settings(), TUM)
     status = {r.id: r.reviewed_by for r in rules.rules}
-    # every rule is human-reviewed, including the readiness rules aps and vpd (R16), except
-    # the deadline rules drafted 2026-11-12 and queued for the maintainer's review
-    assert {k for k, v in status.items() if v != "human"} == {"deadline_winter", "deadline_summer"}
+    # every rule is human-reviewed, including the readiness rules aps and vpd (R16) and the
+    # deadline rules (accepted 2026-11-13)
+    assert {k for k, v in status.items() if v != "human"} == set()
 
 
 # --- KIT Computer Science -------------------------------------------------------

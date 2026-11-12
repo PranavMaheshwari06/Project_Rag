@@ -177,7 +177,8 @@
           "doc_id": "de/tud/cs-msc/aptitude-assessment",
           "quote": "Applicants with a foreign university degree\n\n- Application period: EU applicants: 1st April – 15th July , 1st October – 15th January Non-EU applicants: 1st April – 31st May , 1st October – 30th November"
         }
-      ]
+      ],
+      "reviewed_by": "human"
     },
     {
       "id": "deadline_summer",
@@ -253,7 +254,8 @@
           "doc_id": "de/tud/cs-msc/aptitude-assessment",
           "quote": "Applicants with a foreign university degree\n\n- Application period: EU applicants: 1st April – 15th July , 1st October – 15th January Non-EU applicants: 1st April – 31st May , 1st October – 30th November"
         }
-      ]
+      ],
+      "reviewed_by": "human"
     }
   ]
 }

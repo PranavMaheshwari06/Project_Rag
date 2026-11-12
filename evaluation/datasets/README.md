@@ -48,8 +48,8 @@ file with only the first five fields still loads.
   by a model from the cached pages, each with an `evidence` quote per doc that
   `scripts/validate_gold.py` checks. A second-model review dropped six first
   drafts that another doc answered just as well or that one doc answered alone,
-  and fixed three. They stay `reviewed_by: model` until the maintainer accepts
-  them; results that include them are provisional until then.
+  and fixed three. The maintainer accepted all 18 on 2026-11-13
+  (`reviewed_by: human`).
 - `expect_refusal: true` marks the 14 refusal and coverage items. They have
   `relevant_doc_ids: []`, so the retrieval metrics (Recall@k, MRR, nDCG) skip
   them; they are used to calibrate the refusal threshold.
