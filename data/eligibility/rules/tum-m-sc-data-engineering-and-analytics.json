@@ -1,7 +1,7 @@
 {
   "schema_version": "rules-v1",
   "slug": "tum-m-sc-data-engineering-and-analytics",
-  "record_sha256": "f180521a23fe26d9181c96a015adfb8efe1ff46c6010a19522051795c4e19230",
+  "record_sha256": "fc6f4eb6ecb39f7206350e7c88ecaf6d816f1a41dcf1d5a69edc87c1e21d97d1",
   "rules": [
     {
       "id": "degree",

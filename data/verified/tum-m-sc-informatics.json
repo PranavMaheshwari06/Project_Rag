@@ -1,5 +1,5 @@
 {
-  "verified_at": "2026-10-27T20:31:31+00:00",
+  "verified_at": "2026-11-11T23:43:29+00:00",
   "tier": "second_pass",
   "draft_model": "gemini-3.8-flash",
   "record": {
@@ -46,11 +46,53 @@
       "supporting_citations": []
     },
     "english": {
-      "status": "not_published",
-      "value": null,
-      "quote": null,
-      "doc_id": null,
-      "supporting_citations": []
+      "status": "stated",
+      "value": [
+        {
+          "test": "TOEFL iBT",
+          "min_score": "88"
+        },
+        {
+          "test": "IELTS Academic",
+          "min_score": "6.5 overall band score"
+        },
+        {
+          "test": "Cambridge CAE / CPE",
+          "min_score": "grade A, B or C"
+        },
+        {
+          "test": "PTE Academic",
+          "min_score": "65 overall score"
+        },
+        {
+          "test": "English as the language of instruction in earlier education",
+          "min_score": "at least 50% of the program"
+        }
+      ],
+      "quote": "Internet based Test (iBT): 88 . Only the Test Date Score is valid, MyBest Score will not be accepted.",
+      "doc_id": "de/tum/language-certificates",
+      "supporting_citations": [
+        {
+          "quote": "IELTS Academic with a minimum overall band score of 6.5",
+          "doc_id": "de/tum/language-certificates"
+        },
+        {
+          "quote": "CAE (Cambridge Advanced English), Grades A, B, C",
+          "doc_id": "de/tum/language-certificates"
+        },
+        {
+          "quote": "CPE (Cambridge Proficiency English), Grades A, B, C",
+          "doc_id": "de/tum/language-certificates"
+        },
+        {
+          "quote": "PTE Academic with an Overall Score of at least 65 points",
+          "doc_id": "de/tum/language-certificates"
+        },
+        {
+          "quote": "The language of instruction needs to have been English in at least 50% of the program",
+          "doc_id": "de/tum/language-certificates"
+        }
+      ]
     },
     "entrance_tests": {
       "status": "stated",

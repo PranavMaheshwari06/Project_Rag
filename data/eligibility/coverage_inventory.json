@@ -2,7 +2,7 @@
   "schema_version": "rule-inventory-v1",
   "created_on": "2026-10-27",
   "baseline_commit": "b85ae75",
-  "baseline_refreshed_on": "2026-11-06",
+  "baseline_refreshed_on": "2026-11-12",
   "status": "draft_for_review",
   "author": "model_assisted",
   "reviewed_by": "pending",
@@ -47,15 +47,15 @@
     "data/verified/tu-darmstadt-m-sc-artificial-intelligence-and-machine-learning.json": "08877d3908a679c2c71404dfe6e9c710086bd109df9e4fa11fd51fe361bc3bfc",
     "data/verified/tu-darmstadt-m-sc-computer-science.json": "b179705a590cb1d9f18cc3f8b6e2fd841cbc7c7ee14eb396116751c573dce989",
     "data/verified/tu-dresden-m-sc-computer-science.json": "a41f69955a14a95d033398403720eaed77e1065763c84ba0f79caf4933a0cfa7",
-    "data/verified/tum-m-sc-data-engineering-and-analytics.json": "f4703f178a3a32d41b819bacc14f74bd373a0781bb2557986c09188b85467580",
-    "data/verified/tum-m-sc-informatics.json": "2baba2204a0d14bd924f849133d4a2036261119859443c9b3b6edf5924d42b9c",
+    "data/verified/tum-m-sc-data-engineering-and-analytics.json": "c69214c688226cc862b5b7f84653b2f403154f00fa09469d1f25d8fbd983dc88",
+    "data/verified/tum-m-sc-informatics.json": "f12889d8b0d808599e219261cc85e0f45f2616d37ccf22440855e1803999f5fb",
     "data/verified/university-of-stuttgart-m-sc-computer-science.json": "e9c0e7d2c49f1e64eebb43affa7d5338d1beaa8751af1fd4fbd5b16fb45f82bb",
     "evaluation/datasets/README.md": "b7461dac65663c1bbeb7b24cb67f5ca3c1db4aa23157d2624e562f8334ba7771",
     "evaluation/datasets/gold_qa.jsonl": "64e9d0cf2d7ebf057dd293d128c9085cb87eb4c468abad30f3bd6a75ab4dc7a6",
     "evaluation/datasets/gold_review.md": "83652ed37d7fb51252dcf3767f29822439e356381d92c4dc86e738c6cc877b76",
-    "evaluation/results/refusal_calibration.json": "2667589f415e1d8fb39cc56851ea68e316ff9ef91840f5237418abd1dddf47e3",
+    "evaluation/results/refusal_calibration.json": "9cce3fdb7e8d4b507a44c1897a43c1164b357e16d97ce27e95cc098ff2583775",
     "extraction/schemas.py": "8e7930917a10c83895e727b15f8d49448b5a54d1e8a2b83c9fab2d524ae1af65",
-    "frontend/public/benchmark.json": "9e5ceab39af7858ced66d4f3508bb3308a877d318fc2b5ee9a7dbf490f4759af",
+    "frontend/public/benchmark.json": "2294b6133b8f7e01fd0b972735b399f60781c951c2d17570c6c7d117cd6123bc",
     "sources/manifest.json": "c3e9250c5b6ca30e1cab7fa12d09da020e8d0e7ef70c1f4d091ec4c15b41521d",
     "sources/registry.yaml": "e64624469fe08a9acbd213595a1a8bc87c8a42786220330879cbfd93c3fe318b"
   },
@@ -360,7 +360,7 @@
       "url": "https://www.tum.de/en/studies/application/application-info-portal/admission-requirements/language-certificates",
       "final_url": "https://www.tum.de/en/studies/application/application-info-portal/admission-requirements/language-certificates",
       "snapshot_sha256": "854072bdb44999e8a30004e65098efeaf7fbcc26fb2bbd4f942126e87a60fdf8",
-      "text_sha256": "8a874d27ddfa0964d525497efbc993e1fe1b76cf92fcd97bc73d1448381dab1b",
+      "text_sha256": "d4044bd6804f51f162bfbc4e86b25922c410c8b63ce3b075ae54b3194808a214",
       "fetched_at": "2026-10-16T08:35:30+00:00",
       "cache_file": "de/tum/language-certificates.html"
     },
@@ -838,7 +838,7 @@
     "R14": {
       "title": "TUM: English omission, optional documents and assessment",
       "proposed_interpretation": "English evidence is required by the application deadline for both programmes even though english is not_published in the records. GRE 164 QR AND 4.0 AW OR qualifying annual CS GATE applies by degree country (Bangladesh, China, India, Iran, Pakistan); VPD and APS have separate degree-country predicates. Optional training certificates stay optional. The university aptitude assessment is distinct from GRE/GATE.",
-      "unresolved": "The cached language-certificates page contains German proof, not the complete English thresholds. Obtain the official English-proof evidence before automating that branch. Programme overview describes an interview while department text describes a second-stage test: keep unresolved review and period-specific dates, including the 2026-only test. No fabricated aptitude point formula.",
+      "unresolved": "The cached language-certificates page contains German proof, not the complete English thresholds. Obtain the official English-proof evidence before automating that branch. Programme overview describes an interview while department text describes a second-stage test: keep unresolved review and period-specific dates, including the 2026-only test. No fabricated aptitude point formula. Updated 2026-11-12: the English thresholds are now in both verified records (de/tum/language-certificates, read after the parser fix); the rest of this review is unchanged and still pending.",
       "evidence_ids": [
         "E34",
         "E35",
@@ -2789,7 +2789,7 @@
       "university": "TUM",
       "programme": "M.Sc. Data Engineering and Analytics",
       "verification_tier": "second_pass",
-      "record_sha256": "f180521a23fe26d9181c96a015adfb8efe1ff46c6010a19522051795c4e19230",
+      "record_sha256": "fc6f4eb6ecb39f7206350e7c88ecaf6d816f1a41dcf1d5a69edc87c1e21d97d1",
       "fields": {
         "degree_requirement": {
           "classification": "manual_review",
@@ -2831,12 +2831,14 @@
           "evidence_ids": []
         },
         "english": {
-          "classification": "not_published",
-          "note": "Record is not_published; cached programme explicitly requires English proof. Accepted thresholds are not covered by the cached language page; mandatory source gap.",
+          "classification": "automatic",
+          "note": "Corrected 2026-11-12 from de/tum/language-certificates (parser fix): TOEFL iBT 88, IELTS Academic 6.5, Cambridge CAE/CPE grade A-C, PTE 65, or English as instruction language in at least 50% of the earlier programme. Alternative proof and the new TOEFL 1-6 scale are decided by the university.",
           "review_ids": [
             "R14"
           ],
-          "source_doc_ids": [],
+          "source_doc_ids": [
+            "de/tum/language-certificates"
+          ],
           "evidence_ids": [
             "E35"
           ]
@@ -2962,7 +2964,7 @@
       "university": "TUM",
       "programme": "M.Sc. Informatics",
       "verification_tier": "second_pass",
-      "record_sha256": "b67527c84ef26cfa5b7023fbc2c48784e0bf14b9d1bd94fd1b5d3f55aff1b2a4",
+      "record_sha256": "4942157e105633bb37c706b14ba06d83fbed29b35a5ac74e029c6d8515bf9123",
       "fields": {
         "degree_requirement": {
           "classification": "manual_review",
@@ -3004,12 +3006,14 @@
           "evidence_ids": []
         },
         "english": {
-          "classification": "not_published",
-          "note": "Record is not_published; cached programme explicitly requires English proof. Accepted thresholds are not covered by the cached language page; mandatory source gap.",
+          "classification": "automatic",
+          "note": "Corrected 2026-11-12 from de/tum/language-certificates (parser fix): TOEFL iBT 88, IELTS Academic 6.5, Cambridge CAE/CPE grade A-C, PTE 65, or English as instruction language in at least 50% of the earlier programme. Alternative proof and the new TOEFL 1-6 scale are decided by the university.",
           "review_ids": [
             "R14"
           ],
-          "source_doc_ids": [],
+          "source_doc_ids": [
+            "de/tum/language-certificates"
+          ],
           "evidence_ids": [
             "E36"
           ]

@@ -1,7 +1,7 @@
 {
   "schema_version": "rules-v1",
   "slug": "tum-m-sc-informatics",
-  "record_sha256": "b67527c84ef26cfa5b7023fbc2c48784e0bf14b9d1bd94fd1b5d3f55aff1b2a4",
+  "record_sha256": "4942157e105633bb37c706b14ba06d83fbed29b35a5ac74e029c6d8515bf9123",
   "rules": [
     {
       "id": "degree",

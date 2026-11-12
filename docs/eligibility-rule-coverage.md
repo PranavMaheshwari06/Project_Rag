@@ -22,10 +22,10 @@ Original values/quotes remain in the linked verified records. Source links ident
 | TU Darmstadt M.Sc. Artificial Intelligence and Machine Learning | 2 | 6 | 3 | 6 |
 | TU Darmstadt M.Sc. Computer Science | 2 | 7 | 3 | 5 |
 | TU Dresden M.Sc. Computer Science | 1 | 7 | 2 | 7 |
-| TUM M.Sc. Data Engineering and Analytics | 1 | 7 | 2 | 7 |
-| TUM M.Sc. Informatics | 1 | 7 | 2 | 7 |
+| TUM M.Sc. Data Engineering and Analytics | 2 | 7 | 2 | 6 |
+| TUM M.Sc. Informatics | 2 | 7 | 2 | 6 |
 | University of Stuttgart M.Sc. Computer Science | 1 | 6 | 2 | 8 |
-| **Total (221 fields)** | 24 | 78 | 29 | 90 |
+| **Total (221 fields)** | 26 | 78 | 29 | 88 |
 
 ## KIT — M.Sc. Computational and Data Science
 
@@ -291,7 +291,7 @@ Canonical record SHA-256: `3c7460d2e1249d4929184c6d70ca649ebd091e58807fc7e653ca9
 
 [Verified values and original quotes](../data/verified/tum-m-sc-data-engineering-and-analytics.json); tier `second_pass`; semantic review `pending`.
 
-Canonical record SHA-256: `f180521a23fe26d9181c96a015adfb8efe1ff46c6010a19522051795c4e19230`.
+Canonical record SHA-256: `fc6f4eb6ecb39f7206350e7c88ecaf6d816f1a41dcf1d5a69edc87c1e21d97d1`.
 
 | Original field | Classification | Comparison / boundary | Evidence and review |
 |---|---|---|---|
@@ -300,7 +300,7 @@ Canonical record SHA-256: `f180521a23fe26d9181c96a015adfb8efe1ff46c6010a19522051
 | `subject_credits` | `not_published` | Not published in the verified field; this does not establish absence or exemption. | — |
 | `min_grade_german_scale` | `not_published` | Not published in the verified field; this does not establish absence or exemption. | — |
 | `min_grade_original_scale` | `not_published` | Not published in the verified field; this does not establish absence or exemption. | — |
-| `english` | `not_published` | Record is not_published; cached programme explicitly requires English proof. Accepted thresholds are not covered by the cached language page; mandatory source gap. | [E35](eligibility-rule-review.md#e35); [R14](eligibility-rule-review.md#r14) |
+| `english` | `automatic` | Corrected 2026-11-12 from de/tum/language-certificates (parser fix): TOEFL iBT 88, IELTS Academic 6.5, Cambridge CAE/CPE grade A-C, PTE 65, or English as instruction language in at least 50% of the earlier programme. Alternative proof and the new TOEFL 1-6 scale are decided by the university. | [de/tum/language-certificates](https://www.tum.de/en/studies/application/application-info-portal/admission-requirements/language-certificates); [E35](eligibility-rule-review.md#e35); [R14](eligibility-rule-review.md#r14) |
 | `entrance_tests` | `automatic` | Degree in Bangladesh/China/India/Iran/Pakistan: GRE QR>=164 AND AW>=4 OR annual qualifying CS GATE; use explicit scorecard qualification, not an invented cutoff. | [de/tum/dea-msc/department](https://www.cit.tum.de/en/cit/studies/degree-programs/master-data-engineering-and-analytics/); [R14](eligibility-rule-review.md#r14) |
 | `german` | `not_published` | Not published in the verified field; this does not establish absence or exemption. | — |
 | `work_experience` | `not_published` | Not published in the verified field; this does not establish absence or exemption. | — |
@@ -317,7 +317,7 @@ Canonical record SHA-256: `f180521a23fe26d9181c96a015adfb8efe1ff46c6010a19522051
 
 [Verified values and original quotes](../data/verified/tum-m-sc-informatics.json); tier `second_pass`; semantic review `pending`.
 
-Canonical record SHA-256: `b67527c84ef26cfa5b7023fbc2c48784e0bf14b9d1bd94fd1b5d3f55aff1b2a4`.
+Canonical record SHA-256: `4942157e105633bb37c706b14ba06d83fbed29b35a5ac74e029c6d8515bf9123`.
 
 | Original field | Classification | Comparison / boundary | Evidence and review |
 |---|---|---|---|
@@ -326,7 +326,7 @@ Canonical record SHA-256: `b67527c84ef26cfa5b7023fbc2c48784e0bf14b9d1bd94fd1b5d3
 | `subject_credits` | `not_published` | Not published in the verified field; this does not establish absence or exemption. | — |
 | `min_grade_german_scale` | `not_published` | Not published in the verified field; this does not establish absence or exemption. | — |
 | `min_grade_original_scale` | `not_published` | Not published in the verified field; this does not establish absence or exemption. | — |
-| `english` | `not_published` | Record is not_published; cached programme explicitly requires English proof. Accepted thresholds are not covered by the cached language page; mandatory source gap. | [E36](eligibility-rule-review.md#e36); [R14](eligibility-rule-review.md#r14) |
+| `english` | `automatic` | Corrected 2026-11-12 from de/tum/language-certificates (parser fix): TOEFL iBT 88, IELTS Academic 6.5, Cambridge CAE/CPE grade A-C, PTE 65, or English as instruction language in at least 50% of the earlier programme. Alternative proof and the new TOEFL 1-6 scale are decided by the university. | [de/tum/language-certificates](https://www.tum.de/en/studies/application/application-info-portal/admission-requirements/language-certificates); [E36](eligibility-rule-review.md#e36); [R14](eligibility-rule-review.md#r14) |
 | `entrance_tests` | `automatic` | Degree in Bangladesh/China/India/Iran/Pakistan: GRE QR>=164 AND AW>=4 OR annual qualifying CS GATE; use explicit scorecard qualification, not an invented cutoff. | [de/tum/informatics-msc/department](https://www.cit.tum.de/en/cit/studies/degree-programs/master-informatics/); [R14](eligibility-rule-review.md#r14) |
 | `german` | `not_published` | Not published in the verified field; this does not establish absence or exemption. | — |
 | `work_experience` | `not_published` | Not published in the verified field; this does not establish absence or exemption. | — |

@@ -1,0 +1,381 @@
+{
+  "dataset_schema_version": "eligibility-cases-v1",
+  "note": "Agreement with labels written from the cited sources; not an official admission verification.",
+  "coverage_note": "automatic_check_coverage counts every applicable hard and soft criterion of every case's report (admission, readiness and finance; related variants included); decided = meets or does_not_meet",
+  "metrics": {
+    "cases": 40,
+    "headline_agreement": {
+      "agree": 40,
+      "total": 40,
+      "rate": 1.0
+    },
+    "criterion_agreement": {
+      "agree": 213,
+      "total": 213,
+      "rate": 1.0
+    },
+    "false_positive_headlines": 0,
+    "independent_cases": 17,
+    "automatic_check_coverage": {
+      "decided": 180,
+      "applicable": 303,
+      "rate": 0.594059405940594
+    },
+    "unknown_reasons": {
+      "university_review": 74,
+      "missing_fact": 48,
+      "funds_route_not_comparable": 1
+    },
+    "not_published": 0,
+    "per_programme": {
+      "kit-m-sc-computational-and-data-science": {
+        "cases": 5,
+        "headline_agreement": {
+          "agree": 5,
+          "total": 5,
+          "rate": 1.0
+        },
+        "criterion_agreement": {
+          "agree": 24,
+          "total": 24,
+          "rate": 1.0
+        },
+        "false_positive_headlines": 0
+      },
+      "kit-m-sc-computer-science": {
+        "cases": 4,
+        "headline_agreement": {
+          "agree": 4,
+          "total": 4,
+          "rate": 1.0
+        },
+        "criterion_agreement": {
+          "agree": 24,
+          "total": 24,
+          "rate": 1.0
+        },
+        "false_positive_headlines": 0
+      },
+      "rwth-aachen-m-sc-computer-science": {
+        "cases": 3,
+        "headline_agreement": {
+          "agree": 3,
+          "total": 3,
+          "rate": 1.0
+        },
+        "criterion_agreement": {
+          "agree": 11,
+          "total": 11,
+          "rate": 1.0
+        },
+        "false_positive_headlines": 0
+      },
+      "rwth-aachen-m-sc-data-science": {
+        "cases": 3,
+        "headline_agreement": {
+          "agree": 3,
+          "total": 3,
+          "rate": 1.0
+        },
+        "criterion_agreement": {
+          "agree": 11,
+          "total": 11,
+          "rate": 1.0
+        },
+        "false_positive_headlines": 0
+      },
+      "saarland-university-m-sc-computer-science": {
+        "cases": 3,
+        "headline_agreement": {
+          "agree": 3,
+          "total": 3,
+          "rate": 1.0
+        },
+        "criterion_agreement": {
+          "agree": 14,
+          "total": 14,
+          "rate": 1.0
+        },
+        "false_positive_headlines": 0
+      },
+      "saarland-university-m-sc-data-science-and-artificial-intelligence": {
+        "cases": 2,
+        "headline_agreement": {
+          "agree": 2,
+          "total": 2,
+          "rate": 1.0
+        },
+        "criterion_agreement": {
+          "agree": 12,
+          "total": 12,
+          "rate": 1.0
+        },
+        "false_positive_headlines": 0
+      },
+      "tu-berlin-m-sc-computer-science": {
+        "cases": 5,
+        "headline_agreement": {
+          "agree": 5,
+          "total": 5,
+          "rate": 1.0
+        },
+        "criterion_agreement": {
+          "agree": 58,
+          "total": 58,
+          "rate": 1.0
+        },
+        "false_positive_headlines": 0
+      },
+      "tu-darmstadt-m-sc-artificial-intelligence-and-machine-learning": {
+        "cases": 2,
+        "headline_agreement": {
+          "agree": 2,
+          "total": 2,
+          "rate": 1.0
+        },
+        "criterion_agreement": {
+          "agree": 8,
+          "total": 8,
+          "rate": 1.0
+        },
+        "false_positive_headlines": 0
+      },
+      "tu-darmstadt-m-sc-computer-science": {
+        "cases": 4,
+        "headline_agreement": {
+          "agree": 4,
+          "total": 4,
+          "rate": 1.0
+        },
+        "criterion_agreement": {
+          "agree": 18,
+          "total": 18,
+          "rate": 1.0
+        },
+        "false_positive_headlines": 0
+      },
+      "tu-dresden-m-sc-computer-science": {
+        "cases": 2,
+        "headline_agreement": {
+          "agree": 2,
+          "total": 2,
+          "rate": 1.0
+        },
+        "criterion_agreement": {
+          "agree": 6,
+          "total": 6,
+          "rate": 1.0
+        },
+        "false_positive_headlines": 0
+      },
+      "tum-m-sc-data-engineering-and-analytics": {
+        "cases": 2,
+        "headline_agreement": {
+          "agree": 2,
+          "total": 2,
+          "rate": 1.0
+        },
+        "criterion_agreement": {
+          "agree": 9,
+          "total": 9,
+          "rate": 1.0
+        },
+        "false_positive_headlines": 0
+      },
+      "tum-m-sc-informatics": {
+        "cases": 3,
+        "headline_agreement": {
+          "agree": 3,
+          "total": 3,
+          "rate": 1.0
+        },
+        "criterion_agreement": {
+          "agree": 12,
+          "total": 12,
+          "rate": 1.0
+        },
+        "false_positive_headlines": 0
+      },
+      "university-of-stuttgart-m-sc-computer-science": {
+        "cases": 2,
+        "headline_agreement": {
+          "agree": 2,
+          "total": 2,
+          "rate": 1.0
+        },
+        "criterion_agreement": {
+          "agree": 6,
+          "total": 6,
+          "rate": 1.0
+        },
+        "false_positive_headlines": 0
+      }
+    },
+    "programmes_without_cases": [],
+    "by_author": {
+      "human": {
+        "cases": 5,
+        "headline_agreement": {
+          "agree": 5,
+          "total": 5,
+          "rate": 1.0
+        },
+        "criterion_agreement": {
+          "agree": 54,
+          "total": 54,
+          "rate": 1.0
+        },
+        "false_positive_headlines": 0
+      },
+      "assisted": {
+        "cases": 35,
+        "headline_agreement": {
+          "agree": 35,
+          "total": 35,
+          "rate": 1.0
+        },
+        "criterion_agreement": {
+          "agree": 159,
+          "total": 159,
+          "rate": 1.0
+        },
+        "false_positive_headlines": 0
+      }
+    },
+    "by_reviewer": {
+      "human": {
+        "cases": 5,
+        "headline_agreement": {
+          "agree": 5,
+          "total": 5,
+          "rate": 1.0
+        },
+        "criterion_agreement": {
+          "agree": 54,
+          "total": 54,
+          "rate": 1.0
+        },
+        "false_positive_headlines": 0
+      },
+      "model": {
+        "cases": 0,
+        "headline_agreement": {
+          "agree": 0,
+          "total": 0,
+          "rate": null
+        },
+        "criterion_agreement": {
+          "agree": 0,
+          "total": 0,
+          "rate": null
+        },
+        "false_positive_headlines": 0
+      },
+      "None": {
+        "cases": 35,
+        "headline_agreement": {
+          "agree": 35,
+          "total": 35,
+          "rate": 1.0
+        },
+        "criterion_agreement": {
+          "agree": 159,
+          "total": 159,
+          "rate": 1.0
+        },
+        "false_positive_headlines": 0
+      }
+    },
+    "latency_ms": {
+      "p50": 0.5458509999982653,
+      "p95": 0.9614329999863003,
+      "max": 1.170314000006556
+    }
+  },
+  "disagreements": [],
+  "hashes": {
+    "dataset_sha256": "47fc13235fa8e96061126b0470b2d483b9101e7265787fdc3b211db208837c1a",
+    "finance_sha256": "b2234c55472df2766a7de89a617497b5298af894c2c5c2dfa5130a97263a08bc",
+    "country_groups_sha256": "013a0a427e0425bdddc6f1a37dc65714c7835b0b716b9cd34ef42fdc34a2c38b",
+    "programmes": {
+      "tu-berlin-m-sc-computer-science": {
+        "ruleset_sha256": "f453c8fa447b4c2d24bd79773bf966509d110c89df1b9f73e0bf2e0aadc7efb3",
+        "record_sha256": "abf4441514dbbeb90cccbf878d66db024bcea1672e7d50cbb17ed826f452feb5",
+        "rules_stale": false,
+        "tier": "human"
+      },
+      "kit-m-sc-computer-science": {
+        "ruleset_sha256": "0ddcb4b13300aa603fb8285627fddd0bcd5a30fef64e22621c995be9af963820",
+        "record_sha256": "ea85986cefb22fe0ac7c50ecaea561f4fa171997f7e02f3f0fcd8b741917fbb2",
+        "rules_stale": false,
+        "tier": "human"
+      },
+      "kit-m-sc-computational-and-data-science": {
+        "ruleset_sha256": "df7dddf5ddda3ccaae1c05c665842b649c05b9f25687b951cf255b17fb72cc13",
+        "record_sha256": "3d726ca23a10879cfea8b8e0803ecaf52103a97d1e7239acd1f97dc4218faab2",
+        "rules_stale": false,
+        "tier": "second_pass"
+      },
+      "tum-m-sc-informatics": {
+        "ruleset_sha256": "17ba6f290f0bf068705bd49ead2882d786e16b3ddf8db066a4cdc10c98bbc850",
+        "record_sha256": "4942157e105633bb37c706b14ba06d83fbed29b35a5ac74e029c6d8515bf9123",
+        "rules_stale": false,
+        "tier": "second_pass"
+      },
+      "tum-m-sc-data-engineering-and-analytics": {
+        "ruleset_sha256": "67163bcf1da4b3a8099a3f8e7c0b04bb60189da7f20fb765508aad7a5dbef219",
+        "record_sha256": "fc6f4eb6ecb39f7206350e7c88ecaf6d816f1a41dcf1d5a69edc87c1e21d97d1",
+        "rules_stale": false,
+        "tier": "second_pass"
+      },
+      "rwth-aachen-m-sc-computer-science": {
+        "ruleset_sha256": "ca34f2bd355bbd3ed7c7a3451076d13a9a94403b0069eab8af83a658a0beb8be",
+        "record_sha256": "c4cf2e21fa8f8f52204fb3e33844ac6b06f92041822bff236fb0016b81d8f627",
+        "rules_stale": false,
+        "tier": "human"
+      },
+      "rwth-aachen-m-sc-data-science": {
+        "ruleset_sha256": "d3d79109f6d886403350cefeddd42a318e0ea57f4d8222e3a91d083fe0933750",
+        "record_sha256": "09f2c8e081e0830a38692bb8f3020e6c063c6b5a4ab257103bae03232ad1830f",
+        "rules_stale": false,
+        "tier": "human"
+      },
+      "saarland-university-m-sc-computer-science": {
+        "ruleset_sha256": "1fca39571d6ea6fea5e3196364925ce6a03fcccb008b6e8844fb26e046d0e186",
+        "record_sha256": "7dddd9fb5d34a431b215b29b75e62621ce5f75b2fa1e678f0c86407e9bea5d56",
+        "rules_stale": false,
+        "tier": "second_pass"
+      },
+      "saarland-university-m-sc-data-science-and-artificial-intelligence": {
+        "ruleset_sha256": "b4c3e3e6077e7708211f9daad4d68961a6ab564f49f241ba39158fb87a391093",
+        "record_sha256": "d2322b7af0d71ef930eafb2d0b20276153730814691446dbefd25f87d0ff0c8f",
+        "rules_stale": false,
+        "tier": "human"
+      },
+      "tu-dresden-m-sc-computer-science": {
+        "ruleset_sha256": "729b4ddec9ef3ea6cc40489555200e9564e5779fb93852feb94534e4bd34bce4",
+        "record_sha256": "3c7460d2e1249d4929184c6d70ca649ebd091e58807fc7e653ca918376a11487",
+        "rules_stale": false,
+        "tier": "second_pass"
+      },
+      "tu-darmstadt-m-sc-computer-science": {
+        "ruleset_sha256": "a23ed337d2af0de886f35782d07e401723fe9068b48c58ddb6596f127798215a",
+        "record_sha256": "b87f9260300eb3c064033b3fdd76663bcaf6c373bc1a928bb9b53bb9e8759c17",
+        "rules_stale": false,
+        "tier": "human"
+      },
+      "tu-darmstadt-m-sc-artificial-intelligence-and-machine-learning": {
+        "ruleset_sha256": "ff1dd7a4515f8f6c0887fb723f33dacc698db1a3b5410640f7ad94545a18dfef",
+        "record_sha256": "22bfc9865e47f439e949a6dbd78e9fd3eda2a31eac6d0a382f8bdb75bbaead42",
+        "rules_stale": false,
+        "tier": "second_pass"
+      },
+      "university-of-stuttgart-m-sc-computer-science": {
+        "ruleset_sha256": "32a4c091f9a97da47b21335d5ae3b3ee8093b6a2a8dd08ff34222cb71db96bc1",
+        "record_sha256": "430b7664c0bc143e8a08fde7f0a1b9ae16e192bdbe8d1aa608a5201f5ef2695c",
+        "rules_stale": false,
+        "tier": "second_pass"
+      }
+    }
+  }
+}
