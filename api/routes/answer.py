@@ -16,7 +16,7 @@ def answer(body: AnswerRequest, request: Request) -> AnswerResponse:
     pipeline = get_retrieval_pipeline()
     timer = StageTimer()
 
-    retrieved = pipeline.search(body.query, mode="hybrid_rerank", timer=timer)
+    retrieved = pipeline.search(body.query, mode="hybrid_rerank", timer=timer, filters=body.filters)
     with timer.track("generation"):
         draft = generate_answer(body.query, retrieved, settings, get_llm_client())
         text, citations = map_citations(draft.text, draft.evidence)

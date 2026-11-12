@@ -11,7 +11,8 @@ router = APIRouter()
 def search(body: SearchRequest, request: Request) -> SearchResponse:
     pipeline = get_retrieval_pipeline()
     timer = StageTimer()
-    results = pipeline.search(body.query, mode=body.mode, top_k=body.top_k, timer=timer)
+    results = pipeline.search(body.query, mode=body.mode, top_k=body.top_k, timer=timer,
+                              filters=body.filters)
     return SearchResponse(
         request_id=request.state.request_id,
         query=body.query,

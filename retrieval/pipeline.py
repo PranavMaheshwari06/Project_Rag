@@ -9,6 +9,7 @@ from core.metrics import StageTimer
 from ingestion.pipeline import load_chunks
 from retrieval.bm25_index import BM25Index
 from retrieval.embeddings import Embedder
+from retrieval.filters import matches
 from retrieval.hybrid import rrf_fuse
 from retrieval.reranker import Reranker
 from retrieval.vector_store import get_vector_store
@@ -51,22 +52,26 @@ class RetrievalPipeline:
         self.chunks = chunks
 
     def search(self, query: str, mode: str = "hybrid_rerank", top_k: int | None = None,
-               timer: StageTimer | None = None) -> list[RetrievedChunk]:
+               timer: StageTimer | None = None,
+               filters: dict[str, list[str]] | None = None) -> list[RetrievedChunk]:
         if mode not in MODES:
             raise ValueError(f"unknown retrieval mode: {mode}")
         timer = timer if timer is not None else StageTimer()
         cfg = self.settings.retrieval
         final_k = top_k or cfg.final_top_k
 
+        # ponytail: a filtered search ranks the whole corpus, then keeps the allowed
+        # chunks; fine at ~600 chunks, move to store-native filters past ~10k
+        scan_k = len(self.chunks) if filters else None
         dense_hits: list[tuple[str, float]] = []
         bm25_hits: list[tuple[str, float]] = []
         if mode != "bm25":
             with timer.track("dense_search"):
                 qvec = self.embedder.encode_query(query)
-                dense_hits = self.dense.search(qvec, cfg.dense_top_k)
+                dense_hits = self._keep(self.dense.search(qvec, scan_k or cfg.dense_top_k), filters)[:cfg.dense_top_k]
         if mode != "vector":
             with timer.track("bm25_search"):
-                bm25_hits = self.bm25.search(query, cfg.bm25_top_k)
+                bm25_hits = self._keep(self.bm25.search(query, scan_k or cfg.bm25_top_k), filters)[:cfg.bm25_top_k]
 
         dense_scores = dict(dense_hits)
         bm25_scores = dict(bm25_hits)
@@ -105,6 +110,11 @@ class RetrievalPipeline:
             rc.rerank_score = score
         pool.sort(key=lambda rc: -(rc.rerank_score or 0.0))
         return pool[:final_k]
+
+    def _keep(self, hits: list[tuple[str, float]], filters: dict[str, list[str]] | None) -> list[tuple[str, float]]:
+        if not filters:
+            return hits
+        return [h for h in hits if (c := self.chunks.get(h[0])) is not None and matches(c, filters)]
 
 
 def build_pipeline(settings: Settings) -> RetrievalPipeline:
