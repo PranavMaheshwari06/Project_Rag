@@ -324,3 +324,13 @@ Updated 2026-11-06: X1 is built for TU Berlin and KIT CDS as `university_assessm
 - **Only a lone blocked account is compared with the visa amount.** No page publishes how proofs combine, so any other route or combination stays "ask the embassy".
 - **Evaluation labels are frozen before the first run.** The commit date shows they were not derived from engine output.
 - **Paste-to-fill only drafts.** Every field needs a literal span of the text, and the check endpoint accepts confirmed profiles only.
+
+## 2026-11-13 — Phase 7: the agent and how it is compared
+
+DRAFT for the maintainer to rewrite in their own words (written 2026-11-13 from the Phase 7 notes).
+
+- **The agent speaks JSON, not native function calling.** Each step returns one JSON object: a tool call or the answer. The thin LLM client stays the only module that touches the SDK and works on any OpenAI-compatible endpoint, and a scripted fake replaces it in tests.
+- **The step budget counts LLM calls and is hard.** Six calls per question, the answer included; a tool call on the last call is not run. A slow or confused model cannot spend the daily quota on one question.
+- **Every tool result joins one numbered evidence list.** Record fields and rule citations carry their real page id, so the answer's markers are checked by the same citation mapping as one-shot RAG, and an answer with no valid marker is replaced by the refusal.
+- **The agent can ask the engine, never decide.** The profile comes from the caller as a typed object, the model sees verdicts and requirements but not the student's values, and it is told to report the engine's headline as is.
+- **Agent vs one-shot is scored without a judge.** Cited-document recall and answer-hint number recall on the human-reviewed multi-hop items, paired bootstrap on the difference. It costs no extra quota and every number traces to a reviewed label; it misses facts stated only in words.

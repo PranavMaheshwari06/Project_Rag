@@ -26,18 +26,29 @@ class FakePipeline:
                 for i, d in enumerate(DOCS)]
 
 
+class Quota(Exception):
+    """Stands in for the SDK's RateLimitError: is_provider_error reads the module."""
+
+
+Quota.__module__ = "openai._exceptions"
+
+
 class ScriptedLLM:
     """One-shot calls (plain mode) get `plain`; agent calls (JSON mode) get `agent` in order.
-    `fail_after` raises once that many calls were made, like a used-up daily quota."""
+    `fail_after` raises Quota once that many calls were made, like a used-up daily quota;
+    `switch_after` moves to a fallback model after that many calls, like a 429 in LLMClient."""
 
-    available, model = True, "fake-model"
+    available = True
 
-    def __init__(self, plain, agent, fail_after=None):
+    def __init__(self, plain, agent, fail_after=None, switch_after=None):
         self.plain, self.agent, self.fail_after, self.calls = plain, list(agent), fail_after, 0
+        self.switch_after, self.model = switch_after, "fake-model"
 
     def complete(self, messages, json_mode=False):
         if self.fail_after is not None and self.calls >= self.fail_after:
-            raise RuntimeError("quota")
+            raise Quota("quota")
+        if self.switch_after is not None and self.calls >= self.switch_after:
+            self.model = "fallback-model"
         self.calls += 1
         return json.dumps(self.agent.pop(0)) if json_mode else self.plain
 
@@ -52,8 +63,9 @@ def settings():
     return load_settings()
 
 
-def test_numbers_normalise_separators():
+def test_numbers_normalise_separators_and_skip_markers():
     assert numbers("11,904 and 11.904 EUR, grade 2,5 or 2.5, 1,500") == {"11904", "2.5", "1500"}
+    assert numbers("361,00 EUR, 7.0 or 97.00 [1] [8]") == {"361", "7", "97"}
 
 
 def test_score_counts_docs_and_hint_numbers():
@@ -62,24 +74,58 @@ def test_score_counts_docs_and_hint_numbers():
     assert score(item(), "", [], refused=True) == {"doc_recall": 0.0, "fact_recall": 0.0}
     no_numbers = GoldItem(qid="x", question="q", relevant_doc_ids=DOCS, answer_hint="Apply online.")
     assert score(no_numbers, "x", DOCS, refused=False)["fact_recall"] is None
+    first_march = GoldItem(qid="m", question="q", relevant_doc_ids=DOCS, answer_hint="deadline 1st March")
+    assert score(first_march, "Applications close 15 January [1].", DOCS, refused=False)["fact_recall"] == 0.0
+
+
+def test_uncited_oneshot_answer_scores_as_a_refusal(settings, tmp_path):
+    out = tmp_path / "rows.jsonl"
+    run_comparison([item()], settings, FakePipeline(), ScriptedLLM("Tuition is 6,000 euros.", agent_script()), out)
+    oneshot = load_rows(out)[0]
+    assert oneshot["arm"] == "oneshot" and oneshot["refused"]
+    assert oneshot["scores"] == {"doc_recall": 0.0, "fact_recall": 0.0}
 
 
 def test_rows_are_appended_and_a_rerun_resumes(settings, tmp_path):
     out = tmp_path / "rows.jsonl"
     items = [item("a"), item("b")]
-    # quota ends after the first item's two arms (1 one-shot call + 2 agent calls)
-    llm = ScriptedLLM("Tuition 6,000 euros [1].", agent_script() * 2, fail_after=3)
-    written, stopped = run_comparison(items, settings, FakePipeline(), llm, out)
-    assert written == 2 and stopped == "b/oneshot: RuntimeError"
+    # quota ends inside item b's agent arm: a has 3 calls, b's one-shot 1, b's agent fails on its 1st
+    llm = ScriptedLLM("Tuition 6,000 euros [1].", agent_script() * 2, fail_after=4)
+    written, stopped, mixed = run_comparison(items, settings, FakePipeline(), llm, out)
+    assert written == 2 and stopped == "b/agent: Quota" and mixed == 0
     rows = load_rows(out)
     assert [(r["qid"], r["arm"], r["llm_calls"]) for r in rows] == [("a", "oneshot", 1), ("a", "agent", 2)]
     assert rows[1]["cited_doc_ids"] == DOCS and rows[1]["scores"] == {"doc_recall": 1.0, "fact_recall": 1.0}
     assert rows[1]["steps"] == [{"tool": "search_sources", "args": {"query": "tuition"}, "ok": True}]
-    # next day: only item b runs
+    assert {r["model"] for r in rows} == {"fake-model"}
+    # next day: item b runs both arms again (its lone one-shot was never written)
     llm2 = ScriptedLLM("Tuition 6,000 euros [1].", agent_script())
-    written, stopped = run_comparison(items, settings, FakePipeline(), llm2, out)
+    written, stopped, _ = run_comparison(items, settings, FakePipeline(), llm2, out)
     assert written == 2 and stopped is None and llm2.calls == 3
     assert [(r["qid"], r["arm"]) for r in load_rows(out)][2:] == [("b", "oneshot"), ("b", "agent")]
+
+
+def test_a_model_switch_inside_a_pair_drops_the_pair(settings, tmp_path):
+    out = tmp_path / "rows.jsonl"
+    llm = ScriptedLLM("Tuition 6,000 euros [1].", agent_script() * 2, switch_after=1)
+    written, stopped, mixed = run_comparison([item("a"), item("b")], settings, FakePipeline(), llm, out)
+    assert (written, stopped, mixed) == (2, None, 1)
+    assert [(r["qid"], r["model"]) for r in load_rows(out)] == [("b", "fallback-model")] * 2
+
+
+def test_a_harness_bug_raises_instead_of_stopping_quietly(settings, tmp_path):
+    class Broken(ScriptedLLM):
+        def complete(self, messages, json_mode=False):
+            raise KeyError("bug")
+
+    with pytest.raises(KeyError):
+        run_comparison([item()], settings, FakePipeline(), Broken("", []), tmp_path / "rows.jsonl")
+
+
+def test_a_torn_last_line_is_skipped(tmp_path):
+    out = tmp_path / "rows.jsonl"
+    out.write_text(json.dumps({"qid": "a", "arm": "oneshot"}) + "\n" + '{"qid": "a", "ar')
+    assert load_rows(out) == [{"qid": "a", "arm": "oneshot"}]
 
 
 def test_summary_pairs_items_and_reports_the_difference(settings, tmp_path):
@@ -104,3 +150,5 @@ def test_script_summary_only_needs_no_key(tmp_path, monkeypatch, capsys):
     assert script.main(["--summary-only"]) == 0
     assert json.loads((tmp_path / "summary.json").read_text())["items_total"] == 28
     assert script.main([]) == 1  # tests blank the key: nothing runs
+    with pytest.raises(SystemExit):
+        script.main(["--limit", "-1"])

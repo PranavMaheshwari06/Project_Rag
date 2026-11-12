@@ -22,9 +22,16 @@ from evaluation.retrieval_eval import load_gold  # noqa: E402
 from generation.llm_client import LLMClient  # noqa: E402
 
 
+def positive(text: str) -> int:
+    n = int(text)
+    if n < 1:
+        raise argparse.ArgumentTypeError("must be at least 1")
+    return n
+
+
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--limit", type=int, default=None, help="items to run this time")
+    ap.add_argument("--limit", type=positive, default=None, help="items to run this time")
     ap.add_argument("--delay", type=float, default=6.0, help="seconds between LLM calls (per-minute limit)")
     ap.add_argument("--summary-only", action="store_true")
     args = ap.parse_args(argv)
@@ -41,9 +48,10 @@ def main(argv: list[str] | None = None) -> int:
             return 1
         from retrieval.pipeline import build_pipeline  # loads the models: only when running
 
-        written, stopped = run_comparison(items, settings, build_pipeline(settings), llm, out,
+        written, stopped, mixed = run_comparison(items, settings, build_pipeline(settings), llm, out,
                                           limit=args.limit, delay_s=args.delay)
-        print(f"{written} new rows in {out.name}")
+        print(f"{written} new rows in {out.name}"
+              + (f"; {mixed} pairs dropped (model changed inside the pair), they re-run next time" if mixed else ""))
         if stopped:
             print(f"stopped at {stopped}; run again later to resume")
             status = 2

@@ -42,3 +42,9 @@ class LLMClient:
                 if not self._fallbacks:
                     raise
                 self.model = self._fallbacks.pop(0)
+
+
+def is_provider_error(exc: BaseException) -> bool:
+    """True for errors raised by the SDK (quota, overload, timeout), so callers can
+    stop on those without importing the SDK and still let their own bugs raise."""
+    return type(exc).__module__.split(".")[0] == "openai"

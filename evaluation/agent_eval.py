@@ -1,17 +1,20 @@
 """Agent vs one-shot RAG on the multi_hop gold items. Each (item, arm) result is
-appended to a JSONL file as soon as it exists, so a run stopped by the daily
-quota resumes where it stopped. Both arms run back to back per item, so a
-partial run stays paired.
+appended to a JSONL file as soon as both arms of the item are done, so a run
+stopped by the daily quota resumes where it stopped. The two rows of an item are
+written together, and only when one model answered every call of both arms
+(LLMClient switches model on a 429); a mixed pair is dropped and retried later.
 
 Scores are deterministic, no LLM judge:
 - doc_recall: share of the item's relevant_doc_ids among the documents the
   answer cites (a multi-hop answer needs every hop's page).
 - fact_recall: share of the numbers in the reviewed answer_hint that appear in
   the answer (amounts, dates, durations); None when the hint has no number.
-A refusal scores 0 on both. The headline is the paired difference agent minus
+A refusal, or an answer with no valid citation, scores 0 on both, in both arms.
+Citation markers are removed before numbers are read. The headline is the paired difference agent minus
 one-shot with a bootstrap interval: above zero is a win, containing zero is noise."""
 
 import json
+import logging
 import re
 import time
 from datetime import datetime, timezone
@@ -23,7 +26,10 @@ from core.config import Settings
 from evaluation.bootstrap import bootstrap_ci
 from evaluation.retrieval_eval import GoldItem
 from generation.answer_generator import generate_answer
-from generation.citation_mapper import map_citations
+from generation.citation_mapper import CITE_RE, map_citations
+from generation.llm_client import is_provider_error
+
+log = logging.getLogger(__name__)
 
 ARMS = ("oneshot", "agent")
 METRICS = ("doc_recall", "fact_recall")
@@ -31,12 +37,13 @@ NUMBER_RE = re.compile(r"\d+(?:[.,]\d+)*")
 
 
 def numbers(text: str) -> set[str]:
-    """Numbers with thousands separators dropped and a decimal comma read as a point:
-    "11,904" and "11.904" -> "11904", "2,5" -> "2.5"."""
+    """Numbers with thousands separators dropped, a decimal comma read as a point and
+    trailing decimal zeros cut: "11,904" and "11.904" -> "11904", "2,5" -> "2.5",
+    "361,00" -> "361". [n] citation markers are not numbers of the answer."""
     out = set()
-    for n in NUMBER_RE.findall(text):
-        n = re.sub(r"[.,](?=\d{3}(?!\d))", "", n)  # ponytail: "1.500" read as 1500, never 1.5
-        out.add(n.replace(",", "."))
+    for n in NUMBER_RE.findall(CITE_RE.sub("", text)):
+        n = re.sub(r"[.,](?=\d{3}(?!\d))", "", n).replace(",", ".")  # ponytail: "1.500" is 1500, never 1.5
+        out.add(n.rstrip("0").rstrip(".") if "." in n else n)
     return out
 
 
@@ -55,7 +62,8 @@ def run_oneshot(item: GoldItem, settings: Settings, pipeline, llm) -> dict:
     retrieved = pipeline.search(item.question, mode="hybrid_rerank", top_k=settings.retrieval.final_top_k)
     draft = generate_answer(item.question, retrieved, settings, llm)
     text, citations = map_citations(draft.text, draft.evidence)
-    return {"answer": text, "refused": draft.refused, "stop": draft.mode,
+    # an uncited answer counts as a refusal, as it does in the agent arm
+    return {"answer": text, "refused": draft.refused or not citations, "stop": draft.mode,
             "cited_doc_ids": [draft.evidence[c.marker - 1].doc_id for c in citations], "steps": []}
 
 
@@ -75,6 +83,7 @@ class Metered:
 
     def __init__(self, llm, delay_s: float = 0.0):
         self.llm, self.delay_s, self.calls, self._last = llm, delay_s, 0, 0.0
+        self.answered_by: list[str | None] = []  # the model that answered each successful call
 
     @property
     def available(self) -> bool:
@@ -87,7 +96,9 @@ class Metered:
     def complete(self, messages: list[dict], json_mode: bool = False) -> str:
         time.sleep(max(0.0, self._last + self.delay_s - time.monotonic()))
         try:
-            return self.llm.complete(messages, json_mode=json_mode)
+            reply = self.llm.complete(messages, json_mode=json_mode)
+            self.answered_by.append(self.model)  # after the call: a 429 switch happens inside it
+            return reply
         finally:
             self.calls += 1
             self._last = time.monotonic()
@@ -96,35 +107,52 @@ class Metered:
 def load_rows(path: Path) -> list[dict]:
     if not path.exists():
         return []
-    return [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines() if line.strip()]
+    rows = []
+    for n, line in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
+        try:
+            rows.append(json.loads(line)) if line.strip() else None
+        except json.JSONDecodeError:  # a line torn by a crash mid-write: its pair re-runs
+            log.warning("skipping unreadable line %d of %s", n, path.name)
+    return rows
 
 
 def run_comparison(items: list[GoldItem], settings: Settings, pipeline, llm, out: Path,
-                   limit: int | None = None, delay_s: float = 0.0) -> tuple[int, str | None]:
-    """Run the missing (item, arm) pairs, appending each row. Returns the number of
-    new rows and, if a call failed (quota, overload), why it stopped."""
-    done = {(r["qid"], r["arm"]) for r in load_rows(out)}
-    todo = [i for i in items if any((i.qid, a) not in done for a in ARMS)][:limit]
+                   limit: int | None = None, delay_s: float = 0.0) -> tuple[int, str | None, int]:
+    """Run the items that lack a complete pair. Returns the rows written, why the run
+    stopped early (a provider error: quota, overload) or None, and how many pairs were
+    dropped because the model changed inside them. Any other exception is a bug and raises."""
+    arms: dict[str, set[str]] = {}
+    for r in load_rows(out):
+        arms.setdefault(r["qid"], set()).add(r["arm"])
+    done = {q for q, a in arms.items() if a >= set(ARMS)}
+    todo = [i for i in items if i.qid not in done][:limit]
     out.parent.mkdir(parents=True, exist_ok=True)
     llm = Metered(llm, delay_s)
-    written = 0
+    written = mixed = 0
     for item in todo:
+        pair, models = [], set()
         for arm in ARMS:
-            if (item.qid, arm) in done:
-                continue
-            t0, calls = time.perf_counter(), llm.calls
+            t0, calls, answered = time.perf_counter(), llm.calls, len(llm.answered_by)
             try:
                 result = RUNNERS[arm](item, settings, pipeline, llm)
-            except Exception as e:  # quota or provider error: stop here, the next run resumes
-                return written, f"{item.qid}/{arm}: {type(e).__name__}"
-            row = {"qid": item.qid, "arm": arm, "model": llm.model, "llm_calls": llm.calls - calls,
-                   "run_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
-                   "latency_ms": round((time.perf_counter() - t0) * 1000), **result,
-                   "scores": score(item, result["answer"], result["cited_doc_ids"], result["refused"])}
-            with out.open("a", encoding="utf-8") as fh:
-                fh.write(json.dumps(row, ensure_ascii=False) + "\n")
-            written += 1
-    return written, None
+            except Exception as e:
+                if not is_provider_error(e):
+                    raise
+                return written, f"{item.qid}/{arm}: {type(e).__name__}", mixed
+            models |= set(llm.answered_by[answered:])
+            pair.append({"qid": item.qid, "arm": arm, "llm_calls": llm.calls - calls,
+                         "run_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+                         "latency_ms": round((time.perf_counter() - t0) * 1000), **result,
+                         "scores": score(item, result["answer"], result["cited_doc_ids"], result["refused"])})
+        if len(models) > 1:  # not a like-for-like pair: drop it, the next run repeats the item
+            log.warning("%s: model changed inside the pair (%s); dropped", item.qid, sorted(models))
+            mixed += 1
+            continue
+        model = next(iter(models), None)
+        with out.open("a", encoding="utf-8") as fh:
+            fh.write("".join(json.dumps({"model": model, **row}, ensure_ascii=False) + "\n" for row in pair))
+        written += len(pair)
+    return written, None, mixed
 
 
 def summarize(rows: list[dict], items: list[GoldItem], resamples: int = 2000, seed: int = 0) -> dict:
