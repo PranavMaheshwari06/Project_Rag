@@ -1,6 +1,6 @@
 # Germany Master's Eligibility Assistant
 
-> **Status: in development.** The data pipeline, retrieval core, requirement extraction with review, the eligibility engine and its API are built. All 13 programmes have verified requirement records: 6 verified by hand field by field, 7 by a second pass over the cited pages (see [Verification](#verification)). The engine has rule files for all 13 programmes, with 19 rules still pending review. Independent evaluation, the agent, the UI and a public demo come next. See [the project plan](docs/project-plan.md).
+> **Status: in development.** The data pipeline, retrieval core, requirement extraction with review, the eligibility engine and its API are built. All 13 programmes have verified requirement records: 6 verified by hand field by field, 7 by a second pass over the cited pages (see [Verification](#verification)). The engine has rule files for all 13 programmes, with every rule reviewed by hand and evaluated on 40 frozen cases (see [Eligibility evaluation](#eligibility-evaluation)). The agent, the UI and a public demo come next. See [the project plan](docs/project-plan.md).
 
 Applying for a master's in Germany means checking a dozen official websites: the programme page, uni-assist, APS, the embassy, the blocked-account rules, the city's foreigners' office. Each one says something slightly different, and some of it is only in PDFs. This project reads those official pages for you and answers from them, with a citation and a crawl date on every claim.
 
@@ -106,53 +106,53 @@ How to read it: a field counts as "draft unchanged" only if its status, value, p
 <!-- BENCHMARK:START -->
 | config | queries | Recall@5 | Recall@10 | MRR | nDCG@5 | nDCG@10 | p50 ms | p95 ms |
 |---|---|---|---|---|---|---|---|---|
-| vector | 90 | 0.817 | 0.906 | 0.654 | 0.398 | 0.386 | 15 | 20 |
-| bm25 | 90 | 0.739 | 0.828 | 0.618 | 0.366 | 0.347 | 1 | 2 |
-| hybrid | 90 | 0.794 | 0.906 | 0.703 | 0.432 | 0.399 | 18 | 23 |
-| hybrid_rerank | 90 | 0.872 | 0.906 | 0.774 | 0.472 | 0.416 | 2544 | 2681 |
+| vector | 90 | 0.817 | 0.906 | 0.642 | 0.391 | 0.382 | 58 | 118 |
+| bm25 | 90 | 0.739 | 0.828 | 0.612 | 0.363 | 0.345 | 6 | 12 |
+| hybrid | 90 | 0.789 | 0.906 | 0.701 | 0.429 | 0.399 | 55 | 98 |
+| hybrid_rerank | 90 | 0.872 | 0.906 | 0.768 | 0.475 | 0.416 | 5190 | 7020 |
 
-_90 answerable questions; 104 total items; 600 chunks. Generated 2026-11-06T12:24:26+00:00._
+_90 answerable questions; 104 total items; 605 chunks. Generated 2026-11-12T00:04:01+00:00._
 
 **confusable**
 
 | config | queries | Recall@5 | Recall@10 | MRR | nDCG@5 | nDCG@10 | p50 ms | p95 ms |
 |---|---|---|---|---|---|---|---|---|
-| vector | 11 | 0.818 | 0.909 | 0.594 | 0.317 | 0.354 | 14 | 17 |
-| bm25 | 11 | 0.818 | 0.909 | 0.710 | 0.395 | 0.390 | 1 | 2 |
-| hybrid | 11 | 0.909 | 1.000 | 0.735 | 0.411 | 0.396 | 19 | 25 |
-| hybrid_rerank | 11 | 1.000 | 1.000 | 0.780 | 0.496 | 0.410 | 2563 | 2654 |
+| vector | 11 | 0.818 | 0.909 | 0.594 | 0.317 | 0.354 | 62 | 313 |
+| bm25 | 11 | 0.818 | 0.909 | 0.710 | 0.407 | 0.391 | 6 | 15 |
+| hybrid | 11 | 0.909 | 1.000 | 0.735 | 0.415 | 0.405 | 54 | 84 |
+| hybrid_rerank | 11 | 1.000 | 1.000 | 0.780 | 0.521 | 0.420 | 5320 | 7774 |
 
 **country_rules**
 
 | config | queries | Recall@5 | Recall@10 | MRR | nDCG@5 | nDCG@10 | p50 ms | p95 ms |
 |---|---|---|---|---|---|---|---|---|
-| vector | 24 | 1.000 | 1.000 | 0.762 | 0.554 | 0.536 | 16 | 21 |
-| bm25 | 24 | 0.875 | 0.958 | 0.703 | 0.461 | 0.459 | 2 | 2 |
-| hybrid | 24 | 1.000 | 1.000 | 0.880 | 0.600 | 0.562 | 18 | 21 |
-| hybrid_rerank | 24 | 1.000 | 1.000 | 0.948 | 0.602 | 0.580 | 2566 | 2680 |
+| vector | 24 | 1.000 | 1.000 | 0.762 | 0.548 | 0.535 | 60 | 112 |
+| bm25 | 24 | 0.875 | 0.958 | 0.708 | 0.462 | 0.460 | 7 | 12 |
+| hybrid | 24 | 1.000 | 1.000 | 0.887 | 0.602 | 0.563 | 48 | 93 |
+| hybrid_rerank | 24 | 1.000 | 1.000 | 0.948 | 0.602 | 0.580 | 5007 | 5232 |
 
 **multi_hop**
 
 | config | queries | Recall@5 | Recall@10 | MRR | nDCG@5 | nDCG@10 | p50 ms | p95 ms |
 |---|---|---|---|---|---|---|---|---|
-| vector | 10 | 0.550 | 0.650 | 0.598 | 0.307 | 0.256 | 17 | 23 |
-| bm25 | 10 | 0.450 | 0.550 | 0.441 | 0.264 | 0.214 | 2 | 3 |
-| hybrid | 10 | 0.450 | 0.750 | 0.466 | 0.247 | 0.236 | 19 | 22 |
-| hybrid_rerank | 10 | 0.500 | 0.750 | 0.687 | 0.313 | 0.267 | 2590 | 2657 |
+| vector | 10 | 0.550 | 0.650 | 0.598 | 0.306 | 0.255 | 72 | 170 |
+| bm25 | 10 | 0.400 | 0.550 | 0.441 | 0.251 | 0.212 | 8 | 12 |
+| hybrid | 10 | 0.400 | 0.750 | 0.466 | 0.232 | 0.242 | 54 | 98 |
+| hybrid_rerank | 10 | 0.500 | 0.750 | 0.687 | 0.313 | 0.274 | 5163 | 5324 |
 
 **requirement**
 
 | config | queries | Recall@5 | Recall@10 | MRR | nDCG@5 | nDCG@10 | p50 ms | p95 ms |
 |---|---|---|---|---|---|---|---|---|
-| vector | 45 | 0.778 | 0.911 | 0.623 | 0.356 | 0.343 | 15 | 18 |
-| bm25 | 45 | 0.711 | 0.800 | 0.589 | 0.330 | 0.307 | 1 | 2 |
-| hybrid | 45 | 0.733 | 0.867 | 0.653 | 0.389 | 0.349 | 18 | 24 |
-| hybrid_rerank | 45 | 0.856 | 0.867 | 0.699 | 0.433 | 0.363 | 2515 | 2695 |
+| vector | 45 | 0.778 | 0.911 | 0.601 | 0.344 | 0.334 | 56 | 78 |
+| bm25 | 45 | 0.722 | 0.800 | 0.574 | 0.325 | 0.303 | 5 | 9 |
+| hybrid | 45 | 0.733 | 0.867 | 0.646 | 0.385 | 0.345 | 57 | 146 |
+| hybrid_rerank | 45 | 0.856 | 0.867 | 0.686 | 0.432 | 0.359 | 5505 | 7076 |
 
 | extraction records | programmes | fields | draft unchanged | checker precision | checker recall |
 |---|---|---|---|---|---|
 | human tier (headline) | 6 | 102 | 0.794 | 0.947 | 0.857 |
-| all (second_pass not independent) | 13 | 221 | 0.814 | 0.867 | 0.634 |
+| all (second_pass not independent) | 13 | 221 | 0.805 | 0.867 | 0.605 |
 
 _Historical audit: 29/35 strict passes; 32/35 snapshot passes from 69 stated fields (seed 4). These are pre-correction results._
 
@@ -206,6 +206,12 @@ No API key is needed, except for `POST /profile/parse` and `make parse-profile`.
 `requirements.lock` pins every package for Linux with CPU-only torch, the same setup CI and Docker use. On another platform, or without Make: `uv venv --python 3.12`, then `uv pip install -e '.[dev]'`.
 
 `docker-compose.yml` (Qdrant + API + frontend) is a starting point for a containerised setup; hosting is not verified yet.
+
+## Eligibility evaluation
+
+`make eval-eligibility` runs the rules engine on 40 profiles whose expected verdicts were written from the cited official pages before any engine run (5 by the maintainer, 35 assisted; 17 are independent observations, the rest are variants). Result in [eligibility_baseline.json](evaluation/results/eligibility_baseline.json): 40/40 headline verdicts and 213/213 per-criterion verdicts agree, with 0 false-positive "meets" headlines. The engine decided 180 of 303 applicable criteria (59%); the rest are `unknown` because they need a university assessment (74) or a fact the profile did not give (48), by design.
+
+This measures agreement with the sources as read by the maintainer, not an independent audit, and it is not an admission probability.
 
 ## Honest limitations (current)
 

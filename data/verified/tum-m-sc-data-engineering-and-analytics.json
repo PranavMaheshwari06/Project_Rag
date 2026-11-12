@@ -1,5 +1,5 @@
 {
-  "verified_at": "2026-10-22T23:41:39+00:00",
+  "verified_at": "2026-11-11T23:43:29+00:00",
   "tier": "second_pass",
   "draft_model": "gemini-3.8-flash",
   "record": {
@@ -14,37 +14,85 @@
       "status": "stated",
       "value": "Bachelor's degree in Informatics / Computer Science equivalent to the B.Sc. Informatics taught at TUM",
       "quote": "Students with a Bachelor’s degree in Informatics / Computer Science which is equivalent to the B.Sc. Informatics taught at TUM are eligible to apply.",
-      "doc_id": "de/tum/dea-msc/department"
+      "doc_id": "de/tum/dea-msc/department",
+      "supporting_citations": []
     },
     "min_total_ects": {
       "status": "not_published",
       "value": null,
       "quote": null,
-      "doc_id": null
+      "doc_id": null,
+      "supporting_citations": []
     },
     "subject_credits": {
       "status": "not_published",
       "value": null,
       "quote": null,
-      "doc_id": null
+      "doc_id": null,
+      "supporting_citations": []
     },
     "min_grade_german_scale": {
       "status": "not_published",
       "value": null,
       "quote": null,
-      "doc_id": null
+      "doc_id": null,
+      "supporting_citations": []
     },
     "min_grade_original_scale": {
       "status": "not_published",
       "value": null,
       "quote": null,
-      "doc_id": null
+      "doc_id": null,
+      "supporting_citations": []
     },
     "english": {
-      "status": "not_published",
-      "value": null,
-      "quote": null,
-      "doc_id": null
+      "status": "stated",
+      "value": [
+        {
+          "test": "TOEFL iBT",
+          "min_score": "88"
+        },
+        {
+          "test": "IELTS Academic",
+          "min_score": "6.5 overall band score"
+        },
+        {
+          "test": "Cambridge CAE / CPE",
+          "min_score": "grade A, B or C"
+        },
+        {
+          "test": "PTE Academic",
+          "min_score": "65 overall score"
+        },
+        {
+          "test": "English as the language of instruction in earlier education",
+          "min_score": "at least 50% of the program"
+        }
+      ],
+      "quote": "Internet based Test (iBT): 88 . Only the Test Date Score is valid, MyBest Score will not be accepted.",
+      "doc_id": "de/tum/language-certificates",
+      "supporting_citations": [
+        {
+          "quote": "IELTS Academic with a minimum overall band score of 6.5",
+          "doc_id": "de/tum/language-certificates"
+        },
+        {
+          "quote": "CAE (Cambridge Advanced English), Grades A, B, C",
+          "doc_id": "de/tum/language-certificates"
+        },
+        {
+          "quote": "CPE (Cambridge Proficiency English), Grades A, B, C",
+          "doc_id": "de/tum/language-certificates"
+        },
+        {
+          "quote": "PTE Academic with an Overall Score of at least 65 points",
+          "doc_id": "de/tum/language-certificates"
+        },
+        {
+          "quote": "The language of instruction needs to have been English in at least 50% of the program",
+          "doc_id": "de/tum/language-certificates"
+        }
+      ]
     },
     "entrance_tests": {
       "status": "stated",
@@ -60,7 +108,8 @@
             "Iran",
             "Pakistan"
           ],
-          "exempt_degree_countries": []
+          "exempt_degree_countries": [],
+          "condition": null
         },
         {
           "test": "GATE",
@@ -73,23 +122,27 @@
             "Iran",
             "Pakistan"
           ],
-          "exempt_degree_countries": []
+          "exempt_degree_countries": [],
+          "condition": null
         }
       ],
       "quote": "Applicants with a Degree from Bangladesh, China, India, Iran or Pakistan have to submit a GRE (General) Test. We have defined required minimum scores, lower scores will not be accepted!\n\n\n\nThe required scores are: Verbal reasoning: (will not be taken into account anymore) Quantitative reasoning: 164 Analytical writing: 4.0 The Institution Code: 7806, Department: 5199 (\"all other departments\").\n\n\n\nAlternatively, students can submit a scorecard of the Indian GATE test (Computer Science; for M.Sc. CSE the Mechanical Engineering Test will also be accepted). The minimal qualifying score of the respective year is necessary.",
-      "doc_id": "de/tum/dea-msc/department"
+      "doc_id": "de/tum/dea-msc/department",
+      "supporting_citations": []
     },
     "german": {
       "status": "not_published",
       "value": null,
       "quote": null,
-      "doc_id": null
+      "doc_id": null,
+      "supporting_citations": []
     },
     "work_experience": {
       "status": "not_published",
       "value": null,
       "quote": null,
-      "doc_id": null
+      "doc_id": null,
+      "supporting_citations": []
     },
     "aps_degree_countries": {
       "status": "stated",
@@ -99,13 +152,15 @@
         "Vietnam"
       ],
       "quote": "Applicants with an undergraduate degree from China, India and Vietnam have to submit a certificate from the German Evaluation Center (APS).",
-      "doc_id": "de/tum/dea-msc/department"
+      "doc_id": "de/tum/dea-msc/department",
+      "supporting_citations": []
     },
     "application_route": {
       "status": "stated",
       "value": "both",
       "quote": "Applicants who did not obtain their qualification for postgraduate studies (usually a bachelor's degree) in Germany must apply for a preliminary documentation (VPD) from uni-assist, additionally to the TUM application.",
-      "doc_id": "de/tum/dea-msc/department"
+      "doc_id": "de/tum/dea-msc/department",
+      "supporting_citations": []
     },
     "deadlines": {
       "status": "stated",
@@ -114,23 +169,27 @@
           "intake": "winter",
           "applicant_group": "all",
           "date": "05-31",
-          "kind": "final"
+          "kind": "final",
+          "degree_origin": null
         },
         {
           "intake": "summer",
           "applicant_group": "all",
           "date": "11-30",
-          "kind": "final"
+          "kind": "final",
+          "degree_origin": null
         }
       ],
       "quote": "Application period for winter semester: 01.02. – 31.05. Application period for summer semester: 01.10. – 30.11.",
-      "doc_id": "de/tum/dea-msc/programme"
+      "doc_id": "de/tum/dea-msc/programme",
+      "supporting_citations": []
     },
     "selection_process": {
       "status": "stated",
       "value": "Two-stage aptitude assessment process assessing qualification regarding the qualitative requirements of the Master's program.",
       "quote": "The aptitude assessment for the M.Sc. Data Engineering and Analytics is a two-stage process in which we assess your qualification with regard to the special qualitative requirements of this Master's program.",
-      "doc_id": "de/tum/dea-msc/department"
+      "doc_id": "de/tum/dea-msc/department",
+      "supporting_citations": []
     },
     "required_documents": {
       "status": "stated",
@@ -150,25 +209,29 @@
         "A copy of your passport"
       ],
       "quote": "- A statement of reasons explaining why you have chosen this master’s program and TUM specifically (max. 2 pages)\n\n\n\n- Your CV/résumé\n\n\n\n- A scientific essay of approx. 1,000 words on a specified topic (see below)\n\n\n\n- Form \" Analysis of the Curriculum \" (see below)\n\n\n\n- Bachelor's degree certificate, including a list of courses and grades OR an official transcript of records. Documents not issued in German or English must be translated and notarized by a sworn translator .\n\n\n\n- Curriculum (module descriptions, course catalog or syllabus) of the underlying university degree; this document is very important for the check of the academic qualification!\n\n\n\n- Proof of your English language proficiency\n\n\n\n- GRE or Gate score for applicants with a B.Sc. degree from Bangladesh, China, India, Iran, Pakistan (original scorecard or have the score transmitted directly via ETS)\n\n\n\n- Preliminary documentation from uni-assist for all applicants with a Bachelor's degree from outside Germany\n\n\n\n- APS certificate for applicants with a Bachelor's from China, Vietnam or India\n\n\n\n- Certificates from professional training or additional qualifications related to the program (e.g. participation in research competitions, internships, etc.) (not mandatory)\n\n\n\n- A passport photo\n\n\n\n- A copy of your passport",
-      "doc_id": "de/tum/dea-msc/department"
+      "doc_id": "de/tum/dea-msc/department",
+      "supporting_citations": []
     },
     "tuition_eur_per_semester_non_eu": {
       "status": "stated",
       "value": 6000.0,
       "quote": "The tuition fees for international students from third countries for this degree program are 6,000 euros per semester .",
-      "doc_id": "de/tum/dea-msc/programme"
+      "doc_id": "de/tum/dea-msc/programme",
+      "supporting_citations": []
     },
     "semester_fee_eur": {
       "status": "stated",
       "value": 97.0,
       "quote": "- Student Fees:\n\n\t\t\t\t\t\t\t97.00 €",
-      "doc_id": "de/tum/dea-msc/programme"
+      "doc_id": "de/tum/dea-msc/programme",
+      "supporting_citations": []
     },
     "language_of_instruction": {
       "status": "stated",
       "value": "English",
       "quote": "Language of Instruction : English",
-      "doc_id": "de/tum/dea-msc/department"
+      "doc_id": "de/tum/dea-msc/department",
+      "supporting_citations": []
     },
     "verified": true
   }
