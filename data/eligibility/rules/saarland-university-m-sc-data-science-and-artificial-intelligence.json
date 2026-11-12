@@ -395,6 +395,88 @@
         }
       ],
       "reviewed_by": "human"
+    },
+    {
+      "id": "deadline_winter",
+      "label": "Apply by 15 May for the winter term",
+      "category": "readiness",
+      "check": {
+        "type": "deadline",
+        "intake": "winter",
+        "close": {
+          "month": 5,
+          "day": 15,
+          "year_offset": 0
+        }
+      },
+      "citations": [
+        {
+          "doc_id": "de/saarland/dsai-msc/programme",
+          "quote": "Applications should normally be received by 15 May for students seeking to begin studying in the winter semester and by 15 November for students looking to start their studies in summer."
+        }
+      ]
+    },
+    {
+      "id": "deadline_summer",
+      "label": "Apply by 15 November of the previous year for the summer term",
+      "category": "readiness",
+      "check": {
+        "type": "deadline",
+        "intake": "summer",
+        "close": {
+          "month": 11,
+          "day": 15,
+          "year_offset": -1
+        }
+      },
+      "citations": [
+        {
+          "doc_id": "de/saarland/dsai-msc/programme",
+          "quote": "Applications should normally be received by 15 May for students seeking to begin studying in the winter semester and by 15 November for students looking to start their studies in summer."
+        }
+      ]
+    },
+    {
+      "id": "deadline_winter_early",
+      "label": "Early deadline: apply by 15 November of the previous year for the winter term to hear by mid-February",
+      "category": "readiness",
+      "severity": "soft",
+      "check": {
+        "type": "deadline",
+        "intake": "winter",
+        "close": {
+          "month": 11,
+          "day": 15,
+          "year_offset": -1
+        }
+      },
+      "citations": [
+        {
+          "doc_id": "de/saarland/dsai-msc/programme",
+          "quote": "Applicants who apply by November 15th for the following winter semester are expected to receive a letter of admission by mid-February"
+        }
+      ]
+    },
+    {
+      "id": "deadline_summer_early",
+      "label": "Early deadline: apply by 15 May of the previous year for the summer term to hear by mid-July",
+      "category": "readiness",
+      "severity": "soft",
+      "check": {
+        "type": "deadline",
+        "intake": "summer",
+        "close": {
+          "month": 5,
+          "day": 15,
+          "year_offset": -1
+        }
+      },
+      "citations": [
+        {
+          "doc_id": "de/saarland/dsai-msc/programme",
+          "quote": "Applicants who apply by May 15th for the following summer semester are expected to receive a letter of admission by mid-July"
+        }
+      ]
     }
   ]
 }

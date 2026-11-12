@@ -213,6 +213,46 @@
         }
       ],
       "reviewed_by": "human"
+    },
+    {
+      "id": "deadline_winter",
+      "label": "Apply online and have the hard-copy documents arrive by 15 July for the winter term",
+      "category": "readiness",
+      "check": {
+        "type": "deadline",
+        "intake": "winter",
+        "close": {
+          "month": 7,
+          "day": 15,
+          "year_offset": 0
+        }
+      },
+      "citations": [
+        {
+          "doc_id": "de/tu-darmstadt/informatics-master-admission-guide",
+          "quote": "Cut-off deadline for online application and arrival of hard-copy documents | July 15 | January 15"
+        }
+      ]
+    },
+    {
+      "id": "deadline_summer",
+      "label": "Apply online and have the hard-copy documents arrive by 15 January for the summer term",
+      "category": "readiness",
+      "check": {
+        "type": "deadline",
+        "intake": "summer",
+        "close": {
+          "month": 1,
+          "day": 15,
+          "year_offset": 0
+        }
+      },
+      "citations": [
+        {
+          "doc_id": "de/tu-darmstadt/informatics-master-admission-guide",
+          "quote": "Cut-off deadline for online application and arrival of hard-copy documents | July 15 | January 15"
+        }
+      ]
     }
   ]
 }

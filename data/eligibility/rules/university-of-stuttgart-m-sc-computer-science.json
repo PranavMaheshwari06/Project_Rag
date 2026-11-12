@@ -207,6 +207,56 @@
         }
       ],
       "reviewed_by": "human"
+    },
+    {
+      "id": "deadline_winter",
+      "label": "Apply between 15 November of the previous year and 15 January for the winter term",
+      "category": "readiness",
+      "check": {
+        "type": "deadline",
+        "intake": "winter",
+        "close": {
+          "month": 1,
+          "day": 15,
+          "year_offset": 0
+        },
+        "open": {
+          "month": 11,
+          "day": 15,
+          "year_offset": -1
+        }
+      },
+      "citations": [
+        {
+          "doc_id": "de/ustutt/cs-msc/programme",
+          "quote": "Application period for the winter semester: November 15 – January 15 The winter semester starts in October."
+        }
+      ]
+    },
+    {
+      "id": "deadline_summer",
+      "label": "Apply between 15 May and 15 July of the previous year for the summer term",
+      "category": "readiness",
+      "check": {
+        "type": "deadline",
+        "intake": "summer",
+        "close": {
+          "month": 7,
+          "day": 15,
+          "year_offset": -1
+        },
+        "open": {
+          "month": 5,
+          "day": 15,
+          "year_offset": -1
+        }
+      },
+      "citations": [
+        {
+          "doc_id": "de/ustutt/cs-msc/programme",
+          "quote": "summer semester: May 15 – July 15 The summer semester starts in April."
+        }
+      ]
     }
   ]
 }

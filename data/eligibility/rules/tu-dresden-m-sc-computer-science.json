@@ -102,6 +102,158 @@
         }
       ],
       "reviewed_by": "human"
+    },
+    {
+      "id": "deadline_winter",
+      "label": "With a foreign degree: apply by 15 July (EU nationals) or 31 May (non-EU nationals) for the winter term",
+      "category": "readiness",
+      "check": {
+        "type": "when",
+        "when": {
+          "type": "in",
+          "fact": "degree_country",
+          "values": [
+            "Germany"
+          ],
+          "negate": true
+        },
+        "then": {
+          "type": "all_of",
+          "children": [
+            {
+              "type": "when",
+              "when": {
+                "type": "in",
+                "fact": "citizenships",
+                "values": [
+                  "@EU"
+                ]
+              },
+              "then": {
+                "type": "deadline",
+                "intake": "winter",
+                "close": {
+                  "month": 7,
+                  "day": 15,
+                  "year_offset": 0
+                },
+                "open": {
+                  "month": 4,
+                  "day": 1,
+                  "year_offset": 0
+                }
+              }
+            },
+            {
+              "type": "when",
+              "when": {
+                "type": "in",
+                "fact": "citizenships",
+                "values": [
+                  "@EU"
+                ],
+                "negate": true
+              },
+              "then": {
+                "type": "deadline",
+                "intake": "winter",
+                "close": {
+                  "month": 5,
+                  "day": 31,
+                  "year_offset": 0
+                },
+                "open": {
+                  "month": 4,
+                  "day": 1,
+                  "year_offset": 0
+                }
+              }
+            }
+          ]
+        }
+      },
+      "citations": [
+        {
+          "doc_id": "de/tud/cs-msc/aptitude-assessment",
+          "quote": "Applicants with a foreign university degree\n\n- Application period: EU applicants: 1st April – 15th July , 1st October – 15th January Non-EU applicants: 1st April – 31st May , 1st October – 30th November"
+        }
+      ]
+    },
+    {
+      "id": "deadline_summer",
+      "label": "With a foreign degree: apply by 15 January (EU nationals) or 30 November of the previous year (non-EU nationals) for the summer term",
+      "category": "readiness",
+      "check": {
+        "type": "when",
+        "when": {
+          "type": "in",
+          "fact": "degree_country",
+          "values": [
+            "Germany"
+          ],
+          "negate": true
+        },
+        "then": {
+          "type": "all_of",
+          "children": [
+            {
+              "type": "when",
+              "when": {
+                "type": "in",
+                "fact": "citizenships",
+                "values": [
+                  "@EU"
+                ]
+              },
+              "then": {
+                "type": "deadline",
+                "intake": "summer",
+                "close": {
+                  "month": 1,
+                  "day": 15,
+                  "year_offset": 0
+                },
+                "open": {
+                  "month": 10,
+                  "day": 1,
+                  "year_offset": -1
+                }
+              }
+            },
+            {
+              "type": "when",
+              "when": {
+                "type": "in",
+                "fact": "citizenships",
+                "values": [
+                  "@EU"
+                ],
+                "negate": true
+              },
+              "then": {
+                "type": "deadline",
+                "intake": "summer",
+                "close": {
+                  "month": 11,
+                  "day": 30,
+                  "year_offset": -1
+                },
+                "open": {
+                  "month": 10,
+                  "day": 1,
+                  "year_offset": -1
+                }
+              }
+            }
+          ]
+        }
+      },
+      "citations": [
+        {
+          "doc_id": "de/tud/cs-msc/aptitude-assessment",
+          "quote": "Applicants with a foreign university degree\n\n- Application period: EU applicants: 1st April – 15th July , 1st October – 15th January Non-EU applicants: 1st April – 31st May , 1st October – 30th November"
+        }
+      ]
     }
   ]
 }

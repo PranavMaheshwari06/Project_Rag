@@ -248,6 +248,71 @@
         }
       ],
       "reviewed_by": "human"
+    },
+    {
+      "id": "deadline_winter",
+      "label": "Apply by 15 July (Germany and EU) or 1 March (other countries) for the winter term",
+      "category": "readiness",
+      "check": {
+        "type": "all_of",
+        "children": [
+          {
+            "type": "when",
+            "when": {
+              "type": "in",
+              "fact": "citizenships",
+              "values": [
+                "@EU"
+              ]
+            },
+            "then": {
+              "type": "deadline",
+              "intake": "winter",
+              "close": {
+                "month": 7,
+                "day": 15,
+                "year_offset": 0
+              },
+              "open": {
+                "month": 5,
+                "day": 1,
+                "year_offset": 0
+              }
+            }
+          },
+          {
+            "type": "when",
+            "when": {
+              "type": "in",
+              "fact": "citizenships",
+              "values": [
+                "@EU"
+              ],
+              "negate": true
+            },
+            "then": {
+              "type": "deadline",
+              "intake": "winter",
+              "close": {
+                "month": 3,
+                "day": 1,
+                "year_offset": 0
+              },
+              "open": {
+                "month": 12,
+                "day": 1,
+                "year_offset": -1
+              }
+            }
+          }
+        ]
+      },
+      "citations": [
+        {
+          "doc_id": "de/rwth/application-deadlines",
+          "quote": "Master (without NC—first or higher semesters) | Germany and EU: May 1 until July 15 Other Countries : December 1 until March 1"
+        }
+      ]
     }
   ]
 }

@@ -171,7 +171,8 @@ def test_ds_degree_and_profile_are_university_reviews():
     status = {c.rule_id: (c.verdict, c.reason, c.severity) for c in r.criteria}
     assert status["degree"] == ("unknown", "university_review", "hard")
     assert status["module_profile"] == ("unknown", "university_review", "hard")
-    assert {"degree", "module_profile", "gre", "english"} == set(status)   # no German rule: taught in English
+    # no German rule: taught in English
+    assert {"degree", "module_profile", "gre", "english", "deadline_winter", "deadline_summer"} == set(status)
 
 
 def test_ds_english_is_an_admission_rule():
@@ -200,10 +201,10 @@ def test_cs_headline_fails_on_known_gre_failure():
 # --- Both: citations and review status ------------------------------------------
 def test_rules_cite_the_verified_record_and_are_reviewed():
     s = load_settings()
-    for slug in (CS, DS):
+    for slug, pending in ((CS, {"deadline_winter"}), (DS, {"deadline_winter", "deadline_summer"})):
         rules, stale = load_ruleset(s, slug)
         record = json.loads((Path(s.paths.verified_dir) / f"{slug}.json").read_text())["record"]
         assert not stale
-        assert all(r.reviewed_by == "human" for r in rules.rules)
+        assert {r.id for r in rules.rules if r.reviewed_by != "human"} == pending  # deadline rules drafted 2026-11-12, queued for the maintainer's review
         # quotes the record omits must sit on cached HTML pages: the PDF cannot be re-checked from raw
         assert all(doc != "de/rwth/language-requirements-pdf" for _, doc, _ in uncited_quotes(rules, record))
