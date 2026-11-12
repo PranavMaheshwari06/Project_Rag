@@ -106,12 +106,12 @@ How to read it: a field counts as "draft unchanged" only if its status, value, p
 <!-- BENCHMARK:START -->
 | config | queries | Recall@5 | Recall@10 | MRR | nDCG@5 | nDCG@10 | p50 ms | p95 ms |
 |---|---|---|---|---|---|---|---|---|
-| vector | 108 | 0.762 [0.693, 0.829] | 0.864 [0.812, 0.917] | 0.656 [0.586, 0.727] | 0.400 | 0.382 | 18 | 25 |
-| bm25 | 108 | 0.721 [0.645, 0.795] | 0.815 [0.750, 0.875] | 0.639 [0.565, 0.714] | 0.372 | 0.347 | 2 | 3 |
-| hybrid | 108 | 0.753 [0.682, 0.824] | 0.863 [0.807, 0.914] | 0.722 [0.654, 0.795] | 0.439 | 0.401 | 21 | 28 |
-| hybrid_rerank | 108 | 0.829 [0.773, 0.884] | 0.863 [0.807, 0.914] | 0.749 [0.679, 0.814] | 0.471 | 0.409 | 2560 | 2804 |
+| vector | 108 | 0.748 [0.677, 0.818] | 0.860 [0.804, 0.912] | 0.648 [0.578, 0.722] | 0.392 | 0.376 | 16 | 23 |
+| bm25 | 108 | 0.693 [0.617, 0.772] | 0.819 [0.755, 0.880] | 0.626 [0.552, 0.699] | 0.364 | 0.344 | 2 | 4 |
+| hybrid | 108 | 0.748 [0.676, 0.819] | 0.853 [0.793, 0.906] | 0.704 [0.632, 0.779] | 0.429 | 0.390 | 19 | 24 |
+| hybrid_rerank | 108 | 0.801 [0.731, 0.861] | 0.853 [0.793, 0.906] | 0.748 [0.678, 0.813] | 0.462 | 0.404 | 2771 | 3848 |
 
-_108 answerable questions; 122 total items; 605 chunks. Generated 2026-11-12T21:49:58+00:00._
+_108 answerable questions; 122 total items; 614 chunks. Generated 2026-11-12T22:08:20+00:00._
 
 _18 gold items are not yet human-reviewed: numbers that include them are provisional._
 
@@ -121,37 +121,37 @@ _Brackets: 95% percentile bootstrap interval over queries (2000 resamples, seed 
 
 | config | queries | Recall@5 | Recall@10 | MRR | nDCG@5 | nDCG@10 | p50 ms | p95 ms |
 |---|---|---|---|---|---|---|---|---|
-| vector | 11 | 0.818 [0.545, 1.000] | 0.909 [0.727, 1.000] | 0.594 [0.367, 0.809] | 0.317 | 0.354 | 18 | 23 |
-| bm25 | 11 | 0.818 [0.545, 1.000] | 0.909 [0.727, 1.000] | 0.710 [0.463, 0.939] | 0.407 | 0.391 | 1 | 2 |
-| hybrid | 11 | 0.909 [0.727, 1.000] | 1.000 [1.000, 1.000] | 0.735 [0.523, 0.939] | 0.415 | 0.405 | 21 | 29 |
-| hybrid_rerank | 11 | 1.000 [1.000, 1.000] | 1.000 [1.000, 1.000] | 0.780 [0.598, 0.955] | 0.521 | 0.420 | 2575 | 2774 |
+| vector | 11 | 0.727 [0.455, 1.000] | 0.909 [0.727, 1.000] | 0.577 [0.333, 0.803] | 0.302 | 0.334 | 16 | 18 |
+| bm25 | 11 | 0.727 [0.455, 1.000] | 0.909 [0.727, 1.000] | 0.632 [0.385, 0.861] | 0.364 | 0.372 | 1 | 2 |
+| hybrid | 11 | 0.818 [0.545, 1.000] | 1.000 [1.000, 1.000] | 0.659 [0.439, 0.864] | 0.380 | 0.380 | 18 | 21 |
+| hybrid_rerank | 11 | 1.000 [1.000, 1.000] | 1.000 [1.000, 1.000] | 0.768 [0.577, 0.955] | 0.504 | 0.408 | 3052 | 4067 |
 
 **country_rules**
 
 | config | queries | Recall@5 | Recall@10 | MRR | nDCG@5 | nDCG@10 | p50 ms | p95 ms |
 |---|---|---|---|---|---|---|---|---|
-| vector | 24 | 1.000 [1.000, 1.000] | 1.000 [1.000, 1.000] | 0.762 [0.633, 0.882] | 0.548 | 0.535 | 16 | 21 |
-| bm25 | 24 | 0.875 [0.708, 1.000] | 0.958 [0.875, 1.000] | 0.708 [0.562, 0.849] | 0.462 | 0.460 | 2 | 2 |
-| hybrid | 24 | 1.000 [1.000, 1.000] | 1.000 [1.000, 1.000] | 0.887 [0.774, 0.972] | 0.602 | 0.563 | 20 | 23 |
-| hybrid_rerank | 24 | 1.000 [1.000, 1.000] | 1.000 [1.000, 1.000] | 0.948 [0.865, 1.000] | 0.602 | 0.580 | 2487 | 2612 |
+| vector | 24 | 1.000 [1.000, 1.000] | 1.000 [1.000, 1.000] | 0.762 [0.633, 0.882] | 0.548 | 0.535 | 16 | 19 |
+| bm25 | 24 | 0.875 [0.708, 1.000] | 0.958 [0.875, 1.000] | 0.705 [0.556, 0.849] | 0.461 | 0.462 | 2 | 2 |
+| hybrid | 24 | 1.000 [1.000, 1.000] | 1.000 [1.000, 1.000] | 0.845 [0.725, 0.946] | 0.580 | 0.543 | 18 | 22 |
+| hybrid_rerank | 24 | 1.000 [1.000, 1.000] | 1.000 [1.000, 1.000] | 0.948 [0.865, 1.000] | 0.602 | 0.580 | 2617 | 2702 |
 
 **multi_hop**
 
 | config | queries | Recall@5 | Recall@10 | MRR | nDCG@5 | nDCG@10 | p50 ms | p95 ms |
 |---|---|---|---|---|---|---|---|---|
-| vector | 28 | 0.512 [0.393, 0.625] | 0.655 [0.554, 0.750] | 0.677 [0.532, 0.812] | 0.395 | 0.338 | 17 | 20 |
-| bm25 | 28 | 0.548 [0.429, 0.655] | 0.679 [0.571, 0.786] | 0.657 [0.511, 0.794] | 0.357 | 0.305 | 2 | 4 |
-| hybrid | 28 | 0.512 [0.399, 0.619] | 0.685 [0.583, 0.786] | 0.698 [0.548, 0.835] | 0.396 | 0.349 | 23 | 26 |
-| hybrid_rerank | 28 | 0.571 [0.482, 0.661] | 0.685 [0.583, 0.786] | 0.668 [0.535, 0.794] | 0.401 | 0.339 | 2546 | 2725 |
+| vector | 28 | 0.494 [0.375, 0.613] | 0.637 [0.530, 0.744] | 0.667 [0.517, 0.807] | 0.388 | 0.331 | 20 | 26 |
+| bm25 | 28 | 0.512 [0.393, 0.625] | 0.696 [0.589, 0.804] | 0.660 [0.513, 0.795] | 0.354 | 0.308 | 2 | 5 |
+| hybrid | 28 | 0.530 [0.411, 0.643] | 0.649 [0.542, 0.756] | 0.693 [0.541, 0.833] | 0.401 | 0.340 | 21 | 26 |
+| hybrid_rerank | 28 | 0.536 [0.429, 0.643] | 0.649 [0.542, 0.756] | 0.654 [0.517, 0.790] | 0.384 | 0.325 | 2749 | 2977 |
 
 **requirement**
 
 | config | queries | Recall@5 | Recall@10 | MRR | nDCG@5 | nDCG@10 | p50 ms | p95 ms |
 |---|---|---|---|---|---|---|---|---|
-| vector | 45 | 0.778 [0.644, 0.889] | 0.911 [0.822, 0.978] | 0.601 [0.492, 0.708] | 0.344 | 0.334 | 20 | 26 |
-| bm25 | 45 | 0.722 [0.589, 0.844] | 0.800 [0.667, 0.911] | 0.574 [0.449, 0.692] | 0.325 | 0.303 | 1 | 2 |
-| hybrid | 45 | 0.733 [0.600, 0.867] | 0.867 [0.756, 0.956] | 0.646 [0.519, 0.765] | 0.385 | 0.345 | 20 | 36 |
-| hybrid_rerank | 45 | 0.856 [0.744, 0.944] | 0.867 [0.756, 0.956] | 0.686 [0.572, 0.796] | 0.432 | 0.359 | 2599 | 2944 |
+| vector | 45 | 0.778 [0.644, 0.889] | 0.911 [0.822, 0.978] | 0.594 [0.481, 0.703] | 0.333 | 0.330 | 16 | 19 |
+| bm25 | 45 | 0.700 [0.556, 0.822] | 0.800 [0.667, 0.911] | 0.561 [0.437, 0.678] | 0.318 | 0.296 | 2 | 3 |
+| hybrid | 45 | 0.733 [0.600, 0.867] | 0.867 [0.756, 0.956] | 0.646 [0.517, 0.766] | 0.377 | 0.343 | 18 | 22 |
+| hybrid_rerank | 45 | 0.811 [0.689, 0.911] | 0.867 [0.756, 0.956] | 0.695 [0.579, 0.805] | 0.425 | 0.359 | 2850 | 4408 |
 
 | extraction records | programmes | fields | draft unchanged | checker precision | checker recall |
 |---|---|---|---|---|---|
@@ -160,19 +160,19 @@ _Brackets: 95% percentile bootstrap interval over queries (2000 resamples, seed 
 
 _Historical audit: 29/35 strict passes; 32/35 snapshot passes from 69 stated fields (seed 4). These are pre-correction results._
 
-_Refusal calibration: threshold 0.201490405; 5/14 probes refused; 5/108 answerable questions falsely refused. Status: calibrated. Calibration-set results, not held-out evaluation._
+_Refusal calibration: threshold 0.201490405; 5/14 probes refused; 4/108 answerable questions falsely refused. Status: calibrated. Calibration-set results, not held-out evaluation._
 
 | probe kind | probes | refused | missed |
 |---|---|---|---|
 | refusal | 9 | 4 | 5 |
 | coverage | 5 | 1 | 4 |
 
-_Answer quality (hybrid+rerank, extractive): groundedness 1.000, unsupported-claim rate 0.000, refusal rate 0.082 — token-overlap heuristic (not an LLM judge)._
+_Answer quality (hybrid+rerank, extractive): groundedness 1.000, unsupported-claim rate 0.000, refusal rate 0.074 — token-overlap heuristic (not an LLM judge)._
 <!-- BENCHMARK:END -->
 
 `make eval` validates the gold set, uses the extractive answer path regardless of API keys, calibrates the score gate, and refreshes these results. Models are warmed before timing; the score sweep reuses retrieval results. The detailed artifact is [refusal_calibration.json](evaluation/results/refusal_calibration.json).
 
-The selected score threshold is `0.20149040532450285`. It refuses 5/14 refusal/coverage probes while falsely refusing 5/108 answerable questions. The constraint is at most 5% false refusals; ties prefer fewer false refusals, then a lower threshold. These are calibration-set results, not held-out estimates. Actual answer refusals are reported separately in the calibration artifact.
+The selected score threshold is `0.20149040532450285`. It refuses 5/14 refusal/coverage probes while falsely refusing 4/108 answerable questions. The constraint is at most 5% false refusals; ties prefer fewer false refusals, then a lower threshold. These are calibration-set results, not held-out estimates. Actual answer refusals are reported separately in the calibration artifact.
 
 ## Run it locally
 
@@ -222,7 +222,7 @@ This measures agreement with the sources as read by the maintainer, not an indep
 - **Free-tier LLM quota.** About 20 requests a day per model, so extraction of many programmes takes more than one day and the hosted chat will need caching.
 - **Small corpus, single node.** In-memory BM25 and brute-force cosine search. Fine for thousands of chunks, not millions.
 - **Small, assisted gold set.** 104 of the 122 model-authored items were accepted by the maintainer; the other 18 (multi-hop) are not yet human-reviewed, so numbers that include them are provisional. Labels still have known source overlap; this is not an independent human-written evaluation. Refusal results use the calibration set itself.
-- **Score-only refusal remains weak.** The selected threshold misses 9 of 14 refusal/coverage probes while falsely refusing 5 of 108 answerable questions. Coverage checks need more than a relevance score; calibration is a measured baseline, not a solved coverage policy.
+- **Score-only refusal remains weak.** The selected threshold misses 9 of 14 refusal/coverage probes while falsely refusing 4 of 108 answerable questions. Coverage checks need more than a relevance score; calibration is a measured baseline, not a solved coverage policy.
 - **Seven of 13 programme records are not hand-verified.** They were verified by a second pass over the cited pages and are labelled `second_pass`; a completed 35-field sample found six strict failures, now corrected; unsampled fields remain unscored.
 - **Official pages change.** Every answer shows its crawl date. A weekly re-crawl with human review of changed pages comes with deployment.
 - **The extractive fallback is quotes, not prose.** It is grounded by construction but not fluent.

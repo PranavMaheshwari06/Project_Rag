@@ -839,6 +839,18 @@
     "status": 200,
     "url": "https://www.tum.de/en/studies/application/application-info-portal/admission-requirements/language-certificates"
   },
+  "de/tum/tuition-fees": {
+    "changed": false,
+    "checked_at": "2026-11-12T22:00:59+00:00",
+    "content_type": "text/html",
+    "error": null,
+    "fetched_at": "2026-11-12T22:00:59+00:00",
+    "file": "de/tum/tuition-fees.html",
+    "final_url": "https://www.tum.de/en/studies/fees/tuition",
+    "sha256": "593078b3fc4772d55c446893f7561ffcc979b05da3fa4e61fdcaad29537da50a",
+    "status": 200,
+    "url": "https://www.tum.de/en/studies/fees/tuition"
+  },
   "de/ustutt/cs-msc/department": {
     "changed": false,
     "checked_at": "2026-10-16T08:35:47+00:00",
