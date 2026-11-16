@@ -1,6 +1,6 @@
 # Germany Master's Eligibility Assistant
 
-> **Status: in development.** The data pipeline, retrieval core, requirement extraction with review, the eligibility engine and its API are built. All 13 programmes have verified requirement records: 6 verified by hand field by field, 7 by a second pass over the cited pages (see [Verification](#verification)). The engine has rule files for all 13 programmes, reviewed by hand except the deadline rules added on 2026-11-12 (still pending), and is evaluated on 40 frozen cases (see [Eligibility evaluation](#eligibility-evaluation)). The agent, the UI and a public demo come next. See [the project plan](docs/project-plan.md).
+> **Status: in development.** The data pipeline, retrieval core, requirement extraction with review, the eligibility engine and its API are built. All 13 programmes have verified requirement records: 6 verified by hand field by field, 7 by a second pass over the cited pages (see [Verification](#verification)). The engine has rule files for all 13 programmes, all reviewed by hand, and is evaluated on 40 frozen cases (see [Eligibility evaluation](#eligibility-evaluation)). Retrieval upgrades were tested in an ablation (see [Retrieval ablation](#retrieval-ablation-phase-5)). A small tool-using agent and its comparison harness are built; the comparison run is in progress. Streaming, guardrails, the UI and a public demo come next. See [the project plan](docs/project-plan.md).
 
 Applying for a master's in Germany means checking a dozen official websites: the programme page, uni-assist, APS, the embassy, the blocked-account rules, the city's foreigners' office. Each one says something slightly different, and some of it is only in PDFs. This project reads those official pages for you and answers from them, with a citation and a crawl date on every claim.
 
@@ -78,7 +78,7 @@ flowchart LR
 
 ### Coming next
 
-Finish the eligibility engine (human review of the deadline rules added on 2026-11-12, independent evaluation) → retrieval upgrades kept only if the numbers improve → small tool-using agent → streaming, guardrails and rate limits → UI → free public deployment → MCP server → UI polish. Details and the "done when" check for each phase are in [docs/project-plan.md](docs/project-plan.md).
+Run the agent vs one-shot comparison → streaming, guardrails and rate limits → UI → free public deployment → MCP server → UI polish. Details and the "done when" check for each phase are in [docs/project-plan.md](docs/project-plan.md).
 
 The [eligibility engine spec](docs/eligibility-engine-spec.md) defines its rules, interfaces and evaluation.
 
@@ -180,24 +180,24 @@ The selected score threshold is `0.20149040532450285`. It refuses 5/14 refusal/c
 <!-- ABLATION:START -->
 | questions | arm | n | MRR [95% CI] | MRR gain vs baseline [95% CI] | Recall@5 | p50 ms |
 |---|---|---|---|---|---|---|
-| all | baseline | 108 | 0.748 [0.678, 0.813] | — | 0.801 | 3883 |
-| all | oracle_filter | 108 | 0.785 [0.720, 0.849] | +0.037 [+0.001, +0.074] **win** | 0.856 | 3727 |
-| all | detected_filter | 108 | 0.785 [0.719, 0.849] | +0.037 [+0.001, +0.074] **win** | 0.867 | 3785 |
-| human_reviewed | baseline | 90 | 0.766 [0.691, 0.844] | — | 0.839 | 3679 |
-| human_reviewed | oracle_filter | 90 | 0.796 [0.727, 0.865] | +0.030 [-0.009, +0.073] | 0.894 | 3612 |
-| human_reviewed | detected_filter | 90 | 0.796 [0.727, 0.865] | +0.030 [-0.009, +0.073] | 0.894 | 3626 |
-| confusable | baseline | 11 | 0.768 [0.577, 0.955] | — | 1.000 | 3751 |
-| confusable | oracle_filter | 11 | 0.814 [0.623, 1.000] | +0.045 [+0.000, +0.136] | 1.000 | 3402 |
-| confusable | detected_filter | 11 | 0.814 [0.623, 1.000] | +0.045 [+0.000, +0.136] | 1.000 | 3496 |
-| country_rules | baseline | 24 | 0.948 [0.865, 1.000] | — | 1.000 | 3560 |
-| country_rules | oracle_filter | 24 | 0.951 [0.875, 1.000] | +0.003 [+0.000, +0.010] | 1.000 | 3496 |
-| country_rules | detected_filter | 24 | 0.951 [0.875, 1.000] | +0.003 [+0.000, +0.010] | 1.000 | 3572 |
-| multi_hop | baseline | 28 | 0.654 [0.517, 0.790] | — | 0.536 | 5162 |
-| multi_hop | oracle_filter | 28 | 0.689 [0.558, 0.815] | +0.035 [-0.026, +0.100] | 0.589 | 4843 |
-| multi_hop | detected_filter | 28 | 0.690 [0.561, 0.816] | +0.035 [-0.026, +0.100] | 0.631 | 4863 |
-| requirement | baseline | 45 | 0.695 [0.579, 0.805] | — | 0.811 | 3738 |
-| requirement | oracle_filter | 45 | 0.749 [0.643, 0.847] | +0.054 [-0.022, +0.130] | 0.911 | 3624 |
-| requirement | detected_filter | 45 | 0.749 [0.643, 0.847] | +0.054 [-0.022, +0.130] | 0.911 | 3726 |
+| all | baseline | 108 | 0.748 [0.678, 0.813] | — | 0.801 | 2541 |
+| all | oracle_filter | 108 | 0.785 [0.720, 0.849] | +0.037 [+0.001, +0.074] **win** | 0.856 | 2528 |
+| all | detected_filter | 108 | 0.785 [0.719, 0.849] | +0.037 [+0.001, +0.074] **win** | 0.867 | 2507 |
+| human_reviewed | baseline | 108 | 0.748 [0.678, 0.813] | — | 0.801 | 2541 |
+| human_reviewed | oracle_filter | 108 | 0.785 [0.720, 0.849] | +0.037 [+0.001, +0.074] **win** | 0.856 | 2528 |
+| human_reviewed | detected_filter | 108 | 0.785 [0.719, 0.849] | +0.037 [+0.001, +0.074] **win** | 0.867 | 2507 |
+| confusable | baseline | 11 | 0.768 [0.577, 0.955] | — | 1.000 | 2592 |
+| confusable | oracle_filter | 11 | 0.814 [0.623, 1.000] | +0.045 [+0.000, +0.136] | 1.000 | 2520 |
+| confusable | detected_filter | 11 | 0.814 [0.623, 1.000] | +0.045 [+0.000, +0.136] | 1.000 | 2560 |
+| country_rules | baseline | 24 | 0.948 [0.865, 1.000] | — | 1.000 | 2518 |
+| country_rules | oracle_filter | 24 | 0.951 [0.875, 1.000] | +0.003 [+0.000, +0.010] | 1.000 | 2517 |
+| country_rules | detected_filter | 24 | 0.951 [0.875, 1.000] | +0.003 [+0.000, +0.010] | 1.000 | 2506 |
+| multi_hop | baseline | 28 | 0.654 [0.517, 0.790] | — | 0.536 | 2527 |
+| multi_hop | oracle_filter | 28 | 0.689 [0.558, 0.815] | +0.035 [-0.026, +0.100] | 0.589 | 2531 |
+| multi_hop | detected_filter | 28 | 0.690 [0.561, 0.816] | +0.035 [-0.026, +0.100] | 0.631 | 2494 |
+| requirement | baseline | 45 | 0.695 [0.579, 0.805] | — | 0.811 | 2551 |
+| requirement | oracle_filter | 45 | 0.749 [0.643, 0.847] | +0.054 [-0.022, +0.130] | 0.911 | 2534 |
+| requirement | detected_filter | 45 | 0.749 [0.643, 0.847] | +0.054 [-0.022, +0.130] | 0.911 | 2546 |
 
 | arm | refusal probes refused | answerable questions refused |
 |---|---|---|
@@ -206,7 +206,7 @@ The selected score threshold is `0.20149040532450285`. It refuses 5/14 refusal/c
 | detected_filter | 5/14 | 6/108 |
 <!-- ABLATION:END -->
 
-**Result: filters stay off in `/answer`.** The detector matches the oracle upper bound and lifts overall MRR by +0.037, but the interval's lower edge is +0.001 and it includes zero on the 90 human-reviewed questions. It also raises false refusals from 4 to 6 of 108 (5.6%, above the 5% limit), because the refusal threshold was calibrated without filters. Revisit only together with a recalibration of the threshold on filtered scores. The 18 multi-hop items are not yet human-reviewed, so the "all" row is provisional.
+**Result: filters stay off in `/answer`.** The detector matches the oracle upper bound and lifts MRR by +0.037 [+0.001, +0.074] on all 108 answerable questions, which are now all human-reviewed (re-run 2026-11-16), so the gain is unlikely to be noise, though its lower edge is close to zero. It fails the second condition: false refusals rise from 4 to 6 of 108 (5.6%, above the 5% limit), because the refusal threshold was calibrated without filters. Revisit only together with a recalibration of the threshold on filtered scores.
 
 ## Run it locally
 
