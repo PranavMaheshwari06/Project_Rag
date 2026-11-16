@@ -334,3 +334,14 @@ DRAFT for the maintainer to rewrite in their own words (written 2026-11-13 from 
 - **Every tool result joins one numbered evidence list.** Record fields and rule citations carry their real page id, so the answer's markers are checked by the same citation mapping as one-shot RAG, and an answer with no valid marker is replaced by the refusal.
 - **The agent can ask the engine, never decide.** The profile comes from the caller as a typed object, the model sees verdicts and requirements but not the student's values, and it is told to report the engine's headline as is.
 - **Agent vs one-shot is scored without a judge.** Cited-document recall and answer-hint number recall on the human-reviewed multi-hop items, paired bootstrap on the difference. It costs no extra quota and every number traces to a reviewed label; it misses facts stated only in words.
+
+## 2026-11-12 — Phase 5: fix the parser narrowly, put intervals on every number, keep filters off
+
+DRAFT for the maintainer to rewrite in their own words (written 2026-11-16 from the Phase 5 notes).
+
+- **Parse only the raw `<main>` slice instead of switching parser.** A stray end tag made `html.parser` close `<main>` early, so the TUM language page lost its English requirements. Parsing the `<main>...</main>` slice changed one of 68 pages; a different parser would have moved every page and the whole baseline at once.
+- **Every retrieval number carries a seeded paired bootstrap interval.** An upgrade counts as a win only if the interval of its per-question gain lies above zero. Without intervals, any positive point estimate would look like progress.
+- **Metadata filters stay off.** The rule-based detector matches the oracle upper bound and lifts MRR by +0.037 with an interval just above zero, but false refusals rise from 4 to 6 of 108, past the 5% limit, because the refusal threshold was calibrated without filters. Filters can return only together with a threshold recalibrated on filtered scores.
+- **Query rewriting and parent-child chunking were not built.** Each costs quota or a re-index, and nothing measured showed retrieval scope as the bottleneck; the agent attacks multi-hop questions directly.
+
+Updated 2026-11-16: re-run with all 108 answerable items human-reviewed. The gain is now above zero on the human-reviewed group too; the decision stands on the refusal limit alone.
