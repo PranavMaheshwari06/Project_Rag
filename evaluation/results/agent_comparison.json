@@ -1,0 +1,41 @@
+{
+  "items_total": 28,
+  "items_paired": 28,
+  "method": "deterministic: cited-doc recall and hint-number recall; paired bootstrap on agent minus one-shot",
+  "metrics": {
+    "doc_recall": {
+      "n": 28,
+      "agent": 0.589,
+      "oneshot": 0.143,
+      "diff": 0.446,
+      "diff_ci": [
+        0.268,
+        0.625
+      ]
+    },
+    "fact_recall": {
+      "n": 23,
+      "agent": 0.676,
+      "oneshot": 0.101,
+      "diff": 0.574,
+      "diff_ci": [
+        0.35,
+        0.779
+      ]
+    }
+  },
+  "oneshot": {
+    "refused": 21,
+    "llm_calls_mean": 1.0,
+    "models": [
+      "gemini-3.8-flash"
+    ]
+  },
+  "agent": {
+    "refused": 9,
+    "llm_calls_mean": 4.68,
+    "models": [
+      "gemini-3.8-flash"
+    ]
+  }
+}

@@ -1,6 +1,6 @@
 # Germany Master's Eligibility Assistant
 
-> **Status: in development.** The data pipeline, retrieval core, requirement extraction with review, the eligibility engine and its API are built. All 13 programmes have verified requirement records: 6 verified by hand field by field, 7 by a second pass over the cited pages (see [Verification](#verification)). The engine has rule files for all 13 programmes, all reviewed by hand, and is evaluated on 40 frozen cases (see [Eligibility evaluation](#eligibility-evaluation)). Retrieval upgrades were tested in an ablation (see [Retrieval ablation](#retrieval-ablation-phase-5)). A small tool-using agent and its comparison harness are built; the comparison run is in progress. Streaming, guardrails, the UI and a public demo come next. See [the project plan](docs/project-plan.md).
+> **Status: in development.** The data pipeline, retrieval core, requirement extraction with review, the eligibility engine and its API are built. All 13 programmes have verified requirement records: 6 verified by hand field by field, 7 by a second pass over the cited pages (see [Verification](#verification)). The engine has rule files for all 13 programmes, all reviewed by hand, and is evaluated on 40 frozen cases (see [Eligibility evaluation](#eligibility-evaluation)). Retrieval upgrades were tested in an ablation (see [Retrieval ablation](#retrieval-ablation-phase-5)). A small tool-using agent beats one-shot RAG on the 28 multi-hop questions, mostly because one-shot refuses them (see [Agent vs one-shot](#agent-vs-one-shot-rag-phase-7)). Streaming, guardrails, the UI and a public demo come next. See [the project plan](docs/project-plan.md).
 
 Applying for a master's in Germany means checking a dozen official websites: the programme page, uni-assist, APS, the embassy, the blocked-account rules, the city's foreigners' office. Each one says something slightly different, and some of it is only in PDFs. This project reads those official pages for you and answers from them, with a citation and a crawl date on every claim.
 
@@ -78,7 +78,7 @@ flowchart LR
 
 ### Coming next
 
-Run the agent vs one-shot comparison → streaming, guardrails and rate limits → UI → free public deployment → MCP server → UI polish. Details and the "done when" check for each phase are in [docs/project-plan.md](docs/project-plan.md).
+Streaming, guardrails and rate limits → UI → free public deployment → MCP server → UI polish. Details and the "done when" check for each phase are in [docs/project-plan.md](docs/project-plan.md).
 
 The [eligibility engine spec](docs/eligibility-engine-spec.md) defines its rules, interfaces and evaluation.
 
@@ -207,6 +207,22 @@ The selected score threshold is `0.20149040532450285`. It refuses 5/14 refusal/c
 <!-- ABLATION:END -->
 
 **Result: filters stay off in `/answer`.** The detector matches the oracle upper bound and lifts MRR by +0.037 [+0.001, +0.074] on all 108 answerable questions, which are now all human-reviewed (re-run 2026-11-16), so the gain is unlikely to be noise, though its lower edge is close to zero. It fails the second condition: false refusals rise from 4 to 6 of 108 (5.6%, above the 5% limit), because the refusal threshold was calibrated without filters. Revisit only together with a recalibration of the threshold on filtered scores.
+
+### Agent vs one-shot RAG (Phase 7)
+
+`make compare-agent` runs both arms on the 28 human-reviewed multi-hop questions: one-shot RAG (hybrid+rerank, one LLM call) and the agent (tool loop, at most six calls, read-only tools). Scoring is deterministic, no LLM judge: `doc_recall` is the share of a question's relevant pages that the answer cites; `fact_recall` is the share of the numbers in the reviewed answer found in the answer. A refusal or an uncited answer scores 0. The headline is the paired difference with a 95% bootstrap interval; above zero is a win. Both arms used `gemini-3.8-flash` for every call. Result files: [agent_comparison.json](evaluation/results/agent_comparison.json), [agent_comparison.jsonl](evaluation/results/agent_comparison.jsonl).
+
+| metric | n | agent | one-shot | agent minus one-shot [95% CI] |
+|---|---|---|---|---|
+| doc_recall | 28 | 0.589 | 0.143 | +0.446 [+0.268, +0.625] **win** |
+| fact_recall | 23 | 0.676 | 0.101 | +0.574 [+0.350, +0.779] **win** |
+
+| arm | refused | LLM calls per question | mean latency |
+|---|---|---|---|
+| one-shot | 21/28 | 1.0 | 14 s |
+| agent | 9/28 | 4.7 | 49 s |
+
+**Result: the agent beats one-shot on multi-hop questions, but most of the gap is refusals.** One-shot refuses 21 of 28 because its single retrieval rarely clears the refusal threshold for a question that needs two pages. On the 7 questions where one-shot did answer, the gap is small: `doc_recall` 0.64 (agent) vs 0.57, `fact_recall` 0.75 vs 0.39, too few questions for an interval. The agent costs about five times the calls and three and a half times the latency, and it still refuses 9 of 28 (5 refusals, 2 unparseable replies, 1 over budget, 1 uncited). The whole run used 159 LLM calls and about 0.4 USD at the published Flash price.
 
 ## Run it locally
 
