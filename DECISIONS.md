@@ -270,6 +270,8 @@ checklist looks for the first, and the human pass is there for the second.
 
 *Accepted 2026-10-27: all 104 retained items now record human acceptance, including four explicitly approved updates. Authorship remains model-assisted; see the closure entry.*
 
+*Updated 2026-11-20: the set has 122 items (multi-hop grew from 10 to 28, each with verbatim evidence quotes) and every item records `reviewed_by: human`. `author` stays `model`: the set is model-drafted and human-accepted, not blind-reviewed.*
+
 ## 2026-10-26 — extraction accuracy counts value, quote and doc_id
 
 A field counts as "draft unchanged" only if status, value, quote and doc_id
@@ -294,17 +296,15 @@ The benchmark disables live LLM calls even when a key exists, so the baseline sp
 
 ## 2026-10-27 — Phase 6 Step 0: separate source verification from rule interpretation
 
-Draft for the maintainer to rewrite; semantic rule acceptance is pending.
-
 Phase 6 starts on `phase-6-eligibility-engine` from `b85ae75`, stacked on the still-unmerged Phase 4 work. Its first deliverable is a 13-programme, 17-field inventory rather than eligibility verdicts. Every field has a proposed automation boundary, original source references and any relevant pending interpretation. Forty-four supplemental cached excerpts expose exceptional branches and missed prerequisites without modifying the Phase 4 records or promoting verification tiers. Hashes bind the inventory to its records, cached sources and 51 preserved baseline inputs.
 
 Why: extracting the right words and deciding how conditions combine are different tasks. KIT alternatives, RWTH exemption bases and conditional Darmstadt exams can change a decision even when each quoted value is correct. The cost is a separate semantic review and explicit unknowns for unresolved evidence, including KIT CDS overlap policy and incomplete language-proof coverage. A successful quote/hash check proves consistency with a snapshot, not current university policy or correctness of the interpretation.
 
 The five maintainer-authored profiles and expected labels remain blank until authored independently; the model must not supply them and claim human provenance. The LLM extracts information, while deterministic code will compare confirmed facts under reviewed rules. No engine accuracy or completed Phase 6 claim follows from this inventory.
 
-## 2026-11-02 — Step 3 rule decisions: closed versus open proof lists, units, equivalence
+Outcome (recorded 2026-11-20). The 17 interpretation reviews (R01-R17) in `data/eligibility/coverage_inventory.json` stayed `pending` while the rules were written, because the file is the hash-locked baseline and the validator refuses a draft that claims acceptance. On 2026-11-20 I accepted all 17 (`reviewed_by: human`) after a second pass that mapped each one to the rule or boundary that settled it: 13 are resolved outright in the rules. Four carry a boundary that stays open on purpose and resolves to "the university decides", never to a false pass: R04 (the GRE and GATE age limits are review-only), R08 (the GATE 750 exemption is not a machine branch), R14 (the TUM interview or second-stage test) and R07 (the RWTH score lists rest on a visual PDF check that a second pass cannot repeat from text). The acceptance is recorded without touching the locked baseline hashes. All 114 rules in 13 files are `reviewed_by: human`. The evidence that the split worked is the evaluation: on 40 frozen cases the engine agrees on 40/40 headlines and 213/213 criteria with 0 false-positive headlines (`evaluation/results/eligibility_baseline.json`). Two limits are reported next to that result: only 17 of the 40 cases are marked independent of how the rules were written, and the automatic checks decide 211 of 334 applicable criteria (63.2%). The rest are 74 "the university decides", 48 missing profile facts and 1 funds route that cannot be compared.
 
-DRAFT for the maintainer to rewrite in their own words (written 2026-11-04 from the decisions recorded in LEARNING.md on 2026-11-02).
+## 2026-11-02 — Step 3 rule decisions: closed versus open proof lists, units, equivalence
 
 The 70 rules in the 11 new rule files were accepted (`reviewed_by: human`), with these cross-cutting answers. X2: the 2026 TOEFL 1-6 scale is a separate test name wherever a page publishes a new-scale minimum, so a new-scale score passes or fails on its own and is never converted. X3: a credit total in a unit other than ECTS is "the university decides" everywhere, because the engine does not convert units. X4: where a page gives a closed list of English proofs, failing every listed proof is "does not meet"; where the page says other proof may count, the rule falls back to "the university decides". D14 overrides X4 for TU Darmstadt, because the programme pages ask for C1 while the admission guide lists only three proofs; two official pages disagree, so any other proof is the university's call. D05 builds the RWTH Data Science GRE exemption from citizenship and schooling facts; unknown facts never exempt.
 
@@ -313,6 +313,8 @@ X1 (a profile fact for a reported university equivalence assessment) was accepte
 Why: each answer keeps a verdict tied to what a page actually says. The cost is more "the university decides" outcomes, which the coverage breakdown in the evaluation makes visible.
 
 Updated 2026-11-06: X1 is built for TU Berlin and KIT CDS as `university_assessments`. The other 11 programmes still leave equivalence to the university.
+
+Updated 2026-11-20: the rule set is now 114 rules in 13 files, all `human`. The cost named above is measurable: of 334 applicable criteria in the 40 evaluation cases, 74 end as "the university decides" (`unknown_reasons` in `evaluation/results/eligibility_baseline.json`). That is the price of X2-X4: a verdict never claims more than a page says.
 
 ## 2026-11-06 — profile facts, date checks, funds and the API
 
@@ -327,17 +329,21 @@ Updated 2026-11-06: X1 is built for TU Berlin and KIT CDS as `university_assessm
 
 ## 2026-11-13 — Phase 7: the agent and how it is compared
 
-DRAFT for the maintainer to rewrite in their own words (written 2026-11-13 from the Phase 7 notes).
-
 - **The agent speaks JSON, not native function calling.** Each step returns one JSON object: a tool call or the answer. The thin LLM client stays the only module that touches the SDK and works on any OpenAI-compatible endpoint, and a scripted fake replaces it in tests.
 - **The step budget counts LLM calls and is hard.** Six calls per question, the answer included; a tool call on the last call is not run. A slow or confused model cannot spend the daily quota on one question.
 - **Every tool result joins one numbered evidence list.** Record fields and rule citations carry their real page id, so the answer's markers are checked by the same citation mapping as one-shot RAG, and an answer with no valid marker is replaced by the refusal.
 - **The agent can ask the engine, never decide.** The profile comes from the caller as a typed object, the model sees verdicts and requirements but not the student's values, and it is told to report the engine's headline as is.
 - **Agent vs one-shot is scored without a judge.** Cited-document recall and answer-hint number recall on the human-reviewed multi-hop items, paired bootstrap on the difference. It costs no extra quota and every number traces to a reviewed label; it misses facts stated only in words.
 
-## 2026-11-12 — Phase 5: fix the parser narrowly, put intervals on every number, keep filters off
+Result (recorded 2026-11-20, 28 paired questions, one model, no fallback). The agent cites more of the right pages: `doc_recall` 0.786 against 0.125 for one-shot, difference +0.661 [+0.482, +0.821]; `fact_recall` 0.813 against 0.116, +0.697 [+0.551, +0.848] (`evaluation/results/agent_comparison.json`). The interval is above zero, which was the "done when" line. The first run, before the parser fix below, gave 0.589 against 0.143 with the interval also above zero; the model is not deterministic at temperature 0, so point estimates move between runs and only the interval is the claim.
 
-DRAFT for the maintainer to rewrite in their own words (written 2026-11-16 from the Phase 5 notes).
+What the number does and does not say. One-shot refused 22 of 28 questions, and none of them at the score gate: all 28 pass it. The model replied "not enough evidence" because one retrieval rarely brings in both pages a two-part question needs (18 of the 22 had a relevant page missing from the top 5; mean recall@5 0.50 against 0.67 for the 6 it answered). On those 6, the gap is small: `doc_recall` 0.75 against 0.58. So the honest claim is that the agent can gather two pages for a two-part question, not that it writes better answers. It costs 4.4 calls instead of 1 and 44 s instead of 16 s, and it still refused 4 of 28.
+
+- **The loop reads the first JSON object and ignores what follows.** A 20-call probe that logged raw replies showed the model often appending stray braces or words after a valid object (`{...}}}`); `json.loads` rejected those, each cost a repair call, and 5 of the 20 calls were wasted that way. Two in a row ended a question as `bad_output`. The probe is the evidence; the regression test `test_stray_text_after_the_json_object_is_ignored` is the guard.
+- **Spend was capped and metered.** The two comparison runs used 159 and 152 calls, about 0.40 and 0.38 USD at the published Flash price, against a 1.00 USD limit set before the first run.
+- **Known remaining failures, left unfixed on purpose.** One unparseable reply and one uncited answer in 28. The Phase 8 answer contract (reject uncited output, bounded retry) is where they belong, not a second patch to the loop.
+
+## 2026-11-12 — Phase 5: fix the parser narrowly, put intervals on every number, keep filters off
 
 - **Parse only the raw `<main>` slice instead of switching parser.** A stray end tag made `html.parser` close `<main>` early, so the TUM language page lost its English requirements. Parsing the `<main>...</main>` slice changed one of 68 pages; a different parser would have moved every page and the whole baseline at once.
 - **Every retrieval number carries a seeded paired bootstrap interval.** An upgrade counts as a win only if the interval of its per-question gain lies above zero. Without intervals, any positive point estimate would look like progress.
@@ -345,3 +351,5 @@ DRAFT for the maintainer to rewrite in their own words (written 2026-11-16 from 
 - **Query rewriting and parent-child chunking were not built.** Each costs quota or a re-index, and nothing measured showed retrieval scope as the bottleneck; the agent attacks multi-hop questions directly.
 
 Updated 2026-11-16: re-run with all 108 answerable items human-reviewed. The gain is now above zero on the human-reviewed group too; the decision stands on the refusal limit alone.
+
+Updated 2026-11-20: the agent comparison supports leaving rewriting unbuilt for now. For 17 of the 21 multi-hop questions that one-shot RAG refused, the top 5 passages missed at least one relevant page (mean recall@5 0.50, against 0.64 for the 7 it answered; `retrieval_per_query` in `evaluation/results/refusal_calibration.json`). The gap is retrieval breadth, which a second search fixes, and a tool loop that searches again is already built.
