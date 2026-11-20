@@ -65,7 +65,8 @@ class AgentAnswer(BaseModel):
 def _parse(reply: str) -> dict | None:
     text = reply.strip().removeprefix("```json").removeprefix("```").removesuffix("```").strip()
     try:
-        obj = json.loads(text)
+        # the model often adds stray braces or words after a valid object; json.loads rejects that
+        obj, _ = json.JSONDecoder().raw_decode(text)
     except json.JSONDecodeError:
         return None
     if not isinstance(obj, dict):
