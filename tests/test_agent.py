@@ -97,6 +97,16 @@ def test_two_bad_replies_stop_the_loop(settings):
     assert llm.sent[1][-1]["content"] == REPAIR
 
 
+def test_stray_text_after_the_json_object_is_ignored(settings):
+    # reply shapes seen in a real run: an extra brace, and words after the object
+    llm = FakeLLM('{"tool": "search_sources", "args": {"query": "x"}}}',
+                  '{"args": {"query": "y"}, "tool": "search_sources"} combustion: false}',
+                  '{"answer": "It is 11,904 euros [1]."} done')
+    out = run_agent("q", toolbox(settings), llm)
+    assert out.stop_reason == "answered" and out.llm_calls == 3 and len(out.steps) == 2
+    assert all(sent[-1]["content"] != REPAIR for sent in llm.sent)  # no call spent on a repair
+
+
 def test_tool_errors_go_back_to_the_model(settings):
     llm = FakeLLM(call("browse_web", url="x"), call("get_requirements", programme="../etc"),
                   call("convert_grade", best="a", passing=50, obtained=70), {"answer": REFUSAL_TEXT})
