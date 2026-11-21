@@ -214,15 +214,15 @@ The selected score threshold is `0.20149040532450285`. It refuses 5/14 refusal/c
 
 | metric | n | agent | one-shot | agent minus one-shot [95% CI] |
 |---|---|---|---|---|
-| doc_recall | 28 | 0.589 | 0.143 | +0.446 [+0.268, +0.625] **win** |
-| fact_recall | 23 | 0.676 | 0.101 | +0.574 [+0.350, +0.779] **win** |
+| doc_recall | 28 | 0.786 | 0.125 | +0.661 [+0.482, +0.821] **win** |
+| fact_recall | 23 | 0.813 | 0.116 | +0.697 [+0.551, +0.848] **win** |
 
 | arm | refused | LLM calls per question | mean latency |
 |---|---|---|---|
-| one-shot | 21/28 | 1.0 | 14 s |
-| agent | 9/28 | 4.7 | 49 s |
+| one-shot | 22/28 | 1.0 | 16 s |
+| agent | 4/28 | 4.4 | 44 s |
 
-**Result: the agent beats one-shot on multi-hop questions, but most of the gap is refusals.** One-shot refuses 21 of 28, but not at the score gate: all 28 questions pass it (lowest top score 0.216 against the 0.20 threshold). The model itself replies "not enough evidence", mostly because its single retrieval did not bring in both pages: for 17 of the 21 refused questions the top 5 passages miss at least one relevant page (mean recall@5 0.50, against 0.64 for the 7 it answered). On the 7 questions where one-shot did answer, the gap is small: `doc_recall` 0.64 (agent) vs 0.57, `fact_recall` 0.75 vs 0.39, too few questions for an interval. The agent costs about five times the calls and three and a half times the latency, and it still refuses 9 of 28 (5 refusals, 2 unparseable replies, 1 over budget, 1 uncited). The whole run used 159 LLM calls and about 0.4 USD at the published Flash price.
+**Result: the agent beats one-shot on multi-hop questions, but most of the gap is refusals.** One-shot refuses 22 of 28, but not at the score gate: all 28 questions pass it (lowest top score 0.216 against the 0.20 threshold). The model itself replies "not enough evidence", mostly because its single retrieval did not bring in both pages: for 18 of the 22 refused questions the top 5 passages miss at least one relevant page (mean recall@5 0.50, against 0.67 for the 6 it answered). On those 6 questions the gap is small: `doc_recall` 0.75 (agent) vs 0.58, `fact_recall` 0.90 vs 0.53, too few questions for an interval. The agent costs about four times the calls and three times the latency, and it still refuses 4 of 28 (2 refusals, 1 unparseable reply, 1 uncited). The reported run used 152 LLM calls and about 0.38 USD at the published Flash price. It is the second run: the first, made before the loop learned to ignore stray text after a JSON reply (which had wasted calls and ended some questions as unparseable), gave `doc_recall` 0.589 vs 0.143 and 9 of 28 agent refusals. The interval is above zero in both runs, but the model is not deterministic even at temperature 0, so the point estimates move between runs.
 
 ## Run it locally
 
