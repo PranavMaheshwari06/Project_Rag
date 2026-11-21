@@ -47,6 +47,9 @@ parse-profile:
 compare-agent:
 	$(PY) scripts/compare_agent.py $(ARGS)
 
+eval-llm-refusal:
+	$(PY) scripts/llm_refusal.py $(ARGS)
+
 ablation:
 	$(PY) scripts/run_ablation.py
 
@@ -68,4 +71,4 @@ fmt:
 up:
 	docker compose up --build
 
-.PHONY: venv install crawl ingest index extract review eval ablation compare-agent eval-eligibility eligibility parse-profile validate-rule-inventory test run fmt up
+.PHONY: venv install crawl ingest index extract review eval ablation compare-agent eval-llm-refusal eval-eligibility eligibility parse-profile validate-rule-inventory test run fmt up

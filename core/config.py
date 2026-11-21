@@ -98,6 +98,8 @@ class EvalCfg(BaseModel):
     bootstrap_resamples: int = 2000  # 0 turns the retrieval intervals off
     bootstrap_seed: int = 0
     ablation_out: str = "evaluation/results/ablation.json"
+    llm_refusal_rows_out: str = "evaluation/results/llm_refusal.jsonl"  # one line per gold item
+    llm_refusal_out: str = "evaluation/results/llm_refusal.json"
 
 
 class EligibilityCfg(BaseModel):

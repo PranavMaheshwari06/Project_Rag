@@ -1,0 +1,63 @@
+{
+  "items": 94,
+  "method": "refusal outcome of the real one-shot path with the LLM on; answer correctness is not judged",
+  "by_kind": {
+    "confusable": {
+      "n": 11,
+      "gate": 2,
+      "llm": 5,
+      "uncited": 0,
+      "answered": 4
+    },
+    "country_rules": {
+      "n": 24,
+      "gate": 0,
+      "llm": 2,
+      "uncited": 0,
+      "answered": 22
+    },
+    "coverage": {
+      "n": 5,
+      "gate": 1,
+      "llm": 4,
+      "uncited": 0,
+      "answered": 0
+    },
+    "refusal": {
+      "n": 9,
+      "gate": 4,
+      "llm": 5,
+      "uncited": 0,
+      "answered": 0
+    },
+    "requirement": {
+      "n": 45,
+      "gate": 2,
+      "llm": 12,
+      "uncited": 0,
+      "answered": 31
+    }
+  },
+  "answerable": {
+    "n": 80,
+    "refused": 23,
+    "gate": 4,
+    "llm": 19,
+    "uncited": 0,
+    "answered": 57,
+    "refusal_rate": 0.287,
+    "refusal_rate_ci": [
+      0.188,
+      0.388
+    ]
+  },
+  "expected_refusals": {
+    "n": 14,
+    "refused": 14,
+    "answered_anyway": 0
+  },
+  "models": [
+    "-",
+    "gemini-3.8-flash"
+  ]
+}
