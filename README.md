@@ -173,6 +173,17 @@ _Answer quality (hybrid+rerank, extractive): groundedness 1.000, unsupported-cla
 
 The selected score threshold is `0.20149040532450285`. It refuses 5/14 refusal/coverage probes while falsely refusing 4/108 answerable questions. The constraint is at most 5% false refusals; ties prefer fewer false refusals, then a lower threshold. These are calibration-set results, not held-out estimates. Actual answer refusals are reported separately in the calibration artifact.
 
+### Refusal with the LLM on
+
+The calibration above uses the extractive path, so it measures only the score gate. `make eval-llm-refusal` runs the real one-shot path (gate, then `gemini-3.8-flash`) on the 94 non-multi-hop gold items and records who refused: the gate, the model, or the citation check. Answer correctness is not judged. Result file: [llm_refusal.json](evaluation/results/llm_refusal.json).
+
+| items | n | answered | refused by gate | refused by model |
+|---|---|---|---|---|
+| answerable (requirement, country rules, confusable) | 80 | 57 | 4 | 19 |
+| refusal and coverage probes | 14 | 0 | 5 | 9 |
+
+The model closes the gate's weakness: all 14 probes are refused and none is answered anyway, against 5 of 14 for the gate alone. The price is that 23 of 80 answerable questions are refused too (28.7%, 95% bootstrap interval [18.8%, 38.8%]), 19 of them by the model itself, against 4 of 108 at the gate alone. By kind: requirement 14 of 45, country rules 2 of 24, confusable 7 of 11. The refused questions have a mean recall@5 of 0.63, against 0.97 for the answered ones, but in 12 of the 19 model refusals the relevant page was in the top 5 and the model still declined, so the cause is both retrieval (right page, wrong passage) and a strict answer prompt. The run used 85 LLM calls, about 0.21 USD. This is the number to improve in Phase 8, with the answer contract.
+
 ### Retrieval ablation (Phase 5)
 
 `make ablation` runs hybrid+rerank three ways on the same gold set: no filter (baseline), filters taken from each question's gold metadata (an upper bound no deployed system has) and the rule-based detector in `retrieval/filters.py` (what `/answer` could do). A filter only counts as an improvement if the 95% paired bootstrap interval of its per-question MRR gain lies above zero, and it must not change refusal behaviour. Result file: [ablation.json](evaluation/results/ablation.json).
