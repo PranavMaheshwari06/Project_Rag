@@ -27,8 +27,11 @@ frontend/dist/
 # model caches if someone points HF_HOME here
 .cache/
 
-# local working notes
+# local working notes (enforced by tests/test_publish_rule.py)
+STATUS.md
 docs/working/
 docs/agents/
+graphify-out/
+*.bundle
 data/audit/audit_sheet.md
 data/audit/Audit_sheet_completed.md
