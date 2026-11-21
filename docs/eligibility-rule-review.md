@@ -8,23 +8,23 @@ Record references below link the original values and quotes. Supplemental excerp
 
 | Item | Decision to review | Status |
 |---|---|---|
-| [R01](#r01) | Degree and subject equivalence | pending |
-| [R02](#r02) | KIT CS: selection alternatives and separate GRE condition | pending |
-| [R03](#r03) | KIT CDS: grouped credits, thesis and conditional admission | pending |
-| [R04](#r04) | KIT test validity and accepted English proof | pending |
-| [R05](#r05) | RWTH: country basis and strict GRE bounds | pending |
-| [R06](#r06) | Country-group definitions need independent official evidence | pending |
-| [R07](#r07) | RWTH English scope and milestone | pending |
-| [R08](#r08) | Darmstadt: competencies and conditional exam, both programmes | pending |
-| [R09](#r09) | Saarland: grade alternatives AND class rank | pending |
-| [R10](#r10) | Saarland: test submission and English exceptions | pending |
-| [R11](#r11) | Deadlines: years, routes, classes and exceptions | pending |
-| [R12](#r12) | TU Berlin: credit exclusions and proof/route scope | pending |
-| [R13](#r13) | Dresden: test format and separate aptitude procedure | pending |
-| [R14](#r14) | TUM: English omission, optional documents and assessment | pending |
-| [R15](#r15) | Stuttgart: language validity and conditional assessment | pending |
-| [R16](#r16) | Documents, APS and readiness remain separate | pending |
-| [R17](#r17) | Fees, financial proof and source periods | pending |
+| [R01](#r01) | Degree and subject equivalence | accepted |
+| [R02](#r02) | KIT CS: selection alternatives and separate GRE condition | accepted |
+| [R03](#r03) | KIT CDS: grouped credits, thesis and conditional admission | accepted |
+| [R04](#r04) | KIT test validity and accepted English proof | accepted |
+| [R05](#r05) | RWTH: country basis and strict GRE bounds | accepted |
+| [R06](#r06) | Country-group definitions need independent official evidence | accepted |
+| [R07](#r07) | RWTH English scope and milestone | accepted |
+| [R08](#r08) | Darmstadt: competencies and conditional exam, both programmes | accepted |
+| [R09](#r09) | Saarland: grade alternatives AND class rank | accepted |
+| [R10](#r10) | Saarland: test submission and English exceptions | accepted |
+| [R11](#r11) | Deadlines: years, routes, classes and exceptions | accepted |
+| [R12](#r12) | TU Berlin: credit exclusions and proof/route scope | accepted |
+| [R13](#r13) | Dresden: test format and separate aptitude procedure | accepted |
+| [R14](#r14) | TUM: English omission, optional documents and assessment | accepted |
+| [R15](#r15) | Stuttgart: language validity and conditional assessment | accepted |
+| [R16](#r16) | Documents, APS and readiness remain separate | accepted |
+| [R17](#r17) | Fees, financial proof and source periods | accepted |
 
 <a id="r01"></a>
 
@@ -36,7 +36,7 @@ Unresolved / guard: No automatic non-ECTS conversion or semantic course assignme
 
 Original evidence: [KIT M.Sc. Computational and Data Science / degree_requirement](../data/verified/kit-m-sc-computational-and-data-science.json); [KIT M.Sc. Computer Science / degree_requirement](../data/verified/kit-m-sc-computer-science.json); [RWTH Aachen M.Sc. Computer Science / degree_requirement](../data/verified/rwth-aachen-m-sc-computer-science.json); [RWTH Aachen M.Sc. Data Science / degree_requirement](../data/verified/rwth-aachen-m-sc-data-science.json); [Saarland University M.Sc. Computer Science / degree_requirement](../data/verified/saarland-university-m-sc-computer-science.json); [Saarland University M.Sc. Data Science and Artificial Intelligence / degree_requirement](../data/verified/saarland-university-m-sc-data-science-and-artificial-intelligence.json); [TU Berlin M.Sc. Computer Science / degree_requirement](../data/verified/tu-berlin-m-sc-computer-science.json); [TU Darmstadt M.Sc. Artificial Intelligence and Machine Learning / degree_requirement](../data/verified/tu-darmstadt-m-sc-artificial-intelligence-and-machine-learning.json); [TU Darmstadt M.Sc. Computer Science / degree_requirement](../data/verified/tu-darmstadt-m-sc-computer-science.json); [TU Dresden M.Sc. Computer Science / degree_requirement](../data/verified/tu-dresden-m-sc-computer-science.json); [TUM M.Sc. Data Engineering and Analytics / degree_requirement](../data/verified/tum-m-sc-data-engineering-and-analytics.json); [TUM M.Sc. Informatics / degree_requirement](../data/verified/tum-m-sc-informatics.json); [University of Stuttgart M.Sc. Computer Science / degree_requirement](../data/verified/university-of-stuttgart-m-sc-computer-science.json); [KIT M.Sc. Computational and Data Science / subject_credits](../data/verified/kit-m-sc-computational-and-data-science.json); [KIT M.Sc. Computer Science / subject_credits](../data/verified/kit-m-sc-computer-science.json); [TU Berlin M.Sc. Computer Science / subject_credits](../data/verified/tu-berlin-m-sc-computer-science.json); [TU Darmstadt M.Sc. Artificial Intelligence and Machine Learning / subject_credits](../data/verified/tu-darmstadt-m-sc-artificial-intelligence-and-machine-learning.json); [TU Darmstadt M.Sc. Computer Science / subject_credits](../data/verified/tu-darmstadt-m-sc-computer-science.json).
 
-Review: **pending** · reviewer: **pending**.
+Review: **accepted** · reviewer: **human**.
 
 <a id="r02"></a>
 
@@ -50,7 +50,7 @@ Original evidence: [KIT M.Sc. Computer Science / selection_process](../data/veri
 
 Supplemental evidence: [E01](#e01), [E02](#e02), [E04](#e04).
 
-Review: **pending** · reviewer: **pending**.
+Review: **accepted** · reviewer: **human**.
 
 <a id="r03"></a>
 
@@ -64,7 +64,7 @@ Original evidence: [KIT M.Sc. Computational and Data Science / degree_requiremen
 
 Supplemental evidence: [E05](#e05), [E06](#e06), [E07](#e07), [E08](#e08).
 
-Review: **pending** · reviewer: **pending**.
+Review: **accepted** · reviewer: **human**.
 
 <a id="r04"></a>
 
@@ -78,7 +78,7 @@ Original evidence: [KIT M.Sc. Computer Science / entrance_tests](../data/verifie
 
 Supplemental evidence: [E03](#e03), [E40](#e40), [E41](#e41), [E42](#e42), [E43](#e43).
 
-Review: **pending** · reviewer: **pending**.
+Review: **accepted** · reviewer: **human**.
 
 <a id="r05"></a>
 
@@ -92,7 +92,7 @@ Original evidence: [RWTH Aachen M.Sc. Computer Science / entrance_tests](../data
 
 Supplemental evidence: [E09](#e09), [E10](#e10).
 
-Review: **pending** · reviewer: **pending**.
+Review: **accepted** · reviewer: **human**.
 
 <a id="r06"></a>
 
@@ -106,7 +106,7 @@ Original evidence: [KIT M.Sc. Computer Science / entrance_tests](../data/verifie
 
 Supplemental evidence: [E02](#e02), [E09](#e09), [E10](#e10), [E21](#e21).
 
-Review: **pending** · reviewer: **pending**.
+Review: **accepted** · reviewer: **human**.
 
 <a id="r07"></a>
 
@@ -120,7 +120,7 @@ Original evidence: [RWTH Aachen M.Sc. Computer Science / english](../data/verifi
 
 Supplemental evidence: [E13](#e13), [E14](#e14).
 
-Review: **pending** · reviewer: **pending**.
+Review: **accepted** · reviewer: **human**.
 
 <a id="r08"></a>
 
@@ -134,7 +134,7 @@ Original evidence: [TU Darmstadt M.Sc. Computer Science / entrance_tests](../dat
 
 Supplemental evidence: [E15](#e15), [E16](#e16), [E17](#e17).
 
-Review: **pending** · reviewer: **pending**.
+Review: **accepted** · reviewer: **human**.
 
 <a id="r09"></a>
 
@@ -148,7 +148,7 @@ Original evidence: [Saarland University M.Sc. Computer Science / min_grade_origi
 
 Supplemental evidence: [E19](#e19).
 
-Review: **pending** · reviewer: **pending**.
+Review: **accepted** · reviewer: **human**.
 
 <a id="r10"></a>
 
@@ -162,7 +162,7 @@ Original evidence: [Saarland University M.Sc. Computer Science / entrance_tests]
 
 Supplemental evidence: [E20](#e20), [E21](#e21), [E22](#e22), [E23](#e23), [E24](#e24).
 
-Review: **pending** · reviewer: **pending**.
+Review: **accepted** · reviewer: **human**.
 
 <a id="r11"></a>
 
@@ -176,7 +176,7 @@ Original evidence: [KIT M.Sc. Computational and Data Science / deadlines](../dat
 
 Supplemental evidence: [E11](#e11), [E12](#e12), [E25](#e25), [E26](#e26), [E31](#e31), [E32](#e32), [E33](#e33), [E17](#e17).
 
-Review: **pending** · reviewer: **pending**.
+Review: **accepted** · reviewer: **human**.
 
 <a id="r12"></a>
 
@@ -190,7 +190,7 @@ Original evidence: [TU Berlin M.Sc. Computer Science / subject_credits](../data/
 
 Supplemental evidence: [E27](#e27), [E28](#e28), [E29](#e29).
 
-Review: **pending** · reviewer: **pending**.
+Review: **accepted** · reviewer: **human**.
 
 <a id="r13"></a>
 
@@ -204,7 +204,7 @@ Original evidence: [TU Dresden M.Sc. Computer Science / english](../data/verifie
 
 Supplemental evidence: [E30](#e30), [E31](#e31).
 
-Review: **pending** · reviewer: **pending**.
+Review: **accepted** · reviewer: **human**.
 
 <a id="r14"></a>
 
@@ -218,7 +218,7 @@ Original evidence: [TUM M.Sc. Data Engineering and Analytics / english](../data/
 
 Supplemental evidence: [E34](#e34), [E35](#e35), [E36](#e36).
 
-Review: **pending** · reviewer: **pending**.
+Review: **accepted** · reviewer: **human**.
 
 <a id="r15"></a>
 
@@ -232,7 +232,7 @@ Original evidence: [University of Stuttgart M.Sc. Computer Science / english](..
 
 Supplemental evidence: [E37](#e37), [E38](#e38), [E39](#e39).
 
-Review: **pending** · reviewer: **pending**.
+Review: **accepted** · reviewer: **human**.
 
 <a id="r16"></a>
 
@@ -246,7 +246,7 @@ Original evidence: [KIT M.Sc. Computational and Data Science / aps_degree_countr
 
 Supplemental evidence: [E17](#e17), [E29](#e29).
 
-Review: **pending** · reviewer: **pending**.
+Review: **accepted** · reviewer: **human**.
 
 <a id="r17"></a>
 
@@ -260,7 +260,7 @@ Original evidence: [KIT M.Sc. Computational and Data Science / tuition_eur_per_s
 
 Supplemental evidence: [E18](#e18), [E44](#e44).
 
-Review: **pending** · reviewer: **pending**.
+Review: **accepted** · reviewer: **human**.
 
 ## Supplemental cached evidence
 

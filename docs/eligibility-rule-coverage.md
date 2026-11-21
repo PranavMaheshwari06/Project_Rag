@@ -29,7 +29,7 @@ Original values/quotes remain in the linked verified records. Source links ident
 
 ## KIT — M.Sc. Computational and Data Science
 
-[Verified values and original quotes](../data/verified/kit-m-sc-computational-and-data-science.json); tier `second_pass`; semantic review `pending`.
+[Verified values and original quotes](../data/verified/kit-m-sc-computational-and-data-science.json); tier `second_pass`; semantic review `accepted`.
 
 Canonical record SHA-256: `3d726ca23a10879cfea8b8e0803ecaf52103a97d1e7239acd1f97dc4218faab2`.
 
@@ -55,7 +55,7 @@ Canonical record SHA-256: `3d726ca23a10879cfea8b8e0803ecaf52103a97d1e7239acd1f97
 
 ## KIT — M.Sc. Computer Science
 
-[Verified values and original quotes](../data/verified/kit-m-sc-computer-science.json); tier `human`; semantic review `pending`.
+[Verified values and original quotes](../data/verified/kit-m-sc-computer-science.json); tier `human`; semantic review `accepted`.
 
 Canonical record SHA-256: `ea85986cefb22fe0ac7c50ecaea561f4fa171997f7e02f3f0fcd8b741917fbb2`.
 
@@ -81,7 +81,7 @@ Canonical record SHA-256: `ea85986cefb22fe0ac7c50ecaea561f4fa171997f7e02f3f0fcd8
 
 ## RWTH Aachen — M.Sc. Computer Science
 
-[Verified values and original quotes](../data/verified/rwth-aachen-m-sc-computer-science.json); tier `human`; semantic review `pending`.
+[Verified values and original quotes](../data/verified/rwth-aachen-m-sc-computer-science.json); tier `human`; semantic review `accepted`.
 
 Canonical record SHA-256: `c4cf2e21fa8f8f52204fb3e33844ac6b06f92041822bff236fb0016b81d8f627`.
 
@@ -107,7 +107,7 @@ Canonical record SHA-256: `c4cf2e21fa8f8f52204fb3e33844ac6b06f92041822bff236fb00
 
 ## RWTH Aachen — M.Sc. Data Science
 
-[Verified values and original quotes](../data/verified/rwth-aachen-m-sc-data-science.json); tier `human`; semantic review `pending`.
+[Verified values and original quotes](../data/verified/rwth-aachen-m-sc-data-science.json); tier `human`; semantic review `accepted`.
 
 Canonical record SHA-256: `09f2c8e081e0830a38692bb8f3020e6c063c6b5a4ab257103bae03232ad1830f`.
 
@@ -133,7 +133,7 @@ Canonical record SHA-256: `09f2c8e081e0830a38692bb8f3020e6c063c6b5a4ab257103bae0
 
 ## Saarland University — M.Sc. Computer Science
 
-[Verified values and original quotes](../data/verified/saarland-university-m-sc-computer-science.json); tier `second_pass`; semantic review `pending`.
+[Verified values and original quotes](../data/verified/saarland-university-m-sc-computer-science.json); tier `second_pass`; semantic review `accepted`.
 
 Canonical record SHA-256: `7dddd9fb5d34a431b215b29b75e62621ce5f75b2fa1e678f0c86407e9bea5d56`.
 
@@ -159,7 +159,7 @@ Canonical record SHA-256: `7dddd9fb5d34a431b215b29b75e62621ce5f75b2fa1e678f0c864
 
 ## Saarland University — M.Sc. Data Science and Artificial Intelligence
 
-[Verified values and original quotes](../data/verified/saarland-university-m-sc-data-science-and-artificial-intelligence.json); tier `human`; semantic review `pending`.
+[Verified values and original quotes](../data/verified/saarland-university-m-sc-data-science-and-artificial-intelligence.json); tier `human`; semantic review `accepted`.
 
 Canonical record SHA-256: `d2322b7af0d71ef930eafb2d0b20276153730814691446dbefd25f87d0ff0c8f`.
 
@@ -185,7 +185,7 @@ Canonical record SHA-256: `d2322b7af0d71ef930eafb2d0b20276153730814691446dbefd25
 
 ## TU Berlin — M.Sc. Computer Science
 
-[Verified values and original quotes](../data/verified/tu-berlin-m-sc-computer-science.json); tier `human`; semantic review `pending`.
+[Verified values and original quotes](../data/verified/tu-berlin-m-sc-computer-science.json); tier `human`; semantic review `accepted`.
 
 Canonical record SHA-256: `abf4441514dbbeb90cccbf878d66db024bcea1672e7d50cbb17ed826f452feb5`.
 
@@ -211,7 +211,7 @@ Canonical record SHA-256: `abf4441514dbbeb90cccbf878d66db024bcea1672e7d50cbb17ed
 
 ## TU Darmstadt — M.Sc. Artificial Intelligence and Machine Learning
 
-[Verified values and original quotes](../data/verified/tu-darmstadt-m-sc-artificial-intelligence-and-machine-learning.json); tier `second_pass`; semantic review `pending`.
+[Verified values and original quotes](../data/verified/tu-darmstadt-m-sc-artificial-intelligence-and-machine-learning.json); tier `second_pass`; semantic review `accepted`.
 
 Canonical record SHA-256: `22bfc9865e47f439e949a6dbd78e9fd3eda2a31eac6d0a382f8bdb75bbaead42`.
 
@@ -237,7 +237,7 @@ Canonical record SHA-256: `22bfc9865e47f439e949a6dbd78e9fd3eda2a31eac6d0a382f8bd
 
 ## TU Darmstadt — M.Sc. Computer Science
 
-[Verified values and original quotes](../data/verified/tu-darmstadt-m-sc-computer-science.json); tier `human`; semantic review `pending`.
+[Verified values and original quotes](../data/verified/tu-darmstadt-m-sc-computer-science.json); tier `human`; semantic review `accepted`.
 
 Canonical record SHA-256: `b87f9260300eb3c064033b3fdd76663bcaf6c373bc1a928bb9b53bb9e8759c17`.
 
@@ -263,7 +263,7 @@ Canonical record SHA-256: `b87f9260300eb3c064033b3fdd76663bcaf6c373bc1a928bb9b53
 
 ## TU Dresden — M.Sc. Computer Science
 
-[Verified values and original quotes](../data/verified/tu-dresden-m-sc-computer-science.json); tier `second_pass`; semantic review `pending`.
+[Verified values and original quotes](../data/verified/tu-dresden-m-sc-computer-science.json); tier `second_pass`; semantic review `accepted`.
 
 Canonical record SHA-256: `3c7460d2e1249d4929184c6d70ca649ebd091e58807fc7e653ca918376a11487`.
 
@@ -289,7 +289,7 @@ Canonical record SHA-256: `3c7460d2e1249d4929184c6d70ca649ebd091e58807fc7e653ca9
 
 ## TUM — M.Sc. Data Engineering and Analytics
 
-[Verified values and original quotes](../data/verified/tum-m-sc-data-engineering-and-analytics.json); tier `second_pass`; semantic review `pending`.
+[Verified values and original quotes](../data/verified/tum-m-sc-data-engineering-and-analytics.json); tier `second_pass`; semantic review `accepted`.
 
 Canonical record SHA-256: `fc6f4eb6ecb39f7206350e7c88ecaf6d816f1a41dcf1d5a69edc87c1e21d97d1`.
 
@@ -315,7 +315,7 @@ Canonical record SHA-256: `fc6f4eb6ecb39f7206350e7c88ecaf6d816f1a41dcf1d5a69edc8
 
 ## TUM — M.Sc. Informatics
 
-[Verified values and original quotes](../data/verified/tum-m-sc-informatics.json); tier `second_pass`; semantic review `pending`.
+[Verified values and original quotes](../data/verified/tum-m-sc-informatics.json); tier `second_pass`; semantic review `accepted`.
 
 Canonical record SHA-256: `4942157e105633bb37c706b14ba06d83fbed29b35a5ac74e029c6d8515bf9123`.
 
@@ -341,7 +341,7 @@ Canonical record SHA-256: `4942157e105633bb37c706b14ba06d83fbed29b35a5ac74e029c6
 
 ## University of Stuttgart — M.Sc. Computer Science
 
-[Verified values and original quotes](../data/verified/university-of-stuttgart-m-sc-computer-science.json); tier `second_pass`; semantic review `pending`.
+[Verified values and original quotes](../data/verified/university-of-stuttgart-m-sc-computer-science.json); tier `second_pass`; semantic review `accepted`.
 
 Canonical record SHA-256: `430b7664c0bc143e8a08fde7f0a1b9ae16e192bdbe8d1aa608a5201f5ef2695c`.
 

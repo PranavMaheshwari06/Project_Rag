@@ -3,9 +3,9 @@
   "created_on": "2026-10-27",
   "baseline_commit": "b85ae75",
   "baseline_refreshed_on": "2026-11-12",
-  "status": "draft_for_review",
+  "status": "accepted",
   "author": "model_assisted",
-  "reviewed_by": "pending",
+  "reviewed_by": "human",
   "scope": "Step 0 coverage inventory only; no executable eligibility rules or measured eligibility coverage.",
   "hash_method": "sha256; files are raw bytes; record hashes use original record JSON with sorted keys, compact separators and UTF-8 ensure_ascii=False; text hashes use cleaned source UTF-8.",
   "baseline_inputs": {
@@ -601,8 +601,8 @@
         "tu-darmstadt-m-sc-artificial-intelligence-and-machine-learning.subject_credits",
         "tu-darmstadt-m-sc-computer-science.subject_credits"
       ],
-      "reviewed_by": "pending",
-      "status": "pending"
+      "reviewed_by": "human",
+      "status": "accepted"
     },
     "R02": {
       "title": "KIT CS: selection alternatives and separate GRE condition",
@@ -620,8 +620,8 @@
         "kit-m-sc-computer-science.min_grade_original_scale",
         "kit-m-sc-computer-science.required_documents"
       ],
-      "reviewed_by": "pending",
-      "status": "pending"
+      "reviewed_by": "human",
+      "status": "accepted"
     },
     "R03": {
       "title": "KIT CDS: grouped credits, thesis and conditional admission",
@@ -638,8 +638,8 @@
         "kit-m-sc-computational-and-data-science.subject_credits",
         "kit-m-sc-computational-and-data-science.selection_process"
       ],
-      "reviewed_by": "pending",
-      "status": "pending"
+      "reviewed_by": "human",
+      "status": "accepted"
     },
     "R04": {
       "title": "KIT test validity and accepted English proof",
@@ -657,8 +657,8 @@
         "kit-m-sc-computer-science.english",
         "kit-m-sc-computational-and-data-science.english"
       ],
-      "reviewed_by": "pending",
-      "status": "pending"
+      "reviewed_by": "human",
+      "status": "accepted"
     },
     "R05": {
       "title": "RWTH: country basis and strict GRE bounds",
@@ -672,8 +672,8 @@
         "rwth-aachen-m-sc-computer-science.entrance_tests",
         "rwth-aachen-m-sc-data-science.entrance_tests"
       ],
-      "reviewed_by": "pending",
-      "status": "pending"
+      "reviewed_by": "human",
+      "status": "accepted"
     },
     "R06": {
       "title": "Country-group definitions need independent official evidence",
@@ -692,8 +692,8 @@
         "saarland-university-m-sc-computer-science.entrance_tests",
         "saarland-university-m-sc-data-science-and-artificial-intelligence.entrance_tests"
       ],
-      "reviewed_by": "pending",
-      "status": "pending"
+      "reviewed_by": "human",
+      "status": "accepted"
     },
     "R07": {
       "title": "RWTH English scope and milestone",
@@ -709,8 +709,8 @@
         "rwth-aachen-m-sc-computer-science.german",
         "rwth-aachen-m-sc-data-science.german"
       ],
-      "reviewed_by": "pending",
-      "status": "pending"
+      "reviewed_by": "human",
+      "status": "accepted"
     },
     "R08": {
       "title": "Darmstadt: competencies and conditional exam, both programmes",
@@ -729,8 +729,8 @@
         "tu-darmstadt-m-sc-computer-science.required_documents",
         "tu-darmstadt-m-sc-artificial-intelligence-and-machine-learning.required_documents"
       ],
-      "reviewed_by": "pending",
-      "status": "pending"
+      "reviewed_by": "human",
+      "status": "accepted"
     },
     "R09": {
       "title": "Saarland: grade alternatives AND class rank",
@@ -743,8 +743,8 @@
         "saarland-university-m-sc-computer-science.min_grade_original_scale",
         "saarland-university-m-sc-data-science-and-artificial-intelligence.min_grade_original_scale"
       ],
-      "reviewed_by": "pending",
-      "status": "pending"
+      "reviewed_by": "human",
+      "status": "accepted"
     },
     "R10": {
       "title": "Saarland: test submission and English exceptions",
@@ -763,8 +763,8 @@
         "saarland-university-m-sc-computer-science.english",
         "saarland-university-m-sc-data-science-and-artificial-intelligence.english"
       ],
-      "reviewed_by": "pending",
-      "status": "pending"
+      "reviewed_by": "human",
+      "status": "accepted"
     },
     "R11": {
       "title": "Deadlines: years, routes, classes and exceptions",
@@ -795,8 +795,8 @@
         "tum-m-sc-informatics.deadlines",
         "university-of-stuttgart-m-sc-computer-science.deadlines"
       ],
-      "reviewed_by": "pending",
-      "status": "pending"
+      "reviewed_by": "human",
+      "status": "accepted"
     },
     "R12": {
       "title": "TU Berlin: credit exclusions and proof/route scope",
@@ -814,8 +814,8 @@
         "tu-berlin-m-sc-computer-science.required_documents",
         "tu-berlin-m-sc-computer-science.deadlines"
       ],
-      "reviewed_by": "pending",
-      "status": "pending"
+      "reviewed_by": "human",
+      "status": "accepted"
     },
     "R13": {
       "title": "Dresden: test format and separate aptitude procedure",
@@ -832,8 +832,8 @@
         "tu-dresden-m-sc-computer-science.application_route",
         "tu-dresden-m-sc-computer-science.deadlines"
       ],
-      "reviewed_by": "pending",
-      "status": "pending"
+      "reviewed_by": "human",
+      "status": "accepted"
     },
     "R14": {
       "title": "TUM: English omission, optional documents and assessment",
@@ -856,8 +856,8 @@
         "tum-m-sc-informatics.application_route",
         "tum-m-sc-informatics.selection_process"
       ],
-      "reviewed_by": "pending",
-      "status": "pending"
+      "reviewed_by": "human",
+      "status": "accepted"
     },
     "R15": {
       "title": "Stuttgart: language validity and conditional assessment",
@@ -872,8 +872,8 @@
         "university-of-stuttgart-m-sc-computer-science.english",
         "university-of-stuttgart-m-sc-computer-science.selection_process"
       ],
-      "reviewed_by": "pending",
-      "status": "pending"
+      "reviewed_by": "human",
+      "status": "accepted"
     },
     "R16": {
       "title": "Documents, APS and readiness remain separate",
@@ -924,8 +924,8 @@
         "university-of-stuttgart-m-sc-computer-science.required_documents",
         "university-of-stuttgart-m-sc-computer-science.application_route"
       ],
-      "reviewed_by": "pending",
-      "status": "pending"
+      "reviewed_by": "human",
+      "status": "accepted"
     },
     "R17": {
       "title": "Fees, financial proof and source periods",
@@ -963,8 +963,8 @@
         "university-of-stuttgart-m-sc-computer-science.tuition_eur_per_semester_non_eu",
         "university-of-stuttgart-m-sc-computer-science.semester_fee_eur"
       ],
-      "reviewed_by": "pending",
-      "status": "pending"
+      "reviewed_by": "human",
+      "status": "accepted"
     }
   },
   "programmes": {

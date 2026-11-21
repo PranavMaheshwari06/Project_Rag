@@ -98,8 +98,28 @@ def test_draft_cannot_claim_human_acceptance(inventory_fixture):
     inventory["reviewed_by"] = "human"
     inventory["reviews"]["R01"].update(status="accepted", reviewed_by="human")
     errors = validate(inventory, records, registry, manifest, texts)
-    assert any("pending review" in e for e in errors)
+    assert any("draft_for_review/pending or accepted/human" in e for e in errors)
     assert any("cannot claim acceptance" in e for e in errors)
+
+
+def accept_all(inventory):
+    inventory.update(status="accepted", reviewed_by="human")
+    for review in inventory["reviews"].values():
+        review.update(status="accepted", reviewed_by="human")
+
+
+def test_a_human_accepted_inventory_is_valid(inventory_fixture):
+    inventory, records, registry, manifest, texts = inventory_fixture
+    accept_all(inventory)
+    assert validate(inventory, records, registry, manifest, texts) == []
+
+
+def test_an_accepted_inventory_needs_every_review_accepted(inventory_fixture):
+    inventory, records, registry, manifest, texts = inventory_fixture
+    accept_all(inventory)
+    inventory["reviews"]["R01"].update(status="pending", reviewed_by="pending")
+    errors = validate(inventory, records, registry, manifest, texts)
+    assert any("every review accepted by a human" in e for e in errors)
 
 
 def test_baseline_check_is_read_only_and_catches_artifact_drift(tmp_path, inventory_fixture):

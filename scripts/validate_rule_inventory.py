@@ -20,6 +20,8 @@ from ingestion.registry import load_registry  # noqa: E402
 
 FIELDS = tuple(k for k in ProgramRequirements.model_fields
                if k not in {"university", "programme", "source_doc_ids", "verified"})
+# inventory status -> the (status, reviewed_by) every review must carry
+REVIEW_STATE = {"draft_for_review": ("pending", "pending"), "accepted": ("accepted", "human")}
 CLASSES = {"automatic", "informational_readiness", "manual_review", "not_published"}
 ROOT = Path(__file__).resolve().parent.parent
 INVENTORY = Path("data/eligibility/coverage_inventory.json")
@@ -47,9 +49,9 @@ def validate(inventory: dict, records: dict, registry: list, manifest: dict,
     errors = []
     if inventory.get("schema_version") != "rule-inventory-v1":
         errors.append("unsupported inventory schema")
-    if (inventory.get("status"), inventory.get("reviewed_by")) != (
-            "draft_for_review", "pending"):
-        errors.append("The inventory must retain pending review")
+    if (inventory.get("status"), inventory.get("reviewed_by")) not in (("draft_for_review", "pending"),
+                                                                        ("accepted", "human")):
+        errors.append("The inventory must be draft_for_review/pending or accepted/human")
     registered = {e.id: e for e in registry}
     expected_slugs = {
         re.sub(r"[^a-z0-9]+", "-", f"{e.university} {e.programme}".lower()).strip("-")
@@ -88,8 +90,10 @@ def validate(inventory: dict, records: dict, registry: list, manifest: dict,
     for eid, extra in evidence.items():
         citation(extra["quote"], extra["doc_id"], eid)
     for rid, review in reviews.items():
-        if (review.get("status"), review.get("reviewed_by")) != ("pending", "pending"):
-            errors.append(f"{rid}: draft interpretation cannot claim acceptance")
+        expected = REVIEW_STATE.get(inventory.get("status"), ("pending", "pending"))
+        if (review.get("status"), review.get("reviewed_by")) != expected:
+            errors.append(f"{rid}: draft interpretation cannot claim acceptance" if expected[0] == "pending"
+                          else f"{rid}: an accepted inventory needs every review accepted by a human")
         if not review.get("proposed_interpretation") or not review.get("unresolved"):
             errors.append(f"{rid}: missing interpretation or unresolved boundary")
         for eid in review["evidence_ids"]:
@@ -200,7 +204,7 @@ def render_matrix(inventory: dict) -> str:
     for slug, programme in inventory["programmes"].items():
         lines += [f"## {programme['university']} — {programme['programme']}", "",
                   f"[Verified values and original quotes](../data/verified/{slug}.json); "
-                  f"tier `{programme['verification_tier']}`; semantic review `pending`.", "",
+                  f"tier `{programme['verification_tier']}`; semantic review `{REVIEW_STATE[inventory['status']][0]}`.", "",
                   f"Canonical record SHA-256: `{programme['record_sha256']}`.", "",
                   "| Original field | Classification | Comparison / boundary | Evidence and review |",
                   "|---|---|---|---|"]
@@ -235,7 +239,7 @@ def render_review(inventory: dict) -> str:
              "with their cached snapshot hashes. New source collection, corrections and live verification are not "
              "claimed here. Source gaps must remain explicit in later catalogue readiness.", "",
              "| Item | Decision to review | Status |", "|---|---|---|"]
-    lines += [f"| [{rid}](#{rid.lower()}) | {review['title']} | pending |"
+    lines += [f"| [{rid}](#{rid.lower()}) | {review['title']} | {review['status']} |"
               for rid, review in inventory["reviews"].items()]
     lines.append("")
     for rid, review in inventory["reviews"].items():
@@ -250,7 +254,7 @@ def render_review(inventory: dict) -> str:
         lines += ["Original evidence: " + "; ".join(refs) + ".", ""]
         if review["evidence_ids"]:
             lines += ["Supplemental evidence: " + ", ".join(f"[{e}](#{e.lower()})" for e in review["evidence_ids"]) + ".", ""]
-        lines += ["Review: **pending** · reviewer: **pending**.", ""]
+        lines += [f"Review: **{review['status']}** · reviewer: **{review['reviewed_by']}**.", ""]
     lines += ["## Supplemental cached evidence", "",
               "Excerpts use the same word-normalized quote check as extraction. "
               "The complete context remains in the cached official source. "
@@ -297,7 +301,7 @@ def main() -> int:
         return 1
     count = sum(len(p["fields"]) for p in inventory["programmes"].values())
     print(f"Inventory: {len(records)} programmes / {count} fields; "
-          f"{len(inventory['reviews'])} pending reviews; baseline hashes unchanged.")
+          f"{len(inventory['reviews'])} {REVIEW_STATE[inventory['status']][0]} reviews; baseline hashes unchanged.")
     print("Cached hashes and original/supplemental quotes checked; no live-page verification."
           if args.check_cache else "Cached pages NOT checked (use --check-cache locally); no live-page verification.")
     return 0
