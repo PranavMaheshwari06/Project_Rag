@@ -1,6 +1,6 @@
 # Germany Master's Eligibility Assistant
 
-> **Status: in development.** The data pipeline, retrieval core, requirement extraction with review, the eligibility engine and its API are built. All 13 programmes have verified requirement records: 6 verified by hand field by field, 7 by a second pass over the cited pages (see [Verification](#verification)). The engine has rule files for all 13 programmes, all reviewed by hand, and is evaluated on 40 frozen cases (see [Eligibility evaluation](#eligibility-evaluation)). Retrieval upgrades were tested in an ablation (see [Retrieval ablation](#retrieval-ablation-phase-5)). A small tool-using agent and its comparison harness are built; the comparison run is in progress. Streaming, guardrails, the UI and a public demo come next. See [the project plan](docs/project-plan.md).
+> **Status: in development.** The data pipeline, retrieval core, requirement extraction with review, the eligibility engine and its API are built. All 13 programmes have verified requirement records: 6 verified by hand field by field, 7 by a second pass over the cited pages (see [Verification](#verification)). The engine has rule files for all 13 programmes, all reviewed by hand, and is evaluated on 40 frozen cases (see [Eligibility evaluation](#eligibility-evaluation)). Retrieval upgrades were tested in an ablation (see [Retrieval ablation](#retrieval-ablation-phase-5)). A small tool-using agent beats one-shot RAG on the 28 multi-hop questions, mostly because one-shot refuses them (see [Agent vs one-shot](#agent-vs-one-shot-rag-phase-7)). Streaming, guardrails, the UI and a public demo come next. See [the project plan](docs/project-plan.md).
 
 Applying for a master's in Germany means checking a dozen official websites: the programme page, uni-assist, APS, the embassy, the blocked-account rules, the city's foreigners' office. Each one says something slightly different, and some of it is only in PDFs. This project reads those official pages for you and answers from them, with a citation and a crawl date on every claim.
 
@@ -73,12 +73,12 @@ flowchart LR
   - a second model from a different family cross-checks every field and may suggest a fix, which must pass the same quote check;
   - a local review screen shows each field next to its quote, the full page, automatic warnings and the cross-check verdict. Every field is confirmed against its quote and page before the record is saved as verified: six programmes by hand in this screen, the other seven by a second pass over the cited pages that saves through the same quote check. Verified records are both the product data and the evaluation gold set.
 - **Eligibility engine and API** (`make eligibility`, `POST /eligibility/check`): a deterministic engine checks a confirmed profile against cited rule files for all 13 programmes. Each rule returns meets, does not meet, unknown or not published, with a margin and citations, and admission, readiness and finance get separate summaries. A rule still pending review cannot produce a positive headline. `POST /profile/parse` and `make parse-profile` turn pasted text into an unconfirmed draft, keeping only fields backed by a literal span of the text.
-- **Evaluation harness**: a 4-way benchmark (vector, BM25, hybrid, hybrid+rerank) on Recall@k, MRR, nDCG and p50/p95 latency, with 95% bootstrap intervals over queries, and extraction accuracy (LLM draft vs verified record). The gold question set has 122 items (requirement 45, country rules 24, confusable programmes 11, multi-hop 28, refusal 9, coverage 5), model-drafted from the verified pages; 104 are accepted by the maintainer (assisted review, not blinded) and the 18 multi-hop items added on 2026-11-12 await that review. `scripts/validate_gold.py` checks every label before `make eval` runs.
+- **Evaluation harness**: a 4-way benchmark (vector, BM25, hybrid, hybrid+rerank) on Recall@k, MRR, nDCG and p50/p95 latency, with 95% bootstrap intervals over queries, and extraction accuracy (LLM draft vs verified record). The gold question set has 122 items (requirement 45, country rules 24, confusable programmes 11, multi-hop 28, refusal 9, coverage 5), model-drafted from the verified pages; all are accepted by the maintainer (assisted review, not blinded). `scripts/validate_gold.py` checks every label before `make eval` runs.
 - **Observability**: request ids, structured JSON logs and per-stage latency.
 
 ### Coming next
 
-Run the agent vs one-shot comparison → streaming, guardrails and rate limits → UI → free public deployment → MCP server → UI polish. Details and the "done when" check for each phase are in [docs/project-plan.md](docs/project-plan.md).
+Streaming, guardrails and rate limits → UI → free public deployment → MCP server → UI polish. Details and the "done when" check for each phase are in [docs/project-plan.md](docs/project-plan.md).
 
 The [eligibility engine spec](docs/eligibility-engine-spec.md) defines its rules, interfaces and evaluation.
 
@@ -208,6 +208,22 @@ The selected score threshold is `0.20149040532450285`. It refuses 5/14 refusal/c
 
 **Result: filters stay off in `/answer`.** The detector matches the oracle upper bound and lifts MRR by +0.037 [+0.001, +0.074] on all 108 answerable questions, which are now all human-reviewed (re-run 2026-11-16), so the gain is unlikely to be noise, though its lower edge is close to zero. It fails the second condition: false refusals rise from 4 to 6 of 108 (5.6%, above the 5% limit), because the refusal threshold was calibrated without filters. Revisit only together with a recalibration of the threshold on filtered scores.
 
+### Agent vs one-shot RAG (Phase 7)
+
+`make compare-agent` runs both arms on the 28 human-reviewed multi-hop questions: one-shot RAG (hybrid+rerank, one LLM call) and the agent (tool loop, at most six calls, read-only tools). Scoring is deterministic, no LLM judge: `doc_recall` is the share of a question's relevant pages that the answer cites; `fact_recall` is the share of the numbers in the reviewed answer found in the answer. A refusal or an uncited answer scores 0. The headline is the paired difference with a 95% bootstrap interval; above zero is a win. Both arms used `gemini-3.8-flash` for every call. Result files: [agent_comparison.json](evaluation/results/agent_comparison.json), [agent_comparison.jsonl](evaluation/results/agent_comparison.jsonl).
+
+| metric | n | agent | one-shot | agent minus one-shot [95% CI] |
+|---|---|---|---|---|
+| doc_recall | 28 | 0.786 | 0.125 | +0.661 [+0.482, +0.821] **win** |
+| fact_recall | 23 | 0.813 | 0.116 | +0.697 [+0.551, +0.848] **win** |
+
+| arm | refused | LLM calls per question | mean latency |
+|---|---|---|---|
+| one-shot | 22/28 | 1.0 | 16 s |
+| agent | 4/28 | 4.4 | 44 s |
+
+**Result: the agent beats one-shot on multi-hop questions, but most of the gap is refusals.** One-shot refuses 22 of 28, but not at the score gate: all 28 questions pass it (lowest top score 0.216 against the 0.20 threshold). The model itself replies "not enough evidence", mostly because its single retrieval did not bring in both pages: for 18 of the 22 refused questions the top 5 passages miss at least one relevant page (mean recall@5 0.50, against 0.67 for the 6 it answered). On those 6 questions the gap is small: `doc_recall` 0.75 (agent) vs 0.58, `fact_recall` 0.90 vs 0.53, too few questions for an interval. The agent costs about four times the calls and three times the latency, and it still refuses 4 of 28 (2 refusals, 1 unparseable reply, 1 uncited). The reported run used 152 LLM calls and about 0.38 USD at the published Flash price. It is the second run: the first, made before the loop learned to ignore stray text after a JSON reply (which had wasted calls and ended some questions as unparseable), gave `doc_recall` 0.589 vs 0.143 and 9 of 28 agent refusals. The interval is above zero in both runs, but the model is not deterministic even at temperature 0, so the point estimates move between runs.
+
 ## Run it locally
 
 Needs [uv](https://docs.astral.sh/uv/) and Python 3.12. `crawl` fills the git-ignored `data/raw/`; `ingest`, `index`, `review` and `eval` need it, while `test`, `eligibility` and `--validate` work on a fresh clone. The first run downloads two models from Hugging Face (bge-small ~130MB, bge-reranker-base ~1.1GB). After that, everything except `make crawl` runs offline.
@@ -255,7 +271,7 @@ This measures agreement with the sources as read by the maintainer, not an indep
 
 - **Free-tier LLM quota.** About 20 requests a day per model, so extraction of many programmes takes more than one day and the hosted chat will need caching.
 - **Small corpus, single node.** In-memory BM25 and brute-force cosine search. Fine for thousands of chunks, not millions.
-- **Small, assisted gold set.** 104 of the 122 model-authored items were accepted by the maintainer; the other 18 (multi-hop) are not yet human-reviewed, so numbers that include them are provisional. Labels still have known source overlap; this is not an independent human-written evaluation. Refusal results use the calibration set itself.
+- **Small, assisted gold set.** All 122 items are model-authored and were accepted by the maintainer (assisted review, not blinded). Labels still have known source overlap; this is not an independent human-written evaluation. Refusal results use the calibration set itself.
 - **Score-only refusal remains weak.** The selected threshold misses 9 of 14 refusal/coverage probes while falsely refusing 4 of 108 answerable questions. Coverage checks need more than a relevance score; calibration is a measured baseline, not a solved coverage policy.
 - **Seven of 13 programme records are not hand-verified.** They were verified by a second pass over the cited pages and are labelled `second_pass`; a completed 35-field sample found six strict failures, now corrected; unsampled fields remain unscored.
 - **Official pages change.** Every answer shows its crawl date. A weekly re-crawl with human review of changed pages comes with deployment.
