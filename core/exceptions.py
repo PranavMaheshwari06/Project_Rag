@@ -4,6 +4,7 @@ place instead of sprinkling status codes through business code."""
 
 class AppError(Exception):
     status_code = 500
+    headers: dict[str, str] | None = None  # sent with the error response (e.g. Retry-After)
 
     def __init__(self, message: str):
         super().__init__(message)
@@ -20,6 +21,14 @@ class ServiceUnavailableError(AppError):
 
 class UpstreamError(AppError):
     status_code = 502
+
+
+class TooManyRequestsError(AppError):
+    status_code = 429
+
+    def __init__(self, message: str, retry_after: float):
+        super().__init__(message)
+        self.headers = {"Retry-After": str(max(1, round(retry_after)))}
 
 
 class CorpusNotIngestedError(AppError):

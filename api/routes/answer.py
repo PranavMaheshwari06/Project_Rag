@@ -1,13 +1,15 @@
-from fastapi import APIRouter, Request
+from fastapi import APIRouter, Depends, Request
 
 from api.dependencies import get_llm_client, get_retrieval_pipeline
+from api.limits import limit_llm
+from api.middleware.logging_mw import trace
 from core.config import get_settings
 from core.metrics import StageTimer
 from generation.answer_generator import generate_answer
 from generation.citation_mapper import map_citations
 from schemas.answer import AnswerRequest, AnswerResponse
 
-router = APIRouter()
+router = APIRouter(dependencies=[Depends(limit_llm)])
 
 
 @router.post("/answer", response_model=AnswerResponse)
@@ -21,6 +23,7 @@ def answer(body: AnswerRequest, request: Request) -> AnswerResponse:
         draft = generate_answer(body.query, retrieved, settings, get_llm_client())
         text, citations = map_citations(draft.text, draft.evidence)
 
+    trace(request, mode=draft.mode, refused=draft.refused, stages=timer.as_dict(), query_len=len(body.query))
     return AnswerResponse(
         request_id=request.state.request_id,
         query=body.query,

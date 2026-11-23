@@ -276,3 +276,14 @@ def test_the_error_says_whether_it_was_quota_or_an_outage(world):
     with pytest.raises(UpstreamError) as outage:
         make("a").complete(HI)
     assert "quota" in quota.value.message and "quota" not in outage.value.message
+
+
+def test_the_request_deadline_caps_the_call_budget(world):
+    from core.metrics import request_deadline
+
+    make, clock, _ = world
+    Scripted.script = {"a": [Timeout()], "b": [(1, 1)]}
+    Scripted.on_call = lambda: clock.__setitem__(0, clock[0] + 10)  # every request hangs 10 s
+    with request_deadline(until=clock[0] + 5), pytest.raises(UpstreamError):
+        make("a", "b").complete(HI)
+    assert Scripted.seen == ["a"]  # the request ran out of time long before the 90 s call budget

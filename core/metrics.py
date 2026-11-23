@@ -3,8 +3,9 @@ the evaluation harness."""
 
 import time
 from contextlib import contextmanager
+from collections.abc import Callable
 from contextvars import ContextVar
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 
 @dataclass
@@ -15,16 +16,18 @@ class Usage:
     prompt_tokens: int = 0
     completion_tokens: int = 0
     model: str | None = None  # the model that answered (the last one, if a request made several calls)
+    # called before every provider request; it may raise to stop the request (the API's daily call cap)
+    on_call: Callable[[], None] | None = field(default=None, repr=False)
 
 
 _usage: ContextVar[Usage | None] = ContextVar("llm_usage", default=None)
 
 
 @contextmanager
-def track_usage():
+def track_usage(on_call: Callable[[], None] | None = None):
     """Everything the LLM client sends inside this block is added to the yielded Usage. Outside a
     block nothing is recorded. A contextvar, so concurrent requests never mix their numbers."""
-    usage = Usage()
+    usage = Usage(on_call=on_call)
     token = _usage.set(usage)
     try:
         yield usage
@@ -32,8 +35,28 @@ def track_usage():
         _usage.reset(token)
 
 
+_deadline: ContextVar[float | None] = ContextVar("request_deadline", default=None)
+
+
+@contextmanager
+def request_deadline(until: float):
+    """No LLM attempt may start after `until` (an absolute time.monotonic() value) inside this block."""
+    token = _deadline.set(until)
+    try:
+        yield
+    finally:
+        _deadline.reset(token)
+
+
+def request_deadline_at() -> float | None:
+    return _deadline.get()
+
+
 def record_call() -> None:
+    """Called by the LLM client right before each provider request."""
     if (u := _usage.get()) is not None:
+        if u.on_call is not None:
+            u.on_call()  # before counting: a refused request was never sent
         u.calls += 1
 
 
