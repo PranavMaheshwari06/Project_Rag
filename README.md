@@ -179,10 +179,12 @@ The calibration above uses the extractive path, so it measures only the score ga
 
 | items | n | answered | refused by gate | refused by model |
 |---|---|---|---|---|
-| answerable (requirement, country rules, confusable) | 80 | 57 | 4 | 19 |
-| refusal and coverage probes | 14 | 0 | 5 | 9 |
+| answerable (requirement, country rules, confusable) | 80 | 66 | 4 | 10 |
+| refusal and coverage probes | 14 | 1 | 5 | 8 |
 
-The model closes the gate's weakness: all 14 probes are refused and none is answered anyway, against 5 of 14 for the gate alone. The price is that 23 of 80 answerable questions are refused too (28.7%, 95% bootstrap interval [18.8%, 38.8%]), 19 of them by the model itself, against 4 of 108 at the gate alone. By kind: requirement 14 of 45, country rules 2 of 24, confusable 7 of 11. The refused questions have a mean recall@5 of 0.63, against 0.97 for the answered ones, but in 12 of the 19 model refusals the relevant page was in the top 5 and the model still declined, so the cause is both retrieval (right page, wrong passage) and a strict answer prompt. The run used 85 LLM calls, about 0.21 USD. This is the number to improve in Phase 8, with the answer contract.
+**Current prompt (Phase 8):** 14 of 80 answerable questions are refused (17.5%, 95% bootstrap interval [10.0%, 26.3%]), down from 23 of 80 (28.7%, [18.8%, 38.8%]) before the change. The intervals overlap, so the evidence is the paired comparison: 10 questions moved from refused to answered and none the other way (exact sign test, p = 0.002). By kind: requirement 6 of 45, country rules 2 of 24, confusable 6 of 11. The change came from reading the 19 earlier model refusals against their evidence: in 18 the answer was not in the four passages the model saw (9 times the right page was missing, 9 times the right page was there but not the passage with the fact), and once the model refused a question it could half answer. So the prompt now allows a partial answer that says what the evidence does not cover, treats university-wide and city pages as applying to every programme there, and forbids answering from another university's or programme's page. A partial answer is counted as answered: of the 10 newly answered questions, none states a wrong fact, but 2 only say what is missing and 1 misses the key point (RWTH CS needs German too). Most remaining refusals are retrieval misses, which the agent (`auto` mode, planned) is meant to recover.
+
+One probe is now answered by this metric (d25, "what are my chances with a 7.8 CGPA?"): the model says the chances cannot be determined and lists the published requirements instead, which matches the product rule (never an admission probability) but is not the refusal text. Two runs of the new prompt used 170 LLM calls, about 0.43 USD; the first wording, without the university-wide clause, refused 21 of 80 and lost 4 good answers, which is why the clause exists.
 
 ### Retrieval ablation (Phase 5)
 

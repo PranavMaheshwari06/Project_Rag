@@ -5,15 +5,17 @@
     "confusable": {
       "n": 11,
       "gate": 2,
-      "llm": 5,
+      "llm": 4,
       "uncited": 0,
-      "answered": 4
+      "guardrail": 0,
+      "answered": 5
     },
     "country_rules": {
       "n": 24,
       "gate": 0,
       "llm": 2,
       "uncited": 0,
+      "guardrail": 0,
       "answered": 22
     },
     "coverage": {
@@ -21,40 +23,44 @@
       "gate": 1,
       "llm": 4,
       "uncited": 0,
+      "guardrail": 0,
       "answered": 0
     },
     "refusal": {
       "n": 9,
       "gate": 4,
-      "llm": 5,
+      "llm": 4,
       "uncited": 0,
-      "answered": 0
+      "guardrail": 0,
+      "answered": 1
     },
     "requirement": {
       "n": 45,
       "gate": 2,
-      "llm": 12,
+      "llm": 4,
       "uncited": 0,
-      "answered": 31
+      "guardrail": 0,
+      "answered": 39
     }
   },
   "answerable": {
     "n": 80,
-    "refused": 23,
+    "refused": 14,
     "gate": 4,
-    "llm": 19,
+    "llm": 10,
     "uncited": 0,
-    "answered": 57,
-    "refusal_rate": 0.287,
+    "guardrail": 0,
+    "answered": 66,
+    "refusal_rate": 0.175,
     "refusal_rate_ci": [
-      0.188,
-      0.388
+      0.1,
+      0.263
     ]
   },
   "expected_refusals": {
     "n": 14,
-    "refused": 14,
-    "answered_anyway": 0
+    "refused": 13,
+    "answered_anyway": 1
   },
   "models": [
     "-",
