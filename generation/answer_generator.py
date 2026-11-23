@@ -14,7 +14,7 @@ from typing import Literal
 from core.config import Settings
 from generation.llm_client import LLMClient
 from generation.citation_mapper import map_citations
-from generation.prompt_builder import REFUSAL_TEXT, REPAIR_CITE, build_messages
+from generation.prompt_builder import REFUSAL_TEXT, REPAIR_CITE, SYSTEM_PROMPT, build_messages, leaks_prompt
 from schemas.common import Chunk, RetrievedChunk
 
 SENTENCE_RE = re.compile(r"(?<=[.!?])\s+")
@@ -27,8 +27,9 @@ STOPWORDS = frozenset(
 
 
 # gate: top score under the threshold | model: the LLM gave the refusal text |
-# uncited: no valid marker after the one repair | extractive: the no-LLM fallback found no sentence
-RefusalReason = Literal["gate", "model", "uncited", "extractive"]
+# uncited: no valid marker after the one repair | extractive: the no-LLM fallback found no sentence |
+# guardrail: the answer repeats the system prompt (an injection got through)
+RefusalReason = Literal["gate", "model", "uncited", "extractive", "guardrail"]
 
 
 @dataclass
@@ -102,6 +103,8 @@ def generate_answer(query: str, retrieved: list[RetrievedChunk], settings: Setti
             return _refusal("model")
         if not map_citations(text, evidence)[1]:
             return _refusal("uncited")
+        if leaks_prompt(text, SYSTEM_PROMPT):
+            return _refusal("guardrail")
         return AnswerDraft(text=text, refused=False, mode="llm", evidence=evidence)
 
     text = _extractive_answer(query, evidence, settings.generation.max_sentences_per_chunk)

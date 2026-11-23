@@ -7,6 +7,7 @@ except the multi-hop ones and splits each outcome by who refused:
 - gate: the best rerank score was under the threshold, no LLM call was made
 - llm: the gate passed and the model answered with the refusal text
 - uncited: no valid [n] marker even after the one repair call (the answer contract refuses it)
+- guardrail: the answer repeated the system prompt
 - answered: a cited answer
 
 Rows are appended as they finish, so a run stopped by quota resumes. Scoring is the
@@ -26,11 +27,11 @@ from generation.answer_generator import generate_answer
 from generation.llm_client import is_provider_error
 
 log = logging.getLogger(__name__)
-OUTCOMES = ("gate", "llm", "uncited", "answered")
+OUTCOMES = ("gate", "llm", "uncited", "guardrail", "answered")
 
 
 # the draft's refusal_reason, under the labels the committed results already use
-OUTCOME = {None: "answered", "gate": "gate", "model": "llm", "uncited": "uncited"}
+OUTCOME = {None: "answered", "gate": "gate", "model": "llm", "uncited": "uncited", "guardrail": "guardrail"}
 
 
 def run_item(item: GoldItem, settings: Settings, pipeline, llm) -> dict:
