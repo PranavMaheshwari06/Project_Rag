@@ -17,7 +17,7 @@ jobs:
           pytest -q tests/test_rrf.py tests/test_chunker.py tests/test_citation_mapper.py
           tests/test_parser.py tests/test_extraction.py tests/test_extraction_schemas.py
           tests/test_extraction_eval.py tests/test_review.py tests/test_validate_gold.py
-          tests/test_refusal_eval.py tests/test_eval_runner.py
+          tests/test_refusal_eval.py tests/test_eval_runner.py tests/test_llm_client.py
           tests/test_rule_inventory.py tests/test_retrieval_filters.py tests/test_ablation.py tests/test_eligibility_*.py
           tests/test_agent.py tests/test_agent_eval.py tests/test_llm_refusal_eval.py tests/test_publish_rule.py
       - run: python scripts/validate_rule_inventory.py
