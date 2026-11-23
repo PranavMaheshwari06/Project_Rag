@@ -6,6 +6,7 @@ from fastapi.responses import JSONResponse
 from api.middleware.logging_mw import RequestLoggingMiddleware
 from api.middleware.request_id import RequestIdMiddleware
 from api.routes import answer, eligibility, evaluate, health, ingest, search
+from core.config import get_settings
 from core.exceptions import AppError
 from core.logging import setup_logging
 
@@ -19,7 +20,7 @@ def create_app() -> FastAPI:
     app.add_middleware(RequestIdMiddleware)
     app.add_middleware(
         CORSMiddleware,
-        allow_origins=["http://localhost:5173", "http://127.0.0.1:5173"],
+        allow_origins=get_settings().serve.cors_origins,
         allow_methods=["*"],
         allow_headers=["*"],
     )

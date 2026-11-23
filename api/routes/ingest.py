@@ -1,13 +1,13 @@
-from fastapi import APIRouter, Request
+from fastapi import APIRouter, Depends, Request
 
-from api.dependencies import reset_pipeline
+from api.dependencies import require_admin, reset_pipeline
 from core.config import get_settings
 from core.metrics import StageTimer
 from ingestion.pipeline import run_ingestion
 from retrieval.pipeline import build_indexes
 from schemas.ingest import IngestRequest, IngestResponse
 
-router = APIRouter()
+router = APIRouter(dependencies=[Depends(require_admin)])
 
 
 @router.post("/ingest", response_model=IngestResponse)

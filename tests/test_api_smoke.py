@@ -7,6 +7,13 @@ def test_health(client):
     assert resp.status_code == 200
     body = resp.json()
     assert body["status"] == "ok"
+
+
+def test_ready(client):
+    resp = client.get("/ready")
+    assert resp.status_code == 200
+    body = resp.json()
+    assert body["ready"] is True
     assert body["corpus_ingested"] is True
 
 
@@ -47,16 +54,21 @@ def test_answer(client):
     assert "generation" in body["latency_ms"]
 
 
-def test_ingest(client):
-    resp = client.post("/ingest", json={"rebuild_indexes": False})
+ADMIN = {"Authorization": "Bearer test-admin"}
+
+
+def test_ingest(client, monkeypatch):
+    monkeypatch.setenv("ADMIN_TOKEN", "test-admin")
+    resp = client.post("/ingest", json={"rebuild_indexes": False}, headers=ADMIN)
     assert resp.status_code == 200
     body = resp.json()
     assert body["docs"] > 0
     assert body["chunks"] > 0
 
 
-def test_evaluate(client):
-    resp = client.post("/evaluate")
+def test_evaluate(client, monkeypatch):
+    monkeypatch.setenv("ADMIN_TOKEN", "test-admin")
+    resp = client.post("/evaluate", headers=ADMIN)
     assert resp.status_code == 200
     body = resp.json()
     assert [c["name"] for c in body["configs"]] == ["vector", "bm25", "hybrid", "hybrid_rerank"]
