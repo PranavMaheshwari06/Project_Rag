@@ -5,8 +5,9 @@ same citation mapping as one-shot RAG. JSON mode instead of native function
 calling keeps generation/llm_client.py unchanged and provider-agnostic.
 
 Stop reasons: answered | refused (the model gave the refusal text) | uncited (an
-answer with no valid marker is replaced by the refusal) | budget (no answer
-within max_steps calls) | bad_output (two unparseable replies in a row)."""
+answer with no valid marker, after one repair turn if a step was left, is
+replaced by the refusal) | budget (no answer within max_steps calls) |
+bad_output (two unparseable replies in a row)."""
 
 import json
 import time
@@ -39,6 +40,8 @@ Rules:
 
 LAST_STEP = "Tool budget used up. Reply now with {\"answer\": ...} using only the evidence above."
 REPAIR = "Reply with one JSON object: {\"tool\": ..., \"args\": {...}} or {\"answer\": ...}."
+CITE_REPAIR = ("Your answer cited no numbered evidence passage. Reply with {\"answer\": ...} again, citing every "
+               f"claim with its marker like [1], or answer exactly: \"{REFUSAL_TEXT}\"")
 
 
 class Step(BaseModel):
@@ -91,7 +94,7 @@ def run_agent(question: str, toolbox: Toolbox, llm, max_steps: int | None = None
     messages = [{"role": "system", "content": system_prompt(toolbox)}, {"role": "user", "content": question}]
     evidence: list[Chunk] = []
     steps: list[Step] = []
-    calls, bad_in_row = 0, 0
+    calls, bad_in_row, cite_repaired = 0, 0, False
 
     def finish(text: str, reason: StopReason) -> AgentAnswer:
         cited, citations = map_citations(text, evidence) if reason == "answered" else (text, [])
@@ -119,7 +122,14 @@ def run_agent(question: str, toolbox: Toolbox, llm, max_steps: int | None = None
             continue
         bad_in_row = 0
         if "answer" in action:
-            return finish(action["answer"], "answered")
+            text = action["answer"]
+            uncited = text.strip() != REFUSAL_TEXT and not map_citations(text, evidence)[1]
+            # one repair, inside the budget, and only when there is evidence a marker could point at
+            if uncited and evidence and not cite_repaired and calls < max_steps:
+                cite_repaired = True
+                messages.append({"role": "user", "content": CITE_REPAIR})
+                continue
+            return finish(text, "answered")
         if calls == max_steps:
             break  # a tool call on the last allowed step: no answer within budget
         t0 = time.perf_counter()

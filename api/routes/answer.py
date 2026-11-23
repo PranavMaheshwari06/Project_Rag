@@ -23,13 +23,15 @@ def answer(body: AnswerRequest, request: Request) -> AnswerResponse:
         draft = generate_answer(body.query, retrieved, settings, get_llm_client())
         text, citations = map_citations(draft.text, draft.evidence)
 
-    trace(request, mode=draft.mode, refused=draft.refused, stages=timer.as_dict(), query_len=len(body.query))
+    trace(request, mode=draft.mode, refused=draft.refused, refusal_reason=draft.refusal_reason,
+          stages=timer.as_dict(), query_len=len(body.query))
     return AnswerResponse(
         request_id=request.state.request_id,
         query=body.query,
         answer=text,
         refused=draft.refused,
         mode=draft.mode,
+        refusal_reason=draft.refusal_reason,
         citations=citations,
         chunks=retrieved,
         latency_ms=timer.as_dict(),

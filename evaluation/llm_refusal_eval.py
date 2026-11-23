@@ -6,7 +6,7 @@ except the multi-hop ones and splits each outcome by who refused:
 
 - gate: the best rerank score was under the threshold, no LLM call was made
 - llm: the gate passed and the model answered with the refusal text
-- uncited: an answer with no valid [n] marker (counts as a refusal, as everywhere else)
+- uncited: no valid [n] marker even after the one repair call (the answer contract refuses it)
 - answered: a cited answer
 
 Rows are appended as they finish, so a run stopped by quota resumes. Scoring is the
@@ -23,27 +23,20 @@ from evaluation.agent_eval import Metered, load_rows
 from evaluation.bootstrap import bootstrap_ci
 from evaluation.retrieval_eval import GoldItem
 from generation.answer_generator import generate_answer
-from generation.citation_mapper import map_citations
 from generation.llm_client import is_provider_error
 
 log = logging.getLogger(__name__)
 OUTCOMES = ("gate", "llm", "uncited", "answered")
 
 
-def outcome(gate: bool, refused: bool, cited: bool) -> str:
-    if gate:
-        return "gate"
-    if refused:
-        return "llm"
-    return "answered" if cited else "uncited"
+# the draft's refusal_reason, under the labels the committed results already use
+OUTCOME = {None: "answered", "gate": "gate", "model": "llm", "uncited": "uncited"}
 
 
 def run_item(item: GoldItem, settings: Settings, pipeline, llm) -> dict:
     retrieved = pipeline.search(item.question, mode="hybrid_rerank", top_k=settings.retrieval.final_top_k)
-    gate = not retrieved or (retrieved[0].rerank_score or 0.0) < settings.generation.refusal_threshold
     draft = generate_answer(item.question, retrieved, settings, llm)
-    cited = bool(map_citations(draft.text, draft.evidence)[1]) if not draft.refused else False
-    return {"outcome": outcome(gate, draft.refused, cited), "answer": draft.text[:400]}
+    return {"outcome": OUTCOME[draft.refusal_reason], "answer": draft.text[:400]}
 
 
 def run_items(items: list[GoldItem], settings: Settings, pipeline, llm, out: Path,
