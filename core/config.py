@@ -68,6 +68,11 @@ class ModelsCfg(BaseModel):
     embed_batch_size: int = 16
     llm_model: str = "gemini-3.8-flash"
     llm_fallback_models: list[str] = []  # tried in order when a model's quota is exhausted
+    # code defaults (not in settings.yaml: that file is hash-locked as a baseline input)
+    llm_timeout_s: float = 60.0  # one provider request; a hung connection must not hold a request open
+    llm_backoff_s: float = 2.0  # wait before the single retry of a 5xx or timeout
+    llm_cooldown_s: float = 120.0  # a 429 benches that model this long (the provider's Retry-After wins), then it is retried
+    llm_deadline_s: float = 90.0  # one complete() call, retries and fallbacks included; no new attempt starts after it
     # any OpenAI-compatible endpoint; Gemini by default
     llm_base_url: str = "https://generativelanguage.googleapis.com/v1beta/openai/"
 

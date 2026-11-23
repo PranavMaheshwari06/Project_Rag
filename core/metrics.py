@@ -3,6 +3,50 @@ the evaluation harness."""
 
 import time
 from contextlib import contextmanager
+from contextvars import ContextVar
+from dataclasses import dataclass
+
+
+@dataclass
+class Usage:
+    """LLM spend of one request: provider requests sent (retries and failures included) and tokens."""
+
+    calls: int = 0
+    prompt_tokens: int = 0
+    completion_tokens: int = 0
+    model: str | None = None  # the model that answered (the last one, if a request made several calls)
+
+
+_usage: ContextVar[Usage | None] = ContextVar("llm_usage", default=None)
+
+
+@contextmanager
+def track_usage():
+    """Everything the LLM client sends inside this block is added to the yielded Usage. Outside a
+    block nothing is recorded. A contextvar, so concurrent requests never mix their numbers."""
+    usage = Usage()
+    token = _usage.set(usage)
+    try:
+        yield usage
+    finally:
+        _usage.reset(token)
+
+
+def record_call() -> None:
+    if (u := _usage.get()) is not None:
+        u.calls += 1
+
+
+def record_model(model: str) -> None:
+    if (u := _usage.get()) is not None:
+        u.model = model
+
+
+def record_tokens(provider_usage) -> None:
+    """`provider_usage` is the SDK's usage block or None (some endpoints omit it)."""
+    if (u := _usage.get()) is not None and provider_usage is not None:
+        u.prompt_tokens += getattr(provider_usage, "prompt_tokens", 0) or 0
+        u.completion_tokens += getattr(provider_usage, "completion_tokens", 0) or 0
 
 
 class StageTimer:
