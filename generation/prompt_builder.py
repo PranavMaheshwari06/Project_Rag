@@ -13,6 +13,12 @@ SYSTEM_PROMPT = (
     f'evidence does not answer the question, reply exactly: "{REFUSAL_TEXT}"'
 )
 
+# the one repair turn after a reply with no valid [n] marker (answer contract, Phase 8)
+REPAIR_CITE = (
+    "Your reply cited no numbered evidence passage. Answer again using only the passages above, citing every "
+    f'claim with its marker like [1], or reply exactly: "{REFUSAL_TEXT}"'
+)
+
 
 def build_evidence_block(evidence: list[Chunk]) -> str:
     parts = []

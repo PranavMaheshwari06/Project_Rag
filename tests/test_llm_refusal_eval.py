@@ -5,7 +5,7 @@ import pytest
 
 from core.config import load_settings
 from evaluation.agent_eval import load_rows
-from evaluation.llm_refusal_eval import outcome, run_items, summarize
+from evaluation.llm_refusal_eval import run_items, summarize
 from evaluation.retrieval_eval import GoldItem
 from generation.prompt_builder import REFUSAL_TEXT
 from schemas.common import Chunk, RetrievedChunk
@@ -42,20 +42,13 @@ def settings():
     return load_settings()
 
 
-def test_outcome_names_who_refused():
-    assert outcome(True, True, False) == "gate"
-    assert outcome(False, True, False) == "llm"
-    assert outcome(False, False, False) == "uncited"
-    assert outcome(False, False, True) == "answered"
-
-
 def test_each_outcome_is_recorded_and_the_gate_makes_no_llm_call(settings, tmp_path):
     out = tmp_path / "rows.jsonl"
-    llm = LLM("It costs 100 euros [1].", REFUSAL_TEXT, "It costs money.")
+    llm = LLM("It costs 100 euros [1].", REFUSAL_TEXT, "It costs money.", "Still money.")
     assert run_items([gold("a"), gold("b"), gold("c")], settings, Pipeline(), llm, out) == (3, None)
     rows = load_rows(out)
     assert [r["outcome"] for r in rows] == ["answered", "llm", "uncited"]
-    assert [r["llm_calls"] for r in rows] == [1, 1, 1]
+    assert [r["llm_calls"] for r in rows] == [1, 1, 2]  # uncited = the first reply plus the one repair
     gated = tmp_path / "gated.jsonl"
     assert run_items([gold("z")], settings, Pipeline(0.0), LLM(), gated) == (1, None)
     row = load_rows(gated)[0]

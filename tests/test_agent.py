@@ -6,7 +6,7 @@ import json
 
 import pytest
 
-from agent.loop import LAST_STEP, REPAIR, run_agent
+from agent.loop import CITE_REPAIR, LAST_STEP, REPAIR, run_agent
 from agent.tools import Toolbox
 from core.config import load_settings
 from eligibility.profile import Profile
@@ -73,9 +73,22 @@ def test_two_hop_answer_is_cited_and_traced(settings):
 
 
 def test_hallucinated_marker_alone_gives_the_refusal(settings):
-    llm = FakeLLM(call("search_sources", query="x"), {"answer": "It is 5,000 euros [9]."})
+    llm = FakeLLM(call("search_sources", query="x"), {"answer": "It is 5,000 euros [9]."}, {"answer": "Still [9]."})
     out = run_agent("q", toolbox(settings), llm)
     assert out.stop_reason == "uncited" and out.refused and out.text == REFUSAL_TEXT and not out.citations
+    assert out.llm_calls == 3 and llm.sent[2][-1]["content"] == CITE_REPAIR  # one repair, then the refusal
+
+
+def test_an_uncited_answer_gets_one_repair_then_answers(settings):
+    llm = FakeLLM(call("search_sources", query="x"), {"answer": "It is 5,000 euros."}, {"answer": "5,000 euros [1]."})
+    out = run_agent("q", toolbox(settings), llm)
+    assert out.stop_reason == "answered" and out.llm_calls == 3 and [c.marker for c in out.citations] == [1]
+
+
+def test_an_uncited_answer_on_the_last_step_gets_no_repair(settings):
+    llm = FakeLLM(call("search_sources", query="x"), {"answer": "It is 5,000 euros."})
+    out = run_agent("q", toolbox(settings), llm, max_steps=2)
+    assert out.stop_reason == "uncited" and out.llm_calls == 2  # the step budget is never exceeded
 
 
 def test_model_refusal_is_reported_as_refused(settings):
@@ -121,6 +134,7 @@ def test_weak_search_hits_add_no_evidence(settings):
     llm = FakeLLM(call("search_sources", query="Mars visa"), {"answer": "Yes [1]."})
     out = run_agent("q", tb, llm)
     assert out.steps[0].markers == [] and out.stop_reason == "uncited"
+    assert out.llm_calls == 2  # no repair: with no evidence there is nothing a marker could cite
 
 
 def test_repeated_passage_keeps_its_marker(settings):
