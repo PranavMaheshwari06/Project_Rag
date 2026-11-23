@@ -116,8 +116,14 @@ class AgentCfg(BaseModel):
     summary_out: str = "evaluation/results/agent_comparison.json"
 
 
+class ServeCfg(BaseModel):
+    # code defaults, like EligibilityCfg: settings.yaml is hash-locked as a baseline input
+    cors_origins: list[str] = ["http://localhost:5173", "http://127.0.0.1:5173"]  # env CORS_ORIGINS, comma-separated
+
+
 class Settings(BaseModel):
     paths: PathsCfg = PathsCfg()
+    serve: ServeCfg = ServeCfg()
     eligibility: EligibilityCfg = EligibilityCfg()
     agent: AgentCfg = AgentCfg()
     crawl: CrawlCfg = CrawlCfg()
@@ -151,6 +157,9 @@ def load_settings(config_path: Path | None = None) -> Settings:
         value = os.environ.get(env_name)
         if value:
             setattr(getattr(settings, section), field, value)
+    origins = [o.strip() for o in os.environ.get("CORS_ORIGINS", "").split(",") if o.strip()]
+    if origins:
+        settings.serve.cors_origins = origins
     settings.llm_api_key = os.environ.get("GEMINI_API_KEY") or None
     return settings
 
