@@ -18,7 +18,7 @@ import time
 
 from core.config import Settings
 from core.exceptions import UpstreamError
-from core.metrics import record_call, record_model, record_tokens
+from core.metrics import record_call, record_model, record_tokens, request_deadline_at
 
 log = logging.getLogger(__name__)
 _now = time.monotonic  # module-level so tests can drive the clock
@@ -63,7 +63,8 @@ class LLMClient:
             self._client = openai.OpenAI(
                 api_key=self._api_key, base_url=self.base_url, timeout=self._timeout, max_retries=0
             )
-        deadline = _now() + self._deadline
+        # the call budget, capped by what is left of the request (set by the API middleware; absent in scripts)
+        deadline = min(_now() + self._deadline, request_deadline_at() or float("inf"))
         rejected = False
         for model in self._models:
             if _now() >= deadline:

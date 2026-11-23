@@ -124,6 +124,17 @@ class AgentCfg(BaseModel):
 class ServeCfg(BaseModel):
     # code defaults, like EligibilityCfg: settings.yaml is hash-locked as a baseline input
     cors_origins: list[str] = ["http://localhost:5173", "http://127.0.0.1:5173"]  # env CORS_ORIGINS, comma-separated
+    # limits, per client address; the LLM routes (/answer, /profile/parse) also have their own, stricter pair
+    rate_per_minute: int = 30
+    rate_per_day: int = 500
+    llm_per_minute: int = 6
+    llm_per_day: int = 60
+    daily_llm_calls: int = 300  # global cost ceiling per UTC day, provider requests; env DAILY_LLM_CALL_CAP
+    max_body_bytes: int = 102_400  # a pasted text is at most eligibility.parse_max_chars (16,000)
+    request_deadline_s: float = 120.0  # no LLM attempt starts after this, per request
+    # name of the header the trusted edge sets with the client address (CF-Connecting-IP, X-Forwarded-For);
+    # unset = the socket address. Env CLIENT_IP_HEADER. Never trust a forwarded header you do not control.
+    client_ip_header: str | None = None
 
 
 class Settings(BaseModel):
@@ -165,6 +176,9 @@ def load_settings(config_path: Path | None = None) -> Settings:
     origins = [o.strip() for o in os.environ.get("CORS_ORIGINS", "").split(",") if o.strip()]
     if origins:
         settings.serve.cors_origins = origins
+    if cap := os.environ.get("DAILY_LLM_CALL_CAP"):
+        settings.serve.daily_llm_calls = int(cap)  # a typo fails at startup, not at the first request
+    settings.serve.client_ip_header = os.environ.get("CLIENT_IP_HEADER") or settings.serve.client_ip_header
     settings.llm_api_key = os.environ.get("GEMINI_API_KEY") or None
     return settings
 

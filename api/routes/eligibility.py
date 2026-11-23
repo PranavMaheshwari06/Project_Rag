@@ -10,8 +10,10 @@ from fastapi import APIRouter, Depends, Request
 from pydantic import BaseModel, Field
 
 from api.dependencies import get_llm_client
+from api.limits import limit_any, limit_llm
+from api.middleware.logging_mw import trace
 from core.config import get_settings
-from core.exceptions import BadRequestError, ServiceUnavailableError, UpstreamError
+from core.exceptions import BadRequestError, ServiceUnavailableError, TooManyRequestsError, UpstreamError
 from eligibility.engine import check_eligibility
 from eligibility.finance import load_finance
 from eligibility.parse import ParsedProfile, ParseError, parse_profile
@@ -49,8 +51,9 @@ class ParseRequest(BaseModel):
     text: str = Field(min_length=1)
 
 
-@router.post("/eligibility/check")
+@router.post("/eligibility/check", dependencies=[Depends(limit_any)])
 def check(body: CheckRequest, request: Request) -> CheckResponse:
+    trace(request, n_targets=len(body.targets))
     settings = get_settings()
     request_id = getattr(request.state, "request_id", "-")
     if body.country.strip().casefold() != "germany":
@@ -76,8 +79,9 @@ def check(body: CheckRequest, request: Request) -> CheckResponse:
     return CheckResponse(request_id=request_id, results=results, notices=notices)
 
 
-@router.post("/profile/parse")
-def parse(body: ParseRequest, llm=Depends(get_llm_client)) -> ParsedProfile:
+@router.post("/profile/parse", dependencies=[Depends(limit_llm)])
+def parse(body: ParseRequest, request: Request, llm=Depends(get_llm_client)) -> ParsedProfile:
+    trace(request, text_len=len(body.text))
     limit = get_settings().eligibility.parse_max_chars
     if len(body.text) > limit:
         raise BadRequestError(f"the text is longer than {limit} characters")
@@ -85,6 +89,8 @@ def parse(body: ParseRequest, llm=Depends(get_llm_client)) -> ParsedProfile:
         raise ServiceUnavailableError("profile parsing needs an LLM key on the server; enter the profile manually")
     try:
         return parse_profile(body.text, llm)
+    except TooManyRequestsError:
+        raise  # the daily call cap stopped the request mid-way: its own fixed message, not a provider error
     except ParseError:
         raise UpstreamError("the model did not return a usable draft; enter the profile manually")
     except Exception:  # provider errors may echo the prompt: answer without any of it
