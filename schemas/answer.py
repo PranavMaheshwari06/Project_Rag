@@ -26,7 +26,7 @@ class AnswerResponse(BaseModel):
     refused: bool
     mode: str  # "llm" | "extractive" | "refusal"
     # who refused; None when answered (see generation.answer_generator.RefusalReason)
-    refusal_reason: Literal["gate", "model", "uncited", "extractive"] | None = None
+    refusal_reason: Literal["gate", "model", "uncited", "extractive", "guardrail"] | None = None
     citations: list[Citation]
     chunks: list[RetrievedChunk]
     latency_ms: dict[str, float]
