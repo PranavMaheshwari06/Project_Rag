@@ -21,6 +21,7 @@ def ingest(body: IngestRequest, request: Request) -> IngestResponse:
         with timer.track("indexing"):
             build_indexes(settings)
         reset_pipeline()
+        request.app.state.answer_cache.clear()  # cached answers came from the old indexes
 
     return IngestResponse(
         request_id=request.state.request_id,

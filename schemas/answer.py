@@ -30,3 +30,4 @@ class AnswerResponse(BaseModel):
     citations: list[Citation]
     chunks: list[RetrievedChunk]
     latency_ms: dict[str, float]
+    cached: bool = False  # served from the response cache: no retrieval, no LLM call

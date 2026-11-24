@@ -3,6 +3,7 @@ from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
+from api.cache import TTLCache
 from api.limits import BodyLimitMiddleware, Limits
 from api.middleware.logging_mw import RequestLoggingMiddleware
 from api.middleware.request_id import RequestIdMiddleware
@@ -18,6 +19,7 @@ def create_app() -> FastAPI:
 
     cfg = get_settings().serve
     app.state.limits = Limits(cfg)  # counters live per app, so every test app starts at zero
+    app.state.answer_cache = TTLCache(cfg.answer_cache_entries, cfg.answer_cache_ttl_s)
 
     # added last runs first: request_id must wrap the logging middleware, which wraps the body cap
     app.add_middleware(BodyLimitMiddleware, max_bytes=cfg.max_body_bytes)
