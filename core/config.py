@@ -136,6 +136,9 @@ class ServeCfg(BaseModel):
     # name of the header the trusted edge sets with the client address (CF-Connecting-IP, X-Forwarded-For);
     # unset = the socket address. Env CLIENT_IP_HEADER. Never trust a forwarded header you do not control.
     client_ip_header: str | None = None
+    # /answer response cache (api/cache.py); 0 entries turns it off
+    answer_cache_entries: int = 1000
+    answer_cache_ttl_s: float = 86_400.0  # the corpus changes at most weekly, and a rebuild empties the cache
 
 
 class Settings(BaseModel):

@@ -21,7 +21,7 @@ from core.metrics import request_deadline, track_usage
 log = logging.getLogger("api.access")
 
 # ponytail: add a name here only when a route needs it; never a value that carries user text or a profile
-_LOGGABLE = {"mode", "refused", "refusal_reason", "stages", "query_len", "n_targets", "text_len"}
+_LOGGABLE = {"mode", "refused", "refusal_reason", "stages", "query_len", "n_targets", "text_len", "cached"}
 
 
 def trace(request, **fields) -> None:
