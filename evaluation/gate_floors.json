@@ -1,0 +1,47 @@
+{
+  "_note": "Bounds checked by scripts/check_gate.py in CI. Eligibility and the expected refusals are exact product rules. Retrieval and rate bounds sit inside the measured intervals, so noise passes and a real drop fails. Raise a bound when its number improves; loosen one only with the reason in the same change.",
+  "live:eligibility": {
+    "metrics.cases": {"min": 40},
+    "metrics.headline_agreement.rate": {"min": 1.0},
+    "metrics.criterion_agreement.rate": {"min": 1.0},
+    "metrics.criterion_agreement.total": {"min": 213},
+    "metrics.false_positive_headlines": {"max": 0}
+  },
+  "frontend/public/benchmark.json": {
+    "input_hashes.gold": {"sha256_of": "evaluation/datasets/gold_qa.jsonl"},
+    "input_hashes.registry": {"sha256_of": "sources/registry.yaml"},
+    "input_hashes.manifest": {"sha256_of": "sources/manifest.json"},
+    "settings_snapshot.rrf_k": {"equals_setting": "retrieval.rrf_k"},
+    "settings_snapshot.rerank_n": {"equals_setting": "retrieval.rerank_n"},
+    "settings_snapshot.embed_model": {"equals_setting": "models.embed_model"},
+    "settings_snapshot.rerank_model": {"equals_setting": "models.rerank_model"},
+    "settings_snapshot.refusal_threshold": {"equals_setting": "generation.refusal_threshold"},
+    "gold_size": {"min": 108},
+    "configs.hybrid_rerank.query_count": {"min": 108},
+    "configs.hybrid_rerank.recall.@5": {"min": 0.77},
+    "configs.hybrid_rerank.recall.@10": {"min": 0.82},
+    "configs.hybrid_rerank.mrr": {"min": 0.71},
+    "answers.refusal_confusion.false_refusal_rate": {"max": 0.05},
+    "answers.refusal_confusion.refusal_recall": {"min": 0.28}
+  },
+  "evaluation/results/refusal_calibration.json": {
+    "input_hashes.gold": {"sha256_of": "evaluation/datasets/gold_qa.jsonl"},
+    "input_hashes.registry": {"sha256_of": "sources/registry.yaml"},
+    "input_hashes.manifest": {"sha256_of": "sources/manifest.json"},
+    "status": {"equals": "calibrated"},
+    "constraint_met": {"equals": true},
+    "selected_threshold": {"equals_setting": "generation.refusal_threshold"}
+  },
+  "evaluation/results/agent_comparison.json": {
+    "items_paired": {"min": 28},
+    "metrics.doc_recall.agent": {"min": 0.7},
+    "metrics.doc_recall.diff_ci.0": {"min": 0.01},
+    "metrics.fact_recall.agent": {"min": 0.7}
+  },
+  "evaluation/results/llm_refusal.json": {
+    "answerable.n": {"min": 80},
+    "answerable.refusal_rate": {"max": 0.22},
+    "expected_refusals.n": {"min": 14},
+    "expected_refusals.answered_anyway": {"max": 1}
+  }
+}
