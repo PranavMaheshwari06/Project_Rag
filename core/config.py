@@ -105,6 +105,8 @@ class EvalCfg(BaseModel):
     ablation_out: str = "evaluation/results/ablation.json"
     llm_refusal_rows_out: str = "evaluation/results/llm_refusal.jsonl"  # one line per gold item
     llm_refusal_out: str = "evaluation/results/llm_refusal.json"
+    auto_refusal_rows_out: str = "evaluation/results/auto_refusal.jsonl"  # `auto`, on top of the rows above
+    auto_refusal_out: str = "evaluation/results/auto_refusal.json"
     injection_probe_out: str = "evaluation/results/injection_probe.json"  # live probe, recorded, not gated
 
 
