@@ -51,3 +51,15 @@ def test_empty_evidence_strips_everything():
     text, citations = map_citations("Claim [1]. Claim [2].", [])
     assert citations == []
     assert "[1]" not in text and "[2]" not in text
+
+
+def test_a_grouped_marker_cites_every_source():
+    text, citations = map_citations("Home editions are accepted [1, 3].", EVIDENCE)
+    assert [c.marker for c in citations] == [1, 3]
+    assert text == "Home editions are accepted [1][3]."  # one marker per source, the form the UI reads
+
+
+def test_invented_numbers_are_dropped_from_a_group():
+    text, citations = map_citations("The fee is 100 EUR [2,97]. Made up [97, 98].", EVIDENCE)
+    assert [c.marker for c in citations] == [2]
+    assert text == "The fee is 100 EUR [2]. Made up."

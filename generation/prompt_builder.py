@@ -3,6 +3,7 @@ the same evidence ordering, so [n] points at the same chunk in both modes."""
 
 import re
 
+from generation.citation_mapper import CITE_RE
 from schemas.common import Chunk
 
 REFUSAL_TEXT = "I don't have enough grounded evidence to answer that."
@@ -71,7 +72,7 @@ def build_messages(query: str, evidence: list[Chunk]) -> list[dict]:
 
 def _words(text: str) -> list[str]:
     # citation markers are dropped first, so "Answer [1] the [1] question" cannot break up a leaked run
-    return re.findall(r"[a-z0-9]+", re.sub(r"\[\d+\]", " ", text.lower()))
+    return re.findall(r"[a-z0-9]+", CITE_RE.sub(" ", text.lower()))
 
 
 def _shingles(words: list[str]) -> set[tuple[str, ...]]:

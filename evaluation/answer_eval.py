@@ -5,9 +5,8 @@ answer cites. This is not an LLM judge; it over-credits paraphrase-free
 answers (which the extractive mode produces anyway) and under-credits heavy
 rewording."""
 
-import re
-
 from generation.answer_generator import SENTENCE_RE, content_words
+from generation.citation_mapper import CITE_RE
 from schemas.common import Chunk
 
 METHOD_LABEL = "token-overlap heuristic (not an LLM judge)"
@@ -16,7 +15,7 @@ SUPPORT_THRESHOLD = 0.5
 
 
 def _claims(answer_text: str) -> list[str]:
-    text = re.sub(r"\[\d+\]", "", answer_text)
+    text = CITE_RE.sub("", answer_text)
     return [s.strip() for s in SENTENCE_RE.split(text) if len(s.strip()) > 10]
 
 

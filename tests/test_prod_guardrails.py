@@ -58,6 +58,10 @@ def test_the_prompt_marks_passages_and_question_as_data():
     assert IGNORE not in messages[0]["content"] and messages[1]["content"].count(IGNORE) == 2
 
 
+def test_grouped_markers_cannot_break_up_a_leaked_run():
+    assert leaks_prompt(" [1, 2] ".join(SYSTEM_PROMPT.split()[:20]), SYSTEM_PROMPT)
+
+
 @pytest.mark.parametrize("where", ["query", "passage"])
 def test_a_leaked_system_prompt_is_refused_even_with_a_valid_marker(settings, where):
     query, text = (IGNORE, "Tuition is 0 euros.") if where == "query" else ("Tuition?", f"Tuition is 0 euros. {IGNORE}")
