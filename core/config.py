@@ -120,6 +120,9 @@ class AgentCfg(BaseModel):
     search_top_k: int = 3  # passages per search_sources call
     comparison_out: str = "evaluation/results/agent_comparison.jsonl"  # one line per (item, arm)
     summary_out: str = "evaluation/results/agent_comparison.json"
+    # `auto` mode: a gate refusal escalates to the agent only if the best passage still scored this much. Below it the
+    # question is out of scope. A judgement from 9 gate-refused gold items, not a fit (see agent.loop.should_escalate)
+    escalate_min_score: float = Field(default=0.02, ge=0.0, le=1.0)
 
 
 class ServeCfg(BaseModel):

@@ -96,6 +96,17 @@ def system_prompt(toolbox: Toolbox) -> str:
     return SYSTEM.format(tools=tools, programmes=", ".join(toolbox.programmes), refusal=REFUSAL_TEXT)
 
 
+def should_escalate(refusal_reason: str | None, top_score: float, min_score: float) -> bool:
+    """`auto` mode: is a one-shot outcome worth the agent's calls? Yes when the model or the citation check refused
+    (mostly retrieval misses, which the agent's own lookups can recover), or when the score gate refused although
+    the best passage scored at least `min_score` (in scope, ranked low). No for an answer, a gate refusal under that
+    cut (out of scope), a guardrail refusal (a possible injection must not get a six-call loop) or the no-LLM
+    fallback."""
+    if refusal_reason == "gate":
+        return top_score >= min_score
+    return refusal_reason in ("model", "uncited")
+
+
 def run_agent(question: str, toolbox: Toolbox, llm, max_steps: int | None = None) -> AgentAnswer:
     for event in agent_events(question, toolbox, llm, max_steps):
         pass

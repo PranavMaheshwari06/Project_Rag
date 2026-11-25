@@ -9,7 +9,7 @@ from schemas.search import Filters
 class ChatRequest(BaseModel):
     query: str = Field(min_length=1, max_length=1000)
     filters: Filters | None = None  # one-shot retrieval only; the agent chooses its own lookups
-    mode: Literal["oneshot", "agent"] = "oneshot"
+    mode: Literal["oneshot", "agent", "auto"] = "oneshot"  # auto: one-shot, then the agent if it refuses
     # the student's own profile, for check_eligibility only: never sent to the model, logged or cached
     profile: Profile | None = None
     profile_confirmed: bool = False
