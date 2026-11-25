@@ -65,12 +65,6 @@ test:
 run:
 	$(PY) -m uvicorn api.main:app --port 8000
 
-fmt:
-	$(PY) -m ruff format .
-
-up:
-	docker compose up --build
-
 # needs `make ingest index` first; runs the image with no key (no model calls, no cost) and smoke-tests it over HTTP
 docker-smoke:
 	docker build -f docker/api.Dockerfile -t germany-masters-api .
@@ -79,5 +73,12 @@ docker-smoke:
 	$(PY) scripts/smoke_http.py http://127.0.0.1:8010 --wait 60 --feedback; code=$$?; \
 	  [ $$code = 0 ] || docker logs --tail 40 germany-masters-smoke; \
 	  docker rm -f germany-masters-smoke >/dev/null; exit $$code
+.PHONY: docker-smoke
 
-.PHONY: venv install crawl ingest index extract review eval ablation compare-agent eval-llm-refusal eval-eligibility eligibility parse-profile validate-rule-inventory test run fmt up docker-smoke
+fmt:
+	$(PY) -m ruff format .
+
+up:
+	docker compose up --build
+
+.PHONY: venv install crawl ingest index extract review eval ablation compare-agent eval-llm-refusal eval-eligibility eligibility parse-profile validate-rule-inventory test run fmt up
