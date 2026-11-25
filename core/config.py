@@ -105,6 +105,8 @@ class EvalCfg(BaseModel):
     ablation_out: str = "evaluation/results/ablation.json"
     llm_refusal_rows_out: str = "evaluation/results/llm_refusal.jsonl"  # one line per gold item
     llm_refusal_out: str = "evaluation/results/llm_refusal.json"
+    auto_refusal_rows_out: str = "evaluation/results/auto_refusal.jsonl"  # `auto`, on top of the rows above
+    auto_refusal_out: str = "evaluation/results/auto_refusal.json"
     injection_probe_out: str = "evaluation/results/injection_probe.json"  # live probe, recorded, not gated
 
 
@@ -120,6 +122,9 @@ class AgentCfg(BaseModel):
     search_top_k: int = 3  # passages per search_sources call
     comparison_out: str = "evaluation/results/agent_comparison.jsonl"  # one line per (item, arm)
     summary_out: str = "evaluation/results/agent_comparison.json"
+    # `auto` mode: a gate refusal escalates to the agent only if the best passage still scored this much. Below it the
+    # question is out of scope. A judgement from 9 gate-refused gold items, not a fit (see agent.loop.should_escalate)
+    escalate_min_score: float = Field(default=0.02, ge=0.0, le=1.0)
 
 
 class ServeCfg(BaseModel):

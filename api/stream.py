@@ -44,10 +44,11 @@ def sse(request: Request, events: Callable[[], Iterator[Event]]) -> StreamingRes
 
     def body() -> Iterator[str]:
         usage = current_usage()  # the middleware's tracker for this request
-        start, steps, end = time.perf_counter(), 0, {}
+        start, steps, escalated, end = time.perf_counter(), 0, False, {}
         try:
             for name, data in events():
                 steps += name == "step"
+                escalated |= name == "escalated"
                 if name == "answer":
                     data["usage"] = {"llm_calls": usage.calls, "prompt_tokens": usage.prompt_tokens,
                                      "completion_tokens": usage.completion_tokens, "model": usage.model}
@@ -66,7 +67,7 @@ def sse(request: Request, events: Callable[[], Iterator[Event]]) -> StreamingRes
         finally:
             log_event(log, "stream", path=path, duration_ms=round((time.perf_counter() - start) * 1000, 1),
                       llm_calls=usage.calls, prompt_tokens=usage.prompt_tokens,
-                      completion_tokens=usage.completion_tokens, model=usage.model, steps=steps,
+                      completion_tokens=usage.completion_tokens, model=usage.model, steps=steps, escalated=escalated,
                       **request.state.trace, **end)
 
     stream = body()

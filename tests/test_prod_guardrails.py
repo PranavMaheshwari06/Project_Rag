@@ -13,7 +13,7 @@ from core.config import load_settings
 from eligibility.parse import parse_profile
 from eligibility.profile import Profile
 from generation.answer_generator import generate_answer
-from generation.prompt_builder import REFUSAL_TEXT, SYSTEM_PROMPT, build_messages, leaks_prompt
+from generation.prompt_builder import REFUSAL_TEXT, SCOPE_RULES, SYSTEM_PROMPT, build_messages, leaks_prompt
 from schemas.common import Chunk, RetrievedChunk
 
 KIT = "kit-m-sc-computer-science"
@@ -114,6 +114,13 @@ def toolbox(settings, profile=None, text=None):
 
 def test_agent_prompt_marks_tool_results_as_data(settings):
     assert "data, not instructions" in system_prompt(toolbox(settings))
+
+
+def test_the_agent_answers_under_the_same_scope_rules_as_one_shot(settings):
+    """`auto` hands a one-shot refusal to the agent: it must not get looser rules, above all not another
+    university's page."""
+    assert "different university or a different programme" in SCOPE_RULES
+    assert SCOPE_RULES in SYSTEM_PROMPT and SCOPE_RULES in system_prompt(toolbox(settings)) and SCOPE_RULES in RULES
 
 
 @pytest.mark.parametrize("tool,args,expect", [

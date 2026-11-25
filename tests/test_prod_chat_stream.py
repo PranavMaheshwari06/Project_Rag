@@ -11,17 +11,17 @@ import time
 import pytest
 from fastapi.testclient import TestClient
 
-from agent.loop import agent_events
+from agent.loop import agent_events, should_escalate
 from agent.tools import Toolbox, ToolResult
 from api.main import create_app
 from core.config import load_settings
 from core.exceptions import DeadlineError, UpstreamError
 from core.logging import JsonFormatter, setup_logging
 from core.metrics import record_call, request_deadline
-from generation.prompt_builder import REFUSAL_TEXT
+from generation.prompt_builder import REFUSAL_TEXT, SYSTEM_PROMPT
 from tests.test_prod_answer_contract import hits
 
-ASK = {"query": "What is the TUM fee?"}
+ASK = {"query": "What is the TUM fee?", "mode": "oneshot"}
 AGENT = {**ASK, "mode": "agent"}
 SEARCH = '{"tool": "search_sources", "args": {"query": "fee"}}'
 FINAL = '{"answer": "The fee is 85 EUR [1]."}'
@@ -309,3 +309,120 @@ def test_the_stream_has_the_llm_rate_limit(make):
     assert client.post("/chat/stream", json=ASK).status_code == 200
     r = client.post("/chat/stream", json=ASK)
     assert r.status_code == 429 and "retry-after" in r.headers
+
+
+# --- auto: one-shot first, the agent when one-shot refuses -------------------------------------------
+AUTO = {**ASK, "mode": "auto"}
+ANSWERED = "The fee is 85 EUR [1]."
+
+
+def names(response) -> list[str]:
+    return [name for name, _ in events(response)]
+
+
+@pytest.mark.parametrize("reason,score,escalates", [
+    ("model", 0.9, True), ("uncited", 0.9, True),
+    ("gate", 0.02, True), ("gate", 0.019, False), ("gate", 0.0, False),
+    ("guardrail", 0.9, False), ("extractive", 0.9, False), (None, 0.9, False),
+])
+def test_which_one_shot_outcomes_escalate(reason, score, escalates):
+    assert should_escalate(reason, score, min_score=0.02) is escalates
+
+
+def test_the_default_mode_is_auto(make):
+    _, client, _, _ = make(REFUSAL_TEXT, SEARCH, FINAL)
+    assert "escalated" in names(client.post("/chat/stream", json={"query": ASK["query"]}))
+
+
+def test_auto_keeps_an_answered_one_shot(make, logs):
+    _, client, _, llm = make(ANSWERED)
+    r = client.post("/chat/stream", json=AUTO)
+    assert names(r) == ["sources", "answer"] and events(r)[-1][1]["answered_by"] == "oneshot"
+    assert len(llm.sent) == 1
+    assert [line for line in logs if line["msg"] == "stream"][-1]["escalated"] is False
+
+
+def test_auto_hands_a_refused_question_to_the_agent(make, logs):
+    _, client, _, _ = make(REFUSAL_TEXT, SEARCH, FINAL)
+    out = events(client.post("/chat/stream", json=AUTO))
+    assert [name for name, _ in out] == ["sources", "escalated", "step", "answer"]
+    assert out[1][1] == {"refusal_reason": "model"}
+    answer = out[-1][1]
+    assert answer["answered_by"] == "agent" and not answer["refused"] and answer["usage"]["llm_calls"] == 3
+    end = [line for line in logs if line["msg"] == "stream"][-1]
+    assert end["escalated"] is True and end["llm_calls"] == 3 and end["answered_by"] == "agent"
+
+
+@pytest.mark.parametrize("score,expected", [
+    (0.001, ["sources", "answer"]),                         # out of scope: no agent calls
+    (0.1, ["sources", "escalated", "step", "answer"]),      # in scope, ranked low
+])
+def test_auto_escalates_a_gate_refusal_only_above_the_cut(make, score, expected):
+    _, client, pipeline, llm = make(SEARCH, GIVE_UP)
+    searches = []
+
+    def search(query, mode="hybrid_rerank", top_k=None, timer=None, filters=None):
+        searches.append(query)
+        return [rc.model_copy(update={"rerank_score": score if len(searches) == 1 else 0.9}) for rc in hits()]
+
+    pipeline.search = search
+    assert names(client.post("/chat/stream", json=AUTO)) == expected
+    assert len(llm.sent) == (2 if "escalated" in expected else 0)
+
+
+def test_auto_does_not_escalate_a_filtered_question(make):
+    """The agent ignores filters, so escalating could answer from a university the caller filtered out."""
+    _, client, _, llm = make(REFUSAL_TEXT, SEARCH, FINAL)
+    out = events(client.post("/chat/stream", json={**AUTO, "filters": {"university": ["TUM"]}}))
+    assert [name for name, _ in out] == ["sources", "answer"] and out[-1][1]["refused"] and len(llm.sent) == 1
+
+
+def test_auto_sends_sources_before_the_model_is_asked(make):
+    _, client, _, llm = make()
+
+    def down(*a, **k):
+        raise UpstreamError("the language model is unavailable right now, try again later")
+
+    llm.complete = down
+    assert names(client.post("/chat/stream", json=AUTO)) == ["sources", "error"]
+
+
+def test_auto_does_not_hand_a_guardrail_refusal_to_the_agent(make):
+    _, client, _, llm = make(f"{SYSTEM_PROMPT} [1]")
+    out = events(client.post("/chat/stream", json=AUTO))
+    assert out[-1][1]["refusal_reason"] == "guardrail" and len(llm.sent) == 1
+
+
+def test_auto_without_a_key_stays_one_shot(make):
+    _, client, _, llm = make()
+    llm.available = False
+    out = events(client.post("/chat/stream", json=AUTO))
+    assert [name for name, _ in out] == ["sources", "answer"] and out[-1][1]["answered_by"] == "oneshot"
+
+
+def test_auto_ends_with_an_error_if_the_cap_stops_the_agent(make):
+    _, client, _, _ = make(REFUSAL_TEXT, SEARCH, daily_llm_calls=2)
+    assert names(client.post("/chat/stream", json=AUTO)) == ["sources", "escalated", "step", "error"]
+
+
+def test_auto_repeats_are_served_from_the_cache(make):
+    _, client, _, llm = make(REFUSAL_TEXT, SEARCH, FINAL)
+    client.post("/chat/stream", json=AUTO)
+    out = events(client.post("/chat/stream", json=AUTO))
+    assert [name for name, _ in out] == ["sources", "escalated", "answer"]
+    assert out[-1][1]["cached"] and out[-1][1]["usage"]["llm_calls"] == 0 and len(llm.sent) == 3
+
+
+def test_auto_sends_a_question_with_a_profile_straight_to_the_agent(make, verdict, logs):
+    """One-shot cannot see the profile, so it would answer "your qualifications are not provided"."""
+    app, client, _, llm = make(eligibility_call(), SEARCH, FINAL)
+    out = events(client.post("/chat/stream", json={**PROFILE, "mode": "auto"}))
+    assert not app.state.answer_cache._data and SECRET not in json.dumps(logs) + json.dumps(llm.sent)
+    assert [name for name, _ in out] == ["step", "step", "answer"] and out[-1][1]["answered_by"] == "agent"
+    assert verdict[0].profile.degree_title == SECRET and len(llm.sent) == 3  # no one-shot call before it
+
+
+def test_auto_with_a_profile_and_no_key_stays_one_shot(make):
+    _, client, _, llm = make()
+    llm.available = False
+    assert names(client.post("/chat/stream", json={**PROFILE, "mode": "auto"})) == ["sources", "answer"]
