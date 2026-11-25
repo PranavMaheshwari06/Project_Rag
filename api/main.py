@@ -7,7 +7,7 @@ from api.cache import TTLCache
 from api.limits import BodyLimitMiddleware, Limits
 from api.middleware.logging_mw import RequestLoggingMiddleware
 from api.middleware.request_id import RequestIdMiddleware
-from api.routes import answer, eligibility, evaluate, health, ingest, search
+from api.routes import answer, chat, eligibility, evaluate, health, ingest, search
 from core.config import get_settings
 from core.exceptions import AppError
 from core.logging import setup_logging
@@ -49,7 +49,7 @@ def create_app() -> FastAPI:
             content={"detail": errors, "request_id": getattr(request.state, "request_id", "-")},
         )
 
-    modules = (health, search, answer, ingest, evaluate, eligibility)
+    modules = (health, search, answer, chat, ingest, evaluate, eligibility)
     for module in modules:
         app.include_router(module.router)
     # the access log names a path only if it is one of ours; anything else was chosen by the client

@@ -23,6 +23,10 @@ class UpstreamError(AppError):
     status_code = 502
 
 
+class DeadlineError(AppError):
+    status_code = 504
+
+
 class TooManyRequestsError(AppError):
     status_code = 429
 

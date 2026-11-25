@@ -4,6 +4,7 @@ would keep its own copy; a shared store is the upgrade).
 The key is the question (case and spacing folded) plus the filters, hashed. The stored answer keeps no
 `query` field, but its text can echo the question; it stays in memory for the TTL and is never logged.
 
+`mode` keeps one-shot and agent answers apart (/answer and the one-shot stage of /chat/stream share entries).
 The model, the prompt and the corpus are not in the key: all three are fixed for the life of the process. The corpus only changes through /ingest with a rebuild, which empties the cache, or through a
 redeploy, which restarts the process. A key that changed any of them at runtime would need them in the key."""
 
@@ -16,10 +17,10 @@ from collections import OrderedDict
 _now = time.time  # module-level so tests can drive the clock
 
 
-def answer_key(query: str, filters: dict[str, list[str]] | None) -> str:
+def answer_key(query: str, filters: dict[str, list[str]] | None, mode: str = "oneshot") -> str:
     # filter values are "any of", so their order does not change retrieval
     norm_filters = {k: sorted(v) for k, v in (filters or {}).items()}
-    raw = json.dumps([" ".join(query.casefold().split()), norm_filters], sort_keys=True)
+    raw = json.dumps([mode, " ".join(query.casefold().split()), norm_filters], sort_keys=True)
     return hashlib.sha256(raw.encode()).hexdigest()
 
 

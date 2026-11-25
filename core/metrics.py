@@ -35,6 +35,11 @@ def track_usage(on_call: Callable[[], None] | None = None):
         _usage.reset(token)
 
 
+def current_usage() -> Usage | None:
+    """The tracker of the enclosing `track_usage` block, if any (a streamed response reads it to log its spend)."""
+    return _usage.get()
+
+
 _deadline: ContextVar[float | None] = ContextVar("request_deadline", default=None)
 
 

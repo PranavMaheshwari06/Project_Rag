@@ -6,6 +6,7 @@ its profile from the caller, never from the model, and the model sees verdicts,
 not the student's own numbers."""
 
 import json
+import logging
 from datetime import date
 from decimal import Decimal
 from functools import cached_property
@@ -22,6 +23,8 @@ from eligibility.profile import Profile
 from eligibility.rules import load_ruleset, record_tier
 from ingestion.registry import load_registry
 from schemas.common import Chunk
+
+log = logging.getLogger(__name__)
 
 TIER_NOTE = {
     "human": "every field was checked by hand against the cited page",
@@ -75,6 +78,7 @@ class Toolbox:
                  intake: Literal["winter", "summer"] | None = None, starting_year: int | None = None):
         self.settings, self.pipeline, self.profile = settings, pipeline, profile
         self.as_of, self.intake, self.starting_year = as_of, intake, starting_year
+        self.crashed = False  # a tool raised (not just bad arguments): a retry may do better, so the API does not cache
 
     @cached_property
     def programmes(self) -> list[str]:
@@ -100,6 +104,8 @@ class Toolbox:
         try:
             return getattr(self, name)(parsed)
         except Exception as e:  # a failing tool is a tool error, not a crash; the message stays out
+            self.crashed = True
+            log.warning("agent tool %s raised %s", name, type(e).__name__)
             return ToolResult(ok=False, text=f"{name} failed ({type(e).__name__}).")
 
     def search_sources(self, a: SearchArgs) -> ToolResult:

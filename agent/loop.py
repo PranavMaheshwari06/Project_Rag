@@ -12,11 +12,14 @@ system prompt: an injection got through)."""
 
 import json
 import time
+from collections.abc import Iterator
 from typing import Literal
 
 from pydantic import BaseModel
 
 from agent.tools import TOOLS, Toolbox
+from core.exceptions import DeadlineError
+from core.metrics import request_deadline_at
 from generation.citation_mapper import map_citations
 from generation.prompt_builder import REFUSAL_TEXT, leaks_prompt
 from schemas.answer import Citation
@@ -94,6 +97,14 @@ def system_prompt(toolbox: Toolbox) -> str:
 
 
 def run_agent(question: str, toolbox: Toolbox, llm, max_steps: int | None = None) -> AgentAnswer:
+    for event in agent_events(question, toolbox, llm, max_steps):
+        pass
+    return event  # the last event is always the AgentAnswer
+
+
+def agent_events(question: str, toolbox: Toolbox, llm, max_steps: int | None = None) -> Iterator[Step | AgentAnswer]:
+    """Yields each Step as it finishes, then the AgentAnswer. Raises DeadlineError between steps once the
+    request deadline (core.metrics.request_deadline) has passed; outside a request there is none."""
     max_steps = toolbox.settings.agent.max_steps if max_steps is None else max_steps
     if max_steps < 1:
         raise ValueError("max_steps must be at least 1")
@@ -116,6 +127,8 @@ def run_agent(question: str, toolbox: Toolbox, llm, max_steps: int | None = None
                            citations=citations, evidence=evidence, steps=steps, llm_calls=calls)
 
     while calls < max_steps:
+        if (deadline := request_deadline_at()) is not None and time.monotonic() >= deadline:
+            raise DeadlineError("the question took too long to answer; try a narrower one")
         if calls == max_steps - 1:
             messages.append({"role": "user", "content": LAST_STEP})
         reply = llm.complete(messages, json_mode=True)
@@ -125,7 +138,8 @@ def run_agent(question: str, toolbox: Toolbox, llm, max_steps: int | None = None
         if action is None:
             bad_in_row += 1
             if bad_in_row == 2:
-                return finish(REFUSAL_TEXT, "bad_output")
+                yield finish(REFUSAL_TEXT, "bad_output")
+                return
             messages.append({"role": "user", "content": REPAIR})
             continue
         bad_in_row = 0
@@ -137,7 +151,8 @@ def run_agent(question: str, toolbox: Toolbox, llm, max_steps: int | None = None
                 cite_repaired = True
                 messages.append({"role": "user", "content": CITE_REPAIR})
                 continue
-            return finish(text, "answered")
+            yield finish(text, "answered")
+            return
         if calls == max_steps:
             break  # a tool call on the last allowed step: no answer within budget
         t0 = time.perf_counter()
@@ -153,6 +168,7 @@ def run_agent(question: str, toolbox: Toolbox, llm, max_steps: int | None = None
         steps.append(Step(n=len(steps) + 1, tool=action["tool"], args=action["args"], ok=result.ok,
                           summary=result.text.splitlines()[0] if result.text else "", markers=markers,
                           ms=round((time.perf_counter() - t0) * 1000, 1)))
+        yield steps[-1]
         observation = "\n\n".join([("" if result.ok else "Tool error: ") + result.text, *passages])
         messages.append({"role": "user", "content": f"Result of {action['tool']}:\n{observation}"})
-    return finish(REFUSAL_TEXT, "budget")
+    yield finish(REFUSAL_TEXT, "budget")
