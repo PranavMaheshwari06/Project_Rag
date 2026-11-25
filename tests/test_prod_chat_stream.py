@@ -389,3 +389,17 @@ def test_auto_repeats_are_served_from_the_cache(make):
     out = events(client.post("/chat/stream", json=AUTO))
     assert [name for name, _ in out] == ["sources", "escalated", "answer"]
     assert out[-1][1]["cached"] and out[-1][1]["usage"]["llm_calls"] == 0 and len(llm.sent) == 3
+
+
+def test_auto_sends_a_question_with_a_profile_straight_to_the_agent(make, verdict):
+    """One-shot cannot see the profile, so it would answer "your qualifications are not provided"."""
+    _, client, _, llm = make(eligibility_call(), SEARCH, FINAL)
+    out = events(client.post("/chat/stream", json={**PROFILE, "mode": "auto"}))
+    assert [name for name, _ in out] == ["step", "step", "answer"] and out[-1][1]["answered_by"] == "agent"
+    assert verdict[0].profile.degree_title == SECRET and len(llm.sent) == 3  # no one-shot call before it
+
+
+def test_auto_with_a_profile_and_no_key_stays_one_shot(make):
+    _, client, _, llm = make()
+    llm.available = False
+    assert names(client.post("/chat/stream", json={**PROFILE, "mode": "auto"})) == ["sources", "answer"]

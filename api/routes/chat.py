@@ -69,7 +69,12 @@ def agent_stream(body: ChatRequest, cache: TTLCache | None) -> Iterator[Event]:
 
 
 def auto_events(body: ChatRequest, request: Request, cache: TTLCache | None) -> Iterator[Event]:
-    """One-shot first; the agent only when that outcome is worth its calls (agent.loop.should_escalate)."""
+    """One-shot first; the agent only when that outcome is worth its calls (agent.loop.should_escalate). A question
+    with a profile goes straight to the agent: one-shot cannot see the profile, so it answers that the student's
+    qualifications are unknown, and an answer is never escalated."""
+    if body.profile is not None and get_llm_client().available:
+        yield from agent_stream(body, cache)
+        return
     top = 0.0
     for name, data in oneshot_events(body, request, cache):
         if name == "sources" and data["chunks"]:

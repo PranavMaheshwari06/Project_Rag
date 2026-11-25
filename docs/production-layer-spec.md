@@ -54,6 +54,10 @@ event. If the client disconnects, no further LLM call is made (one already runni
 
 ### When `auto` escalates
 
+A request with a `profile` skips one-shot and goes straight to the agent, with no `sources` or `escalated` event:
+only the agent can use the profile. Send one only when the question is about the student's own case, since it costs
+the agent's calls. Otherwise:
+
 | one-shot outcome | escalates | why |
 |---|---|---|
 | answered (a partial answer included) | no | the cheap path worked |
