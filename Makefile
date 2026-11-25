@@ -59,6 +59,9 @@ eval-eligibility:
 validate-rule-inventory:
 	$(PY) scripts/validate_rule_inventory.py $(ARGS)
 
+gate:
+	$(PY) scripts/check_gate.py $(ARGS)
+
 test:
 	$(PY) -m pytest -q
 
@@ -81,4 +84,4 @@ fmt:
 up:
 	docker compose up --build
 
-.PHONY: venv install crawl ingest index extract review eval ablation compare-agent eval-llm-refusal eval-eligibility eligibility parse-profile validate-rule-inventory test run fmt up
+.PHONY: venv install crawl ingest index extract review eval ablation compare-agent eval-llm-refusal eval-eligibility eligibility parse-profile validate-rule-inventory gate test run fmt up

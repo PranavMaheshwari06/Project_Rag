@@ -22,6 +22,8 @@ jobs:
           tests/test_agent.py tests/test_agent_eval.py tests/test_llm_refusal_eval.py tests/test_publish_rule.py tests/test_prod_*.py
       - run: python scripts/validate_rule_inventory.py
       - run: python scripts/check_eligibility.py --validate
+      # eligibility cases run live; the committed eval numbers must stay inside evaluation/gate_floors.json
+      - run: python scripts/check_gate.py
   frontend:
     runs-on: ubuntu-latest
     defaults: { run: { working-directory: frontend } }

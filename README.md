@@ -276,6 +276,7 @@ make eligibility ARGS="--validate --check-cache"  # also requires the cached pag
 make parse-profile ARGS="--input draft.txt"  # pasted text -> unconfirmed draft profile (needs GEMINI_API_KEY; synthetic text only)
 make eval-eligibility  # validate evaluation/datasets/eligibility_cases.jsonl, run it, write evaluation/results/eligibility_baseline.json
                        # (exits 1 if the cases file is missing or invalid)
+make gate       # the CI eval gate: eligibility cases plus committed eval results against evaluation/gate_floors.json
 ```
 
 Frontend (Node 18+):
@@ -297,6 +298,12 @@ Docker: after `make ingest index` (the corpus is not in git), `make docker-smoke
 `make eval-eligibility` runs the rules engine on 40 profiles whose expected verdicts were written from the cited official pages before any engine run (5 by the maintainer, 35 assisted; 17 are independent observations, the rest are variants). Result in [eligibility_baseline.json](evaluation/results/eligibility_baseline.json): 40/40 headline verdicts and 213/213 per-criterion verdicts agree, with 0 false-positive "meets" headlines. The engine decided 211 of 334 applicable criteria (63%); the rest are `unknown` because they need a university assessment (74), a fact the profile did not give (48) or a funds route with no published comparison (1), by design. Application deadlines are encoded for 12 of 13 programmes (TU Berlin publishes none on its registry pages); those added on 2026-11-12 are awaiting human review and cannot yet mark readiness as complete.
 
 This measures agreement with the sources as read by the maintainer, not an independent audit, and it is not an admission probability.
+
+## CI eval gate
+
+Every push runs `python scripts/check_gate.py` (`make gate`). It runs the 40 eligibility cases live (every headline and criterion verdict must agree, with no false-positive "meets") and checks the committed results against the bounds in [gate_floors.json](evaluation/gate_floors.json): retrieval recall and MRR, the score gate's false refusals, the agent's recall and its gain over one-shot, and the LLM refusal rate with its expected refusals. The benchmark and calibration files must also match the current gold set, registry, crawl manifest and threshold, and the benchmark the current retrieval settings.
+
+What it does not do: CI has neither the corpus (crawled pages are not committed) nor an API key, so it re-runs neither retrieval nor the LLM. A code change that makes retrieval or answers worse passes until the numbers are measured again and committed. For retrieval and the score gate that is `make eval`. The two LLM runs only resume where they stopped, so measuring them again means deleting `evaluation/results/llm_refusal.jsonl` or `agent_comparison.jsonl` first, then running `make eval-llm-refusal` or `make compare-agent` (both call the LLM).
 
 ## Honest limitations (current)
 
