@@ -86,6 +86,8 @@ class GenerationCfg(BaseModel):
     refusal_threshold: float = 0.3
     max_evidence_chunks: int = 4
     max_sentences_per_chunk: int = 3
+    # pasted text per chat request; a code default, because settings.yaml is hash-locked
+    user_source_max_chars: int = 8000
 
 
 class EvalCfg(BaseModel):

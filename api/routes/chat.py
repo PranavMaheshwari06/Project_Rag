@@ -17,7 +17,7 @@ from api.middleware.logging_mw import trace
 from api.routes.answer import answer_steps
 from api.stream import Event, sse
 from core.config import get_settings
-from core.exceptions import ServiceUnavailableError
+from core.exceptions import BadRequestError, ServiceUnavailableError
 from schemas.answer import AnswerResponse
 from schemas.chat import ChatRequest
 
@@ -28,7 +28,7 @@ AGENT_NOT_CACHED = {"uncited", "guardrail", "budget", "bad_output"}
 
 
 def oneshot_events(body: ChatRequest, request: Request, cache: TTLCache | None) -> Iterator[Event]:
-    for item in answer_steps(body.query, body.filters, request.state.request_id, cache):
+    for item in answer_steps(body.query, body.filters, request.state.request_id, cache, body.user_source):
         if isinstance(item, AnswerResponse):
             trace(request, stages=item.latency_ms)  # for the stream's own log line
             yield "answer", {"answered_by": "oneshot", "text": item.answer, "refused": item.refused,
@@ -79,7 +79,8 @@ def auto_events(body: ChatRequest, request: Request, cache: TTLCache | None) -> 
     for name, data in oneshot_events(body, request, cache):
         if name == "sources" and data["chunks"]:
             top = data["chunks"][0]["rerank_score"] or 0.0  # the score the refusal gate looked at
-        if (name == "answer" and get_llm_client().available and not body.filters  # the agent would ignore them
+        if (name == "answer" and get_llm_client().available
+                and not body.filters and body.user_source is None  # the agent sees neither
                 and should_escalate(data["refusal_reason"], top, get_settings().agent.escalate_min_score)):
             yield "escalated", {"refusal_reason": data["refusal_reason"]}
             yield from agent_stream(body, cache)
@@ -90,7 +91,12 @@ def auto_events(body: ChatRequest, request: Request, cache: TTLCache | None) -> 
 @router.post("/chat/stream")
 def chat_stream(body: ChatRequest, request: Request):
     trace(request, mode=body.mode, query_len=len(body.query))
-    cache = None if body.profile is not None else request.app.state.answer_cache  # a profile is never cached
+    if body.user_source is not None:
+        limit = get_settings().generation.user_source_max_chars
+        if len(body.user_source) > limit:
+            raise BadRequestError(f"the pasted text is longer than {limit} characters")
+        trace(request, user_source_len=len(body.user_source))
+    cache =None if body.profile is not None else request.app.state.answer_cache  # a profile is never cached
     if body.mode == "agent":
         return sse(request, lambda: agent_stream(body, cache))
     run = auto_events if body.mode == "auto" else oneshot_events

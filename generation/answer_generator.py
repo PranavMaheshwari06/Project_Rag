@@ -86,12 +86,15 @@ def _extractive_answer(query: str, evidence: list[Chunk], max_sentences: int) ->
 
 
 def generate_answer(query: str, retrieved: list[RetrievedChunk], settings: Settings,
-                    llm: LLMClient) -> AnswerDraft:
+                    llm: LLMClient, pasted: Chunk | None = None) -> AnswerDraft:
     threshold = settings.generation.refusal_threshold
-    if not retrieved or (retrieved[0].rerank_score or 0.0) < threshold:
+    # the gate scores the corpus, which says nothing about pasted text: with a paste, the model decides
+    if pasted is None and (not retrieved or (retrieved[0].rerank_score or 0.0) < threshold):
         return _refusal("gate")
 
     evidence = [rc.chunk for rc in retrieved[: settings.generation.max_evidence_chunks]]
+    if pasted is not None:
+        evidence.append(pasted)  # last, after the official passages
 
     if llm.available:
         messages = build_messages(query, evidence)

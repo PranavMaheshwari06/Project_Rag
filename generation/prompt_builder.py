@@ -3,6 +3,7 @@ the same evidence ordering, so [n] points at the same chunk in both modes."""
 
 import re
 
+from generation.citation_mapper import CITE_RE
 from schemas.common import Chunk
 
 REFUSAL_TEXT = "I don't have enough grounded evidence to answer that."
@@ -40,10 +41,29 @@ def build_evidence_block(evidence: list[Chunk]) -> str:
     return "\n\n".join(parts)
 
 
+USER_SOURCE_ID = "user-source"  # the chunk_id of pasted text, so a caller can tell it from an official page
+# added to the system prompt only when pasted text is among the evidence
+USER_SOURCE_NOTE = (
+    " The last passage was pasted by the student and is not an official source: when you use it, say that it comes "
+    "from the pasted text and is not verified. If it disagrees with another passage, give both and say which is "
+    "the pasted one."
+)
+
+
+def user_source_chunk(text: str) -> Chunk:
+    """Pasted text as one evidence passage. Its [n] markers are rewritten as (n), so it cannot pose as another
+    passage and have a claim of its own cited to an official page."""
+    text = CITE_RE.sub(lambda m: f"({m[1]})", text.strip())
+    return Chunk(chunk_id=USER_SOURCE_ID, doc_id=USER_SOURCE_ID, source=USER_SOURCE_ID, url="",
+                 title="Pasted by you (user-provided, not verified)", section_path="pasted text", text=text,
+                 token_count=len(text.split()))
+
+
 def build_messages(query: str, evidence: list[Chunk]) -> list[dict]:
     user = f"Evidence:\n\n{build_evidence_block(evidence)}\n\nQuestion: {query}"
+    pasted = any(chunk.chunk_id == USER_SOURCE_ID for chunk in evidence)
     return [
-        {"role": "system", "content": SYSTEM_PROMPT},
+        {"role": "system", "content": SYSTEM_PROMPT + (USER_SOURCE_NOTE if pasted else "")},
         {"role": "user", "content": user},
     ]
 
