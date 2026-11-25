@@ -15,6 +15,5 @@ frontend/dist
 build
 dist
 data/raw
-data/processed
-data/index
+data/pages
 data/feedback

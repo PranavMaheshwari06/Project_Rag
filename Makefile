@@ -71,4 +71,13 @@ fmt:
 up:
 	docker compose up --build
 
-.PHONY: venv install crawl ingest index extract review eval ablation compare-agent eval-llm-refusal eval-eligibility eligibility parse-profile validate-rule-inventory test run fmt up
+# needs `make ingest index` first; runs the image with no key (no model calls, no cost) and smoke-tests it over HTTP
+docker-smoke:
+	docker build -f docker/api.Dockerfile -t germany-masters-api .
+	-docker rm -f germany-masters-smoke >/dev/null 2>&1
+	docker run -d --name germany-masters-smoke --memory 4g -p 127.0.0.1:8010:8000 germany-masters-api >/dev/null
+	$(PY) scripts/smoke_http.py http://127.0.0.1:8010 --wait 60 --feedback; code=$$?; \
+	  [ $$code = 0 ] || docker logs --tail 40 germany-masters-smoke; \
+	  docker rm -f germany-masters-smoke >/dev/null; exit $$code
+
+.PHONY: venv install crawl ingest index extract review eval ablation compare-agent eval-llm-refusal eval-eligibility eligibility parse-profile validate-rule-inventory test run fmt up docker-smoke
