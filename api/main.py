@@ -7,7 +7,7 @@ from api.cache import TTLCache
 from api.limits import BodyLimitMiddleware, Limits
 from api.middleware.logging_mw import RequestLoggingMiddleware
 from api.middleware.request_id import RequestIdMiddleware
-from api.routes import answer, chat, eligibility, evaluate, health, ingest, search
+from api.routes import answer, chat, eligibility, evaluate, feedback, health, ingest, search
 from core.config import get_settings
 from core.exceptions import AppError
 from core.logging import setup_logging
@@ -30,6 +30,7 @@ def create_app() -> FastAPI:
         allow_origins=get_settings().serve.cors_origins,
         allow_methods=["*"],
         allow_headers=["*"],
+        expose_headers=["x-request-id"],  # the UI needs an answer's id to send or delete feedback about it
     )
 
     @app.exception_handler(AppError)
@@ -49,7 +50,8 @@ def create_app() -> FastAPI:
             content={"detail": errors, "request_id": getattr(request.state, "request_id", "-")},
         )
 
-    modules = (health, search, answer, chat, ingest, evaluate, eligibility)
+    feedback.purge()  # a restart removes feedback notes past their retention period
+    modules = (health, search, answer, chat, ingest, evaluate, eligibility, feedback)
     for module in modules:
         app.include_router(module.router)
     # the access log names a path only if it is one of ours; anything else was chosen by the client

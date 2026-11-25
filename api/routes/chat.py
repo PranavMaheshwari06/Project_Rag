@@ -33,7 +33,8 @@ def oneshot_events(body: ChatRequest, request: Request, cache: TTLCache | None) 
             trace(request, stages=item.latency_ms)  # for the stream's own log line
             yield "answer", {"answered_by": "oneshot", "text": item.answer, "refused": item.refused,
                              "refusal_reason": item.refusal_reason,
-                             "citations": [c.model_dump() for c in item.citations], "cached": item.cached}
+                             "citations": [c.model_dump() for c in item.citations], "cached": item.cached,
+                             "used_pasted_text": body.user_source is not None}
         else:
             yield "sources", {"chunks": [{"chunk_id": rc.chunk.chunk_id, "doc_id": rc.chunk.doc_id,
                                           "title": rc.chunk.title, "section_path": rc.chunk.section_path,
@@ -43,7 +44,7 @@ def oneshot_events(body: ChatRequest, request: Request, cache: TTLCache | None) 
 def agent_answer(out: AgentAnswer) -> dict:
     reason = {"answered": None, "refused": "model"}.get(out.stop_reason, out.stop_reason)
     return {"answered_by": "agent", "text": out.text, "refused": out.refused, "refusal_reason": reason,
-            "citations": [c.model_dump() for c in out.citations], "cached": False}
+            "citations": [c.model_dump() for c in out.citations], "cached": False, "used_pasted_text": False}
 
 
 def agent_stream(body: ChatRequest, cache: TTLCache | None) -> Iterator[Event]:
@@ -96,7 +97,7 @@ def chat_stream(body: ChatRequest, request: Request):
         if len(body.user_source) > limit:
             raise BadRequestError(f"the pasted text is longer than {limit} characters")
         trace(request, user_source_len=len(body.user_source))
-    cache =None if body.profile is not None else request.app.state.answer_cache  # a profile is never cached
+    cache = None if body.profile is not None else request.app.state.answer_cache  # a profile is never cached
     if body.mode == "agent":
         return sse(request, lambda: agent_stream(body, cache))
     run = auto_events if body.mode == "auto" else oneshot_events

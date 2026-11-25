@@ -309,4 +309,4 @@ This measures agreement with the sources as read by the maintainer, not an indep
 
 ## Privacy
 
-Profiles will stay in the browser. The server is stateless and keeps no accounts and no personal data. Answers cite public official pages only. `POST /profile/parse` sends the pasted text to the configured LLM provider and never logs or stores it. The Gemini free tier may use prompts to improve its products, so use synthetic text there until a hosted privacy notice and a suitable provider are in place.
+The server keeps no accounts and stores no profile, question or pasted text. The one thing a user can make it write down is a feedback note (`POST /feedback`, with consent, kept 90 days). Questions, pasted texts and `POST /profile/parse` input go to the configured LLM provider; a profile used in the chat does not, only the rules engine's result for each requirement. Answers cite official public pages; an answer that also used the student's own pasted text is flagged as unverified. The Gemini free tier may use prompts to improve its products, so use synthetic text there. Details: [privacy notice](docs/privacy-notice.md).

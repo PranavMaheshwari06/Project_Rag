@@ -27,6 +27,9 @@ frontend/dist/
 # model caches if someone points HF_HOME here
 .cache/
 
+# notes users send to POST /feedback: theirs, never committed (enforced by tests/test_publish_rule.py)
+data/feedback/
+
 # local working notes (enforced by tests/test_publish_rule.py)
 STATUS.md
 docs/working/

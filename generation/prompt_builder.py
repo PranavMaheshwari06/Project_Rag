@@ -3,7 +3,6 @@ the same evidence ordering, so [n] points at the same chunk in both modes."""
 
 import re
 
-from generation.citation_mapper import CITE_RE
 from schemas.common import Chunk
 
 REFUSAL_TEXT = "I don't have enough grounded evidence to answer that."
@@ -42,6 +41,7 @@ def build_evidence_block(evidence: list[Chunk]) -> str:
 
 
 USER_SOURCE_ID = "user-source"  # the chunk_id of pasted text, so a caller can tell it from an official page
+_NO_BRACKETS = str.maketrans("[]\uff3b\uff3d\u3010\u3011", "()()()")  # ASCII, full-width and lenticular
 # added to the system prompt only when pasted text is among the evidence
 USER_SOURCE_NOTE = (
     " The last passage was pasted by the student and is not an official source: when you use it, say that it comes "
@@ -51,9 +51,10 @@ USER_SOURCE_NOTE = (
 
 
 def user_source_chunk(text: str) -> Chunk:
-    """Pasted text as one evidence passage. Its [n] markers are rewritten as (n), so it cannot pose as another
-    passage and have a claim of its own cited to an official page."""
-    text = CITE_RE.sub(lambda m: f"({m[1]})", text.strip())
+    """Pasted text as one evidence passage. Its square brackets become parentheses, so it cannot forge a passage
+    marker or header. It can still ask the model in words to cite another passage, so an answer made with a paste is
+    unverified as a whole, whatever it cites."""
+    text = text.strip().translate(_NO_BRACKETS)
     return Chunk(chunk_id=USER_SOURCE_ID, doc_id=USER_SOURCE_ID, source=USER_SOURCE_ID, url="",
                  title="Pasted by you (user-provided, not verified)", section_path="pasted text", text=text,
                  token_count=len(text.split()))

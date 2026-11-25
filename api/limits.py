@@ -97,6 +97,7 @@ class Limits:
     def __init__(self, cfg: ServeCfg):
         self.any = Window(cfg.rate_per_minute, cfg.rate_per_day)
         self.llm = Window(cfg.llm_per_minute, cfg.llm_per_day)
+        self.feedback = Window(cfg.feedback_per_day, cfg.feedback_per_day)
         self.cap = DailyCap(cfg.daily_llm_calls)
         self.ip_header = cfg.client_ip_header
         self.deadline_s = cfg.request_deadline_s
@@ -126,6 +127,12 @@ def client_key(request: Request) -> str:
 def limit_any(request: Request) -> None:
     """Dependency for the public routes that do not call the LLM."""
     request.app.state.limits.any.hit(client_key(request))
+
+
+def limit_feedback(request: Request) -> None:
+    """Dependency for /feedback: the general limits, then a small daily allowance of notes."""
+    limit_any(request)
+    request.app.state.limits.feedback.hit(client_key(request))
 
 
 def limit_llm(request: Request) -> None:
