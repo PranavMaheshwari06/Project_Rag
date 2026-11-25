@@ -79,7 +79,7 @@ def auto_events(body: ChatRequest, request: Request, cache: TTLCache | None) -> 
     for name, data in oneshot_events(body, request, cache):
         if name == "sources" and data["chunks"]:
             top = data["chunks"][0]["rerank_score"] or 0.0  # the score the refusal gate looked at
-        if (name == "answer" and get_llm_client().available
+        if (name == "answer" and get_llm_client().available and not body.filters  # the agent would ignore them
                 and should_escalate(data["refusal_reason"], top, get_settings().agent.escalate_min_score)):
             yield "escalated", {"refusal_reason": data["refusal_reason"]}
             yield from agent_stream(body, cache)

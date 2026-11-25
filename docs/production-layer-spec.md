@@ -8,7 +8,7 @@ chat UI calls. `POST /answer` stays as the plain JSON version of one-shot.
 ```json
 {
   "query": "What is the semester fee at TUM?",
-  "mode": "oneshot",
+  "mode": "auto",
   "filters": {"university": ["TUM"]},
   "profile": null,
   "profile_confirmed": false,
@@ -20,7 +20,7 @@ chat UI calls. `POST /answer` stays as the plain JSON version of one-shot.
 | field | meaning |
 |---|---|
 | `query` | 1-1000 characters. |
-| `mode` | `oneshot`: retrieve, then one LLM call (at most one repair call). `agent`: the tool loop, up to 6 LLM calls. `auto`: one-shot first, then the agent if one-shot refused (rule below), so at most 8 calls. Default `oneshot`. |
+| `mode` | `oneshot`: retrieve, then one LLM call (at most one repair call). `agent`: the tool loop, up to 6 LLM calls. `auto`: one-shot first, then the agent if one-shot refused (rule below), so at most 8 calls. Default `auto`. |
 | `filters` | Optional metadata filters for one-shot retrieval (`university`, `programme`, `stage`, `layer`; values are "any of"). The agent chooses its own lookups and ignores them. |
 | `profile` | Optional student profile (the `/eligibility/check` schema). Used only by the agent's `check_eligibility` tool, whose verdict the model reads. The profile itself never goes to the model and is never logged or cached. |
 | `profile_confirmed` | Must be `true` when a profile is sent: a parsed draft is used only after the student confirms it. |
@@ -55,16 +55,17 @@ event. If the client disconnects, no further LLM call is made (one already runni
 ### When `auto` escalates
 
 A request with a `profile` skips one-shot and goes straight to the agent, with no `sources` or `escalated` event:
-only the agent can use the profile. Send one only when the question is about the student's own case, since it costs
-the agent's calls. Otherwise:
+only the agent can use the profile. Like `agent` mode it then ignores `filters`. Send a profile only when the question
+is about the student's own case, since it costs the agent's calls. Otherwise:
 
 | one-shot outcome | escalates | why |
 |---|---|---|
 | answered (a partial answer included) | no | the cheap path worked |
+| any refusal of a request with `filters` | no | the agent ignores filters, so it could answer from outside them |
 | `model` or `uncited` refusal | yes | mostly retrieval misses, which the agent's own lookups can recover |
 | `gate` refusal, best score 0.02 or more | yes | in scope, but the passages ranked low |
 | `gate` refusal, best score under 0.02 | no | out of scope; six calls would be spent to say so |
-| `guardrail` refusal | no | a possible injection must not get a tool loop |
+| `guardrail` refusal (the reply quoted the system prompt) | no | an injection that got through must not get a tool loop |
 | no LLM configured | no | the agent needs it |
 
 ### `answer`

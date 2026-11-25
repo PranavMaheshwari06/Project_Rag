@@ -83,6 +83,7 @@ class Metered:
 
     def __init__(self, llm, delay_s: float = 0.0):
         self.llm, self.delay_s, self.calls, self._last = llm, delay_s, 0, 0.0
+        self.slept = 0.0  # seconds spent spacing calls: not the system's latency
         self.answered_by: list[str | None] = []  # the model that answered each successful call
 
     @property
@@ -94,7 +95,9 @@ class Metered:
         return getattr(self.llm, "model", None)
 
     def complete(self, messages: list[dict], json_mode: bool = False) -> str:
-        time.sleep(max(0.0, self._last + self.delay_s - time.monotonic()))
+        wait = max(0.0, self._last + self.delay_s - time.monotonic())
+        time.sleep(wait)
+        self.slept += wait
         try:
             reply = self.llm.complete(messages, json_mode=json_mode)
             self.answered_by.append(self.model)  # after the call: a 429 switch happens inside it

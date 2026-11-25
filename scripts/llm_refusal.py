@@ -69,7 +69,9 @@ def main(argv: list[str] | None = None) -> int:
             return 1
         from retrieval.pipeline import build_pipeline  # loads the models: only when running
 
-        written, stopped = run_items(items, settings, build_pipeline(settings), llm, rows_path,
+        pipeline = build_pipeline(settings)
+        pipeline.search("warm up", mode="hybrid_rerank", top_k=1)  # model loading is not any item's latency
+        written, stopped = run_items(items, settings, pipeline, llm, rows_path,
                                      limit=args.limit, delay_s=args.delay, run=run, max_calls=args.max_calls)
         print(f"{written} new rows in {rows_path.name}")
         if stopped:

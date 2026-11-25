@@ -21,7 +21,7 @@ from core.metrics import record_call, request_deadline
 from generation.prompt_builder import REFUSAL_TEXT, SYSTEM_PROMPT
 from tests.test_prod_answer_contract import hits
 
-ASK = {"query": "What is the TUM fee?"}
+ASK = {"query": "What is the TUM fee?", "mode": "oneshot"}
 AGENT = {**ASK, "mode": "agent"}
 SEARCH = '{"tool": "search_sources", "args": {"query": "fee"}}'
 FINAL = '{"answer": "The fee is 85 EUR [1]."}'
@@ -329,6 +329,11 @@ def test_which_one_shot_outcomes_escalate(reason, score, escalates):
     assert should_escalate(reason, score, min_score=0.02) is escalates
 
 
+def test_the_default_mode_is_auto(make):
+    _, client, _, _ = make(REFUSAL_TEXT, SEARCH, FINAL)
+    assert "escalated" in names(client.post("/chat/stream", json={"query": ASK["query"]}))
+
+
 def test_auto_keeps_an_answered_one_shot(make, logs):
     _, client, _, llm = make(ANSWERED)
     r = client.post("/chat/stream", json=AUTO)
@@ -365,6 +370,23 @@ def test_auto_escalates_a_gate_refusal_only_above_the_cut(make, score, expected)
     assert len(llm.sent) == (2 if "escalated" in expected else 0)
 
 
+def test_auto_does_not_escalate_a_filtered_question(make):
+    """The agent ignores filters, so escalating could answer from a university the caller filtered out."""
+    _, client, _, llm = make(REFUSAL_TEXT, SEARCH, FINAL)
+    out = events(client.post("/chat/stream", json={**AUTO, "filters": {"university": ["TUM"]}}))
+    assert [name for name, _ in out] == ["sources", "answer"] and out[-1][1]["refused"] and len(llm.sent) == 1
+
+
+def test_auto_sends_sources_before_the_model_is_asked(make):
+    _, client, _, llm = make()
+
+    def down(*a, **k):
+        raise UpstreamError("the language model is unavailable right now, try again later")
+
+    llm.complete = down
+    assert names(client.post("/chat/stream", json=AUTO)) == ["sources", "error"]
+
+
 def test_auto_does_not_hand_a_guardrail_refusal_to_the_agent(make):
     _, client, _, llm = make(f"{SYSTEM_PROMPT} [1]")
     out = events(client.post("/chat/stream", json=AUTO))
@@ -391,10 +413,11 @@ def test_auto_repeats_are_served_from_the_cache(make):
     assert out[-1][1]["cached"] and out[-1][1]["usage"]["llm_calls"] == 0 and len(llm.sent) == 3
 
 
-def test_auto_sends_a_question_with_a_profile_straight_to_the_agent(make, verdict):
+def test_auto_sends_a_question_with_a_profile_straight_to_the_agent(make, verdict, logs):
     """One-shot cannot see the profile, so it would answer "your qualifications are not provided"."""
-    _, client, _, llm = make(eligibility_call(), SEARCH, FINAL)
+    app, client, _, llm = make(eligibility_call(), SEARCH, FINAL)
     out = events(client.post("/chat/stream", json={**PROFILE, "mode": "auto"}))
+    assert not app.state.answer_cache._data and SECRET not in json.dumps(logs) + json.dumps(llm.sent)
     assert [name for name, _ in out] == ["step", "step", "answer"] and out[-1][1]["answered_by"] == "agent"
     assert verdict[0].profile.degree_title == SECRET and len(llm.sent) == 3  # no one-shot call before it
 

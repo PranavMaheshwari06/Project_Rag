@@ -1,14 +1,17 @@
 """LLM-on refusal evaluation: who refused (gate, model, citation check), resumable
 rows and the summary, with a fake pipeline and a fake LLM (no network, no key)."""
 
+import json
+
 import pytest
 
 from core.config import load_settings
 from evaluation.agent_eval import load_rows
 from evaluation.llm_refusal_eval import run_auto_item, run_items, summarize, summarize_auto
-from evaluation.retrieval_eval import GoldItem
+from evaluation.retrieval_eval import GoldItem, load_gold
 from generation.prompt_builder import REFUSAL_TEXT
 from schemas.common import Chunk, RetrievedChunk
+from scripts import llm_refusal
 
 
 def gold(qid, kind="requirement", expect_refusal=False):
@@ -108,6 +111,10 @@ def test_auto_runs_the_agent_only_where_auto_would_escalate(settings, outcome, s
     assert row["escalated"] is escalates and len(llm.replies) == (0 if escalates else 2)
     if escalates:
         assert row["outcome"] == "answered" and row["cited_doc_ids"] == ["d1"] and row["cites_gold"] is True
+        # enough to audit an answer later: what the agent looked up and which passages it cited
+        assert row["cited_chunk_ids"] == ["c1"] and row["steps"] == [
+            {"tool": "search_sources", "args": {"query": "fee"}, "ok": True, "markers": [1]}]
+        assert row["escalation_ms"] >= 0
     else:
         assert row["outcome"] == outcome and row["answer"] == "one-shot answer"
 
@@ -124,17 +131,58 @@ def test_auto_summary_compares_each_item_with_its_one_shot_row():
            base("not-run-yet", "llm")]
 
     def auto(row, outcome, calls=0, latency=0, cites=None):
-        return {**row, "outcome": outcome, "escalated": calls > 0, "llm_calls": calls, "latency_ms": latency,
-                "cites_gold": cites}
+        # latency_ms also holds the harness's own re-retrieval; escalation_ms is the agent alone
+        return {**row, "outcome": outcome, "escalated": calls > 0, "llm_calls": calls, "latency_ms": latency + 999,
+                "escalation_ms": latency, "cites_gold": cites}
 
     s = summarize_auto(one, [auto(one[0], "answered"), auto(one[1], "answered", 4, 40000, True),
                              auto(one[2], "budget", 6, 60000), auto(one[3], "answered", 3, 20000),
                              auto(one[4], "gate")], resamples=50)
-    assert s["items"] == 5  # only the items auto has run are compared
+    assert s["items"] == 5 and s["one_shot_items_not_run"] == 1  # only the items auto has run are compared
     assert (s["one_shot"]["refused"], s["answerable"]["refused"], s["answerable"]["budget"]) == (2, 1, 1)
-    assert s["paired"]["to_answered"] == ["b"] and s["paired"]["to_refused"] == []
-    assert s["paired"]["sign_test_p"] == 1.0
-    assert s["escalated"] == {"answerable": 2, "probes": 1} and s["probes_answered"] == ["d"]
-    assert s["new_answers_citing_a_gold_page"] == "1 of 1"
+    assert s["recovered"] == ["b"] and s["recovered_citing_a_gold_page"] == "1 of 1"
+    assert "paired" not in s  # auto never turns an answer into a refusal, so a significance test would say nothing
+    assert s["by_one_shot_outcome"] == {"gate": {"escalated": 1, "recovered": 0}, "llm": {"escalated": 2, "recovered": 1}}
+    assert s["escalated"] == {"answerable": 2, "probes": 1}
+    assert s["one_shot"]["probes_answered"] == [] and s["probes_answered"] == s["probes_newly_answered"] == ["d"]
+    assert s["one_shot"]["models"] == ["m"]
     assert s["calls_per_question"] == {"one_shot": 0.6, "auto": 3.2}
     assert s["escalation_added_latency_ms"] == {"p50": 40000, "p95": 60000}
+
+
+def test_auto_rows_that_do_not_match_the_one_shot_rows_are_rejected():
+    """A one-shot re-run (new prompt, new corpus) must not be compared with escalations of the old replies."""
+    one = {**base("a", "llm"), "run_at": "2026-01-02T00:00:00+00:00"}
+    row = {**one, "escalated": True, "cites_gold": None}
+    for stale in ({**row, "run_at": "2026-01-01T00:00:00+00:00"},
+                  {**row, "escalated": False, "outcome": "answered"}, {**row, "qid": "gone"}):
+        with pytest.raises(ValueError, match="delete the auto rows"):
+            summarize_auto([one], [stale], resamples=0)
+
+
+def test_a_crashed_tool_leaves_no_row(settings):
+    class Broken(Pipeline):
+        def search(self, query, **kw):
+            raise MemoryError("reranker")
+
+    with pytest.raises(RuntimeError, match="tool crashed"):
+        run_auto_item(gold("a"), base("a", "llm"), settings, Broken(), LLM(SEARCH, json.dumps({"answer": REFUSAL_TEXT})))
+
+
+def test_the_delay_between_calls_is_not_counted_as_latency(settings, tmp_path):
+    out = tmp_path / "rows.jsonl"
+    run_items([gold("a"), gold("b")], settings, Pipeline(), LLM("Yes [1].", "Yes [1]."), out, delay_s=0.3)
+    rows = load_rows(out)
+    assert rows[1]["latency_ms"] < 150 and rows[1]["models"] == ["m"]
+
+
+def test_auto_summary_only_writes_the_auto_file_and_leaves_one_shot_alone(tmp_path, monkeypatch):
+    s = load_settings()
+    for field in ("llm_refusal_rows_out", "llm_refusal_out", "auto_refusal_rows_out", "auto_refusal_out"):
+        setattr(s.evaluation, field, str(tmp_path / field))
+    monkeypatch.setattr(llm_refusal, "get_settings", lambda: s)
+    assert llm_refusal.main(["--mode", "auto", "--summary-only"]) == 1  # no one-shot rows to build on
+    rows = [json.dumps(base(i.qid, "llm")) for i in load_gold(s.resolve(s.evaluation.gold_path))]
+    (tmp_path / "llm_refusal_rows_out").write_text("\n".join(rows) + "\n")
+    assert llm_refusal.main(["--mode", "auto", "--summary-only"]) == 0
+    assert sorted(p.name for p in tmp_path.iterdir()) == ["auto_refusal_out", "llm_refusal_rows_out"]

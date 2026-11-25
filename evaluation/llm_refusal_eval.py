@@ -22,7 +22,6 @@ import logging
 import time
 from collections.abc import Callable
 from datetime import date, datetime, timezone
-from math import comb
 from pathlib import Path
 
 from agent.loop import run_agent, should_escalate
@@ -60,11 +59,19 @@ def run_auto_item(item: GoldItem, base: dict, settings: Settings, pipeline, llm)
         top = (hits[0].rerank_score or 0.0) if hits else 0.0
     if not should_escalate(reason, top, settings.agent.escalate_min_score):
         return {"escalated": False, "outcome": base["outcome"], "answer": base["answer"], "cites_gold": None}
-    out = run_agent(item.question, Toolbox(settings, pipeline, as_of=date.today()), llm)
+    toolbox = Toolbox(settings, pipeline, as_of=date.today())
+    t0, slept = time.perf_counter(), llm.slept if isinstance(llm, Metered) else 0.0
+    out = run_agent(item.question, toolbox, llm)
+    spent = time.perf_counter() - t0 - ((llm.slept - slept) if isinstance(llm, Metered) else 0.0)
+    if toolbox.crashed:  # a crash (memory, a bug) is not the mode's outcome: keep no row, so a re-run retries it
+        raise RuntimeError(f"{item.qid}: tool crashed, no row kept")
     cited = sorted({out.evidence[c.marker - 1].doc_id for c in out.citations})
     gold = set(item.relevant_doc_ids)
     return {"escalated": True, "outcome": AGENT_OUTCOME[out.stop_reason], "answer": out.text[:1500],
-            "cited_doc_ids": cited, "cites_gold": bool(gold & set(cited)) if gold and not out.refused else None}
+            "cited_doc_ids": cited, "cites_gold": bool(gold & set(cited)) if gold and not out.refused else None,
+            "cited_chunk_ids": [c.chunk_id for c in out.citations],
+            "steps": [{"tool": s.tool, "args": s.args, "ok": s.ok, "markers": s.markers} for s in out.steps],
+            "escalation_ms": round(spent * 1000)}
 
 
 def run_items(items: list[GoldItem], settings: Settings, pipeline, llm, out: Path,
@@ -80,7 +87,7 @@ def run_items(items: list[GoldItem], settings: Settings, pipeline, llm, out: Pat
     for item in todo:
         if max_calls is not None and llm.calls >= max_calls:
             return written, f"call cap of {max_calls} reached"
-        calls, t0 = llm.calls, time.perf_counter()
+        calls, answered, slept, t0 = llm.calls, len(llm.answered_by), llm.slept, time.perf_counter()
         try:
             result = (run or run_item)(item, settings, pipeline, llm)
         except Exception as e:
@@ -89,8 +96,9 @@ def run_items(items: list[GoldItem], settings: Settings, pipeline, llm, out: Pat
             return written, f"{item.qid}: {type(e).__name__}"
         row = {"qid": item.qid, "kind": item.kind, "expect_refusal": item.expect_refusal,
                "model": llm.model if llm.calls > calls else None, "llm_calls": llm.calls - calls,
+               "models": sorted({m for m in llm.answered_by[answered:] if m}),  # a quota switch can mix them
                "run_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
-               "latency_ms": round((time.perf_counter() - t0) * 1000), **result}
+               "latency_ms": round((time.perf_counter() - t0 - (llm.slept - slept)) * 1000), **result}
         with out.open("a", encoding="utf-8") as fh:
             fh.write(json.dumps(row, ensure_ascii=False) + "\n")
         written += 1
@@ -114,43 +122,54 @@ def summarize(rows: list[dict], resamples: int = 2000, seed: int = 0, outcomes: 
     summary["expected_refusals"] = {"n": len(expected),
                                     "refused": sum(r["outcome"] != "answered" for r in expected),
                                     "answered_anyway": sum(r["outcome"] == "answered" for r in expected)}
-    summary["models"] = sorted({r["model"] or "-" for r in by})
+    summary["models"] = sorted({m for r in by for m in (r.get("models") or [r["model"] or "-"])})
     return summary
 
 
 def summarize_auto(base_rows: list[dict], auto_rows: list[dict], resamples: int = 2000, seed: int = 0) -> dict:
-    """The refusal table for `auto`, and its paired comparison with one-shot on the items `auto` has run."""
+    """The refusal table for `auto`, and what it changed against one-shot on the items `auto` has run."""
     auto = {r["qid"]: r for r in auto_rows}
     base = {r["qid"]: r for r in base_rows if r["qid"] in auto}
+    stale = sorted(q for q, r in auto.items() if q not in base or r.get("run_at", "") < base[q].get("run_at", "")
+                   or (not r["escalated"] and r["outcome"] != base[q]["outcome"]))
+    if stale:
+        raise ValueError(f"auto rows older than or different from the one-shot rows ({', '.join(stale)}); "
+                         "delete the auto rows and run again")
     summary = summarize(list(auto.values()), resamples, seed, AUTO_OUTCOMES)
-    summary["method"] = ("`auto` on top of the stored one-shot rows (llm_refusal.jsonl): the one-shot outcome "
-                         "stands unless `auto` escalates it, then the agent's outcome counts. Answer correctness "
-                         "is not judged.")
+    summary["method"] = (
+        "`auto` on top of the stored one-shot rows (llm_refusal.jsonl): the one-shot outcome stands unless `auto` "
+        "escalates it, then the agent's outcome counts. By construction `auto` can only lower the refusal count, so "
+        "no significance test is given: read the recovered answers and any newly answered probe. The gate cut "
+        "(agent.escalate_min_score) was chosen on these gold items, so gate-path results are optimistic. Answer "
+        "correctness is not judged.")
 
     def refused(row: dict) -> bool:
         return row["outcome"] != "answered"
 
-    answerable = [q for q, r in auto.items() if not r["expect_refusal"]]
-    one = summarize(list(base.values()), resamples, seed)["answerable"]
-    summary["one_shot"] = {k: one[k] for k in ("refused", "refusal_rate", "refusal_rate_ci")}
-    to_answered = sorted(q for q in answerable if refused(base[q]) and not refused(auto[q]))
-    to_refused = sorted(q for q in answerable if not refused(base[q]) and refused(auto[q]))
-    n, k = len(to_answered) + len(to_refused), min(len(to_answered), len(to_refused))
-    diffs = [float(refused(auto[q])) - float(refused(base[q])) for q in answerable]
-    summary["paired"] = {"to_answered": to_answered, "to_refused": to_refused,
-                         "sign_test_p": round(min(1.0, 2 * sum(comb(n, i) for i in range(k + 1)) / 2 ** n), 4),
-                         "refusal_rate_diff_ci": bootstrap_ci(diffs, resamples, seed) if diffs else None}
-    escalated = [r for r in auto.values() if r["escalated"]]
-    summary["escalated"] = {"answerable": sum(not r["expect_refusal"] for r in escalated),
-                            "probes": sum(r["expect_refusal"] for r in escalated)}
-    summary["probes_answered"] = sorted(q for q, r in auto.items() if r["expect_refusal"] and not refused(r))
-    cited = sum(auto[q]["cites_gold"] is True for q in to_answered)
-    summary["new_answers_citing_a_gold_page"] = f"{cited} of {len(to_answered)}"
+    answerable = {q for q, r in auto.items() if not r["expect_refusal"]}
+    probes = set(auto) - answerable
+    one = summarize(list(base.values()), resamples, seed)
+    summary["one_shot"] = {**{k: one["answerable"][k] for k in ("refused", "refusal_rate", "refusal_rate_ci")},
+                           "probes_answered": sorted(q for q in probes if not refused(base[q])),
+                           "models": one["models"]}
+    recovered = sorted(q for q in answerable if refused(base[q]) and not refused(auto[q]))
+    summary["recovered"] = recovered
+    cited = sum(auto[q]["cites_gold"] is True for q in recovered)
+    summary["recovered_citing_a_gold_page"] = f"{cited} of {len(recovered)}"
+    escalated = {q for q, r in auto.items() if r["escalated"]}
+    summary["escalated"] = {"answerable": len(escalated & answerable), "probes": len(escalated & probes)}
+    summary["by_one_shot_outcome"] = {
+        o: {"escalated": sum(base[q]["outcome"] == o for q in escalated),
+            "recovered": sum(base[q]["outcome"] == o for q in recovered)}
+        for o in sorted({base[q]["outcome"] for q in escalated})}
+    summary["probes_answered"] = sorted(q for q in probes if not refused(auto[q]))
+    summary["probes_newly_answered"] = sorted(set(summary["probes_answered"]) - set(summary["one_shot"]["probes_answered"]))
+    summary["one_shot_items_not_run"] = len({r["qid"] for r in base_rows} - set(auto))
     one_calls = sum(r["llm_calls"] for r in base.values())
     total = len(auto) or 1
     summary["calls_per_question"] = {
         "one_shot": round(one_calls / total, 2),
         "auto": round((one_calls + sum(r["llm_calls"] for r in auto.values())) / total, 2)}
-    added = [r["latency_ms"] for r in escalated]
+    added = [auto[q]["escalation_ms"] for q in sorted(escalated)]  # the agent alone, as a student would wait
     summary["escalation_added_latency_ms"] = {"p50": percentile(added, 50), "p95": percentile(added, 95)}
     return summary

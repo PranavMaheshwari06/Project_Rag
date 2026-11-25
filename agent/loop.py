@@ -21,7 +21,7 @@ from agent.tools import TOOLS, Toolbox
 from core.exceptions import DeadlineError
 from core.metrics import request_deadline_at
 from generation.citation_mapper import map_citations
-from generation.prompt_builder import REFUSAL_TEXT, leaks_prompt
+from generation.prompt_builder import REFUSAL_TEXT, SCOPE_RULES, leaks_prompt
 from schemas.answer import Citation
 from schemas.common import Chunk
 
@@ -42,12 +42,13 @@ Rules:
 - Never decide eligibility yourself. If asked whether the user qualifies, call check_eligibility and report
   its headline as it is.
 - A question with two parts usually needs two lookups; gather both before answering.
-- If the evidence does not answer the question, answer exactly: "{refusal}\""""
+- {scope}
+- Only if the evidence answers none of the question, answer exactly: "{refusal}\""""
 
 LAST_STEP = "Tool budget used up. Reply now with {\"answer\": ...} using only the evidence above."
 # the rules alone, for the leak check: the tool list and programme slugs are public, and an honest answer
 # that lists several programmes must not count as a leak
-RULES = SYSTEM.format(tools="", programmes="", refusal=REFUSAL_TEXT)
+RULES = SYSTEM.format(tools="", programmes="", scope=SCOPE_RULES, refusal=REFUSAL_TEXT)
 REPAIR = "Reply with one JSON object: {\"tool\": ..., \"args\": {...}} or {\"answer\": ...}."
 CITE_REPAIR = ("Your answer cited no numbered evidence passage. Reply with {\"answer\": ...} again, citing every "
                f"claim with its marker like [1], or answer exactly: \"{REFUSAL_TEXT}\"")
@@ -93,7 +94,8 @@ def _parse(reply: str) -> dict | None:
 
 def system_prompt(toolbox: Toolbox) -> str:
     tools = "\n".join(f"- {name}: {desc}" for name, (_, desc) in TOOLS.items())
-    return SYSTEM.format(tools=tools, programmes=", ".join(toolbox.programmes), refusal=REFUSAL_TEXT)
+    return SYSTEM.format(tools=tools, programmes=", ".join(toolbox.programmes), scope=SCOPE_RULES,
+                         refusal=REFUSAL_TEXT)
 
 
 def should_escalate(refusal_reason: str | None, top_score: float, min_score: float) -> bool:

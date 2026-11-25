@@ -1,0 +1,140 @@
+{
+  "items": 94,
+  "method": "`auto` on top of the stored one-shot rows (llm_refusal.jsonl): the one-shot outcome stands unless `auto` escalates it, then the agent's outcome counts. By construction `auto` can only lower the refusal count, so no significance test is given: read the recovered answers and any newly answered probe. The gate cut (agent.escalate_min_score) was chosen on these gold items, so gate-path results are optimistic. Answer correctness is not judged.",
+  "by_kind": {
+    "confusable": {
+      "n": 11,
+      "gate": 0,
+      "llm": 0,
+      "uncited": 0,
+      "guardrail": 0,
+      "answered": 11,
+      "budget": 0,
+      "bad_output": 0
+    },
+    "country_rules": {
+      "n": 24,
+      "gate": 0,
+      "llm": 0,
+      "uncited": 0,
+      "guardrail": 0,
+      "answered": 24,
+      "budget": 0,
+      "bad_output": 0
+    },
+    "coverage": {
+      "n": 5,
+      "gate": 0,
+      "llm": 5,
+      "uncited": 0,
+      "guardrail": 0,
+      "answered": 0,
+      "budget": 0,
+      "bad_output": 0
+    },
+    "refusal": {
+      "n": 9,
+      "gate": 3,
+      "llm": 5,
+      "uncited": 0,
+      "guardrail": 0,
+      "answered": 1,
+      "budget": 0,
+      "bad_output": 0
+    },
+    "requirement": {
+      "n": 45,
+      "gate": 0,
+      "llm": 0,
+      "uncited": 0,
+      "guardrail": 0,
+      "answered": 45,
+      "budget": 0,
+      "bad_output": 0
+    }
+  },
+  "answerable": {
+    "n": 80,
+    "refused": 0,
+    "gate": 0,
+    "llm": 0,
+    "uncited": 0,
+    "guardrail": 0,
+    "answered": 80,
+    "budget": 0,
+    "bad_output": 0,
+    "refusal_rate": 0.0,
+    "refusal_rate_ci": [
+      0.0,
+      0.0
+    ]
+  },
+  "expected_refusals": {
+    "n": 14,
+    "refused": 13,
+    "answered_anyway": 1
+  },
+  "models": [
+    "-",
+    "gemini-3.8-flash"
+  ],
+  "one_shot": {
+    "refused": 14,
+    "refusal_rate": 0.175,
+    "refusal_rate_ci": [
+      0.1,
+      0.263
+    ],
+    "probes_answered": [
+      "d25"
+    ],
+    "models": [
+      "-",
+      "gemini-3.8-flash"
+    ]
+  },
+  "recovered": [
+    "a20",
+    "b01",
+    "b07",
+    "b08",
+    "b15",
+    "b19",
+    "b21",
+    "b23",
+    "b24",
+    "c10",
+    "c11",
+    "d20",
+    "d22",
+    "d33"
+  ],
+  "recovered_citing_a_gold_page": "14 of 14",
+  "escalated": {
+    "answerable": 14,
+    "probes": 10
+  },
+  "by_one_shot_outcome": {
+    "gate": {
+      "escalated": 6,
+      "recovered": 4
+    },
+    "llm": {
+      "escalated": 18,
+      "recovered": 10
+    }
+  },
+  "probes_answered": [
+    "d25"
+  ],
+  "probes_newly_answered": [],
+  "one_shot_items_not_run": 0,
+  "calls_per_question": {
+    "one_shot": 0.9,
+    "auto": 1.65
+  },
+  "escalation_added_latency_ms": {
+    "p50": 13270,
+    "p95": 29076
+  }
+}
