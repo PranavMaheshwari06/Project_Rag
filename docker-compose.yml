@@ -1,48 +1,29 @@
-# Containerization phase — NOT required for the local run.
-# Local mode: make install && make ingest && make index && make run
-# (vector_backend=memory needs no Qdrant at all).
+# The API image and the UI on localhost: `make ingest index`, then `docker compose up --build`.
+# Without Docker: make install && make ingest && make index && make run.
 
 services:
-  qdrant:
-    image: qdrant/qdrant:v1.12.4
-    ports:
-      - "6333:6333"
-    volumes:
-      - qdrant_data:/qdrant/storage
-    healthcheck:
-      test: ["CMD-SHELL", "bash -c ':> /dev/tcp/127.0.0.1/6333' || exit 1"]
-      interval: 10s
-      timeout: 3s
-      retries: 5
-
   api:
     build:
       context: .
       dockerfile: docker/api.Dockerfile
     ports:
-      - "8000:8000"
+      - "127.0.0.1:8000:8000"
+    # passed from the shell or .env; empty means the default. No ADMIN_TOKEN: /ingest and /evaluate need the crawled
+    # pages and a writable tree, which the image does not have, so they stay off.
     environment:
-      - VECTOR_BACKEND=qdrant
-      - QDRANT_URL=http://qdrant:6333
       - GEMINI_API_KEY=${GEMINI_API_KEY:-}
-    depends_on:
-      qdrant:
-        condition: service_healthy
-    healthcheck:
-      test: ["CMD-SHELL", "python -c \"import urllib.request; urllib.request.urlopen('http://localhost:8000/health')\""]
-      interval: 15s
-      timeout: 5s
-      retries: 5
+      - LLM_MODEL=${LLM_MODEL:-}
+      - CORS_ORIGINS=${CORS_ORIGINS:-}
+      - DAILY_LLM_CALL_CAP=${DAILY_LLM_CALL_CAP:-}
+      - CLIENT_IP_HEADER=${CLIENT_IP_HEADER:-}
+    mem_limit: 4g
 
   frontend:
     build:
       context: ./frontend
       dockerfile: ../docker/frontend.Dockerfile
     ports:
-      - "5173:80"
+      - "127.0.0.1:5173:80"
     depends_on:
       api:
         condition: service_healthy
-
-volumes:
-  qdrant_data:

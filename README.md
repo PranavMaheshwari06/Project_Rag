@@ -75,11 +75,13 @@ flowchart LR
 - **Eligibility engine and API** (`make eligibility`, `POST /eligibility/check`): a deterministic engine checks a confirmed profile against cited rule files for all 13 programmes. Each rule returns meets, does not meet, unknown or not published, with a margin and citations, and admission, readiness and finance get separate summaries. A rule still pending review cannot produce a positive headline. `POST /profile/parse` and `make parse-profile` turn pasted text into an unconfirmed draft, keeping only fields backed by a literal span of the text.
 - **Evaluation harness**: a 4-way benchmark (vector, BM25, hybrid, hybrid+rerank) on Recall@k, MRR, nDCG and p50/p95 latency, with 95% bootstrap intervals over queries, and extraction accuracy (LLM draft vs verified record). The gold question set has 122 items (requirement 45, country rules 24, confusable programmes 11, multi-hop 28, refusal 9, coverage 5), model-drafted from the verified pages; all are accepted by the maintainer (assisted review, not blinded). `scripts/validate_gold.py` checks every label before `make eval` runs.
 - **Serving layer**: `POST /chat/stream` answers by one-shot RAG, hands most refused questions to a six-step agent (`auto`, the default) and streams the process as server-sent events ([contract](docs/production-layer-spec.md)). Public routes are rate-limited per client, a global daily LLM-call cap bounds cost, an answer without a valid citation is refused, prompt-injection cases are tested, and answers to profile-free questions are cached in memory.
+- **Pasted sources and feedback**: a pasted page is answered as one passage and the answer is flagged unverified; feedback is stored only with consent and expires ([privacy notice](docs/privacy-notice.md)).
+- **Docker**: one API image with the corpus, indexes and models, checked over HTTP by `make docker-smoke`.
 - **Observability**: request ids, structured JSON logs with LLM usage per request, and per-stage latency.
 
 ### Coming next
 
-Pasted sources and feedback, Docker and a CI eval gate → UI → free public deployment → MCP server → UI polish. Details and the "done when" check for each phase are in [docs/project-plan.md](docs/project-plan.md).
+UI → free public deployment → MCP server → UI polish. Details and the "done when" check for each phase are in [docs/project-plan.md](docs/project-plan.md).
 
 The [eligibility engine spec](docs/eligibility-engine-spec.md) defines its rules, interfaces and evaluation.
 
@@ -288,7 +290,7 @@ No API key is needed, except for `POST /profile/parse` and `make parse-profile`.
 
 `requirements.lock` pins every package for Linux with CPU-only torch, the same setup CI and Docker use. On another platform, or without Make: `uv venv --python 3.12`, then `uv pip install -e '.[dev]'`.
 
-`docker-compose.yml` (Qdrant + API + frontend) is a starting point for a containerised setup; hosting is not verified yet.
+Docker: after `make ingest index` (the corpus is not in git), `make docker-smoke` builds the API image, runs it without a key and checks over HTTP: readiness, a frozen eligibility case, a cited answer, the event stream, an injection string, feedback and the request limit. `docker compose up --build` (`make up`) runs the API and the UI on localhost. The image holds the code, verified records, rules, chunks, indexes and both retrieval models, and runs one worker as an unprivileged user. Public hosting is not verified yet.
 
 ## Eligibility evaluation
 
