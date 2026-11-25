@@ -10,6 +10,7 @@ from core.config import get_settings
 from core.metrics import StageTimer
 from generation.answer_generator import generate_answer
 from generation.citation_mapper import map_citations
+from generation.prompt_builder import user_source_chunk
 from schemas.answer import AnswerRequest, AnswerResponse
 from schemas.common import RetrievedChunk
 
@@ -18,10 +19,13 @@ NOT_CACHED = {"uncited", "guardrail"}  # contract failures: a retry can succeed
 router = APIRouter(dependencies=[Depends(limit_llm)])
 
 
-def answer_steps(query: str, filters: dict | None, request_id: str,
-                 cache: TTLCache | None) -> Iterator[list[RetrievedChunk] | AnswerResponse]:
+def answer_steps(query: str, filters: dict | None, request_id: str, cache: TTLCache | None,
+                 pasted: str | None = None) -> Iterator[list[RetrievedChunk] | AnswerResponse]:
     """One-shot RAG through the response cache (None = do not cache). Yields the retrieved passages as soon as
-    they are known, then the response, so /chat/stream can show them while the model is still working."""
+    they are known, then the response, so /chat/stream can show them while the model is still working. An answer
+    that saw pasted text is never cached or served from the cache."""
+    if pasted is not None:
+        cache = None
     key = answer_key(query, filters)
     if cache is not None and (hit := cache.get(key)) is not None:
         response = hit.model_copy(deep=True, update={"request_id": request_id, "query": query, "cached": True,
@@ -36,7 +40,8 @@ def answer_steps(query: str, filters: dict | None, request_id: str,
     retrieved = get_retrieval_pipeline().search(query, mode="hybrid_rerank", timer=timer, filters=filters)
     yield retrieved
     with timer.track("generation"):
-        draft = generate_answer(query, retrieved, settings, get_llm_client())
+        draft = generate_answer(query, retrieved, settings, get_llm_client(),
+                                user_source_chunk(pasted) if pasted is not None else None)
         text, citations = map_citations(draft.text, draft.evidence)
 
     response = AnswerResponse(

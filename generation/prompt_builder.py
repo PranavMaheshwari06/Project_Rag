@@ -40,10 +40,31 @@ def build_evidence_block(evidence: list[Chunk]) -> str:
     return "\n\n".join(parts)
 
 
+USER_SOURCE_ID = "user-source"  # the chunk_id of pasted text, so a caller can tell it from an official page
+_NO_BRACKETS = str.maketrans("[]\uff3b\uff3d\u3010\u3011", "()()()")  # ASCII, full-width and lenticular
+# added to the system prompt only when pasted text is among the evidence
+USER_SOURCE_NOTE = (
+    " The last passage was pasted by the student and is not an official source: when you use it, say that it comes "
+    "from the pasted text and is not verified. If it disagrees with another passage, give both and say which is "
+    "the pasted one."
+)
+
+
+def user_source_chunk(text: str) -> Chunk:
+    """Pasted text as one evidence passage. Its square brackets become parentheses, so it cannot forge a passage
+    marker or header. It can still ask the model in words to cite another passage, so an answer made with a paste is
+    unverified as a whole, whatever it cites."""
+    text = text.strip().translate(_NO_BRACKETS)
+    return Chunk(chunk_id=USER_SOURCE_ID, doc_id=USER_SOURCE_ID, source=USER_SOURCE_ID, url="",
+                 title="Pasted by you (user-provided, not verified)", section_path="pasted text", text=text,
+                 token_count=len(text.split()))
+
+
 def build_messages(query: str, evidence: list[Chunk]) -> list[dict]:
     user = f"Evidence:\n\n{build_evidence_block(evidence)}\n\nQuestion: {query}"
+    pasted = any(chunk.chunk_id == USER_SOURCE_ID for chunk in evidence)
     return [
-        {"role": "system", "content": SYSTEM_PROMPT},
+        {"role": "system", "content": SYSTEM_PROMPT + (USER_SOURCE_NOTE if pasted else "")},
         {"role": "user", "content": user},
     ]
 

@@ -9,7 +9,7 @@ import pytest
 
 ROOT = Path(__file__).resolve().parent.parent
 PRIVATE_FILES = {"STATUS.md", ".env"}
-PRIVATE_DIRS = ("docs/working/", "docs/agents/", "graphify-out/")
+PRIVATE_DIRS = ("docs/working/", "docs/agents/", "graphify-out/", "data/feedback/")  # feedback: users' notes
 PRIVATE_SUFFIXES = (".bundle",)
 # Top-level hidden entries a repo of this kind legitimately tracks. Anything else
 # hidden (local tool state, editor folders, caches) is build-only by default.
@@ -32,7 +32,8 @@ def test_no_private_file_is_tracked():
 
 def test_the_rule_matches_private_paths_and_only_those():
     for p in ("STATUS.md", ".env", "docs/working/LEARNING.md", "docs/agents/domain.md",
-              "graphify-out/graph.json", ".toolstate/settings.json", "backup/all-refs.bundle"):
+              "graphify-out/graph.json", ".toolstate/settings.json", "backup/all-refs.bundle",
+              "data/feedback/feedback.jsonl"):
         assert is_private(p), p
     for p in ("README.md", ".env.example", ".github/workflows/ci.yml", "DECISIONS.md", "docs/project-plan.md", "docs/adr/0001.md",
               "data/verified/kit-m-sc-computer-science.json"):

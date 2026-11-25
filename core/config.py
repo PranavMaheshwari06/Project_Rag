@@ -33,6 +33,7 @@ class PathsCfg(BaseModel):
     rules_dir: str = "data/eligibility/rules"
     country_groups_path: str = "data/eligibility/country_groups.json"
     finance_rules_path: str = "data/eligibility/finance.json"
+    feedback_dir: str = "data/feedback"  # notes sent to /feedback (gitignored: never committed, never in the image)
 
 
 class CrawlCfg(BaseModel):
@@ -86,6 +87,8 @@ class GenerationCfg(BaseModel):
     refusal_threshold: float = 0.3
     max_evidence_chunks: int = 4
     max_sentences_per_chunk: int = 3
+    # pasted text per chat request; a code default, because settings.yaml is hash-locked
+    user_source_max_chars: int = 8000
 
 
 class EvalCfg(BaseModel):
@@ -144,6 +147,10 @@ class ServeCfg(BaseModel):
     # /answer response cache (api/cache.py); 0 entries turns it off
     answer_cache_entries: int = 1000
     answer_cache_ttl_s: float = 86_400.0  # the corpus changes at most weekly, and a rebuild empties the cache
+    # /feedback notes: kept this long (stated in docs/privacy-notice.md), and at most this many at once
+    feedback_retention_days: int = 90
+    feedback_max_entries: int = 1000
+    feedback_per_day: int = 5  # per client, so one visitor cannot fill the store
 
 
 class Settings(BaseModel):

@@ -86,12 +86,17 @@ def _extractive_answer(query: str, evidence: list[Chunk], max_sentences: int) ->
 
 
 def generate_answer(query: str, retrieved: list[RetrievedChunk], settings: Settings,
-                    llm: LLMClient) -> AnswerDraft:
+                    llm: LLMClient, pasted: Chunk | None = None) -> AnswerDraft:
     threshold = settings.generation.refusal_threshold
-    if not retrieved or (retrieved[0].rerank_score or 0.0) < threshold:
+    passed = bool(retrieved) and (retrieved[0].rerank_score or 0.0) >= threshold
+    if not passed and pasted is None:
         return _refusal("gate")
 
-    evidence = [rc.chunk for rc in retrieved[: settings.generation.max_evidence_chunks]]
+    # passages that fail the gate are never evidence. The gate says nothing about pasted text, so a paste is not
+    # refused by it: it then stands alone, and otherwise comes after the official passages
+    evidence = [rc.chunk for rc in retrieved[: settings.generation.max_evidence_chunks]] if passed else []
+    if pasted is not None:
+        evidence.append(pasted)
 
     if llm.available:
         messages = build_messages(query, evidence)
